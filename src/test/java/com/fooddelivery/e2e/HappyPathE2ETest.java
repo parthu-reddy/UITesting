@@ -35,7 +35,7 @@ public class HappyPathE2ETest extends TestBase {
         
         // 1. Rider Login & Go Online
         riderPage.navigate(APP_URL, new com.microsoft.playwright.Page.NavigateOptions().setWaitUntil(com.microsoft.playwright.options.WaitUntilState.LOAD));
-        riderLogin.loginAs("Delivery Executive", "5000000001");
+        riderLogin.loginAs("Rider 1", "7000000001");
         System.out.println("Rider logged in");
         deliveryFlow.goOnline();
         System.out.println("Rider is online");

@@ -53,6 +53,19 @@ public class LoginPage {
         clickVerifyAndSecureLogIn();
         
         page.getByPlaceholder("9876543210").waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.HIDDEN));
+        
+        try {
+            page.waitForTimeout(1500); // Wait for potential profile modal to render
+            if (page.getByPlaceholder("Enter your full name").isVisible()) {
+                System.out.println("Complete Profile Modal detected. Filling profile...");
+                page.getByPlaceholder("Enter your full name").fill(role + " User");
+                page.getByPlaceholder("Enter your email address").fill(role.replaceAll("\\s+", "").toLowerCase() + "@example.com");
+                page.locator("button:has-text('Save Profile & Continue')").click();
+                page.getByPlaceholder("Enter your full name").waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.HIDDEN).setTimeout(5000));
+            }
+        } catch (Exception e) {
+            // Modal did not appear or error occurred, continue
+        }
     }
 
     // --- Input Fields ---

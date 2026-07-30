@@ -20,10 +20,11 @@ public class CustomerPage {
             // Open Location modal
             page.locator("span:has-text('Deliver to')").click();
             
-            // Click the specific address inside the modal
-            page.locator("div.fixed.inset-0").locator("p:has-text('" + addressLabel + "')").click();
+            // Click "Use Current Location" inside the modal
+            page.locator("text=Select Delivery Location").waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
+            page.locator("text=Use Current Location").first().click();
             
-            // Wait for modal to close (Deliver To is visible again)
+            // Wait for modal to close
             page.locator("text=Select Delivery Location").waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.HIDDEN));
         } catch (Exception e) {
             System.err.println("Failed in selectAddress: " + e.getMessage());
@@ -33,8 +34,8 @@ public class CustomerPage {
     }
 
     public void openRestaurant(String restaurantName) {
-        // Search and exact match the restaurant title, click the first one if multiple
-        page.getByText(restaurantName, new Page.GetByTextOptions().setExact(true)).first().click();
+        // Find the h5 element containing the brand name (which is what CustomerRestaurantCard renders)
+        page.locator("h5").filter(new Locator.FilterOptions().setHasText(restaurantName)).first().click();
         page.waitForTimeout(500); // UI animation delay
     }
 
@@ -46,9 +47,7 @@ public class CustomerPage {
         page.locator("text=" + itemName).waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
         
         // Assuming there is an "Add" button adjacent/inside the item container
-        // We will click the first exact "Add" button on the screen for simplicity, 
-        // as the Happy Path assumes empty cart and straight adding.
-        page.getByRole(com.microsoft.playwright.options.AriaRole.BUTTON, new Page.GetByRoleOptions().setName(Pattern.compile("^Add$"))).first().click();
+        page.locator("button:has-text('Add')").first().click();
         
         // Wait for cart popup to appear
         page.locator("text=Items Added").waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));

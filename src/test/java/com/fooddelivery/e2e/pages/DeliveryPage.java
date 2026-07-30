@@ -25,20 +25,16 @@ public class DeliveryPage {
             page.locator("button:has-text('Offline')").click();
             page.waitForTimeout(1000);
             
-            // Check if Grant Permissions is shown and click it
-            if (page.locator("button:has-text('Grant Permissions & Go Online')").isVisible()) {
-                page.locator("button:has-text('Grant Permissions & Go Online')").click();
-                page.waitForTimeout(1000);
-            }
+            // Permissions are auto-granted by Playwright context
         } catch (Exception e) {
             System.err.println("Could not go online: " + e.getMessage());
         }
     }
 
     public void acceptDelivery() {
-        // Find the "Accept Delivery" button (or similar text)
-        page.locator("text=Accept Delivery").first().waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
-        page.locator("text=Accept Delivery").first().click();
+        // Find the "Accept Order" or "Accept & Open Map" button
+        page.locator("button:has-text('Accept Order'), button:has-text('Accept & Open Map')").first().waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
+        page.locator("button:has-text('Accept Order'), button:has-text('Accept & Open Map')").first().click();
         page.waitForTimeout(500);
     }
 
