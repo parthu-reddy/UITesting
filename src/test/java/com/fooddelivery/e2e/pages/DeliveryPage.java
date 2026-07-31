@@ -16,14 +16,19 @@ public class DeliveryPage {
         // If already online, return
         try {
             page.waitForTimeout(2000); // wait for state to load from API
-            if (page.locator("button:has-text('Online Duty')").isVisible()) {
+            if (page.locator("button:has-text('Online / Finding Orders')").isVisible()) {
                 System.out.println("Rider is already online.");
                 return;
             }
             // Find the "Offline" button to toggle online status
             page.locator("button:has-text('Offline')").waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE).setTimeout(5000));
             page.locator("button:has-text('Offline')").click();
-            page.waitForTimeout(1000);
+            page.waitForTimeout(4000);
+            
+            if (page.locator("button:has-text('Enable Permissions')").isVisible()) {
+                page.locator("button:has-text('Enable Permissions')").click();
+                page.waitForTimeout(6000);
+            }
             
             // Permissions are auto-granted by Playwright context
         } catch (Exception e) {
@@ -38,22 +43,17 @@ public class DeliveryPage {
         page.waitForTimeout(500);
     }
 
-    public void markPickedUp(String otp) {
-        // Find "Confirm Pickup & Start Driving" button
-        // Need to fill the OTP first
+    public void markPickedUp(String pickupOtp) {
         page.locator("input[placeholder='Enter 6-digit pickup OTP']").waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
-        page.locator("input[placeholder='Enter 6-digit pickup OTP']").fill(otp);
-        
-        page.locator("button", new Page.LocatorOptions().setHasText("Confirm Pickup")).first().click();
+        page.locator("input[placeholder='Enter 6-digit pickup OTP']").fill(pickupOtp);
+        page.locator("button", new Page.LocatorOptions().setHasText("Verify & Pick Up")).first().click();
         page.waitForTimeout(500);
     }
 
-    public void markDelivered(String otp) {
-        // Need to fill the delivery OTP
+    public void markDelivered(String deliveryOtp) {
         page.locator("input[placeholder='Ask customer for 6-digit OTP']").waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
-        page.locator("input[placeholder='Ask customer for 6-digit OTP']").fill(otp);
-        
-        page.locator("button", new Page.LocatorOptions().setHasText("Confirm Delivery")).first().click();
+        page.locator("input[placeholder='Ask customer for 6-digit OTP']").fill(deliveryOtp);
+        page.locator("button", new Page.LocatorOptions().setHasText("Verify & Deliver")).first().click();
         page.waitForTimeout(500);
     }
 }

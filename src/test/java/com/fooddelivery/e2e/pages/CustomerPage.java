@@ -20,12 +20,12 @@ public class CustomerPage {
             // Open Location modal
             page.locator("span:has-text('Deliver to')").click();
             
-            // Click "Use Current Location" inside the modal
-            page.locator("text=Select Delivery Location").waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
-            page.locator("text=Use Current Location").first().click();
+            // Click the existing address label inside the modal
+            page.locator("text=Delivery Location").waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
+            page.locator("p:has-text('" + addressLabel + "')").first().click();
             
             // Wait for modal to close
-            page.locator("text=Select Delivery Location").waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.HIDDEN));
+            page.locator("text=Delivery Location").waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.HIDDEN));
         } catch (Exception e) {
             System.err.println("Failed in selectAddress: " + e.getMessage());
             page.screenshot(new Page.ScreenshotOptions().setPath(java.nio.file.Paths.get("target/select-address-timeout.png")));
@@ -35,19 +35,39 @@ public class CustomerPage {
 
     public void openRestaurant(String restaurantName) {
         // Find the h5 element containing the brand name (which is what CustomerRestaurantCard renders)
-        page.locator("h5").filter(new Locator.FilterOptions().setHasText(restaurantName)).first().click();
+        page.locator("h5").filter(new Locator.FilterOptions().setHasText(java.util.regex.Pattern.compile("^" + restaurantName + "$"))).first().click();
         page.waitForTimeout(500); // UI animation delay
     }
 
     public void addItemToCart(String category, String itemName) {
-        // Wait for the restaurant menu to load
-        page.locator("text=" + category).first().waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
+        // Find an item with preparation time < 15 min so rider is assigned immediately
+        com.microsoft.playwright.Locator dishControls = page.locator("div.flex.justify-between.items-center.mt-2");
+        dishControls.first().waitFor(new com.microsoft.playwright.Locator.WaitForOptions().setState(com.microsoft.playwright.options.WaitForSelectorState.VISIBLE));
         
-        // Ensure the item exists
-        page.locator("text=" + itemName).waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
+        for (int i = 0; i < dishControls.count(); i++) {
+            com.microsoft.playwright.Locator control = dishControls.nth(i);
+            String text = control.textContent(); 
+            if (text.contains("mins")) {
+                try {
+                    java.util.regex.Matcher m = java.util.regex.Pattern.compile("(\\d+)\\s*mins").matcher(text);
+                    if (m.find()) {
+                        int mins = Integer.parseInt(m.group(1));
+                        if (mins < 15) {
+                            System.out.println("Found item with prep time: " + mins + " mins");
+                            control.locator("button:has-text('Add')").click();
+                            page.waitForTimeout(500);
+                            return;
+                        }
+                    }
+                } catch (Exception e) {
+                    // ignore and try next
+                }
+            }
+        }
         
-        // Assuming there is an "Add" button adjacent/inside the item container
+        System.out.println("Could not find item with <15 mins prep time, adding first available item as fallback.");
         page.locator("button:has-text('Add')").first().click();
+        page.waitForTimeout(500);
         
         // Wait for cart popup to appear
         page.locator("text=Items Added").waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
@@ -84,12 +104,22 @@ public class CustomerPage {
     }
 
     public void selectOutlet(String outletNamePartial) {
-        String value = page.locator("select#outlet-select option", new Page.LocatorOptions().setHasText(outletNamePartial)).first().getAttribute("value");
-        page.locator("select#outlet-select").selectOption(value);
-        page.waitForTimeout(500); // UI animation delay
+        try {
+            page.locator("button#outlet-select").click();
+            page.locator("h2:has-text('Select Outlet Location')").waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
+            page.locator("p:has-text('" + outletNamePartial + "')").first().click();
+            page.waitForTimeout(500); // UI animation delay
+        } catch (Exception e) {
+            System.err.println("Failed to select outlet: " + outletNamePartial);
+            page.screenshot(new Page.ScreenshotOptions().setPath(java.nio.file.Paths.get("target/select-outlet-timeout.png")));
+            throw e;
+        }
     }
 
     public String getDeliveryOtp() {
+        // Reload page to fetch latest order status in case SSE connection failed
+        page.reload();
+        page.waitForTimeout(2000);
         // Wait for the delivery OTP to be visible and extract it
         page.locator("text=Secure Delivery Verification").waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
         return page.locator("text=Secure Delivery Verification").locator("xpath=..").locator("div.bg-gradient-to-r").innerText().trim();

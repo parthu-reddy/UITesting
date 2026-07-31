@@ -28,7 +28,8 @@ public abstract class TestBase {
         playwright = Playwright.create();
         // Headless = true for stability in CI/Remote environments
         browser = playwright.chromium().launch(new com.microsoft.playwright.BrowserType.LaunchOptions()
-                .setHeadless(true)
+                .setHeadless(false)
+                .setSlowMo(400) // 400ms delay between actions
                 .setArgs(java.util.Arrays.asList("--unsafely-treat-insecure-origin-as-secure=http://140.245.225.221")));
     }
 

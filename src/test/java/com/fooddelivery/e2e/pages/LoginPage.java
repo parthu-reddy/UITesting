@@ -15,35 +15,16 @@ public class LoginPage {
     // --- High-Level Compound Actions (Backward Compatibility) ---
 
     public void loginAs(String role, String phone) {
-        page.locator("text=" + role).first().waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
+        com.microsoft.playwright.Locator btn = page.locator("button:has-text('" + role + "'):visible").first();
+        btn.waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
         page.waitForTimeout(500); 
-
+        btn.click();
+        
         com.microsoft.playwright.Locator input = page.getByPlaceholder("9876543210");
-        boolean found = false;
-        for (int i = 0; i < 10; i++) {
-            try {
-                Locator locators = page.locator("text=" + role);
-                for (int j = 0; j < locators.count(); j++) {
-                    try {
-                        locators.nth(j).click(new com.microsoft.playwright.Locator.ClickOptions().setTimeout(500));
-                        input.waitFor(new com.microsoft.playwright.Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE).setTimeout(1000));
-                        found = true;
-                        break;
-                    } catch (Exception e2) {}
-                }
-                if (found) break;
-            } catch (Exception e) {
-                page.waitForTimeout(500);
-            }
-        }
-        if (!found) {
-            throw new RuntimeException("Could not click role card and see input");
-        }
+        input.waitFor(new com.microsoft.playwright.Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE).setTimeout(5000));
         
         fillPhoneNumber(phone);
         clickSendOneTimeOtp();
-        
-        page.waitForTimeout(2000);
         
         page.getByPlaceholder("- - - - - -").waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
         
@@ -55,12 +36,14 @@ public class LoginPage {
         page.getByPlaceholder("9876543210").waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.HIDDEN));
         
         try {
-            page.waitForTimeout(1500); // Wait for potential profile modal to render
+            // Wait 3000ms for APIs to resolve and potential Complete Profile Modal to render
+            page.waitForTimeout(3000);
+            
             if (page.getByPlaceholder("Enter your full name").isVisible()) {
                 System.out.println("Complete Profile Modal detected. Filling profile...");
                 page.getByPlaceholder("Enter your full name").fill(role + " User");
                 page.getByPlaceholder("Enter your email address").fill(role.replaceAll("\\s+", "").toLowerCase() + "@example.com");
-                page.locator("button:has-text('Save Profile & Continue')").click();
+                page.locator("button:has-text('Save Profile')").click();
                 page.getByPlaceholder("Enter your full name").waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.HIDDEN).setTimeout(5000));
             }
         } catch (Exception e) {
