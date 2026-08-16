@@ -5,7 +5,7 @@ const { chromium } = require('playwright');
   const context = await browser.newContext();
   const page = await context.newPage();
   
-  await page.goto('http://140.245.225.221/');
+  await page.goto('http://140.245.234.137/');
   
   // Login
   await page.fill('input[type="tel"]', '8000000015');

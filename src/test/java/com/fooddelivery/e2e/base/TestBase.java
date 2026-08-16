@@ -21,7 +21,7 @@ public abstract class TestBase {
     protected Page restaurantPage;
     protected Page riderPage;
 
-    protected static final String APP_URL = "http://140.245.225.221/";
+    protected static final String APP_URL = "http://140.245.234.137/";
 
     @BeforeAll
     public static void setUpClass() {
@@ -30,7 +30,7 @@ public abstract class TestBase {
         browser = playwright.chromium().launch(new com.microsoft.playwright.BrowserType.LaunchOptions()
                 .setHeadless(false)
                 .setSlowMo(400) // 400ms delay between actions
-                .setArgs(java.util.Arrays.asList("--unsafely-treat-insecure-origin-as-secure=http://140.245.225.221")));
+                .setArgs(java.util.Arrays.asList("--unsafely-treat-insecure-origin-as-secure=http://140.245.234.137")));
     }
 
     @AfterAll

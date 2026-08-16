@@ -3,7 +3,7 @@ import json
 import urllib.error
 import urllib.parse
 
-API_URL = "http://140.245.225.221"
+API_URL = "http://140.245.234.137"
 
 def test_customer_restaurants():
     print("Initiating auth for customer 7000000001")
