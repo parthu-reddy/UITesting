@@ -10,6 +10,10 @@
 
     <properties>
         <lombok.version>1.18.38</lombok.version>
+        <!-- This module has no parent, so ${java.version} was resolving to the JVM's own
+             system property (e.g. 26.0.1). maven-compiler-plugin parses source/target with
+             Double.parseDouble, which fails on a patch version: "multiple points". -->
+        <java.version>17</java.version>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
