@@ -24,9 +24,8 @@
     <dependencies>
         <dependency>
             <groupId>com.fooddelivery</groupId>
-            <artifactId>common-library</artifactId>
+            <artifactId>common-test</artifactId>
             <version>1.0-SNAPSHOT</version>
-            <type>test-jar</type>
             <scope>test</scope>
         </dependency>
 
