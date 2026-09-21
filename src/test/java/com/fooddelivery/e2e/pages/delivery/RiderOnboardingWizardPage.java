@@ -1,7 +1,8 @@
 package com.fooddelivery.e2e.pages.delivery;
 
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
-
+import java.nio.file.Paths;
 /**
  * Page Object for rider onboarding wizard.
  * Maps to: {@code RiderOnboardingWizard.tsx}
@@ -18,13 +19,22 @@ public class RiderOnboardingWizardPage {
     }
 
     public boolean isWizardVisible() {
-        return page.locator("text=Partner Onboarding, text=Complete your KYC").first().isVisible();
+        Locator loc = page.locator("text=Partner Onboarding").first();
+        try {
+            loc.waitFor(new com.microsoft.playwright.Locator.WaitForOptions().setState(com.microsoft.playwright.options.WaitForSelectorState.VISIBLE).setTimeout(15000));
+            return true;
+        } catch (Exception e) {
+            System.err.println("Wizard not visible. Current page HTML:");
+            System.err.println(page.content());
+            return false;
+        }
     }
 
     public void completeOnboarding() {
         // Step 0: Basic Profile
         page.locator("input[type='text']").first().fill("E2E Test Rider");
-        page.locator("select, [role='combobox']").first().selectOption("MCWG");
+        page.getByRole(com.microsoft.playwright.options.AriaRole.COMBOBOX, new Page.GetByRoleOptions().setName("Vehicle Type")).click();
+        page.getByRole(com.microsoft.playwright.options.AriaRole.OPTION, new Page.GetByRoleOptions().setName("Motorcycle / Scooter")).click();
         page.locator("input[type='text']").nth(1).fill("KA01AB1234");
         uploadDummyFile();
         clickContinue();
@@ -55,12 +65,41 @@ public class RiderOnboardingWizardPage {
     }
 
     private void uploadDummyFile() {
-        page.setInputFiles("input[type='file']", java.nio.file.Paths.get("src/test/resources/dummy.png"));
+        page.locator("input[type='file']").setInputFiles(Paths.get("src/test/resources/dummy.png"));
+        page.getByText("Click to replace").waitFor();
     }
 
     private void clickContinue() {
         page.locator("button:has-text('Save & Continue'), button:has-text('Verify License'), button:has-text('Verify Vehicle'), button:has-text('Initiate Penny Drop'), button:has-text('Continue')").first().click();
         page.waitForTimeout(1000);
+    }
+
+    public void completeDevModeOnboarding() {
+        // Step 0: Basic Profile
+        page.locator("input[type='text']").first().fill("E2E Test Rider");
+        page.getByRole(com.microsoft.playwright.options.AriaRole.COMBOBOX, new Page.GetByRoleOptions().setName("Vehicle Type")).click();
+        page.getByRole(com.microsoft.playwright.options.AriaRole.OPTION, new Page.GetByRoleOptions().setName("Motorcycle / Scooter")).click();
+        page.locator("input[type='text']").nth(1).fill("KA01AB1234");
+        uploadDummyFile();
+        clickContinue();
+
+        // Step 1: Driving License (Auto-Approved in Dev)
+        page.getByText("Driving License Approved").waitFor();
+        clickContinue();
+
+        // Step 2: Vehicle RC (Auto-Approved in Dev)
+        page.getByText("Vehicle RC Approved").waitFor();
+        clickContinue();
+
+        // Step 3: Bank Account (Auto-Approved in Dev)
+        page.getByText("Bank Verified").waitFor();
+        clickContinue();
+
+        // Step 4: Face Match (Selfie - never auto-approved)
+        page.getByText("Please upload a clear selfie").waitFor();
+        uploadDummyFile();
+        page.locator("button:has-text('Complete Verification')").first().click();
+        page.waitForTimeout(2000);
     }
 
     // Compatibility methods for RiderOnboardingFullTest
@@ -74,7 +113,8 @@ public class RiderOnboardingWizardPage {
     }
 
     public void selectVehicleType(String type) {
-        page.locator("select, [role='combobox']").first().selectOption(type);
+        page.getByRole(com.microsoft.playwright.options.AriaRole.COMBOBOX, new Page.GetByRoleOptions().setName("Vehicle Type")).click();
+        page.locator("text=" + type).click();
     }
 
     public void clickNext() {

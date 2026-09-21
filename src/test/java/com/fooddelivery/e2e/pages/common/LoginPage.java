@@ -98,22 +98,27 @@ public class LoginPage {
     // ── Post-login ───────────────────────────────────────────────────────
 
     private void waitForLoginComplete(String profileName, String profileEmail) {
+        if (profileName != null && profileEmail != null) {
+            Locator nameInput = page.getByPlaceholder("Enter your full name");
+            nameInput.waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
+            CompleteProfileModalPage profile = new CompleteProfileModalPage(page);
+            profile.fillName(profileName);
+            profile.fillEmail(profileEmail);
+            profile.submit();
+        }
+
         page.waitForCondition(() -> {
             if (page.getByPlaceholder("Enter your full name").isVisible()) {
                 if (profileName == null || profileEmail == null) {
                     throw new AssertionError("Account requires profile completion; no profile setup was configured.");
                 }
-                CompleteProfileModalPage profile = new CompleteProfileModalPage(page);
-                profile.fillName(profileName);
-                profile.fillEmail(profileEmail);
-                profile.submit();
             }
             if (page.getByText("Session Limit Reached", new Page.GetByTextOptions().setExact(true)).isVisible()) {
                 throw new AssertionError("Account session limit reached. Configure a dedicated test account.");
             }
             Locator error = page.locator("div:has(> svg.lucide-circle-alert) > span");
             if (error.isVisible()) throw new AssertionError("Login rejected: " + error.innerText());
-            return !page.getByPlaceholder("- - - - - -").isVisible();
+            return !page.getByPlaceholder("- - - - - -").isVisible() && !page.getByPlaceholder("Enter your full name").isVisible();
         });
     }
 

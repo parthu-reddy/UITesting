@@ -38,7 +38,10 @@ public class RestaurantDashboardPage {
     // ── Tab navigation ───────────────────────────────────────────────────
 
     public void openOrdersTab() {
-        page.locator("button:has-text('Live Kitchen Feed'), [role='tab']:has-text('Live Kitchen Feed')").first().click();
+        page.getByRole(com.microsoft.playwright.options.AriaRole.TAB, 
+            new com.microsoft.playwright.Page.GetByRoleOptions()
+                .setName(java.util.regex.Pattern.compile("Live Kitchen Feed.*")))
+            .first().click();
         page.waitForTimeout(300);
     }
 
@@ -48,7 +51,7 @@ public class RestaurantDashboardPage {
     }
 
     public void openSettingsTab() {
-        page.locator("button:has-text('Settings'), [role='tab']:has-text('Settings')").first().click();
+        page.locator("button[aria-label='Restaurant registration and menu settings']").first().click();
         page.waitForTimeout(300);
     }
 

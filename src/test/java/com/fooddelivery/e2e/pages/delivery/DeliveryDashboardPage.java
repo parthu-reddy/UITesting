@@ -21,10 +21,11 @@ public class DeliveryDashboardPage {
     }
 
     public void waitForDashboard() {
-        page.getByText("Today’s Earnings").first()
-                .waitFor(new Locator.WaitForOptions()
-                        .setState(WaitForSelectorState.VISIBLE)
-                        .setTimeout(15000));
+        page.waitForCondition(() -> 
+            page.getByText("Trips Completed").isVisible() || 
+            page.getByText("Offline").isVisible() || 
+            page.getByText("Online Duty").isVisible(),
+            new Page.WaitForConditionOptions().setTimeout(15000));
     }
 
     // ── Tab navigation ───────────────────────────────────────────────────

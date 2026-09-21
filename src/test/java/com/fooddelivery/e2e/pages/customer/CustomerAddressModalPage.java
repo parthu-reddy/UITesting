@@ -21,10 +21,10 @@ public class CustomerAddressModalPage {
     }
 
     public void waitForModalOpen() {
-        page.locator("text=Delivery Location, text=Select Address").first()
-                .waitFor(new Locator.WaitForOptions()
-                        .setState(WaitForSelectorState.VISIBLE)
-                        .setTimeout(5000));
+        page.getByRole(com.microsoft.playwright.options.AriaRole.HEADING, 
+            new com.microsoft.playwright.Page.GetByRoleOptions().setName("Delivery Location").setExact(true))
+            .first()
+            .waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE).setTimeout(5000));
     }
 
     public void selectExistingAddress(String label) {
@@ -37,12 +37,32 @@ public class CustomerAddressModalPage {
         page.waitForTimeout(500);
     }
 
+    public void searchAndSelectLocation(String query) {
+        page.locator("input[aria-label='Search for a place']").first().fill(query);
+        // Wait for the dropdown and click the first result
+        page.locator(".absolute.z-50 button").first().waitFor();
+        page.locator(".absolute.z-50 button").first().click();
+        page.waitForTimeout(1000);
+    }
+
     public void fillAddressLabel(String label) {
         page.locator("input[placeholder*='label'], input[placeholder*='Label']").first().fill(label);
     }
 
     public void fillAddressLine(String address) {
         page.locator("input[placeholder*='address'], input[placeholder*='Address'], textarea").first().fill(address);
+    }
+
+    public void fillCity(String city) {
+        page.locator("input[placeholder*='city'], input[placeholder*='City']").first().fill(city);
+    }
+
+    public void fillState(String state) {
+        page.locator("input[placeholder*='state'], input[placeholder*='State']").first().fill(state);
+    }
+
+    public void fillZipCode(String zipCode) {
+        page.locator("input[placeholder*='zip'], input[placeholder*='Zip'], input[placeholder*='ZIP']").first().fill(zipCode);
     }
 
     public void saveAddress() {

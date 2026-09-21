@@ -17,8 +17,24 @@ public class CustomerDashboardPage {
     }
 
     public void waitForDashboard() {
-        // Wait for the "Deliver to" header or the restaurant browser to appear
-        page.locator("text=Deliver to, text=Good Morning, text=What are you craving").first()
+        try {
+            page.route("https://nominatim.openstreetmap.org/reverse*", route -> {
+                route.fulfill(new com.microsoft.playwright.Route.FulfillOptions()
+                        .setStatus(200)
+                        .setContentType("application/json")
+                        .setBody("{\"display_name\":\"Mocked Current Location\"}"));
+            });
+        } catch (Exception ignored) { }
+
+        Locator loc = page.locator("text=Use Current Location").first();
+        try {
+            loc.waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE).setTimeout(3000));
+            loc.click();
+            page.waitForTimeout(1000);
+        } catch (Exception ignored) { }
+
+        // Wait for the header to appear
+        page.locator("header").first()
                 .waitFor(new Locator.WaitForOptions()
                         .setState(WaitForSelectorState.VISIBLE)
                         .setTimeout(15000));
@@ -44,11 +60,13 @@ public class CustomerDashboardPage {
     // ── Deliver-to header ────────────────────────────────────────────────
 
     public String getDeliverToText() {
-        return page.locator("text=Deliver to").locator("xpath=..").innerText().trim();
+        return page.locator("header >> text=Deliver to").locator("..").innerText().trim();
     }
 
     public void clickDeliverTo() {
-        page.locator("text=Deliver to").first().click();
+        page.getByRole(com.microsoft.playwright.options.AriaRole.BUTTON)
+            .filter(new com.microsoft.playwright.Locator.FilterOptions().setHasText("Deliver to"))
+            .first().click();
         page.waitForTimeout(500);
     }
 
