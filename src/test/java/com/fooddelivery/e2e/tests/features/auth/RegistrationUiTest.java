@@ -33,6 +33,9 @@ public class RegistrationUiTest extends TestBase {
                 } catch (Exception e) {}
             }
         });
+        customerPage.onConsoleMessage(msg -> {
+            System.out.println("BROWSER CONSOLE: " + msg.type() + " " + msg.text());
+        });
         customerPage.navigate(TestConfig.APP_URL);
         
         // Use a new unique phone number to trigger the registration flow
@@ -51,8 +54,11 @@ public class RegistrationUiTest extends TestBase {
         
         modal.searchAndSelectLocation("Keerthi");
         modal.fillAddressLabel("Test Registration Home");
-        // We only fill label because the other fields (address line, city, state, zip)
-        // are auto-populated by the selection from the dropdown.
+        modal.fillAddressLine("123 Main St");
+        modal.fillCity("Bengaluru");
+        modal.fillState("Karnataka");
+        modal.fillZipCode("560001");
+        
         modal.saveAddress();
         
         // Wait for the modal to close and the address to be auto-selected
