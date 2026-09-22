@@ -65,7 +65,7 @@ public abstract class TestBase {
     public void setUpContexts() {
         testCustomerPhone = String.format("8000000%03d", (int)(Math.random() * 500) + 1);
         testRestaurantPhone = String.format("9000000%03d", (int)(Math.random() * 10) + 1);
-        testRiderPhone = String.format("7000000%03d", (int)(Math.random() * 30) + 1);
+        testRiderPhone = String.format("70000%05d", (int)(Math.random() * 90000) + 10000);
         testAdminPhone = String.format("1000000%03d", (int)(Math.random() * 10) + 1);
 
         customerContext = createContext("customer");

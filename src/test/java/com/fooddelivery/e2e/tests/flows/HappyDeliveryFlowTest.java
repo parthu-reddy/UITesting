@@ -42,6 +42,12 @@ public class HappyDeliveryFlowTest extends TestBase {
 
         riderPage.navigate(TestConfig.APP_URL);
         new LoginPage(riderPage).loginAs("Delivery Executive", testRiderPhone);
+        com.fooddelivery.e2e.pages.delivery.RiderOnboardingWizardPage onboarding = new com.fooddelivery.e2e.pages.delivery.RiderOnboardingWizardPage(riderPage);
+        try {
+            if (onboarding.isWizardVisible()) {
+                onboarding.completeOnboarding();
+            }
+        } catch (Exception e) {}
         DeliveryDashboardPage riderDashboard = new DeliveryDashboardPage(riderPage);
         riderDashboard.waitForDashboard();
 
