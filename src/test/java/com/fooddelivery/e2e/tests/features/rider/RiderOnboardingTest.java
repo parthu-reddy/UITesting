@@ -16,7 +16,7 @@ public class RiderOnboardingTest extends TestBase {
     @DisplayName("Login as new rider → check onboarding wizard")
     void checkOnboardingWizard() {
         riderPage.navigate(TestConfig.APP_URL);
-        new LoginPage(riderPage).loginAs("Delivery Executive", TestConfig.RIDER_PHONE);
+        new LoginPage(riderPage).loginAs("Delivery Executive", testRiderPhone);
         DeliveryDashboardPage dashboard = new DeliveryDashboardPage(riderPage);
         dashboard.waitForDashboard();
 

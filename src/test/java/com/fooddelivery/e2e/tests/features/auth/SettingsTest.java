@@ -19,7 +19,7 @@ public class SettingsTest extends TestBase {
     @DisplayName("Navigate to settings → check wallet, addresses, history tabs")
     void settingsTabs() {
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", TestConfig.CUSTOMER_PHONE);
+        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
         CustomerDashboardPage dashboard = new CustomerDashboardPage(customerPage);
         dashboard.waitForDashboard();
 
@@ -53,7 +53,7 @@ public class SettingsTest extends TestBase {
     @DisplayName("Logout from settings")
     void logout() {
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", TestConfig.CUSTOMER_PHONE);
+        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
         new CustomerDashboardPage(customerPage).waitForDashboard();
 
         CustomerDashboardPage dashboard = new CustomerDashboardPage(customerPage);

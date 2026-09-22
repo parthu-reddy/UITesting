@@ -42,13 +42,19 @@ public class RestaurantBrandRegistrationPage {
     public void submit() {
         // Step 1
         Locator inputs = page.locator("input[type='text']");
-        String randomStr = String.valueOf(System.currentTimeMillis() % 100000);
-        inputs.nth(1).fill("29ABCDE" + randomStr + "1Z5"); // GSTIN
-        inputs.nth(2).fill("ABCDE" + randomStr); // PAN
-        inputs.nth(3).fill("U12345KA2023PTC" + randomStr + "6"); // CIN
+        String random4Digits = String.format("%04d", (System.currentTimeMillis() % 10000));
+        String pan = "ABCDE" + random4Digits + "F"; // 10 chars
+        String gstin = "29" + pan + "1Z5"; // 15 chars
+        String cin = "U12345KA2023PTC" + random4Digits + "01"; // 21 chars
+
+        inputs.nth(1).fill(gstin); // GSTIN
+        inputs.nth(2).fill(pan); // PAN
+        inputs.nth(3).fill(cin); // CIN
         
         page.locator("button:has-text('Next')").first().click();
-        page.waitForTimeout(1000);
+        
+        // Wait for step 2 by waiting for Bank Details text or similar
+        page.locator("text=Bank Account #").waitFor();
 
         // Step 2
         Locator bankInputs = page.locator("input[type='text']");

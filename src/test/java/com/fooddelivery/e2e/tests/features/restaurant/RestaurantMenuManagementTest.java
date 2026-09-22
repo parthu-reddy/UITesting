@@ -16,7 +16,7 @@ public class RestaurantMenuManagementTest extends TestBase {
     @DisplayName("Navigate to Menu tab → toggle item availability")
     void toggleMenuItemAvailability() {
         restaurantPage.navigate(TestConfig.APP_URL);
-        new LoginPage(restaurantPage).loginAs("Restaurant Partner", TestConfig.RESTAURANT_PHONE);
+        new LoginPage(restaurantPage).loginAs("Restaurant Partner", testRestaurantPhone);
         RestaurantDashboardPage dashboard = new RestaurantDashboardPage(restaurantPage);
         dashboard.waitForDashboard();
 

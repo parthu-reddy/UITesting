@@ -17,15 +17,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Tag("login")
 public class LoginSmokeTest extends TestBase {
     enum Account {
-        CUSTOMER("Order Food", TestConfig.CUSTOMER_PHONE, "Deliver to"),
-        RESTAURANT("Restaurant Partner", TestConfig.RESTAURANT_PHONE, "Menu Stock Toggles"),
-        DELIVERY("Delivery Executive", TestConfig.RIDER_PHONE, "Today’s Earnings"),
-        ADMIN("System Admin", TestConfig.ADMIN_PHONE, "Live Operations");
+        CUSTOMER("Order Food", "Deliver to"),
+        RESTAURANT("Restaurant Partner", "Menu Stock Toggles"),
+        DELIVERY("Delivery Executive", "Today’s Earnings"),
+        ADMIN("System Admin", "Live Operations");
 
-        final String label, phone, dashboardText;
-        Account(String label, String phone, String dashboardText) {
+        final String label, dashboardText;
+        Account(String label, String dashboardText) {
             this.label = label;
-            this.phone = phone;
             this.dashboardText = dashboardText;
         }
     }
@@ -39,16 +38,26 @@ public class LoginSmokeTest extends TestBase {
         };
     }
 
+    private String phoneFor(Account account) {
+        return switch (account) {
+            case CUSTOMER -> testCustomerPhone;
+            case RESTAURANT -> testRestaurantPhone;
+            case DELIVERY -> testRiderPhone;
+            case ADMIN -> testAdminPhone;
+        };
+    }
+
     @ParameterizedTest(name = "{0}: valid OTP opens the correct dashboard")
     @EnumSource(Account.class)
     void successfulLogin(Account account) {
         Page page = pageFor(account);
+        String phone = phoneFor(account);
         page.navigate(TestConfig.APP_URL);
         LoginPage login = new LoginPage(page);
         if (account == Account.ADMIN) {
-            login.loginAs(account.label, account.phone, TestConfig.ADMIN_PROFILE_NAME, TestConfig.ADMIN_PROFILE_EMAIL);
+            login.loginAs(account.label, phone, TestConfig.ADMIN_PROFILE_NAME, TestConfig.ADMIN_PROFILE_EMAIL);
         } else {
-            login.loginAs(account.label, account.phone);
+            login.loginAs(account.label, phone);
         }
         assertThat(page.getByText(account.dashboardText, new Page.GetByTextOptions().setExact(true)).first())
                 .isVisible();
@@ -62,10 +71,11 @@ public class LoginSmokeTest extends TestBase {
     @EnumSource(Account.class)
     void failedLogin(Account account) {
         Page page = pageFor(account);
+        String phone = phoneFor(account);
         page.navigate(TestConfig.APP_URL);
         LoginPage login = new LoginPage(page);
         login.selectRole(account.label);
-        login.fillPhoneNumber(account.phone);
+        login.fillPhoneNumber(phone);
         login.clickSendOtp();
         login.waitForOtpInput();
         login.clickAutofillCode();

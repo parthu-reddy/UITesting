@@ -18,7 +18,7 @@ public class AdminUserOpsTest extends TestBase {
     @DisplayName("Admin navigates to Users → searches → opens detail panel")
     void adminUserManagement() {
         adminPage.navigate(TestConfig.APP_URL);
-        new LoginPage(adminPage).loginAs("System Admin", TestConfig.ADMIN_PHONE);
+        new LoginPage(adminPage).loginAs("System Admin", testAdminPhone);
         AdminPortalPage portal = new AdminPortalPage(adminPage);
         portal.waitForPortal();
 
@@ -29,7 +29,7 @@ public class AdminUserOpsTest extends TestBase {
         assertThat(users.isUserListVisible()).isTrue().as("User list should be visible");
 
         // Search for a test user
-        users.searchUser(TestConfig.CUSTOMER_PHONE);
+        users.searchUser(testCustomerPhone);
         adminPage.waitForTimeout(1000);
 
         // Select first result

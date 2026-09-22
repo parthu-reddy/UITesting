@@ -38,7 +38,7 @@ public class RiderFulfillmentTest extends TestBase {
         String shortOrderId = fullOrderId.length() >= 8 ? fullOrderId.substring(0, 8) : fullOrderId;
         
         // Rapidly accept and prepare the order on behalf of the restaurant
-        pickupOtp = StateSetupHelper.acceptAndPrepareOrder(browser, TestConfig.RESTAURANT_PHONE, shortOrderId, outletName);
+        pickupOtp = StateSetupHelper.acceptAndPrepareOrder(browser, testRestaurantPhone, shortOrderId, outletName);
         
         // Rapidly fetch the delivery OTP on behalf of the customer
         deliveryOtp = StateSetupHelper.getDeliveryOtp(browser, uniqueCustomerPhone);

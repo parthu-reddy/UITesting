@@ -34,6 +34,11 @@ public abstract class TestBase {
     protected Page riderPage;
     protected Page adminPage;
 
+    protected String testCustomerPhone;
+    protected String testRestaurantPhone;
+    protected String testRiderPhone;
+    protected String testAdminPhone;
+
     @BeforeAll
     public static void setUpClass() {
         playwright = Playwright.create();
@@ -55,6 +60,11 @@ public abstract class TestBase {
 
     @BeforeEach
     public void setUpContexts() {
+        testCustomerPhone = String.format("8000000%03d", (int)(Math.random() * 500) + 1);
+        testRestaurantPhone = String.format("9000000%03d", (int)(Math.random() * 500) + 1);
+        testRiderPhone = String.format("7000000%03d", (int)(Math.random() * 500) + 1);
+        testAdminPhone = String.format("1000000%03d", (int)(Math.random() * 500) + 1);
+
         customerContext = createContext("customer");
         restaurantContext = createContext("restaurant");
         riderContext = createContext("rider");

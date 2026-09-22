@@ -19,12 +19,12 @@ public class ChatCommunicationTest extends TestBase {
     void customerSendsMessage() {
         // Login customer and place an order first
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", TestConfig.CUSTOMER_PHONE);
+        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
         new CustomerDashboardPage(customerPage).waitForDashboard();
 
         // Login restaurant
         restaurantPage.navigate(TestConfig.APP_URL);
-        new LoginPage(restaurantPage).loginAs("Restaurant Partner", TestConfig.RESTAURANT_PHONE);
+        new LoginPage(restaurantPage).loginAs("Restaurant Partner", testRestaurantPhone);
         new RestaurantDashboardPage(restaurantPage).waitForDashboard();
 
         // Customer places order

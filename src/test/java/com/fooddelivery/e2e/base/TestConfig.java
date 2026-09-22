@@ -28,17 +28,12 @@ public final class TestConfig {
     public static final boolean RECORD_VIDEO = Boolean.parseBoolean(
             System.getProperty("record.video", "true"));
 
-    // ── Test User Phone Numbers ──────────────────────────────────────────
-
-    public static final String CUSTOMER_PHONE = System.getProperty("customer.phone", "8000000001");
-    public static final String RESTAURANT_PHONE = System.getProperty("restaurant.phone", "9000000001");
-    public static final String RIDER_PHONE = System.getProperty("rider.phone", "7000000001");
-    public static final String ADMIN_PHONE = System.getProperty("admin.phone", "1000000001");
+    // ── Test User Profiles ──────────────────────────────────────────
 
     /** Used only when the selected admin reaches first-login profile completion. */
     public static final String ADMIN_PROFILE_NAME = System.getProperty("admin.profile.name", "E2E Admin");
     public static final String ADMIN_PROFILE_EMAIL = System.getProperty(
-            "admin.profile.email", "e2e-admin-" + ADMIN_PHONE + "@example.com");
+            "admin.profile.email", "e2e-admin-dynamic@example.com");
 
     // ── Geolocation (Bangalore) ──────────────────────────────────────────
 

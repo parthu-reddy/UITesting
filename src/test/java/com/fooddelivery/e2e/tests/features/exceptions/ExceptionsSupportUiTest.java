@@ -16,7 +16,7 @@ public class ExceptionsSupportUiTest extends TestBase {
     @DisplayName("EXCEPTION-01: Restaurant Rejects Order")
     void restaurantRejectsOrder() {
         restaurantPage.navigate(TestConfig.APP_URL);
-        new LoginPage(restaurantPage).loginAs("Restaurant Partner", TestConfig.RESTAURANT_PHONE);
+        new LoginPage(restaurantPage).loginAs("Restaurant Partner", testRestaurantPhone);
         
         // Simulating the UI state for rejecting an order
         boolean isRejectButtonVisible = restaurantPage.locator("text=Reject").isVisible();
@@ -27,7 +27,7 @@ public class ExceptionsSupportUiTest extends TestBase {
     @DisplayName("EXCEPTION-02: Customer Cancels Order")
     void customerCancelsOrder() {
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", TestConfig.CUSTOMER_PHONE);
+        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
 
         boolean isCancelButtonVisible = customerPage.locator("text=Cancel Order").isVisible();
         assertThat(isCancelButtonVisible).isFalse();
@@ -37,7 +37,7 @@ public class ExceptionsSupportUiTest extends TestBase {
     @DisplayName("SUPPORT-01: Submit Review")
     void submitReview() {
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", TestConfig.CUSTOMER_PHONE);
+        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
         
         boolean isRateVisible = customerPage.locator("text=Rate Order").isVisible();
         assertThat(isRateVisible).isFalse();

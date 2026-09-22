@@ -19,7 +19,7 @@ public class SavedAddressOutletUiTest extends TestBase {
     @Test
     void existingHomeAndNearbyBrand1Outlet() {
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", TestConfig.CUSTOMER_PHONE);
+        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
         new com.fooddelivery.e2e.pages.customer.SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();
         String outletName = new com.fooddelivery.e2e.pages.customer.NearbyOutletPage(customerPage).openBrand1AndSelectNearby();
 

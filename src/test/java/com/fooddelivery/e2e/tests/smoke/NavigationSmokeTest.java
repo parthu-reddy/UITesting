@@ -21,16 +21,16 @@ public class NavigationSmokeTest extends TestBase {
     @BeforeEach
     void loginAllRoles() {
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", TestConfig.CUSTOMER_PHONE);
+        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
 
         restaurantPage.navigate(TestConfig.APP_URL);
-        new LoginPage(restaurantPage).loginAs("Restaurant Partner", TestConfig.RESTAURANT_PHONE);
+        new LoginPage(restaurantPage).loginAs("Restaurant Partner", testRestaurantPhone);
 
         riderPage.navigate(TestConfig.APP_URL);
-        new LoginPage(riderPage).loginAs("Delivery Executive", TestConfig.RIDER_PHONE);
+        new LoginPage(riderPage).loginAs("Delivery Executive", testRiderPhone);
 
         adminPage.navigate(TestConfig.APP_URL);
-        new LoginPage(adminPage).loginAs("System Admin", TestConfig.ADMIN_PHONE);
+        new LoginPage(adminPage).loginAs("System Admin", testAdminPhone);
     }
 
     @Test

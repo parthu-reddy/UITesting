@@ -21,7 +21,7 @@ public class OrderCancellationTest extends TestBase {
     void restaurantRejectsOrder() {
         // Place an order as customer
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", TestConfig.CUSTOMER_PHONE);
+        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
         
         // Add item and place order (omitting complex setup for brevity, assume simple add item)
         // customerPage.locator("text=Add to Cart").first().click(); // Mocked interaction
@@ -32,7 +32,7 @@ public class OrderCancellationTest extends TestBase {
         
         // For testing the restaurant side of rejection:
         restaurantPage.navigate(TestConfig.APP_URL);
-        new LoginPage(restaurantPage).loginAs("Restaurant Partner", TestConfig.RESTAURANT_PHONE);
+        new LoginPage(restaurantPage).loginAs("Restaurant Partner", testRestaurantPhone);
         RestaurantDashboardPage restDash = new RestaurantDashboardPage(restaurantPage);
         restDash.waitForDashboard();
 
@@ -54,7 +54,7 @@ public class OrderCancellationTest extends TestBase {
     @DisplayName("CANCEL-07 to CANCEL-09: Customer cancels order before restaurant accepts")
     void customerCancelsOrderBeforeAccept() {
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", TestConfig.CUSTOMER_PHONE);
+        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
         
         CustomerOrderTrackerPage tracker = new CustomerOrderTrackerPage(customerPage);
         // CANCEL-07: Cancel button visible

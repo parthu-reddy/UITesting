@@ -18,7 +18,7 @@ public class RiderUiTest extends TestBase {
     @DisplayName("RIDER-01: Verify Rider Dashboard and Go Online functionality")
     void verifyRiderDashboardAndOnlineStatus() {
         riderPage.navigate(TestConfig.APP_URL);
-        new LoginPage(riderPage).loginAs("Delivery Executive", TestConfig.RIDER_PHONE);
+        new LoginPage(riderPage).loginAs("Delivery Executive", testRiderPhone);
         
         DeliveryDashboardPage dashboard = new DeliveryDashboardPage(riderPage);
         dashboard.waitForDashboard();

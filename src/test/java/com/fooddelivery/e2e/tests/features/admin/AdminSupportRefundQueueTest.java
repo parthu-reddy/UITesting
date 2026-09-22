@@ -19,7 +19,7 @@ public class AdminSupportRefundQueueTest extends TestBase {
     @BeforeEach
     void loginAdmin() {
         adminPage.navigate(TestConfig.APP_URL);
-        new LoginPage(adminPage).loginAs("Admin", TestConfig.ADMIN_PHONE);
+        new LoginPage(adminPage).loginAs("Admin", testAdminPhone);
         AdminPortalPage dashboard = new AdminPortalPage(adminPage);
         dashboard.waitForPortal();
     }

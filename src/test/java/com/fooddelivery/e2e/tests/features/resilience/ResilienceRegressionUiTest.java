@@ -16,10 +16,10 @@ public class ResilienceRegressionUiTest extends TestBase {
     @DisplayName("ISOLATION-01: Verify isolated contexts")
     void verifyIsolatedContexts() {
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", TestConfig.CUSTOMER_PHONE);
+        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
 
         restaurantPage.navigate(TestConfig.APP_URL);
-        new LoginPage(restaurantPage).loginAs("Restaurant Partner", TestConfig.RESTAURANT_PHONE);
+        new LoginPage(restaurantPage).loginAs("Restaurant Partner", testRestaurantPhone);
 
         // Verify that one is Customer and the other is Restaurant
         assertThat(customerPage.locator("text=Deliver to").isVisible()).isTrue();
@@ -30,10 +30,10 @@ public class ResilienceRegressionUiTest extends TestBase {
     @DisplayName("ISOLATION-02: Customer and rider in separate contexts")
     void verifyCustomerAndRiderIsolated() {
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", TestConfig.CUSTOMER_PHONE);
+        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
 
         riderPage.navigate(TestConfig.APP_URL);
-        new LoginPage(riderPage).loginAs("Delivery Executive", TestConfig.RIDER_PHONE);
+        new LoginPage(riderPage).loginAs("Delivery Executive", testRiderPhone);
 
         // Verify independent sessions
         assertThat(customerPage.locator("text=Deliver to").isVisible()).isTrue();
@@ -46,13 +46,13 @@ public class ResilienceRegressionUiTest extends TestBase {
     @DisplayName("ISOLATION-03: All three roles in separate contexts")
     void verifyAllRolesIsolated() {
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", TestConfig.CUSTOMER_PHONE);
+        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
 
         restaurantPage.navigate(TestConfig.APP_URL);
-        new LoginPage(restaurantPage).loginAs("Restaurant Partner", TestConfig.RESTAURANT_PHONE);
+        new LoginPage(restaurantPage).loginAs("Restaurant Partner", testRestaurantPhone);
 
         riderPage.navigate(TestConfig.APP_URL);
-        new LoginPage(riderPage).loginAs("Delivery Executive", TestConfig.RIDER_PHONE);
+        new LoginPage(riderPage).loginAs("Delivery Executive", testRiderPhone);
 
         // Verify all 3 dashboards independent
         assertThat(customerPage.locator("text=Deliver to").isVisible()).isTrue();
@@ -66,7 +66,7 @@ public class ResilienceRegressionUiTest extends TestBase {
     @DisplayName("RECOVERY-01: Page Refresh During Checkout")
     void verifyPageRefreshPersistence() {
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", TestConfig.CUSTOMER_PHONE);
+        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
         
         // Simulating the reload
         customerPage.reload();

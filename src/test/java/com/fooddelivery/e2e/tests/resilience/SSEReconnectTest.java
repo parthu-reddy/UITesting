@@ -21,11 +21,11 @@ public class SSEReconnectTest extends TestBase {
     void sseReconnection() {
         // Login customer and restaurant
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", TestConfig.CUSTOMER_PHONE);
+        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
         new CustomerDashboardPage(customerPage).waitForDashboard();
 
         restaurantPage.navigate(TestConfig.APP_URL);
-        new LoginPage(restaurantPage).loginAs("Restaurant Partner", TestConfig.RESTAURANT_PHONE);
+        new LoginPage(restaurantPage).loginAs("Restaurant Partner", testRestaurantPhone);
         new RestaurantDashboardPage(restaurantPage).waitForDashboard();
 
         // Place an order

@@ -18,7 +18,7 @@ public class OrderCancellationFlowTest extends TestBase {
     @DisplayName("Customer cancels order before restaurant accepts")
     void customerCancelsBeforeAcceptance() {
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", TestConfig.CUSTOMER_PHONE);
+        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
         new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();
         CustomerDashboardPage dashboard = new CustomerDashboardPage(customerPage);
 

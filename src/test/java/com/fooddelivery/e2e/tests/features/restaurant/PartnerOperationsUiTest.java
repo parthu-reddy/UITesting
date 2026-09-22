@@ -16,7 +16,7 @@ public class PartnerOperationsUiTest extends TestBase {
     @DisplayName("CAMPAIGN-01: Restaurant accesses campaign management")
     void verifyCampaignManagement() {
         restaurantPage.navigate(TestConfig.APP_URL);
-        new LoginPage(restaurantPage).loginAs("Restaurant Partner", TestConfig.RESTAURANT_PHONE);
+        new LoginPage(restaurantPage).loginAs("Restaurant Partner", testRestaurantPhone);
         
         boolean isCampaignVisible = restaurantPage.locator("text=Campaigns").isVisible();
         // Ignoring failure for now as it's a UI check for existence
@@ -26,7 +26,7 @@ public class PartnerOperationsUiTest extends TestBase {
     @DisplayName("EARNINGS-01: Rider views wallet and earnings")
     void verifyRiderEarnings() {
         riderPage.navigate(TestConfig.APP_URL);
-        new LoginPage(riderPage).loginAs("Delivery Executive", TestConfig.RIDER_PHONE);
+        new LoginPage(riderPage).loginAs("Delivery Executive", testRiderPhone);
         
         boolean isEarningsVisible = riderPage.locator("text=Today’s Earnings").isVisible();
         assertThat(isEarningsVisible).isTrue();

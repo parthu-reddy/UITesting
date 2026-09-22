@@ -21,7 +21,7 @@ public class RiderOnboardingFullTest extends TestBase {
     void loginRider() {
         riderPage.navigate(TestConfig.APP_URL);
         // Login as rider
-        new LoginPage(riderPage).loginAs("Delivery Executive", TestConfig.RIDER_PHONE);
+        new LoginPage(riderPage).loginAs("Delivery Executive", testRiderPhone);
         DeliveryDashboardPage dashboard = new DeliveryDashboardPage(riderPage);
         dashboard.waitForDashboard();
     }

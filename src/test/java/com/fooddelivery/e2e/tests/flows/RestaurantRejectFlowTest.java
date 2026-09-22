@@ -20,13 +20,13 @@ public class RestaurantRejectFlowTest extends TestBase {
     void restaurantCancelsOrder() {
         // Login customer
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", TestConfig.CUSTOMER_PHONE);
+        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
         new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();
         // wait handled by selectHomeFromOpenDialog
 
         // Login restaurant
         restaurantPage.navigate(TestConfig.APP_URL);
-        new LoginPage(restaurantPage).loginAs("Restaurant Partner", TestConfig.RESTAURANT_PHONE);
+        new LoginPage(restaurantPage).loginAs("Restaurant Partner", testRestaurantPhone);
         new RestaurantDashboardPage(restaurantPage).waitForDashboard();
 
         // Customer places order

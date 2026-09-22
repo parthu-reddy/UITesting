@@ -20,7 +20,7 @@ public class CustomerHomeAddressTest extends TestBase {
     @BeforeEach
     void loginCustomer() {
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", TestConfig.CUSTOMER_PHONE);
+        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
         CustomerAddressModalPage addressModal = new CustomerAddressModalPage(customerPage);
         if (addressModal.isModalOpen()) {
             addressModal.selectExistingAddress("Home");

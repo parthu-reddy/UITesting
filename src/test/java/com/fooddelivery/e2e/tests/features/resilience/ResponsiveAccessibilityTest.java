@@ -30,7 +30,7 @@ public class ResponsiveAccessibilityTest extends TestBase {
     void testMobileLayout() {
         customerPage.setViewportSize(390, 844);
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", TestConfig.CUSTOMER_PHONE);
+        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
         
         // Mobile layout should still show key features (bottom nav or similar elements might be responsive)
         assertThat(customerPage.locator("text=Deliver to").isVisible()).isTrue();
@@ -44,7 +44,7 @@ public class ResponsiveAccessibilityTest extends TestBase {
     @DisplayName("ACCESS-04: Escape closes modal")
     void testEscapeClosesModal() {
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", TestConfig.CUSTOMER_PHONE);
+        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
         
         // Open the user settings or a modal
         if (customerPage.locator("button[aria-label='Settings'], text=Settings").isVisible()) {

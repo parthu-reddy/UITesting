@@ -10,7 +10,7 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 public class AdminReadOnlyUiTest extends TestBase {
     @BeforeEach void login() {
         adminPage.navigate(TestConfig.APP_URL);
-        new LoginPage(adminPage).loginAs("System Admin", TestConfig.ADMIN_PHONE);
+        new LoginPage(adminPage).loginAs("System Admin", testAdminPhone);
         assertThat(adminPage.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Admin").setExact(true))).isVisible();
     }
     private void tab(String name) { adminPage.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(name).setExact(true)).click(); }
@@ -42,9 +42,9 @@ public class AdminReadOnlyUiTest extends TestBase {
     }
     @Test void findExistingCustomerByPhone() {
         tab("User Management");
-        adminPage.getByPlaceholder("User ID / Phone").fill(TestConfig.CUSTOMER_PHONE);
+        adminPage.getByPlaceholder("User ID / Phone").fill(testCustomerPhone);
         tab("Search");
-        assertThat(adminPage.getByText(TestConfig.CUSTOMER_PHONE, new Page.GetByTextOptions().setExact(true)).first()).isVisible();
+        assertThat(adminPage.getByText(testCustomerPhone, new Page.GetByTextOptions().setExact(true)).first()).isVisible();
     }
     @Test void reviewModerationIsReadOnly() {
         tab("Review Moderation");

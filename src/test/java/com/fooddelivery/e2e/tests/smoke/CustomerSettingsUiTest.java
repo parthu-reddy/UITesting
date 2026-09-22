@@ -11,14 +11,14 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 public class CustomerSettingsUiTest extends TestBase {
     @BeforeEach void openSettings() {
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food",TestConfig.CUSTOMER_PHONE);
+        new LoginPage(customerPage).loginAs("Order Food",testCustomerPhone);
         new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();
         customerPage.getByTitle("Profile Settings",new Page.GetByTitleOptions().setExact(true)).click();
         assertThat(customerPage.getByRole(AriaRole.HEADING,new Page.GetByRoleOptions().setName("Account Settings"))).isVisible();
     }
     @Test void profilePhoneIsReadOnlyAndCloseReturnsHome() {
         Locator phone=customerPage.locator("input[type=tel]");
-        assertThat(phone).hasValue(TestConfig.CUSTOMER_PHONE);
+        assertThat(phone).hasValue(testCustomerPhone);
         assertThat(phone).isDisabled();
         customerPage.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("Close settings")).click();
         assertThat(customerPage.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName(java.util.regex.Pattern.compile("Deliver to")))).containsText("Home:");
@@ -32,6 +32,6 @@ public class CustomerSettingsUiTest extends TestBase {
         assertThat(customerPage.getByText("Available Balance",new Page.GetByTextOptions().setExact(true))).isVisible();
         assertThat(customerPage.getByRole(AriaRole.HEADING,new Page.GetByRoleOptions().setName("Transaction History"))).isVisible();
         customerPage.getByRole(AriaRole.TAB,new Page.GetByRoleOptions().setName("Profile").setExact(true)).click();
-        assertThat(customerPage.locator("input[type=tel]")).hasValue(TestConfig.CUSTOMER_PHONE);
+        assertThat(customerPage.locator("input[type=tel]")).hasValue(testCustomerPhone);
     }
 }

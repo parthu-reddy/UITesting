@@ -23,7 +23,7 @@ public class AdminSupportUserReviewTest extends TestBase {
     @BeforeEach
     void loginAdmin() {
         adminPage.navigate(TestConfig.APP_URL);
-        new LoginPage(adminPage).loginAs("System Admin", TestConfig.ADMIN_PHONE,
+        new LoginPage(adminPage).loginAs("System Admin", testAdminPhone,
                 TestConfig.ADMIN_PROFILE_NAME, TestConfig.ADMIN_PROFILE_EMAIL);
         portal = new AdminPortalPage(adminPage);
         portal.waitForPortal();
@@ -104,7 +104,7 @@ public class AdminSupportUserReviewTest extends TestBase {
         portal.openUsersTab();
         AdminUserManagementPage users = new AdminUserManagementPage(adminPage);
         assertThat(users.isUserListVisible()).isTrue();
-        users.searchUser(TestConfig.CUSTOMER_PHONE);
+        users.searchUser(testCustomerPhone);
         adminPage.waitForTimeout(1000);
         int count = users.getUserCount();
         assertThat(count).isGreaterThanOrEqualTo(1);
@@ -115,7 +115,7 @@ public class AdminSupportUserReviewTest extends TestBase {
     void selectUserAndViewDetail() {
         portal.openUsersTab();
         AdminUserManagementPage users = new AdminUserManagementPage(adminPage);
-        users.searchUser(TestConfig.CUSTOMER_PHONE);
+        users.searchUser(testCustomerPhone);
         adminPage.waitForTimeout(1000);
         if (users.getUserCount() > 0) {
             users.selectUser(0);

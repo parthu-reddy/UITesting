@@ -51,7 +51,7 @@ public class ProfileSettingsTest extends TestBase {
     @DisplayName("SETTINGS-01: SharedSettings Address tab")
     void sharedSettingsAddressTab() {
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", TestConfig.CUSTOMER_PHONE);
+        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
         CustomerDashboardPage dashboard = new CustomerDashboardPage(customerPage);
         dashboard.waitForDashboard();
         dashboard.openSettingsTab();
@@ -71,7 +71,7 @@ public class ProfileSettingsTest extends TestBase {
     @DisplayName("SETTINGS-03: SharedSettings Wallet tab")
     void sharedSettingsWalletTab() {
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", TestConfig.CUSTOMER_PHONE);
+        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
         CustomerDashboardPage dashboard = new CustomerDashboardPage(customerPage);
         dashboard.waitForDashboard();
         dashboard.openSettingsTab();
@@ -89,7 +89,7 @@ public class ProfileSettingsTest extends TestBase {
     @DisplayName("SETTINGS-05: SharedSettings History tab")
     void sharedSettingsHistoryTab() {
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", TestConfig.CUSTOMER_PHONE);
+        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
         CustomerDashboardPage dashboard = new CustomerDashboardPage(customerPage);
         dashboard.waitForDashboard();
         dashboard.openSettingsTab();

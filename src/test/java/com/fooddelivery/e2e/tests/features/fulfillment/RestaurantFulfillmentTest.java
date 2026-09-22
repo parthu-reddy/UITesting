@@ -24,7 +24,7 @@ public class RestaurantFulfillmentTest extends TestBase {
     void setupOrder() {
         // Log in to the restaurant first so the SSE connection is active
         restaurantPage.navigate(TestConfig.APP_URL);
-        new LoginPage(restaurantPage).loginAs("Restaurant Partner", TestConfig.RESTAURANT_PHONE);
+        new LoginPage(restaurantPage).loginAs("Restaurant Partner", testRestaurantPhone);
         RestaurantOrderQueuePage orderQueue = new RestaurantOrderQueuePage(restaurantPage);
         orderQueue.waitForQueueLoad();
 

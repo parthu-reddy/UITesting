@@ -13,7 +13,7 @@ public class MenuCartUiTest extends TestBase {
     @BeforeEach
     void openMenu() {
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", TestConfig.CUSTOMER_PHONE);
+        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
         new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();
         new NearbyOutletPage(customerPage).openBrand1AndSelectNearby();
         assertThat(customerPage.getByText("Menu items", new Page.GetByTextOptions().setExact(true))).isVisible();

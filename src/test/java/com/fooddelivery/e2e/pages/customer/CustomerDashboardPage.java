@@ -14,6 +14,7 @@ public class CustomerDashboardPage {
 
     public CustomerDashboardPage(Page page) {
         this.page = page;
+        this.page.onConsoleMessage(msg -> System.out.println("[BROWSER CONSOLE] " + msg.text()));
     }
 
     public void waitForDashboard() {
@@ -53,7 +54,7 @@ public class CustomerDashboardPage {
     }
 
     public void openSettingsTab() {
-        page.locator("button:has-text('Settings'), button:has(svg.lucide-settings), [role='tab']:has-text('Settings')").first().click();
+        page.locator("button[title='Profile Settings']").first().click();
         page.waitForTimeout(300);
     }
 

@@ -18,7 +18,7 @@ public class AdminUiTest extends TestBase {
         adminPage.navigate(TestConfig.APP_URL);
         
         // Use loginAs with profile for Admin if needed, or just standard login
-        new LoginPage(adminPage).loginAs("System Admin", TestConfig.ADMIN_PHONE, TestConfig.ADMIN_PROFILE_NAME, TestConfig.ADMIN_PROFILE_EMAIL);
+        new LoginPage(adminPage).loginAs("System Admin", testAdminPhone, TestConfig.ADMIN_PROFILE_NAME, TestConfig.ADMIN_PROFILE_EMAIL);
         
         adminPage.waitForTimeout(2000);
         

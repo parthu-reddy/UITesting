@@ -16,7 +16,7 @@ public class ReviewFlowTest extends TestBase {
     @DisplayName("Submit star rating and comment after delivery")
     void submitReview() {
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", TestConfig.CUSTOMER_PHONE);
+        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
         new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();
         // wait handled by selectHomeFromOpenDialog
 

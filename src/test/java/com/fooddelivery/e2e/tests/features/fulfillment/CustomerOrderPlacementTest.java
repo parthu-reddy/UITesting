@@ -20,7 +20,7 @@ public class CustomerOrderPlacementTest extends TestBase {
     @DisplayName("CUSTOMER-01: Customer can successfully place an order")
     void customerPlacesOrderSuccessfully() {
         String uniqueRiderPhone = "7000000001";
-        String uniqueCustomerPhone = "8000000001";
+        String uniqueCustomerPhone = testCustomerPhone;
 
         // Ensure rider is online to satisfy backend availability checks
         com.fooddelivery.e2e.util.StateSetupHelper.ensureRiderIsOnline(browser, uniqueRiderPhone);

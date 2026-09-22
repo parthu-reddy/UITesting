@@ -17,7 +17,7 @@ public class RestaurantUiTest extends TestBase {
     @DisplayName("REST-01: Verify Restaurant Dashboard loads and basic elements are visible")
     void verifyRestaurantDashboardUI() {
         restaurantPage.navigate(TestConfig.APP_URL);
-        new LoginPage(restaurantPage).loginAs("Restaurant Partner", TestConfig.RESTAURANT_PHONE);
+        new LoginPage(restaurantPage).loginAs("Restaurant Partner", testRestaurantPhone);
         
         RestaurantDashboardPage dashboard = new RestaurantDashboardPage(restaurantPage);
         dashboard.waitForDashboard();

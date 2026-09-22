@@ -18,7 +18,7 @@ public class CustomerCartTest extends TestBase {
     @DisplayName("Add items → verify cart total → increment/decrement → remove item")
     void cartOperations() {
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", TestConfig.CUSTOMER_PHONE);
+        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
         CustomerDashboardPage dashboard = new CustomerDashboardPage(customerPage);
         dashboard.waitForDashboard();
 

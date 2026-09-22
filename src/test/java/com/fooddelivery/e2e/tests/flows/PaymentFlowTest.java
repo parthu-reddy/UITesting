@@ -18,7 +18,7 @@ public class PaymentFlowTest extends TestBase {
     @DisplayName("Place COD order and verify payment method badge")
     void codPaymentFlow() {
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", TestConfig.CUSTOMER_PHONE);
+        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
         new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();
         // wait handled by selectHomeFromOpenDialog
 

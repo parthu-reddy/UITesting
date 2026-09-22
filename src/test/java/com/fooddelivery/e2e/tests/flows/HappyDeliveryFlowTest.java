@@ -31,17 +31,17 @@ public class HappyDeliveryFlowTest extends TestBase {
         System.out.println("═══ STEP 1: Logging in all actors ═══");
 
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", TestConfig.CUSTOMER_PHONE);
+        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
         new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();
         CustomerDashboardPage customerDashboard = new CustomerDashboardPage(customerPage);
 
         restaurantPage.navigate(TestConfig.APP_URL);
-        new LoginPage(restaurantPage).loginAs("Restaurant Partner", TestConfig.RESTAURANT_PHONE);
+        new LoginPage(restaurantPage).loginAs("Restaurant Partner", testRestaurantPhone);
         RestaurantDashboardPage restaurantDashboard = new RestaurantDashboardPage(restaurantPage);
         restaurantDashboard.waitForDashboard();
 
         riderPage.navigate(TestConfig.APP_URL);
-        new LoginPage(riderPage).loginAs("Delivery Executive", TestConfig.RIDER_PHONE);
+        new LoginPage(riderPage).loginAs("Delivery Executive", testRiderPhone);
         DeliveryDashboardPage riderDashboard = new DeliveryDashboardPage(riderPage);
         riderDashboard.waitForDashboard();
 

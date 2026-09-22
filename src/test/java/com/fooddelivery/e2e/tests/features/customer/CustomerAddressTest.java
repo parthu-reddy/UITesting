@@ -18,7 +18,7 @@ public class CustomerAddressTest extends TestBase {
     @DisplayName("Select existing address → Deliver-to header updates")
     void selectExistingAddress() {
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", TestConfig.CUSTOMER_PHONE);
+        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
         CustomerDashboardPage dashboard = new CustomerDashboardPage(customerPage);
         dashboard.waitForDashboard();
 
@@ -44,7 +44,7 @@ public class CustomerAddressTest extends TestBase {
     @DisplayName("Add new address → appears in address list")
     void addNewAddress() {
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", TestConfig.CUSTOMER_PHONE);
+        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
         CustomerDashboardPage dashboard = new CustomerDashboardPage(customerPage);
         dashboard.waitForDashboard();
 

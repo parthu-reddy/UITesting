@@ -16,7 +16,7 @@ public class OutletSelectionTest extends TestBase {
     @DisplayName("Select different outlet → verify menu updates")
     void selectDifferentOutlet() {
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", TestConfig.CUSTOMER_PHONE);
+        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
         new CustomerDashboardPage(customerPage).waitForDashboard();
 
         CustomerHomePage home = new CustomerHomePage(customerPage);

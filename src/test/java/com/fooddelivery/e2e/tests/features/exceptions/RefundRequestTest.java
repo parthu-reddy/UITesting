@@ -17,7 +17,7 @@ public class RefundRequestTest extends TestBase {
     @DisplayName("Post-delivery → open support → request refund")
     void requestRefund() {
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", TestConfig.CUSTOMER_PHONE);
+        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
         new CustomerDashboardPage(customerPage).waitForDashboard();
 
         // Navigate to orders

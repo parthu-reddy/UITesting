@@ -21,7 +21,7 @@ public class AdminLedgerAdvancedTest extends TestBase {
     @BeforeEach
     void loginAdmin() {
         adminPage.navigate(TestConfig.APP_URL);
-        new LoginPage(adminPage).loginAs("System Admin", TestConfig.ADMIN_PHONE,
+        new LoginPage(adminPage).loginAs("System Admin", testAdminPhone,
                 TestConfig.ADMIN_PROFILE_NAME, TestConfig.ADMIN_PROFILE_EMAIL);
         portal = new AdminPortalPage(adminPage);
         portal.waitForPortal();

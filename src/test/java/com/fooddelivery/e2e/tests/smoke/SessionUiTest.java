@@ -21,12 +21,23 @@ public class SessionUiTest extends TestBase {
             case ADMIN -> adminPage;
         };
     }
+    
+    private String phoneFor(LoginSmokeTest.Account account) {
+        return switch (account) {
+            case CUSTOMER -> testCustomerPhone;
+            case RESTAURANT -> testRestaurantPhone;
+            case DELIVERY -> testRiderPhone;
+            case ADMIN -> testAdminPhone;
+        };
+    }
+    
     @ParameterizedTest(name = "{0}: reload retains dashboard; logout and reload stay signed out")
     @EnumSource(LoginSmokeTest.Account.class)
     void reloadAndLogout(LoginSmokeTest.Account account) {
         Page page = pageFor(account);
+        String phoneStr = phoneFor(account);
         page.navigate(TestConfig.APP_URL);
-        new LoginPage(page).loginAs(account.label, account.phone);
+        new LoginPage(page).loginAs(account.label, phoneStr);
         assertThat(page.getByText(account.dashboardText, new Page.GetByTextOptions().setExact(true)).first()).isVisible();
         if (account == LoginSmokeTest.Account.CUSTOMER)
             new com.fooddelivery.e2e.pages.customer.SavedDeliveryAddressPage(page).selectHomeFromOpenDialog();

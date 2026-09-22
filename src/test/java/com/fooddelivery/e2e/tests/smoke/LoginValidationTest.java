@@ -25,6 +25,16 @@ public class LoginValidationTest extends TestBase {
             case ADMIN -> adminPage;
         };
     }
+    
+    private String phoneFor(LoginSmokeTest.Account account) {
+        return switch (account) {
+            case CUSTOMER -> testCustomerPhone;
+            case RESTAURANT -> testRestaurantPhone;
+            case DELIVERY -> testRiderPhone;
+            case ADMIN -> testAdminPhone;
+        };
+    }
+    
     private LoginPage open(Page page, LoginSmokeTest.Account account) {
         page.navigate(TestConfig.APP_URL);
         LoginPage login = new LoginPage(page);
@@ -36,6 +46,7 @@ public class LoginValidationTest extends TestBase {
     @EnumSource(LoginSmokeTest.Account.class)
     void phoneValidation(LoginSmokeTest.Account account) {
         Page page = pageFor(account);
+        String phoneStr = phoneFor(account);
         LoginPage login = open(page, account);
         List<String> requests = new ArrayList<>();
         page.onRequest(r -> { if (r.url().contains("/auth/initiate")) requests.add(r.url()); });
@@ -44,8 +55,8 @@ public class LoginValidationTest extends TestBase {
         assertThat(phone.evaluate("e => e.validity.valueMissing")).isEqualTo(true);
         assertThat(phone).isFocused();
         assertThat(page.getByPlaceholder("- - - - - -")).isHidden();
-        login.fillPhoneNumber("abc" + account.phone + "999");
-        assertThat(phone).hasValue(account.phone);
+        login.fillPhoneNumber("abc" + phoneStr + "999");
+        assertThat(phone).hasValue(phoneStr);
         assertThat(requests).isEmpty();
     }
 
@@ -53,8 +64,9 @@ public class LoginValidationTest extends TestBase {
     @EnumSource(LoginSmokeTest.Account.class)
     void otpValidationAndBack(LoginSmokeTest.Account account) {
         Page page = pageFor(account);
+        String phoneStr = phoneFor(account);
         LoginPage login = open(page, account);
-        login.fillPhoneNumber(account.phone);
+        login.fillPhoneNumber(phoneStr);
         login.clickSendOtp();
         login.waitForOtpInput();
         List<String> requests = new ArrayList<>();
@@ -66,7 +78,7 @@ public class LoginValidationTest extends TestBase {
         login.fillOtp("ab12-345678");
         assertThat(otp).hasValue("123456");
         login.clickBackButton();
-        assertThat(page.getByPlaceholder("9876543210")).hasValue(account.phone);
+        assertThat(page.getByPlaceholder("9876543210")).hasValue(phoneStr);
         assertThat(otp).isHidden();
         assertThat(requests).isEmpty();
         assertThat(page.evaluate("() => localStorage.getItem('auth_token')")).isNull();
@@ -76,8 +88,9 @@ public class LoginValidationTest extends TestBase {
     @EnumSource(LoginSmokeTest.Account.class)
     void resendOtp(LoginSmokeTest.Account account) {
         Page page = pageFor(account);
+        String phoneStr = phoneFor(account);
         LoginPage login = open(page, account);
-        login.fillPhoneNumber(account.phone);
+        login.fillPhoneNumber(phoneStr);
         login.clickSendOtp();
         login.waitForOtpInput();
         // Wait for the second dev OTP fetch to avoid autofilling stale React state.

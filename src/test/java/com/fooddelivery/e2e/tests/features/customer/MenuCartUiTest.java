@@ -18,7 +18,7 @@ public class MenuCartUiTest extends TestBase {
     @DisplayName("MENU-01: Menu displays items with prices and without restaurant controls")
     void menuDisplaysItemsWithoutRestaurantEditingControls() {
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", TestConfig.CUSTOMER_PHONE);
+        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
         
         CustomerDashboardPage dashboard = new CustomerDashboardPage(customerPage);
         dashboard.waitForDashboard();
@@ -55,7 +55,7 @@ public class MenuCartUiTest extends TestBase {
     @DisplayName("CART-01: Add, increment, decrement, and empty cart")
     void addIncrementDecrementAndEmptyCart() {
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", TestConfig.CUSTOMER_PHONE);
+        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
         
         CustomerDashboardPage dashboard = new CustomerDashboardPage(customerPage);
         dashboard.waitForDashboard();

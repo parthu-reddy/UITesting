@@ -29,7 +29,7 @@ public class PickupDeliveryOtpTest extends TestBase {
     void loginAllActors() {
         // Login customer
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", TestConfig.CUSTOMER_PHONE);
+        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
         CustomerAddressModalPage addressModal = new CustomerAddressModalPage(customerPage);
         if (addressModal.isModalOpen()) {
             addressModal.selectExistingAddress("Home");
@@ -37,13 +37,13 @@ public class PickupDeliveryOtpTest extends TestBase {
 
         // Login restaurant
         restaurantPage.navigate(TestConfig.APP_URL);
-        new LoginPage(restaurantPage).loginAs("Restaurant Partner", TestConfig.RESTAURANT_PHONE);
+        new LoginPage(restaurantPage).loginAs("Restaurant Partner", testRestaurantPhone);
         restaurantDashboard = new RestaurantDashboardPage(restaurantPage);
         restaurantDashboard.waitForDashboard();
 
         // Login rider
         riderPage.navigate(TestConfig.APP_URL);
-        new LoginPage(riderPage).loginAs("Delivery Executive", TestConfig.RIDER_PHONE);
+        new LoginPage(riderPage).loginAs("Delivery Executive", testRiderPhone);
         riderDashboard = new DeliveryDashboardPage(riderPage);
         riderDashboard.waitForDashboard();
         toggle = new DeliveryOnlineTogglePage(riderPage);
