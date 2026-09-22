@@ -28,6 +28,14 @@ public class DeliveryDashboardPage {
             new Page.WaitForConditionOptions().setTimeout(15000));
     }
 
+    public void goOnline() {
+        Locator toggleBtn = page.locator("button:has-text('Offline'), button:has-text('Online Duty')").first();
+        if ("Offline".equals(toggleBtn.innerText().trim())) {
+            toggleBtn.click();
+            page.getByText("Online Duty").waitFor();
+        }
+    }
+
     // ── Tab navigation ───────────────────────────────────────────────────
 
     public void openActiveTab() {

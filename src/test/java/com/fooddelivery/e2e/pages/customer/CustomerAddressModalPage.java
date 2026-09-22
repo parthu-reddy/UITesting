@@ -66,7 +66,7 @@ public class CustomerAddressModalPage {
     }
 
     public void saveAddress() {
-        page.locator("button:has-text('Save'), button:has-text('Add')").first().click();
+        page.locator("button:has-text('Save Address')").first().click();
         page.waitForTimeout(1000);
     }
 

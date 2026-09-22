@@ -52,12 +52,8 @@ public class RegistrationUiTest extends TestBase {
         CustomerAddressModalPage modal = new CustomerAddressModalPage(customerPage);
         modal.waitForModalOpen();
         
-        modal.searchAndSelectLocation("Keerthi");
+        modal.searchAndSelectLocation("Keerthi Rendezvous");
         modal.fillAddressLabel("Test Registration Home");
-        modal.fillAddressLine("123 Main St");
-        modal.fillCity("Bengaluru");
-        modal.fillState("Karnataka");
-        modal.fillZipCode("560001");
         
         modal.saveAddress();
         
@@ -93,6 +89,8 @@ public class RegistrationUiTest extends TestBase {
         DeliveryDashboardPage dashboard = new DeliveryDashboardPage(riderPage);
         dashboard.waitForDashboard();
         
+        dashboard.goOnline();
+        
         riderPage.waitForCondition(() ->
             riderPage.locator("text=Trips Completed").isVisible() ||
             riderPage.locator("text=Offline").isVisible() ||
@@ -126,13 +124,14 @@ public class RegistrationUiTest extends TestBase {
         OutletRegistrationPage outletPage = new OutletRegistrationPage(restaurantPage);
         assertThat(outletPage.isRegistrationVisible()).isTrue();
         
-        outletPage.fillOutletName("Koramangala Branch");
-        outletPage.searchAndSelectLocation("Koramangala");
+        outletPage.fillOutletName("Tin Factory");
+        outletPage.searchAndSelectLocation("Keerthi Rendezvous");
         String randomFssai = String.format("1234%010d", (System.currentTimeMillis() % 10000000000L));
         outletPage.fillFssai(randomFssai);
         outletPage.submit();
         
-        // Navigate back to home dashboard
+        // Navigate back to home dashboard by toggling settings off
+        dashboard.openSettingsTab();
         dashboard.openOrdersTab();
         dashboard.waitForDashboard();
         
