@@ -57,7 +57,8 @@ public class HappyDeliveryFlowTest extends TestBase {
         customerPage.waitForTimeout(2000); // Wait for restaurant data to load
 
         // Open the first available restaurant
-        new NearbyOutletPage(customerPage).openBrand1AndSelectNearby();
+        int brandNum = Integer.parseInt(testRestaurantPhone.substring(7));
+        new NearbyOutletPage(customerPage).openBrandAndSelectNearby("Brand " + brandNum);
 
         // ── Step 4: Customer adds item and places order ───────────────────
         System.out.println("═══ STEP 4: Customer adding item and placing order ═══");

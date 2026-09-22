@@ -31,7 +31,8 @@ public final class OtpExtractor {
                 .setTimeout(15000));
 
         // The OTP is in a sibling div with bg-gradient styling
-        Locator otpValue = otpSection.locator("xpath=..")
+        Locator otpValue = page.locator("text=Secure Delivery Verification")
+                .locator("xpath=../..")
                 .locator("div.bg-gradient-to-r");
         otpValue.waitFor(new Locator.WaitForOptions()
                 .setState(WaitForSelectorState.VISIBLE));

@@ -44,7 +44,7 @@ public class DeliveryDashboardPage {
     }
 
     public void openHistoryTab() {
-        page.locator("button:has-text('History'), [role='tab']:has-text('History')").first().click();
+        page.locator("button:has-text('Trips Completed')").first().click();
         page.waitForTimeout(300);
     }
 

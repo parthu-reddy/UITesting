@@ -68,7 +68,15 @@ public class RestaurantOrderQueuePage {
     }
 
     public void refreshOrders() {
-        page.locator("button[title='Refresh Orders'], button:has(svg.lucide-refresh-cw)").first().click();
+        try {
+            Locator refreshBtn = page.locator("button[title='Refresh Orders'], button:has(svg.lucide-refresh-cw)").first();
+            refreshBtn.waitFor(new Locator.WaitForOptions().setTimeout(3000));
+            refreshBtn.click();
+        } catch (Exception e) {
+            System.out.println("[RESTAURANT] No refresh button found, reloading page instead.");
+            page.reload();
+            waitForQueueLoad();
+        }
         page.waitForTimeout(1000);
     }
 }

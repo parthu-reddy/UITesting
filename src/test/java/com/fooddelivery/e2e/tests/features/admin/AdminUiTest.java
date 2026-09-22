@@ -29,4 +29,34 @@ public class AdminUiTest extends TestBase {
                                           
         assertThat(isAdminDashboardVisible).isTrue();
     }
+
+    @Test
+    @DisplayName("ADMIN-02: Verify Admin Routing persists on page reload")
+    void verifyAdminRoutingPersistence() {
+        adminPage.navigate(TestConfig.APP_URL);
+        
+        // Login as Admin
+        new LoginPage(adminPage).loginAs("System Admin", testAdminPhone, TestConfig.ADMIN_PROFILE_NAME, TestConfig.ADMIN_PROFILE_EMAIL);
+        adminPage.waitForTimeout(2000);
+        
+        // Navigate to the User Management tab using the sidebar
+        adminPage.locator("text=User Management").click();
+        
+        // Wait for the URL to reflect the React Router path
+        adminPage.waitForURL("**/admin/users");
+        assertThat(adminPage.url()).contains("/admin/users");
+        
+        // Verify the User Management view is actually rendered (e.g., looking for the role filter)
+        assertThat(adminPage.locator("text=ALL ROLES").first().isVisible()).isTrue();
+        
+        // Reload the page
+        adminPage.reload();
+        adminPage.waitForTimeout(2000);
+        
+        // Verify URL is STILL /admin/users after reload
+        assertThat(adminPage.url()).contains("/admin/users");
+        
+        // Verify we didn't get kicked back to the default tab and User Management is still rendered
+        assertThat(adminPage.locator("text=ALL ROLES").first().isVisible()).isTrue();
+    }
 }

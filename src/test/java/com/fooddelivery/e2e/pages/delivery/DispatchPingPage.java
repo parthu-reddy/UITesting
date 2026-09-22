@@ -21,22 +21,21 @@ public class DispatchPingPage {
      * The dispatch ping auto-expires after a timeout, so we wait with a generous timeout.
      */
     public void waitForPing() {
-        page.getByRole(com.microsoft.playwright.options.AriaRole.ALERT)
+        page.locator("text=New Dispatch").first()
                 .waitFor(new Locator.WaitForOptions()
                         .setState(WaitForSelectorState.VISIBLE)
                         .setTimeout(120000)); // 2 minutes: order dispatch may take time
     }
 
     public boolean hasPing() {
-        return page.getByRole(com.microsoft.playwright.options.AriaRole.ALERT).isVisible();
+        return page.locator("text=New Dispatch").first().isVisible();
     }
 
     /**
      * Accepts the dispatch by clicking "Accept Order".
      */
     public void acceptDispatch() {
-        Locator accept = page.getByRole(com.microsoft.playwright.options.AriaRole.ALERT)
-                .locator("button:has-text('Accept Order'), button:has-text('Accept')");
+        Locator accept = page.locator("button:has-text('Accept Order'), button:has-text('Accept')").first();
         accept.waitFor(new Locator.WaitForOptions()
                 .setState(WaitForSelectorState.VISIBLE)
                 .setTimeout(5000));

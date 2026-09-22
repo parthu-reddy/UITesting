@@ -58,7 +58,8 @@ public class PickupDeliveryOtpTest extends TestBase {
      */
     private String placeOrderAndPrepare() {
         // Customer selects restaurant and adds item
-        new NearbyOutletPage(customerPage).openBrand1AndSelectNearby();
+        int brandNum = Integer.parseInt(testRestaurantPhone.substring(7));
+        new NearbyOutletPage(customerPage).openBrandAndSelectNearby("Brand " + brandNum);
         CustomerMenuViewPage menu = new CustomerMenuViewPage(customerPage);
         menu.addQuickPrepItemToCart();
         menu.clickViewCart();

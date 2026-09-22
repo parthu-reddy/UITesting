@@ -27,11 +27,8 @@ public class RestaurantFulfillmentTest extends TestBase {
         new LoginPage(restaurantPage).loginAs("Restaurant Partner", testRestaurantPhone);
         RestaurantOrderQueuePage orderQueue = new RestaurantOrderQueuePage(restaurantPage);
         orderQueue.waitForQueueLoad();
-
-        String uniqueRiderPhone = "7000000002";
-        String uniqueCustomerPhone = "8000000002";
-        StateSetupHelper.ensureRiderIsOnline(browser, uniqueRiderPhone);
-        StateSetupHelper.OrderSetupResult result = StateSetupHelper.placeOrder(browser, uniqueCustomerPhone);
+        StateSetupHelper.ensureRiderIsOnline(riderPage, testRiderPhone);
+        StateSetupHelper.OrderSetupResult result = StateSetupHelper.placeOrder(customerPage, testCustomerPhone, testRestaurantPhone);
         fullOrderId = result.orderId;
         shortOrderId = fullOrderId.substring(0, 8);
         outletName = result.outletName;

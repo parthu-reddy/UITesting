@@ -23,7 +23,7 @@ public class CustomerOrderPlacementTest extends TestBase {
         String uniqueCustomerPhone = testCustomerPhone;
 
         // Ensure rider is online to satisfy backend availability checks
-        com.fooddelivery.e2e.util.StateSetupHelper.ensureRiderIsOnline(browser, uniqueRiderPhone);
+        com.fooddelivery.e2e.util.StateSetupHelper.ensureRiderIsOnline(riderPage, uniqueRiderPhone);
 
         customerPage.navigate(TestConfig.APP_URL);
         new LoginPage(customerPage).loginAs("Order Food", uniqueCustomerPhone);

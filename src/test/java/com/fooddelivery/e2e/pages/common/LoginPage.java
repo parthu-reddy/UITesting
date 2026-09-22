@@ -98,20 +98,28 @@ public class LoginPage {
     // ── Post-login ───────────────────────────────────────────────────────
 
     private void waitForLoginComplete(String profileName, String profileEmail) {
-        if (profileName != null && profileEmail != null) {
-            Locator nameInput = page.getByPlaceholder("Enter your full name");
-            nameInput.waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
-            CompleteProfileModalPage profile = new CompleteProfileModalPage(page);
-            profile.fillName(profileName);
-            profile.fillEmail(profileEmail);
-            profile.submit();
+        try {
+            page.waitForCondition(() ->
+                !page.url().contains("/login") || page.getByPlaceholder("Enter your full name").isVisible(),
+                new Page.WaitForConditionOptions().setTimeout(10000));
+        } catch (com.microsoft.playwright.TimeoutError e) {
+            // proceed to standard state checks which will throw appropriate errors
+        }
+
+        if (page.getByPlaceholder("Enter your full name").isVisible()) {
+            if (profileName != null && profileEmail != null) {
+                CompleteProfileModalPage profile = new CompleteProfileModalPage(page);
+                profile.fillName(profileName);
+                profile.fillEmail(profileEmail);
+                profile.submit();
+            } else {
+                throw new AssertionError("Account requires profile completion; no profile setup was configured.");
+            }
         }
 
         page.waitForCondition(() -> {
-            if (page.getByPlaceholder("Enter your full name").isVisible()) {
-                if (profileName == null || profileEmail == null) {
-                    throw new AssertionError("Account requires profile completion; no profile setup was configured.");
-                }
+            if (page.getByText("Session Limit Reached", new Page.GetByTextOptions().setExact(true)).isVisible()) {
+                throw new AssertionError("Account session limit reached. Configure a dedicated test account.");
             }
             if (page.getByText("Session Limit Reached", new Page.GetByTextOptions().setExact(true)).isVisible()) {
                 throw new AssertionError("Account session limit reached. Configure a dedicated test account.");

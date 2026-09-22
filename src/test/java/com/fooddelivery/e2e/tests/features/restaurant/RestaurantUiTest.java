@@ -32,4 +32,28 @@ public class RestaurantUiTest extends TestBase {
                                      
         assertThat(isDashboardVisible).isTrue();
     }
+
+    @Test
+    @DisplayName("REST-02: Verify Restaurant Routing persists on page reload")
+    void verifyRestaurantRoutingPersistence() {
+        restaurantPage.navigate(TestConfig.APP_URL);
+        new LoginPage(restaurantPage).loginAs("Restaurant Partner", testRestaurantPhone, "Test Restaurant", "restaurant@example.com");
+        
+        RestaurantDashboardPage dashboard = new RestaurantDashboardPage(restaurantPage);
+        dashboard.waitForDashboard();
+        
+        // Dismiss any dashboard overlays
+        restaurantPage.keyboard().press("Escape");
+        restaurantPage.waitForTimeout(500);
+        
+        // Reload the page
+        restaurantPage.reload();
+        restaurantPage.waitForTimeout(2000);
+        
+        // Verify URL is STILL /restaurant after reload
+        assertThat(restaurantPage.url()).contains("/restaurant");
+        
+        // Verify dashboard is still visible
+        dashboard.waitForDashboard();
+    }
 }

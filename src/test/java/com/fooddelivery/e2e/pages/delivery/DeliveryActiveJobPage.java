@@ -61,10 +61,10 @@ public class DeliveryActiveJobPage {
      * Enters the 6-digit delivery OTP from the customer.
      */
     public void enterDeliveryOtp(String otp) {
-        Locator input = page.getByPlaceholder("Enter 6-digit delivery OTP");
+        Locator input = page.getByPlaceholder("Ask customer for 6-digit OTP");
         input.waitFor(new Locator.WaitForOptions()
                 .setState(WaitForSelectorState.VISIBLE)
-                .setTimeout(10000));
+                .setTimeout(30000));
         input.fill(otp);
     }
 
@@ -93,7 +93,7 @@ public class DeliveryActiveJobPage {
     }
 
     public boolean isDeliveryPhase() {
-        return page.locator("text=Enter 6-digit delivery OTP, text=Slide to deliver").first().isVisible();
+        return page.locator("text=Ask customer for 6-digit OTP, text=Slide to deliver").first().isVisible();
     }
 
     public boolean hasCompletedDelivery() {

@@ -9,13 +9,17 @@ public class NearbyOutletPage {
     private final Page page;
     public NearbyOutletPage(Page page) { this.page = page; }
     public String openBrand1AndSelectNearby() {
-        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(Pattern.compile("Brand\\s*1\\b"))).first().click();
+        return openBrandAndSelectNearby("Brand 1");
+    }
+
+    public String openBrandAndSelectNearby(String brandName) {
+        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(Pattern.compile(brandName + "\\b"))).first().click();
         page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Change outlet")).click();
         Locator outlets = page.getByRole(AriaRole.DIALOG);
         assertThat(outlets.getByText("Select Outlet Location", new Locator.GetByTextOptions().setExact(true))).isVisible();
-        Locator choices = outlets.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("Brand 1 Outlet 1"));
+        Locator choices = outlets.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText(brandName + " Outlet 1"));
         assertThat(choices.first()).isVisible();
-        String outletName = "Brand 1 Outlet 1";
+        String outletName = brandName + " Outlet 1";
         choices.first().click();
         assertThat(outlets).isHidden();
         return outletName;

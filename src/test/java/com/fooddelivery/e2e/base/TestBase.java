@@ -47,7 +47,10 @@ public abstract class TestBase {
                         .setHeadless(TestConfig.HEADLESS)
                         .setSlowMo(TestConfig.SLOW_MO)
                         .setArgs(List.of(
-                                "--unsafely-treat-insecure-origin-as-secure=" + TestConfig.APP_URL.replaceAll("/$", "")
+                                "--unsafely-treat-insecure-origin-as-secure=" + TestConfig.APP_URL.replaceAll("/$", ""),
+                                "--disable-background-timer-throttling",
+                                "--disable-backgrounding-occluded-windows",
+                                "--disable-renderer-backgrounding"
                         ))
         );
     }
@@ -61,9 +64,9 @@ public abstract class TestBase {
     @BeforeEach
     public void setUpContexts() {
         testCustomerPhone = String.format("8000000%03d", (int)(Math.random() * 500) + 1);
-        testRestaurantPhone = String.format("9000000%03d", (int)(Math.random() * 500) + 1);
-        testRiderPhone = String.format("7000000%03d", (int)(Math.random() * 500) + 1);
-        testAdminPhone = String.format("1000000%03d", (int)(Math.random() * 500) + 1);
+        testRestaurantPhone = String.format("9000000%03d", (int)(Math.random() * 10) + 1);
+        testRiderPhone = String.format("7000000%03d", (int)(Math.random() * 30) + 1);
+        testAdminPhone = String.format("1000000%03d", (int)(Math.random() * 10) + 1);
 
         customerContext = createContext("customer");
         restaurantContext = createContext("restaurant");

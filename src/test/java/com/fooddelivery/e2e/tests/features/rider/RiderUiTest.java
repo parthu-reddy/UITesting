@@ -31,4 +31,33 @@ public class RiderUiTest extends TestBase {
         
         assertThat(toggle.isOnline()).isTrue();
     }
+
+    @Test
+    @DisplayName("RIDER-02: Verify Rider Routing persists on page reload")
+    void verifyRiderRoutingPersistence() {
+
+        riderPage.navigate(TestConfig.APP_URL);
+        new LoginPage(riderPage).loginAs("Delivery Executive", testRiderPhone, "Test Rider", "rider@example.com");
+        
+        DeliveryDashboardPage dashboard = new DeliveryDashboardPage(riderPage);
+        dashboard.waitForDashboard();
+        riderPage.waitForTimeout(2000);
+        
+        // Navigate to the History tab
+        dashboard.openHistoryTab();
+        
+        // Wait for the URL to reflect the React Router path
+        riderPage.waitForURL("**/delivery/history");
+        assertThat(riderPage.url()).contains("/delivery/history");
+        
+        // Reload the page
+        riderPage.reload();
+        riderPage.waitForTimeout(2000);
+        
+        // Verify URL is STILL /delivery/history after reload
+        assertThat(riderPage.url()).contains("/delivery/history");
+        
+        // Verify the history panel is still active
+        assertThat(riderPage.locator("text=Completed Deliveries").first().isVisible()).isTrue();
+    }
 }
