@@ -6,6 +6,8 @@ import com.microsoft.playwright.options.WaitForSelectorState;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Page Object for the Customer Menu View (inside a restaurant).
@@ -100,8 +102,11 @@ public class CustomerMenuViewPage {
      * This ensures the rider gets assigned immediately during E2E tests.
      */
     public void addQuickPrepItemToCart() {
+        Set<String> triedOutlets = new HashSet<>();
         // Try up to 5 times (checking different outlets if needed)
         for (int attempt = 0; attempt < 5; attempt++) {
+            String currentOutlet = page.locator("#outlet-select").first().innerText().trim().split("\\R")[0];
+            triedOutlets.add(currentOutlet);
             Locator dishControls = page.locator("[data-menu-item]");
             try {
                 dishControls.first().waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE).setTimeout(3000));
@@ -149,9 +154,6 @@ public class CustomerMenuViewPage {
                 Locator options = page.locator("role=dialog").first().locator("button:has(p)");
                 options.first().waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE).setTimeout(3000));
                 
-                // Pick the next outlet < 4km that we haven't tried (we can just pick randomly or use attempt index)
-                // For simplicity, pick the (attempt + 1)th outlet < 4km
-                int validOutletsFound = 0;
                 boolean selectedNew = false;
                 for (int i = 0; i < options.count(); i++) {
                     String text = options.nth(i).innerText();
@@ -159,21 +161,21 @@ public class CustomerMenuViewPage {
                         Matcher m = Pattern.compile("([0-9.]+)\\s*(km|kms)").matcher(text.toLowerCase());
                         if (m.find()) {
                             double distance = Double.parseDouble(m.group(1));
-                            if (distance < 4.0) {
-                                if (validOutletsFound == attempt + 1) { // skip the ones we already tried
-                                    System.out.println("[CUSTOMER] Selecting alternative outlet: " + distance + " km");
-                                    options.nth(i).click();
-                                    selectedNew = true;
-                                    break;
-                                }
-                                validOutletsFound++;
+                            String outletName = options.nth(i).locator("p").first().innerText().trim();
+                            if (distance < 5.0 && !triedOutlets.contains(outletName)) {
+                                System.out.println("[CUSTOMER] Selecting alternative outlet: "
+                                        + outletName + " at " + distance + " km");
+                                triedOutlets.add(outletName);
+                                options.nth(i).click();
+                                selectedNew = true;
+                                break;
                             }
                         }
                     }
                 }
                 
                 if (!selectedNew) {
-                    System.out.println("[CUSTOMER] No more alternative outlets < 4km found.");
+                    System.out.println("[CUSTOMER] No more untried alternative outlets < 5km found.");
                     break; // stop trying
                 }
                 page.waitForTimeout(2000); // wait for new menu to load

@@ -6,10 +6,18 @@ import com.fooddelivery.e2e.pages.customer.*;
 import com.microsoft.playwright.*;
 import com.microsoft.playwright.options.AriaRole;
 import org.junit.jupiter.api.*;
+import java.util.regex.Pattern;
+
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 @Tag("cart-ui")
 public class MenuCartUiTest extends TestBase {
+    private double parseInr(String text) {
+        if (text.contains("FREE")) return 0;
+        java.util.regex.Matcher amount = Pattern.compile("₹([0-9,]+(?:\\.[0-9]{1,2})?)").matcher(text);
+        if (!amount.find()) throw new AssertionError("No INR amount in: " + text);
+        return Double.parseDouble(amount.group(1).replace(",", ""));
+    }
     @BeforeEach
     void openMenu() {
         customerPage.navigate(TestConfig.APP_URL);
@@ -27,6 +35,29 @@ public class MenuCartUiTest extends TestBase {
         assertThat(customerPage.locator("[data-menu-item] input[type=checkbox]")).hasCount(0);
         assertThat(customerPage.locator("[data-menu-item] button[aria-label^='Edit ']")).hasCount(0);
     }
+    @Test
+    void allMenuItemsHaveNamesPositivePricesAndCategories() {
+        Locator rows = customerPage.locator("[data-menu-item]");
+        org.assertj.core.api.Assertions.assertThat(rows.count()).isGreaterThan(0);
+        for (int index = 0; index < rows.count(); index++) {
+            Locator row = rows.nth(index);
+            org.assertj.core.api.Assertions.assertThat(row.locator("h4").innerText().trim()).isNotEmpty();
+            String price = row.locator("span").filter(new Locator.FilterOptions()
+                    .setHasText(Pattern.compile("^₹[0-9]"))).last().innerText().trim();
+            org.assertj.core.api.Assertions.assertThat(price).matches("^₹[0-9]+(?:\\.[0-9]{1,2})?$");
+            double amount = Double.parseDouble(price.substring(1));
+            org.assertj.core.api.Assertions.assertThat(amount).isGreaterThan(0);
+            org.assertj.core.api.Assertions.assertThat(row.innerText()).doesNotContain("null", "undefined");
+        }
+
+        Locator categories = customerPage.locator("section").filter(new Locator.FilterOptions()
+                .setHas(customerPage.locator("[data-menu-item]"))).locator("h5");
+        org.assertj.core.api.Assertions.assertThat(categories.count()).isGreaterThan(0);
+        for (int index = 0; index < categories.count(); index++) {
+            org.assertj.core.api.Assertions.assertThat(categories.nth(index).innerText().trim()).isNotEmpty();
+        }
+    }
+
     @Test
     void outOfStockItemsCannotBeAdded() {
         Locator unavailable = customerPage.locator("[data-menu-item]")
@@ -79,6 +110,19 @@ public class MenuCartUiTest extends TestBase {
                 .click(new Locator.ClickOptions().setDelay(100));
         assertThat(cart.getByText("Your cart is empty", new Locator.GetByTextOptions().setExact(true))).isVisible();
         assertThat(cart.locator("output")).hasCount(0);
+        cart.locator("button:has(svg.lucide-x)").click();
+        assertThat(cart).isHidden();
+        assertThat(customerPage.getByText("View Cart", new Page.GetByTextOptions().setExact(true))).isHidden();
+    }
+    @Test void fiveSequentialIncrementsReachQuantitySix() {
+        Locator row = firstOrderableItem();
+        String name = row.locator("h4").innerText().trim();
+        row.getByRole(AriaRole.BUTTON,
+                new Locator.GetByRoleOptions().setName("ADD").setExact(true)).click();
+        Locator increment = row.getByRole(AriaRole.BUTTON,
+                new Locator.GetByRoleOptions().setName("Add one " + name).setExact(true));
+        for (int click = 0; click < 5; click++) increment.click();
+        assertThat(row.locator("output")).hasText("6");
     }
     @Test void menuQuantityControlsAndRemoval() {
         Locator row = firstOrderableItem();
@@ -114,5 +158,125 @@ public class MenuCartUiTest extends TestBase {
         cart.getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Remove one " + name).setExact(true))
                 .click(new Locator.ClickOptions().setDelay(100));
         assertThat(cart.getByText("Your cart is empty", new Locator.GetByTextOptions().setExact(true))).isVisible();
+    }
+
+    @Test void twoDistinctItemsProduceExactSubtotal() {
+        Locator orderable = customerPage.locator("[data-menu-item]").filter(new Locator.FilterOptions()
+                .setHas(customerPage.getByRole(AriaRole.BUTTON,
+                        new Page.GetByRoleOptions().setName("ADD").setExact(true))));
+        org.assertj.core.api.Assertions.assertThat(orderable.count()).isGreaterThanOrEqualTo(2);
+
+        Locator first = customerPage.locator("[data-menu-item=\"" + orderable.nth(0).getAttribute("data-menu-item") + "\"]");
+        Locator second = customerPage.locator("[data-menu-item=\"" + orderable.nth(1).getAttribute("data-menu-item") + "\"]");
+        String firstName = first.locator("h4").innerText().trim();
+        String secondName = second.locator("h4").innerText().trim();
+        double firstPrice = parseInr(first.locator("span").filter(new Locator.FilterOptions()
+                .setHasText(Pattern.compile("^₹[0-9]"))).last().innerText());
+        double secondPrice = parseInr(second.locator("span").filter(new Locator.FilterOptions()
+                .setHasText(Pattern.compile("^₹[0-9]"))).last().innerText());
+
+        first.getByRole(AriaRole.BUTTON,
+                new Locator.GetByRoleOptions().setName("ADD").setExact(true)).click();
+        second.getByRole(AriaRole.BUTTON,
+                new Locator.GetByRoleOptions().setName("ADD").setExact(true)).click();
+        customerPage.getByText("View Cart", new Page.GetByTextOptions().setExact(true)).click();
+
+        Locator cart = customerPage.getByRole(AriaRole.DIALOG,
+                new Page.GetByRoleOptions().setName("Your cart").setExact(true));
+        assertThat(cart.getByText(firstName, new Locator.GetByTextOptions().setExact(true))).isVisible();
+        assertThat(cart.getByText(secondName, new Locator.GetByTextOptions().setExact(true))).isVisible();
+        String subtotalText = cart.getByText("Subtotal", new Locator.GetByTextOptions().setExact(true))
+                .locator("..").locator("span").last().innerText();
+        org.assertj.core.api.Assertions.assertThat(parseInr(subtotalText))
+                .isEqualTo(firstPrice + secondPrice);
+    }
+
+    @Test void cartPersistsAfterSettingsNavigation() {
+        Locator row = firstOrderableItem();
+        String name = row.locator("h4").innerText().trim();
+        row.getByRole(AriaRole.BUTTON,
+                new Locator.GetByRoleOptions().setName("ADD").setExact(true)).click();
+
+        customerPage.getByTitle("Profile Settings", new Page.GetByTitleOptions().setExact(true)).click();
+        assertThat(customerPage.getByRole(AriaRole.HEADING,
+                new Page.GetByRoleOptions().setName("Account Settings"))).isVisible();
+        customerPage.getByRole(AriaRole.BUTTON,
+                new Page.GetByRoleOptions().setName("Close settings")).click();
+
+        customerPage.getByText("View Cart", new Page.GetByTextOptions().setExact(true)).click();
+        Locator cart = customerPage.getByRole(AriaRole.DIALOG,
+                new Page.GetByRoleOptions().setName("Your cart").setExact(true));
+        assertThat(cart.getByText(name, new Locator.GetByTextOptions().setExact(true))).isVisible();
+        assertThat(cart.locator("output")).hasText("1");
+    }
+
+    @Test void freeDeliveryTrackerShowsProgressAfterAddingItem() {
+        Locator row = firstOrderableItem();
+        row.getByRole(AriaRole.BUTTON,
+                new Locator.GetByRoleOptions().setName("ADD").setExact(true)).click();
+
+        Locator progress = customerPage.getByRole(AriaRole.PROGRESSBAR,
+                new Page.GetByRoleOptions().setName("Progress towards free delivery").setExact(true));
+        assertThat(progress).isVisible();
+        String value = progress.getAttribute("aria-valuenow");
+        org.assertj.core.api.Assertions.assertThat(Integer.parseInt(value)).isBetween(0, 100);
+        Locator message = customerPage.getByText(Pattern.compile(
+                "(?:Add ₹[0-9,.]+ for Free Delivery!|Free Delivery Unlocked!)"));
+        assertThat(message.first()).isVisible();
+    }
+
+    @Test void freeDeliveryCanBeUnlockedThroughCartAdditions() {
+        Locator row = firstOrderableItem();
+        String name = row.locator("h4").innerText().trim();
+        row.getByRole(AriaRole.BUTTON,
+                new Locator.GetByRoleOptions().setName("ADD").setExact(true)).click();
+        Locator progress = customerPage.getByRole(AriaRole.PROGRESSBAR,
+                new Page.GetByRoleOptions().setName("Progress towards free delivery").setExact(true));
+        assertThat(progress).isVisible();
+
+        Locator increment = row.getByRole(AriaRole.BUTTON,
+                new Locator.GetByRoleOptions().setName("Add one " + name).setExact(true));
+        for (int attempt = 0; attempt < 30 && Integer.parseInt(progress.getAttribute("aria-valuenow")) < 100; attempt++) {
+            increment.click(new Locator.ClickOptions().setDelay(100));
+        }
+
+        assertThat(progress).hasAttribute("aria-valuenow", "100");
+        assertThat(customerPage.getByText("Free Delivery Unlocked! 🎉",
+                new Page.GetByTextOptions().setExact(true))).isVisible();
+    }
+
+    @Test void cartTotalEqualsDisplayedSubtotalFeesAndTaxes() {
+        Locator row = firstOrderableItem();
+        row.getByRole(AriaRole.BUTTON,
+                new Locator.GetByRoleOptions().setName("ADD").setExact(true)).click();
+        customerPage.getByText("View Cart", new Page.GetByTextOptions().setExact(true)).click();
+        Locator cart = customerPage.getByRole(AriaRole.DIALOG,
+                new Page.GetByRoleOptions().setName("Your cart").setExact(true));
+        assertThat(cart).isVisible();
+
+        double subtotal = parseInr(cart.getByText("Subtotal", new Locator.GetByTextOptions().setExact(true))
+                .locator("..").innerText());
+        double delivery = parseInr(cart.getByText("Delivery Fee", new Locator.GetByTextOptions().setExact(true))
+                .locator("..").innerText());
+        Locator platformLine = cart.getByText("Platform Fee", new Locator.GetByTextOptions().setExact(true));
+        double platform = platformLine.count() == 0 ? 0 : parseInr(platformLine.locator("..").innerText());
+        Locator sgstLine = cart.getByText("SGST (2.5%)", new Locator.GetByTextOptions().setExact(true));
+        Locator cgstLine = cart.getByText("CGST (2.5%)", new Locator.GetByTextOptions().setExact(true));
+        assertThat(sgstLine).isVisible();
+        assertThat(cgstLine).isVisible();
+        org.assertj.core.api.Assertions.assertThat(sgstLine.locator("..").innerText())
+                .as("SGST must settle before cart arithmetic can be verified")
+                .doesNotContain("Calculating");
+        org.assertj.core.api.Assertions.assertThat(cgstLine.locator("..").innerText())
+                .as("CGST must settle before cart arithmetic can be verified")
+                .doesNotContain("Calculating");
+        double sgst = parseInr(sgstLine.locator("..").innerText());
+        double cgst = parseInr(cgstLine.locator("..").innerText());
+        double total = parseInr(cart.getByText("Total", new Locator.GetByTextOptions().setExact(true))
+                .locator("..").innerText());
+
+        org.assertj.core.api.Assertions.assertThat(total)
+                .isCloseTo(subtotal + platform + delivery + sgst + cgst,
+                        org.assertj.core.data.Offset.offset(0.01));
     }
 }

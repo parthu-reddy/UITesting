@@ -3,104 +3,118 @@ package com.fooddelivery.e2e.tests.resilience;
 import com.fooddelivery.e2e.base.TestBase;
 import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.common.LoginPage;
-import com.fooddelivery.e2e.pages.customer.*;
-import org.junit.jupiter.api.*;
+import com.fooddelivery.e2e.pages.customer.CustomerCartDrawerPage;
+import com.fooddelivery.e2e.pages.customer.CustomerDashboardPage;
+import com.fooddelivery.e2e.pages.customer.CustomerMenuViewPage;
+import com.fooddelivery.e2e.pages.customer.NearbyOutletPage;
+import com.fooddelivery.e2e.pages.customer.SavedDeliveryAddressPage;
+import com.microsoft.playwright.Locator;
+import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.AriaRole;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import java.util.regex.Pattern;
 
-/**
- * Tests that user session and order state persist across page reloads.
- * The app uses localStorage for session tokens.
- */
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
+
+/** UI-only recovery checks. No order is submitted and no backend state is changed. */
 @Tag("resilience")
 public class PageReloadRecoveryTest extends TestBase {
 
+    private void loginCustomerAtHome() {
+        customerPage.navigate(TestConfig.APP_URL);
+        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
+        new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();
+    }
+
+    private Locator deliverToButton() {
+        return customerPage.getByRole(AriaRole.BUTTON,
+                new Page.GetByRoleOptions().setName(Pattern.compile("Deliver to")));
+    }
+
     @Test
-    @DisplayName("Login → place order → reload page → verify session and order persist")
+    @DisplayName("RECOVERY-01: Customer session survives a hard reload")
     void sessionPersistsAcrossReload() {
-        customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
-        CustomerDashboardPage dashboard = new CustomerDashboardPage(customerPage);
-        dashboard.waitForDashboard();
+        loginCustomerAtHome();
+        assertThat(deliverToButton()).containsText("Home:");
 
-        // Capture pre-reload state
-        String preReloadContent = customerPage.content();
-        assertThat(preReloadContent).containsAnyOf("Deliver to", "craving", "Good");
-
-        // Full page reload
-        System.out.println("[RELOAD TEST] Reloading page...");
         customerPage.reload();
-        customerPage.waitForTimeout(3000);
 
-        // Verify we're still logged in (not back at login screen)
-        System.out.println("[RELOAD TEST] URL AFTER RELOAD: " + customerPage.url());
-        String postReloadContent = customerPage.content();
-        assertThat(postReloadContent)
-                .doesNotContain("Order Food") // Login role selector shouldn't appear
-                .containsAnyOf("Deliver to", "craving", "Good", "Orders")
-                .as("User session should persist across reload via localStorage");
-
-        System.out.println("[RELOAD TEST] Session persisted successfully.");
+        assertThat(deliverToButton()).containsText("Home:");
+        assertThat(customerPage.getByRole(AriaRole.BUTTON,
+                new Page.GetByRoleOptions().setName("Order Food").setExact(true))).hasCount(0);
     }
 
     @Test
-    @DisplayName("Place order → reload → order still visible")
-    void orderPersistsAcrossReload() {
-        customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
-        new CustomerDashboardPage(customerPage).waitForDashboard();
+    @DisplayName("RECOVERY-03: Selected Home address survives a hard reload")
+    void selectedAddressPersistsAcrossReload() {
+        loginCustomerAtHome();
+        String selectedAddress = deliverToButton().locator("span").last().innerText().trim();
 
-        // Place an order
-        CustomerHomePage home = new CustomerHomePage(customerPage);
-        customerPage.waitForTimeout(2000);
-        home.openRestaurant("Brand 1");
-        CustomerMenuViewPage customerMenu = new CustomerMenuViewPage(customerPage);
-        customerMenu.selectNearestOutlet();
-        customerMenu.addQuickPrepItemToCart();
-        customerMenu.clickViewCart();
-        new CustomerCartDrawerPage(customerPage).checkout();
-        customerPage.waitForTimeout(3000);
-
-        // Reload
         customerPage.reload();
-        customerPage.waitForTimeout(5000);
 
-        // Check active orders are still visible
-        CustomerDashboardPage dashboard = new CustomerDashboardPage(customerPage);
-        boolean hasOrders = dashboard.hasActiveOrders();
-        System.out.println("[RELOAD TEST] Active orders after reload: " + hasOrders);
+        assertThat(deliverToButton().locator("span").last()).hasText(selectedAddress);
+        assertThat(customerPage.getByRole(AriaRole.DIALOG)).hasCount(0);
     }
 
     @Test
-    @DisplayName("Login → navigate to settings → reload page → verify settings tab persists")
-    void tabStatePersistsAcrossReload() {
-        customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
-        CustomerDashboardPage dashboard = new CustomerDashboardPage(customerPage);
-        dashboard.waitForDashboard();
+    @DisplayName("RECOVERY-02: Cart item survives a hard reload")
+    void cartPersistsAcrossReload() {
+        loginCustomerAtHome();
+        new NearbyOutletPage(customerPage).openBrand1AndSelectNearby();
 
-        // Navigate to settings tab
-        dashboard.openSettingsTab();
-        customerPage.waitForTimeout(2000);
-        
-        // Assert we are in the settings tab
-        String preReloadContent = customerPage.content();
-        assertThat(preReloadContent).contains("Account Settings");
+        CustomerMenuViewPage menu = new CustomerMenuViewPage(customerPage);
+        menu.addQuickPrepItemToCart();
+        menu.clickViewCart();
+        CustomerCartDrawerPage cart = new CustomerCartDrawerPage(customerPage);
+        cart.waitForCartOpen();
+        String itemName = cart.getFirstItemName();
+        assertThat(customerPage.getByRole(AriaRole.DIALOG,
+                new Page.GetByRoleOptions().setName("Your cart"))).containsText(itemName);
 
-        // Full page reload
-        System.out.println("[RELOAD TEST] URL BEFORE RELOAD: " + customerPage.url());
-        System.out.println("[RELOAD TEST] JS location.href BEFORE: " + customerPage.evaluate("window.location.href"));
-        System.out.println("[RELOAD TEST] Reloading page while in settings tab...");
         customerPage.reload();
-        customerPage.waitForTimeout(3000);
+        menu.clickViewCart();
+        cart.waitForCartOpen();
 
-        // Verify we're still on the settings tab
-        System.out.println("[RELOAD TEST] URL AFTER RELOAD: " + customerPage.url());
-        String postReloadContent = customerPage.content();
-        assertThat(postReloadContent)
-                .contains("Account Settings")
-                .as("URL-driven tab state should persist across page reload");
+        assertThat(customerPage.getByRole(AriaRole.DIALOG,
+                new Page.GetByRoleOptions().setName("Your cart"))).containsText(itemName);
+    }
 
-        System.out.println("[RELOAD TEST] Tab state persisted successfully.");
+    @Test
+    @DisplayName("RECOVERY-01: Customer settings route survives a hard reload")
+    void settingsRoutePersistsAcrossReload() {
+        loginCustomerAtHome();
+        new CustomerDashboardPage(customerPage).openSettingsTab();
+        Locator heading = customerPage.getByRole(AriaRole.HEADING,
+                new Page.GetByRoleOptions().setName("Account Settings"));
+        assertThat(heading).isVisible();
+        String settingsUrl = customerPage.url();
+
+        customerPage.reload();
+
+        assertThat(heading).isVisible();
+        org.assertj.core.api.Assertions.assertThat(customerPage.url()).isEqualTo(settingsUrl);
+        assertThat(customerPage.locator("input[type=tel]")).hasValue(testCustomerPhone);
+    }
+
+    @Test
+    @DisplayName("RECOVERY-16: Second customer tab shares session and Home selection")
+    void secondTabSharesCustomerSession() {
+        loginCustomerAtHome();
+        String selectedAddress = deliverToButton().locator("span").last().innerText().trim();
+
+        Page secondTab = customerContext.newPage();
+        try {
+            secondTab.navigate(TestConfig.APP_URL);
+            Locator secondDeliverTo = secondTab.getByRole(AriaRole.BUTTON,
+                    new Page.GetByRoleOptions().setName(Pattern.compile("Deliver to")));
+            assertThat(secondDeliverTo.locator("span").last()).hasText(selectedAddress);
+            assertThat(secondTab.getByRole(AriaRole.BUTTON,
+                    new Page.GetByRoleOptions().setName("Order Food").setExact(true))).hasCount(0);
+        } finally {
+            secondTab.close();
+        }
     }
 }

@@ -23,9 +23,9 @@ All scenarios use real UI interactions only. No token injection, no direct stora
 
 | ID | Role | Action | Expected result |
 |---|---|---|---|
-| SESSION-08 | Customer | Login → log out via Settings → reload. | Role selector shown; no residual auth state. |
-| SESSION-09 | Restaurant | Login → log out → reload. | Same. |
-| SESSION-10 | Rider | Login → log out → reload. | Same. |
+| SESSION-08 | Customer | Login → log out via Settings → reload. | Implemented and live-passed; role selector remains after reload. |
+| SESSION-09 | Restaurant | Login → log out → reload. | Active and failing: deployed Profile settings returns to Live Kitchen and no Log Out action renders. Reload persistence itself passes. |
+| SESSION-10 | Rider | Login → log out → reload. | Implemented and live-passed; role selector remains after reload. |
 | SESSION-11 | Admin | Login → log out → reload. | Same. |
 
 ## Batch 4 — Cross-role isolation (three simultaneous contexts)
@@ -45,3 +45,9 @@ All scenarios use real UI interactions only. No token injection, no direct stora
 | SESSION-17 | Restaurant | Restaurant-specific tabs (Incoming, Preparation, Ready) visible; customer cart absent. | Correct UI. |
 | SESSION-18 | Rider | Rider-specific UI ("Today's Earnings", online toggle) visible; restaurant/customer controls absent. | Correct UI. |
 | SESSION-19 | Admin | Admin portal tabs (Users, Categories, Ledger, etc.) visible; customer/rider controls absent. | Correct UI. |
+
+## Batch 6 — Active device visibility
+
+| ID | Description | Action | Expected result |
+|---|---|---|---|
+| SESSION-20 | Current device appears | Customer opens Account Settings without removing any session. | Implemented and live-passed: Logged-in Devices renders at least one device with Remove and Last Active controls/text. |

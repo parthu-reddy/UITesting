@@ -1,6 +1,6 @@
 # campaigns-and-promotions
 
-Status: first UI-only checks implemented and validated; broader coverage remains pending.
+Status: first UI-only checks are implemented, but current live validation is blocked by the restaurant dashboard redirect recorded in `PENDING.md`; broader coverage remains pending.
 
 Scope: Campaigns, advertisements and promotion management.
 

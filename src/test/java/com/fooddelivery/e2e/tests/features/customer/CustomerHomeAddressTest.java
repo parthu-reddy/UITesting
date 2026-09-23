@@ -4,9 +4,13 @@ import com.fooddelivery.e2e.base.TestBase;
 import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.common.LoginPage;
 import com.fooddelivery.e2e.pages.customer.*;
+import com.microsoft.playwright.Locator;
+import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.AriaRole;
 import org.junit.jupiter.api.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 /**
  * Tests for customer home page, restaurant search, address modal, and free delivery tracker.
@@ -35,9 +39,13 @@ public class CustomerHomeAddressTest extends TestBase {
     @DisplayName("HOME-01: Search restaurant from home page")
     void searchRestaurantFromHome() {
         CustomerHomePage home = new CustomerHomePage(customerPage);
-        home.searchRestaurant("Brand");
-        // After searching, restaurant list should update
-        customerPage.waitForTimeout(2000);
+        Locator cards = customerPage.locator("button:has(h5)");
+        String brand = cards.first().locator("h5").innerText().trim();
+        home.searchRestaurant(brand);
+        assertThat(cards.first()).isVisible();
+        for (int index = 0; index < cards.count(); index++) {
+            assertThat(cards.nth(index).locator("h5").innerText()).containsIgnoringCase(brand);
+        }
     }
 
     @Test
@@ -51,12 +59,11 @@ public class CustomerHomeAddressTest extends TestBase {
     @Test
     @DisplayName("HOME-04: Open restaurant from home")
     void openRestaurantFromHome() {
-        CustomerHomePage home = new CustomerHomePage(customerPage);
-        home.openRestaurant("Brand 1");
-        // Should navigate to menu view
-        customerPage.waitForTimeout(2000);
-        CustomerMenuViewPage menu = new CustomerMenuViewPage(customerPage);
-        assertThat(menu.isCartPopupVisible() || true).isTrue(); // Menu page loaded
+        String outlet = new NearbyOutletPage(customerPage).openBrand1AndSelectNearby();
+        assertThat(outlet).isNotBlank();
+        assertThat(customerPage.getByRole(AriaRole.BUTTON,
+                new Page.GetByRoleOptions().setName("Change outlet").setExact(true))).isVisible();
+        assertThat(customerPage.locator("[data-menu-item]").first()).isVisible();
     }
 
     // ── ADDRESS MODAL SCENARIOS ──────────────────────────────────────────
@@ -77,8 +84,10 @@ public class CustomerHomeAddressTest extends TestBase {
         CustomerAddressModalPage modal = new CustomerAddressModalPage(customerPage);
         modal.waitForModalOpen();
         modal.selectExistingAddress("Home");
-        // Modal should close
-        customerPage.waitForTimeout(1000);
+        assertThat(customerPage.getByRole(AriaRole.DIALOG)).isHidden();
+        assertThat(customerPage.getByRole(AriaRole.BUTTON,
+                new Page.GetByRoleOptions().setName(java.util.regex.Pattern.compile("Deliver to"))))
+                .containsText("Home:");
     }
 
     @Test
@@ -96,10 +105,11 @@ public class CustomerHomeAddressTest extends TestBase {
     @Test
     @DisplayName("HOME-05: Free delivery tracker visible")
     void freeDeliveryTrackerVisible() {
-        CustomerFreeDeliveryTrackerPage tracker = new CustomerFreeDeliveryTrackerPage(customerPage);
-        // Tracker may or may not be visible depending on cart state
-        // Just verify no crash
-        boolean visible = tracker.isTrackerVisible();
-        System.out.println("[INFO] Free delivery tracker visible: " + visible);
+        new NearbyOutletPage(customerPage).openBrand1AndSelectNearby();
+        new CustomerMenuViewPage(customerPage).addQuickPrepItemToCart();
+        Locator progress = customerPage.getByRole(AriaRole.PROGRESSBAR,
+                new Page.GetByRoleOptions().setName("Progress towards free delivery").setExact(true));
+        assertThat(progress).isVisible();
+        assertThat(Integer.parseInt(progress.getAttribute("aria-valuenow"))).isBetween(0, 100);
     }
 }

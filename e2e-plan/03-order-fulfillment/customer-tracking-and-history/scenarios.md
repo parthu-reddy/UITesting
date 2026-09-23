@@ -32,6 +32,8 @@ Uses: `CustomerOrderTrackerPage`, `CustomerActiveOrdersCarouselPage`, `MapTracki
 
 ## Batch 4 — Order history
 
+Current blocker: `CustomerOrderHistory` is implemented but not mounted anywhere in the customer UI; all scenarios in this batch remain unreachable through UI interaction or direct routing.
+
 | ID | Description | Action | Expected result |
 |---|---|---|---|
 | HISTORY-01 | Completed order in history | After delivery completes. | Order appears in `CustomerOrderHistoryPage` with status "Completed" and correct total. |
@@ -64,11 +66,10 @@ Uses: `CustomerOrderTrackerPage`, `CustomerActiveOrdersCarouselPage`, `MapTracki
 
 | ID | Description | Action | Expected result |
 |---|---|---|---|
-| HOME-01 | Customer home search restaurant | `CustomerHomePage.searchRestaurant("Brand")`. | Restaurant list filters to matching brand names. |
-| HOME-02 | Restaurant count | On home page. | `getVisibleRestaurantCount()` ≥ 1 (at least one restaurant in range). |
-| HOME-03 | Restaurant visibility check | `isRestaurantVisible("Brand 1")`. | Returns true if Brand 1 is within delivery range. |
-| HOME-04 | Open restaurant from home | `openRestaurant("Brand 1")`. | Restaurant menu view opens for that brand. |
-| HOME-05 | Free delivery tracker visible | On customer home/cart. | `CustomerFreeDeliveryTrackerPage.isTrackerVisible()` renders (shows progress or "Unlocked"). |
-| HOME-06 | Free delivery remaining amount | On tracker. | `getRemainingAmountText()` returns a value (e.g., "₹50 more for free delivery") or "Free delivery unlocked". |
-| HOME-07 | Free delivery unlocked state | When order total exceeds threshold. | `isFreeDeliveryUnlocked()` returns true. |
-
+| HOME-01 | Customer home search restaurant | Search for a displayed brand. | Implemented and live-passed in `RestaurantDiscoveryUiTest`; every remaining card matches. |
+| HOME-02 | Restaurant count | On home page. | Implemented and live-passed; at least two cards and two distinct brands render. |
+| HOME-03 | Restaurant visibility check | Find Brand1 after selecting Home. | Implemented through nearby Brand1 selection; an eligible outlet below 5 km is required. |
+| HOME-04 | Open restaurant from home | Open Brand1 and select a nearby outlet. | Implemented and live-passed; menu rows render. |
+| HOME-05 | Free delivery tracker visible | Add an orderable item through the menu UI. | Implemented and live-passed: named progressbar renders with a bounded value from 0 to 100. |
+| HOME-06 | Free delivery remaining amount | On tracker. | Implemented and live-passed: UI shows `Add ₹… for Free Delivery!` or `Free Delivery Unlocked!`. |
+| HOME-07 | Free delivery unlocked state | Increment an orderable item until the progress reaches its configured threshold. | Implemented and live-passed: progress reaches 100 and `Free Delivery Unlocked!` renders without checkout. |

@@ -10,6 +10,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Base class for all E2E tests.
@@ -63,9 +64,12 @@ public abstract class TestBase {
 
     @BeforeEach
     public void setUpContexts() {
-        testCustomerPhone = String.format("8000000%03d", (int)(Math.random() * 500) + 1);
-        testRestaurantPhone = String.format("9000000%03d", (int)(Math.random() * 10) + 1);
-        testRiderPhone = String.format("70000%05d", (int)(Math.random() * 90000) + 10000);
+        testCustomerPhone = System.getProperty("customer.phone",
+                String.format("8000000%03d", ThreadLocalRandom.current().nextInt(1, 501)));
+        testRestaurantPhone = System.getProperty("restaurant.phone",
+                String.format("9000000%03d", ThreadLocalRandom.current().nextInt(1, 11)));
+        testRiderPhone = System.getProperty("rider.phone",
+                String.format("7000000%03d", ThreadLocalRandom.current().nextInt(1, 31)));
         testAdminPhone = String.format("1000000%03d", (int)(Math.random() * 10) + 1);
 
         customerContext = createContext("customer");

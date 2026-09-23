@@ -11,6 +11,7 @@ Confirmation for later: include this as a separately tagged slow test? It does n
 - Rate-limit exhaustion: defer to avoid blocking shared seeded accounts.
 - Short phone/OTP input: agree expected validation; generated schemas currently lack length constraints. Do not invent acceptance criteria or create accounts from malformed test data.
 - Profile-form validation remains unimplemented beyond authorized admin completion.
+- Restaurant logout remains blocked in the deployed UI. `SessionUiTest` logs in and survives reload, but opening Profile settings returns to Live Kitchen and no exact `Log Out` button appears; the UI-only test times out at that control. Customer and rider logout plus post-logout reload passed in the same three-role run.
 
 ## Validation evidence
 

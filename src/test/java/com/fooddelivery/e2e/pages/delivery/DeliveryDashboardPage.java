@@ -2,7 +2,10 @@ package com.fooddelivery.e2e.pages.delivery;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.AriaRole;
 import com.microsoft.playwright.options.WaitForSelectorState;
+
+import java.util.regex.Pattern;
 
 /**
  * Page Object for the Delivery Dashboard shell.
@@ -21,11 +24,12 @@ public class DeliveryDashboardPage {
     }
 
     public void waitForDashboard() {
-        page.waitForCondition(() -> 
-            page.getByText("Trips Completed").isVisible() || 
-            page.getByText("Offline").isVisible() || 
-            page.getByText("Online Duty").isVisible(),
-            new Page.WaitForConditionOptions().setTimeout(15000));
+        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions()
+                        .setName(Pattern.compile("^(Offline|Online Duty)$")))
+                .first()
+                .waitFor(new Locator.WaitForOptions()
+                        .setState(WaitForSelectorState.VISIBLE)
+                        .setTimeout(15000));
     }
 
     public void goOnline() {

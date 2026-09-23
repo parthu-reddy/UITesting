@@ -32,7 +32,7 @@ public class RiderOnboardingWizardPage {
 
     public void completeOnboarding() {
         // Step 0: Basic Profile
-        page.locator("input[type='text']").first().fill("E2E Test Rider");
+        page.locator("input[type='text']").first().fill("Test Rider");
         page.getByRole(com.microsoft.playwright.options.AriaRole.COMBOBOX, new Page.GetByRoleOptions().setName("Vehicle Type")).click();
         page.getByRole(com.microsoft.playwright.options.AriaRole.OPTION, new Page.GetByRoleOptions().setName("Motorcycle / Scooter")).click();
         page.locator("input[type='text']").nth(1).fill("KA01AB1234");
@@ -76,7 +76,7 @@ public class RiderOnboardingWizardPage {
 
     public void completeDevModeOnboarding() {
         // Step 0: Basic Profile
-        page.locator("input[type='text']").first().fill("E2E Test Rider");
+        page.locator("input[type='text']").first().fill("Test Rider");
         page.getByRole(com.microsoft.playwright.options.AriaRole.COMBOBOX, new Page.GetByRoleOptions().setName("Vehicle Type")).click();
         page.getByRole(com.microsoft.playwright.options.AriaRole.OPTION, new Page.GetByRoleOptions().setName("Motorcycle / Scooter")).click();
         page.locator("input[type='text']").nth(1).fill("KA01AB1234");

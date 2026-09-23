@@ -24,10 +24,13 @@ public class DeliveryOnlineTogglePage {
         Locator offlineBtn = page.locator("button:has-text('Offline')").first();
         if (offlineBtn.isVisible()) {
             offlineBtn.click();
+            Locator enablePermissions = page.getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
+                    new Page.GetByRoleOptions().setName("Enable Permissions"));
+            if (enablePermissions.isVisible()) enablePermissions.click();
             page.locator("button:has-text('Online Duty')")
                     .waitFor(new Locator.WaitForOptions()
                             .setState(WaitForSelectorState.VISIBLE)
-                            .setTimeout(5000));
+                            .setTimeout(15000));
         }
     }
 

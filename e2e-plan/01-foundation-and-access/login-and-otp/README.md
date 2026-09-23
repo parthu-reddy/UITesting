@@ -14,6 +14,8 @@ Admin profile setup is explicitly enabled only in the admin positive login case;
 
 Further input-validation, resend/expiry and profile validation batches remain planned; this result does not claim exhaustive authentication coverage.
 
+`SessionUiTest` live-passed logout and post-logout reload for customer and rider using randomized seeded accounts. Restaurant reload persistence passed, but logout is blocked by the deployed restaurant settings navigation defect. Admin is excluded from this operational-role run per current project scope.
+
 ## Second batch validation
 
 LoginValidationTest: **12 passed, 0 failures, 0 errors, 0 skipped** against the configured deployment. Covers required/normalized phone and OTP inputs, Back navigation, and successful resent-code login for every role. See AUTH-09–20 in scenarios.md.

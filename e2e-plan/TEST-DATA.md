@@ -4,14 +4,14 @@ User-confirmed on 2026-09-19 from the deployed development setup:
 
 | Role | Phone | Use |
 | --- | --- | --- |
-| Customer | `8000000001` | Existing seeded customer |
-| Restaurant | `9000000001` | Existing seeded restaurant partner |
-| Rider / delivery executive | `7000000001` | Existing seeded rider |
+| Customer | random `8000000001`–`8000000500` | Existing seeded customers with saved addresses |
+| Restaurant | random `9000000001`–`9000000010` | Existing seeded restaurant partners |
+| Rider / delivery executive | random `7000000001`–`7000000030` | Existing seeded, approved riders |
 | Admin | `1000000001` | User selected earlier default; no dedicated admin account seeded |
 
 Prefer these existing accounts when creating tests. Do not create replacement accounts merely to simplify setup. Their current login/profile state still needs live validation. The user-confirmed rider number supersedes the earlier choice `5000000001` for planned tests; it is not evidence that the older seed ranges have been removed.
 
-TestConfig defaults now match the three confirmed seeded accounts. Override them when needed using `-Dcustomer.phone=8000000001 -Drestaurant.phone=9000000001 -Drider.phone=7000000001`. User subsequently confirmed using admin `1000000001` and said any number can be used because no dedicated admin account was created. The authorized admin profile-completion flow has now passed live validation; retain this test profile for reuse.
+Each test run chooses one account randomly from each seeded range to spread OTP traffic. Override any random selection when reproducing a failure using `-Dcustomer.phone=8000000001 -Drestaurant.phone=9000000001 -Drider.phone=7000000001`. User subsequently confirmed using admin `1000000001` and said any number can be used because no dedicated admin account was created. The authorized admin profile-completion flow has now passed live validation; retain this test profile for reuse.
 
 ## Order prerequisites
 

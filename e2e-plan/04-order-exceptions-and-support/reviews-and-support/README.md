@@ -1,7 +1,7 @@
 # reviews-and-support
 
-Status: not started; scenarios intentionally deferred.
+Status: in progress. The first read-only My Reviews test is implemented and currently exposes a deployed HTTP 403 failure.
 
 Scope: Ratings, reviews and post-delivery support.
 
-When starting this folder, follow the workflow in the [main plan](../../README.md). Record source/page-object references, prerequisites, scenario IDs, implementation links and validation results here. Add `scenarios.md` only at that point.
+Implementation: `CustomerSettingsUiTest.myReviewsTabShowsReviewsOrDefinedEmptyState` checks the customer’s own immutable review history without submitting a review. See [validation failures and pending work](PENDING.md).

@@ -7,9 +7,9 @@ Uses: `SharedSettingsPage`, `RiderSettingsPage`, `RestaurantSettingsPage`, `KycU
 | ID | Description | Action | Expected result |
 |---|---|---|---|
 | PROFILE-01 | Profile settings open | Customer logs in → selects Home → opens Settings. | `SharedSettingsPage` opens with profile info (name, phone). |
-| PROFILE-02 | Phone field is read-only | On customer profile settings. | Phone number field is non-editable (read-only); existing number visible. |
-| PROFILE-03 | Customer name visible | On profile settings. | Name field shows a non-empty string (seeded customer's name). |
-| PROFILE-04 | Close settings returns to dashboard | Tap Close/Back on settings. | Returns to Customer Dashboard; no crash. |
+| PROFILE-02 | Phone field is read-only | On customer profile settings. | Implemented and live-passed with exact randomized seeded phone. |
+| PROFILE-03 | Customer name visible | On profile settings. | Implemented and live-passed: seeded full name and email inputs are nonempty. |
+| PROFILE-04 | Close settings returns to dashboard | Tap Close/Back on settings. | Implemented and live-passed; Home delivery address is visible. |
 | PROFILE-05 | Edit name (if allowed) | If name is editable, change it and save. | Updated name visible on settings; dashboard header updates. If editing is not supported, field is read-only — document. |
 
 ## Batch 2 — Restaurant profile and settings
@@ -24,10 +24,10 @@ Uses: `SharedSettingsPage`, `RiderSettingsPage`, `RestaurantSettingsPage`, `KycU
 
 | ID | Description | Action | Expected result |
 |---|---|---|---|
-| PROFILE-09 | Rider profile open | Rider logs in → opens Settings. | `RiderSettingsPage` shows name, phone, vehicle type. |
+| PROFILE-09 | Rider profile open | Rider logs in → opens Settings. | Implemented and live-passed: Rider Settings opens; phone is disabled; name, email, vehicle registration and vehicle type are populated. |
 | PROFILE-10 | Documents section visible | On rider settings. | Documents section visible (e.g. "Upload Aadhaar", "Upload License"); not a blank section. |
 | PROFILE-11 | Wallet section visible | On rider settings. | Wallet section shows bank account info or UPI ID input; not blank. |
-| PROFILE-12 | No fields edited | Verify settings UI without changing any field. | UI renders correctly; no auto-save on view. |
+| PROFILE-12 | No fields edited | Verify settings UI without changing any field. | Implemented and live-passed; settings is opened and closed without saving or editing. |
 
 ## Batch 4 — KYC upload
 
@@ -89,12 +89,12 @@ Active sessions modal: view devices, terminate individual or all sessions.
 
 | ID | Description | Action | Expected result |
 |---|---|---|---|
-| SETTINGS-01 | Addresses tab opens | Open Settings → `SharedSettingsPage.openAddressesTab()`. | Addresses list visible; `getSavedAddressCount()` ≥ 1. |
-| SETTINGS-02 | Home address in saved list | On Addresses tab. | `hasAddress("Home")` returns true. |
-| SETTINGS-03 | Wallet tab opens | `SharedSettingsPage.openWalletTab()`. | Wallet section visible; `isWalletVisible()` returns true; balance shown. |
-| SETTINGS-04 | Wallet balance is non-negative | On Wallet tab. | `getWalletBalance()` ≥ ₹0; not `null`. |
-| SETTINGS-05 | History tab opens | `SharedSettingsPage.openHistoryTab()`. | `isTransactionHistoryVisible()` returns true; table or list renders. |
-| SETTINGS-06 | Logout via settings | `SharedSettingsPage.clickLogout()`. | Redirected to role selector; dashboard no longer visible. |
+| SETTINGS-01 | Addresses tab opens | Open Settings → select Addresses. | Implemented and live-passed; saved-address content and Add / Manage Addresses render. |
+| SETTINGS-02 | Home address in saved list | On Addresses tab. | Implemented and live-passed without mutation: Home is visible. |
+| SETTINGS-03 | Wallet tab opens | `SharedSettingsPage.openWalletTab()`. | Implemented and live-passed through Store Credit; Available Balance is visible. |
+| SETTINGS-04 | Wallet balance is non-negative | On Wallet tab. | Implemented and live-passed: Store Credit balance is INR-formatted, numeric and ≥ ₹0. |
+| SETTINGS-05 | History tab opens | `SharedSettingsPage.openHistoryTab()`. | Implemented and live-passed through keyboard navigation and Transaction History rendering. |
+| SETTINGS-06 | Logout via settings | Use each role's settings logout action. | Customer and rider live-passed through reload. Restaurant is blocked because settings returns to Live Kitchen and exposes no logout action. |
 
 ## Batch 10 — Customer Address Modal (`CustomerAddressModalPage`)
 
@@ -102,9 +102,9 @@ Active sessions modal: view devices, terminate individual or all sessions.
 |---|---|---|---|
 | ADDR-MODAL-01 | Address modal opens | Customer taps "Deliver to" → `CustomerAddressModalPage.waitForModalOpen()`. | `isModalOpen()` returns true; "Delivery Location" heading visible. |
 | ADDR-MODAL-02 | Select existing address | Tap "Home" via `selectExistingAddress("Home")`. | Modal closes; dashboard shows "Home" as delivery address. |
-| ADDR-MODAL-03 | Add new address form | Tap "Add New Address" via `clickAddNewAddress()`. | Address form fields appear (label, address line). |
-| ADDR-MODAL-04 | Fill new address label and line | `fillAddressLabel("Office")` + `fillAddressLine("123 Tech Park")`. | Both fields accept input. |
+| ADDR-MODAL-03 | Add new address form | From Settings → Addresses, tap Add / Manage Addresses. | Implemented and live-passed: label, address line, city, state and ZIP fields render. |
+| ADDR-MODAL-04 | Fill new address label and line | Enter temporary unsaved label and address line. | Implemented and live-passed: both inputs retain their exact values and are discarded on close. |
 | ADDR-MODAL-05 | Save new address | Tap "Save" via `saveAddress()`. | New address "Office" appears in address list; `getAddressCount()` increments. |
-| ADDR-MODAL-06 | Save address without label blocked | Leave label empty → tap Save. | Validation error; address not saved. |
+| ADDR-MODAL-06 | Incomplete address blocked | Leave required fields empty or incomplete. | Implemented and live-passed: Save Address remains disabled until every required field is populated, then becomes enabled; the form is closed without saving and no address is created. |
 | ADDR-MODAL-07 | Address count accurate | After saving. | `getAddressCount()` matches the number of visible address entries. |
-
+| ADDR-MODAL-08 | Dismissed draft is cleared | Fill every required field, close without saving, then reopen Add / Manage Addresses. | Implemented: all required inputs reopen blank, preventing a discarded draft from leaking into a later address attempt. |

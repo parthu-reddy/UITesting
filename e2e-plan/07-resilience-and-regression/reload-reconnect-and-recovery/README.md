@@ -1,7 +1,9 @@
 # reload-reconnect-and-recovery
 
-Status: not started; scenarios intentionally deferred.
+Status: in progress; first reversible UI-only reload batch implemented.
 
 Scope: Reload, network interruption and SSE/WebSocket recovery.
 
-When starting this folder, follow the workflow in the [main plan](../../README.md). Record source/page-object references, prerequisites, scenario IDs, implementation links and validation results here. Add `scenarios.md` only at that point.
+`PageReloadRecoveryTest` covers customer session persistence, exact Home-address restoration, cart-item restoration, and Settings route/profile restoration. `NetworkRecoveryUiTest` verifies that an offline period does not blank the loaded UI or lose the cart after reconnect and reload. Both use randomized seeded customers and never submit an order.
+
+Live validation results and remaining reconnect scenarios are recorded in `PENDING.md`.

@@ -54,7 +54,7 @@ public class RestaurantFulfillmentTest extends TestBase {
         // Mark as prepared
         actions.markPrepared(shortOrderId);
         
-        String pickupOtp = actions.getPickupOtp();
+        String pickupOtp = actions.getPickupOtp(shortOrderId);
         assertThat(pickupOtp).isNotEmpty();
     }
 

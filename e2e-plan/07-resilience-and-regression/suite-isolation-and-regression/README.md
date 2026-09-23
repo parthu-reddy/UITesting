@@ -1,7 +1,11 @@
 # suite-isolation-and-regression
 
-Status: not started; scenarios intentionally deferred.
+Status: in progress; first exact three-role isolation test implemented.
 
 Scope: Test data cleanup, isolation, repeatability and smoke/regression execution.
 
-When starting this folder, follow the workflow in the [main plan](../../README.md). Record source/page-object references, prerequisites, scenario IDs, implementation links and validation results here. Add `scenarios.md` only at that point.
+`ResilienceRegressionUiTest` logs customer, restaurant and rider into simultaneous isolated contexts using randomized seeded accounts. It asserts each role's exact dashboard marker and proves role-specific controls do not leak into the other contexts. No order or shared data mutation is involved.
+
+See `PENDING.md` for live validation and remaining repeatability work.
+
+The two newest customer accessibility tests passed in two consecutive identical live runs, covering a small repeatability sample without consuming OTP capacity across the full suite.

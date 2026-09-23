@@ -32,7 +32,7 @@ public class SessionUiTest extends TestBase {
     }
     
     @ParameterizedTest(name = "{0}: reload retains dashboard; logout and reload stay signed out")
-    @EnumSource(LoginSmokeTest.Account.class)
+    @EnumSource(value = LoginSmokeTest.Account.class, names = {"CUSTOMER", "RESTAURANT", "DELIVERY"})
     void reloadAndLogout(LoginSmokeTest.Account account) {
         Page page = pageFor(account);
         String phoneStr = phoneFor(account);

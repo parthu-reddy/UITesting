@@ -1,7 +1,9 @@
 # restaurant-acceptance-and-preparation
 
-Status: not started; scenarios intentionally deferred.
+Status: core acceptance/preparation path is covered by the passing `HappyDeliveryFlowTest`: the exact new order is selected by ID, accepted, started cooking and marked prepared before rider dispatch. REST-ACCEPT-05, REST-ACCEPT-06 and REST-ACCEPT-12 through REST-ACCEPT-15 are covered by that coordinated run.
 
 Scope: Restaurant queue, acceptance and kitchen preparation.
 
-When starting this folder, follow the workflow in the [main plan](../../README.md). Record source/page-object references, prerequisites, scenario IDs, implementation links and validation results here. Add `scenarios.md` only at that point.
+`RestaurantNavigationUiTest` was added for REST-NAV-01 through REST-NAV-05 and REST-NAV-07. Its first Live Kitchen assertion passes, but switching to Menu fails against the deployed UI. The test remains executable as a regression reproduction; this folder is not marked fully validated.
+
+See `PENDING.md` for the navigation failure and remaining acceptance cases.

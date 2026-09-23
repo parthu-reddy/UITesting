@@ -68,19 +68,23 @@ public class PickupDeliveryOtpTest extends TestBase {
         cart.checkout();
         customerPage.waitForTimeout(3000);
 
+        CustomerOrderTrackerPage tracker = new CustomerOrderTrackerPage(customerPage);
+        String fullOrderId = tracker.getOrderId();
+        String shortOrderId = fullOrderId.substring(0, 8);
+
         // Restaurant accepts, cooks, prepares
         restaurantPage.reload();
         restaurantPage.waitForTimeout(2000);
         RestaurantOrderActionsPage orderActions = new RestaurantOrderActionsPage(restaurantPage);
-        orderActions.acceptOrder();
-        orderActions.startCooking();
-        orderActions.markPrepared();
+        orderActions.acceptOrder(shortOrderId);
+        orderActions.startCooking(shortOrderId);
+        orderActions.markPrepared(shortOrderId);
 
         // Get pickup OTP
         restaurantPage.waitForTimeout(2000);
         restaurantPage.reload();
         restaurantPage.waitForTimeout(3000);
-        return orderActions.getPickupOtp();
+        return orderActions.getPickupOtp(shortOrderId);
     }
 
     // ── PICKUP OTP SCENARIOS ──────────────────────────────────────────────

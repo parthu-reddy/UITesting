@@ -6,7 +6,7 @@ Uses: `RestaurantDashboardPage` (Campaigns tab). No campaigns are permanently cr
 
 | ID | Description | Action | Expected result |
 |---|---|---|---|
-| CAMPAIGN-01 | Campaigns tab accessible | Login as restaurant → tap "Campaigns" tab. | Campaign list page renders; active/scheduled/past campaign sections visible. |
+| CAMPAIGN-01 | Campaigns tab accessible | Login as restaurant → tap "Campaigns" tab. | Implemented as a strict active test requiring Ad Spending History and New Campaign. The current deployment redirects back to Live Kitchen; see `PENDING.md`. |
 | CAMPAIGN-02 | Empty campaign list message | If no campaigns created. | Empty state message shown ("No campaigns yet"); not a blank page. |
 | CAMPAIGN-03 | Existing campaign card | If a seeded campaign exists. | Campaign card shows name, discount/offer type, start date, end date, and status. |
 | CAMPAIGN-04 | Campaign status labels | Active, Scheduled, Expired campaigns shown with correct labels. | Status label matches actual date range (e.g. "Active" if today is within the campaign dates). |
@@ -65,4 +65,3 @@ Advanced campaign creation with budgets and bid amounts. Admin view of campaign 
 | PERF-01 | Open ad performance | `openAdPerformance()`. | Performance dashboard renders. |
 | PERF-02 | Performance dashboard visible | After opening. | `isPerformanceDashboardVisible()` returns true; headings like "Ad Performance", "Impressions", or "Clicks" visible. |
 | PERF-03 | Metrics non-null | On performance dashboard. | Impression and click counts are ≥ 0; not `null` or "undefined". |
-

@@ -21,18 +21,29 @@ public class RestaurantDashboardPage {
     }
 
     public void waitForDashboard() {
-        page.getByText("Menu Stock Toggles").first()
-                .waitFor(new Locator.WaitForOptions()
-                        .setState(WaitForSelectorState.VISIBLE)
-                        .setTimeout(15000));
+        page.waitForCondition(() ->
+                        anyVisible(page.getByText("Menu Stock Toggles", new Page.GetByTextOptions().setExact(true))) ||
+                        anyVisible(page.getByText("Kitchen Kanban Board", new Page.GetByTextOptions().setExact(true))),
+                new Page.WaitForConditionOptions().setTimeout(15000));
+    }
+
+    private boolean anyVisible(Locator candidates) {
+        for (int i = 0; i < candidates.count(); i++) {
+            if (candidates.nth(i).isVisible()) return true;
+        }
+        return false;
     }
 
     // ── Outlet selection ─────────────────────────────────────────────────
 
     public void selectOutlet(String outletName) {
-        page.locator("select").selectOption(
-                new com.microsoft.playwright.options.SelectOption().setLabel(outletName));
-        page.waitForTimeout(500);
+        Locator outlet = page.getByRole(com.microsoft.playwright.options.AriaRole.COMBOBOX,
+                new Page.GetByRoleOptions().setName("Outlet"));
+        if (!outlet.innerText().trim().equals(outletName)) {
+            outlet.click();
+            page.getByRole(com.microsoft.playwright.options.AriaRole.OPTION,
+                    new Page.GetByRoleOptions().setName(outletName).setExact(true)).click();
+        }
     }
 
     // ── Tab navigation ───────────────────────────────────────────────────

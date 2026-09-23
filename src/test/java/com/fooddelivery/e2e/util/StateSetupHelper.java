@@ -90,7 +90,7 @@ public class StateSetupHelper {
             actions.startCooking(shortOrderId);
             actions.markPrepared(shortOrderId);
             
-            return actions.getPickupOtp();
+            return actions.getPickupOtp(shortOrderId);
         } finally {
             // Context stays open for reuse
         }

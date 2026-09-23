@@ -6,11 +6,11 @@ Ensures test suite hygiene: no state bleed between tests, no hardcoded waits cau
 
 | ID | Description | Action | Expected result |
 |---|---|---|---|
-| ISOLATION-01 | Customer and restaurant in separate contexts | Run customer login (Context A) and restaurant login (Context B) simultaneously. | Context A has customer session; Context B has restaurant session; no cross-contamination. |
-| ISOLATION-02 | Customer and rider in separate contexts | Same for customer (A) and rider (C). | Independent sessions; each sees only its own role UI. |
-| ISOLATION-03 | All three roles in separate contexts | Customer (A), Restaurant (B), Rider (C) simultaneously. | All three dashboards independent; no shared localStorage or cookies. |
+| ISOLATION-01 | Customer and restaurant in separate contexts | Covered by the consolidated three-role test. | Exact role markers visible; role-specific controls absent from the other context. |
+| ISOLATION-02 | Customer and rider in separate contexts | Covered by the consolidated three-role test. | Exact role markers visible; role-specific controls absent from the other context. |
+| ISOLATION-03 | All three roles in separate contexts | Customer (A), Restaurant (B), Rider (C) simultaneously. | Implemented in `ResilienceRegressionUiTest` with randomized seeded accounts. |
 | ISOLATION-04 | Context close cleans up | After test, context.close() called. | Next test opens a fresh context with no residual auth state. |
-| ISOLATION-05 | Incognito-equivalent fresh context | Open a new BrowserContext with no stored state. | Role selector shown; no dashboard visible without logging in. |
+| ISOLATION-05 | Incognito-equivalent fresh context | Open a new BrowserContext with no stored state. | Implemented; all three operational role choices render and customer dashboard is absent. |
 
 ## Batch 2 — Test data isolation
 

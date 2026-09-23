@@ -18,8 +18,8 @@ Uses: `DeliveryDashboardPage`, `DeliveryOnlineTogglePage`, `DispatchPingPage`, `
 | ID | Description | Prerequisite | Action | Expected result |
 |---|---|---|---|---|
 | DISPATCH-05 | Dispatch ping appears | Rider Online, restaurant has marked food Ready, prep time constraint met. | Wait up to 90 s. | `DispatchPingPage` modal/card appears showing restaurant name, pick-up address, customer area, estimated distance. |
-| DISPATCH-06 | Ping shows order details | On dispatch ping. | Verify restaurant name, estimated payout, and distance are non-empty. | All three fields non-empty. |
-| DISPATCH-07 | Ping has accept and decline buttons | On dispatch ping modal. | — | "Accept" and "Decline" (or "Reject") buttons both visible. |
+| DISPATCH-06 | Ping shows order details | On dispatch ping. | Verify pickup restaurant, drop-off address, estimated payout and countdown are non-empty. | Implemented in `HappyDeliveryFlowTest`; a completed live run rendered and validated all current card fields. The current card does not display a distance. |
+| DISPATCH-07 | Ping has accept and decline buttons | On dispatch ping modal. | — | Implemented and live-validated: exactly one `Accept Order` and one `Decline` action render before immediate acceptance. |
 | DISPATCH-08 | Ping timeout | If rider does not respond to ping within the system timeout. | Ping dismisses automatically; order is re-dispatched to another rider or enters exception state. | Ping card disappears after timeout; no JS error. |
 
 ## Batch 3 — Accepting a dispatch
@@ -27,9 +27,9 @@ Uses: `DeliveryDashboardPage`, `DeliveryOnlineTogglePage`, `DispatchPingPage`, `
 | ID | Description | Action | Expected result |
 |---|---|---|---|
 | DISPATCH-09 | Accept dispatch | Tap "Accept" on ping. | `DeliveryActiveJobPage` opens; shows "Navigate to Restaurant" phase with restaurant address. |
-| DISPATCH-10 | Active job shows restaurant address | On active job after accept. | Restaurant name and approximate address visible; not empty. |
+| DISPATCH-10 | Active job shows restaurant address | On active job after accept. | Implemented and live-validated: the exact selected outlet and nonempty customer delivery address render. |
 | DISPATCH-11 | Active job phase indicator | After accept. | Phase label shows "Pickup" or "Going to Restaurant" or equivalent. |
-| DISPATCH-12 | Accept is idempotent | Accept dispatch → reload rider page. | Active job still shown; no duplicate assignment. |
+| DISPATCH-12 | Accept is idempotent | Accept dispatch → reload rider page. | Implemented and live-validated: the exact full order ID and pickup OTP control are restored after reload. |
 
 ## Batch 4 — Declining a dispatch
 
@@ -55,4 +55,3 @@ Uses: `DeliveryDashboardPage`, `DeliveryOnlineTogglePage`, `DispatchPingPage`, `
 | DISPATCH-20 | Rider isBlocked check | If rider's KYC is rejected or account is suspended. | `DeliveryOnlineTogglePage.isBlocked()` returns true; toggle to go online is disabled; message shown. |
 | DISPATCH-21 | Rider wallet tab opens | Tap "Wallet" tab via `DeliveryDashboardPage.openWalletTab()`. | `RiderWalletPage` renders with wallet balance visible. |
 | DISPATCH-22 | Rider wallet balance non-null | On wallet tab. | `RiderWalletPage.getWalletBalance()` returns a value ≥ ₹0; not `null`. |
-

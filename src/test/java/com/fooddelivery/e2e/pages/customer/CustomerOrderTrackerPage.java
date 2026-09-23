@@ -83,7 +83,14 @@ public class CustomerOrderTrackerPage {
 
     public String getOrderId() {
         Locator selectLocator = page.locator("[role='combobox'][aria-label='Which order to track']").first();
-        if (selectLocator.isVisible()) {
+        Locator singleOrderId = page.locator("h3 span.font-mono").first();
+        page.locator("[role='combobox'][aria-label='Which order to track'], h3 span.font-mono")
+                .first()
+                .waitFor(new Locator.WaitForOptions()
+                        .setState(WaitForSelectorState.VISIBLE)
+                        .setTimeout(15000));
+
+        if (selectLocator.count() > 0 && selectLocator.isVisible()) {
             String text = selectLocator.innerText().trim();
             if (text.startsWith("#")) {
                 text = text.substring(1);
@@ -95,7 +102,7 @@ public class CustomerOrderTrackerPage {
             return text;
         }
 
-        String idText = page.locator("h3 span.font-mono").first().innerText().trim();
+        String idText = singleOrderId.innerText().trim();
         if (idText.startsWith("#")) {
             return idText.substring(1);
         }

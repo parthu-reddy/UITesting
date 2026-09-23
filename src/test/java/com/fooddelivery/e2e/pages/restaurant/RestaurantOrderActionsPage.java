@@ -17,6 +17,12 @@ public class RestaurantOrderActionsPage {
         this.page = page;
     }
 
+    private Locator orderCard(String orderId) {
+        String shortId = orderId.substring(0, Math.min(8, orderId.length()));
+        return page.locator("div.p-4.space-y-3\\.5").filter(
+                new Locator.FilterOptions().setHas(page.locator("span.font-mono", new Page.LocatorOptions().setHasText("#" + shortId))));
+    }
+
     // ── Order lifecycle actions ──────────────────────────────────────────
 
     public void acceptOrder() {
@@ -29,7 +35,7 @@ public class RestaurantOrderActionsPage {
     }
 
     public void acceptOrder(String shortOrderId) {
-        Locator btn = page.locator("div:has(span:has-text('#" + shortOrderId + "'))").locator("button:has-text('Accept Order')").first();
+        Locator btn = orderCard(shortOrderId).locator("button:has-text('Accept Order')").first();
         btn.waitFor(new Locator.WaitForOptions()
                 .setState(WaitForSelectorState.VISIBLE)
                 .setTimeout(15000));
@@ -47,7 +53,7 @@ public class RestaurantOrderActionsPage {
     }
 
     public void startCooking(String shortOrderId) {
-        Locator btn = page.locator("div:has(span:has-text('#" + shortOrderId + "'))").locator("button:has-text('Start Cook')").first();
+        Locator btn = orderCard(shortOrderId).locator("button:has-text('Start Cook')").first();
         btn.waitFor(new Locator.WaitForOptions()
                 .setState(WaitForSelectorState.VISIBLE)
                 .setTimeout(10000));
@@ -65,7 +71,7 @@ public class RestaurantOrderActionsPage {
     }
 
     public void markPrepared(String shortOrderId) {
-        Locator btn = page.locator("div:has(span:has-text('#" + shortOrderId + "'))").locator("button:has-text('Mark Prepared')").first();
+        Locator btn = orderCard(shortOrderId).locator("button:has-text('Mark Prepared')").first();
         btn.waitFor(new Locator.WaitForOptions()
                 .setState(WaitForSelectorState.VISIBLE)
                 .setTimeout(10000));
@@ -99,7 +105,7 @@ public class RestaurantOrderActionsPage {
 
     public void cancelOrder(String shortOrderId) {
         // Step 1: Click "Cancel" to open the cancellation reason drawer
-        Locator container = page.locator("div:has(span:has-text('#" + shortOrderId + "'))");
+        Locator container = orderCard(shortOrderId);
         Locator cancelBtn = container.locator("button:has-text('Cancel')").first();
         cancelBtn.waitFor(new Locator.WaitForOptions()
                 .setState(WaitForSelectorState.VISIBLE)
@@ -125,10 +131,10 @@ public class RestaurantOrderActionsPage {
     // ── OTP extraction ───────────────────────────────────────────────────
 
     /**
-     * Gets the pickup/handover OTP by clicking "Show Handover OTP" and extracting the value.
+     * Gets the pickup/handover OTP by clicking "Show Handover OTP" and extracting the value for a specific order.
      */
-    public String getPickupOtp() {
-        return OtpExtractor.getRestaurantPickupOtp(page);
+    public String getPickupOtp(String shortOrderId) {
+        return OtpExtractor.getRestaurantPickupOtp(page, shortOrderId);
     }
 
     // ── Chat ─────────────────────────────────────────────────────────────

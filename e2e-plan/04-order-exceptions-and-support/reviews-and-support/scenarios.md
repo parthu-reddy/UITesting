@@ -44,3 +44,9 @@ Prerequisite: at least one completed order in the customer's history. Uses: `Rat
 | SUPPORT-09 | Ticket shows correct category | On admin side. | Ticket category is "Missing Item" matching what customer selected. |
 | SUPPORT-10 | Ticket shows order ID | On admin side. | Order ID on ticket matches the customer's order. |
 | SUPPORT-11 | Admin can change ticket status | Admin selects a status (e.g. "In Review", "Resolved"). | Status updates and ticket moves to corresponding tab. |
+
+## Batch 5 — Customer review history
+
+| ID | Description | Action | Expected result |
+|---|---|---|---|
+| REVIEW-13 | My Reviews resolves | Customer opens Account Settings → My Reviews. | Implemented and active: at least one review article or the defined empty state renders. Live deployment currently fails because `/api/v1/reviews/me` returns HTTP 403; see `PENDING.md`. |

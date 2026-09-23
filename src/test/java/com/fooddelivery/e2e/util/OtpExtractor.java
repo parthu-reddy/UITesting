@@ -38,7 +38,6 @@ public final class OtpExtractor {
                 .setState(WaitForSelectorState.VISIBLE));
 
         String otp = otpValue.innerText().trim();
-        System.out.println("[OTP] Customer delivery OTP: " + otp);
         return otp;
     }
 
@@ -52,22 +51,22 @@ public final class OtpExtractor {
      * @param page the restaurant's Playwright page
      * @return the 6-digit OTP string
      */
-    public static String getRestaurantPickupOtp(Page page) {
-        Locator otpButton = page.locator("button:has-text('Show Handover OTP')").first();
+    public static String getRestaurantPickupOtp(Page page, String shortOrderId) {
+        Locator container = page.locator("div:has(span:has-text('#" + shortOrderId + "'))").first();
+        Locator otpButton = container.locator("button:has-text('Show Handover OTP')").first();
         otpButton.waitFor(new Locator.WaitForOptions()
                 .setState(WaitForSelectorState.VISIBLE)
                 .setTimeout(15000));
         otpButton.click();
 
-        // OTP is shown inside the button in a span.font-mono after clicking.
         // We cannot reuse otpButton here because the text changes, making :has-text('Show Handover OTP') false!
-        Locator otpSpan = page.locator("button:has(span.font-mono)").locator("span.font-mono").first();
+        // We use span.tracking-widest to uniquely identify the OTP span (since the left pane buttons also have span.font-mono)
+        Locator otpSpan = container.locator("span.tracking-widest").first();
         otpSpan.waitFor(new Locator.WaitForOptions()
                 .setState(WaitForSelectorState.VISIBLE)
                 .setTimeout(3000));
 
         String otp = otpSpan.innerText().trim();
-        System.out.println("[OTP] Restaurant pickup OTP: " + otp);
         return otp;
     }
 }

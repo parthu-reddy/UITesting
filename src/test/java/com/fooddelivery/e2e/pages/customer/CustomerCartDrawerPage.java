@@ -27,15 +27,29 @@ public class CustomerCartDrawerPage {
         return page.getByText("Your Cart").first().isVisible();
     }
 
+    public String getFirstItemName() {
+        return page.getByRole(com.microsoft.playwright.options.AriaRole.DIALOG,
+                        new Page.GetByRoleOptions().setName("Your cart"))
+                .locator("div.space-y-3 span.font-semibold").first().innerText().trim();
+    }
+
+    public boolean isCheckoutEnabled() {
+        Locator checkout = page.getByRole(com.microsoft.playwright.options.AriaRole.DIALOG,
+                        new Page.GetByRoleOptions().setName("Your cart"))
+                .locator("button:has-text('Checkout')").first();
+        return checkout.isVisible() && checkout.isEnabled();
+    }
+
     public void clickPlaceOrder() {
-        page.locator("button:has-text('Place Cash-on-Delivery Order'), button:has-text('Checkout'), button:has-text('Place Order')").first().click();
-        page.waitForTimeout(1000);
+        page.locator("button:has-text('Checkout')").first().click();
+        new PaymentModalPage(page).waitForOpen();
     }
 
     public void clickPaySecurely() {
-        page.locator("button", new Page.LocatorOptions().setHasText("Pay ")).last()
-            .click(new com.microsoft.playwright.Locator.ClickOptions().setForce(true));
-        page.waitForTimeout(2000);
+        page.getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
+                new Page.GetByRoleOptions().setName("Credit Card")).click();
+        page.getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
+                new Page.GetByRoleOptions().setName(java.util.regex.Pattern.compile("Pay .* Now"))).click();
     }
 
     /**

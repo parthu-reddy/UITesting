@@ -1,3 +1,3 @@
 # Sessions and role access
 
-First UI-only batch validated: all 4 role cases passed. Implemented in SessionUiTest. See [scenarios.md](scenarios.md) and the [pending work and validation notes](PENDING.md) for live results. Device eviction and backend authorization coverage remain deferred. This folder is not exhaustively covered.
+Session persistence and isolation coverage is implemented in `SessionUiTest`. A read-only active-device check also passes through `CustomerSettingsUiTest`, proving the current logged-in device renders with its Last Active text without removing it. See [scenarios.md](scenarios.md) and [pending work and validation notes](PENDING.md). Device eviction and backend authorization remain deferred.

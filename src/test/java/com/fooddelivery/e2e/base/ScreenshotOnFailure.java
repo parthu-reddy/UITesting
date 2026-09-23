@@ -36,6 +36,10 @@ public class ScreenshotOnFailure implements AfterTestExecutionCallback {
             String prefix = testName + "_" + label;
 
             try {
+                // Expand viewport height to force rendering of the full layout
+                int width = page.viewportSize().width;
+                page.setViewportSize(width, 2500);
+
                 page.screenshot(new Page.ScreenshotOptions()
                         .setPath(SCREENSHOT_DIR.resolve(prefix + ".png"))
                         .setFullPage(true));

@@ -3,6 +3,7 @@ package com.fooddelivery.e2e.pages.customer;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.WaitForSelectorState;
 import com.microsoft.playwright.Locator;
+import java.util.regex.Pattern;
 
 /**
  * Page Object for Customer Address Modal.
@@ -21,8 +22,9 @@ public class CustomerAddressModalPage {
     }
 
     public void waitForModalOpen() {
-        page.getByRole(com.microsoft.playwright.options.AriaRole.HEADING, 
-            new com.microsoft.playwright.Page.GetByRoleOptions().setName("Delivery Location").setExact(true))
+        page.getByRole(com.microsoft.playwright.options.AriaRole.HEADING,
+            new com.microsoft.playwright.Page.GetByRoleOptions()
+                    .setName(Pattern.compile("^(?:Select )?Delivery Location$")))
             .first()
             .waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE).setTimeout(5000));
     }
@@ -71,7 +73,10 @@ public class CustomerAddressModalPage {
     }
 
     public boolean isModalOpen() {
-        return page.locator("text=Delivery Location, text=Select Address").first().isVisible();
+        return page.getByRole(com.microsoft.playwright.options.AriaRole.HEADING,
+                new com.microsoft.playwright.Page.GetByRoleOptions()
+                        .setName(Pattern.compile("^(?:Select )?Delivery Location$")))
+                .first().isVisible();
     }
 
     public int getAddressCount() {

@@ -17,10 +17,10 @@ All scenarios require: seeded customer logged in, "Home" address selected, Brand
 | ID | Description | Action | Expected result |
 |---|---|---|---|
 | CHECKOUT-06 | Payment options visible | On checkout/payment step, verify at least one payment method option is visible (e.g. UPI, Card, Wallet). | Payment option list renders; no blank section. |
-| CHECKOUT-07 | Select UPI | Tap "UPI" option. | UPI selected; UPI details form or QR visible. |
-| CHECKOUT-08 | Select Card | Tap "Card" option. | Card input form visible (cardholder, number, expiry, CVV fields). |
-| CHECKOUT-09 | Select Wallet | Tap "Wallet" option (if available). | Wallet balance shown; "Pay from Wallet" button enabled. |
-| CHECKOUT-10 | Payment method persists on back | Select Card → go back to cart → re-enter checkout. | Card option is still selected (or at minimum, no selection is retained and user must re-select — document actual behavior). |
+| CHECKOUT-07 | Select UPI | Tap "UPI / Netbanking" option. | Choice accepts the click and the common Pay action remains enabled. The current UI has no UPI detail form or QR step. |
+| CHECKOUT-08 | Select Card | Tap "Credit Card" option. | Choice accepts the click and the common Pay action remains enabled. The current simulated payment UI has no card-entry fields. |
+| CHECKOUT-09 | Select Wallet | Verify the Wallet option. | Wallet option renders; it may be disabled when the displayed balance is insufficient. |
+| CHECKOUT-10 | Payment choice after closing | Select a method → close payment → re-enter checkout. | Document actual reset/persistence behavior; the current UI has no separate Back step. |
 
 ## Batch 3 — Successful checkout (integration)
 
@@ -36,7 +36,7 @@ All scenarios require: seeded customer logged in, "Home" address selected, Brand
 |---|---|---|---|
 | CHECKOUT-14 | Back from checkout preserves cart | Enter checkout → tap Back. | Cart items still present; no partial order created. |
 | CHECKOUT-15 | Close payment modal | On payment modal, tap "X" or Cancel. | Modal closes; checkout screen still visible; cart intact. |
-| CHECKOUT-16 | Reload during checkout | Enter checkout → reload page. | Cart and address remain populated; no orphan payment initiated. |
+| CHECKOUT-16 | Reload during checkout | Enter checkout → reload page. | Implemented and live-passed: the unsubmitted payment modal closes, the authenticated dashboard renders, and the same cart item remains with checkout enabled. |
 
 ## Batch 5 — Payment failure handling
 

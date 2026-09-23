@@ -1,18 +1,18 @@
 # Phased E2E coverage plan
 
-Status: phase 01 started; environment/account configuration and its checklist are implemented, and the first eight login cases now validated, including admin. Detailed scenarios will be written only when work begins on a functionality folder. Existing test files are starting points, not proof that a feature is covered or passing.
+Status: active UI-only implementation across phases 01 through 03. Authentication, reversible checkout presentation, rider availability, and the complete happy delivery lifecycle have passing focused tests. Detailed scenarios are written when work begins on a functionality folder. Existing test files are starting points, not proof that a feature is covered or passing.
 
 ## Phase order
 
 | Phase | Purpose | Status |
 | --- | --- | --- |
 | [01-foundation-and-access](01-foundation-and-access/README.md) | Establish reliable configuration, seeded accounts and authentication before order flows. | In progress |
-| [02-customer-order-entry](02-customer-order-entry/README.md) | Prepare a customer order using existing data and a serviceable outlet. | Planned |
-| [03-order-fulfillment](03-order-fulfillment/README.md) | Complete the core journey while monitoring customer, restaurant and rider together. | Planned |
-| [04-order-exceptions-and-support](04-order-exceptions-and-support/README.md) | Extend the working order lifecycle to exception handling and support. | Planned |
-| [05-partner-and-account-management](05-partner-and-account-management/README.md) | Cover supporting workflows using seeded accounts and reversible changes. | Planned |
+| [02-customer-order-entry](02-customer-order-entry/README.md) | Prepare a customer order using existing data and a serviceable outlet. | In progress |
+| [03-order-fulfillment](03-order-fulfillment/README.md) | Complete the core journey while monitoring customer, restaurant and rider together. | In progress |
+| [04-order-exceptions-and-support](04-order-exceptions-and-support/README.md) | Extend the working order lifecycle to exception handling and support. | In progress |
+| [05-partner-and-account-management](05-partner-and-account-management/README.md) | Cover supporting workflows using seeded accounts and reversible changes. | In progress |
 | [06-admin-operations](06-admin-operations/README.md) | Validate administration after confirming a usable existing admin account. | Planned |
-| [07-resilience-and-regression](07-resilience-and-regression/README.md) | Make validated functional coverage repeatable across UI and connectivity conditions. | Planned |
+| [07-resilience-and-regression](07-resilience-and-regression/README.md) | Make validated functional coverage repeatable across UI and connectivity conditions. | In progress |
 
 ## Work one folder at a time
 

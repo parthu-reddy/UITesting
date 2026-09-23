@@ -60,7 +60,7 @@ All scenarios use real backend authentication. No mocked tokens. OTP is read via
 
 | ID | Role | Action | Expected result |
 |---|---|---|---|
-| AUTH-25 | Customer | Login → open Settings → tap "Logout". | Redirected to role selector; `CustomerDashboardPage` no longer visible on reload. |
-| AUTH-26 | Restaurant | Same logout flow. | Role selector visible; `RestaurantDashboardPage` not visible on reload. |
-| AUTH-27 | Rider | Same logout flow. | Role selector visible. |
+| AUTH-25 | Customer | Login → open Settings → tap "Logout". | Implemented and live-passed; role selector remains after reload. |
+| AUTH-26 | Restaurant | Same logout flow. | Active and failing: profile/settings navigation returns to Live Kitchen, so no Log Out control appears. |
+| AUTH-27 | Rider | Same logout flow. | Implemented and live-passed; role selector remains after reload. |
 | AUTH-28 | Admin | Same logout flow. | Role selector visible. |

@@ -3,6 +3,8 @@ package com.fooddelivery.e2e.tests.features.restaurant;
 import com.fooddelivery.e2e.base.TestBase;
 import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.common.LoginPage;
+import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.AriaRole;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -18,8 +20,16 @@ public class PartnerOperationsUiTest extends TestBase {
         restaurantPage.navigate(TestConfig.APP_URL);
         new LoginPage(restaurantPage).loginAs("Restaurant Partner", testRestaurantPhone);
         
-        boolean isCampaignVisible = restaurantPage.locator("text=Campaigns").isVisible();
-        // Ignoring failure for now as it's a UI check for existence
+        restaurantPage.getByRole(AriaRole.TAB,
+                new Page.GetByRoleOptions().setName("Ad Campaigns").setExact(true)).click();
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(
+                restaurantPage.getByRole(AriaRole.HEADING,
+                        new Page.GetByRoleOptions().setName("Ad Spending History")))
+                .isVisible();
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(
+                restaurantPage.getByRole(AriaRole.BUTTON,
+                        new Page.GetByRoleOptions().setName("New Campaign").setExact(true)))
+                .isVisible();
     }
 
     @Test
