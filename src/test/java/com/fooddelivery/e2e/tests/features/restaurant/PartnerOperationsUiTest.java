@@ -21,7 +21,7 @@ public class PartnerOperationsUiTest extends TestBase {
         new LoginPage(restaurantPage).loginAs("Restaurant Partner", testRestaurantPhone);
         
         restaurantPage.getByRole(AriaRole.TAB,
-                new Page.GetByRoleOptions().setName("Ad Campaigns").setExact(true)).click();
+                new Page.GetByRoleOptions().setName("Campaigns").setExact(true)).click();
         com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(
                 restaurantPage.getByRole(AriaRole.HEADING,
                         new Page.GetByRoleOptions().setName("Ad Spending History")))

@@ -45,15 +45,13 @@ public class CustomerCartDrawerPage {
         new PaymentModalPage(page).waitForOpen();
     }
 
+    /** Pays by card on the checkout sheet -- the method every test account can use. */
     public void clickPaySecurely() {
-        page.getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
-                new Page.GetByRoleOptions().setName("Credit Card")).click();
-        page.getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
-                new Page.GetByRoleOptions().setName(java.util.regex.Pattern.compile("Pay .* Now"))).click();
+        new PaymentModalPage(page).placeOrder("Credit or debit card");
     }
 
     /**
-     * Performs the complete checkout flow: View Cart → Place Order → Pay.
+     * Performs the complete checkout flow: Checkout → choose card → Place order.
      */
     public void checkout() {
         clickPlaceOrder();

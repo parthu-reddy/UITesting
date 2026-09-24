@@ -82,7 +82,7 @@ public class ResponsiveAccessibilityTest extends TestBase {
         new LoginPage(restaurantPage).loginAs("Restaurant Partner", testRestaurantPhone);
         new RestaurantDashboardPage(restaurantPage).waitForDashboard();
 
-        assertThat(restaurantPage.getByText("Kitchen Kanban Board",
+        assertThat(restaurantPage.getByText("Updates every 5 s",
                 new Page.GetByTextOptions().setExact(true))).isVisible();
         assertThat(horizontalOverflow(restaurantPage)).isLessThanOrEqualTo(0);
     }

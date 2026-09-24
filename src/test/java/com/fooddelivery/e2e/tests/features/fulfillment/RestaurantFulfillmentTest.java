@@ -74,8 +74,8 @@ public class RestaurantFulfillmentTest extends TestBase {
     @DisplayName("REST-NAV-01: Restaurant Queue Tab States")
     void restaurantQueueTabStates() {
         
-        boolean incomingVisible = restaurantPage.locator("text=New Placed").isVisible();
-        boolean prepVisible = restaurantPage.locator("text=Cooking Feed").isVisible();
+        boolean incomingVisible = restaurantPage.getByText("Incoming", new com.microsoft.playwright.Page.GetByTextOptions().setExact(true)).isVisible();
+        boolean prepVisible = restaurantPage.getByText("In the kitchen", new com.microsoft.playwright.Page.GetByTextOptions().setExact(true)).isVisible();
         
         assertThat(incomingVisible).isTrue();
         assertThat(prepVisible).isTrue();

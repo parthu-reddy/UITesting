@@ -53,7 +53,7 @@ public class RestaurantDiscoveryUiTest extends TestBase {
         Locator cards = openCustomerHome();
         int initialCount = cards.count();
         String brand = cards.first().locator("h5").innerText().trim();
-        Locator search = customerPage.getByPlaceholder("Search restaurants, dishes, cuisines...");
+        Locator search = customerPage.getByPlaceholder("Search restaurants or cuisines");
 
         search.fill(brand);
         customerPage.waitForTimeout(400);
@@ -78,8 +78,10 @@ public class RestaurantDiscoveryUiTest extends TestBase {
     void categoryFilterCanBeSelectedAndCleared() {
         Locator cards = openCustomerHome();
         int initialCount = cards.count();
-        Locator filterSection = customerPage.getByText("Filter by Cravings",
-                new com.microsoft.playwright.Page.GetByTextOptions().setExact(true)).locator("..");
+        // Chips are the cuisines on the list, in a group labelled "Filter by cuisine". The row is
+        // drawn only when there are at least two cuisines to choose between.
+        Locator filterSection = customerPage.getByRole(com.microsoft.playwright.options.AriaRole.GROUP,
+                new com.microsoft.playwright.Page.GetByRoleOptions().setName("Filter by cuisine"));
         Locator categoryButtons = filterSection.getByRole(com.microsoft.playwright.options.AriaRole.BUTTON);
         assertThat(categoryButtons.count()).isGreaterThanOrEqualTo(2);
 

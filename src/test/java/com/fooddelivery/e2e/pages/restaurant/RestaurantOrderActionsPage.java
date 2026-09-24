@@ -6,7 +6,7 @@ import com.microsoft.playwright.options.WaitForSelectorState;
 import com.fooddelivery.e2e.util.OtpExtractor;
 
 /**
- * Page Object for Restaurant Order Actions (Accept, Cook, Mark Prepared, Show OTP).
+ * Page Object for Restaurant Order Actions (Accept, Start cooking, Mark ready, Show pickup code).
  * Maps to: {@code RestaurantOrderActions.tsx, RestaurantOrderCard.tsx}
  */
 public class RestaurantOrderActionsPage {
@@ -17,16 +17,22 @@ public class RestaurantOrderActionsPage {
         this.page = page;
     }
 
+    /** The card by its data-order-id (prefix match, so a short id works). Classes are not an interface. */
     private Locator orderCard(String orderId) {
-        String shortId = orderId.substring(0, Math.min(8, orderId.length()));
-        return page.locator("div.p-4.space-y-3\\.5").filter(
-                new Locator.FilterOptions().setHas(page.locator("span.font-mono", new Page.LocatorOptions().setHasText("#" + shortId))));
+        String shortId = orderId.substring(0, Math.min(8, orderId.length())).toLowerCase();
+        return page.locator("[data-testid='restaurant-order-card'][data-order-id^='" + shortId + "']");
+    }
+
+    /** "Accept" is the filled primary on an incoming card (it read "Accept Order" before the redesign). */
+    private static Locator acceptIn(Locator scope) {
+        return scope.getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
+                new Locator.GetByRoleOptions().setName("Accept").setExact(true)).first();
     }
 
     // ── Order lifecycle actions ──────────────────────────────────────────
 
     public void acceptOrder() {
-        Locator btn = page.locator("button:has-text('Accept Order')").first();
+        Locator btn = acceptIn(page.locator("[data-testid='restaurant-order-card']"));
         btn.waitFor(new Locator.WaitForOptions()
                 .setState(WaitForSelectorState.VISIBLE)
                 .setTimeout(15000));
@@ -35,7 +41,7 @@ public class RestaurantOrderActionsPage {
     }
 
     public void acceptOrder(String shortOrderId) {
-        Locator btn = orderCard(shortOrderId).locator("button:has-text('Accept Order')").first();
+        Locator btn = acceptIn(orderCard(shortOrderId));
         btn.waitFor(new Locator.WaitForOptions()
                 .setState(WaitForSelectorState.VISIBLE)
                 .setTimeout(15000));
@@ -62,7 +68,7 @@ public class RestaurantOrderActionsPage {
     }
 
     public void markPrepared() {
-        Locator btn = page.locator("button:has-text('Mark Prepared')").first();
+        Locator btn = page.locator("button:has-text('Mark ready')").first();
         btn.waitFor(new Locator.WaitForOptions()
                 .setState(WaitForSelectorState.VISIBLE)
                 .setTimeout(10000));
@@ -71,7 +77,7 @@ public class RestaurantOrderActionsPage {
     }
 
     public void markPrepared(String shortOrderId) {
-        Locator btn = orderCard(shortOrderId).locator("button:has-text('Mark Prepared')").first();
+        Locator btn = orderCard(shortOrderId).locator("button:has-text('Mark ready')").first();
         btn.waitFor(new Locator.WaitForOptions()
                 .setState(WaitForSelectorState.VISIBLE)
                 .setTimeout(10000));
@@ -80,8 +86,8 @@ public class RestaurantOrderActionsPage {
     }
 
     public void cancelOrder() {
-        // Step 1: Click "Cancel" to open the cancellation reason drawer
-        Locator cancelBtn = page.locator("button:has-text('Cancel')").first();
+        // Step 1: "Reject" (incoming) or "Cancel" (accepted) opens the cancellation reason drawer
+        Locator cancelBtn = page.locator("[data-testid='restaurant-order-card'] button:has-text('Reject'), [data-testid='restaurant-order-card'] button:has-text('Cancel')").first();
         cancelBtn.waitFor(new Locator.WaitForOptions()
                 .setState(WaitForSelectorState.VISIBLE)
                 .setTimeout(15000));
@@ -104,9 +110,9 @@ public class RestaurantOrderActionsPage {
     }
 
     public void cancelOrder(String shortOrderId) {
-        // Step 1: Click "Cancel" to open the cancellation reason drawer
+        // Step 1: "Reject" (incoming) or "Cancel" (accepted) opens the cancellation reason drawer
         Locator container = orderCard(shortOrderId);
-        Locator cancelBtn = container.locator("button:has-text('Cancel')").first();
+        Locator cancelBtn = container.locator("button:has-text('Reject'), button:has-text('Cancel')").first();
         cancelBtn.waitFor(new Locator.WaitForOptions()
                 .setState(WaitForSelectorState.VISIBLE)
                 .setTimeout(15000));
@@ -131,7 +137,7 @@ public class RestaurantOrderActionsPage {
     // ── OTP extraction ───────────────────────────────────────────────────
 
     /**
-     * Gets the pickup/handover OTP by clicking "Show Handover OTP" and extracting the value for a specific order.
+     * Gets the pickup/handover OTP by clicking "Show pickup code" and extracting the value for a specific order.
      */
     public String getPickupOtp(String shortOrderId) {
         return OtpExtractor.getRestaurantPickupOtp(page, shortOrderId);
@@ -170,10 +176,10 @@ public class RestaurantOrderActionsPage {
     }
 
     public boolean hasNewOrders() {
-        return page.locator("button:has-text('Accept Order')").first().isVisible();
+        return acceptIn(page.locator("[data-testid='restaurant-order-card']")).isVisible();
     }
 
     public boolean hasRefundRequest() {
-        return page.locator("text=Action Required: Refund").isVisible();
+        return page.locator("text=Refund requested").first().isVisible();
     }
 }

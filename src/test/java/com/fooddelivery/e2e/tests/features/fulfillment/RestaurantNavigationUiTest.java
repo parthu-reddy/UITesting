@@ -27,14 +27,14 @@ public class RestaurantNavigationUiTest extends TestBase {
                 testRestaurantPhone);
         new RestaurantDashboardPage(restaurantPage).waitForDashboard();
 
-        clickTab(Pattern.compile("Live Kitchen Feed.*"));
-        waitVisible(restaurantPage.getByText("New Placed", new Page.GetByTextOptions().setExact(true)));
+        clickTab(Pattern.compile("^Orders.*"));
+        waitVisible(restaurantPage.getByText("Incoming", new Page.GetByTextOptions().setExact(true)));
 
-        clickTab(Pattern.compile("Menu Stock Toggles"));
+        clickTab(Pattern.compile("^Menu$"));
         waitVisible(restaurantPage.getByRole(AriaRole.HEADING,
-                new Page.GetByRoleOptions().setName("In-Stock Dish Toggles")));
+                new Page.GetByRoleOptions().setName(Pattern.compile("Today.s menu"))));
 
-        clickTab(Pattern.compile("Ad Campaigns"));
+        clickTab(Pattern.compile("^Campaigns$"));
         waitVisible(restaurantPage.getByRole(AriaRole.HEADING,
                 new Page.GetByRoleOptions().setName("Ad Spending History")));
 
@@ -45,8 +45,8 @@ public class RestaurantNavigationUiTest extends TestBase {
         waitVisible(restaurantPage.getByRole(AriaRole.REGION,
                 new Page.GetByRoleOptions().setName("What customers said")));
 
-        clickTab(Pattern.compile("Live Kitchen Feed.*"));
-        waitVisible(restaurantPage.getByText("Cooking Feed", new Page.GetByTextOptions().setExact(true)));
+        clickTab(Pattern.compile("^Orders.*"));
+        waitVisible(restaurantPage.getByText("In the kitchen", new Page.GetByTextOptions().setExact(true)));
     }
 
     private void clickTab(Pattern name) {

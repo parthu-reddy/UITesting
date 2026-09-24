@@ -18,7 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LoginSmokeTest extends TestBase {
     enum Account {
         CUSTOMER("Order Food", "Deliver to"),
-        RESTAURANT("Restaurant Partner", "Menu Stock Toggles"),
+        RESTAURANT("Restaurant Partner", "Updates every 5 s"),
         DELIVERY("Delivery Executive", "Today’s Earnings"),
         ADMIN("System Admin", "Live Operations");
 

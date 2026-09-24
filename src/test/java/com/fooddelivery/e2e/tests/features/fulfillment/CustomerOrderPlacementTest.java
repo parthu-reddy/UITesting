@@ -42,7 +42,7 @@ public class CustomerOrderPlacementTest extends TestBase {
         cart.checkout();
         
         CustomerOrderTrackerPage tracker = new CustomerOrderTrackerPage(customerPage);
-        tracker.verifyOrderStatus("Order Received");
+        tracker.waitForTracker();
         
         String orderId = tracker.getOrderId();
         assertThat(orderId).isNotEmpty();

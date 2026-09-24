@@ -74,7 +74,7 @@ public class CustomerDashboardPage {
     // ── Active orders ────────────────────────────────────────────────────
 
     public boolean hasActiveOrders() {
-        return page.locator("text=Active Orders, text=Track Order, text=Order Received").first().isVisible();
+        return page.locator("[data-testid='order-tracker']").first().isVisible();
     }
 
     public int getActiveOrderCount() {

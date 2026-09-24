@@ -56,15 +56,16 @@ public class CheckoutUiTest extends TestBase {
                 .doesNotContain("No address selected");
         assertThat(payment.hasItem(cartItemName)).as("Payment summary keeps the cart item").isTrue();
         assertThat(payment.hasQuantity(1)).as("Payment summary shows the cart quantity").isTrue();
-        assertThat(payment.hasTotalLine("Subtotal")).isTrue();
-        assertThat(payment.hasTotalLine("Delivery Fee")).isTrue();
-        assertThat(payment.hasTotalLine("Taxes")).isTrue();
-        assertThat(payment.hasTotalLine("Total to Pay")).isTrue();
+        assertThat(payment.hasTotalLine("Item total")).isTrue();
+        assertThat(payment.hasTotalLine("Delivery fee")).isTrue();
+        assertThat(payment.isPayEnabled()).as("Place order enables once the server quote returns").isTrue();
+        assertThat(payment.hasTotalLine("GST & restaurant charges")).isTrue();
+        assertThat(payment.hasTotalLine("Total")).isTrue();
 
-        assertThat(payment.hasPaymentMethod("Credit Card")).isTrue();
-        assertThat(payment.hasPaymentMethod("UPI / Netbanking")).isTrue();
+        assertThat(payment.hasPaymentMethod("Credit or debit card")).isTrue();
+        assertThat(payment.hasPaymentMethod("UPI")).isTrue();
         assertThat(payment.hasPaymentMethod("Wallet")).isTrue();
-        payment.selectPaymentMethod("UPI / Netbanking");
+        payment.selectPaymentMethod("UPI");
         assertThat(payment.isPayEnabled()).as("Selecting an available payment method keeps Pay enabled").isTrue();
 
         payment.close();
@@ -107,7 +108,7 @@ public class CheckoutUiTest extends TestBase {
         com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(
                 customerPage.getByRole(com.microsoft.playwright.options.AriaRole.DIALOG,
                         new com.microsoft.playwright.Page.GetByRoleOptions()
-                                .setName("Complete Your Order").setExact(true))).isVisible();
+                                .setName("Checkout").setExact(true))).isVisible();
         assertThat(payment.hasItem(cartItemName)).isTrue();
         payment.close();
     }

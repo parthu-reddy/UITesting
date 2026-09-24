@@ -73,19 +73,19 @@ public class PartnerReadOnlyUiTest extends TestBase {
         restaurantPage.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("Profile settings").setExact(true)).click();
         assertThat(restaurantPage.getByRole(AriaRole.HEADING,new Page.GetByRoleOptions().setName("Account Settings"))).isVisible();
         restaurantPage.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("Close settings").setExact(true)).click();
-        assertThat(restaurantPage.getByText("Menu Stock Toggles",new Page.GetByTextOptions().setExact(true)).first()).isVisible();
+        assertThat(restaurantPage.getByRole(AriaRole.TAB,new Page.GetByRoleOptions().setName("Menu").setExact(true))).isVisible();
     }
 
     @Test void restaurantStockControlsRenderWithoutToggling() {
         login(restaurantPage,"Restaurant Partner",testRestaurantPhone);
-        restaurantPage.getByRole(AriaRole.TAB,new Page.GetByRoleOptions().setName("Menu Stock Toggles").setExact(true)).click();
-        assertThat(restaurantPage.getByRole(AriaRole.HEADING,new Page.GetByRoleOptions().setName("In-Stock Dish Toggles"))).isVisible();
+        restaurantPage.getByRole(AriaRole.TAB,new Page.GetByRoleOptions().setName("Menu").setExact(true)).click();
+        assertThat(restaurantPage.getByRole(AriaRole.HEADING,new Page.GetByRoleOptions().setName(java.util.regex.Pattern.compile("Today.s menu")))).isVisible();
         assertThat(restaurantPage.getByRole(AriaRole.SWITCH).first()).isVisible();
         assertThat(restaurantPage.getByRole(AriaRole.SWITCH).first()).hasAttribute("aria-checked",Pattern.compile("true|false"));
     }
     @Test void campaignDraftCanBeCancelled() {
         login(restaurantPage,"Restaurant Partner",testRestaurantPhone);
-        restaurantPage.getByRole(AriaRole.TAB,new Page.GetByRoleOptions().setName("Ad Campaigns").setExact(true)).click();
+        restaurantPage.getByRole(AriaRole.TAB,new Page.GetByRoleOptions().setName("Campaigns").setExact(true)).click();
         restaurantPage.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("New Campaign").setExact(true)).click();
         Locator dialog=restaurantPage.getByRole(AriaRole.DIALOG);
         assertThat(dialog.getByText("New Ad Campaign",new Locator.GetByTextOptions().setExact(true))).isVisible();

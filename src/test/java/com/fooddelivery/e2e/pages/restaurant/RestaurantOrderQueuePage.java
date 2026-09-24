@@ -46,20 +46,27 @@ public class RestaurantOrderQueuePage {
         page.waitForTimeout(500);
     }
 
+    private Locator cards(String... statuses) {
+        StringBuilder sel = new StringBuilder();
+        for (String st : statuses) {
+            if (sel.length() > 0) sel.append(", ");
+            sel.append("[data-testid='restaurant-order-card'][data-status='").append(st).append("']");
+        }
+        return page.locator(sel.toString());
+    }
+
     public int getNewOrderCount() {
-        return page.locator("button:has-text('Accept Order')").count();
+        return cards("PENDING_ACCEPTANCE", "CREATED").count();
     }
 
     public int getCookingOrderCount() {
-        return page.locator("button:has-text('Mark Prepared')").count()
-                + page.locator("button:has-text('Start Cook')").count();
+        return cards("ACCEPTED", "PREPARING").count();
     }
 
     public boolean hasOrders() {
         // Poll for up to 15 seconds — SSE-delivered orders may not appear immediately
         for (int i = 0; i < 15; i++) {
-            if (page.locator("text=Accept Order").first().isVisible()
-                    || page.locator("text=Order Value").first().isVisible()) {
+            if (page.locator("[data-testid='restaurant-order-card']").first().isVisible()) {
                 return true;
             }
             page.waitForTimeout(1000);

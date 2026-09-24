@@ -50,13 +50,13 @@ public class ResilienceRegressionUiTest extends TestBase {
         assertThat(customerPage.getByRole(AriaRole.BUTTON,
                 new Page.GetByRoleOptions().setName(Pattern.compile("Deliver to"))))
                 .containsText("Home:");
-        assertThat(restaurantPage.getByText("Menu Stock Toggles",
+        assertThat(restaurantPage.getByText("Updates every 5 s",
                 new Page.GetByTextOptions().setExact(true)).first()).isVisible();
         assertThat(riderPage.getByRole(AriaRole.BUTTON,
                 new Page.GetByRoleOptions().setName(Pattern.compile("^(Offline|Online Duty)$"))).first())
                 .isVisible();
 
-        assertThat(customerPage.getByText("Menu Stock Toggles",
+        assertThat(customerPage.getByText("Updates every 5 s",
                 new Page.GetByTextOptions().setExact(true))).hasCount(0);
         assertThat(restaurantPage.getByRole(AriaRole.BUTTON,
                 new Page.GetByRoleOptions().setName(Pattern.compile("Deliver to")))).hasCount(0);
