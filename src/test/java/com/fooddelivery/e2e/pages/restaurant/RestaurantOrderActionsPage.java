@@ -23,10 +23,13 @@ public class RestaurantOrderActionsPage {
         return page.locator("[data-testid='restaurant-order-card'][data-order-id^='" + shortId + "']");
     }
 
-    /** "Accept" is the filled primary on an incoming card (it read "Accept Order" before the redesign). */
+    /**
+     * The filled primary on an incoming card. It reads "Accept · 25 min" -- the promised prep
+     * time follows the verb -- so match the start of the name, not the whole of it.
+     */
     private static Locator acceptIn(Locator scope) {
         return scope.getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
-                new Locator.GetByRoleOptions().setName("Accept").setExact(true)).first();
+                new Locator.GetByRoleOptions().setName(java.util.regex.Pattern.compile("^Accept\\b"))).first();
     }
 
     // ── Order lifecycle actions ──────────────────────────────────────────
