@@ -8,7 +8,12 @@ import com.fooddelivery.e2e.util.WaitHelpers;
 
 /**
  * Page Object for the Customer Order Tracker.
- * Maps to: {@code OrderTrackerLive.tsx, OrderTrackerSettled.tsx, OrderTrackerSteps.tsx}
+ * Maps to: {@code OrderTrackerLive.tsx, OrderTrackerSettled.tsx, OrderDeliveredSummary.tsx}
+ * <p>
+ * Each of the three renders {@code [data-testid='order-tracker']} with the full order id in
+ * {@code data-order-id}. At the default 1280 px viewport the live tracker is in the desktop
+ * right rail, not the main column -- locate it by test id, never by layout.
+ * </p>
  * <p>
  * Also covers sub-components: {@code OrderStatusTimeline.tsx}, {@code OrderMoneyBreakdown.tsx},
  * {@code OrderItemList.tsx}, {@code CustomerOrderPlacedToast.tsx}, {@code CustomerOrderTracker.tsx}
@@ -23,6 +28,18 @@ public class CustomerOrderTrackerPage {
     }
 
     // ── Status verification ──────────────────────────────────────────────
+
+    /** The tracker for the order in view (or the first one). */
+    public Locator tracker() {
+        return page.locator("[data-testid='order-tracker']").first();
+    }
+
+    /** The tracker is on screen: an order was placed and the customer is watching it. */
+    public void waitForTracker() {
+        tracker().waitFor(new Locator.WaitForOptions()
+                .setState(WaitForSelectorState.VISIBLE)
+                .setTimeout(30000));
+    }
 
     public void verifyOrderStatus(String expectedStatus) {
         WaitHelpers.waitForOrderStatus(page, expectedStatus, 30000);
@@ -51,18 +68,29 @@ public class CustomerOrderTrackerPage {
 
     // ── Order actions ────────────────────────────────────────────────────
 
+    /** Cancel now asks first (a danger confirm); this answers it. */
+    private void confirmCancel() {
+        page.getByRole(com.microsoft.playwright.options.AriaRole.DIALOG)
+                .getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
+                        new Locator.GetByRoleOptions().setName("Cancel order").setExact(true))
+                .click();
+    }
+
     public void cancelOrder() {
-        page.locator("button:has-text('Cancel Order')").first().click();
+        tracker().locator("button:has-text('Cancel order')").first().click();
+        confirmCancel();
         page.waitForTimeout(1000);
     }
 
     public void approveDelay() {
-        page.locator("button:has-text('Accept Delay'), button:has-text('Approve')").first().click();
+        tracker().getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
+                new Locator.GetByRoleOptions().setName(java.util.regex.Pattern.compile("ll wait$"))).click();
         page.waitForTimeout(1000);
     }
 
     public void rejectDelay() {
-        page.locator("button:has-text('Cancel Order')").first().click();
+        tracker().locator("button:has-text('Cancel order')").first().click();
+        confirmCancel();
         page.waitForTimeout(1000);
     }
 
@@ -74,7 +102,11 @@ public class CustomerOrderTrackerPage {
     // ── Order details ────────────────────────────────────────────────────
 
     public String getTotalPaid() {
-        return page.locator("text=Total Paid").locator("xpath=..").locator("span").last().innerText().trim();
+        // The live tracker keeps the bill in a collapsed <details>; open it first.
+        Locator summary = tracker().locator("details > summary").first();
+        if (summary.count() > 0 && tracker().locator("details[open]").count() == 0) summary.click();
+        return tracker().locator("text=Total paid").first()
+                .locator("xpath=..").locator("span").last().innerText().trim();
     }
 
     public String getPaymentMethod() {
@@ -82,36 +114,13 @@ public class CustomerOrderTrackerPage {
     }
 
     public String getOrderId() {
-        Locator selectLocator = page.locator("[role='combobox'][aria-label='Which order to track']").first();
-        Locator singleOrderId = page.locator("h3 span.font-mono").first();
-        page.locator("[role='combobox'][aria-label='Which order to track'], h3 span.font-mono")
-                .first()
-                .waitFor(new Locator.WaitForOptions()
-                        .setState(WaitForSelectorState.VISIBLE)
-                        .setTimeout(15000));
-
-        if (selectLocator.count() > 0 && selectLocator.isVisible()) {
-            String text = selectLocator.innerText().trim();
-            if (text.startsWith("#")) {
-                text = text.substring(1);
-            }
-            int spaceIndex = text.indexOf(" ");
-            if (spaceIndex != -1) {
-                return text.substring(0, spaceIndex);
-            }
-            return text;
-        }
-
-        String idText = singleOrderId.innerText().trim();
-        if (idText.startsWith("#")) {
-            return idText.substring(1);
-        }
-        return idText;
+        waitForTracker();
+        return tracker().getAttribute("data-order-id");
     }
 
     public boolean hasRiderAssigned() {
         try {
-            page.locator("text=Rider Assigned").waitFor(new Locator.WaitForOptions().setTimeout(15000));
+            page.locator("[data-testid='rider-card']").first().waitFor(new Locator.WaitForOptions().setTimeout(15000));
             return true;
         } catch (Exception e) {
             return false;
@@ -120,8 +129,8 @@ public class CustomerOrderTrackerPage {
 
     public boolean hasRiderAssigned(String orderId) {
         try {
-            Locator trackerContainer = page.locator("div:has(span:has-text('#" + orderId + "'))").last();
-            trackerContainer.locator("text=Rider Assigned").waitFor(new Locator.WaitForOptions().setTimeout(15000));
+            page.locator("[data-testid='order-tracker'][data-order-id='" + orderId + "'] [data-testid='rider-card']")
+                    .first().waitFor(new Locator.WaitForOptions().setTimeout(15000));
             return true;
         } catch (Exception e) {
             return false;

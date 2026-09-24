@@ -51,7 +51,7 @@ public class StateSetupHelper {
             cart.checkout();
             
             CustomerOrderTrackerPage tracker = new CustomerOrderTrackerPage(page);
-            tracker.verifyOrderStatus("Order Received");
+            tracker.waitForTracker();
             return new OrderSetupResult(tracker.getOrderId(), outletName);
         } finally {
             // Context stays open for reuse

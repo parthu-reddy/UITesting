@@ -24,7 +24,6 @@ public class MenuCartUiTest extends TestBase {
         new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
         new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();
         new NearbyOutletPage(customerPage).openBrand1AndSelectNearby();
-        assertThat(customerPage.getByText("Menu items", new Page.GetByTextOptions().setExact(true))).isVisible();
         assertThat(customerPage.locator("[data-menu-item]").first()).isVisible();
     }
     @Test

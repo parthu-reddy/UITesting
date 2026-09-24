@@ -22,8 +22,8 @@ public class RestaurantDashboardPage {
 
     public void waitForDashboard() {
         page.waitForCondition(() ->
-                        anyVisible(page.getByText("Menu Stock Toggles", new Page.GetByTextOptions().setExact(true))) ||
-                        anyVisible(page.getByText("Kitchen Kanban Board", new Page.GetByTextOptions().setExact(true))),
+                        anyVisible(page.getByRole(com.microsoft.playwright.options.AriaRole.TAB, new Page.GetByRoleOptions().setName("Menu").setExact(true))) ||
+                        anyVisible(page.getByText("Updates every 5 s", new Page.GetByTextOptions().setExact(true))),
                 new Page.WaitForConditionOptions().setTimeout(15000));
     }
 
@@ -51,7 +51,7 @@ public class RestaurantDashboardPage {
     public void openOrdersTab() {
         page.getByRole(com.microsoft.playwright.options.AriaRole.TAB, 
             new com.microsoft.playwright.Page.GetByRoleOptions()
-                .setName(java.util.regex.Pattern.compile("Live Kitchen Feed.*")))
+                .setName(java.util.regex.Pattern.compile("^Orders.*")))
             .first().click();
         page.waitForTimeout(300);
     }
