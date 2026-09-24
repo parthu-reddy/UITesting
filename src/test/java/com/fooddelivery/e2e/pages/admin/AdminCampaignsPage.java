@@ -12,6 +12,10 @@ import com.microsoft.playwright.Page;
  * </p>
  */
 public class AdminCampaignsPage {
+    // NOTE 2026-09-24: `FormField` now NESTS its control inside the <label> so the visible
+    // text is the field's accessible name (it was a sibling with no `for`, which is why the
+    // accessibility audits failed). Sibling combinators `~ input` / `+ input` no longer match
+    // that structure; the descendant form does. Placeholder fallbacks are kept.
     private final Page page;
     public AdminCampaignsPage(Page page) { this.page = page; }
 
@@ -33,19 +37,19 @@ public class AdminCampaignsPage {
     }
 
     public void fillCampaignName(String name) {
-        page.locator("input[placeholder*='Campaign'], input[placeholder*='name'], label:has-text('Name') + input, label:has-text('Name') ~ input").first().fill(name);
+        page.locator("input[placeholder*='Campaign'], input[placeholder*='name'], label:has-text('Name') input").first().fill(name);
     }
 
     public void fillDailyBudget(String amount) {
-        page.locator("label:has-text('Daily') ~ input, input[placeholder*='Daily']").first().fill(amount);
+        page.locator("label:has-text('Daily') input, input[placeholder*='Daily']").first().fill(amount);
     }
 
     public void fillTotalBudget(String amount) {
-        page.locator("label:has-text('Total') ~ input, label:has-text('Lifetime') ~ input, input[placeholder*='Total']").first().fill(amount);
+        page.locator("label:has-text('Total') input, label:has-text('Lifetime') input, input[placeholder*='Total']").first().fill(amount);
     }
 
     public void fillBidAmount(String amount) {
-        page.locator("label:has-text('Bid') ~ input, input[placeholder*='Bid']").first().fill(amount);
+        page.locator("label:has-text('Bid') input, input[placeholder*='Bid']").first().fill(amount);
     }
 
     public void submitCampaign() {

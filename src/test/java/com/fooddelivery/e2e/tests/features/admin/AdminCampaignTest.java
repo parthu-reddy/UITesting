@@ -14,6 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Covers: CAMPAIGN-ADM-01..13, PERF-01..03
  */
 @Tag("admin-campaigns")
+@Disabled("The admin portal has no campaigns screen: campaigns are a RESTAURANT tab (RestaurantTabPanels -> CampaignManagement). Recorded in e2e-plan/NOT-DEFECTS/README.md")
 public class AdminCampaignTest extends TestBase {
 
     private AdminPortalPage portal;

@@ -32,7 +32,7 @@ All scenarios use real UI interactions only. No token injection, no direct stora
 
 | ID | Description | Action | Expected result |
 |---|---|---|---|
-| SESSION-12 | Customer + Restaurant | Open Context A (Customer) and Context B (Restaurant) simultaneously. | Each sees only its own dashboard; no role-swap. |
+| SESSION-12 | Customer + Restaurant | Implemented in `CrossRoleSessionIsolationTest`: both roles remain isolated across simultaneous login, reload, and customer logout. |
 | SESSION-13 | Customer + Rider | Open Context A (Customer) and Context C (Rider) simultaneously. | Same isolation. |
 | SESSION-14 | All three | Open Customer, Restaurant, Rider in three contexts simultaneously. | Each context renders its own dashboard independently; no JS errors. |
 
@@ -41,8 +41,8 @@ All scenarios use real UI interactions only. No token injection, no direct stora
 | ID | Role | Action | Expected result |
 |---|---|---|---|
 | SESSION-15 | Unauthenticated | Navigate directly to the app root while unauthenticated. | Role selector is shown; no dashboard leaks. |
-| SESSION-16 | Customer | After login, customer-specific UI controls (e.g. "Deliver to", cart icon) are visible; restaurant-specific controls (e.g. "Incoming Orders") are absent. | Correct role-specific UI rendered. |
-| SESSION-17 | Restaurant | Restaurant-specific tabs (Incoming, Preparation, Ready) visible; customer cart absent. | Correct UI. |
+| SESSION-16 | Customer | Implemented: Home Deliver-to renders while Kitchen Kanban and Accept Order are absent. |
+| SESSION-17 | Restaurant | Implemented: Kitchen Kanban renders while customer Deliver-to and View Cart are absent. |
 | SESSION-18 | Rider | Rider-specific UI ("Today's Earnings", online toggle) visible; restaurant/customer controls absent. | Correct UI. |
 | SESSION-19 | Admin | Admin portal tabs (Users, Categories, Ledger, etc.) visible; customer/rider controls absent. | Correct UI. |
 
@@ -51,3 +51,5 @@ All scenarios use real UI interactions only. No token injection, no direct stora
 | ID | Description | Action | Expected result |
 |---|---|---|---|
 | SESSION-20 | Current device appears | Customer opens Account Settings without removing any session. | Implemented and live-passed: Logged-in Devices renders at least one device with Remove and Last Active controls/text. |
+
+The legacy SESSION-MGMT plan now follows the current inline UI: SESSION-MGMT-01 and SESSION-MGMT-02 strictly verify the `Logged-in Devices` section and current browser session. SESSION-MGMT-05 verifies that only per-device `Remove` actions exist. There is no modal or remove-all control in the current product.

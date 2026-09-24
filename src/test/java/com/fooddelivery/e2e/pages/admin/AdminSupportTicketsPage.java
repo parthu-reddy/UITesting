@@ -13,16 +13,25 @@ public class AdminSupportTicketsPage {
     private final Page page;
     public AdminSupportTicketsPage(Page page) { this.page = page; }
 
+    // Maps to AdminSupportTickets.tsx. Tab and button names below are that file's, verbatim.
+
+    private com.microsoft.playwright.Locator button(String exactName) {
+        return page.getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
+                new Page.GetByRoleOptions().setName(exactName).setExact(true));
+    }
+
     // ── Visibility ───────────────────────────────────────────────────────
 
     public boolean isSupportVisible() {
-        return page.locator("text=Support Tickets, text=Support, text=Tickets").first().isVisible();
+        return page.getByRole(com.microsoft.playwright.options.AriaRole.HEADING,
+                new Page.GetByRoleOptions().setName("Support Tickets").setExact(true)).isVisible();
     }
 
     // ── Tab navigation ───────────────────────────────────────────────────
 
-    public void openTab(String tabName) {
-        page.locator("button:has-text('" + tabName + "')").first().click();
+    /** Tabs read OPEN, IN REVIEW, RESOLVED, REJECTED -- the status with its underscore replaced. */
+    public void openTab(String status) {
+        button(status.replace('_', ' ')).click();
         page.waitForTimeout(500);
     }
 
@@ -33,35 +42,47 @@ public class AdminSupportTicketsPage {
 
     // ── Ticket list ──────────────────────────────────────────────────────
 
+    /** Ticket buttons, in the list under the "<STATUS> Tickets (n)" header. */
+    private com.microsoft.playwright.Locator tickets() {
+        return page.locator("div:has(> h2:has-text('Tickets')) + div > button");
+    }
+
     public int getTicketCount() {
-        return page.locator("[data-testid='support-ticket'], .ticket-card, button:has(text='#')").count();
+        return tickets().count();
     }
 
     public void selectTicket(int index) {
-        page.locator("[data-testid='support-ticket'], .ticket-card, button:has(text='#')").nth(index).click();
+        tickets().nth(index).click();
         page.waitForTimeout(500);
     }
 
     public boolean isTicketDetailOpen() {
-        return page.locator("text=Ticket Details, text=Resolution, text=Resolve").first().isVisible();
+        return page.getByRole(com.microsoft.playwright.options.AriaRole.HEADING,
+                new Page.GetByRoleOptions().setName("Ticket Details").setExact(true)).isVisible();
     }
 
     // ── Ticket actions ───────────────────────────────────────────────────
 
     public void fillResolutionNotes(String notes) {
-        page.locator("textarea").first().fill(notes);
+        page.getByPlaceholder("Add admin notes (required for rejection)").fill(notes);
     }
 
+    /**
+     * "Resolve Ticket" approves. Exact name: a has-text('Resolve') match finds the RESOLVED tab
+     * first. Approving asks nothing -- see the admin-refund finding in reviews-and-support/PENDING.md.
+     */
     public void resolveTicket() {
-        page.locator("button:has-text('Resolve'), button:has(svg.lucide-shield-check)").first().click();
+        button("Resolve Ticket").click();
         page.waitForTimeout(2000);
     }
 
+    /** "Reject Request" (enabled once notes exist), then the danger confirm "Reject request". */
     public void rejectTicket() {
-        page.locator("button:has-text('Reject'), button:has(svg.lucide-x-circle)").first().click();
-        page.waitForTimeout(1000);
-        // Confirm the rejection dialog
-        page.locator("button:has-text('Reject request'), button:has-text('Confirm')").first().click();
+        button("Reject Request").click();
+        page.getByRole(com.microsoft.playwright.options.AriaRole.DIALOG)
+                .getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
+                        new com.microsoft.playwright.Locator.GetByRoleOptions().setName("Reject request").setExact(true))
+                .click();
         page.waitForTimeout(2000);
     }
 
@@ -70,22 +91,15 @@ public class AdminSupportTicketsPage {
         resolveTicket();
     }
 
-    // ── Chat ─────────────────────────────────────────────────────────────
-
-    public void openChat() {
-        page.locator("button:has-text('Chat'), button:has-text('Open Chat')").first().click();
-        page.waitForTimeout(500);
-    }
-
-    // ── Pagination ───────────────────────────────────────────────────────
+    // ── Pagination (rendered only when there is more than one page) ─────
 
     public void nextPage() {
-        page.locator("button:has-text('Next')").first().click();
+        button("Next").click();
         page.waitForTimeout(500);
     }
 
     public void prevPage() {
-        page.locator("button:has-text('Prev')").first().click();
+        button("Previous").click();
         page.waitForTimeout(500);
     }
 }

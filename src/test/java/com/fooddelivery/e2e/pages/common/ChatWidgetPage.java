@@ -18,8 +18,9 @@ public class ChatWidgetPage {
 
     // ── Chat ─────────────────────────────────────────────────────────────
 
+    /** The widget is open exactly when its composer is on screen (ChatWidget.tsx). */
     public boolean isChatOpen() {
-        return page.locator("text=Chat, [data-testid='chat-widget']").first().isVisible();
+        return page.getByPlaceholder("Type a message...").isVisible();
     }
 
     public void sendMessage(String message) {

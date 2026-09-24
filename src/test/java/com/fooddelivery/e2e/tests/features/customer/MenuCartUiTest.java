@@ -5,6 +5,7 @@ import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.common.LoginPage;
 import com.fooddelivery.e2e.pages.customer.*;
 import com.microsoft.playwright.Locator;
+import com.microsoft.playwright.Page;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -86,12 +87,13 @@ public class MenuCartUiTest extends TestBase {
         customerPage.waitForTimeout(1000);
 
         // Verify empty cart state
-        boolean isEmpty = customerPage.locator("text=Your cart is empty, text=No items in cart").first().isVisible();
+        boolean isEmpty = customerPage.getByText("Your cart is empty", new Page.GetByTextOptions().setExact(true)).isVisible();
         if(!isEmpty) {
              System.out.println("Cart not empty yet, trying to click remove again");
              cart.removeItem(0);
              customerPage.waitForTimeout(1000);
-             isEmpty = customerPage.locator("text=Your cart is empty, text=No items in cart").first().isVisible();
+             isEmpty = customerPage.getByText("Your cart is empty", new Page.GetByTextOptions().setExact(true)).isVisible();
         }
+        assertThat(isEmpty).as("Removing every item leaves the drawer's empty state").isTrue();
     }
 }

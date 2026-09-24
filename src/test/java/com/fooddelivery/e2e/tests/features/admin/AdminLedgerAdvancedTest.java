@@ -88,6 +88,7 @@ public class AdminLedgerAdvancedTest extends TestBase {
     }
 
     @Test
+    @Disabled("AdminLedgerView has no statement or detail panel; a row's only action copies its transaction id. Recorded in e2e-plan/NOT-DEFECTS/README.md")
     @DisplayName("LEDGER-ADV-11: Open statement detail panel")
     void openStatementDetailPanel() {
         portal.openLedgerTab();
@@ -121,7 +122,7 @@ public class AdminLedgerAdvancedTest extends TestBase {
     @Test
     @DisplayName("PAYOUT-11: Open payout history tab")
     void openPayoutHistoryTab() {
-        portal.openLedgerTab(); // Navigate to ledger area first
+        portal.openPayoutsTab(); // "Pending Payouts" in the admin sidebar
         AdminPayoutsPage payouts = new AdminPayoutsPage(adminPage);
         assertThat(payouts.isPayoutsVisible()).isTrue();
     }

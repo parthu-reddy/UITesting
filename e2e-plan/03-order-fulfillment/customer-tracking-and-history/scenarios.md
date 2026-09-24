@@ -32,22 +32,22 @@ Uses: `CustomerOrderTrackerPage`, `CustomerActiveOrdersCarouselPage`, `MapTracki
 
 ## Batch 4 — Order history
 
-Current blocker: `CustomerOrderHistory` is implemented but not mounted anywhere in the customer UI; all scenarios in this batch remain unreachable through UI interaction or direct routing.
+The current customer UI exposes history through Account Settings → History. It renders a defined empty state or clickable order summaries. The older standalone `CustomerOrderHistory` overlay remains unmounted.
 
 | ID | Description | Action | Expected result |
 |---|---|---|---|
-| HISTORY-01 | Completed order in history | After delivery completes. | Order appears in `CustomerOrderHistoryPage` with status "Completed" and correct total. |
-| HISTORY-02 | History item shows restaurant name | In order history list. | Each order card shows the restaurant/brand name; no "Unknown" or `null`. |
-| HISTORY-03 | History item shows date | Each history entry shows the order date/time. | Date is non-empty and formatted readably. |
-| HISTORY-04 | History item shows total | Each history entry shows the final paid total. | Total ≥ ₹0; formatted with rupee symbol. |
-| HISTORY-05 | Tap history item for details | Tap a completed order in history. | Order detail view or modal opens showing itemised breakdown. |
-| HISTORY-06 | Cancelled order in history | After a cancellation. | Cancelled order appears in history with status "Cancelled"; no "Completed" label. |
+| HISTORY-01 | Completed order in history | Implemented through the reachable settings History tab; the test accepts the defined empty state for seeded accounts without history. |
+| HISTORY-02 | History item shows restaurant name | Implemented for every rendered row; restaurant must be nonblank and cannot contain `Unknown`, `null`, or `undefined`. |
+| HISTORY-03 | History item shows date | Still pending: the reachable history row does not render a date. |
+| HISTORY-04 | History item shows total | Implemented for every rendered row through an INR total and nonempty status assertion. |
+| HISTORY-05 | Tap history item for details | Implemented: clicking a populated row must close settings and open the exact order tracker. |
+| HISTORY-06 | Cancelled order in history | Status rendering is structurally covered; a deterministic cancelled-order history fixture remains pending. |
 
 ## Batch 5 — Reorder
 
 | ID | Description | Action | Expected result |
 |---|---|---|---|
-| REORDER-01 | Reorder strip visible | On a completed order detail. | `ReorderStripPage` shows a "Reorder" button. |
+| REORDER-01 | Reorder strip visible | On a completed order detail. | Still unreachable: settings history opens the tracker and renders no Reorder control. |
 | REORDER-02 | Reorder adds items to cart | Tap "Reorder". | Same items as the original order are added to the cart; cart drawer opens. |
 | REORDER-03 | Reorder from unavailable outlet | If the original outlet is now > 5 km or closed. | UI shows a warning instead of silently adding items. |
 

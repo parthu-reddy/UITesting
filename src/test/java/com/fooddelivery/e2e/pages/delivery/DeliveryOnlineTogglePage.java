@@ -17,10 +17,22 @@ public class DeliveryOnlineTogglePage {
     }
 
     /**
-     * Goes online by clicking the "Offline" button.
-     * Waits for the button to change to "Online Duty".
+     * Goes online and registers this browser's current location.
+     *
+     * <p>A seeded rider may still be rendered as online from an earlier session even though the
+     * current browser has not registered its geolocation with dispatch. Cycle that stale online
+     * state through offline before going online again so availability checks use this session.
      */
     public void goOnline() {
+        Locator onlineBtn = page.locator("button:has-text('Online Duty')").first();
+        if (onlineBtn.isVisible()) {
+            onlineBtn.click();
+            page.locator("button:has-text('Offline')")
+                    .waitFor(new Locator.WaitForOptions()
+                            .setState(WaitForSelectorState.VISIBLE)
+                            .setTimeout(5000));
+        }
+
         Locator offlineBtn = page.locator("button:has-text('Offline')").first();
         if (offlineBtn.isVisible()) {
             offlineBtn.click();

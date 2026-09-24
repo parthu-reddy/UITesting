@@ -34,7 +34,9 @@ public class RiderAvailabilityUiTest extends TestBase {
         assertThat(riderPage.getByText("Today’s Earnings",
                 new Page.GetByTextOptions().setExact(true)).isVisible()).isTrue();
 
-        if (!duty.isOnline()) duty.goOnline();
+        // Always re-register this browser's geolocation, including when the seeded rider was
+        // already rendered Online from an earlier session.
+        duty.goOnline();
         assertThat(duty.isOnline()).isTrue();
         riderPage.reload();
         dashboard.waitForDashboard();

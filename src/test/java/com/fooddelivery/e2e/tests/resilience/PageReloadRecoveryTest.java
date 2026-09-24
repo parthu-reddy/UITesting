@@ -7,6 +7,7 @@ import com.fooddelivery.e2e.pages.customer.CustomerCartDrawerPage;
 import com.fooddelivery.e2e.pages.customer.CustomerDashboardPage;
 import com.fooddelivery.e2e.pages.customer.CustomerMenuViewPage;
 import com.fooddelivery.e2e.pages.customer.NearbyOutletPage;
+import com.fooddelivery.e2e.pages.customer.PaymentModalPage;
 import com.fooddelivery.e2e.pages.customer.SavedDeliveryAddressPage;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
@@ -32,6 +33,17 @@ public class PageReloadRecoveryTest extends TestBase {
     private Locator deliverToButton() {
         return customerPage.getByRole(AriaRole.BUTTON,
                 new Page.GetByRoleOptions().setName(Pattern.compile("Deliver to")));
+    }
+
+    private String openCartWithOneItem() {
+        loginCustomerAtHome();
+        new NearbyOutletPage(customerPage).openBrand1AndSelectNearby();
+        CustomerMenuViewPage menu = new CustomerMenuViewPage(customerPage);
+        menu.addQuickPrepItemToCart();
+        menu.clickViewCart();
+        CustomerCartDrawerPage cart = new CustomerCartDrawerPage(customerPage);
+        cart.waitForCartOpen();
+        return cart.getFirstItemName();
     }
 
     @Test
@@ -113,6 +125,58 @@ public class PageReloadRecoveryTest extends TestBase {
             assertThat(secondDeliverTo.locator("span").last()).hasText(selectedAddress);
             assertThat(secondTab.getByRole(AriaRole.BUTTON,
                     new Page.GetByRoleOptions().setName("Order Food").setExact(true))).hasCount(0);
+        } finally {
+            secondTab.close();
+        }
+    }
+
+    @Test
+    @DisplayName("RECOVERY-12/13: Browser Back closes payment and preserves the exact cart")
+    void browserBackFromPaymentPreservesCart() {
+        String itemName = openCartWithOneItem();
+        CustomerCartDrawerPage cart = new CustomerCartDrawerPage(customerPage);
+        cart.clickPlaceOrder();
+        PaymentModalPage payment = new PaymentModalPage(customerPage);
+        org.assertj.core.api.Assertions.assertThat(payment.hasItem(itemName)).isTrue();
+
+        customerPage.goBack();
+
+        assertThat(customerPage.getByRole(AriaRole.DIALOG,
+                new Page.GetByRoleOptions().setName("Checkout").setExact(true))).isHidden();
+        assertThat(customerPage.getByRole(AriaRole.DIALOG,
+                new Page.GetByRoleOptions().setName("Your cart"))).containsText(itemName);
+    }
+
+    @Test
+    @DisplayName("RECOVERY-15: Browser Back from a restaurant menu restores the restaurant list")
+    void browserBackFromRestaurantMenuRestoresHome() {
+        loginCustomerAtHome();
+        new NearbyOutletPage(customerPage).openBrand1AndSelectNearby();
+        assertThat(customerPage.locator("[data-menu-item]").first()).isVisible();
+
+        customerPage.goBack();
+
+        assertThat(customerPage.getByPlaceholder("Search restaurants or cuisines")).isVisible();
+        assertThat(customerPage.locator("button:has(h5)").first()).isVisible();
+    }
+
+    @Test
+    @DisplayName("RECOVERY-16: Cart created in one tab is available in a second tab after reload")
+    void cartSynchronizesAcrossCustomerTabs() {
+        String itemName = openCartWithOneItem();
+        new CustomerCartDrawerPage(customerPage).closeCart();
+
+        Page secondTab = customerContext.newPage();
+        try {
+            secondTab.navigate(TestConfig.APP_URL);
+            Locator deliverTo = secondTab.getByRole(AriaRole.BUTTON,
+                    new Page.GetByRoleOptions().setName(Pattern.compile("Deliver to")));
+            assertThat(deliverTo).containsText("Home:");
+            secondTab.reload();
+            secondTab.getByText("View Cart", new Page.GetByTextOptions().setExact(true)).click();
+            CustomerCartDrawerPage secondCart = new CustomerCartDrawerPage(secondTab);
+            secondCart.waitForCartOpen();
+            org.assertj.core.api.Assertions.assertThat(secondCart.getFirstItemName()).isEqualTo(itemName);
         } finally {
             secondTab.close();
         }

@@ -17,29 +17,26 @@ public class AdminOperationsPage {
         this.page = page;
     }
 
+    // Maps to pages/admin/money/OperationsPage.tsx ("Money Operations"): a tablist of four.
+
     public boolean isOperationsVisible() {
-        return page.locator("text=Rejections, text=Reconciliation, text=Operations").first().isVisible();
+        return page.getByRole(com.microsoft.playwright.options.AriaRole.HEADING,
+                new Page.GetByRoleOptions().setName("Money Operations").setExact(true)).isVisible();
     }
 
-    public void openRejectionsTab() {
-        page.locator("button:has-text('Rejections')").first().click();
+    private void tab(String name) {
+        page.getByRole(com.microsoft.playwright.options.AriaRole.TAB,
+                new Page.GetByRoleOptions().setName(name).setExact(true)).click();
         page.waitForTimeout(500);
     }
 
-    public void openReconciliationTab() {
-        page.locator("button:has-text('Reconciliation')").first().click();
-        page.waitForTimeout(500);
-    }
+    public void openRejectionsTab() { tab("Ledger Rejections"); }
 
-    public void openPaymentDlqTab() {
-        page.locator("button:has-text('Payment DLQ'), button:has-text('Payment')").first().click();
-        page.waitForTimeout(500);
-    }
+    public void openReconciliationTab() { tab("Reconciliation Runs"); }
 
-    public void openWalletDlqTab() {
-        page.locator("button:has-text('Wallet DLQ'), button:has-text('Wallet')").first().click();
-        page.waitForTimeout(500);
-    }
+    public void openPaymentDlqTab() { tab("Payment DLQ"); }
+
+    public void openWalletDlqTab() { tab("Wallet DLQ"); }
 
     public void resolveRejection(int index, String note) {
         page.locator("[data-testid='rejection-row'], tr").nth(index + 1).click();

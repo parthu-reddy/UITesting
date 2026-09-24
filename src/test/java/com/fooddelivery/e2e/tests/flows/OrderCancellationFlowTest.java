@@ -6,6 +6,8 @@ import com.fooddelivery.e2e.pages.common.LoginPage;
 import com.fooddelivery.e2e.pages.customer.*;
 import com.fooddelivery.e2e.pages.delivery.DeliveryDashboardPage;
 import com.fooddelivery.e2e.pages.delivery.DeliveryOnlineTogglePage;
+import com.fooddelivery.e2e.pages.restaurant.RestaurantOrderActionsPage;
+import com.fooddelivery.e2e.pages.restaurant.RestaurantOrderQueuePage;
 import com.microsoft.playwright.Locator;
 import org.junit.jupiter.api.*;
 
@@ -33,8 +35,16 @@ public class OrderCancellationFlowTest extends TestBase {
         new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
         new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();
 
-        String selectedOutlet = new NearbyOutletPage(customerPage).openBrand1AndSelectNearby();
-        assertThat(selectedOutlet).as("The customer must select a nearby Brand 1 outlet").isNotBlank();
+        int brandNumber = Integer.parseInt(testRestaurantPhone.substring(7));
+        String selectedOutlet = new NearbyOutletPage(customerPage)
+                .openBrandAndSelectNearby("Brand " + brandNumber);
+        assertThat(selectedOutlet).as("The customer must select the randomized restaurant's nearby outlet")
+                .isNotBlank();
+
+        restaurantPage.navigate(TestConfig.APP_URL);
+        new LoginPage(restaurantPage).loginAs("Restaurant Partner", testRestaurantPhone);
+        RestaurantOrderQueuePage restaurantQueue = new RestaurantOrderQueuePage(restaurantPage);
+        restaurantQueue.waitForQueueLoad();
 
         CustomerMenuViewPage menu = new CustomerMenuViewPage(customerPage);
         menu.addQuickPrepItemToCart();
@@ -47,6 +57,13 @@ public class OrderCancellationFlowTest extends TestBase {
         CustomerOrderTrackerPage tracker = new CustomerOrderTrackerPage(customerPage);
         String orderId = tracker.getOrderId();
         assertThat(orderId).as("The newly placed order must appear in the tracker").isNotBlank();
+        String shortOrderId = orderId.substring(0, Math.min(8, orderId.length()));
+
+        restaurantQueue.selectOutlet(selectedOutlet);
+        restaurantQueue.refreshOrders();
+        RestaurantOrderActionsPage restaurantActions = new RestaurantOrderActionsPage(restaurantPage);
+        restaurantActions.orderCard(shortOrderId)
+                .waitFor(new Locator.WaitForOptions().setTimeout(30000));
         customerPage.locator("button:has-text('Cancel Order')").first()
                 .waitFor(new Locator.WaitForOptions().setTimeout(15000));
 
@@ -60,5 +77,11 @@ public class OrderCancellationFlowTest extends TestBase {
         terminalHeadline.waitFor(new Locator.WaitForOptions().setTimeout(15000));
         assertThat(terminalHeadline.innerText()).isEqualTo("This order was cancelled.");
         assertThat(customerPage.locator("button:has-text('Cancel Order')").count()).isZero();
+
+        restaurantPage.reload();
+        restaurantQueue.selectOutlet(selectedOutlet);
+        restaurantActions.orderCard(shortOrderId).waitFor(new Locator.WaitForOptions()
+                .setState(com.microsoft.playwright.options.WaitForSelectorState.HIDDEN)
+                .setTimeout(30000));
     }
 }

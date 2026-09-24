@@ -37,7 +37,7 @@ public class AdminUserOpsTest extends TestBase {
             users.selectUser(0);
             adminPage.waitForTimeout(1000);
             if (users.isDetailPanelOpen()) {
-                System.out.println("[TEST] User detail panel opened: " + users.getUserName());
+                System.out.println("[TEST] User detail panel opened: " + users.getUserId());
             }
         } catch (Exception e) {
             System.out.println("[TEST] No search results or detail panel not available.");

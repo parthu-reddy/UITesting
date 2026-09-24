@@ -14,20 +14,28 @@ public class RiderSettingsPage {
         this.page = page;
     }
 
+    /** A verified rider's settings: the "Rider Settings" heading (RiderSettingsView.tsx). */
     public boolean isSettingsVisible() {
-        return page.locator("text=Profile, text=Settings, text=Vehicle").first().isVisible();
+        return page.getByRole(com.microsoft.playwright.options.AriaRole.HEADING,
+                new Page.GetByRoleOptions().setName("Rider Settings").setExact(true)).isVisible();
     }
 
+    /** An unverified rider sees the takeover wizard instead: "Partner Onboarding" (RiderOnboardingWizard.tsx). */
     public boolean isOnboardingWizardVisible() {
-        return page.locator("text=Complete Your Profile, text=Onboarding, text=Step").first().isVisible();
+        return page.getByRole(com.microsoft.playwright.options.AriaRole.HEADING,
+                new Page.GetByRoleOptions().setName("Partner Onboarding").setExact(true)).isVisible();
     }
 
     public void fillVehicleNumber(String number) {
         page.locator("input[placeholder*='vehicle'], input[placeholder*='Vehicle']").first().fill(number);
     }
 
+    /** The custom Select (a combobox + listbox), not a native select. Options read e.g. "EV Two-Wheeler". */
     public void selectVehicleType(String type) {
-        page.locator("select").selectOption(type);
+        page.getByRole(com.microsoft.playwright.options.AriaRole.COMBOBOX,
+                new Page.GetByRoleOptions().setName("Vehicle Type").setExact(true)).click();
+        page.getByRole(com.microsoft.playwright.options.AriaRole.OPTION,
+                new Page.GetByRoleOptions().setName(type).setExact(true)).click();
     }
 
     public void completeOnboardingStep() {

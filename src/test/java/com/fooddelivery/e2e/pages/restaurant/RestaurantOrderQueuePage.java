@@ -74,17 +74,14 @@ public class RestaurantOrderQueuePage {
         return false;
     }
 
+    /**
+     * The board has no refresh control: it polls every 5 s ("Updates every 5 s",
+     * useRestaurantOrders). A reload is the immediate refresh, and it keeps the selected outlet,
+     * which the dashboard stores in localStorage.
+     */
     public void refreshOrders() {
-        try {
-            Locator refreshBtn = page.locator("button[title='Refresh Orders'], button:has(svg.lucide-refresh-cw)").first();
-            refreshBtn.waitFor(new Locator.WaitForOptions().setTimeout(3000));
-            refreshBtn.click();
-        } catch (Exception e) {
-            System.out.println("[RESTAURANT] No refresh button found, reloading page instead.");
-            page.reload();
-            waitForQueueLoad();
-        }
-        page.waitForTimeout(1000);
+        page.reload();
+        waitForQueueLoad();
     }
 }
 

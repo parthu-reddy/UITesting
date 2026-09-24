@@ -15,51 +15,75 @@ public class AdminUserManagementPage {
     private final Page page;
     public AdminUserManagementPage(Page page) { this.page = page; }
 
+    // Maps to AdminUserManagement.tsx (list) and AdminUserDetailPanel.tsx (detail).
+
     // ── Visibility ───────────────────────────────────────────────────────
 
+    /** The list panel's search field is always rendered. */
     public boolean isUserListVisible() {
-        return page.locator("text=User Management, text=Users, table").first().isVisible();
+        return page.getByPlaceholder("User ID / Phone").isVisible();
     }
 
     // ── Search & Filter ──────────────────────────────────────────────────
 
+    /** A form: the field plus a Search submit. */
     public void searchUser(String query) {
-        page.locator("input[placeholder*='Search'], input[type='search']").first().fill(query);
+        page.getByPlaceholder("User ID / Phone").fill(query);
+        page.getByPlaceholder("User ID / Phone").press("Enter");
         page.waitForTimeout(500);
     }
 
+    /** The role filter is the custom Select (options ALL ROLES, ADMIN, CUSTOMER, RESTAURANT, DELIVERY). */
     public void filterByRole(String role) {
-        page.locator("select").first().selectOption(role);
+        page.locator("div:has(> form input[placeholder='User ID / Phone'])")
+                .getByRole(com.microsoft.playwright.options.AriaRole.COMBOBOX).click();
+        page.getByRole(com.microsoft.playwright.options.AriaRole.OPTION,
+                new Page.GetByRoleOptions().setName(role).setExact(true)).click();
         page.waitForTimeout(500);
     }
 
     // ── User list ────────────────────────────────────────────────────────
 
+    /** One button per user, in the list below the filter bar. It is not a table. */
+    private com.microsoft.playwright.Locator users() {
+        return page.locator("div:has(> form input[placeholder='User ID / Phone']) + div > button");
+    }
+
     public int getUserCount() {
-        return page.locator("tr, [data-testid='user-row']").count() - 1; // subtract header
+        return users().count();
     }
 
     public void selectUser(int index) {
-        page.locator("tr, [data-testid='user-row']").nth(index + 1).click(); // +1 for header
+        users().nth(index).click();
         page.waitForTimeout(500);
     }
 
     // ── Detail panel ─────────────────────────────────────────────────────
 
     public boolean isDetailPanelOpen() {
-        return page.locator("text=User Details, text=Account Info").first().isVisible();
+        return page.getByRole(com.microsoft.playwright.options.AriaRole.HEADING,
+                new Page.GetByRoleOptions().setName("User Details").setExact(true)).isVisible();
     }
 
-    public String getUserName() {
-        return page.locator("text=Name").locator("xpath=..").locator("span, p").last().innerText().trim();
+    /** The panel's fields are ID, Status and Phone -- it shows no name. */
+    private String field(String label) {
+        return page.getByText(label, new Page.GetByTextOptions().setExact(true)).first()
+                .locator("xpath=following-sibling::p[1]").innerText().trim();
+    }
+
+    public String getUserId() {
+        return field("ID");
     }
 
     public String getUserPhone() {
-        return page.locator("text=Phone").locator("xpath=..").locator("span, p").last().innerText().trim();
+        return field("Phone");
     }
 
+    /** The first role chip under the "Roles" heading. */
     public String getUserRole() {
-        return page.locator("text=Role, text=Roles").locator("xpath=..").locator("span, p, .badge").last().innerText().trim();
+        return page.getByRole(com.microsoft.playwright.options.AriaRole.HEADING,
+                        new Page.GetByRoleOptions().setName("Roles").setExact(true))
+                .locator("xpath=following-sibling::div[1]/div[1]").innerText().trim();
     }
 
     // ── Role management ──────────────────────────────────────────────────

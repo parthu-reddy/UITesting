@@ -61,7 +61,7 @@ public class RiderOnboardingFullTest extends TestBase {
         RiderSettingsPage settings = new RiderSettingsPage(riderPage);
         if (settings.isOnboardingWizardVisible()) {
             RiderOnboardingWizardPage wizard = new RiderOnboardingWizardPage(riderPage);
-            wizard.selectVehicleType("2-Wheeler");
+            wizard.selectVehicleType("Motorcycle / Scooter");
         }
     }
 
@@ -76,7 +76,7 @@ public class RiderOnboardingFullTest extends TestBase {
             RiderOnboardingWizardPage wizard = new RiderOnboardingWizardPage(riderPage);
             int initialStep = wizard.getCurrentStep();
             wizard.fillVehicleNumber("KA01AB1234");
-            wizard.selectVehicleType("2-Wheeler");
+            wizard.selectVehicleType("Motorcycle / Scooter");
             wizard.clickNext();
             
             riderPage.waitForTimeout(500);

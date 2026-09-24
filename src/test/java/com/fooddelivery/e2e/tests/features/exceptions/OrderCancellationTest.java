@@ -57,14 +57,14 @@ public class OrderCancellationTest extends TestBase {
         new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
         
         CustomerOrderTrackerPage tracker = new CustomerOrderTrackerPage(customerPage);
-        // CANCEL-07: Cancel button visible
-        if (customerPage.locator("button:has-text('Cancel Order')").isVisible()) {
+        // CANCEL-07: Cancel button visible (the live tracker offers it only before acceptance)
+        if (tracker.tracker().locator("button:has-text('Cancel order')").isVisible()) {
             tracker.cancelOrder();
-            // Validate status changed
-            assertThat(tracker.isStatusVisible("Cancelled")).isTrue();
+            // Validate status changed: the settled tracker carries the backend status
+            assertThat(tracker.hasStatus("CANCELLED")).isTrue();
         } else {
             // CANCEL-09: Cancel button hidden after acceptance
-            assertThat(customerPage.locator("button:has-text('Cancel Order')").isVisible()).isFalse();
+            assertThat(tracker.tracker().locator("button:has-text('Cancel order')").isVisible()).isFalse();
         }
     }
 }

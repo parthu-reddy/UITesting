@@ -17,8 +17,11 @@ public class RestaurantOrderActionsPage {
         this.page = page;
     }
 
-    /** The card by its data-order-id (prefix match, so a short id works). Classes are not an interface. */
-    private Locator orderCard(String orderId) {
+    /**
+     * The card by its data-order-id (prefix match, so a short id works). Classes are not an
+     * interface. Public because flow tests scope their own assertions to one card.
+     */
+    public Locator orderCard(String orderId) {
         String shortId = orderId.substring(0, Math.min(8, orderId.length())).toLowerCase();
         return page.locator("[data-testid='restaurant-order-card'][data-order-id^='" + shortId + "']");
     }
@@ -30,6 +33,14 @@ public class RestaurantOrderActionsPage {
     private static Locator acceptIn(Locator scope) {
         return scope.getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
                 new Locator.GetByRoleOptions().setName(java.util.regex.Pattern.compile("^Accept\\b"))).first();
+    }
+
+    public void openOrderDetails(String shortOrderId) {
+        orderCard(shortOrderId).locator("button:has(svg.lucide-receipt)").click();
+        page.getByRole(com.microsoft.playwright.options.AriaRole.DIALOG)
+                .waitFor(new Locator.WaitForOptions()
+                        .setState(WaitForSelectorState.VISIBLE)
+                        .setTimeout(5000));
     }
 
     // ── Order lifecycle actions ──────────────────────────────────────────
@@ -176,6 +187,23 @@ public class RestaurantOrderActionsPage {
         // The clock icon button opens the delay modal
         page.locator("button:has(svg.lucide-clock)").first().click();
         page.waitForTimeout(500);
+    }
+
+    public void requestDelay(String shortOrderId, int minutes, String reason) {
+        Locator card = orderCard(shortOrderId);
+        card.getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
+                new Locator.GetByRoleOptions().setName("Ask the customer for more time").setExact(true)).click();
+
+        Locator delayOption = card.getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
+                new Locator.GetByRoleOptions().setName("+" + minutes + " Min").setExact(true));
+        delayOption.waitFor(new Locator.WaitForOptions()
+                .setState(WaitForSelectorState.VISIBLE)
+                .setTimeout(5000));
+        delayOption.click();
+
+        card.locator("input[placeholder*='High custom baking orders']").fill(reason);
+        card.getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
+                new Locator.GetByRoleOptions().setName("Submit Delay").setExact(true)).click();
     }
 
     public boolean hasNewOrders() {

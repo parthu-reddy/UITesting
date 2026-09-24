@@ -3,6 +3,8 @@ package com.fooddelivery.e2e.pages.restaurant;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.options.WaitForSelectorState;
+import com.microsoft.playwright.options.AriaRole;
+import java.util.regex.Pattern;
 
 /**
  * Page Object for the restaurant order details modal.
@@ -17,11 +19,15 @@ public class RestaurantOrderDetailsModalPage {
     }
 
     public boolean isOpen() {
-        return page.locator("text=Order #, text=Order Details").first().isVisible();
+        return page.getByRole(AriaRole.DIALOG,
+                new Page.GetByRoleOptions().setName(Pattern.compile("^Order #[0-9a-f]{8}$")))
+                .isVisible();
     }
 
     public String getOrderId() {
-        return page.locator("text=Order #").first().innerText().trim();
+        return page.getByRole(AriaRole.DIALOG,
+                        new Page.GetByRoleOptions().setName(Pattern.compile("^Order #[0-9a-f]{8}$")))
+                .getAttribute("aria-label");
     }
 
     public String getCustomerName() {
@@ -29,7 +35,10 @@ public class RestaurantOrderDetailsModalPage {
     }
 
     public void close() {
-        page.locator("button:has(svg.lucide-x), button:has-text('Close')").first().click();
-        page.waitForTimeout(300);
+        Locator dialog = page.getByRole(AriaRole.DIALOG,
+                new Page.GetByRoleOptions().setName(Pattern.compile("^Order #[0-9a-f]{8}$")));
+        dialog.getByRole(AriaRole.BUTTON,
+                new Locator.GetByRoleOptions().setName("Close Details").setExact(true)).click();
+        dialog.waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.HIDDEN));
     }
 }

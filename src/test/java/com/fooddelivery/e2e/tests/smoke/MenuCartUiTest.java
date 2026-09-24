@@ -57,6 +57,65 @@ public class MenuCartUiTest extends TestBase {
         }
     }
 
+    @Test void menuDescriptionsUseSecondaryTextStyling() {
+        Locator descriptions = customerPage.locator("[data-menu-item] p.text-\\[11\\.5px\\]");
+        org.assertj.core.api.Assertions.assertThat(descriptions.count())
+                .as("seeded menu should expose at least one item description")
+                .isGreaterThan(0);
+        for (int index = 0; index < descriptions.count(); index++) {
+            Locator description = descriptions.nth(index);
+            String text = description.innerText().trim();
+            org.assertj.core.api.Assertions.assertThat(text)
+                    .isNotBlank()
+                    .doesNotContain("null", "undefined");
+            double descriptionSize = Double.parseDouble(((String) description.evaluate(
+                    "element => getComputedStyle(element).fontSize")).replace("px", ""));
+            double nameSize = Double.parseDouble(((String) description.locator("xpath=../div[1]/h4")
+                    .evaluate("element => getComputedStyle(element).fontSize")).replace("px", ""));
+            org.assertj.core.api.Assertions.assertThat(descriptionSize).isLessThan(nameSize);
+            org.assertj.core.api.Assertions.assertThat(description.getAttribute("class"))
+                    .contains("line-clamp-2");
+        }
+    }
+
+    @Test void everyMenuItemHasLoadedImageOrFallback() {
+        Locator rows = customerPage.locator("[data-menu-item]");
+        for (int index = 0; index < rows.count(); index++) {
+            Locator image = rows.nth(index).locator("img");
+            assertThat(image).hasCount(1);
+            assertThat(image).hasAttribute("alt", "");
+            int naturalWidth = ((Number) image.evaluate("element => element.naturalWidth")).intValue();
+            org.assertj.core.api.Assertions.assertThat(naturalWidth)
+                    .as("menu row %s image should load instead of leaving a broken visual", index)
+                    .isGreaterThan(0);
+        }
+    }
+
+    @Test void dietaryMarkersAndPrepTimesNeverInventValues() {
+        Locator rows = customerPage.locator("[data-menu-item]");
+        int dietaryMarkers = 0;
+        int prepTimes = 0;
+        for (int index = 0; index < rows.count(); index++) {
+            Locator row = rows.nth(index);
+            Locator markers = row.locator("[role='img'][aria-label]");
+            for (int marker = 0; marker < markers.count(); marker++) {
+                org.assertj.core.api.Assertions.assertThat(markers.nth(marker).getAttribute("aria-label"))
+                        .isIn("Vegetarian", "Non-vegetarian");
+                dietaryMarkers++;
+            }
+            java.util.regex.Matcher prep = Pattern.compile("Ready in\\s+(\\d+) min")
+                    .matcher(row.innerText());
+            if (prep.find()) {
+                org.assertj.core.api.Assertions.assertThat(Integer.parseInt(prep.group(1))).isPositive();
+                prepTimes++;
+            }
+        }
+        org.assertj.core.api.Assertions.assertThat(dietaryMarkers)
+                .as("seeded menu should include classified dietary markers").isGreaterThan(0);
+        org.assertj.core.api.Assertions.assertThat(prepTimes)
+                .as("seeded menu should include explicitly configured preparation times").isGreaterThan(0);
+    }
+
     @Test
     void outOfStockItemsCannotBeAdded() {
         Locator unavailable = customerPage.locator("[data-menu-item]")
@@ -244,38 +303,43 @@ public class MenuCartUiTest extends TestBase {
                 new Page.GetByTextOptions().setExact(true))).isVisible();
     }
 
-    @Test void cartTotalEqualsDisplayedSubtotalFeesAndTaxes() {
+    /**
+     * The bill is the checkout sheet's, not the cart drawer's. The drawer shows "Item total"
+     * only; it used to print its own SGST/CGST estimate, a second bill that disagreed with the
+     * server's quote until it landed (CustomerCartDrawer.tsx). The sheet's lines are "Item
+     * total", "Delivery fee" (FREE at zero), "Platform fee" (only when charged) and "GST &
+     * restaurant charges" (only once quoted), and they must add up to "Total".
+     */
+    @Test void checkoutTotalEqualsItemTotalFeesAndTaxes() {
         Locator row = firstOrderableItem();
         row.getByRole(AriaRole.BUTTON,
                 new Locator.GetByRoleOptions().setName("ADD").setExact(true)).click();
         customerPage.getByText("View Cart", new Page.GetByTextOptions().setExact(true)).click();
-        Locator cart = customerPage.getByRole(AriaRole.DIALOG,
-                new Page.GetByRoleOptions().setName("Your cart").setExact(true));
-        assertThat(cart).isVisible();
+        CustomerCartDrawerPage cart = new CustomerCartDrawerPage(customerPage);
+        cart.clickPlaceOrder();
+        PaymentModalPage payment = new PaymentModalPage(customerPage);
+        org.assertj.core.api.Assertions.assertThat(payment.isPayEnabled())
+                .as("the server quote must land before the bill can be checked")
+                .isTrue();
+        Locator sheet = customerPage.getByRole(AriaRole.DIALOG,
+                new Page.GetByRoleOptions().setName("Checkout").setExact(true));
 
-        double subtotal = parseInr(cart.getByText("Subtotal", new Locator.GetByTextOptions().setExact(true))
-                .locator("..").innerText());
-        double delivery = parseInr(cart.getByText("Delivery Fee", new Locator.GetByTextOptions().setExact(true))
-                .locator("..").innerText());
-        Locator platformLine = cart.getByText("Platform Fee", new Locator.GetByTextOptions().setExact(true));
-        double platform = platformLine.count() == 0 ? 0 : parseInr(platformLine.locator("..").innerText());
-        Locator sgstLine = cart.getByText("SGST (2.5%)", new Locator.GetByTextOptions().setExact(true));
-        Locator cgstLine = cart.getByText("CGST (2.5%)", new Locator.GetByTextOptions().setExact(true));
-        assertThat(sgstLine).isVisible();
-        assertThat(cgstLine).isVisible();
-        org.assertj.core.api.Assertions.assertThat(sgstLine.locator("..").innerText())
-                .as("SGST must settle before cart arithmetic can be verified")
-                .doesNotContain("Calculating");
-        org.assertj.core.api.Assertions.assertThat(cgstLine.locator("..").innerText())
-                .as("CGST must settle before cart arithmetic can be verified")
-                .doesNotContain("Calculating");
-        double sgst = parseInr(sgstLine.locator("..").innerText());
-        double cgst = parseInr(cgstLine.locator("..").innerText());
-        double total = parseInr(cart.getByText("Total", new Locator.GetByTextOptions().setExact(true))
+        double itemTotal = billLine(sheet, "Item total");
+        double delivery = billLine(sheet, "Delivery fee");
+        Locator platformLabel = sheet.getByText("Platform fee", new Locator.GetByTextOptions().setExact(true));
+        double platform = platformLabel.count() == 0 ? 0 : billLine(sheet, "Platform fee");
+        double gst = billLine(sheet, "GST & restaurant charges");
+        double total = parseInr(sheet.getByText("Total", new Locator.GetByTextOptions().setExact(true))
                 .locator("..").innerText());
 
         org.assertj.core.api.Assertions.assertThat(total)
-                .isCloseTo(subtotal + platform + delivery + sgst + cgst,
+                .isCloseTo(itemTotal + delivery + platform + gst,
                         org.assertj.core.data.Offset.offset(0.01));
+    }
+
+    /** One AmountBreakdown line: the label sits one level inside the row that holds the amount. */
+    private double billLine(Locator sheet, String label) {
+        return parseInr(sheet.getByText(label, new Locator.GetByTextOptions().setExact(true))
+                .locator("xpath=../..").innerText());
     }
 }

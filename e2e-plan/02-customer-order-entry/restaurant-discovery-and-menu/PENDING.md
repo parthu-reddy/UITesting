@@ -6,8 +6,16 @@ The out-of-stock case is implemented and remains active, but the latest randomiz
 
 MENU-05 live-passed: the test selected the nearest Brand1 outlet, found a different Brand1 outlet below 5 km, switched to it, verified menu rows rendered, and reopened the selector to confirm the selected checkmark moved to the second outlet.
 
-Item-image fallback and description styling remain pending. Source inspection shows menu rows omit the image container entirely when `imageUrl` is absent rather than rendering a placeholder; a future UI assertion must follow the intended product contract instead of claiming a fallback currently exists. The current restaurant menu has no item-search field, so MENU-11 through MENU-13 cover the actual search control on the customer restaurant browser. UI checks do not establish server-side authorization.
+MENU-09 live-passed on 2026-09-24: every seeded description was nonblank, smaller than its item name, two-line clamped, and free of leaked `null`/`undefined` values.
+
+MENU-08 is implemented as a strict regression test and failed live on 2026-09-24. Menu row 25 rendered an `img`, but the image did not load (`naturalWidth = 0`), so the deployed UI left a broken visual instead of a loaded item image or fallback. The failure remains active in `MenuCartUiTest.everyMenuItemHasLoadedImageOrFallback`.
+
+Dietary/preparation metadata validation is implemented and failed its seeded-data prerequisite on 2026-09-24 because the selected deployed menu exposed zero accessible dietary markers. The test permits unclassified individual items but requires at least one classified seeded item to exercise the contract; when markers exist it accepts only `Vegetarian` or `Non-vegetarian`. Preparation times, when rendered, must be positive. Keep this test active and either seed at least one dietary classification or fix the UI if classifications already exist in the response.
+
+The current restaurant menu has no item-search field, so MENU-11 through MENU-13 cover the actual search control on the customer restaurant browser. UI checks do not establish server-side authorization.
 
 The restaurant-browser category filter is now live-passed. A non-All category becomes `aria-pressed=true`, the displayed cards are reduced or unchanged according to data, and selecting All restores nonempty unfiltered results. The assertion accounts for the component's intentional six-card lazy-load reset after each filter change.
+
+Restaurant cover-image coverage live-passed on 2026-09-24. Every rendered restaurant card had exactly one loaded image (`naturalWidth > 0`) and a nonempty alt value; this exercises the configured fallback when a restaurant image is absent.
 
 Evidence: UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.smoke.MenuCartUiTest.xml (four passes, drawer-increment failure, and missing out-of-stock fixture failure in the 2026-09-23 full class run), plus `RestaurantDiscoveryUiTest` (one focused pass). No inventory edits.

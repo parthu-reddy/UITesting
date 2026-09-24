@@ -14,11 +14,17 @@ public class RiderWalletPage {
         this.page = page;
     }
 
+    /** "Earnings Wallet" with the balance beside it (RiderWalletSection.tsx). */
+    private com.microsoft.playwright.Locator heading() {
+        return page.getByRole(com.microsoft.playwright.options.AriaRole.HEADING,
+                new Page.GetByRoleOptions().setName("Earnings Wallet").setExact(true));
+    }
+
     public boolean isWalletVisible() {
-        return page.locator("text=Wallet, text=Balance").first().isVisible();
+        return heading().isVisible();
     }
 
     public String getWalletBalance() {
-        return page.locator("text=Balance").locator("xpath=..").locator("span").last().innerText().trim();
+        return heading().locator("xpath=..").locator("span").last().innerText().trim();
     }
 }

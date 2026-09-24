@@ -13,84 +13,88 @@ public class AdminLedgerPage {
     private final Page page;
     public AdminLedgerPage(Page page) { this.page = page; }
 
+    // Maps to AdminLedgerView.tsx: a filter form over a table, paged by chevron buttons.
+
     // ── Visibility ───────────────────────────────────────────────────────
 
     public boolean isLedgerVisible() {
-        return page.locator("text=Ledger, text=Transactions, text=Statement").first().isVisible();
+        return page.getByRole(com.microsoft.playwright.options.AriaRole.HEADING,
+                new Page.GetByRoleOptions().setName("Ledger Entries").setExact(true)).isVisible();
     }
 
     // ── Filters ──────────────────────────────────────────────────────────
 
     public void filterByTransactionId(String txnId) {
-        page.locator("input[placeholder*='Transaction'], input[placeholder*='txn']").first().fill(txnId);
+        page.getByPlaceholder("Transaction ID").fill(txnId);
     }
 
     public void filterByOwnerId(String ownerId) {
-        page.locator("input[placeholder*='Owner ID'], input[placeholder*='owner']").first().fill(ownerId);
+        page.getByPlaceholder("Owner ID").fill(ownerId);
     }
 
-    public void selectOwnerType(String type) {
-        page.locator("select").filter(new com.microsoft.playwright.Locator.FilterOptions()
-                .setHas(page.locator("option:has-text('Owner Type'), option:has-text('Type')"))).first()
-                .selectOption(type);
+    /** The three filters are custom Selects, named by their placeholders; options are the enum values. */
+    private void choose(String comboName, String option) {
+        page.getByRole(com.microsoft.playwright.options.AriaRole.COMBOBOX,
+                new Page.GetByRoleOptions().setName(comboName).setExact(true)).click();
+        page.getByRole(com.microsoft.playwright.options.AriaRole.OPTION,
+                new Page.GetByRoleOptions().setName(option).setExact(true)).click();
     }
 
-    public void selectCategory(String category) {
-        page.locator("select").filter(new com.microsoft.playwright.Locator.FilterOptions()
-                .setHas(page.locator("option:has-text('Category'), option:has-text('All Categories')"))).first()
-                .selectOption(category);
-    }
+    public void selectOwnerType(String type) { choose("All Owner Types", type); }
 
-    public void selectDirection(String direction) {
-        page.locator("select").filter(new com.microsoft.playwright.Locator.FilterOptions()
-                .setHas(page.locator("option:has-text('Direction'), option:has-text('All Directions')"))).first()
-                .selectOption(direction);
-    }
+    /** Category options read the enum with spaces: DELIVERY_FEE shows as "DELIVERY FEE". */
+    public void selectCategory(String category) { choose("All Categories", category.replace('_', ' ')); }
+
+    public void selectDirection(String direction) { choose("All Directions", direction); }
 
     public void applyFilter() {
-        page.locator("button:has-text('Search'), button:has-text('Apply'), button:has(svg.lucide-search)").first().click();
+        page.getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
+                new Page.GetByRoleOptions().setName("Apply Filters").setExact(true)).click();
         page.waitForTimeout(2000);
     }
 
     public void clearFilters() {
-        page.locator("button:has-text('Clear'), button:has-text('Reset')").first().click();
+        page.getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
+                new Page.GetByRoleOptions().setName("Clear").setExact(true)).click();
         page.waitForTimeout(1000);
-    }
-
-    public void selectDateRange(String from, String to) {
-        page.locator("input[type='date']").first().fill(from);
-        page.locator("input[type='date']").last().fill(to);
-        page.waitForTimeout(500);
     }
 
     // ── Transaction list ─────────────────────────────────────────────────
 
-    public int getTransactionCount() {
-        return page.locator("table tbody tr, [data-testid='ledger-row']").count();
+    /** Real rows only: loading and "No ledger transactions found." are one full-width cell. */
+    private com.microsoft.playwright.Locator rows() {
+        return page.locator("table tbody tr:not(:has(td[colspan]))");
     }
 
+    public int getTransactionCount() {
+        return rows().count();
+    }
+
+    /**
+     * The ledger has no statement or detail panel: a row's only action is copying its
+     * transaction id. LEDGER-ADV-11 is recorded in e2e-plan/NOT-DEFECTS/README.md.
+     */
     public void openStatement(int index) {
-        page.locator("table tbody tr, [data-testid='ledger-row']").nth(index).click();
-        page.waitForTimeout(500);
+        throw new UnsupportedOperationException("AdminLedgerView has no statement/detail panel");
     }
 
     public boolean isStatementPanelOpen() {
-        return page.locator("text=Statement, text=Transaction Detail, text=Entries").first().isVisible();
+        throw new UnsupportedOperationException("AdminLedgerView has no statement/detail panel");
     }
 
-    // ── Pagination ───────────────────────────────────────────────────────
+    // ── Pagination: icon-only chevrons either side of "Page n of m" ────
 
     public void nextPage() {
-        page.locator("button:has(svg.lucide-chevron-right), button:has-text('Next')").first().click();
+        page.locator("button:has(svg.lucide-chevron-right)").first().click();
         page.waitForTimeout(500);
     }
 
     public void prevPage() {
-        page.locator("button:has(svg.lucide-chevron-left), button:has-text('Prev')").first().click();
+        page.locator("button:has(svg.lucide-chevron-left)").first().click();
         page.waitForTimeout(500);
     }
 
     public String getPageInfo() {
-        return page.locator("text=Page").first().innerText().trim();
+        return page.getByText(java.util.regex.Pattern.compile("^Page \\d+ of \\d+$")).first().innerText().trim();
     }
 }

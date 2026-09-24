@@ -20,6 +20,7 @@ public class ProfileSettingsTest extends TestBase {
     // ── PROFILE COMPLETION MODAL SCENARIOS ───────────────────────────────
 
     @Test
+    @Disabled("Uses an unseeded phone and permanently completes a new profile")
     @DisplayName("PROFILE-16/17: Complete profile modal prompt")
     void completeProfileModalPrompt() {
         // Use a new unique phone to trigger the profile setup

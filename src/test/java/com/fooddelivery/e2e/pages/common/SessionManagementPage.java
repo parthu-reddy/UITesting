@@ -1,6 +1,8 @@
 package com.fooddelivery.e2e.pages.common;
 
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.Locator;
+import com.microsoft.playwright.options.AriaRole;
 
 /**
  * Page Object for the Session Management Modal.
@@ -18,20 +20,39 @@ public class SessionManagementPage {
     }
 
     public boolean isSessionModalOpen() {
-        return page.locator("text=Active Sessions, text=Session Management, text=Devices").first().isVisible();
+        return section().isVisible();
     }
 
     public int getSessionCount() {
-        return page.locator("[data-testid='session-row'], .session-entry").count();
+        return sessionRows().count();
     }
 
     public void terminateSession(int index) {
-        page.locator("button:has-text('Terminate'), button:has-text('End Session')").nth(index).click();
-        page.waitForTimeout(1000);
+        sessionRows().nth(index).getByRole(AriaRole.BUTTON,
+                new Locator.GetByRoleOptions().setName("Remove").setExact(true)).click();
     }
 
     public void terminateAll() {
-        page.locator("button:has-text('Terminate All'), button:has-text('End All Sessions')").first().click();
-        page.waitForTimeout(1000);
+        throw new UnsupportedOperationException("The current UI has no remove-all-sessions action");
+    }
+
+    public Locator section() {
+        return page.getByRole(AriaRole.HEADING,
+                new Page.GetByRoleOptions().setName("Logged-in Devices").setExact(true))
+                .locator("xpath=../..");
+    }
+
+    public Locator sessionRows() {
+        return section().getByRole(AriaRole.BUTTON,
+                new Locator.GetByRoleOptions().setName("Remove").setExact(true))
+                .locator("xpath=..");
+    }
+
+    public boolean hasDefinedState() {
+        return getSessionCount() > 0
+                || section().getByText("Loading sessions...",
+                        new Locator.GetByTextOptions().setExact(true)).isVisible()
+                || section().getByText("No active sessions found.",
+                        new Locator.GetByTextOptions().setExact(true)).isVisible();
     }
 }

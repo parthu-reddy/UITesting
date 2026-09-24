@@ -14,16 +14,24 @@ public class DeliveryOrderDetailsModalPage {
         this.page = page;
     }
 
+    /** A Modal titled "Order #1a2b3c4d" (DeliveryOrderDetailsModal.tsx); the title is the dialog's name. */
+    private com.microsoft.playwright.Locator dialog() {
+        return page.getByRole(com.microsoft.playwright.options.AriaRole.DIALOG,
+                new Page.GetByRoleOptions().setName(java.util.regex.Pattern.compile("^Order #[0-9a-f]{8}$")));
+    }
+
     public boolean isOpen() {
-        return page.locator("text=Order #, text=Order Details, svg.lucide-receipt").first().isVisible();
+        return dialog().isVisible();
     }
 
     public String getOrderId() {
-        return page.locator("text=Order #").first().innerText().trim();
+        return dialog().getAttribute("aria-label");
     }
 
+    /** The modal is headerless; Escape closes every Overlay. */
     public void close() {
-        page.locator("button:has(svg.lucide-x), button:has-text('Close')").first().click();
-        page.waitForTimeout(300);
+        page.keyboard().press("Escape");
+        dialog().waitFor(new com.microsoft.playwright.Locator.WaitForOptions()
+                .setState(com.microsoft.playwright.options.WaitForSelectorState.HIDDEN));
     }
 }

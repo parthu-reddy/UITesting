@@ -125,6 +125,7 @@ public class AdminLiveOpsFleetTest extends TestBase {
     @Test
     @DisplayName("OPS-TAB-01: Operations panel visible")
     void operationsPanelVisible() {
+        portal.openMoneyOperationsTab();
         AdminOperationsPage ops = new AdminOperationsPage(adminPage);
         assertThat(ops.isOperationsVisible()).isTrue();
     }
@@ -132,6 +133,7 @@ public class AdminLiveOpsFleetTest extends TestBase {
     @Test
     @DisplayName("OPS-TAB-02: Open rejections tab")
     void openRejectionsTab() {
+        portal.openMoneyOperationsTab();
         AdminOperationsPage ops = new AdminOperationsPage(adminPage);
         ops.openRejectionsTab();
         adminPage.waitForTimeout(500);
@@ -140,6 +142,7 @@ public class AdminLiveOpsFleetTest extends TestBase {
     @Test
     @DisplayName("OPS-TAB-03: Open reconciliation tab")
     void openReconciliationTab() {
+        portal.openMoneyOperationsTab();
         AdminOperationsPage ops = new AdminOperationsPage(adminPage);
         ops.openReconciliationTab();
         adminPage.waitForTimeout(500);
@@ -148,6 +151,7 @@ public class AdminLiveOpsFleetTest extends TestBase {
     @Test
     @DisplayName("OPS-TAB-05: Open payment DLQ tab")
     void openPaymentDlqTab() {
+        portal.openMoneyOperationsTab();
         AdminOperationsPage ops = new AdminOperationsPage(adminPage);
         ops.openPaymentDlqTab();
         adminPage.waitForTimeout(500);
@@ -156,6 +160,7 @@ public class AdminLiveOpsFleetTest extends TestBase {
     @Test
     @DisplayName("OPS-TAB-06: Open wallet DLQ tab")
     void openWalletDlqTab() {
+        portal.openMoneyOperationsTab();
         AdminOperationsPage ops = new AdminOperationsPage(adminPage);
         ops.openWalletDlqTab();
         adminPage.waitForTimeout(500);

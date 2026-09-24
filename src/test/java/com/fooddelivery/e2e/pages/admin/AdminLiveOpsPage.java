@@ -15,18 +15,25 @@ public class AdminLiveOpsPage {
 
     // ── Visibility ───────────────────────────────────────────────────────
 
+    /** The order list's "Active Orders" header is always rendered (AdminLiveOperations.tsx). */
     public boolean isLiveOpsVisible() {
-        return page.locator("text=Live Operations, text=Active Orders, text=Live Map").first().isVisible();
+        return page.getByRole(com.microsoft.playwright.options.AriaRole.HEADING,
+                new Page.GetByRoleOptions().setName("Active Orders").setExact(true)).isVisible();
     }
 
     // ── Order list ───────────────────────────────────────────────────────
 
+    /** One button per active order, in the list under the "Active Orders" header. */
+    private com.microsoft.playwright.Locator orders() {
+        return page.locator("div:has(> h3:text-is('Active Orders')) + div > button");
+    }
+
     public int getActiveOrderCount() {
-        return page.locator("[data-testid='live-order'], .live-order-card, button:has(text='#')").count();
+        return orders().count();
     }
 
     public void selectOrder(int index) {
-        page.locator("button:has(p:has-text('#'))").nth(index).click();
+        orders().nth(index).click();
         page.waitForTimeout(500);
     }
 
@@ -35,8 +42,10 @@ public class AdminLiveOpsPage {
         page.waitForTimeout(500);
     }
 
+    /** A selected order opens its panel, which carries "Refund Actions". */
     public boolean isOrderSelected() {
-        return page.locator("text=Order #, text=Refund Actions").first().isVisible();
+        return page.getByRole(com.microsoft.playwright.options.AriaRole.HEADING,
+                new Page.GetByRoleOptions().setName("Refund Actions").setExact(true)).isVisible();
     }
 
     public void refresh() {

@@ -29,8 +29,8 @@ Uses: Playwright viewport override, keyboard simulation, standard ARIA assertion
 | ID | Description | Action | Expected result |
 |---|---|---|---|
 | ACCESS-06 | Images declare alt text | All `<img>` elements on customer home page. | Implemented and live-passed twice: no rendered image is missing the `alt` attribute; decorative empty values are allowed. |
-| ACCESS-07 | Buttons have accessible names | Visible login role controls. | Implemented and live-passed; broader authenticated-screen audit remains pending. |
-| ACCESS-08 | Form fields have labels | On login, checkout, and settings forms. | Login phone test implemented and currently fails: visible label is not programmatically associated. Other forms remain pending. |
+| ACCESS-07 | Buttons have accessible names | Visible login role controls and authenticated customer settings. | Implemented and live-passed: all login role controls and every visible customer-settings button expose text or an explicit accessible name. |
+| ACCESS-08 | Form fields have labels | On login, checkout, and settings forms. | Strict tests implemented for login, customer profile, and new-address fields; all currently expose at least one unassociated field. Checkout remains blocked by delivery availability. |
 | ACCESS-09 | Cart quantity output ARIA | Add an available item → open cart → inspect quantity output. | Implemented; output must expose `aria-live="polite"`. |
 | ACCESS-10 | Role selector tabs have ARIA roles | On login role selector. | Implemented through visible native role buttons with accessible names. |
 
@@ -51,4 +51,4 @@ Uses: Playwright viewport override, keyboard simulation, standard ARIA assertion
 | NAV-02 | Deep link to settings | Navigate directly to the settings URL if one exists. | Not currently applicable: customer routing uses a wildcard main view and Account Settings has no direct route. |
 | NAV-03 | Unknown route fallback | Navigate an authenticated customer to `/i-do-not-exist`. | Implemented and live-passed: URL is retained while the customer dashboard and Home address render safely instead of a blank page. |
 
-Additional validated navigation: `RoleNavigationUiTest` passes all four role-selector forward/back paths at 1280 px and 390 px. Full authenticated dashboard-tab navigation remains pending and restaurant tabs are blocked by the recorded route override defect.
+Additional validated navigation: `RoleNavigationUiTest` passes all four role-selector forward/back paths at 1280 px and 390 px. Customer Account Settings now live-passes selection of Profile, History, Addresses, My Reviews, and Store Credit while retaining the settings shell. Restaurant tabs remain blocked by the recorded route override defect.

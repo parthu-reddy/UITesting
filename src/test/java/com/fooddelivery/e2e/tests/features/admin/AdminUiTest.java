@@ -22,11 +22,12 @@ public class AdminUiTest extends TestBase {
         
         adminPage.waitForTimeout(2000);
         
-        // Verify a dashboard element is visible
-        boolean isAdminDashboardVisible = adminPage.locator("text=Platform Overview").isVisible() ||
-                                          adminPage.locator("text=System Admin").isVisible() ||
-                                          adminPage.locator("text=Analytics").isVisible();
-                                          
+        // The admin shell: its "Admin" heading and the sidebar (AdminPortal.tsx). It lands on
+        // the fleet map.
+        boolean isAdminDashboardVisible = adminPage.getByRole(com.microsoft.playwright.options.AriaRole.HEADING,
+                        new com.microsoft.playwright.Page.GetByRoleOptions().setName("Admin").setExact(true)).isVisible()
+                && adminPage.getByText("Live Operations", new com.microsoft.playwright.Page.GetByTextOptions().setExact(true)).isVisible();
+
         assertThat(isAdminDashboardVisible).isTrue();
     }
 

@@ -15,17 +15,22 @@ public class AdminPayoutsPage {
         this.page = page;
     }
 
+    /** pages/admin/money/AdminPayoutsPage.tsx: headed "Payouts", with its own two-item nav. */
     public boolean isPayoutsVisible() {
-        return page.locator("text=Payouts, text=Payout Queue, text=Pending Payouts").first().isVisible();
+        return page.getByRole(com.microsoft.playwright.options.AriaRole.HEADING,
+                new Page.GetByRoleOptions().setName("Payouts").setExact(true)).isVisible();
     }
 
+    /** Exact names: a has-text('Pending') match hits the admin sidebar's "Pending Payouts" first. */
     public void openPendingQueue() {
-        page.locator("button:has-text('Pending'), button:has-text('Queue')").first().click();
+        page.getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
+                new Page.GetByRoleOptions().setName("Pending Queue").setExact(true)).click();
         page.waitForTimeout(500);
     }
 
     public void openHistory() {
-        page.locator("button:has-text('History'), button:has-text('Completed')").first().click();
+        page.getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
+                new Page.GetByRoleOptions().setName("History").setExact(true)).click();
         page.waitForTimeout(500);
     }
 

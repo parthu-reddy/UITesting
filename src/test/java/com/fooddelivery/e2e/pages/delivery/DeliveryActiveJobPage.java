@@ -84,20 +84,39 @@ public class DeliveryActiveJobPage {
 
     // ── Status checks ────────────────────────────────────────────────────
 
+    /** The rider's job panel: "Active Contract" (DeliveryActiveJob.tsx). */
+    private Locator activeContract() {
+        return page.getByRole(com.microsoft.playwright.options.AriaRole.HEADING,
+                new Page.GetByRoleOptions().setName("Active Contract").setExact(true));
+    }
+
     public boolean isActiveJobVisible() {
-        return page.locator("text=Active Delivery, text=Pickup, text=Arrived at Restaurant").first().isVisible();
+        return activeContract().isVisible();
     }
 
+    /** Before pickup the panel asks for the restaurant's code (ActiveDeliveryCard.tsx). */
     public boolean isPickupPhase() {
-        return page.locator("text=Enter 6-digit pickup OTP, text=Slide to confirm pickup").first().isVisible();
+        return page.getByPlaceholder("Enter 6-digit pickup OTP").isVisible();
     }
 
+    /** After pickup it asks for the customer's code instead. */
     public boolean isDeliveryPhase() {
-        return page.locator("text=Ask customer for 6-digit OTP, text=Slide to deliver").first().isVisible();
+        return page.getByPlaceholder("Ask customer for 6-digit OTP").isVisible();
     }
 
+    /**
+     * A confirmed delivery closes the job panel (useRiderJobActions: setActiveJobId(null)); there
+     * is no toast. A rejected code keeps the panel open with an error, so "closed" is the signal.
+     */
     public boolean hasCompletedDelivery() {
-        return page.locator("text=Delivered, text=Delivery Complete, text=Completed").first().isVisible();
+        try {
+            activeContract().waitFor(new Locator.WaitForOptions()
+                    .setState(WaitForSelectorState.HIDDEN)
+                    .setTimeout(15000));
+            return true;
+        } catch (com.microsoft.playwright.PlaywrightException e) {
+            return false;
+        }
     }
 
     // ── Navigation ───────────────────────────────────────────────────────

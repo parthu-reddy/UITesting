@@ -49,6 +49,20 @@ public class RestaurantDiscoveryUiTest extends TestBase {
     }
 
     @Test
+    void everyRestaurantCardHasALoadedNamedCoverImage() {
+        Locator cards = openCustomerHome();
+        for (int index = 0; index < cards.count(); index++) {
+            Locator image = cards.nth(index).locator("img");
+            com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(image).hasCount(1);
+            assertThat(image.getAttribute("alt")).isNotBlank();
+            int naturalWidth = ((Number) image.evaluate("element => element.naturalWidth")).intValue();
+            assertThat(naturalWidth)
+                    .as("restaurant card %s must load its cover or the configured fallback", index)
+                    .isGreaterThan(0);
+        }
+    }
+
+    @Test
     void searchNoResultsAndClearRestoreRestaurantCards() {
         Locator cards = openCustomerHome();
         int initialCount = cards.count();

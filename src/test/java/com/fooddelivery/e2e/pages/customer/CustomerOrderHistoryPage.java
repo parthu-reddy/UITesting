@@ -3,6 +3,7 @@ package com.fooddelivery.e2e.pages.customer;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.WaitForSelectorState;
 import com.microsoft.playwright.Locator;
+import com.microsoft.playwright.options.AriaRole;
 
 /**
  * Page Object for Customer Order History.
@@ -17,11 +18,23 @@ public class CustomerOrderHistoryPage {
     }
 
     public void waitForHistoryLoad() {
-        page.waitForTimeout(2000); // Wait for API to load order history
+        page.getByRole(AriaRole.TAB,
+                new Page.GetByRoleOptions().setName("History").setExact(true))
+                .waitFor(new Locator.WaitForOptions()
+                        .setState(WaitForSelectorState.VISIBLE)
+                        .setTimeout(10000));
+        page.locator("[data-screen='settings']")
+                .getByText("Loading history...", new Locator.GetByTextOptions().setExact(true))
+                .or(emptyState())
+                .or(historyCards().first())
+                .first()
+                .waitFor(new Locator.WaitForOptions()
+                        .setState(WaitForSelectorState.VISIBLE)
+                        .setTimeout(20000));
     }
 
     public int getOrderCount() {
-        return page.locator("[data-testid='order-card'], .order-card, div:has(> text='Order #')").count();
+        return historyCards().count();
     }
 
     public boolean hasOrderWithStatus(String status) {
@@ -29,8 +42,7 @@ public class CustomerOrderHistoryPage {
     }
 
     public void clickOrderCard(int index) {
-        page.locator("[data-testid='order-card'], .order-card").nth(index).click();
-        page.waitForTimeout(500);
+        historyCards().nth(index).click();
     }
 
     public boolean hasReorderButton() {
@@ -40,5 +52,20 @@ public class CustomerOrderHistoryPage {
     public void clickReorder() {
         page.locator("button:has-text('Reorder')").first().click();
         page.waitForTimeout(500);
+    }
+
+    public Locator historyCards() {
+        return page.locator("[data-screen='settings']")
+                .locator("div.flex-1.overflow-y-auto.overscroll-none button[type='button']")
+                .filter(new Locator.FilterOptions().setHas(page.locator("span.font-mono")));
+    }
+
+    public Locator emptyState() {
+        return page.getByText("No order history found.",
+                new Page.GetByTextOptions().setExact(true));
+    }
+
+    public boolean hasDefinedState() {
+        return emptyState().isVisible() || getOrderCount() > 0;
     }
 }

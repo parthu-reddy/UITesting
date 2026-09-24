@@ -75,6 +75,40 @@ public class CheckoutUiTest extends TestBase {
     }
 
     @Test
+    @DisplayName("CHECKOUT-07-10: Payment methods remain usable after closing and reopening checkout")
+    void paymentChoicesAndCheckoutReentry() {
+        String cartItemName = openCheckoutWithOneItem();
+        PaymentModalPage payment = new PaymentModalPage(customerPage);
+
+        // Radio names (CustomerCheckout.tsx): "La Bouffe Wallet", "UPI", "Credit or debit card".
+        // Only the wallet can be disabled -- when its balance cannot cover the bill.
+        assertThat(payment.isPaymentMethodEnabled("Credit or debit card")).isTrue();
+        assertThat(payment.isPaymentMethodEnabled("UPI")).isTrue();
+        payment.selectPaymentMethod("UPI");
+        assertThat(payment.isPayEnabled()).isTrue();
+        payment.selectPaymentMethod("Credit or debit card");
+        assertThat(payment.isPayEnabled()).isTrue();
+        if (payment.isPaymentMethodEnabled("Wallet")) {
+            payment.selectPaymentMethod("Wallet");
+            assertThat(payment.isPayEnabled()).isTrue();
+        }
+
+        payment.close();
+        CustomerCartDrawerPage cart = new CustomerCartDrawerPage(customerPage);
+        assertThat(cart.isCartOpen()).isTrue();
+        assertThat(cart.getFirstItemName()).isEqualTo(cartItemName);
+        cart.clickPlaceOrder();
+
+        assertThat(payment.isOpen()).isTrue();
+        assertThat(payment.hasItem(cartItemName)).isTrue();
+        assertThat(payment.hasPaymentMethod("Credit or debit card")).isTrue();
+        assertThat(payment.hasPaymentMethod("UPI")).isTrue();
+        assertThat(payment.hasPaymentMethod("Wallet")).isTrue();
+        assertThat(payment.isPayEnabled()).isTrue();
+        payment.close();
+    }
+
+    @Test
     @DisplayName("CHECKOUT-16: Reload during checkout preserves address and cart without submitting payment")
     void reloadDuringCheckoutPreservesCart() {
         String cartItemName = openCheckoutWithOneItem();

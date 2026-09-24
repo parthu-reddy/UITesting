@@ -47,9 +47,7 @@ public class PickupDeliveryOtpTest extends TestBase {
         riderDashboard = new DeliveryDashboardPage(riderPage);
         riderDashboard.waitForDashboard();
         toggle = new DeliveryOnlineTogglePage(riderPage);
-        if (!toggle.isOnline()) {
-            toggle.goOnline();
-        }
+        toggle.goOnline();
     }
 
     /**

@@ -34,9 +34,9 @@ All scenarios use `CustomerCartDrawerPage`, `CustomerMenuViewPage`, `CustomerFre
 
 | ID | Description | Action | Expected result |
 |---|---|---|---|
-| CART-14 | Cross-restaurant conflict dialog | Add from two restaurants. | Not applicable to current UI: cart state intentionally keeps independent carts keyed by restaurant and exposes no conflict dialog. |
-| CART-15 | Accept conflict → cart replaced | Conflict confirmation. | Not applicable because no replace confirmation exists. |
-| CART-16 | Dismiss conflict → cart unchanged | Conflict cancellation. | Not applicable because no conflict dialog exists. |
+| CART-14 | Cross-restaurant cart behavior | Implemented for the current product contract: add one item from each of two nearby brands and open the combined cart. | Two independent restaurant sections and checkout actions render; no replacement dialog appears. |
+| CART-15 | First cart is retained | After adding from the second restaurant. | Implemented: the first outlet and exact first item remain visible. |
+| CART-16 | Second cart remains independent | Inspect combined cart. | Implemented: the second outlet/item has its own checkout action and neither cart replaces the other. |
 
 ## Batch 5 — Empty cart state
 

@@ -27,14 +27,14 @@ Uses all page objects as applicable. Tests browser-level resilience and state pe
 
 | ID | Description | Action | Expected result |
 |---|---|---|---|
-| RECOVERY-12 | Back from checkout | Enter checkout → press browser Back. | Returns to cart; cart items intact; no partial order created. |
-| RECOVERY-13 | Back from payment modal | Open payment modal → press Back. | Modal closes; checkout screen remains. |
+| RECOVERY-12 | Back from checkout | Enter checkout → press browser Back. | Strict UI-only test implemented together with RECOVERY-13; live validation is blocked before the modal opens by delivery-availability HTTP 409. |
+| RECOVERY-13 | Back from payment modal | Open payment modal → press Back. | Strict UI-only test implemented: modal must close and the exact cart item must remain visible; live validation is blocked by delivery-availability HTTP 409. |
 | RECOVERY-14 | Back from order tracker | View active order tracker → press Back. | Returns to home/dashboard; active order still in progress. |
-| RECOVERY-15 | Back from restaurant menu | Customer on restaurant menu → browser Back. | Returns to restaurant list; no cart cleared. |
+| RECOVERY-15 | Back from restaurant menu | Customer on restaurant menu → browser Back. | Implemented and currently failing: browser Back does not restore the restaurant list. |
 
 ## Batch 4 — Parallel tab recovery
 
 | ID | Description | Action | Expected result |
 |---|---|---|---|
-| RECOVERY-16 | Two customer tabs | Open two tabs with the same customer session. | Implemented for shared authentication and exact Home selection; cross-tab cart consistency remains pending. |
+| RECOVERY-16 | Two customer tabs | Open two tabs with the same customer session. | Implemented and live-passed for shared authentication, exact Home selection, and the exact cart item after second-tab reload. |
 | RECOVERY-17 | Order placed in one tab visible in other | Customer places order in Tab 1. | Tab 2's active orders section updates (or on next interaction/reload shows the new order). |

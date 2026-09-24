@@ -14,11 +14,14 @@ public class AdminCategoriesPage {
         this.page = page;
     }
 
+    /** AdminCategories.tsx: the list is headed "Existing Categories". */
     public boolean isCategoriesVisible() {
-        return page.locator("text=Categories, text=Food Categories").first().isVisible();
+        return page.getByRole(com.microsoft.playwright.options.AriaRole.HEADING,
+                new Page.GetByRoleOptions().setName("Existing Categories").setExact(true)).isVisible();
     }
 
+    /** One card per category under that heading; the empty state is a <p>, not a card. */
     public int getCategoryCount() {
-        return page.locator("[data-testid='category-card'], .category-card").count();
+        return page.locator("h3:text-is('Existing Categories') + div > div").count();
     }
 }

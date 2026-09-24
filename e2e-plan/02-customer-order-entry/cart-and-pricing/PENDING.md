@@ -26,4 +26,8 @@ The CART-14 through CART-16 conflict-dialog scenarios do not match the current a
 
 `cartTotalEqualsDisplayedSubtotalFeesAndTaxes` now implements the strict CART-10 through CART-12 arithmetic check. Its first live run did not reach settled pricing: delivery availability returned HTTP 409 and both tax lines remained `Calculating...`. The test remains active and fails instead of interpreting unresolved values as zero. When the quote settles, it requires Total to equal Subtotal + Platform Fee + Delivery Fee + SGST + CGST within ₹0.01.
 
+## Independent multi-restaurant carts
+
+The obsolete `CustomerCartTest` that referenced nonexistent `Test Brand` data has been replaced with the deployed product contract for CART-14 through CART-16. Its live run passed: one UI-added item from Brand 1 and one from Brand 2 remained in separate outlet sections, each retained its exact item and independent Checkout action, and no cart-replacement dialog appeared. Review endpoints returned HTTP 403 and delivery availability returned HTTP 409 during the run, but neither prevented this non-checkout cart behavior from being verified.
+
 `fiveSequentialIncrementsReachQuantitySix` and the expanded `removeOnlyItemFromCart` live-passed. Five rendered increment-button activations changed quantity 1 to 6. Removing the only item displayed `Your cart is empty`, removed the quantity output, and after closing the drawer the View Cart trigger was hidden. These tests keep their cart state inside the disposable browser context.

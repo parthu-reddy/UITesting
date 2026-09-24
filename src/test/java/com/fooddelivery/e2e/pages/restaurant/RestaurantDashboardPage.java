@@ -44,6 +44,8 @@ public class RestaurantDashboardPage {
             page.getByRole(com.microsoft.playwright.options.AriaRole.OPTION,
                     new Page.GetByRoleOptions().setName(outletName).setExact(true)).click();
         }
+        page.waitForCondition(() -> outlet.innerText().trim().equals(outletName),
+                new Page.WaitForConditionOptions().setTimeout(5000));
     }
 
     // ── Tab navigation ───────────────────────────────────────────────────

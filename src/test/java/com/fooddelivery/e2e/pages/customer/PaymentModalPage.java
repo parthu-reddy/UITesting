@@ -65,15 +65,23 @@ public class PaymentModalPage {
 
     /** Radio names: "La Bouffe Wallet …", "UPI", "Credit or debit card". Matched as a substring. */
     public boolean hasPaymentMethod(String name) {
-        return dialog().getByRole(AriaRole.RADIO,
-                new Locator.GetByRoleOptions().setName(Pattern.compile(Pattern.quote(name), Pattern.CASE_INSENSITIVE)))
-                .first().isVisible();
+        return paymentRadio(name).isVisible();
+    }
+
+    /** The wallet radio is disabled while the balance cannot cover the bill; UPI and card never are. */
+    public boolean isPaymentMethodEnabled(String name) {
+        Locator method = paymentRadio(name);
+        return method.isVisible() && method.isEnabled();
     }
 
     public void selectPaymentMethod(String name) {
-        dialog().getByRole(AriaRole.RADIO,
+        paymentRadio(name).click();
+    }
+
+    private Locator paymentRadio(String name) {
+        return dialog().getByRole(AriaRole.RADIO,
                 new Locator.GetByRoleOptions().setName(Pattern.compile(Pattern.quote(name), Pattern.CASE_INSENSITIVE)))
-                .first().click();
+                .first();
     }
 
     private Locator placeOrder() {

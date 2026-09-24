@@ -34,6 +34,17 @@ public class CustomerSettingsUiTest extends TestBase {
         customerPage.getByRole(AriaRole.TAB,new Page.GetByRoleOptions().setName("Profile").setExact(true)).click();
         assertThat(customerPage.locator("input[type=tel]")).hasValue(testCustomerPhone);
     }
+
+    @Test void everyCustomerSettingsTabCanBeSelectedWithoutLosingSettings() {
+        for (String name : java.util.List.of("Profile", "History", "Addresses", "My Reviews", "Store Credit")) {
+            Locator tab = customerPage.getByRole(AriaRole.TAB,
+                    new Page.GetByRoleOptions().setName(name).setExact(true));
+            tab.click();
+            assertThat(tab).hasAttribute("aria-selected", "true");
+            assertThat(customerPage.getByRole(AriaRole.HEADING,
+                    new Page.GetByRoleOptions().setName("Account Settings"))).isVisible();
+        }
+    }
     @Test void profileIdentityAndStoreCreditBalanceRender() {
         Locator name = customerPage.locator("input[type=text]").first();
         assertThat(name).not().hasValue("");
@@ -62,6 +73,59 @@ public class CustomerSettingsUiTest extends TestBase {
         assertThat(customerPage.getByText("Home", new Page.GetByTextOptions().setExact(true)).first()).isVisible();
         assertThat(customerPage.getByRole(AriaRole.BUTTON,
                 new Page.GetByRoleOptions().setName("Add / Manage Addresses").setExact(true))).isVisible();
+    }
+
+    @Test void everyVisibleSettingsButtonHasAnAccessibleName() {
+        Locator buttons = customerPage.locator("button:visible");
+        org.assertj.core.api.Assertions.assertThat(buttons.count()).isGreaterThan(0);
+        for (int index = 0; index < buttons.count(); index++) {
+            Locator button = buttons.nth(index);
+            String accessibleName = (String) button.evaluate("element => "
+                    + "(element.getAttribute('aria-label') || element.getAttribute('aria-labelledby') || "
+                    + "element.getAttribute('title') || element.textContent || '').trim()");
+            org.assertj.core.api.Assertions.assertThat(accessibleName)
+                    .as("visible settings button %s must expose text, aria-label, aria-labelledby, or title", index)
+                    .isNotBlank();
+        }
+    }
+
+    @Test void everyVisibleProfileFieldHasAProgrammaticLabel() {
+        Locator fields = customerPage.locator("input:visible, select:visible, textarea:visible");
+        org.assertj.core.api.Assertions.assertThat(fields.count()).isGreaterThan(0);
+        for (int index = 0; index < fields.count(); index++) {
+            boolean labelled = (Boolean) fields.nth(index).evaluate("element => {"
+                    + "const id = element.id;"
+                    + "const explicit = id && document.querySelector(`label[for=\"${CSS.escape(id)}\"]`);"
+                    + "const wrapped = element.closest('label');"
+                    + "const aria = element.getAttribute('aria-label') || element.getAttribute('aria-labelledby');"
+                    + "return Boolean(explicit || wrapped || (aria && aria.trim()));"
+                    + "}");
+            org.assertj.core.api.Assertions.assertThat(labelled)
+                    .as("visible profile field %s must be associated with a label", index).isTrue();
+        }
+    }
+
+    @Test void everyVisibleNewAddressFieldHasAProgrammaticLabel() {
+        customerPage.getByRole(AriaRole.TAB,
+                new Page.GetByRoleOptions().setName("Addresses").setExact(true)).click();
+        customerPage.getByRole(AriaRole.BUTTON,
+                new Page.GetByRoleOptions().setName("Add / Manage Addresses").setExact(true)).click();
+        Locator panel = customerPage.getByText("Delivery Location",
+                new Page.GetByTextOptions().setExact(true)).locator("xpath=../../..");
+        Locator fields = panel.locator("input:visible, select:visible, textarea:visible");
+        org.assertj.core.api.Assertions.assertThat(fields.count()).isGreaterThan(0);
+        for (int index = 0; index < fields.count(); index++) {
+            boolean labelled = (Boolean) fields.nth(index).evaluate("element => {"
+                    + "const id = element.id;"
+                    + "const explicit = id && document.querySelector(`label[for=\"${CSS.escape(id)}\"]`);"
+                    + "const wrapped = element.closest('label');"
+                    + "const aria = element.getAttribute('aria-label') || element.getAttribute('aria-labelledby');"
+                    + "return Boolean(explicit || wrapped || (aria && aria.trim()));"
+                    + "}");
+            org.assertj.core.api.Assertions.assertThat(labelled)
+                    .as("visible address field %s must be associated with a label", index).isTrue();
+        }
+        panel.locator("button:has(svg.lucide-x)").click();
     }
     @Test void blankNewAddressFormIsBlockedAndCanBeClosed() {
         customerPage.getByRole(AriaRole.TAB,
@@ -111,5 +175,51 @@ public class CustomerSettingsUiTest extends TestBase {
                 customerPage.getByText("You haven't reviewed anything yet",
                         new Page.GetByTextOptions().setExact(true)));
         assertThat(outcome).isVisible();
+    }
+
+    @Test void profileThemeClassTogglesAndRestoresLight() {
+        Locator app = customerPage.locator(".app-background").first();
+        Locator toggle = customerPage.getByTitle("Toggle Light/Dark Mode",
+                new Page.GetByTitleOptions().setExact(true));
+        assertThat(toggle).isVisible();
+
+        boolean startsDark = java.util.regex.Pattern.compile("(?:^|\\s)dark(?:\\s|$)")
+                .matcher(app.getAttribute("class")).find();
+        if (startsDark) toggle.click();
+        assertThat(app).not().hasClass(java.util.regex.Pattern.compile(".*\\bdark\\b.*"));
+        toggle.click();
+        assertThat(app).hasClass(java.util.regex.Pattern.compile(".*\\bdark\\b.*"));
+
+        toggle.click();
+        assertThat(app).not().hasClass(java.util.regex.Pattern.compile(".*\\bdark\\b.*"));
+    }
+
+    @Test void profileDarkThemePersistsAcrossReload() {
+        Locator app = customerPage.locator(".app-background").first();
+        Locator toggle = customerPage.getByTitle("Toggle Light/Dark Mode",
+                new Page.GetByTitleOptions().setExact(true));
+        if (!java.util.regex.Pattern.compile("(?:^|\\s)dark(?:\\s|$)")
+                .matcher(app.getAttribute("class")).find()) toggle.click();
+        assertThat(app).hasClass(java.util.regex.Pattern.compile(".*\\bdark\\b.*"));
+
+        customerPage.reload();
+        assertThat(customerPage.locator(".app-background").first())
+                .hasClass(java.util.regex.Pattern.compile(".*\\bdark\\b.*"));
+    }
+
+    @Test void profileDarkThemeChangesRenderedBackground() {
+        Locator app = customerPage.locator(".app-background").first();
+        Locator toggle = customerPage.getByTitle("Toggle Light/Dark Mode",
+                new Page.GetByTitleOptions().setExact(true));
+        if (java.util.regex.Pattern.compile("(?:^|\\s)dark(?:\\s|$)")
+                .matcher(app.getAttribute("class")).find()) toggle.click();
+        String lightBackground = (String) app.evaluate("element => getComputedStyle(element).backgroundColor");
+
+        toggle.click();
+        assertThat(app).hasClass(java.util.regex.Pattern.compile(".*\\bdark\\b.*"));
+        String darkBackground = (String) app.evaluate("element => getComputedStyle(element).backgroundColor");
+        org.assertj.core.api.Assertions.assertThat(darkBackground)
+                .as("Dark mode must visibly change the application background")
+                .isNotEqualTo(lightBackground);
     }
 }

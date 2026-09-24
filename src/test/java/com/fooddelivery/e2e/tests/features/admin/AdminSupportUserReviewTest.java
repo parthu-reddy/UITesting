@@ -84,6 +84,7 @@ public class AdminSupportUserReviewTest extends TestBase {
     @Test
     @DisplayName("REFUND-ADV-01: Refund queue visible")
     void refundQueueVisible() {
+        portal.openRefundsTab();
         AdminRefundQueuePage refunds = new AdminRefundQueuePage(adminPage);
         assertThat(refunds.isRefundQueueVisible()).isTrue();
     }
@@ -91,6 +92,7 @@ public class AdminSupportUserReviewTest extends TestBase {
     @Test
     @DisplayName("REFUND-ADV-02: Refund count")
     void refundCount() {
+        portal.openRefundsTab();
         AdminRefundQueuePage refunds = new AdminRefundQueuePage(adminPage);
         int count = refunds.getRefundCount();
         assertThat(count).isGreaterThanOrEqualTo(0);
@@ -205,6 +207,7 @@ public class AdminSupportUserReviewTest extends TestBase {
     @Test
     @DisplayName("ADMIN-CAT-09: Categories editor visible")
     void categoriesEditorVisible() {
+        portal.openCategoriesTab();
         AdminCategoriesPage categories = new AdminCategoriesPage(adminPage);
         assertThat(categories.isCategoriesVisible()).isTrue();
     }
@@ -212,6 +215,7 @@ public class AdminSupportUserReviewTest extends TestBase {
     @Test
     @DisplayName("ADMIN-CAT-10: Category count")
     void categoryCount() {
+        portal.openCategoriesTab();
         AdminCategoriesPage categories = new AdminCategoriesPage(adminPage);
         int count = categories.getCategoryCount();
         assertThat(count).isGreaterThanOrEqualTo(0);

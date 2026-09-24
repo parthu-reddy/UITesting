@@ -11,6 +11,7 @@ import com.fooddelivery.e2e.pages.restaurant.OutletRegistrationPage;
 import com.fooddelivery.e2e.pages.restaurant.RestaurantBrandRegistrationPage;
 import com.fooddelivery.e2e.pages.restaurant.RestaurantDashboardPage;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
@@ -20,6 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * End-to-End Registration flow tests for Customer, Rider, and Restaurant personas.
  */
 @Tag("e2e-registration")
+@Disabled("Creates permanent accounts, addresses, brands, and outlets; requires authorized disposable test data")
 public class RegistrationUiTest extends TestBase {
 
     @Test
@@ -135,11 +137,9 @@ public class RegistrationUiTest extends TestBase {
         dashboard.openOrdersTab();
         dashboard.waitForDashboard();
         
-        restaurantPage.waitForCondition(() ->
-            restaurantPage.locator("text=Active Orders").isVisible() ||
-            restaurantPage.locator("text=Orders").first().isVisible() ||
-            restaurantPage.locator("text=Past Orders").first().isVisible() ||
-            restaurantPage.locator("text=Live Kitchen").first().isVisible(),
-            new com.microsoft.playwright.Page.WaitForConditionOptions().setTimeout(10000));
+        // The orders board: its "Orders" heading (RestaurantOrderQueue.tsx).
+        restaurantPage.getByRole(com.microsoft.playwright.options.AriaRole.HEADING,
+                        new com.microsoft.playwright.Page.GetByRoleOptions().setName("Orders").setExact(true))
+                .waitFor(new com.microsoft.playwright.Locator.WaitForOptions().setTimeout(10000));
     }
 }

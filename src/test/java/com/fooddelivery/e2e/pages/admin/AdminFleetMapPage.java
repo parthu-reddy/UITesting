@@ -12,35 +12,52 @@ public class AdminFleetMapPage {
     private final Page page;
     public AdminFleetMapPage(Page page) { this.page = page; }
 
+    // Maps to AdminFleetMap.tsx. Markers are maplibre elements built by createMapPin, which tags
+    // each with data-pin-tone: restaurant, customer, rider or rider-offline.
+
     // ── Visibility ───────────────────────────────────────────────────────
 
     public boolean isFleetMapVisible() {
-        return page.locator("text=Fleet Map, text=Fleet, text=Drivers").first().isVisible();
+        return page.getByRole(com.microsoft.playwright.options.AriaRole.HEADING,
+                new Page.GetByRoleOptions().setName("Fleet Map Legend").setExact(true)).isVisible();
+    }
+
+    private com.microsoft.playwright.Locator riderMarkers() {
+        return page.locator(".fleet-marker[data-pin-tone^='rider']");
     }
 
     public int getDriverMarkerCount() {
-        return page.locator("[data-testid='driver-marker'], .driver-pin").count();
+        return riderMarkers().count();
     }
 
     // ── Driver selection ─────────────────────────────────────────────────
 
+    /** A click opens the marker's popup ("Rider: <name>, Status: ...") and copies the rider id. */
     public void selectDriver(int index) {
-        page.locator("[data-testid='driver-marker'], .driver-pin, button:has(svg.lucide-truck)").nth(index).click();
+        riderMarkers().nth(index).click();
         page.waitForTimeout(500);
     }
 
+    private com.microsoft.playwright.Locator riderPopup() {
+        return page.locator(".maplibregl-popup:has-text('Rider:')");
+    }
+
     public boolean isDriverDetailVisible() {
-        return page.locator("text=Driver Details, text=Driver Info, text=Active Delivery").first().isVisible();
+        return riderPopup().isVisible();
     }
 
     public String getDriverName() {
-        return page.locator("text=Driver Details, text=Driver Info").locator("xpath=..").locator("p, span").first().innerText().trim();
+        String text = riderPopup().innerText();
+        return text.substring(text.indexOf("Rider:") + "Rider:".length()).split("\n")[0].trim();
     }
 
     // ── Map controls ─────────────────────────────────────────────────────
 
+    /** The fleet map has no refresh control; a reload refetches every layer. */
     public void refreshMap() {
-        page.locator("button:has-text('Refresh'), button:has(svg.lucide-refresh-cw)").first().click();
-        page.waitForTimeout(1000);
+        page.reload();
+        page.getByRole(com.microsoft.playwright.options.AriaRole.HEADING,
+                        new Page.GetByRoleOptions().setName("Fleet Map Legend").setExact(true))
+                .waitFor(new com.microsoft.playwright.Locator.WaitForOptions().setTimeout(15000));
     }
 }

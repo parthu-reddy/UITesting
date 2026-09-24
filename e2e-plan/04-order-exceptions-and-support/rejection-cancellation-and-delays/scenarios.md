@@ -24,8 +24,8 @@ Uses: `RestaurantOrderActionsPage`, `CustomerOrderTrackerPage`, `DeliveryActiveJ
 
 | ID | Description | Action | Expected result |
 |---|---|---|---|
-| CANCEL-08 | Cancel before accept removes from restaurant queue | Customer cancels → check restaurant context. | Order disappears from restaurant Incoming queue. |
-| CANCEL-09 | Cancel button hidden after acceptance | Restaurant accepts → customer checks tracker. | "Cancel Order" button is no longer visible (too late to cancel). |
+| CANCEL-08 | Cancel before accept removes from restaurant queue | Implemented in `OrderCancellationFlowTest`; the exact order is first observed in Incoming, then must disappear after customer cancellation. |
+| CANCEL-09 | Cancel button hidden after acceptance | Implemented in `RestaurantFulfillmentTest`; the customer reloads after exact-order acceptance and must not see Cancel Order. |
 | CANCEL-10 | Customer cancel reason (if required) | Customer taps Cancel → provides reason. | Reason submitted; refund initiated. |
 
 ## Planned batch 3 — Rider abandons / delays
@@ -42,3 +42,15 @@ Uses: `RestaurantOrderActionsPage`, `CustomerOrderTrackerPage`, `DeliveryActiveJ
 |---|---|---|---|
 | CANCEL-15 | Restaurant timeout auto-cancel | Restaurant never accepts within system timeout (≥ 5 min). | Order auto-cancelled; customer notified; refund initiated. *(Requires env config — document timeout value.)* |
 | CANCEL-16 | Order timeout UI | While waiting for restaurant for a long time. | Customer tracker shows a delay indicator or "This is taking longer than usual". |
+
+## Implemented batch 5 — Delay approval decision
+
+| ID | Description | Result |
+|---|---|---|
+| DELAY-01 | Restaurant opens delay control for the exact incoming order | Implemented in `DelayApprovalFlowTest`. |
+| DELAY-02 | Restaurant requests a 15-minute delay with a reason | Implemented using the rendered `+15 Min`, reason, and Submit Delay controls. |
+| DELAY-03 | Customer sees the delay prompt | Implemented with exact prompt and Approve Delay assertions. |
+| DELAY-04 | Customer approves delay | Implemented; verifies the prompt closes, customer status advances, and restaurant order becomes accepted. |
+| DELAY-05 | Customer can reject the delay | Implemented through the prompt's Cancel Order action. |
+| DELAY-06 | Rejected delay terminates customer order | Implemented with the exact tracked order's terminal headline. |
+| DELAY-07 | Rejected delay leaves restaurant queue | Implemented; verifies the exact order card disappears after reload. |

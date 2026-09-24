@@ -4,7 +4,6 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.WaitForSelectorState;
 import com.fooddelivery.e2e.util.OtpExtractor;
-import com.fooddelivery.e2e.util.WaitHelpers;
 
 /**
  * Page Object for the Customer Order Tracker.
@@ -41,23 +40,37 @@ public class CustomerOrderTrackerPage {
                 .setTimeout(30000));
     }
 
-    public void verifyOrderStatus(String expectedStatus) {
-        WaitHelpers.waitForOrderStatus(page, expectedStatus, 30000);
-    }
-
-    public void verifyOrderStatusWithReload(String expectedStatus) {
+    /**
+     * Waits until the tracker reports one of these ORDER statuses -- the backend enum the tracker
+     * carries in {@code data-status} (PREPARING, READY_FOR_PICKUP, CANCELLED ...).
+     *
+     * <p>Not the headline: its wording is design copy ("Cooking now"), and while an arrival
+     * estimate exists the headline is replaced by "ARRIVING IN N min" altogether. Reloads once
+     * midway, because a dropped live stream leaves the tracker on its last state.</p>
+     */
+    public void waitForStatus(String... orderStatuses) {
+        Locator match = page.locator(java.util.Arrays.stream(orderStatuses)
+                .map(s -> "[data-testid='order-tracker'][data-status='" + s + "']")
+                .collect(java.util.stream.Collectors.joining(", "))).first();
         try {
-            WaitHelpers.waitForOrderStatus(page, expectedStatus, 20000);
-        } catch (Exception e) {
-            // SSE may have dropped — reload and try again
+            match.waitFor(new Locator.WaitForOptions()
+                    .setState(WaitForSelectorState.VISIBLE)
+                    .setTimeout(20000));
+        } catch (com.microsoft.playwright.PlaywrightException e) {
             page.reload();
-            page.waitForTimeout(2000);
-            WaitHelpers.waitForText(page, expectedStatus, 15000);
+            match.waitFor(new Locator.WaitForOptions()
+                    .setState(WaitForSelectorState.VISIBLE)
+                    .setTimeout(15000));
         }
     }
 
-    public boolean isStatusVisible(String status) {
-        return page.locator("text=" + status).isVisible();
+    public boolean hasStatus(String orderStatus) {
+        try {
+            waitForStatus(orderStatus);
+            return true;
+        } catch (com.microsoft.playwright.PlaywrightException e) {
+            return false;
+        }
     }
 
     // ── OTP extraction ───────────────────────────────────────────────────
@@ -83,15 +96,25 @@ public class CustomerOrderTrackerPage {
     }
 
     public void approveDelay() {
-        tracker().getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
-                new Locator.GetByRoleOptions().setName(java.util.regex.Pattern.compile("ll wait$"))).click();
-        page.waitForTimeout(1000);
+        // "I’ll wait" -- the UI writes a typographic apostrophe (&rsquo;), so match the end of
+        // the name rather than typing the character (OrderTrackerLive.tsx).
+        Locator approve = tracker().getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
+                new Locator.GetByRoleOptions().setName(java.util.regex.Pattern.compile("ll wait$")));
+        approve.waitFor(new Locator.WaitForOptions()
+                .setState(WaitForSelectorState.VISIBLE)
+                .setTimeout(20000));
+        approve.click();
     }
 
+    /** Declining the delay asks first ("Cancel instead of waiting?"), like any other cancel. */
     public void rejectDelay() {
-        tracker().locator("button:has-text('Cancel order')").first().click();
+        Locator reject = tracker().getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
+                new Locator.GetByRoleOptions().setName("Cancel order").setExact(true));
+        reject.waitFor(new Locator.WaitForOptions()
+                .setState(WaitForSelectorState.VISIBLE)
+                .setTimeout(20000));
+        reject.click();
         confirmCancel();
-        page.waitForTimeout(1000);
     }
 
     public void dismissFailedOrder() {

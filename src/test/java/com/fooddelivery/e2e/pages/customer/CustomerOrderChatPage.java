@@ -14,8 +14,9 @@ public class CustomerOrderChatPage {
         this.page = page;
     }
 
+    /** The order chat is ChatWidget: open exactly when its composer is on screen. */
     public boolean isChatOpen() {
-        return page.locator("text=Chat, text=Send a message, textarea, input[placeholder*='message']").first().isVisible();
+        return page.getByPlaceholder("Type a message...").isVisible();
     }
 
     public void sendMessage(String text) {

@@ -77,7 +77,4 @@ public class CustomerDashboardPage {
         return page.locator("[data-testid='order-tracker']").first().isVisible();
     }
 
-    public int getActiveOrderCount() {
-        return page.locator("[data-testid='active-order'], .active-order-card").count();
-    }
 }

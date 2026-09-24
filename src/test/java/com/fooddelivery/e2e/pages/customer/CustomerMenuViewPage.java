@@ -33,7 +33,9 @@ public class CustomerMenuViewPage {
     public void selectOutlet(String outletNamePartial) {
         try {
             page.locator("button#outlet-select, button:has-text('Select Outlet')").first().click();
-            page.locator("text=Select Outlet Location, text=Select Outlet").first()
+            // A Modal titled "Select Outlet Location" (CustomerOutletSelectorModal.tsx).
+            page.getByRole(com.microsoft.playwright.options.AriaRole.DIALOG,
+                            new Page.GetByRoleOptions().setName("Select Outlet Location").setExact(true))
                     .waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
             page.locator("p:has-text('" + outletNamePartial + "')").first().click();
             page.waitForTimeout(500);

@@ -15,6 +15,10 @@ import com.microsoft.playwright.Page;
  * </p>
  */
 public class RestaurantMenuEditorPage {
+    // NOTE 2026-09-24: `FormField` now NESTS its control inside the <label> so the visible
+    // text is the field's accessible name (it was a sibling with no `for`, which is why the
+    // accessibility audits failed). Sibling combinators `~ input` / `+ input` no longer match
+    // that structure; the descendant form does. Placeholder fallbacks are kept.
 
     private final Page page;
 
@@ -24,8 +28,10 @@ public class RestaurantMenuEditorPage {
 
     // ── Visibility ───────────────────────────────────────────────────────
 
+    /** The Menu tab: "Today’s menu" (RestaurantMenuTogglesView.tsx) -- a typographic apostrophe. */
     public boolean isMenuEditorVisible() {
-        return page.locator("text=Menu, text=Categories, text=Items").first().isVisible();
+        return page.getByRole(com.microsoft.playwright.options.AriaRole.HEADING,
+                new Page.GetByRoleOptions().setName(java.util.regex.Pattern.compile("^Today.s menu$"))).isVisible();
     }
 
     // ── Categories ───────────────────────────────────────────────────────
@@ -65,15 +71,15 @@ public class RestaurantMenuEditorPage {
     }
 
     public void fillItemName(String name) {
-        page.locator("label:has-text('Name') ~ input, input[placeholder*='Item name']").first().fill(name);
+        page.locator("label:has-text('Name') input, input[placeholder*='Item name']").first().fill(name);
     }
 
     public void fillItemPrice(String price) {
-        page.locator("label:has-text('Price') ~ input, input[placeholder*='Price']").first().fill(price);
+        page.locator("label:has-text('Price') input, input[placeholder*='Price']").first().fill(price);
     }
 
     public void fillItemPrepTime(String minutes) {
-        page.locator("label:has-text('Prep') ~ input, input[placeholder*='Prep'], input[placeholder*='min']").first().fill(minutes);
+        page.locator("label:has-text('Prep') input, input[placeholder*='Prep'], input[placeholder*='min']").first().fill(minutes);
     }
 
     public void selectItemCategory(String categoryName) {
@@ -123,11 +129,14 @@ public class RestaurantMenuEditorPage {
 
     // ── Counts ───────────────────────────────────────────────────────────
 
+    /** One stock switch per dish, named "<dish> available" (StockToggleRow.tsx). */
     public int getItemCount() {
-        return page.locator("[data-testid='menu-item'], .menu-item-row").count();
+        return page.getByRole(com.microsoft.playwright.options.AriaRole.SWITCH,
+                new Page.GetByRoleOptions().setName(java.util.regex.Pattern.compile(" available$"))).count();
     }
 
+    /** One group per category: an h3 over that category's dish switches. */
     public int getCategoryCount() {
-        return page.locator("[data-testid='category-group'], .category-group").count();
+        return page.locator("div.space-y-3:has(> h3):has([role='switch'])").count();
     }
 }

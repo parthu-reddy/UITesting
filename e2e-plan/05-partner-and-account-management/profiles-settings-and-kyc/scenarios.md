@@ -43,9 +43,9 @@ Uses: `SharedSettingsPage`, `RiderSettingsPage`, `RestaurantSettingsPage`, `KycU
 
 | ID | Description | Action | Expected result |
 |---|---|---|---|
-| PROFILE-13 | Dark mode toggle | Open Settings → toggle Dark Mode. | App-level dark class applied; background color changes. |
-| PROFILE-14 | Light mode toggle | Toggle back to Light Mode. | Light theme restored. |
-| PROFILE-15 | Theme persists on reload | Toggle Dark Mode → reload page. | Dark Mode still active after reload. |
+| PROFILE-13 | Dark mode toggle | Implemented from open Account Settings: app-level dark class applies, but the strict computed-background test currently fails; see `PENDING.md`. |
+| PROFILE-14 | Light mode toggle | Implemented: the persistence test restores light mode and verifies the dark class is removed. |
+| PROFILE-15 | Theme persists on reload | Implemented as a strict active test and currently failing; the ThemeProvider resets to light after reload. |
 
 ## Batch 6 — Rider onboarding wizard (`RiderOnboardingWizardPage`)
 

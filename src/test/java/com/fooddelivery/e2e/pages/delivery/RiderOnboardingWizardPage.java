@@ -112,9 +112,11 @@ public class RiderOnboardingWizardPage {
         page.locator("input[type='text']").nth(1).fill(number);
     }
 
+    /** Wizard options: "Bicycle", "EV Two-Wheeler", "Motorcycle / Scooter", "Car / LMV". */
     public void selectVehicleType(String type) {
         page.getByRole(com.microsoft.playwright.options.AriaRole.COMBOBOX, new Page.GetByRoleOptions().setName("Vehicle Type")).click();
-        page.locator("text=" + type).click();
+        page.getByRole(com.microsoft.playwright.options.AriaRole.OPTION,
+                new Page.GetByRoleOptions().setName(type).setExact(true)).click();
     }
 
     public void clickNext() {

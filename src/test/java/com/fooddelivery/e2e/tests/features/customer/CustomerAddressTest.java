@@ -3,60 +3,77 @@ package com.fooddelivery.e2e.tests.features.customer;
 import com.fooddelivery.e2e.base.TestBase;
 import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.common.LoginPage;
-import com.fooddelivery.e2e.pages.customer.*;
-import org.junit.jupiter.api.*;
+import com.fooddelivery.e2e.pages.customer.SavedDeliveryAddressPage;
+import com.microsoft.playwright.Locator;
+import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.AriaRole;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import java.util.regex.Pattern;
 
-/**
- * Tests customer address management: add new, select existing, verify header updates.
- */
-@Tag("feature")
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
+
+/** Existing-address and unsaved-draft coverage; never creates shared address data. */
+@Tag("ui-only")
+@Tag("customer-address")
 public class CustomerAddressTest extends TestBase {
 
-    @Test
-    @DisplayName("Select existing address → Deliver-to header updates")
-    void selectExistingAddress() {
+    @BeforeEach
+    void loginWithHome() {
         customerPage.navigate(TestConfig.APP_URL);
         new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
-        CustomerDashboardPage dashboard = new CustomerDashboardPage(customerPage);
-        dashboard.waitForDashboard();
-
-        // Click "Deliver to" to open address modal
-        dashboard.clickDeliverTo();
-
-        CustomerAddressModalPage modal = new CustomerAddressModalPage(customerPage);
-        modal.waitForModalOpen();
-
-        // Select an existing address
-        int count = modal.getAddressCount();
-        assertThat(count).isGreaterThan(0).as("Test user should have at least one saved address");
-
-        modal.selectExistingAddress("Home");
-        customerPage.waitForTimeout(1000);
-
-        // Verify the "Deliver to" header updated
-        String deliverTo = dashboard.getDeliverToText();
-        assertThat(deliverTo).isNotEmpty();
+        new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();
     }
 
     @Test
-    @DisplayName("Add new address → appears in address list")
-    void addNewAddress() {
-        customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
-        CustomerDashboardPage dashboard = new CustomerDashboardPage(customerPage);
-        dashboard.waitForDashboard();
+    @DisplayName("ADDRESS-01-03: Existing Home selection updates Deliver-to header")
+    void selectExistingHomeAddress() {
+        customerPage.getByRole(AriaRole.BUTTON,
+                new Page.GetByRoleOptions().setName(Pattern.compile("Deliver to"))).click();
+        Locator dialog = customerPage.getByRole(AriaRole.DIALOG,
+                new Page.GetByRoleOptions().setName("Select Delivery Location").setExact(true));
+        assertThat(dialog).isVisible();
+        assertThat(dialog.getByRole(AriaRole.BUTTON,
+                new Locator.GetByRoleOptions().setName(Pattern.compile("^Home\\b")))).isVisible();
+        dialog.getByRole(AriaRole.BUTTON,
+                new Locator.GetByRoleOptions().setName(Pattern.compile("^Home\\b"))).click();
 
-        dashboard.clickDeliverTo();
-        CustomerAddressModalPage modal = new CustomerAddressModalPage(customerPage);
-        modal.waitForModalOpen();
+        assertThat(dialog).isHidden();
+        assertThat(customerPage.getByRole(AriaRole.BUTTON,
+                new Page.GetByRoleOptions().setName(Pattern.compile("Deliver to"))))
+                .containsText("Home:");
+    }
 
-        modal.clickAddNewAddress();
-        modal.fillAddressLabel("Test Office");
-        modal.fillAddressLine("123 Test Street, Bangalore");
-        modal.saveAddress();
+    @Test
+    @DisplayName("ADDR-MODAL-03/04/08: Unsaved address draft is discarded")
+    void unsavedAddressDraftDoesNotCreateSharedData() {
+        customerPage.getByTitle("Profile Settings",
+                new Page.GetByTitleOptions().setExact(true)).click();
+        customerPage.getByRole(AriaRole.TAB,
+                new Page.GetByRoleOptions().setName("Addresses").setExact(true)).click();
+        int homeCountBefore = customerPage.getByText("Home",
+                new Page.GetByTextOptions().setExact(true)).count();
 
-        customerPage.waitForTimeout(2000);
+        customerPage.getByRole(AriaRole.BUTTON,
+                new Page.GetByRoleOptions().setName("Add / Manage Addresses").setExact(true)).click();
+        Locator panel = customerPage.getByText("Delivery Location",
+                new Page.GetByTextOptions().setExact(true)).locator("xpath=../../..");
+        Locator label = panel.getByPlaceholder("Label (e.g. Home, Work)");
+        Locator line = panel.getByPlaceholder("Address Line 1");
+        label.fill("Unsaved E2E Draft");
+        line.fill("123 Unsaved Test Street");
+        assertThat(label).hasValue("Unsaved E2E Draft");
+        assertThat(line).hasValue("123 Unsaved Test Street");
+        assertThat(panel.getByRole(AriaRole.BUTTON,
+                new Locator.GetByRoleOptions().setName("Save Address").setExact(true))).isDisabled();
+
+        panel.locator("button:has(svg.lucide-x)").click();
+        assertThat(customerPage.getByText("Unsaved E2E Draft",
+                new Page.GetByTextOptions().setExact(true))).hasCount(0);
+        assertThat(customerPage.getByText("Home",
+                new Page.GetByTextOptions().setExact(true))).hasCount(homeCountBefore);
     }
 }

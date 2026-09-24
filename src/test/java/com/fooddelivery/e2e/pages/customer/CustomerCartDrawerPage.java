@@ -62,22 +62,33 @@ public class CustomerCartDrawerPage {
         return page.locator("text=Total").locator("xpath=..").locator("span").last().innerText().trim();
     }
 
-    public int getItemCount() {
-        return page.locator("[data-testid='cart-item'], .cart-item").count();
+    private Locator drawer() {
+        return page.getByRole(com.microsoft.playwright.options.AriaRole.DIALOG,
+                new Page.GetByRoleOptions().setName("Your cart"));
     }
 
+    /** One row per dish: each row's Stepper has an "Add one <dish>" button (Stepper.tsx). */
+    public int getItemCount() {
+        return drawer().getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
+                new Locator.GetByRoleOptions().setName(java.util.regex.Pattern.compile("^Add one "))).count();
+    }
+
+    /** "Remove one <dish>"; at quantity 1 it removes the row (the Stepper's min is 0). */
     public void removeItem(int index) {
-        page.locator("button:has(svg.lucide-minus), button:has(svg.lucide-trash)").nth(index).click();
+        drawer().getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
+                new Locator.GetByRoleOptions().setName(java.util.regex.Pattern.compile("^Remove one "))).nth(index).click();
         page.waitForTimeout(300);
     }
 
     public void incrementItem(int index) {
-        page.locator("button:has(svg.lucide-plus)").nth(index).click();
+        drawer().getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
+                new Locator.GetByRoleOptions().setName(java.util.regex.Pattern.compile("^Add one "))).nth(index).click();
         page.waitForTimeout(300);
     }
 
+    /** The drawer's close control is an unlabelled X icon button (CustomerCartDrawer.tsx). */
     public void closeCart() {
-        page.locator("button:has(svg.lucide-x)").first().click();
-        page.waitForTimeout(300);
+        drawer().locator("button:has(svg.lucide-x)").first().click();
+        drawer().waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.HIDDEN));
     }
 }

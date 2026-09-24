@@ -14,40 +14,48 @@ public class AdminReviewsPage {
     private final Page page;
     public AdminReviewsPage(Page page) { this.page = page; }
 
-    // ── Visibility ───────────────────────────────────────────────────────
+    // Maps to features/reviews/components/AdminReviewsView.tsx ("Review Moderation").
 
     public boolean isReviewsVisible() {
-        return page.locator("text=Reviews, text=Ratings, text=Moderation").first().isVisible();
+        return page.getByRole(com.microsoft.playwright.options.AriaRole.HEADING,
+                new Page.GetByRoleOptions().setName("Review Moderation").setExact(true)).isVisible();
     }
 
-    // ── Mode selection ───────────────────────────────────────────────────
-
-    public void switchToEntityMode() {
-        page.locator("button:has-text('By Entity'), button:has-text('entity')").first().click();
+    private void choose(String comboName, String option) {
+        page.getByRole(com.microsoft.playwright.options.AriaRole.COMBOBOX,
+                new Page.GetByRoleOptions().setName(comboName).setExact(true)).click();
+        page.getByRole(com.microsoft.playwright.options.AriaRole.OPTION,
+                new Page.GetByRoleOptions().setName(option).setExact(true)).click();
         page.waitForTimeout(300);
     }
 
-    public void switchToUserMode() {
-        page.locator("button:has-text('By User'), button:has-text('user')").first().click();
-        page.waitForTimeout(300);
-    }
+    // ── Mode selection: a "Look up by" Select with Entity / Author ───────
+
+    public void switchToEntityMode() { choose("Look up by", "Entity"); }
+
+    public void switchToUserMode() { choose("Look up by", "Author"); }
 
     // ── Entity search ────────────────────────────────────────────────────
 
+    /** Takes the enum (RESTAURANT, DRIVER, PRODUCT); the options read Restaurant, Driver, Product. */
     public void selectEntityType(String type) {
-        page.locator("select").first().selectOption(type);
+        choose("Entity type", type.charAt(0) + type.substring(1).toLowerCase());
     }
 
     public void fillEntityId(String id) {
-        page.locator("input[placeholder*='Entity'], input[placeholder*='ID'], input[placeholder*='Restaurant']").first().fill(id);
+        page.getByRole(com.microsoft.playwright.options.AriaRole.TEXTBOX,
+                new Page.GetByRoleOptions().setName("Entity ID").setExact(true)).fill(id);
     }
 
     public void fillUserId(String userId) {
-        page.locator("input[placeholder*='User'], input[placeholder*='user']").first().fill(userId);
+        page.getByRole(com.microsoft.playwright.options.AriaRole.TEXTBOX,
+                new Page.GetByRoleOptions().setName("Author user ID").setExact(true)).fill(userId);
     }
 
+    /** Disabled until the lookup has an id to search for. */
     public void search() {
-        page.locator("button:has-text('Search'), button:has(svg.lucide-search)").first().click();
+        page.getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
+                new Page.GetByRoleOptions().setName("Search").setExact(true)).click();
         page.waitForTimeout(2000);
     }
 
@@ -64,17 +72,17 @@ public class AdminReviewsPage {
         search();
     }
 
-    // ── Results ──────────────────────────────────────────────────────────
+    // ── Results: one <article> per review, each with a read-only StarRating (role img) ──
 
     public int getReviewCount() {
-        return page.locator("[data-testid='review-card'], .review-card").count();
+        return page.locator("article").count();
     }
 
     public boolean hasStarRatings() {
-        return page.locator("svg.lucide-star, [data-testid='star-rating']").first().isVisible();
+        return page.locator("article [role='img']").first().isVisible();
     }
 
     public boolean isEmptyState() {
-        return page.locator("text=No reviews, text=no reviews").first().isVisible();
+        return page.getByText("No reviews found", new Page.GetByTextOptions().setExact(true)).isVisible();
     }
 }

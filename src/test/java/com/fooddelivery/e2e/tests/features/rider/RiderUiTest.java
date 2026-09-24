@@ -24,10 +24,7 @@ public class RiderUiTest extends TestBase {
         dashboard.waitForDashboard();
 
         DeliveryOnlineTogglePage toggle = new DeliveryOnlineTogglePage(riderPage);
-        // Sometimes it starts as online from a previous test run
-        if (!toggle.isOnline()) {
-            toggle.goOnline();
-        }
+        toggle.goOnline();
         
         assertThat(toggle.isOnline()).isTrue();
     }

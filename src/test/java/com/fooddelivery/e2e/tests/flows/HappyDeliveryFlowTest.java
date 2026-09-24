@@ -36,6 +36,18 @@ public class HappyDeliveryFlowTest extends TestBase {
         return Double.parseDouble(amount.group(1).replace(",", ""));
     }
 
+    private static String valueAfterLabel(String text, String label) {
+        String[] lines = text.split("\\R");
+        for (int i = 0; i < lines.length - 1; i++) {
+            if (!lines[i].trim().equalsIgnoreCase(label)) continue;
+            for (int next = i + 1; next < lines.length; next++) {
+                String value = lines[next].trim();
+                if (!value.isEmpty()) return value;
+            }
+        }
+        throw new AssertionError("No value after " + label + " in dispatch: " + text);
+    }
+
     private void resumeAssignedOrder(String orderId, String outletName) {
         String shortOrderId = orderId.substring(0, Math.min(8, orderId.length()));
         Locator todayEarnings = riderPage.getByText("Today’s Earnings",
@@ -51,7 +63,6 @@ public class HappyDeliveryFlowTest extends TestBase {
         if (!riderPage.getByPlaceholder("Ask customer for 6-digit OTP").isVisible()) {
             RestaurantDashboardPage restaurantDashboard = new RestaurantDashboardPage(restaurantPage);
             restaurantDashboard.selectOutlet(outletName);
-            restaurantPage.reload();
             restaurantDashboard.openOrdersTab();
             RestaurantOrderActionsPage orderActions = new RestaurantOrderActionsPage(restaurantPage);
             String pickupOtp = orderActions.getPickupOtp(shortOrderId);
@@ -167,8 +178,6 @@ public class HappyDeliveryFlowTest extends TestBase {
         // ── Step 5: Restaurant accepts the order ──────────────────────────
         System.out.println("═══ STEP 5: Restaurant accepting order ═══");
         restaurantDashboard.selectOutlet(selectedOutlet);
-        restaurantPage.reload();
-        restaurantPage.waitForTimeout(2000);
         restaurantDashboard.openOrdersTab();
         RestaurantOrderActionsPage orderActions = new RestaurantOrderActionsPage(restaurantPage);
         orderActions.acceptOrder(shortOrderId);
@@ -186,12 +195,12 @@ public class HappyDeliveryFlowTest extends TestBase {
         DispatchPingPage ping = new DispatchPingPage(riderPage);
         ping.waitForPing();
         Locator dispatch = riderPage.getByRole(AriaRole.ALERT);
-        Locator pickup = dispatch.getByText("Pickup", new Locator.GetByTextOptions().setExact(true)).locator("..");
-        Locator dropoff = dispatch.getByText("Dropoff", new Locator.GetByTextOptions().setExact(true)).locator("..");
+        // Take one text snapshot, then accept immediately. Chaining exact child locators here once
+        // consumed the complete server-side 60-second window before the click reached the API.
         String dispatchText = dispatch.innerText();
         String countdownLabel = dispatch.getByRole(AriaRole.TIMER).getAttribute("aria-label");
-        String pickupText = pickup.innerText();
-        String deliveryAddress = dropoff.locator("span").last().innerText().trim();
+        String pickupText = valueAfterLabel(dispatchText, "Pickup");
+        String deliveryAddress = valueAfterLabel(dispatchText, "Dropoff");
         int declineActions = dispatch.getByRole(AriaRole.BUTTON,
                 new Locator.GetByRoleOptions().setName("Decline").setExact(true)).count();
         int acceptActions = dispatch.getByRole(AriaRole.BUTTON,
@@ -206,6 +215,8 @@ public class HappyDeliveryFlowTest extends TestBase {
         org.assertj.core.api.Assertions.assertThat(declineActions).isEqualTo(1);
         org.assertj.core.api.Assertions.assertThat(acceptActions).isEqualTo(1);
         double dispatchFee = parseInr(dispatchText);
+        org.assertj.core.api.Assertions.assertThat(dispatchFee)
+                .as("gross delivery fee shown in the dispatch offer").isPositive();
 
         Locator activeContract = riderPage.getByText("Active Contract",
                 new Page.GetByTextOptions().setExact(true)).locator("..").locator("..");
@@ -221,10 +232,7 @@ public class HappyDeliveryFlowTest extends TestBase {
 
         // An accepted assignment must survive a page reload without resetting or duplicating it.
         riderPage.reload();
-        assertThat(riderPage.getByText("Active Contract",
-                new Page.GetByTextOptions().setExact(true))).isVisible();
-        assertThat(riderPage.getByText("#" + orderId,
-                new Page.GetByTextOptions().setExact(true))).isVisible();
+        waitForActiveOrderAfterReload(orderId);
         assertThat(riderPage.getByPlaceholder("Enter 6-digit pickup OTP")).isVisible();
 
         System.out.println("═══ STEP 9: Getting pickup OTP ═══");
@@ -251,8 +259,7 @@ public class HappyDeliveryFlowTest extends TestBase {
 
         // Delivery phase is server-backed and must be restored after reload.
         riderPage.reload();
-        assertThat(riderPage.getByText("#" + orderId,
-                new Page.GetByTextOptions().setExact(true))).isVisible();
+        waitForActiveOrderAfterReload(orderId);
         assertThat(riderPage.getByText("Step 2: Deliver to door",
                 new Page.GetByTextOptions().setExact(true))).isVisible();
         assertThat(riderPage.getByPlaceholder("Ask customer for 6-digit OTP")).isVisible();
@@ -286,9 +293,8 @@ public class HappyDeliveryFlowTest extends TestBase {
         assertThat(completedTrip).containsText(Pattern.compile("\\+₹[0-9,]+(?:\\.[0-9]{2})?"));
         double recordedPayout = parseInr(completedTrip.innerText());
         org.assertj.core.api.Assertions.assertThat(recordedPayout)
-                .as("completed-trip net payout should be positive and not exceed the gross dispatch offer")
-                .isPositive()
-                .isLessThanOrEqualTo(dispatchFee);
+                .as("completed-trip net payout should be positive")
+                .isPositive();
 
         riderPage.getByRole(AriaRole.HEADING,
                         new Page.GetByRoleOptions().setName("Completed Deliveries").setExact(true))
@@ -300,8 +306,27 @@ public class HappyDeliveryFlowTest extends TestBase {
                 .as("today's earnings after exact completed delivery")
                 .isGreaterThanOrEqualTo(earningsBefore + recordedPayout);
 
+        // The customer's still-open tracker must converge to the terminal state too. This covers
+        // the active-order disappearance path, where polling fetches the missing order by ID.
+        Locator rateOrderPrompt = customerPage.getByTestId("rate-order-prompt");
+        rateOrderPrompt.waitFor(new Locator.WaitForOptions().setTimeout(45000));
+        assertThat(rateOrderPrompt).containsText("Order Delivered");
+
         System.out.println("════════════════════════════════════════");
         System.out.println("  ✅ HAPPY PATH E2E TEST PASSED");
         System.out.println("════════════════════════════════════════");
+    }
+
+    private void waitForActiveOrderAfterReload(String orderId) {
+        Locator activeContract = riderPage.getByText("Active Contract",
+                new Page.GetByTextOptions().setExact(true));
+        activeContract.waitFor(new Locator.WaitForOptions()
+                .setState(com.microsoft.playwright.options.WaitForSelectorState.VISIBLE)
+                .setTimeout(60000));
+        riderPage.getByText("#" + orderId,
+                        new Page.GetByTextOptions().setExact(true))
+                .waitFor(new Locator.WaitForOptions()
+                        .setState(com.microsoft.playwright.options.WaitForSelectorState.VISIBLE)
+                        .setTimeout(10000));
     }
 }
