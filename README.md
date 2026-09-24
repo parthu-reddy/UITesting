@@ -70,3 +70,6 @@ mvn test -Dtest=RoleNavigationUiTest,SessionUiTest,SavedAddressOutletUiTest -Dhe
 Added AdminReadOnlyUiTest, PartnerReadOnlyUiTest, CustomerSettingsUiTest and LoginThemeUiTest, plus three independent MenuCartUiTest cases. Focused runs validated 20 of 21 new cases; admin phone search remains failing. The earlier cart-drawer increment failure also remains open. See each functionality folder's PENDING.md for outcomes and scope limits. Use focused `-Dtest=ClassName` or `-Dtest=ClassName#methodName` runs; combining all login-heavy suites may exhaust shared OTP limits.
 
 <!-- dummy data -->
+
+
+<!-- dummy data update -->
