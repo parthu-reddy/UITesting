@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Tag("ui-only")
-public class MenuCartUiTest extends TestBase {
+public class MenuCartFeatureTest extends TestBase {
 
     @Test
     @DisplayName("MENU-01: Menu displays items with prices and without restaurant controls")

@@ -1,5 +1,6 @@
 package com.fooddelivery.e2e.tests.features.customer;
 
+import com.fooddelivery.e2e.pages.customer.CustomerDashboardPage;
 import com.fooddelivery.e2e.base.TestBase;
 import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.common.LoginPage;
@@ -50,8 +51,7 @@ public class CustomerAddressTest extends TestBase {
     @Test
     @DisplayName("ADDR-MODAL-03/04/08: Unsaved address draft is discarded")
     void unsavedAddressDraftDoesNotCreateSharedData() {
-        customerPage.getByTitle("Profile Settings",
-                new Page.GetByTitleOptions().setExact(true)).click();
+        CustomerDashboardPage.openProfileSettings(customerPage);
         customerPage.getByRole(AriaRole.TAB,
                 new Page.GetByRoleOptions().setName("Addresses").setExact(true)).click();
         int homeCountBefore = customerPage.getByText("Home",

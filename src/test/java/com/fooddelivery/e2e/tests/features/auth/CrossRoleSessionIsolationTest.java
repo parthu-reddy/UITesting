@@ -1,5 +1,6 @@
 package com.fooddelivery.e2e.tests.features.auth;
 
+import com.fooddelivery.e2e.pages.customer.CustomerDashboardPage;
 import com.fooddelivery.e2e.base.TestBase;
 import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.common.LoginPage;
@@ -48,8 +49,7 @@ public class CrossRoleSessionIsolationTest extends TestBase {
     @Test
     @DisplayName("SESSION-12: Customer logout does not terminate restaurant session")
     void customerLogoutDoesNotAffectRestaurantSession() {
-        customerPage.getByTitle("Profile Settings",
-                new Page.GetByTitleOptions().setExact(true)).click();
+        CustomerDashboardPage.openProfileSettings(customerPage);
         customerPage.getByRole(AriaRole.BUTTON,
                 new Page.GetByRoleOptions().setName("Log Out").setExact(true)).click();
         assertThat(customerPage.getByRole(AriaRole.BUTTON,

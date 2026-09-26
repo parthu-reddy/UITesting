@@ -21,6 +21,7 @@ import java.util.regex.Pattern;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Tag("flow")
 @Tag("ui-only")
 public class RestaurantFulfillmentTest extends TestBase {
 

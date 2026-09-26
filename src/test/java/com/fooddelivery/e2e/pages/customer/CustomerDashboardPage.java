@@ -2,6 +2,7 @@ package com.fooddelivery.e2e.pages.customer;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.AriaRole;
 import com.microsoft.playwright.options.WaitForSelectorState;
 
 /**
@@ -54,8 +55,21 @@ public class CustomerDashboardPage {
     }
 
     public void openSettingsTab() {
-        page.locator("button[title='Profile Settings']").first().click();
-        page.waitForTimeout(300);
+        openProfileSettings(page);
+    }
+
+    /**
+     * DashboardHeader's "Profile Settings" button is {@code lg:hidden}; from 1024 px CustomerNavRail's
+     * "Account" link is the visible control for the same settings view.
+     */
+    public static void openProfileSettings(Page page) {
+        if (page.viewportSize() != null && page.viewportSize().width >= 1024) {
+            page.getByRole(AriaRole.COMPLEMENTARY, new Page.GetByRoleOptions().setName("Customer navigation"))
+                    .getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Account").setExact(true))
+                    .click();
+        } else {
+            page.getByTitle("Profile Settings", new Page.GetByTitleOptions().setExact(true)).click();
+        }
     }
 
     // ── Deliver-to header ────────────────────────────────────────────────

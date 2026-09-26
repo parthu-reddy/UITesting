@@ -23,8 +23,7 @@ public class CustomerRoutingUiTest extends TestBase {
         customerPage.waitForTimeout(500);
         
         // Navigate to the Profile/Settings using the profile menu/button
-        customerPage.locator("button[title='Profile Settings'], button[aria-label='Profile Settings'], button:has-text('Profile')").first()
-                    .click(new com.microsoft.playwright.Locator.ClickOptions().setForce(true));
+        com.fooddelivery.e2e.pages.customer.CustomerDashboardPage.openProfileSettings(customerPage);
         
         // Wait for the URL to reflect the React Router path
         customerPage.waitForURL("**/customer/settings*");

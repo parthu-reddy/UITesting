@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Tag("flow")
 @Tag("ui-only")
 public class RiderFulfillmentTest extends TestBase {
 
@@ -28,7 +29,7 @@ public class RiderFulfillmentTest extends TestBase {
     @BeforeEach
     public void setupOrder() {
         System.out.println("[TEST] Starting setupOrder...");
-        uniqueRiderPhone = String.format("70%08d", (int)(Math.random() * 100000000));
+        uniqueRiderPhone = testRiderPhone; // seeded, approved rider (TEST-DATA.md); never create one
         uniqueCustomerPhone = "8000000003";
         uniqueRestaurantPhone = "9000000004"; // Brand 4 — known to have orderable items
 

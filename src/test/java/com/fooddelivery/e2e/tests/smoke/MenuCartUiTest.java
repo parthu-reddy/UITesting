@@ -1,5 +1,6 @@
 package com.fooddelivery.e2e.tests.smoke;
 
+import com.fooddelivery.e2e.pages.customer.CustomerDashboardPage;
 import com.fooddelivery.e2e.base.*;
 import com.fooddelivery.e2e.pages.common.LoginPage;
 import com.fooddelivery.e2e.pages.customer.*;
@@ -255,7 +256,7 @@ public class MenuCartUiTest extends TestBase {
         row.getByRole(AriaRole.BUTTON,
                 new Locator.GetByRoleOptions().setName("ADD").setExact(true)).click();
 
-        customerPage.getByTitle("Profile Settings", new Page.GetByTitleOptions().setExact(true)).click();
+        CustomerDashboardPage.openProfileSettings(customerPage);
         assertThat(customerPage.getByRole(AriaRole.HEADING,
                 new Page.GetByRoleOptions().setName("Account Settings"))).isVisible();
         customerPage.getByRole(AriaRole.BUTTON,

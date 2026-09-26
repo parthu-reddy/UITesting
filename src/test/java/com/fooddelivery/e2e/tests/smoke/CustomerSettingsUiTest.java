@@ -1,4 +1,5 @@
 package com.fooddelivery.e2e.tests.smoke;
+import com.fooddelivery.e2e.pages.customer.CustomerDashboardPage;
 import com.fooddelivery.e2e.base.*;
 import com.fooddelivery.e2e.pages.common.LoginPage;
 import com.fooddelivery.e2e.pages.customer.SavedDeliveryAddressPage;
@@ -13,7 +14,7 @@ public class CustomerSettingsUiTest extends TestBase {
         customerPage.navigate(TestConfig.APP_URL);
         new LoginPage(customerPage).loginAs("Order Food",testCustomerPhone);
         new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();
-        customerPage.getByTitle("Profile Settings",new Page.GetByTitleOptions().setExact(true)).click();
+        CustomerDashboardPage.openProfileSettings(customerPage);
         assertThat(customerPage.getByRole(AriaRole.HEADING,new Page.GetByRoleOptions().setName("Account Settings"))).isVisible();
     }
     @Test void profilePhoneIsReadOnlyAndCloseReturnsHome() {

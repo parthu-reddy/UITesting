@@ -1,5 +1,6 @@
 package com.fooddelivery.e2e.tests.features.customer;
 
+import com.fooddelivery.e2e.pages.customer.CustomerDashboardPage;
 import com.fooddelivery.e2e.base.TestBase;
 import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.common.LoginPage;
@@ -29,8 +30,7 @@ public class CustomerOrderHistoryUiTest extends TestBase {
         customerPage.navigate(TestConfig.APP_URL);
         new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
         new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();
-        customerPage.getByTitle("Profile Settings",
-                new Page.GetByTitleOptions().setExact(true)).click();
+        CustomerDashboardPage.openProfileSettings(customerPage);
         customerPage.getByRole(AriaRole.TAB,
                 new Page.GetByRoleOptions().setName("History").setExact(true)).click();
         history = new CustomerOrderHistoryPage(customerPage);

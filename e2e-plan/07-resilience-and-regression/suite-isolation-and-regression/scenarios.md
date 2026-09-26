@@ -35,7 +35,7 @@ Ensures test suite hygiene: no state bleed between tests, no hardcoded waits cau
 | ID | Description | Action | Expected result |
 |---|---|---|---|
 | REGR-01 | Login smoke (all 4 roles) | Run `LoginSmokeTest` after each deployment. | 8/8 tests pass. |
-| REGR-02 | Menu loads (customer) | Run `MenuCartUiTest.menuDisplaysItemsWithoutRestaurantEditingControls`. | Menu items visible; no restaurant editing controls. |
+| REGR-02 | Menu loads (customer) | Run `MenuCartFeatureTest.menuDisplaysItemsWithoutRestaurantEditingControls`. | Menu items visible; no restaurant editing controls. |
 | REGR-03 | Restaurant dashboard loads | Run `RestaurantUiTest`. | Restaurant dashboard renders; all tabs accessible. |
 | REGR-04 | Rider dashboard loads | Run `RiderUiTest`. | Rider dashboard renders; earnings visible. |
 | REGR-05 | Admin portal loads | Run `AdminUiTest`. | Admin portal renders; all admin tabs accessible. |

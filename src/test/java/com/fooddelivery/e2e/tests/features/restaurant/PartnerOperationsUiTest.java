@@ -1,5 +1,6 @@
 package com.fooddelivery.e2e.tests.features.restaurant;
 
+import com.microsoft.playwright.Locator;
 import com.fooddelivery.e2e.base.TestBase;
 import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.common.LoginPage;
@@ -38,7 +39,8 @@ public class PartnerOperationsUiTest extends TestBase {
         riderPage.navigate(TestConfig.APP_URL);
         new LoginPage(riderPage).loginAs("Delivery Executive", testRiderPhone);
         
-        boolean isEarningsVisible = riderPage.locator("text=Today’s Earnings").isVisible();
-        assertThat(isEarningsVisible).isTrue();
+        Locator earnings = riderPage.locator("text=Today’s Earnings").first();
+        earnings.waitFor(new Locator.WaitForOptions().setTimeout(15000));
+        assertThat(earnings.isVisible()).isTrue();
     }
 }

@@ -1,5 +1,6 @@
 package com.fooddelivery.e2e.tests.smoke;
 
+import com.fooddelivery.e2e.pages.customer.CustomerDashboardPage;
 import com.fooddelivery.e2e.base.TestBase;
 import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.common.LoginPage;
@@ -52,7 +53,7 @@ public class SessionUiTest extends TestBase {
             // Current admin logout icon has no accessible name; source-grounded fallback.
             page.locator("button:has(svg.lucide-log-out)").click();
         } else {
-            if (account == LoginSmokeTest.Account.CUSTOMER) page.getByTitle("Profile Settings", new Page.GetByTitleOptions().setExact(true)).click();
+            if (account == LoginSmokeTest.Account.CUSTOMER) CustomerDashboardPage.openProfileSettings(page);
             else page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Profile settings").setExact(true)).click();
             page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions()
                     .setName(account == LoginSmokeTest.Account.DELIVERY ? "Sign Out" : "Log Out").setExact(true)).click();

@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Tag("flow")
 @Tag("ui-only")
 public class CustomerOrderPlacementTest extends TestBase {
 
