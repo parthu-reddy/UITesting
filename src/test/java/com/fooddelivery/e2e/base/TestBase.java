@@ -70,7 +70,7 @@ public abstract class TestBase {
                 String.format("9000000%03d", ThreadLocalRandom.current().nextInt(1, 11)));
         testRiderPhone = System.getProperty("rider.phone",
                 String.format("7000000%03d", ThreadLocalRandom.current().nextInt(1, 31)));
-        testAdminPhone = String.format("1000000%03d", (int)(Math.random() * 10) + 1);
+        testAdminPhone = System.getProperty("admin.phone", "1000000001");
 
         customerContext = createContext("customer");
         restaurantContext = createContext("restaurant");

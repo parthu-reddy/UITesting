@@ -104,10 +104,10 @@ public class DelayApprovalFlowTest extends TestBase {
 
         tracker.rejectDelay();
 
-        // The server's answer, not the screen's optimistic one: declining publishes
-        // ORDER_DELAY_REJECTED, which settles the order as CANCELLED_BY_RESTAURANT with the reason
-        // "Customer rejected delay" (AwaitingDelayApprovalState.handleDelayRejected). The live
-        // tracker sets CANCELLED locally until the next refresh -- see NOT-DEFECTS/PENDING.
+        // The server's answer: declining publishes ORDER_DELAY_REJECTED, which settles the order
+        // as CANCELLED_BY_RESTAURANT with the reason "Customer rejected delay"
+        // (AwaitingDelayApprovalState.handleDelayRejected). Since UI useLiveOrderActions A9 the
+        // screen shows that status at once; the reload proves it is the server's, not the screen's.
         customerPage.reload();
         tracker.waitForStatus("CANCELLED_BY_RESTAURANT");
         Locator terminalHeadline = customerPage.locator("[data-testid='terminal-headline']");

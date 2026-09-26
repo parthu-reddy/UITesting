@@ -69,5 +69,10 @@ public class AdminPortalPage {
         throw new UnsupportedOperationException("The admin portal has no campaigns screen; campaigns are a restaurant tab");
     }
 
-    public void openRefundsTab() { nav("Refund Queue"); }
+    public void openRefundsTab() {
+        page.getByRole(com.microsoft.playwright.options.AriaRole.NAVIGATION)
+                .getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
+                        new Locator.GetByRoleOptions().setName("Refund Queue").setExact(true))
+                .click();
+    }
 }

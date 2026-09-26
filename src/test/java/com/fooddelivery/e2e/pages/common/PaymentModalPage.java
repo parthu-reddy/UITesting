@@ -27,11 +27,6 @@ public class PaymentModalPage {
         return page.locator("text=Delivering To, text=Pay Securely").first().isVisible();
     }
 
-    public void selectCashOnDelivery() {
-        page.locator("button:has-text('Cash on Delivery'), label:has-text('Cash on Delivery')").first().click();
-        page.waitForTimeout(300);
-    }
-
     public void selectWalletPayment() {
         page.locator("button:has-text('Wallet'), label:has-text('Wallet')").first().click();
         page.waitForTimeout(300);

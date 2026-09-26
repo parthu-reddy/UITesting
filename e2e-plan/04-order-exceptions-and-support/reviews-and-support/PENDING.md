@@ -61,3 +61,17 @@ opens either widget first, so on the customer home it asserts nothing and passes
 match the real widgets (the chat composer's "Type a message..." field; the place search named
 "Search for a place") so the guards are at least truthful, but the scenarios still need a flow
 that opens the chat from an order and the address map — new test code, out of this phase's scope.
+
+## 2026-09-25 — deployed refund queue smoke validation
+
+Ran the existing `AdminSupportUserReviewTest#refundQueueVisible+refundCount` against
+`https://gulf-strike-dark-extras.trycloudflare.com/` using admin `1000000001`:
+**2 passed, 0 failures/errors/skips**. Report: `target/surefire-reports/com.fooddelivery.e2e.tests.features.admin.AdminSupportUserReviewTest.txt`.
+The initial navigation attempt exposed Java `Pattern.quote` escaping in the shared sidebar
+helper; `openRefundsTab()` now uses an exact accessible button name. TestBase now honors
+`-Dadmin.phone` and defaults to the retained admin account. Working-tree locator audit passes.
+
+`AdminSupportRefundQueueTest#testRefundQueueActions` was not executed: automatic approval
+review blocked its real rejection of the first open ticket without explicit approval or an
+isolated disposable fixture. Refund approval, rejection, and payment completion remain
+unvalidated live. No refund data was changed by the completed read-only tests.

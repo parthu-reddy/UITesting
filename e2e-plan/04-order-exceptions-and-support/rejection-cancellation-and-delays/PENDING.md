@@ -22,7 +22,9 @@ now "The kitchen asked for N more minutes" with the kitchen's reason, and the bu
 **"I’ll wait"** (a typographic apostrophe) and **"Cancel order"**, which confirms first
 ("Cancel instead of waiting?"). The restaurant card's status is read from its `data-status`.
 
-**UI finding — the tracker misstates the outcome of a declined delay until it refreshes.**
+**UI finding — FIXED 2026-09-25 (UI `useLiveOrderActions`, backlog A9): the screen now sets
+CANCELLED_BY_RESTAURANT, the status the server settles on. Kept for the record:** the tracker
+misstated the outcome of a declined delay until it refreshed.
 Declining publishes `ORDER_DELAY_REJECTED`; `AwaitingDelayApprovalState.handleDelayRejected` settles
 the order as **CANCELLED_BY_RESTAURANT**, reason "Customer rejected delay". But
 `useLiveOrderActions.answerDelay(false)` sets **CANCELLED** locally, so the screen says "This order
