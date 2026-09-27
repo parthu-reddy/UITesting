@@ -3,17 +3,20 @@ package com.fooddelivery.e2e.util;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 
-/**
- * Simulates the {@code <SwipeAction>} gesture used in the delivery UI.
- * <p>
- * The component uses {@code role="slider"} and supports keyboard shortcuts:
- * pressing {@code End} or {@code Enter} confirms the action immediately.
- * This is more reliable than simulating pointer drag in headless mode.
- * </p>
- */
+/** Pointer gestures for the UI SwipeAction slider; keyboard confirmation is explicit. */
 public final class SwipeHelper {
 
     private SwipeHelper() {}
+
+    private static Locator slider(Page page, String label) {
+        return page.getByRole(com.microsoft.playwright.options.AriaRole.SLIDER,
+                new Page.GetByRoleOptions().setName(label));
+    }
+
+    public static void swipeToConfirm(Page page, String label) {
+        page.bringToFront();
+        swipeToConfirmByDrag(page, label);
+    }
 
     /**
      * Confirms a SwipeAction by its aria-label text.
@@ -23,10 +26,8 @@ public final class SwipeHelper {
      * @param page  the Playwright page containing the SwipeAction
      * @param label the aria-label text (or partial match) of the SwipeAction slider
      */
-    public static void swipeToConfirm(Page page, String label) {
-        Locator slider = page.locator("div[role='slider']")
-                .filter(new Locator.FilterOptions().setHasText(label))
-                .first();
+    public static void confirmWithKeyboard(Page page, String label) {
+        Locator slider = slider(page, label);
 
         slider.waitFor(new Locator.WaitForOptions()
                 .setState(com.microsoft.playwright.options.WaitForSelectorState.VISIBLE));
@@ -41,37 +42,64 @@ public final class SwipeHelper {
 
     /**
      * Confirms a SwipeAction by simulating a full pointer drag across the track.
-     * Use this as a fallback if keyboard confirmation doesn't trigger correctly.
+     *
+     * <p>SwipeAction confirms on release iff the pointer is past 85% of the track, and it reports
+     * its progress in {@code aria-valuenow} while the pointer is down. So the outcome is decided
+     * before release: a drag observed at 85%+ confirms when released; a drag that fell short (the
+     * panel moved under the pointer, a re-render) springs back to 0 without confirming and is
+     * retried. There is no sleep: callers wait for the status request the swipe sends.
      *
      * @param page  the Playwright page
      * @param label the aria-label text of the SwipeAction slider
      */
     public static void swipeToConfirmByDrag(Page page, String label) {
-        Locator slider = page.locator("div[role='slider']")
-                .filter(new Locator.FilterOptions().setHasText(label))
-                .first();
+        Locator slider = slider(page, label);
+        java.util.regex.Pattern pastThreshold = java.util.regex.Pattern.compile("(?:8[5-9]|9[0-9]|100)");
+        com.microsoft.playwright.PlaywrightException lastShortfall = null;
 
-        slider.waitFor(new Locator.WaitForOptions()
-                .setState(com.microsoft.playwright.options.WaitForSelectorState.VISIBLE));
+        for (int attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+            slider.waitFor(new Locator.WaitForOptions()
+                    .setState(com.microsoft.playwright.options.WaitForSelectorState.VISIBLE));
+            slider.scrollIntoViewIfNeeded();
+            // Locked while a previous confirmation is in flight; it re-arms at 0 when that settles.
+            com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(slider).isEnabled();
+            com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(slider)
+                    .hasAttribute("aria-valuenow", "0");
+            // Unlike raw mouse coordinates, hover waits for animation stability and hit testing.
+            slider.hover(new Locator.HoverOptions().setPosition(20, 28));
+            var box = slider.boundingBox();
+            if (box == null) {
+                throw new IllegalStateException("SwipeAction slider not visible: " + label);
+            }
+            double endX = box.x + box.width * 0.95;
+            double midY = box.y + box.height / 2;
 
-        var box = slider.boundingBox();
-        if (box == null) {
-            throw new IllegalStateException("SwipeAction slider not visible: " + label);
+            page.mouse().down();
+            boolean reached = false;
+            try {
+                // One continuous movement. Separate move calls each inherit slowMo.
+                page.mouse().move(endX, midY, new com.microsoft.playwright.Mouse.MoveOptions().setSteps(30));
+                com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(slider)
+                        .hasAttribute("aria-valuenow", pastThreshold,
+                                new com.microsoft.playwright.assertions.LocatorAssertions.HasAttributeOptions()
+                                        .setTimeout(3000));
+                reached = true;
+            } catch (AssertionError | com.microsoft.playwright.PlaywrightException shortfall) {
+                lastShortfall = new com.microsoft.playwright.PlaywrightException(
+                        "attempt " + attempt + ": drag reached " + slider.getAttribute("aria-valuenow") + "%", shortfall);
+                System.out.printf("[SWIPE] %s attempt %d fell short (%s%%); retrying%n",
+                        label, attempt, slider.getAttribute("aria-valuenow"));
+            } finally {
+                page.mouse().up();
+            }
+            if (reached) {
+                System.out.printf("[SWIPE] %s confirmed on attempt %d%n", label, attempt);
+                return;
+            }
         }
-
-        double startX = box.x + 20;
-        double endX = box.x + box.width * 0.90;
-        double midY = box.y + box.height / 2;
-
-        page.mouse().move(startX, midY);
-        page.mouse().down();
-        // Simulate gradual drag with multiple steps for realism
-        for (int step = 1; step <= 20; step++) {
-            double x = startX + (endX - startX) * step / 20.0;
-            page.mouse().move(x, midY);
-        }
-        page.mouse().up();
-
-        page.waitForTimeout(500);
+        throw new IllegalStateException("SwipeAction '" + label + "' never reached the confirm threshold in "
+                + MAX_ATTEMPTS + " drags", lastShortfall);
     }
+
+    private static final int MAX_ATTEMPTS = 3;
 }

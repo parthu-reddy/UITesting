@@ -33,11 +33,7 @@ public class DeliveryDashboardPage {
     }
 
     public void goOnline() {
-        Locator toggleBtn = page.locator("button:has-text('Offline'), button:has-text('Online Duty')").first();
-        if ("Offline".equals(toggleBtn.innerText().trim())) {
-            toggleBtn.click();
-            page.getByText("Online Duty").waitFor();
-        }
+        new DeliveryOnlineTogglePage(page).goOnline();
     }
 
     // ── Tab navigation ───────────────────────────────────────────────────

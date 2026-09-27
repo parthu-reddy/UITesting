@@ -32,7 +32,6 @@ public class DeliveryActiveJobPage {
                 .setState(WaitForSelectorState.VISIBLE)
                 .setTimeout(15000));
         btn.click();
-        page.waitForTimeout(1000);
     }
 
     // ── Pickup OTP + SwipeAction ─────────────────────────────────────────
@@ -46,6 +45,8 @@ public class DeliveryActiveJobPage {
                 .setState(WaitForSelectorState.VISIBLE)
                 .setTimeout(10000));
         input.fill(otp);
+        // The field is controlled by React; the swipe must not start until it holds the code.
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(input).hasValue(otp);
     }
 
     /**
@@ -66,20 +67,15 @@ public class DeliveryActiveJobPage {
                 .setState(WaitForSelectorState.VISIBLE)
                 .setTimeout(30000));
         input.fill(otp);
+        // The field is controlled by React; the swipe must not start until it holds the code.
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(input).hasValue(otp);
     }
 
     /**
      * Swipes to confirm delivery (replaces the old "Verify & Deliver" button).
      */
     public void swipeToConfirmDelivery() {
-        // The delivery swipe label includes the payout amount, so we match partial text
-        Locator slider = page.locator("div[role='slider']")
-                .filter(new Locator.FilterOptions().setHasText("Slide to deliver"));
-        slider.first().waitFor(new Locator.WaitForOptions()
-                .setState(WaitForSelectorState.VISIBLE));
-        slider.first().focus();
-        slider.first().press("End");
-        page.waitForTimeout(500);
+        SwipeHelper.swipeToConfirm(page, "Slide to deliver");
     }
 
     // ── Status checks ────────────────────────────────────────────────────

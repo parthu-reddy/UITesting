@@ -50,6 +50,29 @@ public class HappyDeliveryFlowTest extends TestBase {
 
     private void resumeAssignedOrder(String orderId, String outletName) {
         String shortOrderId = orderId.substring(0, Math.min(8, orderId.length()));
+        Locator activeHeading = riderPage.getByRole(AriaRole.HEADING,
+                new Page.GetByRoleOptions().setName("Active Contract").setExact(true));
+        Locator dispatchOffer = riderPage.getByRole(AriaRole.ALERT)
+                .filter(new Locator.FilterOptions().setHasText("New Dispatch"))
+                .filter(new Locator.FilterOptions().setHasText(outletName));
+        riderPage.waitForCondition(() -> activeHeading.isVisible() || dispatchOffer.isVisible(),
+                new Page.WaitForConditionOptions().setTimeout(60000));
+        if (!riderPage.getByText("Active Contract",
+                new Page.GetByTextOptions().setExact(true)).isVisible()) {
+            // A failed dispatch attempt can leave this test's prepared order unassigned.
+            // Recover it through the same visible popup, without creating another order.
+            DispatchPingPage ping = new DispatchPingPage(riderPage);
+            ping.waitForPing(outletName);
+            assertThat(riderPage.getByText("ORDER CONTRACT #" + shortOrderId,
+                    new Page.GetByTextOptions().setExact(true))).isVisible();
+            riderPage.bringToFront();
+            ping.acceptDispatch(orderId);
+            waitForActiveOrder(orderId);
+        }
+        waitForActiveOrder(orderId);
+        riderPage.waitForCondition(() -> riderPage.getByPlaceholder("Enter 6-digit pickup OTP").isVisible()
+                        || riderPage.getByPlaceholder("Ask customer for 6-digit OTP").isVisible(),
+                new Page.WaitForConditionOptions().setTimeout(30000));
         Locator todayEarnings = riderPage.getByText("Today’s Earnings",
                 new Page.GetByTextOptions().setExact(true)).locator("..").locator("span").last();
         double earningsBefore = parseInr(todayEarnings.innerText());
@@ -70,9 +93,9 @@ public class HappyDeliveryFlowTest extends TestBase {
 
             Locator arrived = riderPage.getByRole(AriaRole.BUTTON,
                     new Page.GetByRoleOptions().setName("Mark Arrived at Restaurant").setExact(true));
-            if (arrived.isVisible()) activeJob.markArrivedAtRestaurant();
+            if (arrived.isVisible()) confirmStatus(orderId, "AT_RESTAURANT", activeJob::markArrivedAtRestaurant);
             activeJob.enterPickupOtp(pickupOtp);
-            activeJob.swipeToConfirmPickup();
+            confirmStatus(orderId, "OUT_FOR_DELIVERY", activeJob::swipeToConfirmPickup);
         }
         assertThat(riderPage.getByPlaceholder("Ask customer for 6-digit OTP")).isVisible();
 
@@ -81,7 +104,7 @@ public class HappyDeliveryFlowTest extends TestBase {
         String deliveryOtp = tracker.getDeliveryOtp();
         org.assertj.core.api.Assertions.assertThat(deliveryOtp).matches("[0-9]{6}");
         activeJob.enterDeliveryOtp(deliveryOtp);
-        activeJob.swipeToConfirmDelivery();
+        confirmDelivery(activeJob, orderId);
 
         assertThat(riderPage.getByRole(AriaRole.BUTTON,
                 new Page.GetByRoleOptions().setName(Pattern.compile("^Online Duty$")))).isVisible();
@@ -138,7 +161,7 @@ public class HappyDeliveryFlowTest extends TestBase {
         // ── Step 2: Rider goes online ─────────────────────────────────────
         System.out.println("═══ STEP 2: Rider going online ═══");
         DeliveryOnlineTogglePage toggle = new DeliveryOnlineTogglePage(riderPage);
-        toggle.goOnline();
+        riderDashboard.goOnline();
         assertThat(toggle.isOnline()).isTrue();
         Locator todayEarnings = riderPage.getByText("Today’s Earnings",
                 new Page.GetByTextOptions().setExact(true)).locator("..").locator("span").last();
@@ -193,8 +216,10 @@ public class HappyDeliveryFlowTest extends TestBase {
         // Accept the short-lived dispatch before opening the restaurant OTP.
         System.out.println("═══ STEP 8: Rider accepting dispatch ═══");
         DispatchPingPage ping = new DispatchPingPage(riderPage);
-        ping.waitForPing();
-        Locator dispatch = riderPage.getByRole(AriaRole.ALERT);
+        ping.waitForPing(selectedOutlet);
+        Locator dispatch = riderPage.getByRole(AriaRole.ALERT)
+                .filter(new Locator.FilterOptions().setHasText("New Dispatch"))
+                .filter(new Locator.FilterOptions().setHasText(selectedOutlet));
         // Take one text snapshot, then accept immediately. Chaining exact child locators here once
         // consumed the complete server-side 60-second window before the click reached the API.
         String dispatchText = dispatch.innerText();
@@ -205,7 +230,13 @@ public class HappyDeliveryFlowTest extends TestBase {
                 new Locator.GetByRoleOptions().setName("Decline").setExact(true)).count();
         int acceptActions = dispatch.getByRole(AriaRole.BUTTON,
                 new Locator.GetByRoleOptions().setName("Accept Order").setExact(true)).count();
-        ping.acceptDispatch();
+        // Validate identity before mutating anything: another unfinished order can be offered
+        // first in a shared seeded environment. The popup exposes its outlet, the board its ID.
+        org.assertj.core.api.Assertions.assertThat(pickupText).contains(selectedOutlet);
+        assertThat(riderPage.getByText("ORDER CONTRACT #" + shortOrderId,
+                new Page.GetByTextOptions().setExact(true))).isVisible();
+        riderPage.bringToFront();
+        ping.acceptDispatch(orderId);
 
         org.assertj.core.api.Assertions.assertThat(dispatchText).containsIgnoringCase("New Dispatch");
         org.assertj.core.api.Assertions.assertThat(countdownLabel)
@@ -218,6 +249,7 @@ public class HappyDeliveryFlowTest extends TestBase {
         org.assertj.core.api.Assertions.assertThat(dispatchFee)
                 .as("gross delivery fee shown in the dispatch offer").isPositive();
 
+        waitForActiveOrder(orderId);
         Locator activeContract = riderPage.getByText("Active Contract",
                 new Page.GetByTextOptions().setExact(true)).locator("..").locator("..");
         assertThat(activeContract).containsText(orderId);
@@ -232,7 +264,7 @@ public class HappyDeliveryFlowTest extends TestBase {
 
         // An accepted assignment must survive a page reload without resetting or duplicating it.
         riderPage.reload();
-        waitForActiveOrderAfterReload(orderId);
+        waitForActiveOrder(orderId);
         assertThat(riderPage.getByPlaceholder("Enter 6-digit pickup OTP")).isVisible();
 
         System.out.println("═══ STEP 9: Getting pickup OTP ═══");
@@ -242,14 +274,13 @@ public class HappyDeliveryFlowTest extends TestBase {
         // ── Step 10: Rider marks arrived at restaurant ────────────────────
         System.out.println("═══ STEP 10: Rider marking arrived ═══");
         DeliveryActiveJobPage activeJob = new DeliveryActiveJobPage(riderPage);
-        riderPage.waitForTimeout(2000);
-        activeJob.markArrivedAtRestaurant();
+        // Waits for the server to accept the step, not for a guessed number of seconds.
+        confirmStatus(orderId, "AT_RESTAURANT", activeJob::markArrivedAtRestaurant);
 
         // ── Step 11: Rider enters pickup OTP and swipes to confirm ────────
         System.out.println("═══ STEP 11: Rider picking up order ═══");
-        riderPage.waitForTimeout(2000);
         activeJob.enterPickupOtp(pickupOtp);
-        activeJob.swipeToConfirmPickup();
+        confirmStatus(orderId, "OUT_FOR_DELIVERY", activeJob::swipeToConfirmPickup);
         assertThat(riderPage.getByText("Step 2: Deliver to door",
                 new Page.GetByTextOptions().setExact(true))).isVisible();
         assertThat(riderPage.getByText("Package Picked Up",
@@ -259,7 +290,7 @@ public class HappyDeliveryFlowTest extends TestBase {
 
         // Delivery phase is server-backed and must be restored after reload.
         riderPage.reload();
-        waitForActiveOrderAfterReload(orderId);
+        waitForActiveOrder(orderId);
         assertThat(riderPage.getByText("Step 2: Deliver to door",
                 new Page.GetByTextOptions().setExact(true))).isVisible();
         assertThat(riderPage.getByPlaceholder("Ask customer for 6-digit OTP")).isVisible();
@@ -271,9 +302,8 @@ public class HappyDeliveryFlowTest extends TestBase {
 
         // ── Step 13: Rider enters delivery OTP and swipes to deliver ──────
         System.out.println("═══ STEP 13: Rider delivering order ═══");
-        riderPage.waitForTimeout(2000);
         activeJob.enterDeliveryOtp(deliveryOtp);
-        activeJob.swipeToConfirmDelivery();
+        confirmDelivery(activeJob, orderId);
 
         // ── Step 14: Verify delivery complete ─────────────────────────────
         System.out.println("═══ STEP 14: Verifying delivery complete ═══");
@@ -308,16 +338,39 @@ public class HappyDeliveryFlowTest extends TestBase {
 
         // The customer's still-open tracker must converge to the terminal state too. This covers
         // the active-order disappearance path, where polling fetches the missing order by ID.
-        Locator rateOrderPrompt = customerPage.getByTestId("rate-order-prompt");
-        rateOrderPrompt.waitFor(new Locator.WaitForOptions().setTimeout(45000));
-        assertThat(rateOrderPrompt).containsText("Order Delivered");
+        Locator deliveredSummary = customerPage.locator(
+                "[data-testid='order-tracker'][data-order-id='" + orderId + "']");
+        deliveredSummary.getByRole(AriaRole.HEADING,
+                new Locator.GetByRoleOptions().setName("Order delivered").setExact(true))
+                .waitFor(new Locator.WaitForOptions().setTimeout(45000));
+        assertThat(deliveredSummary).containsText("Delivered from " + selectedOutlet);
+        assertThat(deliveredSummary.getByRole(AriaRole.BUTTON,
+                new Locator.GetByRoleOptions().setName("Tax invoice").setExact(true))).isVisible();
 
         System.out.println("════════════════════════════════════════");
         System.out.println("  ✅ HAPPY PATH E2E TEST PASSED");
         System.out.println("════════════════════════════════════════");
     }
 
-    private void waitForActiveOrderAfterReload(String orderId) {
+    private void confirmDelivery(DeliveryActiveJobPage activeJob, String orderId) {
+        confirmStatus(orderId, "DELIVERED", activeJob::swipeToConfirmDelivery);
+    }
+
+    private void confirmStatus(String orderId, String status, Runnable swipe) {
+        com.microsoft.playwright.Response response = riderPage.waitForResponse(
+                r -> r.request().method().equals("POST")
+                        && r.url().endsWith("/orders/" + orderId + "/status")
+                        && r.request().postData() != null
+                        && r.request().postData().contains("\"" + status + "\""),
+                new Page.WaitForResponseOptions().setTimeout(60000),
+                swipe);
+        System.out.printf("[OTP SWIPE] %s submission returned HTTP %d for order %s%n",
+                status, response.status(), orderId);
+        org.assertj.core.api.Assertions.assertThat(response.ok())
+                .as("%s confirmation after pointer swipe: HTTP %s", status, response.status()).isTrue();
+    }
+
+    private void waitForActiveOrder(String orderId) {
         Locator activeContract = riderPage.getByText("Active Contract",
                 new Page.GetByTextOptions().setExact(true));
         activeContract.waitFor(new Locator.WaitForOptions()

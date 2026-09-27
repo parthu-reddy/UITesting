@@ -34,8 +34,8 @@ public class RiderAvailabilityUiTest extends TestBase {
         assertThat(riderPage.getByText("Today’s Earnings",
                 new Page.GetByTextOptions().setExact(true)).isVisible()).isTrue();
 
-        // Always re-register this browser's geolocation, including when the seeded rider was
-        // already rendered Online from an earlier session.
+        boolean initiallyOnline = duty.isOnline();
+        // Online setup is idempotent; do not cycle a rider already on duty.
         duty.goOnline();
         assertThat(duty.isOnline()).isTrue();
         riderPage.reload();
@@ -49,7 +49,7 @@ public class RiderAvailabilityUiTest extends TestBase {
         assertThat(duty.isOffline()).as("Offline duty survives reload").isTrue();
 
         duty.goOnline();
-        assertThat(duty.isOnline()).as("Test restores the shared rider to Online").isTrue();
+        assertThat(duty.isOnline()).as("Rider can return Online after an explicit offline action").isTrue();
 
         riderPage.getByRole(AriaRole.BUTTON,
                 new Page.GetByRoleOptions().setName(Pattern.compile("Trips Completed"))).click();
@@ -58,5 +58,6 @@ public class RiderAvailabilityUiTest extends TestBase {
         assertThat(riderPage.getByText("Delivered", new Page.GetByTextOptions().setExact(true)).first().isVisible()
                 || riderPage.getByText("No completed deliveries found.",
                 new Page.GetByTextOptions().setExact(true)).isVisible()).isTrue();
+        if (!initiallyOnline) duty.goOffline();
     }
 }
