@@ -1,6 +1,8 @@
 # Failures and pending work
 
-## Fixed in source; redeploy validation pending: cart drawer increment
+## Live-closed: cart drawer increment
+
+Post-redeploy validation on 2026-09-27 passes 3/3 with seeded customer `8000000005`: drawer increment/decrement/empty, remove-only-item, and menu quantity/removal. The original drawer operation now changes quantity 1 to 2.
 
 `MenuCartUiTest.addIncrementDecrementAndEmptyCart` was reproduced on 2026-09-27: expected quantity 2 after Add one, displayed 1. The click reached the rendered button once, `food_delivery_carts_v2` remained unchanged, and no cart network request is involved. The cause was the prop contract between `CustomerDashboard` and `CustomerModalStack`: the dashboard renamed the hook function locally but never exposed the `originalAddToCart` property the modal stack destructured, so the drawer received `undefined` instead of the restaurant-aware mutation function.
 
@@ -12,7 +14,7 @@ Evidence: UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.smok
 
 Resolved test defect: original locator depended on the ADD button, which disappears after adding. Fixed by retaining data-menu-item identity. The remaining quantity failure occurred after this correction.
 
-Pending: deployed validation of the drawer fix and settled quote arithmetic for fees/taxes. No checkout/payment is performed by these cart tests. Cart state is isolated to the test browser and discarded on closure; no other browser's cart is modified. Browser resource errors are tracked separately.
+No checkout/payment is performed by these cart tests. Cart state is isolated to the test browser and discarded on closure; no other browser's cart is modified. Browser resource errors are tracked separately.
 
 ## Independent cart cases
 

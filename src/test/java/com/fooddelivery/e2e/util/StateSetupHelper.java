@@ -161,7 +161,10 @@ public class StateSetupHelper {
                 page.waitForTimeout(1000); 
             }
             toggle.goOnline();
-            page.waitForTimeout(1000); 
+            page.waitForTimeout(1000);
+            if (!toggle.isOnline()) {
+                throw new IllegalStateException("Seeded rider did not reach Online state: " + riderPhone);
+            }
         } finally {
             // Context stays open for reuse
         }

@@ -19,21 +19,20 @@ public class CustomerDashboardPage {
     }
 
     public void waitForDashboard() {
+        Locator addressDialogHeading = page.getByRole(AriaRole.HEADING,
+                new Page.GetByRoleOptions().setName("Select Delivery Location").setExact(true));
+        boolean addressDialogOpen = false;
         try {
-            page.route("https://nominatim.openstreetmap.org/reverse*", route -> {
-                route.fulfill(new com.microsoft.playwright.Route.FulfillOptions()
-                        .setStatus(200)
-                        .setContentType("application/json")
-                        .setBody("{\"display_name\":\"Mocked Current Location\"}"));
-            });
-        } catch (Exception ignored) { }
-
-        Locator loc = page.locator("text=Use Current Location").first();
-        try {
-            loc.waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE).setTimeout(3000));
-            loc.click();
-            page.waitForTimeout(1000);
-        } catch (Exception ignored) { }
+            addressDialogHeading.waitFor(new Locator.WaitForOptions()
+                    .setState(WaitForSelectorState.VISIBLE)
+                    .setTimeout(3000));
+            addressDialogOpen = true;
+        } catch (com.microsoft.playwright.TimeoutError ignored) { }
+        if (addressDialogOpen) {
+            // Quotes and orders require a persisted deliveryAddressId. GPS selection deliberately
+            // has no ID, so shared E2E setup must use the seeded Home address instead.
+            new SavedDeliveryAddressPage(page).selectHomeFromOpenDialog();
+        }
 
         // Wait for the header to appear
         page.locator("header").first()

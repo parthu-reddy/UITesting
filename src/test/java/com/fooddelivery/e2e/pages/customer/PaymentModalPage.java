@@ -51,6 +51,15 @@ public class PaymentModalPage {
         return dialog().getByText("×" + quantity, new Locator.GetByTextOptions().setExact(true)).first().isVisible();
     }
 
+    /** Waits until the estimated checkout summary has been replaced by the server's final quote. */
+    public void waitForFinalQuote() {
+        dialog().getByText("GST & restaurant charges", new Locator.GetByTextOptions().setExact(true))
+                .first()
+                .waitFor(new Locator.WaitForOptions()
+                        .setState(WaitForSelectorState.VISIBLE)
+                        .setTimeout(15000));
+    }
+
     /**
      * A bill line with a real amount. Labels: "Item total", "Delivery fee", "Platform fee",
      * "GST & restaurant charges", "Total".
@@ -65,13 +74,26 @@ public class PaymentModalPage {
 
     /** Radio names: "La Bouffe Wallet …", "UPI", "Credit or debit card". Matched as a substring. */
     public boolean hasPaymentMethod(String name) {
-        return paymentRadio(name).isVisible();
+        Locator method = paymentRadio(name);
+        try {
+            method.waitFor(new Locator.WaitForOptions()
+                    .setState(WaitForSelectorState.ATTACHED)
+                    .setTimeout(5000));
+            method.scrollIntoViewIfNeeded();
+            return method.count() == 1;
+        } catch (com.microsoft.playwright.TimeoutError ignored) {
+            return false;
+        }
     }
 
     /** The wallet radio is disabled while the balance cannot cover the bill; UPI and card never are. */
     public boolean isPaymentMethodEnabled(String name) {
         Locator method = paymentRadio(name);
-        return method.isVisible() && method.isEnabled();
+        method.waitFor(new Locator.WaitForOptions()
+                .setState(WaitForSelectorState.ATTACHED)
+                .setTimeout(5000));
+        method.scrollIntoViewIfNeeded();
+        return method.isEnabled();
     }
 
     public void selectPaymentMethod(String name) {
@@ -79,8 +101,8 @@ public class PaymentModalPage {
     }
 
     private Locator paymentRadio(String name) {
-        return dialog().getByRole(AriaRole.RADIO,
-                new Locator.GetByRoleOptions().setName(Pattern.compile(Pattern.quote(name), Pattern.CASE_INSENSITIVE)))
+        return dialog().getByRole(AriaRole.RADIO)
+                .filter(new Locator.FilterOptions().setHasText(name))
                 .first();
     }
 
@@ -99,6 +121,7 @@ public class PaymentModalPage {
     }
 
     public void placeOrder(String method) {
+        waitForFinalQuote();
         selectPaymentMethod(method);
         if (!isPayEnabled()) {
             throw new IllegalStateException("Place order stayed disabled -- quote never arrived or no method is selectable");

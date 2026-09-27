@@ -10,7 +10,7 @@ MENU-09 live-passed on 2026-09-24: every seeded description was nonblank, smalle
 
 MENU-08 is implemented as a strict regression test and failed live on 2026-09-24. Menu row 25 rendered an `img`, but the image did not load (`naturalWidth = 0`), so the deployed UI left a broken visual instead of a loaded item image or fallback. The failure remains active in `MenuCartUiTest.everyMenuItemHasLoadedImageOrFallback`.
 
-Dietary/preparation metadata validation is implemented and failed its seeded-data prerequisite on 2026-09-24 because the selected deployed menu exposed zero accessible dietary markers. The test permits unclassified individual items but requires at least one classified seeded item to exercise the contract; when markers exist it accepts only `Vegetarian` or `Non-vegetarian`. Preparation times, when rendered, must be positive. Keep this test active and either seed at least one dietary classification or fix the UI if classifications already exist in the response.
+Dietary/preparation metadata validation originally failed because the customer menu DTO omitted `isVeg`. After the DTO fix and redeployment, `MenuCartUiTest.dietaryMarkersAndPrepTimesNeverInventValues` live-passed on 2026-09-27. The test still permits genuinely unclassified individual items, requires at least one classified seeded item, accepts only `Vegetarian` or `Non-vegetarian`, and requires positive preparation times when rendered.
 
 The current restaurant menu has no item-search field, so MENU-11 through MENU-13 cover the actual search control on the customer restaurant browser. UI checks do not establish server-side authorization.
 

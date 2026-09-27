@@ -20,7 +20,7 @@ ACCESS-07 authenticated coverage live-passed on 2026-09-24. Every visible button
 
 NAV-02 was reactivated on 2026-09-27. Although `CustomerDashboard.tsx` retains a wildcard shell route, `useCustomerRoute.ts` now derives Account Settings from `/customer/settings` and recognizes the profile, history, addresses, wallet, and reviews subpaths. The existing `CustomerRoutingUiTest` now navigates directly to `/customer/settings/profile` and verifies the view before and after reload. Live validation is recorded separately; this is no longer a "not applicable" scenario.
 
-Two headless live attempts on 2026-09-27 stalled during Playwright/test-class startup and had to be stopped; Surefire reported `Tests run: 0`, so neither attempt reached NAV-02 and neither is a route failure. Both explicitly used `-Drecord.video=false`. `LoginPage.waitForLoginComplete` now applies the configured suite timeout to its final state wait so a login rejection cannot hang a future run indefinitely. A clean live NAV-02 result is still pending.
+Two initial headless attempts on 2026-09-27 stalled during Playwright/test-class startup and reached zero tests; neither was a route failure. After `LoginPage.waitForLoginComplete` was bounded by the configured suite timeout, a clean `CustomerRoutingUiTest.verifyCustomerRoutingPersistence` run passed. NAV-02 is live-closed: direct `/customer/settings/profile` navigation and reload preserve the URL and Account Settings view.
 
 ACCESS-03 live-passed after using an animation-aware assertion. With a rider made Online through the UI, the test focuses the cart's enabled Checkout button, presses Enter, waits for the named `Complete Your Order` dialog, verifies the exact cart item in the payment summary, and closes without paying.
 

@@ -20,7 +20,7 @@ public class CustomerOrderPlacementTest extends TestBase {
     @Test
     @DisplayName("CUSTOMER-01: Customer can successfully place an order")
     void customerPlacesOrderSuccessfully() {
-        String uniqueRiderPhone = "7000000001";
+        String uniqueRiderPhone = System.getProperty("rider.phone", "7000000001");
         String uniqueCustomerPhone = testCustomerPhone;
 
         // Ensure rider is online to satisfy backend availability checks
