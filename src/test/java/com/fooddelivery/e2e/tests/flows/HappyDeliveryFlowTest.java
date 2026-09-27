@@ -338,11 +338,12 @@ public class HappyDeliveryFlowTest extends TestBase {
 
         // The customer's still-open tracker must converge to the terminal state too. This covers
         // the active-order disappearance path, where polling fetches the missing order by ID.
+        // Polling can be 60 seconds apart; allow another 30 seconds for event processing/requests.
         Locator deliveredSummary = customerPage.locator(
                 "[data-testid='order-tracker'][data-order-id='" + orderId + "']");
         deliveredSummary.getByRole(AriaRole.HEADING,
                 new Locator.GetByRoleOptions().setName("Order delivered").setExact(true))
-                .waitFor(new Locator.WaitForOptions().setTimeout(45000));
+                .waitFor(new Locator.WaitForOptions().setTimeout(90000));
         assertThat(deliveredSummary).containsText("Delivered from " + selectedOutlet);
         assertThat(deliveredSummary.getByRole(AriaRole.BUTTON,
                 new Locator.GetByRoleOptions().setName("Tax invoice").setExact(true))).isVisible();
