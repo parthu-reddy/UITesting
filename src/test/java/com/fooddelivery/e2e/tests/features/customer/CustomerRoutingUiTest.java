@@ -3,6 +3,7 @@ package com.fooddelivery.e2e.tests.features.customer;
 import com.fooddelivery.e2e.base.TestBase;
 import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.common.LoginPage;
+import com.microsoft.playwright.Page;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -13,31 +14,29 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class CustomerRoutingUiTest extends TestBase {
 
     @Test
-    @DisplayName("CUST-01: Verify Customer Routing persists on page reload")
+    @DisplayName("NAV-02: Customer settings deep link opens directly and survives reload")
     void verifyCustomerRoutingPersistence() {
         customerPage.navigate(TestConfig.APP_URL);
         new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone, "Test Customer", "customer@example.com");
-        
-        // Dismiss any dashboard overlays (like Location Required)
+
+        // Dismiss any dashboard overlays (like Location Required).
         customerPage.keyboard().press("Escape");
         customerPage.waitForTimeout(500);
-        
-        // Navigate to the Profile/Settings using the profile menu/button
-        com.fooddelivery.e2e.pages.customer.CustomerDashboardPage.openProfileSettings(customerPage);
-        
-        // Wait for the URL to reflect the React Router path
-        customerPage.waitForURL("**/customer/settings*");
-        assertThat(customerPage.url()).contains("/customer/settings");
-        
-        // Reload the page
+
+        // Exercise the route itself instead of reaching settings through in-memory UI state.
+        String settingsUrl = TestConfig.APP_URL.replaceAll("/$", "") + "/customer/settings/profile";
+        customerPage.navigate(settingsUrl);
+        customerPage.waitForURL("**/customer/settings/profile");
+        customerPage.getByText("Account Settings", new Page.GetByTextOptions().setExact(true)).waitFor();
+        assertThat(customerPage.getByText("Account Settings", new Page.GetByTextOptions().setExact(true)).isVisible())
+                .isTrue();
+
         customerPage.reload();
-        customerPage.waitForTimeout(2000);
-        
-        // Verify URL is STILL /customer/settings after reload
-        assertThat(customerPage.url()).contains("/customer/settings");
-        
-        // Verify the settings page is still active (e.g. Profile details)
-        assertThat(customerPage.locator("text=Profile Settings").first().isVisible() ||
-                   customerPage.locator("text=Account").first().isVisible()).isTrue();
+        customerPage.waitForURL("**/customer/settings/profile");
+
+        assertThat(customerPage.url()).endsWith("/customer/settings/profile");
+        customerPage.getByText("Account Settings", new Page.GetByTextOptions().setExact(true)).waitFor();
+        assertThat(customerPage.getByText("Account Settings", new Page.GetByTextOptions().setExact(true)).isVisible())
+                .isTrue();
     }
 }

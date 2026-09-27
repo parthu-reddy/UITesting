@@ -48,7 +48,7 @@ Uses: Playwright viewport override, keyboard simulation, standard ARIA assertion
 | ID | Description | Action | Expected result |
 |---|---|---|---|
 | NAV-01 | All role dashboards navigate | Each of the four roles can navigate between their main tabs without a crash. | No `TypeError` or blank page on any tab in any role. |
-| NAV-02 | Deep link to settings | Navigate directly to the settings URL if one exists. | Not currently applicable: customer routing uses a wildcard main view and Account Settings has no direct route. |
+| NAV-02 | Deep link to settings | After customer login, navigate directly to `/customer/settings/profile`, then reload. | Account Settings and the Profile tab render directly; the same URL and view survive reload. Covered by `CustomerRoutingUiTest`. |
 | NAV-03 | Unknown route fallback | Navigate an authenticated customer to `/i-do-not-exist`. | Implemented and live-passed: URL is retained while the customer dashboard and Home address render safely instead of a blank page. |
 
 Additional validated navigation: `RoleNavigationUiTest` passes all four role-selector forward/back paths at 1280 px and 390 px. Customer Account Settings now live-passes selection of Profile, History, Addresses, My Reviews, and Store Credit while retaining the settings shell. Restaurant tabs remain blocked by the recorded route override defect.

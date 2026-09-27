@@ -1,5 +1,6 @@
 package com.fooddelivery.e2e.pages.common;
 
+import com.fooddelivery.e2e.base.TestConfig;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
@@ -121,13 +122,10 @@ public class LoginPage {
             if (page.getByText("Session Limit Reached", new Page.GetByTextOptions().setExact(true)).isVisible()) {
                 throw new AssertionError("Account session limit reached. Configure a dedicated test account.");
             }
-            if (page.getByText("Session Limit Reached", new Page.GetByTextOptions().setExact(true)).isVisible()) {
-                throw new AssertionError("Account session limit reached. Configure a dedicated test account.");
-            }
             Locator error = page.locator("div:has(> svg.lucide-circle-alert) > span");
             if (error.isVisible()) throw new AssertionError("Login rejected: " + error.innerText());
             return !page.getByPlaceholder("- - - - - -").isVisible() && !page.getByPlaceholder("Enter your full name").isVisible();
-        });
+        }, new Page.WaitForConditionOptions().setTimeout(TestConfig.DEFAULT_TIMEOUT));
     }
 
     // ── Navigation helpers ───────────────────────────────────────────────

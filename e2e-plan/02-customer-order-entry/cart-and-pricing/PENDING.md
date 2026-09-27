@@ -1,8 +1,10 @@
 # Failures and pending work
 
-## Open: cart increment remains at one
+## Fixed in source; redeploy validation pending: cart drawer increment
 
-MenuCartUiTest.addIncrementDecrementAndEmptyCart fails: expected quantity 2 after Add one, displayed 1. Reproduced with a normal-duration 100ms click; source useCustomerCart has a 50ms mutation guard, but accommodating it did not resolve the failure. Keep the test failing; no application code was changed to force a pass.
+`MenuCartUiTest.addIncrementDecrementAndEmptyCart` was reproduced on 2026-09-27: expected quantity 2 after Add one, displayed 1. The click reached the rendered button once, `food_delivery_carts_v2` remained unchanged, and no cart network request is involved. The cause was the prop contract between `CustomerDashboard` and `CustomerModalStack`: the dashboard renamed the hook function locally but never exposed the `originalAddToCart` property the modal stack destructured, so the drawer received `undefined` instead of the restaurant-aware mutation function.
+
+The UI now exposes that function explicitly as `addToCartForRestaurant`, and the modal stack requires that named prop with the cart drawer's exact function type. `npm run typecheck`, `npm run lint`, the existing cart hook unit tests, and a production build pass. A focused run against the new local build could not reach the cart because Identity returned HTTP 403 from OTP initiation. Redeploy the UI and rerun the three focused cases before marking this live-closed.
 
 Reproduction: customer 8000000001 → existing Home → Brand1 → explicitly select nearest outlet below 5 km (observed Brand 1 Outlet 10) → ADD Brand 1 Item 1-1 → View Cart → Add one. Quantity stayed 1 in that drawer-specific run. Menu-level increment/decrement/removal and final-item empty-cart behavior now pass separately.
 
@@ -10,7 +12,7 @@ Evidence: UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.smok
 
 Resolved test defect: original locator depended on the ADD button, which disappears after adding. Fixed by retaining data-menu-item identity. The remaining quantity failure occurred after this correction.
 
-Pending: application investigation of the historical drawer-specific increment failure and settled quote arithmetic for fees/taxes. No checkout/payment is performed by these cart tests. Cart state is isolated to the test browser and discarded on closure; no other browser's cart is modified. Browser resource errors remain unattributed.
+Pending: deployed validation of the drawer fix and settled quote arithmetic for fees/taxes. No checkout/payment is performed by these cart tests. Cart state is isolated to the test browser and discarded on closure; no other browser's cart is modified. Browser resource errors are tracked separately.
 
 ## Independent cart cases
 
