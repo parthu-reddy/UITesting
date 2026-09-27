@@ -42,7 +42,9 @@ public abstract class TestBase {
 
     @BeforeAll
     public static void setUpClass() {
+        System.out.println("[E2E STARTUP] Creating Playwright driver");
         playwright = Playwright.create();
+        System.out.println("[E2E STARTUP] Launching Chromium (headless=" + TestConfig.HEADLESS + ")");
         browser = playwright.chromium().launch(
                 new BrowserType.LaunchOptions()
                         .setHeadless(TestConfig.HEADLESS)
@@ -54,6 +56,7 @@ public abstract class TestBase {
                                 "--disable-renderer-backgrounding"
                         ))
         );
+        System.out.println("[E2E STARTUP] Chromium ready");
     }
 
     @AfterAll
