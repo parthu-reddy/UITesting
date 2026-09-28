@@ -35,3 +35,8 @@ The CART-14 through CART-16 conflict-dialog scenarios do not match the current a
 The obsolete `CustomerCartTest` that referenced nonexistent `Test Brand` data has been replaced with the deployed product contract for CART-14 through CART-16. Its live run passed: one UI-added item from Brand 1 and one from Brand 2 remained in separate outlet sections, each retained its exact item and independent Checkout action, and no cart-replacement dialog appeared. Review endpoints returned HTTP 403 and delivery availability returned HTTP 409 during the run, but neither prevented this non-checkout cart behavior from being verified.
 
 `fiveSequentialIncrementsReachQuantitySix` and the expanded `removeOnlyItemFromCart` live-passed. Five rendered increment-button activations changed quantity 1 to 6. Removing the only item displayed `Your cart is empty`, removed the quantity output, and after closing the drawer the View Cart trigger was hidden. These tests keep their cart state inside the disposable browser context.
+
+
+## 2026-09-28 focused five-class rerun
+
+`MenuCartUiTest` ran 16 cases: 15 passed and 1 failed, with no skips. The out-of-stock case created a temporary unavailable-item fixture through the restaurant UI and restored it. The checkout arithmetic failure was a test defect: it checked whether Place order was enabled before a payment method had been selected. The quote itself had loaded. After changing the test to wait for the final quote lines, the checkout arithmetic case passed in a focused 1-test rerun on 2026-09-28.

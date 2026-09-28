@@ -31,3 +31,8 @@ Re-run the tests in this folder after deployment.
 These changes are applied to `FoodDeliveryAppUI` source and pass typecheck, lint and the 339
 unit tests. **They are not verified**: nothing here is proven until the UI is deployed and the
 owning test is re-run live. Do not mark anything validated on the strength of this note.
+
+
+## 2026-09-28 focused five-class rerun
+
+`PartnerReadOnlyUiTest.campaignDraftCanBeCancelled` passed: the unsaved campaign draft opened and closed without persisting. This validates draft cancellation only; the campaign navigation and persisted campaign scenarios recorded above remain separate.

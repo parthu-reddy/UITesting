@@ -75,3 +75,8 @@ helper; `openRefundsTab()` now uses an exact accessible button name. TestBase no
 review blocked its real rejection of the first open ticket without explicit approval or an
 isolated disposable fixture. Refund approval, rejection, and payment completion remain
 unvalidated live. No refund data was changed by the completed read-only tests.
+
+
+## 2026-09-28 focused five-class rerun
+
+`ReviewFlowTest.submitReview` skipped before opening the rating modal because the randomized seeded customer had no delivered order in History. The deployed History UI was reached, but review eligibility and POST submission were not exercised. Seeded customer accounts guarantee a login and Home address, not delivered-order history. Use a disposable UI-created order completed through the normal customer → restaurant → rider lifecycle, then rate that exact order; do not depend on prior test order or guess a seeded history row. `HappyDeliveryFlowTest` demonstrates the full order lifecycle and OTP handoff. This review test remains data-blocked until it owns or receives such a completed-order fixture.

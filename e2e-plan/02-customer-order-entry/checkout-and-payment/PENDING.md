@@ -13,3 +13,8 @@ The focused CHECKOUT-16 run passed. A later two-method class run produced one pa
 Reuse Home, explicitly select a nearby Brand1 outlet below 5 km, and make the seeded rider available through the UI. Do not substitute new addresses or fabricated backend state for missing prerequisites.
 
 `CheckoutUiTest` live-passed all four non-submitting scenarios on 2026-09-27 with a seeded nearby rider: final quote and bill, all payment choices, close/reopen, reload recovery, and keyboard activation. The latest UI source additionally keeps Wallet disabled and unselected until its balance request resolves; that regression test passes locally and awaits the next deployment. No test clicked Place order.
+
+
+## 2026-09-28 focused five-class rerun
+
+The initial checkout bill arithmetic assertion failed because it used the disabled Place order button as a quote-ready signal, even though no payment method was selected. The screenshot showed the final quote and all bill lines. After changing the assertion to wait for the final quote label, `MenuCartUiTest.checkoutTotalEqualsItemTotalFeesAndTaxes` passed in a focused 1-test live rerun on 2026-09-28. `PageReloadRecoveryTest.browserBackFromPaymentPreservesCart` passed in the five-class run; it is no longer skipped. Background availability requests during outlet discovery returned 409, but the chosen checkout was available after rider readiness was confirmed.

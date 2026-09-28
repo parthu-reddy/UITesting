@@ -19,3 +19,8 @@ Pending after this batch:
 - active order, restaurant preparation and rider active-job reload scenarios require a clean order lifecycle;
 - reconnect/status reconciliation scenarios require an active order and remain blocked by intermittent delivery-availability HTTP 409 responses;
 - an explicit offline banner is not assumed; the implemented test proves loaded-page stability and cart recovery. Product-specific banner behavior remains pending.
+
+
+## 2026-09-28 focused five-class rerun
+
+`PageReloadRecoveryTest` ran all 8 cases successfully in the focused five-class run. `browserBackFromPaymentPreservesCart` was exercised and passed after the rider-duty preflight helper established live server status and telemetry. Background HTTP 409 availability checks during outlet discovery did not block the selected checkout.

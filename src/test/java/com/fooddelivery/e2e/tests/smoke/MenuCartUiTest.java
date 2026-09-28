@@ -4,16 +4,21 @@ import com.fooddelivery.e2e.pages.customer.CustomerDashboardPage;
 import com.fooddelivery.e2e.base.*;
 import com.fooddelivery.e2e.pages.common.LoginPage;
 import com.fooddelivery.e2e.pages.customer.*;
-import com.fooddelivery.e2e.pages.delivery.DeliveryDashboardPage;
+import com.fooddelivery.e2e.pages.restaurant.RestaurantDashboardPage;
+import com.fooddelivery.e2e.util.CheckoutAvailability;
+import com.fooddelivery.e2e.util.SeededRiderDuty;
 import com.microsoft.playwright.*;
 import com.microsoft.playwright.options.AriaRole;
 import org.junit.jupiter.api.*;
 import java.util.regex.Pattern;
+import java.time.Duration;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 @Tag("cart-ui")
 public class MenuCartUiTest extends TestBase {
+    private String selectedOutlet;
+
     private double parseInr(String text) {
         if (text.contains("FREE")) return 0;
         java.util.regex.Matcher amount = Pattern.compile("₹([0-9,]+(?:\\.[0-9]{1,2})?)").matcher(text);
@@ -25,7 +30,7 @@ public class MenuCartUiTest extends TestBase {
         customerPage.navigate(TestConfig.APP_URL);
         new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
         new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();
-        new NearbyOutletPage(customerPage).openBrand1AndSelectNearby();
+        selectedOutlet = new NearbyOutletPage(customerPage).openBrand1AndSelectNearby();
         assertThat(customerPage.locator("[data-menu-item]").first()).isVisible();
     }
     @Test
@@ -82,14 +87,34 @@ public class MenuCartUiTest extends TestBase {
 
     @Test void everyMenuItemHasLoadedImageOrFallback() {
         Locator rows = customerPage.locator("[data-menu-item]");
+        org.assertj.core.api.Assertions.assertThat(rows.count()).isGreaterThan(0);
         for (int index = 0; index < rows.count(); index++) {
-            Locator image = rows.nth(index).locator("img");
-            assertThat(image).hasCount(1);
-            assertThat(image).hasAttribute("alt", "");
-            int naturalWidth = ((Number) image.evaluate("element => element.naturalWidth")).intValue();
-            org.assertj.core.api.Assertions.assertThat(naturalWidth)
-                    .as("menu row %s image should load instead of leaving a broken visual", index)
-                    .isGreaterThan(0);
+            Locator row = rows.nth(index);
+            Locator slot = row.locator("div.relative.overflow-hidden").first();
+            slot.scrollIntoViewIfNeeded();
+            Locator image = row.locator("img");
+            long deadline = System.nanoTime() + Duration.ofSeconds(10).toNanos();
+            boolean settled = false;
+            while (System.nanoTime() < deadline) {
+                if (image.count() == 0) {
+                    // ImageLoader removes a failed photo and its failed brand mark, leaving its
+                    // visible paper-sunken placeholder in the same image slot.
+                    Locator placeholder = slot.locator("div.absolute.inset-0");
+                    assertThat(placeholder).isVisible();
+                    settled = true;
+                    break;
+                }
+                assertThat(image).hasAttribute("alt", "");
+                int naturalWidth = ((Number) image.evaluate("element => element.naturalWidth")).intValue();
+                if (naturalWidth > 0) {
+                    settled = true;
+                    break;
+                }
+                customerPage.waitForTimeout(100);
+            }
+            org.assertj.core.api.Assertions.assertThat(settled)
+                    .as("menu row %s should load its photo or render ImageLoader's fallback", index)
+                    .isTrue();
         }
     }
 
@@ -120,12 +145,50 @@ public class MenuCartUiTest extends TestBase {
 
     @Test
     void outOfStockItemsCannotBeAdded() {
-        Locator unavailable = customerPage.locator("[data-menu-item]")
-                .filter(new Locator.FilterOptions().setHasText("Out of stock"));
-        assertThat(unavailable.first()).isVisible();
-        assertThat(unavailable.getByRole(AriaRole.BUTTON,
-                new Locator.GetByRoleOptions().setName("ADD").setExact(true))).hasCount(0);
-        assertThat(unavailable.locator("output")).hasCount(0);
+        Locator orderable = firstOrderableItem();
+        String itemId = orderable.getAttribute("data-menu-item");
+        String itemName = orderable.locator("h4").innerText().trim();
+
+        // The deployment has no seeded out-of-stock menu item. Create the fixture through the
+        // restaurant's real stock switch, then restore its original state even on assertion failure.
+        restaurantPage.navigate(TestConfig.APP_URL);
+        new LoginPage(restaurantPage).loginAs("Restaurant Partner", "9000000001");
+        RestaurantDashboardPage restaurant = new RestaurantDashboardPage(restaurantPage);
+        restaurant.waitForDashboard();
+        restaurant.selectOutlet(selectedOutlet);
+        restaurant.openMenuTab();
+
+        Locator stockSwitch = restaurantPage.getByRole(AriaRole.SWITCH,
+                new Page.GetByRoleOptions().setName(itemName + " available").setExact(true));
+        assertThat(stockSwitch).isVisible();
+        assertThat(stockSwitch).hasAttribute("aria-checked", "true");
+        try {
+            setStockAvailability(stockSwitch, false);
+
+            customerPage.reload();
+            new NearbyOutletPage(customerPage).openBrand1AndSelectNearby();
+            Locator unavailable = customerPage.locator("[data-menu-item=\"" + itemId + "\"]");
+            assertThat(unavailable).containsText("Out of stock");
+            assertThat(unavailable.getByRole(AriaRole.BUTTON,
+                    new Locator.GetByRoleOptions().setName("ADD").setExact(true))).hasCount(0);
+            assertThat(unavailable.locator("output")).hasCount(0);
+        } finally {
+            setStockAvailability(stockSwitch, true);
+        }
+    }
+
+    private void setStockAvailability(Locator stockSwitch, boolean available) {
+        boolean current = Boolean.parseBoolean(stockSwitch.getAttribute("aria-checked"));
+        if (current == available) return;
+
+        com.microsoft.playwright.Response response = restaurantPage.waitForResponse(
+                candidate -> candidate.request().method().equals("POST")
+                        && candidate.url().contains("/menu-overrides/"),
+                stockSwitch::click);
+        org.assertj.core.api.Assertions.assertThat(response.status())
+                .as("restaurant stock update should be accepted before checking/restoring customer availability")
+                .isBetween(200, 299);
+        assertThat(stockSwitch).hasAttribute("aria-checked", Boolean.toString(available));
     }
     @Test
     void addIncrementDecrementAndEmptyCart() {
@@ -154,8 +217,8 @@ public class MenuCartUiTest extends TestBase {
     }
 
     private Locator firstOrderableItem() {
-        Locator choice = customerPage.locator("[data-menu-item]").filter(new Locator.FilterOptions()
-                .setHas(customerPage.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("ADD").setExact(true)))).first();
+        Locator choice = customerPage.locator(
+                "[data-menu-item]:has([data-testid='add-to-cart-button'])").first();
         assertThat(choice).isVisible();
         return customerPage.locator("[data-menu-item=\"" + choice.getAttribute("data-menu-item") + "\"]");
     }
@@ -221,9 +284,11 @@ public class MenuCartUiTest extends TestBase {
     }
 
     @Test void twoDistinctItemsProduceExactSubtotal() {
-        Locator orderable = customerPage.locator("[data-menu-item]").filter(new Locator.FilterOptions()
-                .setHas(customerPage.getByRole(AriaRole.BUTTON,
-                        new Page.GetByRoleOptions().setName("ADD").setExact(true))));
+        Locator orderable = customerPage.locator(
+                "[data-menu-item]:has([data-testid='add-to-cart-button'])");
+        orderable.nth(1).waitFor(new Locator.WaitForOptions()
+                .setState(com.microsoft.playwright.options.WaitForSelectorState.VISIBLE)
+                .setTimeout(10000));
         org.assertj.core.api.Assertions.assertThat(orderable.count()).isGreaterThanOrEqualTo(2);
 
         Locator first = customerPage.locator("[data-menu-item=\"" + orderable.nth(0).getAttribute("data-menu-item") + "\"]");
@@ -313,35 +378,33 @@ public class MenuCartUiTest extends TestBase {
      * restaurant charges" (only once quoted), and they must add up to "Total".
      */
     @Test void checkoutTotalEqualsItemTotalFeesAndTaxes() {
-        // A rider must be online near the restaurant for the availability check to pass (HTTP 409 otherwise).
-        riderPage.navigate(TestConfig.APP_URL);
-        new LoginPage(riderPage).loginAs("Delivery Executive", testRiderPhone);
-        new DeliveryDashboardPage(riderPage).goOnline();
+        try (SeededRiderDuty ignored = SeededRiderDuty.ensureOnline(riderPage, testRiderPhone)) {
+            Locator row = firstOrderableItem();
+            row.getByRole(AriaRole.BUTTON,
+                    new Locator.GetByRoleOptions().setName("ADD").setExact(true)).click();
+            customerPage.getByText("View Cart", new Page.GetByTextOptions().setExact(true)).click();
+            CheckoutAvailability.requireDeliveryAvailable(
+                    CheckoutAvailability.clickCheckoutAndWaitForAvailability(customerPage));
+            PaymentModalPage payment = new PaymentModalPage(customerPage);
+            payment.waitForOpen();
+            // The Place order button stays disabled until a payment method is selected. Quote
+            // readiness is represented by the final quoted bill lines, not button enablement.
+            payment.waitForFinalQuote();
+            Locator sheet = customerPage.getByRole(AriaRole.DIALOG,
+                    new Page.GetByRoleOptions().setName("Checkout").setExact(true));
 
-        Locator row = firstOrderableItem();
-        row.getByRole(AriaRole.BUTTON,
-                new Locator.GetByRoleOptions().setName("ADD").setExact(true)).click();
-        customerPage.getByText("View Cart", new Page.GetByTextOptions().setExact(true)).click();
-        CustomerCartDrawerPage cart = new CustomerCartDrawerPage(customerPage);
-        cart.clickPlaceOrder();
-        PaymentModalPage payment = new PaymentModalPage(customerPage);
-        org.assertj.core.api.Assertions.assertThat(payment.isPayEnabled())
-                .as("the server quote must land before the bill can be checked")
-                .isTrue();
-        Locator sheet = customerPage.getByRole(AriaRole.DIALOG,
-                new Page.GetByRoleOptions().setName("Checkout").setExact(true));
+            double itemTotal = billLine(sheet, "Item total");
+            double delivery = billLine(sheet, "Delivery fee");
+            Locator platformLabel = sheet.getByText("Platform fee", new Locator.GetByTextOptions().setExact(true));
+            double platform = platformLabel.count() == 0 ? 0 : billLine(sheet, "Platform fee");
+            double gst = billLine(sheet, "GST & restaurant charges");
+            double total = parseInr(sheet.getByText("Total", new Locator.GetByTextOptions().setExact(true))
+                    .locator("..").innerText());
 
-        double itemTotal = billLine(sheet, "Item total");
-        double delivery = billLine(sheet, "Delivery fee");
-        Locator platformLabel = sheet.getByText("Platform fee", new Locator.GetByTextOptions().setExact(true));
-        double platform = platformLabel.count() == 0 ? 0 : billLine(sheet, "Platform fee");
-        double gst = billLine(sheet, "GST & restaurant charges");
-        double total = parseInr(sheet.getByText("Total", new Locator.GetByTextOptions().setExact(true))
-                .locator("..").innerText());
-
-        org.assertj.core.api.Assertions.assertThat(total)
-                .isCloseTo(itemTotal + delivery + platform + gst,
-                        org.assertj.core.data.Offset.offset(0.01));
+            org.assertj.core.api.Assertions.assertThat(total)
+                    .isCloseTo(itemTotal + delivery + platform + gst,
+                            org.assertj.core.data.Offset.offset(0.01));
+        }
     }
 
     /** One AmountBreakdown line: the label sits one level inside the row that holds the amount. */

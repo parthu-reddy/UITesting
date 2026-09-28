@@ -4,10 +4,18 @@ import com.fooddelivery.e2e.base.TestBase;
 import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.common.LoginPage;
 import com.fooddelivery.e2e.pages.customer.CustomerCartDrawerPage;
+import com.fooddelivery.e2e.pages.customer.NearbyOutletPage;
+import com.fooddelivery.e2e.pages.customer.PaymentModalPage;
+import com.fooddelivery.e2e.pages.customer.SavedDeliveryAddressPage;
 import com.fooddelivery.e2e.pages.customer.CustomerOrderTrackerPage;
 import com.fooddelivery.e2e.pages.restaurant.RestaurantDashboardPage;
 import com.fooddelivery.e2e.pages.restaurant.RestaurantOrderActionsPage;
-import org.junit.jupiter.api.Assumptions;
+import com.fooddelivery.e2e.pages.customer.CustomerMenuViewPage;
+import com.fooddelivery.e2e.util.CheckoutAvailability;
+import com.fooddelivery.e2e.util.SeededRiderDuty;
+import com.microsoft.playwright.Locator;
+import com.microsoft.playwright.options.WaitForSelectorState;
+import com.microsoft.playwright.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -20,45 +28,110 @@ public class OrderCancellationTest extends TestBase {
     @Test
     @DisplayName("CANCEL-01 to CANCEL-02: Restaurant rejects order")
     void restaurantRejectsOrder() {
-        // Place an order as customer
-        customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
-        
-        // Restaurant side:
-        restaurantPage.navigate(TestConfig.APP_URL);
-        new LoginPage(restaurantPage).loginAs("Restaurant Partner", testRestaurantPhone);
-        RestaurantDashboardPage restDash = new RestaurantDashboardPage(restaurantPage);
-        restDash.waitForDashboard();
+        try (SeededRiderDuty ignored = SeededRiderDuty.ensureOnline(riderPage, testRiderPhone)) {
+            customerPage.navigate(TestConfig.APP_URL);
+            new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
+            new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();
 
-        boolean hasIncoming = restaurantPage.getByText("Incoming").isVisible();
-        Assumptions.assumeTrue(hasIncoming,
-                "No incoming orders available — prerequisite order placement is not implemented yet");
-        restaurantPage.getByText("Incoming").first().click();
-            
-        RestaurantOrderActionsPage actions = new RestaurantOrderActionsPage(restaurantPage);
-        // CANCEL-01: Reject button visible
-        assertThat(restaurantPage.locator("button:has-text('Reject'), button:has-text('Cancel')").isVisible()).isTrue();
-            
-        // CANCEL-02: Reject triggers customer cancellation
-        actions.cancelOrder();
+            int brandNumber = Integer.parseInt(testRestaurantPhone.substring(7));
+            String selectedOutlet = new NearbyOutletPage(customerPage)
+                    .openBrandAndSelectNearby("Brand " + brandNumber);
+            new CustomerMenuViewPage(customerPage).addQuickPrepItemToCart();
+            new CustomerMenuViewPage(customerPage).clickViewCart();
+            CustomerCartDrawerPage cart = new CustomerCartDrawerPage(customerPage);
+            cart.waitForCartOpen();
+            CheckoutAvailability.requireDeliveryAvailable(
+                    CheckoutAvailability.clickCheckoutAndWaitForAvailability(customerPage));
+
+            PaymentModalPage payment = new PaymentModalPage(customerPage);
+            payment.waitForOpen();
+            payment.placeOrder("Credit or debit card");
+
+            CustomerOrderTrackerPage tracker = new CustomerOrderTrackerPage(customerPage);
+            String orderId = tracker.getOrderId();
+            assertThat(orderId).as("A real customer order must be created before restaurant rejection")
+                    .isNotBlank();
+            String shortOrderId = orderId.substring(0, Math.min(8, orderId.length()));
+
+            restaurantPage.navigate(TestConfig.APP_URL);
+            new LoginPage(restaurantPage).loginAs("Restaurant Partner", testRestaurantPhone);
+            RestaurantDashboardPage dashboard = new RestaurantDashboardPage(restaurantPage);
+            dashboard.waitForDashboard();
+            dashboard.selectOutlet(selectedOutlet);
+            dashboard.openOrdersTab();
+
+            RestaurantOrderActionsPage actions = new RestaurantOrderActionsPage(restaurantPage);
+            Locator orderCard = actions.orderCard(shortOrderId);
+            orderCard.waitFor(new Locator.WaitForOptions()
+                    .setState(WaitForSelectorState.VISIBLE)
+                    .setTimeout(20000));
+            assertThat(orderCard.locator("button:has-text('Reject'), button:has-text('Cancel')")
+                    .first().isVisible()).isTrue();
+            actions.cancelOrder(shortOrderId);
+            orderCard.waitFor(new Locator.WaitForOptions()
+                    .setState(WaitForSelectorState.HIDDEN)
+                    .setTimeout(20000));
+
+            customerPage.reload();
+            Locator cancelledOrder = customerPage.locator(
+                    "[data-testid='order-tracker'][data-order-id='" + orderId + "']");
+            cancelledOrder.waitFor(new Locator.WaitForOptions()
+                    .setState(WaitForSelectorState.VISIBLE)
+                    .setTimeout(20000));
+            Locator terminalHeadline = cancelledOrder.locator("[data-testid='terminal-headline']");
+            terminalHeadline.waitFor(new Locator.WaitForOptions().setTimeout(20000));
+            assertThat(terminalHeadline.innerText())
+                    .isEqualTo("The restaurant could not fulfil this order.");
+            assertThat(cancelledOrder.locator("[data-testid='cancellation-reason']").innerText())
+                    .contains("Item out of stock");
+        }
     }
 
     @Test
     @DisplayName("CANCEL-07 to CANCEL-09: Customer cancels order before restaurant accepts")
     void customerCancelsOrderBeforeAccept() {
-        customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
-        
-        CustomerOrderTrackerPage tracker = new CustomerOrderTrackerPage(customerPage);
-        // CANCEL-07: Cancel button visible (the live tracker offers it only before acceptance)
-        if (tracker.tracker().locator("button:has-text('Cancel order')").isVisible()) {
-            tracker.cancelOrder();
-            // Validate status changed: the settled tracker carries the backend status
-            assertThat(tracker.hasStatus("CANCELLED")).isTrue();
-        } else {
-            // CANCEL-09: Cancel button hidden after acceptance — this is valid, not a failure
-            System.out.println("[INFO] No active pre-acceptance order to cancel — test passes as no-op");
+        try (SeededRiderDuty ignored = SeededRiderDuty.ensureOnline(riderPage, testRiderPhone)) {
+            customerPage.navigate(TestConfig.APP_URL);
+            new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
+            new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();
+
+            int brandNumber = Integer.parseInt(testRestaurantPhone.substring(7));
+            new NearbyOutletPage(customerPage).openBrandAndSelectNearby("Brand " + brandNumber);
+            new CustomerMenuViewPage(customerPage).addQuickPrepItemToCart();
+            new CustomerMenuViewPage(customerPage).clickViewCart();
+            new CustomerCartDrawerPage(customerPage).waitForCartOpen();
+            CheckoutAvailability.requireDeliveryAvailable(
+                    CheckoutAvailability.clickCheckoutAndWaitForAvailability(customerPage));
+
+            PaymentModalPage payment = new PaymentModalPage(customerPage);
+            payment.waitForOpen();
+            payment.placeOrder("Credit or debit card");
+
+            CustomerOrderTrackerPage tracker = new CustomerOrderTrackerPage(customerPage);
+            String orderId = tracker.getOrderId();
+            assertThat(orderId).as("A real customer order must exist before cancellation").isNotBlank();
+            Locator ownOrder = customerPage.locator(
+                    "[data-testid='order-tracker'][data-order-id='" + orderId + "']");
+            Locator cancelButton = ownOrder.locator("button:has-text('Cancel order')");
+            cancelButton.waitFor(new Locator.WaitForOptions()
+                    .setState(WaitForSelectorState.VISIBLE)
+                    .setTimeout(15000));
+
+            Response cancellationResponse = customerPage.waitForResponse(
+                    response -> response.request().method().equals("POST")
+                            && response.url().endsWith("/api/v1/orders/" + orderId + "/cancel"),
+                    new com.microsoft.playwright.Page.WaitForResponseOptions().setTimeout(20000),
+                    tracker::cancelOrder);
+            assertThat(cancellationResponse.status())
+                    .as("customer cancellation API response body: %s", cancellationResponse.text())
+                    .isBetween(200, 299);
+
+            Locator cancelledOrder = customerPage.locator(
+                    "[data-testid='order-tracker'][data-order-id='" + orderId + "'][data-status='CANCELLED']");
+            cancelledOrder.waitFor(new Locator.WaitForOptions()
+                    .setState(WaitForSelectorState.VISIBLE)
+                    .setTimeout(20000));
+            assertThat(cancelledOrder.getAttribute("data-status")).isEqualTo("CANCELLED");
         }
     }
 }
-

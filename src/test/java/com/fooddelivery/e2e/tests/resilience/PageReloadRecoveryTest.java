@@ -9,7 +9,8 @@ import com.fooddelivery.e2e.pages.customer.CustomerMenuViewPage;
 import com.fooddelivery.e2e.pages.customer.NearbyOutletPage;
 import com.fooddelivery.e2e.pages.customer.PaymentModalPage;
 import com.fooddelivery.e2e.pages.customer.SavedDeliveryAddressPage;
-import com.fooddelivery.e2e.pages.delivery.DeliveryDashboardPage;
+import com.fooddelivery.e2e.util.CheckoutAvailability;
+import com.fooddelivery.e2e.util.SeededRiderDuty;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
@@ -134,23 +135,21 @@ public class PageReloadRecoveryTest extends TestBase {
     @Test
     @DisplayName("RECOVERY-12/13: Browser Back closes payment and preserves the exact cart")
     void browserBackFromPaymentPreservesCart() {
-        // A rider must be online near the restaurant for the availability check to pass (HTTP 409 otherwise).
-        riderPage.navigate(TestConfig.APP_URL);
-        new LoginPage(riderPage).loginAs("Delivery Executive", testRiderPhone);
-        new DeliveryDashboardPage(riderPage).goOnline();
+        try (SeededRiderDuty ignored = SeededRiderDuty.ensureOnline(riderPage, testRiderPhone)) {
+            String itemName = openCartWithOneItem();
+            CheckoutAvailability.requireDeliveryAvailable(
+                    CheckoutAvailability.clickCheckoutAndWaitForAvailability(customerPage));
+            PaymentModalPage payment = new PaymentModalPage(customerPage);
+            payment.waitForOpen();
+            org.assertj.core.api.Assertions.assertThat(payment.hasItem(itemName)).isTrue();
 
-        String itemName = openCartWithOneItem();
-        CustomerCartDrawerPage cart = new CustomerCartDrawerPage(customerPage);
-        cart.clickPlaceOrder();
-        PaymentModalPage payment = new PaymentModalPage(customerPage);
-        org.assertj.core.api.Assertions.assertThat(payment.hasItem(itemName)).isTrue();
+            customerPage.goBack();
 
-        customerPage.goBack();
-
-        assertThat(customerPage.getByRole(AriaRole.DIALOG,
-                new Page.GetByRoleOptions().setName("Checkout").setExact(true))).isHidden();
-        assertThat(customerPage.getByRole(AriaRole.DIALOG,
-                new Page.GetByRoleOptions().setName("Your cart"))).containsText(itemName);
+            assertThat(customerPage.getByRole(AriaRole.DIALOG,
+                    new Page.GetByRoleOptions().setName("Checkout").setExact(true))).isHidden();
+            assertThat(customerPage.getByRole(AriaRole.DIALOG,
+                    new Page.GetByRoleOptions().setName("Your cart"))).containsText(itemName);
+        }
     }
 
     @Test

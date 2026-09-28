@@ -17,3 +17,8 @@ Evidence: UITesting/target/surefire-reports (reports are overwritten by focused 
 PartnerReadOnlyUiTest.riderVerificationAndWalletSectionsRender passed: Document Verification, explicit Documents/Bank Approved-or-Pending statuses, exact disabled rider phone, Earnings Wallet, an INR-formatted nonnegative wallet balance, and Sign Out are visible. `riderTodayEarningsIsNonNegativeCurrency` also passed for the dashboard value. These checks validate UI formatting and nonnegative values; they do not establish ledger accuracy.
 
 The focused run logged unrelated driver-review HTTP 403 responses. They did not block the rider dashboard, history, settings, verification, or wallet assertions.
+
+
+## 2026-09-28 focused five-class rerun
+
+`PartnerReadOnlyUiTest` ran 11 cases: 10 passed and 1 skipped. `riderCompletedTripShowsRestaurantPayoutAndDate` had no completed trip for its randomized rider, so it skipped before checking payout, restaurant, or date. Seeded riders guarantee approved accounts, not completed trips or ledger entries. Make this deterministic by using a completed order produced by the normal UI lifecycle for the same rider, as in `HappyDeliveryFlowTest`, or an isolated test database fixture that includes the matching completed order and ledger data. Do not fabricate payout rows or alter rider duty state to create a history entry. This case remains data-blocked.

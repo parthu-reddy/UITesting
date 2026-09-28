@@ -33,3 +33,8 @@ The test therefore reloads and asserts the server's status, not the optimistic o
 source, not yet observed live.
 
 Live validation is pending while the deployed rider verification endpoint returns HTTP 503 and prevents the prerequisite rider duty control from rendering. No backend shortcut was added.
+
+
+## 2026-09-28 focused five-class rerun
+
+`OrderCancellationTest` ran 2 cases and both errored after creating their own orders. Restaurant rejection disappeared from the restaurant queue but the customer order remained active; customer cancellation returned HTTP 409. A focused rerun captured the cancellation response body as the generic `DataIntegrityViolationException` response. Source review found that every production `RefundCommand` producer omitted the required `refunds.source` column. The local CustomerApplication change now supplies an explicit source for all producers and validates it before persistence. `mvn -DskipTests package` passed, including test-source compilation; no backend tests were run. The deployed application still needs this backend change before cancellation/rejection can be revalidated. The exact customer order from the diagnostic run was `65094d20-a912-4351-9efa-d55f3424866e` and the captured UI still showed `CREATED`; verify its terminal/refund state after deployment. If HTTP 409 remains, inspect the backend constraint detail because the client response intentionally hides it.
