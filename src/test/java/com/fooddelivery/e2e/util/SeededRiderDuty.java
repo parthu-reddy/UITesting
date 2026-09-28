@@ -157,6 +157,17 @@ public final class SeededRiderDuty implements AutoCloseable {
             page.offResponse(profileListener);
             return;
         }
+        boolean activeContractVisible = page.getByRole(
+                com.microsoft.playwright.options.AriaRole.HEADING,
+                new Page.GetByRoleOptions().setName("Active Contract").setExact(true)).isVisible();
+        if (activeContractVisible || "ON_DELIVERY".equals(latestStatus.get())) {
+            // Never undo the temporary ONLINE setup while the rider holds an order. The test may
+            // have failed mid-delivery; keep server duty intact so the job can be resumed safely.
+            System.out.println("[RIDER] Leaving duty unchanged while an active delivery is in progress");
+            page.offWebSocket(socketListener);
+            page.offResponse(profileListener);
+            return;
+        }
         try {
             toggle.goOffline();
             int beforeRefresh = profileResponses.get();

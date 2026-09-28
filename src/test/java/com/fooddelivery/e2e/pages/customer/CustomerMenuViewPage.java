@@ -47,6 +47,14 @@ public class CustomerMenuViewPage {
         }
     }
 
+    /** Current outlet after addQuickPrepItemToCart may have moved to another eligible location. */
+    public String getSelectedOutletName() {
+        Locator outletHeading = page.getByRole(com.microsoft.playwright.options.AriaRole.HEADING,
+                new Page.GetByRoleOptions().setName(Pattern.compile("^Brand \\d+ Outlet \\d+$"))).first();
+        outletHeading.waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
+        return outletHeading.innerText().trim();
+    }
+
     public String selectNearestOutlet() {
         try {
             // Click change outlet

@@ -166,8 +166,13 @@ public class MenuCartUiTest extends TestBase {
             setStockAvailability(stockSwitch, false);
 
             customerPage.reload();
-            new NearbyOutletPage(customerPage).openBrand1AndSelectNearby();
+            String reopenedOutlet = new NearbyOutletPage(customerPage)
+                    .openBrandCardAndSelectNearby("Brand 1");
+            org.assertj.core.api.Assertions.assertThat(reopenedOutlet).isEqualTo(selectedOutlet);
             Locator unavailable = customerPage.locator("[data-menu-item=\"" + itemId + "\"]");
+            // Reload returns to the restaurant feed; reselect the same outlet so this assertion
+            // checks the exact menu item whose stock the restaurant changed.
+            assertThat(unavailable).isVisible();
             assertThat(unavailable).containsText("Out of stock");
             assertThat(unavailable.getByRole(AriaRole.BUTTON,
                     new Locator.GetByRoleOptions().setName("ADD").setExact(true))).hasCount(0);

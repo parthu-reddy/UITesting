@@ -1,6 +1,7 @@
 package com.fooddelivery.e2e.tests.smoke;
 import com.fooddelivery.e2e.base.*;
 import com.fooddelivery.e2e.pages.common.LoginPage;
+import com.fooddelivery.e2e.util.CompletedDeliveryFixture;
 import com.microsoft.playwright.*;
 import com.microsoft.playwright.options.AriaRole;
 import org.junit.jupiter.api.*;
@@ -31,16 +32,27 @@ public class PartnerReadOnlyUiTest extends TestBase {
         assertThat(riderPage.getByText("Try selecting a different date.",
                 new Page.GetByTextOptions().setExact(true))).isVisible();
     }
+    // The history assertion provisions its own completed order through the real three-actor flow;
+    // this is the one test in this UI-smoke class that writes order and rider-payout history.
     @Test void riderCompletedTripShowsRestaurantPayoutAndDate() {
-        login(riderPage,"Delivery Executive",testRiderPhone);
+        CompletedDeliveryFixture.Result deliveredOrder = CompletedDeliveryFixture.completeOrder(
+                customerPage, restaurantPage, riderPage,
+                testCustomerPhone, testRestaurantPhone, testRiderPhone);
+        assertThat(riderPage.getByRole(AriaRole.BUTTON,
+                new Page.GetByRoleOptions().setName(Pattern.compile("^Online Duty$")))).isVisible();
         riderPage.getByRole(AriaRole.BUTTON,
                 new Page.GetByRoleOptions().setName(Pattern.compile("Trips Completed"))).click();
         Locator trip = riderPage.locator("button").filter(new Locator.FilterOptions()
-                .setHasText(Pattern.compile("ORDER #[0-9a-fA-F]{8}"))).first();
-        org.junit.jupiter.api.Assumptions.assumeTrue(trip.isVisible(),
-                "No completed delivery trips found for test rider — skipping");
+                .setHasText("ORDER #" + deliveredOrder.shortOrderId()))
+                .filter(new Locator.FilterOptions().setHasText("Delivered"));
+        trip.waitFor(new Locator.WaitForOptions().setTimeout(30000));
         assertThat(trip).containsText("Delivered");
-        assertThat(trip).containsText(Pattern.compile("\\+₹[0-9]+(?:\\.[0-9]{2})?"));
+        java.util.regex.Matcher payout = Pattern.compile("\\+₹([0-9,]+(?:\\.[0-9]{2})?)")
+                .matcher(trip.innerText());
+        org.assertj.core.api.Assertions.assertThat(payout.find())
+                .as("completed trip shows the rider payout").isTrue();
+        org.assertj.core.api.Assertions.assertThat(Double.parseDouble(payout.group(1).replace(",", "")))
+                .as("completed trip payout is positive").isPositive();
         Locator details = trip.locator("p");
         org.assertj.core.api.Assertions.assertThat(details.nth(1).innerText().trim())
                 .as("completed trip restaurant name").isNotEmpty();

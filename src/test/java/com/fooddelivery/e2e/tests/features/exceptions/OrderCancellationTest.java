@@ -8,6 +8,7 @@ import com.fooddelivery.e2e.pages.customer.NearbyOutletPage;
 import com.fooddelivery.e2e.pages.customer.PaymentModalPage;
 import com.fooddelivery.e2e.pages.customer.SavedDeliveryAddressPage;
 import com.fooddelivery.e2e.pages.customer.CustomerOrderTrackerPage;
+import com.fooddelivery.e2e.pages.customer.CustomerDashboardPage;
 import com.fooddelivery.e2e.pages.restaurant.RestaurantDashboardPage;
 import com.fooddelivery.e2e.pages.restaurant.RestaurantOrderActionsPage;
 import com.fooddelivery.e2e.pages.customer.CustomerMenuViewPage;
@@ -16,6 +17,7 @@ import com.fooddelivery.e2e.util.SeededRiderDuty;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.options.WaitForSelectorState;
 import com.microsoft.playwright.Response;
+import com.microsoft.playwright.options.AriaRole;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -72,7 +74,24 @@ public class OrderCancellationTest extends TestBase {
                     .setState(WaitForSelectorState.HIDDEN)
                     .setTimeout(20000));
 
+            // Terminal orders are removed from the active-order endpoint after a reload.
+            // Find the rejected order in History, then open its detail tracker to verify the
+            // customer can still see who cancelled it and why.
             customerPage.reload();
+            CustomerDashboardPage.openProfileSettings(customerPage);
+            Locator historyTab = customerPage.getByRole(AriaRole.TAB,
+                    new com.microsoft.playwright.Page.GetByRoleOptions()
+                            .setName("History").setExact(true));
+            historyTab.click();
+
+            Locator historyOrder = customerPage.locator("[data-testid='customer-history-order']")
+                    .filter(new Locator.FilterOptions().setHasText(shortOrderId));
+            historyOrder.waitFor(new Locator.WaitForOptions()
+                    .setState(WaitForSelectorState.VISIBLE)
+                    .setTimeout(20000));
+            assertThat(historyOrder.innerText()).containsIgnoringCase("Cancelled by Restaurant");
+            historyOrder.click();
+
             Locator cancelledOrder = customerPage.locator(
                     "[data-testid='order-tracker'][data-order-id='" + orderId + "']");
             cancelledOrder.waitFor(new Locator.WaitForOptions()
