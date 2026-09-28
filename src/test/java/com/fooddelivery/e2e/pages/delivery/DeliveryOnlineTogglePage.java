@@ -16,15 +16,42 @@ public class DeliveryOnlineTogglePage {
         this.page = page;
     }
 
+    /**
+     * Grants browser-level notification and geolocation permissions via CDP so the
+     * rider app can go online in headless mode without a native prompt blocking it.
+     */
+    public static void grantBrowserPermissions(Page page) {
+        try {
+            page.context().grantPermissions(
+                    java.util.List.of("notifications", "geolocation"),
+                    new com.microsoft.playwright.BrowserContext.GrantPermissionsOptions()
+                            .setOrigin(page.url().replaceAll("(https?://[^/]+).*", "$1")));
+        } catch (Exception e) {
+            System.out.println("[RIDER] grantPermissions failed (may be already granted): " + e.getMessage());
+        }
+    }
+
     /** Go online only when offline; never cycle an already-online rider. */
     public void goOnline() {
+        grantBrowserPermissions(page);
         new DeliveryDashboardPage(page).waitForDashboard();
         Locator offlineBtn = page.locator("button:has-text('Offline')").first();
         if (offlineBtn.isVisible()) {
             offlineBtn.click();
+
+            // The "Enable Permissions" prompt may appear asynchronously after clicking
+            // Offline. Poll for it with a short timeout instead of a single isVisible().
             Locator enablePermissions = page.getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
                     new Page.GetByRoleOptions().setName("Enable Permissions"));
-            if (enablePermissions.isVisible()) enablePermissions.click();
+            try {
+                enablePermissions.waitFor(new Locator.WaitForOptions()
+                        .setState(WaitForSelectorState.VISIBLE)
+                        .setTimeout(5000));
+                enablePermissions.click();
+            } catch (com.microsoft.playwright.TimeoutError ignored) {
+                // Permissions already granted — prompt never appeared, which is fine.
+            }
+
             page.locator("button:has-text('Online Duty')")
                     .waitFor(new Locator.WaitForOptions()
                             .setState(WaitForSelectorState.VISIBLE)
@@ -59,3 +86,4 @@ public class DeliveryOnlineTogglePage {
         return btn.isDisabled();
     }
 }
+

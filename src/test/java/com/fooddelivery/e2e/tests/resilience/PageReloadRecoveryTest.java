@@ -9,6 +9,7 @@ import com.fooddelivery.e2e.pages.customer.CustomerMenuViewPage;
 import com.fooddelivery.e2e.pages.customer.NearbyOutletPage;
 import com.fooddelivery.e2e.pages.customer.PaymentModalPage;
 import com.fooddelivery.e2e.pages.customer.SavedDeliveryAddressPage;
+import com.fooddelivery.e2e.pages.delivery.DeliveryDashboardPage;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
@@ -133,6 +134,11 @@ public class PageReloadRecoveryTest extends TestBase {
     @Test
     @DisplayName("RECOVERY-12/13: Browser Back closes payment and preserves the exact cart")
     void browserBackFromPaymentPreservesCart() {
+        // A rider must be online near the restaurant for the availability check to pass (HTTP 409 otherwise).
+        riderPage.navigate(TestConfig.APP_URL);
+        new LoginPage(riderPage).loginAs("Delivery Executive", testRiderPhone);
+        new DeliveryDashboardPage(riderPage).goOnline();
+
         String itemName = openCartWithOneItem();
         CustomerCartDrawerPage cart = new CustomerCartDrawerPage(customerPage);
         cart.clickPlaceOrder();

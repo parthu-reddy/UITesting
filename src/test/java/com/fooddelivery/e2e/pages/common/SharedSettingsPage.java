@@ -60,7 +60,8 @@ public class SharedSettingsPage {
     }
 
     public boolean hasAddress(String label) {
-        return page.locator("text=" + label).isVisible();
+        return page.locator("[data-screen='settings']").getByText(label, 
+                new com.microsoft.playwright.Locator.GetByTextOptions().setExact(true)).first().isVisible();
     }
 
     // ── History tab ──────────────────────────────────────────────────────

@@ -49,9 +49,15 @@ public class SessionManagementPage {
     }
 
     public boolean hasDefinedState() {
+        // If still loading, wait for it to resolve first
+        Locator loading = section().getByText("Loading sessions...",
+                new Locator.GetByTextOptions().setExact(true));
+        try {
+            loading.waitFor(new Locator.WaitForOptions()
+                    .setState(com.microsoft.playwright.options.WaitForSelectorState.HIDDEN)
+                    .setTimeout(10000));
+        } catch (com.microsoft.playwright.TimeoutError ignored) { }
         return getSessionCount() > 0
-                || section().getByText("Loading sessions...",
-                        new Locator.GetByTextOptions().setExact(true)).isVisible()
                 || section().getByText("No active sessions found.",
                         new Locator.GetByTextOptions().setExact(true)).isVisible();
     }

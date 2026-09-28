@@ -20,7 +20,7 @@ public class MapTrackingPage {
     }
 
     public boolean isMapContainerVisible() {
-        return page.locator("[data-testid='map-container'], .map-panel, [class*='map']").first().isVisible();
+        return page.locator("[data-testid='map-container'], .map-panel").first().isVisible();
     }
 
     /**

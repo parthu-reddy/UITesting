@@ -25,10 +25,6 @@ public class CustomerHomeAddressTest extends TestBase {
     void loginCustomer() {
         customerPage.navigate(TestConfig.APP_URL);
         new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
-        CustomerAddressModalPage addressModal = new CustomerAddressModalPage(customerPage);
-        if (addressModal.isModalOpen()) {
-            addressModal.selectExistingAddress("Home");
-        }
         dashboard = new CustomerDashboardPage(customerPage);
         dashboard.waitForDashboard();
     }

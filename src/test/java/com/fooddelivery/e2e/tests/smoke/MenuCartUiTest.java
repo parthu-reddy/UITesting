@@ -4,6 +4,7 @@ import com.fooddelivery.e2e.pages.customer.CustomerDashboardPage;
 import com.fooddelivery.e2e.base.*;
 import com.fooddelivery.e2e.pages.common.LoginPage;
 import com.fooddelivery.e2e.pages.customer.*;
+import com.fooddelivery.e2e.pages.delivery.DeliveryDashboardPage;
 import com.microsoft.playwright.*;
 import com.microsoft.playwright.options.AriaRole;
 import org.junit.jupiter.api.*;
@@ -207,7 +208,7 @@ public class MenuCartUiTest extends TestBase {
         customerPage.getByText("View Cart", new Page.GetByTextOptions().setExact(true)).click();
         Locator cart = customerPage.getByRole(AriaRole.DIALOG, new Page.GetByRoleOptions().setName("Your cart").setExact(true));
         String unitPrice = cart.getByText(name, new Locator.GetByTextOptions().setExact(true)).locator("..").locator("p").innerText();
-        assertThat(cart.getByText("Subtotal", new Locator.GetByTextOptions().setExact(true)).locator("..")).containsText(unitPrice);
+        assertThat(cart.getByText("Item total", new Locator.GetByTextOptions().setExact(true)).locator("..")).containsText(unitPrice);
         assertThat(cart.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHasText("Delivering To"))).containsText("Home:");
         cart.locator("button:has(svg.lucide-x)").click();
         assertThat(cart).isHidden();
@@ -244,7 +245,7 @@ public class MenuCartUiTest extends TestBase {
                 new Page.GetByRoleOptions().setName("Your cart").setExact(true));
         assertThat(cart.getByText(firstName, new Locator.GetByTextOptions().setExact(true))).isVisible();
         assertThat(cart.getByText(secondName, new Locator.GetByTextOptions().setExact(true))).isVisible();
-        String subtotalText = cart.getByText("Subtotal", new Locator.GetByTextOptions().setExact(true))
+        String subtotalText = cart.getByText("Item total", new Locator.GetByTextOptions().setExact(true))
                 .locator("..").locator("span").last().innerText();
         org.assertj.core.api.Assertions.assertThat(parseInr(subtotalText))
                 .isEqualTo(firstPrice + secondPrice);
@@ -312,6 +313,11 @@ public class MenuCartUiTest extends TestBase {
      * restaurant charges" (only once quoted), and they must add up to "Total".
      */
     @Test void checkoutTotalEqualsItemTotalFeesAndTaxes() {
+        // A rider must be online near the restaurant for the availability check to pass (HTTP 409 otherwise).
+        riderPage.navigate(TestConfig.APP_URL);
+        new LoginPage(riderPage).loginAs("Delivery Executive", testRiderPhone);
+        new DeliveryDashboardPage(riderPage).goOnline();
+
         Locator row = firstOrderableItem();
         row.getByRole(AriaRole.BUTTON,
                 new Locator.GetByRoleOptions().setName("ADD").setExact(true)).click();

@@ -18,26 +18,29 @@ public class ReviewFlowTest extends TestBase {
         customerPage.navigate(TestConfig.APP_URL);
         new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
         new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();
-        // wait handled by selectHomeFromOpenDialog
 
-        // Navigate to order history to find a delivered order
+        // Navigate to settings → history to find delivered orders
         CustomerDashboardPage dashboard = new CustomerDashboardPage(customerPage);
-        dashboard.openOrdersTab();
+        dashboard.openSettingsTab();
+        customerPage.getByRole(com.microsoft.playwright.options.AriaRole.TAB,
+                new com.microsoft.playwright.Page.GetByRoleOptions().setName("History").setExact(true)).click();
         customerPage.waitForTimeout(2000);
 
         // Check if there's a rate/review button on a completed order
-        if (customerPage.locator("button:has-text('Rate'), button:has-text('Review')").first().isVisible()) {
-            customerPage.locator("button:has-text('Rate'), button:has-text('Review')").first().click();
-            customerPage.waitForTimeout(1000);
+        boolean hasRateButton = customerPage.locator("button:has-text('Rate'), button:has-text('Review')").first().isVisible();
+        Assumptions.assumeTrue(hasRateButton,
+                "No delivered orders with rate/review button found — skipping");
+        customerPage.locator("button:has-text('Rate'), button:has-text('Review')").first().click();
+        customerPage.waitForTimeout(1000);
 
-            // Fill in review
-            if (customerPage.locator("textarea, input[placeholder*='review']").first().isVisible()) {
-                customerPage.locator("textarea, input[placeholder*='review']").first().fill("Great food and fast delivery!");
-            }
-
-            // Click submit
-            customerPage.locator("button:has-text('Submit'), button:has-text('Send')").first().click();
-            customerPage.waitForTimeout(2000);
+        // Fill in review
+        if (customerPage.locator("textarea, input[placeholder*='review']").first().isVisible()) {
+            customerPage.locator("textarea, input[placeholder*='review']").first().fill("Great food and fast delivery!");
         }
+
+        // Click submit
+        customerPage.locator("button:has-text('Submit'), button:has-text('Send')").first().click();
+        customerPage.waitForTimeout(2000);
     }
 }
+

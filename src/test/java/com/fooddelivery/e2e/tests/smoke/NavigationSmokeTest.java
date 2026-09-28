@@ -63,6 +63,9 @@ public class NavigationSmokeTest extends TestBase {
         dashboard.openSettingsTab();
         assertThat(restaurantPage.content()).containsAnyOf("Settings", "Brand", "Outlet");
 
+        // Close settings overlay before navigating to other tabs
+        dashboard.openSettingsTab();
+
         dashboard.openEarningsTab();
         assertThat(restaurantPage.content()).containsAnyOf("Earnings", "Revenue", "Payout");
 

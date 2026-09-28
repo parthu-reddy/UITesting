@@ -23,14 +23,22 @@ public class CustomerOrderHistoryPage {
                 .waitFor(new Locator.WaitForOptions()
                         .setState(WaitForSelectorState.VISIBLE)
                         .setTimeout(10000));
-        page.locator("[data-screen='settings']")
-                .getByText("Loading history...", new Locator.GetByTextOptions().setExact(true))
+        // First wait for either loading, empty state, or data to appear
+        Locator loading = page.locator("[data-screen='settings']")
+                .getByText("Loading history...", new Locator.GetByTextOptions().setExact(true));
+        Locator anyContent = loading
                 .or(emptyState())
-                .or(historyCards().first())
-                .first()
+                .or(historyCards().first());
+        anyContent.first()
                 .waitFor(new Locator.WaitForOptions()
                         .setState(WaitForSelectorState.VISIBLE)
                         .setTimeout(20000));
+        // Then wait for Loading to disappear (i.e. data actually loaded)
+        try {
+            loading.waitFor(new Locator.WaitForOptions()
+                    .setState(WaitForSelectorState.HIDDEN)
+                    .setTimeout(15000));
+        } catch (com.microsoft.playwright.TimeoutError ignored) { }
     }
 
     public int getOrderCount() {

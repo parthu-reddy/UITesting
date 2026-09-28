@@ -41,10 +41,11 @@ public class MenuCartFeatureTest extends TestBase {
         dishControls.waitFor();
         
         // First item has a nonempty name and rupee price
-        String itemName = dishControls.locator("h3").innerText();
+        String itemName = dishControls.locator("h4").innerText();
         assertThat(itemName).isNotBlank();
         
-        String priceText = dishControls.locator("p:has-text('₹')").first().innerText();
+        String priceText = dishControls.locator("span").filter(new Locator.FilterOptions()
+                .setHasText(java.util.regex.Pattern.compile("^₹[0-9]"))).first().innerText();
         assertThat(priceText).contains("₹");
         
         // Verify restaurant editing controls are absent

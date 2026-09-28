@@ -49,7 +49,8 @@ public class DeliveryDashboardPage {
     }
 
     public void openSettingsTab() {
-        page.locator("button:has-text('Settings'), [role='tab']:has-text('Settings')").first().click();
+        page.getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
+                new Page.GetByRoleOptions().setName("Profile settings").setExact(true)).click();
         page.waitForTimeout(300);
     }
 

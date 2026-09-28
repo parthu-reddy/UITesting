@@ -31,7 +31,7 @@ public class SSEReconnectTest extends TestBase {
         // Place an order
         CustomerHomePage home = new CustomerHomePage(customerPage);
         customerPage.waitForTimeout(2000);
-        home.openRestaurant("Test Brand");
+        home.openRestaurant("Brand 1");
         new CustomerMenuViewPage(customerPage).addQuickPrepItemToCart();
         new CustomerMenuViewPage(customerPage).clickViewCart();
         new CustomerCartDrawerPage(customerPage).checkout();

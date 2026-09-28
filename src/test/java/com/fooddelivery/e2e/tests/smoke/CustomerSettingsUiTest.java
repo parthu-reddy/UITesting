@@ -178,27 +178,39 @@ public class CustomerSettingsUiTest extends TestBase {
         assertThat(outcome).isVisible();
     }
 
+    /**
+     * Returns the visible theme toggle for the current viewport.
+     * Desktop (≥1024 px): CustomerNavRail → button text "Dark mode" or "Light mode".
+     * Mobile (&lt;1024 px): DashboardHeader → button title "Toggle Light/Dark Mode".
+     */
+    private Locator themeToggle() {
+        if (customerPage.viewportSize() != null && customerPage.viewportSize().width >= 1024) {
+            return customerPage.getByRole(AriaRole.BUTTON,
+                    new Page.GetByRoleOptions().setName(java.util.regex.Pattern.compile("^(Dark|Light) mode$")));
+        }
+        return customerPage.getByTitle("Toggle Light/Dark Mode",
+                new Page.GetByTitleOptions().setExact(true));
+    }
+
     @Test void profileThemeClassTogglesAndRestoresLight() {
         Locator app = customerPage.locator(".app-background").first();
-        Locator toggle = customerPage.getByTitle("Toggle Light/Dark Mode",
-                new Page.GetByTitleOptions().setExact(true));
+        Locator toggle = themeToggle();
         assertThat(toggle).isVisible();
 
         boolean startsDark = java.util.regex.Pattern.compile("(?:^|\\s)dark(?:\\s|$)")
                 .matcher(app.getAttribute("class")).find();
         if (startsDark) toggle.click();
         assertThat(app).not().hasClass(java.util.regex.Pattern.compile(".*\\bdark\\b.*"));
-        toggle.click();
+        themeToggle().click();
         assertThat(app).hasClass(java.util.regex.Pattern.compile(".*\\bdark\\b.*"));
 
-        toggle.click();
+        themeToggle().click();
         assertThat(app).not().hasClass(java.util.regex.Pattern.compile(".*\\bdark\\b.*"));
     }
 
     @Test void profileDarkThemePersistsAcrossReload() {
         Locator app = customerPage.locator(".app-background").first();
-        Locator toggle = customerPage.getByTitle("Toggle Light/Dark Mode",
-                new Page.GetByTitleOptions().setExact(true));
+        Locator toggle = themeToggle();
         if (!java.util.regex.Pattern.compile("(?:^|\\s)dark(?:\\s|$)")
                 .matcher(app.getAttribute("class")).find()) toggle.click();
         assertThat(app).hasClass(java.util.regex.Pattern.compile(".*\\bdark\\b.*"));
@@ -210,13 +222,12 @@ public class CustomerSettingsUiTest extends TestBase {
 
     @Test void profileDarkThemeChangesRenderedBackground() {
         Locator app = customerPage.locator(".app-background").first();
-        Locator toggle = customerPage.getByTitle("Toggle Light/Dark Mode",
-                new Page.GetByTitleOptions().setExact(true));
+        Locator toggle = themeToggle();
         if (java.util.regex.Pattern.compile("(?:^|\\s)dark(?:\\s|$)")
                 .matcher(app.getAttribute("class")).find()) toggle.click();
         String lightBackground = (String) app.evaluate("element => getComputedStyle(element).backgroundColor");
 
-        toggle.click();
+        themeToggle().click();
         assertThat(app).hasClass(java.util.regex.Pattern.compile(".*\\bdark\\b.*"));
         String darkBackground = (String) app.evaluate("element => getComputedStyle(element).backgroundColor");
         org.assertj.core.api.Assertions.assertThat(darkBackground)
