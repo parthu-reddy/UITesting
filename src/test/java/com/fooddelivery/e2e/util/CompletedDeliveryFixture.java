@@ -18,6 +18,7 @@ import org.assertj.core.api.Assertions;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.Consumer;
 import java.util.regex.Pattern;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
@@ -41,6 +42,17 @@ public final class CompletedDeliveryFixture {
 
     public static Result completeOrder(Page customerPage, Page restaurantPage, Page riderPage,
                                        String customerPhone, String restaurantPhone, String riderPhone) {
+        return completeOrder(customerPage, restaurantPage, riderPage,
+                customerPhone, restaurantPhone, riderPhone, ignored -> { });
+    }
+
+    /**
+     * Completes an order while allowing a UI assertion after restaurant acceptance, when customer
+     * chat should already be available and the order remains active.
+     */
+    public static Result completeOrder(Page customerPage, Page restaurantPage, Page riderPage,
+                                       String customerPhone, String restaurantPhone, String riderPhone,
+                                       Consumer<Result> afterRestaurantAccept) {
         customerPage.navigate(TestConfig.APP_URL);
         new LoginPage(customerPage).loginAs("Order Food", customerPhone);
         new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();
@@ -52,13 +64,14 @@ public final class CompletedDeliveryFixture {
 
         try (SeededRiderDuty ignored = SeededRiderDuty.ensureOnline(riderPage, riderPhone)) {
             return completeWithOnlineRider(customerPage, restaurantPage, riderPage,
-                    customerPhone, restaurantPhone, restaurant);
+                    customerPhone, restaurantPhone, restaurant, afterRestaurantAccept);
         }
     }
 
     private static Result completeWithOnlineRider(Page customerPage, Page restaurantPage, Page riderPage,
                                                    String customerPhone, String restaurantPhone,
-                                                   RestaurantDashboardPage restaurant) {
+                                                   RestaurantDashboardPage restaurant,
+                                                   Consumer<Result> afterRestaurantAccept) {
 
         int brandNumber = Integer.parseInt(restaurantPhone.substring(7));
         String selectedOutlet = new NearbyOutletPage(customerPage)
@@ -95,6 +108,7 @@ public final class CompletedDeliveryFixture {
         restaurant.openOrdersTab();
         RestaurantOrderActionsPage actions = new RestaurantOrderActionsPage(restaurantPage);
         actions.acceptOrder(result.shortOrderId());
+        afterRestaurantAccept.accept(result);
         actions.startCooking(result.shortOrderId());
         actions.markPrepared(result.shortOrderId());
 

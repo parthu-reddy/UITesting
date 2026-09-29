@@ -49,6 +49,30 @@ public class RestaurantNavigationUiTest extends TestBase {
         waitVisible(restaurantPage.getByText("In the kitchen", new Page.GetByTextOptions().setExact(true)));
     }
 
+    @Test
+    @DisplayName("REVIEW-AGG-01: Restaurant sees public review and aggregate for a rated outlet")
+    void restaurantReviewsShowPublicFeedbackAndAggregate() {
+        restaurantPage.navigate(TestConfig.APP_URL);
+        new LoginPage(restaurantPage).loginAs("Restaurant Partner", testRestaurantPhone);
+        RestaurantDashboardPage dashboard = new RestaurantDashboardPage(restaurantPage);
+        dashboard.waitForDashboard();
+        dashboard.selectOutlet("Brand 1 Outlet 6");
+        dashboard.openReviewsTab();
+
+        Locator reviewsPanel = restaurantPage.getByRole(AriaRole.REGION,
+                new Page.GetByRoleOptions().setName("What customers said").setExact(true));
+        Locator e2eReview = reviewsPanel.getByText("E2E automated review verification.",
+                new Locator.GetByTextOptions().setExact(true));
+        e2eReview.waitFor(new Locator.WaitForOptions()
+                .setState(WaitForSelectorState.VISIBLE).setTimeout(30000));
+
+        com.microsoft.playwright.assertions.PlaywrightAssertions
+                .assertThat(reviewsPanel.locator("span.text-3xl.font-black"))
+                .hasText(Pattern.compile("^[1-5]\\.\\d$"));
+        com.microsoft.playwright.assertions.PlaywrightAssertions
+                .assertThat(reviewsPanel.getByText(Pattern.compile("\\d+ reviews?"))).isVisible();
+    }
+
     private void clickTab(Pattern name) {
         restaurantPage.getByRole(AriaRole.TAB, new Page.GetByRoleOptions().setName(name)).click();
     }

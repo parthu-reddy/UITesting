@@ -94,12 +94,16 @@ public class AdminSupportTicketsPage {
     // ── Pagination (rendered only when there is more than one page) ─────
 
     public void nextPage() {
-        button("Next").click();
+        com.microsoft.playwright.Locator next = button("Next");
+        if (next.count() == 0 || !next.isEnabled()) return;
+        next.click();
         page.waitForTimeout(500);
     }
 
     public void prevPage() {
-        button("Previous").click();
+        com.microsoft.playwright.Locator previous = button("Previous");
+        if (previous.count() == 0 || !previous.isEnabled()) return;
+        previous.click();
         page.waitForTimeout(500);
     }
 }

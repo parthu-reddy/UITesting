@@ -1,6 +1,7 @@
 package com.fooddelivery.e2e.pages.admin;
 
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.Response;
 
 /**
  * Maps to: {@code AdminLedgerView.tsx, LedgerStatementPanel.tsx}
@@ -32,7 +33,7 @@ public class AdminLedgerPage {
         page.getByPlaceholder("Owner ID").fill(ownerId);
     }
 
-    /** The three filters are custom Selects, named by their placeholders; options are the enum values. */
+    /** The three filters are custom Selects, named by their placeholders; enum labels use spaces. */
     private void choose(String comboName, String option) {
         page.getByRole(com.microsoft.playwright.options.AriaRole.COMBOBOX,
                 new Page.GetByRoleOptions().setName(comboName).setExact(true)).click();
@@ -40,23 +41,38 @@ public class AdminLedgerPage {
                 new Page.GetByRoleOptions().setName(option).setExact(true)).click();
     }
 
-    public void selectOwnerType(String type) { choose("All Owner Types", type); }
+    public void selectOwnerType(String type) { choose("All Owner Types", type.replace('_', ' ')); }
 
     /** Category options read the enum with spaces: DELIVERY_FEE shows as "DELIVERY FEE". */
     public void selectCategory(String category) { choose("All Categories", category.replace('_', ' ')); }
 
     public void selectDirection(String direction) { choose("All Directions", direction); }
 
-    public void applyFilter() {
-        page.getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
-                new Page.GetByRoleOptions().setName("Apply Filters").setExact(true)).click();
-        page.waitForTimeout(2000);
+    private Response waitForTransactionsResponse(String expectedQuery, Runnable action) {
+        return page.waitForResponse(response ->
+                response.url().contains("/api/v1/internal/admin/ledger/transactions")
+                        && response.url().contains(expectedQuery)
+                        && "GET".equals(response.request().method()), action);
     }
 
-    public void clearFilters() {
-        page.getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
-                new Page.GetByRoleOptions().setName("Clear").setExact(true)).click();
-        page.waitForTimeout(1000);
+    public int applyFilter(String expectedQuery) {
+        Response response = waitForTransactionsResponse(expectedQuery, () ->
+                page.getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
+                        new Page.GetByRoleOptions().setName("Apply Filters").setExact(true)).click());
+        return response.status();
+    }
+
+    public int clearFilters() {
+        Response response = waitForTransactionsResponse("?page=0&size=20", () ->
+                page.getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
+                        new Page.GetByRoleOptions().setName("Clear").setExact(true)).click());
+        return response.status();
+    }
+
+    public void waitForEmptyResults() {
+        page.getByText("No ledger transactions found.",
+                new Page.GetByTextOptions().setExact(true))
+                .waitFor(new com.microsoft.playwright.Locator.WaitForOptions().setTimeout(10000));
     }
 
     // ── Transaction list ─────────────────────────────────────────────────
@@ -85,12 +101,16 @@ public class AdminLedgerPage {
     // ── Pagination: icon-only chevrons either side of "Page n of m" ────
 
     public void nextPage() {
-        page.locator("button:has(svg.lucide-chevron-right)").first().click();
+        com.microsoft.playwright.Locator button = page.locator("button:has(svg.lucide-chevron-right)").first();
+        if (button.count() == 0 || !button.isEnabled()) return;
+        button.click();
         page.waitForTimeout(500);
     }
 
     public void prevPage() {
-        page.locator("button:has(svg.lucide-chevron-left)").first().click();
+        com.microsoft.playwright.Locator button = page.locator("button:has(svg.lucide-chevron-left)").first();
+        if (button.count() == 0 || !button.isEnabled()) return;
+        button.click();
         page.waitForTimeout(500);
     }
 

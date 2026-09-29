@@ -1,8 +1,6 @@
 package com.fooddelivery.e2e.tests.features.admin;
 
 import com.fooddelivery.e2e.base.TestBase;
-import com.fooddelivery.e2e.base.TestConfig;
-import com.fooddelivery.e2e.pages.common.LoginPage;
 import com.fooddelivery.e2e.pages.admin.*;
 import org.junit.jupiter.api.*;
 
@@ -17,8 +15,7 @@ public class AdminUserOpsTest extends TestBase {
     @Test
     @DisplayName("Admin navigates to Users → searches → opens detail panel")
     void adminUserManagement() {
-        adminPage.navigate(TestConfig.APP_URL);
-        new LoginPage(adminPage).loginAs("System Admin", testAdminPhone);
+        loginAsAdmin();
         AdminPortalPage portal = new AdminPortalPage(adminPage);
         portal.waitForPortal();
 

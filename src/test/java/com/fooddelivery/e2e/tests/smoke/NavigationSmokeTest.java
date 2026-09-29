@@ -29,8 +29,7 @@ public class NavigationSmokeTest extends TestBase {
         riderPage.navigate(TestConfig.APP_URL);
         new LoginPage(riderPage).loginAs("Delivery Executive", testRiderPhone);
 
-        adminPage.navigate(TestConfig.APP_URL);
-        new LoginPage(adminPage).loginAs("System Admin", testAdminPhone);
+        loginAsAdmin();
     }
 
     @Test
@@ -93,23 +92,43 @@ public class NavigationSmokeTest extends TestBase {
 
     @Test
     @Order(4)
-    @DisplayName("Admin tabs: Live Ops, Users, Ledger, Reviews, Campaigns")
+    @DisplayName("Admin tabs: Live Ops, Users, Ledger, Reviews, Support, Money Ops, Refunds")
     void adminTabs() {
         AdminPortalPage portal = new AdminPortalPage(adminPage);
         portal.waitForPortal();
 
         portal.openUsersTab();
-        assertThat(adminPage.content()).containsAnyOf("Users", "User Management", "Search");
+        com.microsoft.playwright.assertions.PlaywrightAssertions
+                .assertThat(adminPage.getByPlaceholder("User ID / Phone")).isVisible();
 
         portal.openLedgerTab();
-        assertThat(adminPage.content()).containsAnyOf("Ledger", "Transactions", "Statement");
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(adminPage.getByRole(
+                com.microsoft.playwright.options.AriaRole.HEADING,
+                new com.microsoft.playwright.Page.GetByRoleOptions().setName("Ledger Entries").setExact(true))).isVisible();
 
         portal.openReviewsTab();
-        assertThat(adminPage.content()).containsAnyOf("Reviews", "Ratings");
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(adminPage.getByRole(
+                com.microsoft.playwright.options.AriaRole.HEADING,
+                new com.microsoft.playwright.Page.GetByRoleOptions().setName("Review Moderation").setExact(true))).isVisible();
 
-        portal.openCampaignsTab();
-        assertThat(adminPage.content()).containsAnyOf("Campaigns", "Ad Performance");
+        portal.openSupportTab();
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(adminPage.getByRole(
+                com.microsoft.playwright.options.AriaRole.HEADING,
+                new com.microsoft.playwright.Page.GetByRoleOptions().setName("Support Tickets").setExact(true))).isVisible();
+
+        portal.openMoneyOperationsTab();
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(adminPage.getByRole(
+                com.microsoft.playwright.options.AriaRole.HEADING,
+                new com.microsoft.playwright.Page.GetByRoleOptions().setName("Money Operations").setExact(true))).isVisible();
+
+        portal.openRefundsTab();
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(adminPage.getByRole(
+                com.microsoft.playwright.options.AriaRole.HEADING,
+                new com.microsoft.playwright.Page.GetByRoleOptions().setName("Refund Exception Queue").setExact(true))).isVisible();
 
         portal.openLiveOpsTab();
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(adminPage.getByRole(
+                com.microsoft.playwright.options.AriaRole.HEADING,
+                new com.microsoft.playwright.Page.GetByRoleOptions().setName("Active Orders").setExact(true))).isVisible();
     }
 }

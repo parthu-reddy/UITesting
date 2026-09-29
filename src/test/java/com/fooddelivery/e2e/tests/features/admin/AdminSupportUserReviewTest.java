@@ -1,9 +1,7 @@
 package com.fooddelivery.e2e.tests.features.admin;
 
 import com.fooddelivery.e2e.base.TestBase;
-import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.admin.*;
-import com.fooddelivery.e2e.pages.common.LoginPage;
 import org.junit.jupiter.api.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -22,9 +20,7 @@ public class AdminSupportUserReviewTest extends TestBase {
 
     @BeforeEach
     void loginAdmin() {
-        adminPage.navigate(TestConfig.APP_URL);
-        new LoginPage(adminPage).loginAs("System Admin", testAdminPhone,
-                TestConfig.ADMIN_PROFILE_NAME, TestConfig.ADMIN_PROFILE_EMAIL);
+        loginAsAdmin();
         portal = new AdminPortalPage(adminPage);
         portal.waitForPortal();
     }
@@ -184,12 +180,13 @@ public class AdminSupportUserReviewTest extends TestBase {
     void searchReviewsByEntity() {
         portal.openReviewsTab();
         AdminReviewsPage reviews = new AdminReviewsPage(adminPage);
-        reviews.switchToEntityMode();
-        reviews.selectEntityType("RESTAURANT");
-        reviews.search();
-        adminPage.waitForTimeout(1000);
+        reviews.searchByEntity("RESTAURANT", "00000000-0000-0000-0000-000000000000");
+        adminPage.getByText("No reviews found", new com.microsoft.playwright.Page.GetByTextOptions()
+                .setExact(true)).waitFor(new com.microsoft.playwright.Locator.WaitForOptions()
+                .setState(com.microsoft.playwright.options.WaitForSelectorState.VISIBLE)
+                .setTimeout(15000));
         int count = reviews.getReviewCount();
-        assertThat(count).isGreaterThanOrEqualTo(0);
+        assertThat(count).isZero();
     }
 
     @Test

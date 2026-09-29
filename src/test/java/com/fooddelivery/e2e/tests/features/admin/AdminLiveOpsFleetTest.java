@@ -1,9 +1,7 @@
 package com.fooddelivery.e2e.tests.features.admin;
 
 import com.fooddelivery.e2e.base.TestBase;
-import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.admin.*;
-import com.fooddelivery.e2e.pages.common.LoginPage;
 import org.junit.jupiter.api.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -19,9 +17,7 @@ public class AdminLiveOpsFleetTest extends TestBase {
 
     @BeforeEach
     void loginAdmin() {
-        adminPage.navigate(TestConfig.APP_URL);
-        new LoginPage(adminPage).loginAs("System Admin", testAdminPhone,
-                TestConfig.ADMIN_PROFILE_NAME, TestConfig.ADMIN_PROFILE_EMAIL);
+        loginAsAdmin();
         portal = new AdminPortalPage(adminPage);
         portal.waitForPortal();
     }
@@ -33,6 +29,7 @@ public class AdminLiveOpsFleetTest extends TestBase {
     void fleetMapVisible() {
         portal.openFleetTab();
         AdminFleetMapPage fleet = new AdminFleetMapPage(adminPage);
+        fleet.waitForFleetMap();
         assertThat(fleet.isFleetMapVisible()).isTrue();
     }
 

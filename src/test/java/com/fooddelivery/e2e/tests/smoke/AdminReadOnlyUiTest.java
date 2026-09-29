@@ -1,6 +1,5 @@
 package com.fooddelivery.e2e.tests.smoke;
 import com.fooddelivery.e2e.base.*;
-import com.fooddelivery.e2e.pages.common.LoginPage;
 import com.microsoft.playwright.*;
 import com.microsoft.playwright.options.AriaRole;
 import org.junit.jupiter.api.*;
@@ -9,8 +8,7 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 @Tag("admin-ui")
 public class AdminReadOnlyUiTest extends TestBase {
     @BeforeEach void login() {
-        adminPage.navigate(TestConfig.APP_URL);
-        new LoginPage(adminPage).loginAs("System Admin", testAdminPhone);
+        loginAsAdmin();
         assertThat(adminPage.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Admin").setExact(true))).isVisible();
     }
     private void tab(String name) { adminPage.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(name).setExact(true)).click(); }

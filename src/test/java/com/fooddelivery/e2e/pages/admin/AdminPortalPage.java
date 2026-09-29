@@ -2,9 +2,8 @@ package com.fooddelivery.e2e.pages.admin;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.Response;
 import com.microsoft.playwright.options.WaitForSelectorState;
-
-import java.util.regex.Pattern;
 
 /**
  * Page Object for the Admin Portal shell.
@@ -30,15 +29,16 @@ public class AdminPortalPage {
     // ── Sidebar navigation ───────────────────────────────────────────────
     //
     // SidebarNav renders one <button> per item inside the admin <nav>. The labels are
-    // AdminPortal.tsx's, verbatim. "Manual Interventions" may carry a count badge, so the label
-    // is matched at the start of the name.
+    // AdminPortal.tsx's, verbatim. A count badge can be appended to Manual Interventions, so use
+    // Playwright's case-sensitive substring name matching within the navigation landmark.
 
     private void nav(String label) {
-        page.getByRole(com.microsoft.playwright.options.AriaRole.NAVIGATION)
+        Locator button = page.getByRole(com.microsoft.playwright.options.AriaRole.NAVIGATION)
                 .getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
-                        new Locator.GetByRoleOptions().setName(Pattern.compile("^" + Pattern.quote(label) + "\\b")))
-                .click();
-        page.waitForTimeout(300);
+                        new Locator.GetByRoleOptions().setName(label));
+        button.click();
+        page.waitForCondition(() -> "page".equals(button.getAttribute("aria-current")),
+                new Page.WaitForConditionOptions().setTimeout(5000));
     }
 
     public void openLiveOpsTab() { nav("Live Operations"); }
@@ -53,7 +53,13 @@ public class AdminPortalPage {
 
     public void openFleetTab() { nav("Fleet Map"); }
 
-    public void openLedgerTab() { nav("Ledger Entries"); }
+    public int openLedgerTab() {
+        Response response = page.waitForResponse(result ->
+                result.url().contains("/api/v1/internal/admin/ledger/transactions")
+                        && "GET".equals(result.request().method()),
+                () -> nav("Ledger Entries"));
+        return response.status();
+    }
 
     public void openPayoutsTab() { nav("Pending Payouts"); }
 
@@ -70,9 +76,6 @@ public class AdminPortalPage {
     }
 
     public void openRefundsTab() {
-        page.getByRole(com.microsoft.playwright.options.AriaRole.NAVIGATION)
-                .getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
-                        new Locator.GetByRoleOptions().setName("Refund Queue").setExact(true))
-                .click();
+        nav("Refund Queue");
     }
 }

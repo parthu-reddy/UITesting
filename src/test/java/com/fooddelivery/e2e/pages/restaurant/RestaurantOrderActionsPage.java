@@ -165,6 +165,10 @@ public class RestaurantOrderActionsPage {
         page.waitForTimeout(500);
     }
 
+    public void openChat(String orderId) {
+        orderCard(orderId).locator("button:has(svg.lucide-message-square)").click();
+    }
+
     // ── Order details ────────────────────────────────────────────────────
 
     public void showOrderDetails() {

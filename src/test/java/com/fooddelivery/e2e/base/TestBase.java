@@ -1,6 +1,8 @@
 package com.fooddelivery.e2e.base;
 
 import com.microsoft.playwright.*;
+import com.fooddelivery.e2e.pages.admin.AdminPortalPage;
+import com.fooddelivery.e2e.pages.common.LoginPage;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -10,7 +12,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Base class for all E2E tests.
@@ -21,6 +25,8 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 @ExtendWith(ScreenshotOnFailure.class)
 public abstract class TestBase {
+
+    private static final Map<String, String> ADMIN_STORAGE_STATES = new ConcurrentHashMap<>();
 
     protected static Playwright playwright;
     protected static Browser browser;
@@ -101,11 +107,47 @@ public abstract class TestBase {
                 .setPermissions(Arrays.asList("geolocation", "notifications"))
                 .setGeolocation(TestConfig.GEO_LAT, TestConfig.GEO_LNG);
 
+        if ("admin".equals(label)) {
+            String storageState = ADMIN_STORAGE_STATES.get(adminStorageStateKey());
+            if (storageState != null) options.setStorageState(storageState);
+        }
+
         if (TestConfig.RECORD_VIDEO) {
             options.setRecordVideoDir(Paths.get("target/videos/" + label));
             options.setRecordVideoSize(1280, 720);
         }
         return browser.newContext(options);
+    }
+
+    /**
+     * Admin E2E tests share the one seeded admin account. Reuse its authenticated browser state
+     * across isolated contexts so a suite run does not exceed the server's per-phone OTP limits.
+     */
+    protected final void loginAsAdmin() {
+        adminPage.navigate(TestConfig.APP_URL);
+        AdminPortalPage portal = new AdminPortalPage(adminPage);
+        String cacheKey = adminStorageStateKey();
+
+        if (ADMIN_STORAGE_STATES.containsKey(cacheKey)) {
+            try {
+                portal.waitForPortal();
+                ADMIN_STORAGE_STATES.put(cacheKey, adminContext.storageState());
+                return;
+            } catch (TimeoutError expiredOrInvalidState) {
+                boolean loginScreen = adminPage.locator("button:has-text('System Admin'):visible").count() > 0;
+                if (!loginScreen) throw expiredOrInvalidState;
+                ADMIN_STORAGE_STATES.remove(cacheKey);
+            }
+        }
+
+        new LoginPage(adminPage).loginAs("System Admin", testAdminPhone,
+                TestConfig.ADMIN_PROFILE_NAME, TestConfig.ADMIN_PROFILE_EMAIL);
+        portal.waitForPortal();
+        ADMIN_STORAGE_STATES.put(cacheKey, adminContext.storageState());
+    }
+
+    private String adminStorageStateKey() {
+        return TestConfig.APP_URL + "|" + testAdminPhone;
     }
 
     private Page createPage(BrowserContext context) {

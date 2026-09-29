@@ -1,12 +1,11 @@
 package com.fooddelivery.e2e.tests.features.admin;
 
 import com.fooddelivery.e2e.base.TestBase;
-import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.admin.AdminPortalPage;
 import com.fooddelivery.e2e.pages.admin.AdminRefundQueuePage;
 import com.fooddelivery.e2e.pages.admin.AdminSupportTicketsPage;
-import com.fooddelivery.e2e.pages.common.LoginPage;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -18,8 +17,7 @@ public class AdminSupportRefundQueueTest extends TestBase {
 
     @BeforeEach
     void loginAdmin() {
-        adminPage.navigate(TestConfig.APP_URL);
-        new LoginPage(adminPage).loginAs("Admin", testAdminPhone);
+        loginAsAdmin();
         AdminPortalPage dashboard = new AdminPortalPage(adminPage);
         dashboard.waitForPortal();
     }
@@ -50,14 +48,11 @@ public class AdminSupportRefundQueueTest extends TestBase {
         if (openCount > 0) {
             support.selectTicket(0);
             assertThat(support.isTicketDetailOpen()).isTrue();
-            
-            support.resolveTicketWithNotes("Quick resolution note");
-            // The ticket should be resolved
-            System.out.println("[INFO] Support ticket resolved.");
         }
     }
 
     @Test
+    @Disabled("Rejecting the first live refund ticket changes shared financial/support data; requires an isolated disposable fixture")
     @DisplayName("REFUND-QUEUE-01..07, REFUND-ADV-01..04: Refund queue actions")
     void testRefundQueueActions() {
         AdminPortalPage dashboard = new AdminPortalPage(adminPage);

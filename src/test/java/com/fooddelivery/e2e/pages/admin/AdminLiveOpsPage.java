@@ -56,12 +56,16 @@ public class AdminLiveOpsPage {
     // ── Pagination ───────────────────────────────────────────────────────
 
     public void nextPage() {
-        page.locator("button:has-text('Next')").first().click();
+        com.microsoft.playwright.Locator button = page.locator("button:has-text('Next')").first();
+        if (button.count() == 0 || !button.isEnabled()) return;
+        button.click();
         page.waitForTimeout(500);
     }
 
     public void prevPage() {
-        page.locator("button:has-text('Prev')").first().click();
+        com.microsoft.playwright.Locator button = page.locator("button:has-text('Prev')").first();
+        if (button.count() == 0 || !button.isEnabled()) return;
+        button.click();
         page.waitForTimeout(500);
     }
 

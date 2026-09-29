@@ -1,9 +1,7 @@
 package com.fooddelivery.e2e.tests.features.admin;
 
 import com.fooddelivery.e2e.base.TestBase;
-import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.admin.*;
-import com.fooddelivery.e2e.pages.common.LoginPage;
 import org.junit.jupiter.api.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -20,9 +18,7 @@ public class AdminLedgerAdvancedTest extends TestBase {
 
     @BeforeEach
     void loginAdmin() {
-        adminPage.navigate(TestConfig.APP_URL);
-        new LoginPage(adminPage).loginAs("System Admin", testAdminPhone,
-                TestConfig.ADMIN_PROFILE_NAME, TestConfig.ADMIN_PROFILE_EMAIL);
+        loginAsAdmin();
         portal = new AdminPortalPage(adminPage);
         portal.waitForPortal();
     }
@@ -42,23 +38,23 @@ public class AdminLedgerAdvancedTest extends TestBase {
     void filterByTransactionId() {
         portal.openLedgerTab();
         AdminLedgerPage ledger = new AdminLedgerPage(adminPage);
-        ledger.filterByTransactionId("e2e-nonexistent-txn-id");
-        ledger.applyFilter();
-        adminPage.waitForTimeout(1000);
-        // Should show 0 results or empty state for fake ID
-        assertThat(ledger.getTransactionCount()).isGreaterThanOrEqualTo(0);
+        // The API binds transactionId as a UUID; use a valid UUID that cannot match seeded data.
+        ledger.filterByTransactionId("00000000-0000-0000-0000-000000000000");
+        assertThat(ledger.applyFilter("transactionId=00000000-0000-0000-0000-000000000000")).isEqualTo(200);
+        ledger.waitForEmptyResults();
+        assertThat(ledger.getTransactionCount()).isZero();
     }
 
     @Test
-    @DisplayName("LEDGER-ADV-04: Filter by owner type RESTAURANT")
+    @DisplayName("LEDGER-ADV-04: Filter by restaurant payable account")
     void filterByOwnerType() {
         portal.openLedgerTab();
         AdminLedgerPage ledger = new AdminLedgerPage(adminPage);
-        ledger.selectOwnerType("RESTAURANT");
-        ledger.applyFilter();
-        adminPage.waitForTimeout(1000);
-        int count = ledger.getTransactionCount();
-        assertThat(count).isGreaterThanOrEqualTo(0);
+        ledger.filterByOwnerId("00000000-0000-0000-0000-000000000000");
+        ledger.selectOwnerType("RESTAURANT_PAYABLE");
+        assertThat(ledger.applyFilter("ownerId=00000000-0000-0000-0000-000000000000&ownerType=RESTAURANT_PAYABLE")).isEqualTo(200);
+        ledger.waitForEmptyResults();
+        assertThat(ledger.getTransactionCount()).isZero();
     }
 
     @Test
@@ -67,9 +63,7 @@ public class AdminLedgerAdvancedTest extends TestBase {
         portal.openLedgerTab();
         AdminLedgerPage ledger = new AdminLedgerPage(adminPage);
         ledger.selectDirection("CREDIT");
-        ledger.applyFilter();
-        adminPage.waitForTimeout(1000);
-        assertThat(ledger.getTransactionCount()).isGreaterThanOrEqualTo(0);
+        assertThat(ledger.applyFilter("direction=CREDIT")).isEqualTo(200);
     }
 
     @Test
@@ -77,14 +71,15 @@ public class AdminLedgerAdvancedTest extends TestBase {
     void clearFiltersResetsAll() {
         portal.openLedgerTab();
         AdminLedgerPage ledger = new AdminLedgerPage(adminPage);
-        ledger.filterByTransactionId("test");
-        ledger.selectOwnerType("RESTAURANT");
-        ledger.applyFilter();
-        ledger.clearFilters();
-        adminPage.waitForTimeout(500);
-        // After clearing, transaction count should be the full unfiltered set
-        int count = ledger.getTransactionCount();
-        assertThat(count).isGreaterThanOrEqualTo(0);
+        ledger.filterByTransactionId("00000000-0000-0000-0000-000000000000");
+        ledger.filterByOwnerId("00000000-0000-0000-0000-000000000000");
+        ledger.selectOwnerType("RESTAURANT_PAYABLE");
+        assertThat(ledger.applyFilter("transactionId=00000000-0000-0000-0000-000000000000&ownerId=00000000-0000-0000-0000-000000000000&ownerType=RESTAURANT_PAYABLE")).isEqualTo(200);
+        ledger.waitForEmptyResults();
+        assertThat(ledger.getTransactionCount()).isZero();
+        assertThat(ledger.clearFilters()).isEqualTo(200);
+        assertThat(adminPage.getByPlaceholder("Transaction ID").inputValue()).isEmpty();
+        assertThat(adminPage.getByPlaceholder("Owner ID").inputValue()).isEmpty();
     }
 
     @Test

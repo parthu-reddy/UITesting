@@ -1,14 +1,14 @@
 # Validation failures and pending work
 
-## My Reviews returns HTTP 403
+## My Reviews HTTP 403 — historical blocker, not reproduced
 
 `CustomerSettingsUiTest.myReviewsTabShowsReviewsOrDefinedEmptyState` is implemented as a strict read-only test. It logs in with a randomized seeded customer, opens Account Settings → My Reviews, and requires either at least one review article or the defined `You haven't reviewed anything yet` empty state.
 
-Live validation on 2026-09-23 fails. `GET /api/v1/reviews/me?page=0&size=20` returns HTTP 403, and the tab renders neither the review list nor its defined empty state. The test remains active and failing. No review was submitted, edited, or deleted.
+Live validation on 2026-09-23 failed: `GET /api/v1/reviews/me?page=0&size=20` returned HTTP 403, and the tab rendered neither the review list nor its defined empty state. On 2026-09-28, the focused test passed on the deployed environment for the selected seeded customer. Treat the 403 as a historical observation; it is not a current confirmed failure.
 
 Evidence: `target/surefire-reports/TEST-com.fooddelivery.e2e.tests.smoke.CustomerSettingsUiTest.xml` and `target/screenshots/myReviewsTabShowsReviewsOrDefinedEmptyState___customer.png` / `.html`.
 
-Review submission and post-delivery support still require a suitable completed order and remain pending.
+The 2026-09-28 My Reviews test was read-only and submitted no review.
 
 ## UI fixes applied 2026-09-24 (not yet deployed or re-run)
 
@@ -77,6 +77,22 @@ isolated disposable fixture. Refund approval, rejection, and payment completion 
 unvalidated live. No refund data was changed by the completed read-only tests.
 
 
-## 2026-09-28 focused five-class rerun
+## 2026-09-28 deployed review E2E results
 
-`ReviewFlowTest.submitReview` skipped before opening the rating modal because the randomized seeded customer had no delivered order in History. The deployed History UI was reached, but review eligibility and POST submission were not exercised. Seeded customer accounts guarantee a login and Home address, not delivered-order history. Use a disposable UI-created order completed through the normal customer → restaurant → rider lifecycle, then rate that exact order; do not depend on prior test order or guess a seeded history row. `HappyDeliveryFlowTest` demonstrates the full order lifecycle and OTP handoff. This review test remains data-blocked until it owns or receives such a completed-order fixture.
+Focused checks against the deployed development environment:
+
+- `ReviewFlowTest.submitReview`: 1 passed, 0 failures/errors/skips. The test completed a seeded order through the customer → restaurant → rider flow, submitted ratings for the restaurant, delivery partner, and dish, then reopened the order from History and verified that ratings are visible but cannot be edited or submitted again.
+- `CustomerSettingsUiTest.myReviewsTabShowsReviewsOrDefinedEmptyState`: 1 passed, 0 failures/errors/skips.
+- `RestaurantNavigationUiTest.restaurantReviewsShowPublicFeedbackAndAggregate`: 1 passed, 0 failures/errors/skips. This is read-only and confirmed the posted restaurant comment, average rating, and review count for Brand 1 Outlet 6.
+
+The delivery and review submissions are persistent test data in the development environment. Each successful review submission is immutable by design. The first two review-flow attempts also persisted delivered test orders and review submissions before failing on a test-only exact-copy assertion and a test-only assumption that a delivered tracker returns after reload; those assumptions were corrected, and the final History-based immutability check passed.
+
+## 2026-09-28 expanded participant review flow — restaurant UI path blocked
+
+The expanded `ReviewFlowTest.submitReview` completed delivery, submitted the customer's three reviews, and verified the customer read-only state. It then errored before restaurant submission while waiting for the restaurant's `Order History` tab. Latest result: 1 test, 0 assertion failures, 1 error, 0 skipped. The rider submission was not reached.
+
+Source inspection found the product cause: the restaurant settings gear and profile button both navigated to `/restaurant/settings`, where `RestaurantDashboard` renders `SharedSettingsView`. The `OrderHistory` and `RestaurantOrderDetailsModal` review action are in `RestaurantSettingsShell`, which was never mounted for that route. The UI source now gives the management console its own `/restaurant/management` route while keeping account settings at `/restaurant/settings`. `npm run typecheck` passes. This route fix is not deployed yet, so the restaurant review submission flow cannot be validated against the current deployment.
+
+This run added one delivered development order (`fb775a6b`) and three immutable customer reviews before reaching the blocked restaurant navigation. Across the four review-flow attempts so far, development test data contains four delivered orders and twelve customer reviews. The earlier three-order customer review, My Reviews, and restaurant public aggregate checks passed.
+
+Remaining review E2E coverage after deployment: restaurant review submission and read-only reopening, delivery-partner review submission and read-only reopening, and explicit rejection of cross-order, unrelated-target, self-review, and role-disallowed submissions. Post-delivery support remains outside these review checks.

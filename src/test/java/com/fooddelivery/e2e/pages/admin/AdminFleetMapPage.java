@@ -18,8 +18,18 @@ public class AdminFleetMapPage {
     // ── Visibility ───────────────────────────────────────────────────────
 
     public boolean isFleetMapVisible() {
+        return legend().isVisible();
+    }
+
+    public void waitForFleetMap() {
+        legend().waitFor(new com.microsoft.playwright.Locator.WaitForOptions()
+                .setState(com.microsoft.playwright.options.WaitForSelectorState.VISIBLE)
+                .setTimeout(15000));
+    }
+
+    private com.microsoft.playwright.Locator legend() {
         return page.getByRole(com.microsoft.playwright.options.AriaRole.HEADING,
-                new Page.GetByRoleOptions().setName("Fleet Map Legend").setExact(true)).isVisible();
+                new Page.GetByRoleOptions().setName("Fleet Map Legend").setExact(true));
     }
 
     private com.microsoft.playwright.Locator riderMarkers() {
@@ -56,8 +66,6 @@ public class AdminFleetMapPage {
     /** The fleet map has no refresh control; a reload refetches every layer. */
     public void refreshMap() {
         page.reload();
-        page.getByRole(com.microsoft.playwright.options.AriaRole.HEADING,
-                        new Page.GetByRoleOptions().setName("Fleet Map Legend").setExact(true))
-                .waitFor(new com.microsoft.playwright.Locator.WaitForOptions().setTimeout(15000));
+        waitForFleetMap();
     }
 }
