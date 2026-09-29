@@ -109,18 +109,16 @@ public class ChatCommunicationTest extends TestBase {
                     + order.shortOrderId();
             assertThat(longMessage.length()).as("long-message fixture length").isGreaterThan(200);
             customerChat.sendMessage(longMessage);
+            assertMessageVisible(customerPage, longMessage);
             customerMessageVisible = true;
-            com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(
-                    restaurantPage.getByText(longMessage,
-                            new Page.GetByTextOptions().setExact(true))).isVisible();
+            assertMessageVisible(restaurantPage, longMessage);
             restaurantMessageVisible = true;
 
             String reply = "E2E restaurant reply " + order.shortOrderId();
             restaurantChat.sendMessage(reply);
+            assertMessageVisible(restaurantPage, reply);
             restaurantReplyVisible = true;
-            com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(
-                    customerPage.getByText(reply,
-                            new Page.GetByTextOptions().setExact(true))).isVisible();
+            assertMessageVisible(customerPage, reply);
             customerReplyVisible = true;
 
             return snapshot(customerTelemetry, restaurantTelemetry, customerSessionStatus,
@@ -164,34 +162,29 @@ public class ChatCommunicationTest extends TestBase {
             }
             waitForConnected(customerPage, customerChat, customerTelemetry);
 
-            Response riderSession = riderPage.waitForResponse(
-                    response -> response.request().method().equals("POST")
-                            && response.url().contains("/api/v1/chat/sessions"),
-                    new Page.WaitForResponseOptions().setTimeout(20000),
-                    () -> riderChat.openChat(order.orderId()));
-            riderSessionStatus = riderSession.status();
-            if (!riderSession.ok()) {
+            riderSessionStatus = openParticipantChat(
+                    riderPage, riderChat, order.orderId(), riderTelemetry);
+            if (!isSuccessfulStatus(riderSessionStatus)) {
                 return snapshot(customerTelemetry, riderTelemetry, customerSessionStatus,
                         riderSessionStatus, customerChatOpened, false, false,
                         customerMessageVisible, riderMessageVisible, false, false,
-                        "rider session request was rejected");
+                        "rider session request was rejected after bounded retries; HTTP "
+                                + riderSessionStatus);
             }
             waitForConnected(riderPage, riderChat, riderTelemetry);
 
             String message = "E2E customer-to-rider message " + order.shortOrderId();
             customerChat.sendMessage(message);
+            assertMessageVisible(customerPage, message);
             customerMessageVisible = true;
-            com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(
-                    riderPage.getByText(message,
-                            new Page.GetByTextOptions().setExact(true))).isVisible();
+            assertMessageVisible(riderPage, message);
             riderMessageVisible = true;
 
             String reply = "E2E rider reply " + order.shortOrderId();
             riderChat.sendMessage(reply);
+            assertMessageVisible(riderPage, reply);
             riderReplyVisible = true;
-            com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(
-                    customerPage.getByText(reply,
-                            new Page.GetByTextOptions().setExact(true))).isVisible();
+            assertMessageVisible(customerPage, reply);
             customerReplyVisible = true;
 
             return snapshot(customerTelemetry, riderTelemetry, customerSessionStatus,
@@ -228,6 +221,7 @@ public class ChatCommunicationTest extends TestBase {
 
             waitForConnected(customerPage, customerChat, telemetry);
             customerChat.sendMessage(message);
+            assertMessageVisible(customerPage, message);
             customerMessageVisible = true;
             return snapshot(telemetry, null, customerSessionStatus, null,
                     customerChatOpened, false, false, customerMessageVisible, false,
@@ -287,8 +281,22 @@ public class ChatCommunicationTest extends TestBase {
                 response -> response.request().method().equals("POST")
                         && response.url().contains("/api/v1/chat/sessions"),
                 new Page.WaitForResponseOptions().setTimeout(20000),
-                () -> chat.openChat(orderId));
-        return session.status();
+                () -> chat.openChatLauncher(orderId));
+        Integer status = session.status();
+        for (int retry = 0; retry < 4 && status == 403; retry++) {
+            // Rider assignment is published asynchronously to the customer order store. A
+            // legitimate rider can briefly receive 403 until that authorized participant is
+            // visible; exercise the chat's explicit retry affordance, but do not retry other
+            // failures or loop indefinitely.
+            page.waitForTimeout(750);
+            Response retriedSession = page.waitForResponse(
+                    response -> response.request().method().equals("POST")
+                            && response.url().contains("/api/v1/chat/sessions"),
+                    new Page.WaitForResponseOptions().setTimeout(10000),
+                    chat::retrySession);
+            status = retriedSession.status();
+        }
+        return status;
     }
 
     private static boolean isSuccessfulStatus(Integer status) {
@@ -321,6 +329,11 @@ public class ChatCommunicationTest extends TestBase {
         }
     }
 
+    private static void assertMessageVisible(Page page, String message) {
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(
+                page.getByText(message, new Page.GetByTextOptions().setExact(true))).isVisible();
+    }
+
     private static void assertSuccessfulRoundTrip(ChatAttempt attempt, String orderState) {
         assertSuccessfulChatAttempt(attempt, orderState, true);
         assertThat(attempt.peerReplyVisible())
@@ -345,6 +358,9 @@ public class ChatCommunicationTest extends TestBase {
                         attempt == null ? "not started" : attempt.recipientWebsocketState(),
                         attempt == null ? "no result" : attempt.failure())
                 .isNotNull();
+        assertThat(attempt.failure())
+                .as("chat setup and delivery report no failure during %s", orderState)
+                .isEmpty();
         assertThat(attempt.customerSessionStatus())
                 .as("creating the customer chat session %s", orderState)
                 .isBetween(200, 299);
@@ -372,7 +388,6 @@ public class ChatCommunicationTest extends TestBase {
                     .as("recipient sends a reply %s", orderState)
                     .isTrue();
         }
-        assertThat(attempt.failure()).as("chat failure detail").isEmpty();
     }
 
     private record ChatTelemetry(AtomicReference<Integer> sessionResponseStatus,

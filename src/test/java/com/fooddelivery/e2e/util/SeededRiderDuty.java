@@ -30,6 +30,7 @@ public final class SeededRiderDuty implements AutoCloseable {
     private final Page page;
     private final DeliveryOnlineTogglePage toggle;
     private boolean restoreOffline;
+    private boolean preserveOnlineForActiveDelivery;
     private final AtomicReference<String> profileStatus = new AtomicReference<>();
     private final AtomicReference<String> latestStatus = new AtomicReference<>();
     private final AtomicReference<WebSocket> riderSocket = new AtomicReference<>();
@@ -118,6 +119,14 @@ public final class SeededRiderDuty implements AutoCloseable {
         }
     }
 
+    void preserveOnlineForActiveDelivery() {
+        preserveOnlineForActiveDelivery = true;
+    }
+
+    void markDeliveryCompleted() {
+        preserveOnlineForActiveDelivery = false;
+    }
+
     private void observeDutyStatus(WebSocketFrame frame) {
         String text = frame.text();
         if (text == null || !text.contains("\"DUTY_STATUS\"")) return;
@@ -153,6 +162,15 @@ public final class SeededRiderDuty implements AutoCloseable {
     @Override
     public void close() {
         if (!restoreOffline || !toggle.isOnline()) {
+            page.offWebSocket(socketListener);
+            page.offResponse(profileListener);
+            return;
+        }
+        if (preserveOnlineForActiveDelivery) {
+            // A failed fixture must leave an assigned delivery resumable. The backend will
+            // reject an offline request while the order is active, and a stale dashboard may
+            // not render the active-job panel when this cleanup runs.
+            System.out.println("[RIDER] Keeping duty online because the test order is still active");
             page.offWebSocket(socketListener);
             page.offResponse(profileListener);
             return;

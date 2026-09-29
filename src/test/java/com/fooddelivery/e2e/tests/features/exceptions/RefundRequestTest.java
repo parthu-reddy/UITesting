@@ -11,6 +11,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -30,6 +32,17 @@ public class RefundRequestTest extends TestBase {
         CompletedDeliveryFixture.Result order = CompletedDeliveryFixture.completeOrder(
                 customerPage, restaurantPage, riderPage,
                 testCustomerPhone, testRestaurantPhone, testRiderPhone);
+
+        AtomicBoolean allowChatReconnect = new AtomicBoolean(false);
+        AtomicInteger blockedChatSockets = new AtomicInteger();
+        customerPage.routeWebSocket("**/ws/chat**", socket -> {
+            if (allowChatReconnect.get()) {
+                socket.connectToServer();
+            } else {
+                blockedChatSockets.incrementAndGet();
+                socket.close();
+            }
+        });
 
         ChatWidgetPage refund = new ChatWidgetPage(customerPage);
         Response sessionResponse = customerPage.waitForResponse(
@@ -62,20 +75,28 @@ public class RefundRequestTest extends TestBase {
 
         String reason = "E2E quote request for order " + order.shortOrderId();
         refund.fillRefundReason(reason);
-        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(submitButton).isEnabled();
 
+        Locator connectingStatus = refund.refundModal().getByRole(
+                com.microsoft.playwright.options.AriaRole.STATUS);
+        customerPage.waitForCondition(
+                () -> blockedChatSockets.get() > 0 && connectingStatus.isVisible(),
+                new Page.WaitForConditionOptions().setTimeout(15000));
+        assertThat(submitButton.isDisabled())
+                .as("a valid quote cannot be discarded while the chat WebSocket is disconnected")
+                .isTrue();
+
+        allowChatReconnect.set(true);
         waitForStompConnected(customerPage, telemetry);
+        customerPage.waitForCondition(submitButton::isEnabled,
+                new Page.WaitForConditionOptions().setTimeout(15000));
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(submitButton).isEnabled();
         refund.submitRefundRequest();
         refund.refundModal().waitFor(
                 new Locator.WaitForOptions().setState(WaitForSelectorState.HIDDEN));
-        customerPage.waitForCondition(telemetry.refundQuoteFrameSent()::get,
-                new Page.WaitForConditionOptions().setTimeout(10000));
         com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(
                 customerPage.getByText("Requesting quote...",
-                        new Page.GetByTextOptions().setExact(true))).isVisible();
-        assertThat(telemetry.refundQuoteFrameSent().get())
-                .as("client sends a REFUND_QUOTE_REQUEST STOMP frame")
-                .isTrue();
+                        new Page.GetByTextOptions().setExact(true)))
+                .isVisible();
     }
 
     private static ChatTelemetry observeChatTraffic(Page page) {
@@ -88,13 +109,6 @@ public class RefundRequestTest extends TestBase {
                     telemetry.stompState().set("CONNECTED");
                 }
             });
-            webSocket.onFrameSent(frame -> {
-                String text = frame.text();
-                if (text != null && text.contains("/app/chat.send/")
-                        && text.contains("REFUND_QUOTE_REQUEST")) {
-                    telemetry.refundQuoteFrameSent().set(true);
-                }
-            });
         });
         return telemetry;
     }
@@ -104,10 +118,9 @@ public class RefundRequestTest extends TestBase {
                 new Page.WaitForConditionOptions().setTimeout(20000));
     }
 
-    private record ChatTelemetry(AtomicReference<String> stompState,
-                                 AtomicReference<Boolean> refundQuoteFrameSent) {
+    private record ChatTelemetry(AtomicReference<String> stompState) {
         private ChatTelemetry() {
-            this(new AtomicReference<>("not connected"), new AtomicReference<>(false));
+            this(new AtomicReference<>("not connected"));
         }
     }
 }

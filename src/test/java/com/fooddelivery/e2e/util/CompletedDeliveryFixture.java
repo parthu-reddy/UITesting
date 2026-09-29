@@ -74,9 +74,11 @@ public final class CompletedDeliveryFixture {
         RestaurantDashboardPage restaurant = new RestaurantDashboardPage(restaurantPage);
         restaurant.waitForDashboard();
 
-        try (SeededRiderDuty ignored = SeededRiderDuty.ensureOnline(riderPage, riderPhone)) {
+        SeededRiderDuty riderDuty = SeededRiderDuty.ensureOnline(riderPage, riderPhone);
+        try (riderDuty) {
             return completeWithOnlineRider(customerPage, restaurantPage, riderPage,
-                    customerPhone, restaurantPhone, restaurant, afterRestaurantAccept, afterRiderAccept);
+                    customerPhone, restaurantPhone, restaurant, afterRestaurantAccept,
+                    afterRiderAccept, riderDuty);
         }
     }
 
@@ -84,7 +86,8 @@ public final class CompletedDeliveryFixture {
                                                    String customerPhone, String restaurantPhone,
                                                    RestaurantDashboardPage restaurant,
                                                    Consumer<Result> afterRestaurantAccept,
-                                                   Consumer<Result> afterRiderAccept) {
+                                                   Consumer<Result> afterRiderAccept,
+                                                   SeededRiderDuty riderDuty) {
 
         int brandNumber = Integer.parseInt(restaurantPhone.substring(7));
         String selectedOutlet = new NearbyOutletPage(customerPage)
@@ -131,6 +134,7 @@ public final class CompletedDeliveryFixture {
                 new Page.GetByTextOptions().setExact(true))).isVisible();
         dispatch.acceptDispatch(orderId);
         waitForActiveOrder(riderPage, orderId);
+        riderDuty.preserveOnlineForActiveDelivery();
         afterRiderAccept.accept(result);
 
         DeliveryActiveJobPage activeJob = new DeliveryActiveJobPage(riderPage);
@@ -145,8 +149,15 @@ public final class CompletedDeliveryFixture {
         deliveryCode.waitFor(new Locator.WaitForOptions().setTimeout(15000));
         String deliveryOtp = deliveryCode.innerText().trim();
         Assertions.assertThat(deliveryOtp).matches("[0-9]{6}");
+        if (!activeJob.isDeliveryPhase()) {
+            System.out.println("[E2E] Delivery form disappeared from the rider view; reloading the assigned job");
+            riderPage.reload();
+            waitForDeliveryActiveOrder(riderPage, orderId);
+            activeJob = new DeliveryActiveJobPage(riderPage);
+        }
         activeJob.enterDeliveryOtp(deliveryOtp);
         confirmStatus(riderPage, orderId, "DELIVERED", activeJob::swipeToConfirmDelivery);
+        riderDuty.markDeliveryCompleted();
 
         // Wait until the customer service has persisted DELIVERED before querying rider history,
         // which reads the same order store asynchronously from the rider service.
@@ -243,6 +254,16 @@ public final class CompletedDeliveryFixture {
         riderPage.getByText("#" + orderId, new Page.GetByTextOptions().setExact(true))
                 .waitFor(new Locator.WaitForOptions().setTimeout(10000));
         riderPage.getByPlaceholder("Enter 6-digit pickup OTP")
+                .waitFor(new Locator.WaitForOptions().setTimeout(30000));
+    }
+
+    private static void waitForDeliveryActiveOrder(Page riderPage, String orderId) {
+        riderPage.getByRole(AriaRole.HEADING,
+                new Page.GetByRoleOptions().setName("Active Contract").setExact(true))
+                .waitFor(new Locator.WaitForOptions().setTimeout(60000));
+        riderPage.getByText("#" + orderId, new Page.GetByTextOptions().setExact(true))
+                .waitFor(new Locator.WaitForOptions().setTimeout(10000));
+        riderPage.getByPlaceholder("Ask customer for 6-digit OTP")
                 .waitFor(new Locator.WaitForOptions().setTimeout(30000));
     }
 }

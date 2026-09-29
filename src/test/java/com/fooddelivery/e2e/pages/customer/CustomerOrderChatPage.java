@@ -20,17 +20,31 @@ public class CustomerOrderChatPage {
 
     /** The order chat is ChatWidget: open exactly when its composer is on screen. */
     public boolean isChatOpen() {
-        return page.getByPlaceholder("Type a message...").isVisible();
+        return page.getByRole(AriaRole.BUTTON,
+                new Page.GetByRoleOptions().setName("Close chat").setExact(true)).isVisible();
     }
 
     /** Opens the customer order chat from its order-specific floating button. */
     public void openChat(String orderId) {
+        openChatLauncher(orderId);
+        page.getByPlaceholder("Type a message...").waitFor();
+    }
+
+    /** Clicks the launcher without assuming session initialization succeeds. */
+    public void openChatLauncher(String orderId) {
         String floatingLabel = "#" + orderId.substring(0, Math.min(6, orderId.length()));
         Locator launcher = page.getByRole(AriaRole.BUTTON,
                 new Page.GetByRoleOptions().setName(floatingLabel).setExact(true));
         assertThat(launcher).hasCount(1);
         launcher.click();
-        page.getByPlaceholder("Type a message...").waitFor();
+    }
+
+    /** Retries session initialization from the error state shown by ChatWidget. */
+    public void retrySession() {
+        Locator retry = page.getByRole(AriaRole.BUTTON,
+                new Page.GetByRoleOptions().setName("Try again").setExact(true));
+        retry.waitFor(new Locator.WaitForOptions().setTimeout(5000));
+        retry.click();
     }
 
     public Locator composer() {

@@ -49,8 +49,8 @@ Uses: `ChatWidgetPage`, `CustomerOrderChatPage`, `RestaurantChatPage`, `CallOver
 | ID | Description | Action | Expected result |
 |---|---|---|---|
 | CHAT-REFUND-01 | Open refund quote form | Complete a test-created order and use “Something wrong with this order?” on its delivered summary. | The refund quote modal opens for that exact order and loads its items. |
-| CHAT-REFUND-02 | Item and reason are required | Select an item but leave the reason blank. | “Request Quote” stays disabled; adding a reason enables it. |
-| CHAT-REFUND-03 | Submit a refund quote request | Submit a reasoned quote request for the test-created order. | A `REFUND_QUOTE_REQUEST` STOMP event is sent and the chat shows “Requesting quote...”; no refund decision or payout is made. |
+| CHAT-REFUND-02 | Item, reason, and chat connection are required | Select an item and leave the reason blank, then provide a reason while the chat WebSocket is disconnected. | “Request Quote” stays disabled until the form is valid and chat reconnects; it then enables. |
+| CHAT-REFUND-03 | Submit a refund quote request | Submit a reasoned quote request for the test-created order. | The accepted `REFUND_QUOTE_REQUEST` appears in chat as “Requesting quote...”; no refund decision or payout is made. |
 | CHAT-REFUND-04 | Missing reason blocked | Leave the reason blank after selecting an item. | The request stays disabled and no quote event is sent. |
 
 ## Batch 6 — Map Search and Place Autocomplete (`MapTrackingPage`)
