@@ -56,15 +56,19 @@ public class RestaurantNavigationUiTest extends TestBase {
         new LoginPage(restaurantPage).loginAs("Restaurant Partner", testRestaurantPhone);
         RestaurantDashboardPage dashboard = new RestaurantDashboardPage(restaurantPage);
         dashboard.waitForDashboard();
-        dashboard.selectOutlet("Brand 1 Outlet 6");
+        String outletName = System.getProperty("review.outlet.name", "Brand 1 Outlet 6");
+        String expectedComment = System.getProperty(
+                "review.customer.comment", "E2E automated review verification.");
+        dashboard.selectOutlet(outletName);
         dashboard.openReviewsTab();
 
         Locator reviewsPanel = restaurantPage.getByRole(AriaRole.REGION,
                 new Page.GetByRoleOptions().setName("What customers said").setExact(true));
-        Locator e2eReview = reviewsPanel.getByText("E2E automated review verification.",
+        Locator e2eReview = reviewsPanel.getByText(expectedComment,
                 new Locator.GetByTextOptions().setExact(true));
-        e2eReview.waitFor(new Locator.WaitForOptions()
+        e2eReview.first().waitFor(new Locator.WaitForOptions()
                 .setState(WaitForSelectorState.VISIBLE).setTimeout(30000));
+        assertThat(e2eReview.count()).isGreaterThan(0);
 
         com.microsoft.playwright.assertions.PlaywrightAssertions
                 .assertThat(reviewsPanel.locator("span.text-3xl.font-black"))

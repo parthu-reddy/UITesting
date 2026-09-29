@@ -3,6 +3,7 @@ package com.fooddelivery.e2e.pages.common;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.WaitForSelectorState;
+import com.microsoft.playwright.options.AriaRole;
 
 /**
  * Page Object for the ChatWidget and RefundRequestModal.
@@ -41,17 +42,46 @@ public class ChatWidgetPage {
 
     // ── Refund Request ───────────────────────────────────────────────────
 
+    /** Opens the refund quote modal through the delivered order's actual support CTA. */
     public void openRefundRequest() {
-        page.locator("button:has-text('Request Refund'), button:has-text('Refund')").first().click();
-        page.waitForTimeout(500);
+        page.getByRole(AriaRole.BUTTON,
+                        new Page.GetByRoleOptions().setName("Something wrong with this order?").setExact(true))
+                .click();
+        refundModal().waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
+    }
+
+    public void openRefundRequest(String orderId) {
+        Locator orderTracker = page.locator(
+                "[data-testid='order-tracker'][data-order-id='" + orderId + "']");
+        orderTracker.getByRole(AriaRole.BUTTON,
+                        new Locator.GetByRoleOptions().setName("Something wrong with this order?").setExact(true))
+                .click();
+        refundModal().waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
     }
 
     public void fillRefundReason(String reason) {
-        page.locator("textarea, input[placeholder*='reason']").first().fill(reason);
+        refundReasonInput().fill(reason);
     }
 
     public void submitRefundRequest() {
-        page.locator("button:has-text('Submit'), button:has-text('Request')").first().click();
-        page.waitForTimeout(1000);
+        requestQuoteButton().click();
+    }
+
+    public Locator refundModal() {
+        return page.getByRole(AriaRole.DIALOG,
+                new Page.GetByRoleOptions().setName("Request refund quote").setExact(true));
+    }
+
+    public Locator refundItemCheckboxes() {
+        return refundModal().locator("input[type='checkbox']");
+    }
+
+    public Locator refundReasonInput() {
+        return refundModal().getByPlaceholder("Please explain why you are requesting a refund...");
+    }
+
+    public Locator requestQuoteButton() {
+        return refundModal().getByRole(AriaRole.BUTTON,
+                new Locator.GetByRoleOptions().setName("Request Quote").setExact(true));
     }
 }

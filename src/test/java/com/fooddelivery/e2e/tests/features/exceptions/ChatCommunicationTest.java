@@ -15,41 +15,230 @@ import java.util.concurrent.atomic.AtomicReference;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * UI-only regression coverage for customer messaging while an order is active and during the
- * delivered-order grace period. Requires seeded customer, restaurant, and rider accounts plus a
- * nearby Brand 1 outlet.
+ * UI-only coverage for order chat while active, after dispatch, and during the delivered-order
+ * grace period. The order fixture always finishes delivery before a captured chat failure is
+ * asserted, so a chat regression cannot strand an order or rider.
  */
 @Tag("feature")
+@Tag("chat")
 public class ChatCommunicationTest extends TestBase {
 
     @Test
-    @DisplayName("Customer can send a message while the order is active and restaurant receives it")
-    void customerCanSendMessageDuringActiveOrder() {
+    @DisplayName("Customer, restaurant, and rider exchange messages through the order lifecycle")
+    void orderParticipantsCanChatThroughDelivery() {
         ChatTelemetry customerTelemetry = observeChatTraffic(customerPage);
         ChatTelemetry restaurantTelemetry = observeChatTraffic(restaurantPage);
-        AtomicReference<ChatAttempt> activeAttempt = new AtomicReference<>();
+        ChatTelemetry riderTelemetry = observeChatTraffic(riderPage);
+        AtomicReference<ChatAttempt> restaurantConversation = new AtomicReference<>();
+        AtomicReference<ChatAttempt> riderConversation = new AtomicReference<>();
 
-        CompletedDeliveryFixture.completeOrder(
-                customerPage, restaurantPage, riderPage,
-                testCustomerPhone, testRestaurantPhone, testRiderPhone,
-                order -> activeAttempt.set(trySendMessage(customerPage, order,
-                        "E2E active-order check " + order.shortOrderId(), customerTelemetry,
-                        restaurantPage, restaurantTelemetry)));
-
-        assertSuccessfulChatAttempt(activeAttempt.get(), "while the order is active", true);
-    }
-
-    @Test
-    @DisplayName("Customer can send a message during the delivered-order grace period")
-    void customerCanSendMessageAfterDelivery() {
-        ChatTelemetry telemetry = observeChatTraffic(customerPage);
         CompletedDeliveryFixture.Result order = CompletedDeliveryFixture.completeOrder(
                 customerPage, restaurantPage, riderPage,
-                testCustomerPhone, testRestaurantPhone, testRiderPhone);
+                testCustomerPhone, testRestaurantPhone, testRiderPhone,
+                activeOrder -> restaurantConversation.set(tryRestaurantRoundTrip(
+                        customerPage, restaurantPage, activeOrder, customerTelemetry, restaurantTelemetry)),
+                dispatchedOrder -> riderConversation.set(tryRiderRoundTrip(
+                        customerPage, riderPage, dispatchedOrder, customerTelemetry, riderTelemetry)));
+
+        ChatAttempt restaurantAttempt = restaurantConversation.get();
+        assertSuccessfulRoundTrip(restaurantAttempt, "while the order is active");
+        assertThat(restaurantAttempt.emptyMessageBlocked())
+                .as("empty messages are disabled while the order is active")
+                .isTrue();
+        assertThat(restaurantAttempt.whitespaceMessageBlocked())
+                .as("whitespace-only messages are disabled while the order is active")
+                .isTrue();
+        assertSuccessfulRoundTrip(riderConversation.get(), "after rider dispatch");
 
         ChatAttempt attempt = trySendMessage(customerPage, order,
-                "E2E delivery-window check " + order.shortOrderId(), telemetry, null, null);
+                "E2E delivery-window check " + order.shortOrderId(), customerTelemetry);
         assertSuccessfulChatAttempt(attempt, "after delivery", false);
+    }
+
+    private static ChatAttempt tryRestaurantRoundTrip(Page customerPage, Page restaurantPage,
+                                                      CompletedDeliveryFixture.Result order,
+                                                      ChatTelemetry customerTelemetry,
+                                                      ChatTelemetry restaurantTelemetry) {
+        CustomerOrderChatPage customerChat = new CustomerOrderChatPage(customerPage);
+        CustomerOrderChatPage restaurantChat = new CustomerOrderChatPage(restaurantPage);
+        Integer customerSessionStatus = null;
+        Integer restaurantSessionStatus = null;
+        boolean customerChatOpened = false;
+        boolean emptyMessageBlocked = false;
+        boolean whitespaceMessageBlocked = false;
+        boolean customerMessageVisible = false;
+        boolean restaurantMessageVisible = false;
+        boolean restaurantReplyVisible = false;
+        boolean customerReplyVisible = false;
+
+        try {
+            customerSessionStatus = openParticipantChat(
+                    customerPage, customerChat, order.orderId(), customerTelemetry);
+            customerChatOpened = true;
+            if (!isSuccessfulStatus(customerSessionStatus)) {
+                return snapshot(customerTelemetry, restaurantTelemetry, customerSessionStatus,
+                        restaurantSessionStatus, customerChatOpened, emptyMessageBlocked,
+                        whitespaceMessageBlocked, customerMessageVisible, restaurantMessageVisible,
+                        false, false, "customer session request was rejected");
+            }
+            waitForConnected(customerPage, customerChat, customerTelemetry);
+
+            emptyMessageBlocked = customerChat.sendButton().isDisabled();
+            customerChat.composer().fill("   \t");
+            whitespaceMessageBlocked = customerChat.sendButton().isDisabled();
+            customerChat.composer().fill("");
+
+            Response restaurantSession = restaurantPage.waitForResponse(
+                    response -> response.request().method().equals("POST")
+                            && response.url().contains("/api/v1/chat/sessions"),
+                    new Page.WaitForResponseOptions().setTimeout(20000),
+                    () -> {
+                        new RestaurantOrderActionsPage(restaurantPage).openChat(order.shortOrderId());
+                        restaurantChat.openChat(order.orderId());
+                    });
+            restaurantSessionStatus = restaurantSession.status();
+            if (!restaurantSession.ok()) {
+                return snapshot(customerTelemetry, restaurantTelemetry, customerSessionStatus,
+                        restaurantSessionStatus, customerChatOpened, emptyMessageBlocked,
+                        whitespaceMessageBlocked, customerMessageVisible, restaurantMessageVisible,
+                        false, false, "restaurant session request was rejected");
+            }
+            waitForConnected(restaurantPage, restaurantChat, restaurantTelemetry);
+
+            String longMessage = "E2E long customer message " + "message-part ".repeat(20)
+                    + order.shortOrderId();
+            assertThat(longMessage.length()).as("long-message fixture length").isGreaterThan(200);
+            customerChat.sendMessage(longMessage);
+            customerMessageVisible = true;
+            com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(
+                    restaurantPage.getByText(longMessage,
+                            new Page.GetByTextOptions().setExact(true))).isVisible();
+            restaurantMessageVisible = true;
+
+            String reply = "E2E restaurant reply " + order.shortOrderId();
+            restaurantChat.sendMessage(reply);
+            restaurantReplyVisible = true;
+            com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(
+                    customerPage.getByText(reply,
+                            new Page.GetByTextOptions().setExact(true))).isVisible();
+            customerReplyVisible = true;
+
+            return snapshot(customerTelemetry, restaurantTelemetry, customerSessionStatus,
+                    restaurantSessionStatus, customerChatOpened, emptyMessageBlocked,
+                    whitespaceMessageBlocked, customerMessageVisible, restaurantMessageVisible,
+                    restaurantReplyVisible, customerReplyVisible, "");
+        } catch (RuntimeException | AssertionError failure) {
+            return snapshot(customerTelemetry, restaurantTelemetry, customerSessionStatus,
+                    restaurantSessionStatus, customerChatOpened, emptyMessageBlocked,
+                    whitespaceMessageBlocked, customerMessageVisible, restaurantMessageVisible,
+                    restaurantReplyVisible, customerReplyVisible, failure.getClass().getSimpleName());
+        } finally {
+            closeChatIfOpen(customerChat);
+            closeChatIfOpen(restaurantChat);
+        }
+    }
+
+    private static ChatAttempt tryRiderRoundTrip(Page customerPage, Page riderPage,
+                                                 CompletedDeliveryFixture.Result order,
+                                                 ChatTelemetry customerTelemetry,
+                                                 ChatTelemetry riderTelemetry) {
+        CustomerOrderChatPage customerChat = new CustomerOrderChatPage(customerPage);
+        CustomerOrderChatPage riderChat = new CustomerOrderChatPage(riderPage);
+        Integer customerSessionStatus = null;
+        Integer riderSessionStatus = null;
+        boolean customerChatOpened = false;
+        boolean customerMessageVisible = false;
+        boolean riderMessageVisible = false;
+        boolean riderReplyVisible = false;
+        boolean customerReplyVisible = false;
+
+        try {
+            customerSessionStatus = openParticipantChat(
+                    customerPage, customerChat, order.orderId(), customerTelemetry);
+            customerChatOpened = true;
+            if (!isSuccessfulStatus(customerSessionStatus)) {
+                return snapshot(customerTelemetry, riderTelemetry, customerSessionStatus,
+                        riderSessionStatus, customerChatOpened, false, false,
+                        customerMessageVisible, riderMessageVisible, false, false,
+                        "customer session request was rejected");
+            }
+            waitForConnected(customerPage, customerChat, customerTelemetry);
+
+            Response riderSession = riderPage.waitForResponse(
+                    response -> response.request().method().equals("POST")
+                            && response.url().contains("/api/v1/chat/sessions"),
+                    new Page.WaitForResponseOptions().setTimeout(20000),
+                    () -> riderChat.openChat(order.orderId()));
+            riderSessionStatus = riderSession.status();
+            if (!riderSession.ok()) {
+                return snapshot(customerTelemetry, riderTelemetry, customerSessionStatus,
+                        riderSessionStatus, customerChatOpened, false, false,
+                        customerMessageVisible, riderMessageVisible, false, false,
+                        "rider session request was rejected");
+            }
+            waitForConnected(riderPage, riderChat, riderTelemetry);
+
+            String message = "E2E customer-to-rider message " + order.shortOrderId();
+            customerChat.sendMessage(message);
+            customerMessageVisible = true;
+            com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(
+                    riderPage.getByText(message,
+                            new Page.GetByTextOptions().setExact(true))).isVisible();
+            riderMessageVisible = true;
+
+            String reply = "E2E rider reply " + order.shortOrderId();
+            riderChat.sendMessage(reply);
+            riderReplyVisible = true;
+            com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(
+                    customerPage.getByText(reply,
+                            new Page.GetByTextOptions().setExact(true))).isVisible();
+            customerReplyVisible = true;
+
+            return snapshot(customerTelemetry, riderTelemetry, customerSessionStatus,
+                    riderSessionStatus, customerChatOpened, false, false,
+                    customerMessageVisible, riderMessageVisible, riderReplyVisible,
+                    customerReplyVisible, "");
+        } catch (RuntimeException | AssertionError failure) {
+            return snapshot(customerTelemetry, riderTelemetry, customerSessionStatus,
+                    riderSessionStatus, customerChatOpened, false, false,
+                    customerMessageVisible, riderMessageVisible, riderReplyVisible,
+                    customerReplyVisible, failure.getClass().getSimpleName());
+        } finally {
+            closeChatIfOpen(customerChat);
+            closeChatIfOpen(riderChat);
+        }
+    }
+
+    private static ChatAttempt trySendMessage(Page customerPage, CompletedDeliveryFixture.Result order,
+                                              String message, ChatTelemetry telemetry) {
+        CustomerOrderChatPage customerChat = new CustomerOrderChatPage(customerPage);
+        Integer customerSessionStatus = null;
+        boolean customerChatOpened = false;
+        boolean customerMessageVisible = false;
+
+        try {
+            customerSessionStatus = openParticipantChat(
+                    customerPage, customerChat, order.orderId(), telemetry);
+            customerChatOpened = true;
+            if (!isSuccessfulStatus(customerSessionStatus)) {
+                return snapshot(telemetry, null, customerSessionStatus, null,
+                        customerChatOpened, false, false, false, false,
+                        false, false, "customer session request was rejected");
+            }
+
+            waitForConnected(customerPage, customerChat, telemetry);
+            customerChat.sendMessage(message);
+            customerMessageVisible = true;
+            return snapshot(telemetry, null, customerSessionStatus, null,
+                    customerChatOpened, false, false, customerMessageVisible, false,
+                    false, false, "");
+        } catch (RuntimeException | AssertionError failure) {
+            return snapshot(telemetry, null, customerSessionStatus, null,
+                    customerChatOpened, false, false, customerMessageVisible, false,
+                    false, false, failure.getClass().getSimpleName());
+        } finally {
+            closeChatIfOpen(customerChat);
+        }
     }
 
     private static ChatTelemetry observeChatTraffic(Page page) {
@@ -77,68 +266,6 @@ public class ChatCommunicationTest extends TestBase {
         return telemetry;
     }
 
-    private static ChatAttempt trySendMessage(Page customerPage, CompletedDeliveryFixture.Result order,
-                                               String message, ChatTelemetry customerTelemetry,
-                                               Page recipientPage, ChatTelemetry recipientTelemetry) {
-        CustomerOrderChatPage customerChat = new CustomerOrderChatPage(customerPage);
-        CustomerOrderChatPage recipientChat = null;
-        Integer customerSessionStatus = null;
-
-        try {
-            Response sessionResponse = customerPage.waitForResponse(
-                    response -> response.request().method().equals("POST")
-                            && response.url().contains("/api/v1/chat/sessions"),
-                    new Page.WaitForResponseOptions().setTimeout(20000),
-                    () -> customerChat.openChat(order.orderId()));
-            customerSessionStatus = sessionResponse.status();
-            if (!sessionResponse.ok()) {
-                closeChatIfOpen(customerChat);
-                return attempt(customerSessionStatus, customerTelemetry, recipientTelemetry,
-                        false, false, "customer session request was rejected");
-            }
-
-            waitForConnected(customerPage, customerChat, customerTelemetry);
-
-            if (recipientPage != null) {
-                CustomerOrderChatPage peerChat = new CustomerOrderChatPage(recipientPage);
-                Response peerSessionResponse = recipientPage.waitForResponse(
-                        response -> response.request().method().equals("POST")
-                                && response.url().contains("/api/v1/chat/sessions"),
-                        new Page.WaitForResponseOptions().setTimeout(20000),
-                        () -> {
-                            new RestaurantOrderActionsPage(recipientPage).openChat(order.shortOrderId());
-                            peerChat.openChat(order.orderId());
-                        });
-                recipientChat = peerChat;
-                if (!peerSessionResponse.ok()) {
-                    closeChatIfOpen(customerChat);
-                    closeChatIfOpen(recipientChat);
-                    return attempt(customerSessionStatus, customerTelemetry, recipientTelemetry,
-                            false, false, "restaurant session request was rejected");
-                }
-                waitForConnected(recipientPage, recipientChat, recipientTelemetry);
-            }
-
-            customerChat.sendMessage(message);
-            boolean recipientReceivedMessage = recipientPage == null;
-            if (recipientPage != null) {
-                com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(
-                        recipientPage.getByText(message,
-                                new Page.GetByTextOptions().setExact(true))).isVisible();
-                recipientReceivedMessage = true;
-            }
-            closeChatIfOpen(customerChat);
-            if (recipientChat != null) closeChatIfOpen(recipientChat);
-            return attempt(customerSessionStatus, customerTelemetry, recipientTelemetry,
-                    true, recipientReceivedMessage, "");
-        } catch (RuntimeException | AssertionError failure) {
-            closeChatIfOpen(customerChat);
-            if (recipientChat != null) closeChatIfOpen(recipientChat);
-            return attempt(customerSessionStatus, customerTelemetry, recipientTelemetry,
-                    false, false, failure.getClass().getSimpleName());
-        }
-    }
-
     private static void waitForConnected(Page page, CustomerOrderChatPage chat, ChatTelemetry telemetry) {
         page.waitForCondition(
                 () -> telemetry.websocketState().get().startsWith("STOMP "),
@@ -148,17 +275,42 @@ public class ChatCommunicationTest extends TestBase {
                 new Page.WaitForConditionOptions().setTimeout(15000));
     }
 
-    private static ChatAttempt attempt(Integer customerSessionStatus, ChatTelemetry customerTelemetry,
-                                       ChatTelemetry recipientTelemetry, boolean customerMessageVisible,
-                                       boolean recipientMessageVisible, String failure) {
+    private static Integer openParticipantChat(Page page, CustomerOrderChatPage chat,
+                                               String orderId, ChatTelemetry telemetry) {
+        Integer existingSessionStatus = telemetry.sessionResponseStatus().get();
+        if (isSuccessfulStatus(existingSessionStatus)) {
+            chat.openChat(orderId);
+            return existingSessionStatus;
+        }
+
+        Response session = page.waitForResponse(
+                response -> response.request().method().equals("POST")
+                        && response.url().contains("/api/v1/chat/sessions"),
+                new Page.WaitForResponseOptions().setTimeout(20000),
+                () -> chat.openChat(orderId));
+        return session.status();
+    }
+
+    private static boolean isSuccessfulStatus(Integer status) {
+        return status != null && status >= 200 && status < 300;
+    }
+
+    private static ChatAttempt snapshot(ChatTelemetry customerTelemetry, ChatTelemetry peerTelemetry,
+                                       Integer customerSessionStatus, Integer peerSessionStatus,
+                                       boolean customerChatOpened, boolean emptyMessageBlocked,
+                                       boolean whitespaceMessageBlocked, boolean customerMessageVisible,
+                                       boolean peerMessageVisible, boolean peerReplyVisible,
+                                       boolean customerReplyVisible, String failure) {
         return new ChatAttempt(
                 customerSessionStatus,
                 customerTelemetry.websocketResponseStatus().get(),
                 customerTelemetry.websocketState().get(),
-                recipientTelemetry == null ? null : recipientTelemetry.sessionResponseStatus().get(),
-                recipientTelemetry == null ? null : recipientTelemetry.websocketResponseStatus().get(),
-                recipientTelemetry == null ? null : recipientTelemetry.websocketState().get(),
-                customerMessageVisible, recipientMessageVisible, failure);
+                peerSessionStatus == null && peerTelemetry == null ? null : peerSessionStatus,
+                peerTelemetry == null ? null : peerTelemetry.websocketResponseStatus().get(),
+                peerTelemetry == null ? null : peerTelemetry.websocketState().get(),
+                customerChatOpened, emptyMessageBlocked, whitespaceMessageBlocked,
+                customerMessageVisible, peerMessageVisible, peerReplyVisible,
+                customerReplyVisible, failure);
     }
 
     private static void closeChatIfOpen(CustomerOrderChatPage chat) {
@@ -169,8 +321,18 @@ public class ChatCommunicationTest extends TestBase {
         }
     }
 
+    private static void assertSuccessfulRoundTrip(ChatAttempt attempt, String orderState) {
+        assertSuccessfulChatAttempt(attempt, orderState, true);
+        assertThat(attempt.peerReplyVisible())
+                .as("peer reply is visible in the sender chat %s", orderState)
+                .isTrue();
+        assertThat(attempt.customerReplyVisible())
+                .as("customer receives the peer reply in real time %s", orderState)
+                .isTrue();
+    }
+
     private static void assertSuccessfulChatAttempt(ChatAttempt attempt, String orderState,
-                                                     boolean expectRecipientMessage) {
+                                                    boolean expectRecipientMessage) {
         assertThat(attempt)
                 .as("chat attempt %s; customer session=%s, customer WebSocket=%s (%s), "
                                 + "recipient session=%s, recipient WebSocket=%s (%s), failure=%s",
@@ -189,21 +351,28 @@ public class ChatCommunicationTest extends TestBase {
         assertThat(attempt.customerWebsocketState())
                 .as("authenticated customer chat WebSocket handshake %s", orderState)
                 .isEqualTo("STOMP CONNECTED");
+        assertThat(attempt.customerChatOpened())
+                .as("customer chat launcher opens for the order %s", orderState)
+                .isTrue();
         assertThat(attempt.customerMessageVisible())
-                .as("customer message echoed in chat %s", orderState)
+                .as("customer message is visible in chat %s", orderState)
                 .isTrue();
 
         if (expectRecipientMessage) {
             assertThat(attempt.recipientSessionStatus())
-                    .as("creating the restaurant chat session %s", orderState)
+                    .as("creating the recipient chat session %s", orderState)
                     .isBetween(200, 299);
             assertThat(attempt.recipientWebsocketState())
-                    .as("authenticated restaurant chat WebSocket handshake %s", orderState)
+                    .as("authenticated recipient chat WebSocket handshake %s", orderState)
                     .isEqualTo("STOMP CONNECTED");
             assertThat(attempt.recipientMessageVisible())
-                    .as("restaurant receives the customer message %s", orderState)
+                    .as("recipient receives the customer message %s", orderState)
+                    .isTrue();
+            assertThat(attempt.peerReplyVisible())
+                    .as("recipient sends a reply %s", orderState)
                     .isTrue();
         }
+        assertThat(attempt.failure()).as("chat failure detail").isEmpty();
     }
 
     private record ChatTelemetry(AtomicReference<Integer> sessionResponseStatus,
@@ -217,6 +386,8 @@ public class ChatCommunicationTest extends TestBase {
     private record ChatAttempt(Integer customerSessionStatus, Integer customerWebsocketResponseStatus,
                                String customerWebsocketState, Integer recipientSessionStatus,
                                Integer recipientWebsocketResponseStatus, String recipientWebsocketState,
-                               boolean customerMessageVisible, boolean recipientMessageVisible,
-                               String failure) { }
+                               boolean customerChatOpened, boolean emptyMessageBlocked,
+                               boolean whitespaceMessageBlocked, boolean customerMessageVisible,
+                               boolean recipientMessageVisible, boolean peerReplyVisible,
+                               boolean customerReplyVisible, String failure) { }
 }

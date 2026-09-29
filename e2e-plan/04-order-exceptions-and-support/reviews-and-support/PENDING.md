@@ -96,3 +96,38 @@ Source inspection found the product cause: the restaurant settings gear and prof
 This run added one delivered development order (`fb775a6b`) and three immutable customer reviews before reaching the blocked restaurant navigation. Across the four review-flow attempts so far, development test data contains four delivered orders and twelve customer reviews. The earlier three-order customer review, My Reviews, and restaurant public aggregate checks passed.
 
 Remaining review E2E coverage after deployment: restaurant review submission and read-only reopening, delivery-partner review submission and read-only reopening, and explicit rejection of cross-order, unrelated-target, self-review, and role-disallowed submissions. Post-delivery support remains outside these review checks.
+
+## 2026-09-29 — deployed participant flows passed; earnings and delivery blockers remain
+
+The previous route blocker is resolved in the deployed UI. Focused live checks against `https://gulf-strike-dark-extras.trycloudflare.com/` show:
+
+- Customer review submission and immutable reopening succeeded for delivered order `5d82315a-1084-4dbd-ba6c-da302b4fb7c1`; a later reuse run submitted the restaurant's and delivery partner's reviews and verified their read-only reopening.
+- `CustomerSettingsUiTest#myReviewsTabShowsReviewsOrDefinedEmptyState`: **1 passed, 0 failures/errors/skips**.
+- `RestaurantNavigationUiTest#restaurantReviewsShowPublicFeedbackAndAggregate`: **1 passed, 0 failures/errors/skips** for Brand 1 Outlet 9.
+- The latest stricter, read-only `ReviewFlowTest#submitReview` run is **1 failure, 0 errors/skips**: the restaurant earnings request returned HTTP 500. It used the existing order, created no order or review data, and now fails instead of accepting the UI's ₹0.00 fallback.
+
+Backend verification:
+
+- ReviewsService: full Maven suite **94 passed, 0 failures/errors/skips**.
+- CustomerApplication: review eligibility/participant authorization, restaurant earnings controller, and JPA earnings query checks **24 passed, 0 failures/errors/skips**.
+- DeliveryExecutiveApplication: focused assignment authorization, OTP, and delivery-progress checks **19 passed, 0 failures/errors/skips**.
+- FoodDeliveryAppUI: review modal and star-rating unit tests **16 passed**; `npm run typecheck` passed.
+- UITesting E2E sources compile with the new strict earnings-response assertion and status-response diagnostics.
+
+### Production blocker: restaurant order earnings returns HTTP 500
+
+Opening restaurant order details for order `5d82315a-1084-4dbd-ba6c-da302b4fb7c1` repeatedly returned HTTP 500 from `/api/v1/money/restaurant/{outletId}/orders/{orderId}`. The UI silently displayed ₹0.00 for the breakdown. Source inspection found that the controller used the normal `findById` lookup and then iterated lazy `orderItems`, while Open Session in View is off; unlike the other order queries used outside a transaction, this lookup did not fetch `orderItems`.
+
+The CustomerApplication source now uses a dedicated `@EntityGraph(orderItems)` query, with a repository test that clears the persistence context before checking the returned collection. The E2E now fails if the endpoint does not return a 2xx response instead of allowing the zero-value fallback to look successful. These changes have **not** been deployed or verified live. Deploy the CustomerApplication fix, then rerun the existing-order `ReviewFlowTest` before treating restaurant order details as healthy.
+
+### Delivery lifecycle HTTP 500
+
+An attempt to create another full delivery failed on the rider `/status` request for `AT_RESTAURANT` with HTTP 500, leaving order `7166ba95-a3cc-4475-81f8-f745294fba35` at `READY_FOR_PICKUP`. Do not create more orders until the service-side failure and this fixture's state are checked. This failure is separate from review submission.
+
+The source path validates the active assignment, records `AT_RESTAURANT`, and writes an outbox event, but no server-side exception details were available from that run, so the exact failure remains unconfirmed. `CompletedDeliveryFixture.confirmStatus` now includes the HTTP response body in a failed assertion, and `OrderExecutionService` now logs unexpected status-transition exceptions with driver, order, and status context. These are diagnostic changes, not a confirmed fix; they have not been deployed or exercised against a new order. Check the existing incomplete order before placing another one.
+
+### Scope and persistent test data
+
+The successful customer review submission for order `5d82315a-1084-4dbd-ba6c-da302b4fb7c1` created immutable restaurant, delivery-partner, and dish reviews. The later participant run added immutable restaurant-authored and rider-authored reviews for that order. The customer history and public restaurant feed checks are read-only. Live negative POST cases remain intentionally unprobed because a validation defect could create irreversible invalid review rows; the backend authorization tests cover those denials.
+
+Overall status remains **not production-ready** until the backend fix is deployed and the live earnings request passes, and the rider `AT_RESTAURANT` 500 is understood and retested safely. Post-delivery support scenarios above are not part of this review validation and remain unverified.

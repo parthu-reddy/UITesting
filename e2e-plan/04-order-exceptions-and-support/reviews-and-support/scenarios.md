@@ -2,18 +2,17 @@
 
 Prerequisite: at least one completed order in the customer's history. Uses: `RateOrderModalPage`, `CustomerReviewsPage`, `PostDeliverySupportModalPage`, `AdminSupportTicketsPage`.
 
-## Batch 1 — Customer submits review
+## Batch 1 — Participants review order-related targets
 
 | ID | Description | Action | Expected result |
 |---|---|---|---|
-| REVIEW-01 | Rate Order button visible on completed order | Customer opens a completed order in history. | "Rate Order" / "Leave a Review" button visible. |
-| REVIEW-02 | Review modal opens | Tap "Rate Order". | `RateOrderModalPage` opens with star rating for food and delivery. |
-| REVIEW-03 | Star rating for food | Tap 4 stars on "Food" rating. | 4 stars highlighted. |
-| REVIEW-04 | Star rating for delivery | Tap 5 stars on "Delivery" rating. | 5 stars highlighted. |
-| REVIEW-05 | Text review field | Type "Great food, fast delivery!" in the text field. | Text appears in the field. |
-| REVIEW-06 | Submit review | Tap "Submit". | Success toast/message shown; modal closes. |
-| REVIEW-07 | Submit without rating blocked | Open review modal → tap Submit without selecting any stars. | Validation prevents submission; error shown asking for rating. |
-| REVIEW-08 | Rate Order button hidden after review | After submitting a review. | "Rate Order" button is no longer visible for that order (already reviewed). |
+| REVIEW-01 | Customer sees eligible targets | Customer opens a delivered order's review action. | The shared review dialog lists only that order's restaurant, assigned delivery partner, and purchased dishes. |
+| REVIEW-02 | Customer submits ratings | Rate one or more targets and optionally comment on each rated target. | Only rated targets are submitted; success is shown. |
+| REVIEW-03 | Customer review is immutable | Reopen the same order's review action. | Saved ratings/comments are visible without rating controls, text fields, or submit action. |
+| REVIEW-04 | Restaurant reviews participants | Restaurant opens a delivered order and its review action. | Only Customer and Delivery partner targets are available; submit and reopen as read-only. |
+| REVIEW-05 | Delivery partner reviews participants | Assigned rider opens the delivered order and its review action. | Only Customer and Restaurant targets are available; submit and reopen as read-only. |
+| REVIEW-06 | Empty submission blocked | Open an eligible review dialog without selecting stars. | Submit stays disabled; a review cannot be saved without a rating. |
+| REVIEW-07 | Ineligible target rejected | Attempt self-review, review of an unrelated dish, a target outside the actor's role matrix, or an order the actor did not participate in. | Backend rejects the request; no review is created. Covered by service/controller tests; not posted to the live immutable review endpoint. |
 
 ## Batch 2 — Restaurant sees review
 
@@ -49,4 +48,4 @@ Prerequisite: at least one completed order in the customer's history. Uses: `Rat
 
 | ID | Description | Action | Expected result |
 |---|---|---|---|
-| REVIEW-13 | My Reviews resolves | Customer opens Account Settings → My Reviews. | Implemented and active: at least one review article or the defined empty state renders. Live deployment currently fails because `/api/v1/reviews/me` returns HTTP 403; see `PENDING.md`. |
+| REVIEW-13 | My Reviews resolves | Customer opens Account Settings → My Reviews. | At least one review article or the defined empty state renders. Focused deployed check passed on 2026-09-29; older HTTP 403 is historical. |

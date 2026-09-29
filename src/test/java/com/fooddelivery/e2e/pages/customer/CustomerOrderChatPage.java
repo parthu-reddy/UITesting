@@ -37,6 +37,10 @@ public class CustomerOrderChatPage {
         return page.getByPlaceholder("Type a message...");
     }
 
+    public Locator sendButton() {
+        return page.locator("form:has(textarea[placeholder='Type a message...']) button[type='submit']");
+    }
+
     public void closeChat() {
         Locator accessibleClose = page.getByRole(AriaRole.BUTTON,
                 new Page.GetByRoleOptions().setName("Close chat").setExact(true));
@@ -51,7 +55,7 @@ public class CustomerOrderChatPage {
         Locator composer = composer();
         assertThat(composer).isEnabled();
         composer.fill(text);
-        page.locator("form:has(textarea[placeholder='Type a message...']) button[type='submit']").click();
+        sendButton().click();
         assertThat(page.getByText(text, new Page.GetByTextOptions().setExact(true))).isVisible();
     }
 

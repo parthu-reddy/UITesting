@@ -53,6 +53,18 @@ public final class CompletedDeliveryFixture {
     public static Result completeOrder(Page customerPage, Page restaurantPage, Page riderPage,
                                        String customerPhone, String restaurantPhone, String riderPhone,
                                        Consumer<Result> afterRestaurantAccept) {
+        return completeOrder(customerPage, restaurantPage, riderPage,
+                customerPhone, restaurantPhone, riderPhone, afterRestaurantAccept, ignored -> { });
+    }
+
+    /**
+     * Completes an order while allowing a UI assertion after restaurant acceptance and again
+     * after the rider has accepted dispatch and the active job is visible.
+     */
+    public static Result completeOrder(Page customerPage, Page restaurantPage, Page riderPage,
+                                       String customerPhone, String restaurantPhone, String riderPhone,
+                                       Consumer<Result> afterRestaurantAccept,
+                                       Consumer<Result> afterRiderAccept) {
         customerPage.navigate(TestConfig.APP_URL);
         new LoginPage(customerPage).loginAs("Order Food", customerPhone);
         new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();
@@ -64,14 +76,15 @@ public final class CompletedDeliveryFixture {
 
         try (SeededRiderDuty ignored = SeededRiderDuty.ensureOnline(riderPage, riderPhone)) {
             return completeWithOnlineRider(customerPage, restaurantPage, riderPage,
-                    customerPhone, restaurantPhone, restaurant, afterRestaurantAccept);
+                    customerPhone, restaurantPhone, restaurant, afterRestaurantAccept, afterRiderAccept);
         }
     }
 
     private static Result completeWithOnlineRider(Page customerPage, Page restaurantPage, Page riderPage,
                                                    String customerPhone, String restaurantPhone,
                                                    RestaurantDashboardPage restaurant,
-                                                   Consumer<Result> afterRestaurantAccept) {
+                                                   Consumer<Result> afterRestaurantAccept,
+                                                   Consumer<Result> afterRiderAccept) {
 
         int brandNumber = Integer.parseInt(restaurantPhone.substring(7));
         String selectedOutlet = new NearbyOutletPage(customerPage)
@@ -118,6 +131,7 @@ public final class CompletedDeliveryFixture {
                 new Page.GetByTextOptions().setExact(true))).isVisible();
         dispatch.acceptDispatch(orderId);
         waitForActiveOrder(riderPage, orderId);
+        afterRiderAccept.accept(result);
 
         DeliveryActiveJobPage activeJob = new DeliveryActiveJobPage(riderPage);
         String pickupOtp = actions.getPickupOtp(result.shortOrderId());
@@ -163,8 +177,15 @@ public final class CompletedDeliveryFixture {
                         && candidate.request().postData() != null
                         && candidate.request().postData().contains("\"" + status + "\""),
                 new Page.WaitForResponseOptions().setTimeout(60000), action);
+        String responseBody;
+        try {
+            responseBody = response.text();
+        } catch (RuntimeException unreadableBody) {
+            responseBody = "<response body unavailable: " + unreadableBody.getMessage() + ">";
+        }
         Assertions.assertThat(response.ok())
-                .as("%s status confirmation returns HTTP %s", status, response.status())
+                .as("%s status confirmation returns HTTP %s; response: %s",
+                        status, response.status(), responseBody)
                 .isTrue();
     }
 

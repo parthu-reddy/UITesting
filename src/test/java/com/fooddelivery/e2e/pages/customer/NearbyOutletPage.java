@@ -13,8 +13,7 @@ public class NearbyOutletPage {
     }
 
     public String openBrandAndSelectNearby(String brandName) {
-        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(Pattern.compile(brandName + "\\b"))).first().click();
-        return selectNearbyOutlet(brandName);
+        return openBrandCardAndSelectNearby(brandName);
     }
 
     /** Opens a brand card from the post-reload restaurant feed, then selects its nearest outlet. */
