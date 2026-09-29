@@ -1,9 +1,9 @@
 # users-categories-and-moderation
 
-Status: first UI-only batch implemented; see scenarios and validation notes.
+Status: read-only E2E checks implemented and compile-verified; live Dev execution is pending a resolvable deployed URL.
 
-Scope: User management, categories, campaigns and review moderation.
+Scope: User management, categories, and read-only review investigation. The admin portal has no campaigns screen.
 
-When starting this folder, follow the workflow in the [main plan](../../README.md). Record source/page-object references, prerequisites, scenario IDs, implementation links and validation results here. Add `scenarios.md` only at that point.
+Current coverage: seeded user phone lookup and details, role filtering, user pagination, cancelable suspension confirmation, category empty/list states, invalid category validation, edit-form opening without saving, review entity/author lookup, star ratings, and the read-only policy.
 
 See [validation and pending work](PENDING.md).

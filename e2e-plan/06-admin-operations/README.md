@@ -1,5 +1,7 @@
 # 06-admin-operations
 
+Status: all four functionality folders source-audited; read-only E2E coverage is implemented and compile-verified. Deployed browser execution is pending confirmation of the authoritative Oracle tunnel hostname because the rule-file hostname currently fails DNS.
+
 Validate administration after confirming a usable existing admin account.
 
 Work through one functionality folder at a time:

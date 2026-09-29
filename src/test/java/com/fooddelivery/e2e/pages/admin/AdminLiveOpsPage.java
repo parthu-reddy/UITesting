@@ -32,6 +32,19 @@ public class AdminLiveOpsPage {
         return orders().count();
     }
 
+    public void waitForOrdersLoaded() {
+        orders().first().or(page.getByText("No active orders right now.",
+                        new Page.GetByTextOptions().setExact(true))).first()
+                .waitFor(new com.microsoft.playwright.Locator.WaitForOptions()
+                        .setState(com.microsoft.playwright.options.WaitForSelectorState.VISIBLE)
+                        .setTimeout(30000));
+    }
+
+    public boolean isEmptyStateVisible() {
+        return page.getByText("No active orders right now.",
+                new Page.GetByTextOptions().setExact(true)).isVisible();
+    }
+
     public void selectOrder(int index) {
         orders().nth(index).click();
         page.waitForTimeout(500);
@@ -46,6 +59,17 @@ public class AdminLiveOpsPage {
     public boolean isOrderSelected() {
         return page.getByRole(com.microsoft.playwright.options.AriaRole.HEADING,
                 new Page.GetByRoleOptions().setName("Refund Actions").setExact(true)).isVisible();
+    }
+
+    public String getAvailableDriverHeading() {
+        return page.getByRole(com.microsoft.playwright.options.AriaRole.HEADING,
+                new Page.GetByRoleOptions().setName(java.util.regex.Pattern.compile("^Available Drivers \\(\\d+\\)$")))
+                .innerText().trim();
+    }
+
+    public boolean isNoAvailableDriverMessageVisible() {
+        return page.getByText("No available drivers nearby.",
+                new Page.GetByTextOptions().setExact(true)).isVisible();
     }
 
     public void refresh() {
@@ -70,7 +94,19 @@ public class AdminLiveOpsPage {
     }
 
     public String getPageInfo() {
-        return page.locator("text=Page").first().innerText().trim();
+        return page.getByText(java.util.regex.Pattern.compile("^Page \\d+ of \\d+$")).first().innerText().trim();
+    }
+
+    public boolean canGoNextPage() {
+        com.microsoft.playwright.Locator next = page.getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
+                new Page.GetByRoleOptions().setName("Next").setExact(true));
+        return next.count() > 0 && next.isEnabled();
+    }
+
+    public boolean canGoPreviousPage() {
+        com.microsoft.playwright.Locator previous = page.getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
+                new Page.GetByRoleOptions().setName("Prev").setExact(true));
+        return previous.count() > 0 && previous.isEnabled();
     }
 
     // ── Driver assignment ────────────────────────────────────────────────

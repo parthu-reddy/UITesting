@@ -19,7 +19,7 @@ Uses: `ChatWidgetPage`, `CustomerOrderChatPage`, `RestaurantChatPage`, `CallOver
 
 | ID | Description | Action | Expected result |
 |---|---|---|---|
-| CHAT-08 | Chat with rider after dispatch | After rider accepts dispatch, customer opens the order-scoped chat launcher and rider opens the active-job launcher. | Both participants join the same authenticated order session. |
+| CHAT-08 | Chat with rider after dispatch | After rider accepts dispatch, wait until the customer's live order tracker shows the assigned rider; then customer and rider open their order-scoped chat launchers. | Both participants join the same authenticated order session after the order participant list includes the rider. |
 | CHAT-09 | Customer sends message to rider | Customer sends a unique rider-directed message. | Message appears in customer chat. |
 | CHAT-10 | Rider receives message | Keep the rider chat open while the customer sends. | Message appears in rider chat without a page reload. |
 | CHAT-11 | Rider replies to customer | Rider sends a unique reply. | Customer sees the reply in real time without a page reload. |
@@ -51,7 +51,7 @@ Uses: `ChatWidgetPage`, `CustomerOrderChatPage`, `RestaurantChatPage`, `CallOver
 | CHAT-REFUND-01 | Open refund quote form | Complete a test-created order and use “Something wrong with this order?” on its delivered summary. | The refund quote modal opens for that exact order and loads its items. |
 | CHAT-REFUND-02 | Item, reason, and chat connection are required | Select an item and leave the reason blank, then provide a reason while the chat WebSocket is disconnected. | “Request Quote” stays disabled until the form is valid and chat reconnects; it then enables. |
 | CHAT-REFUND-03 | Submit a refund quote request | Submit a reasoned quote request for the test-created order. | The accepted `REFUND_QUOTE_REQUEST` appears in chat as “Requesting quote...”; no refund decision or payout is made. |
-| CHAT-REFUND-04 | Missing reason blocked | Leave the reason blank after selecting an item. | The request stays disabled and no quote event is sent. |
+| CHAT-REFUND-04 | Missing reason blocked on connected chat | Leave the reason blank after selecting an item while chat is connected. | The request stays disabled and no quote message appears. |
 
 ## Batch 6 — Map Search and Place Autocomplete (`MapTrackingPage`)
 

@@ -1,9 +1,9 @@
 # ledger-payouts-and-order-money
 
-Status: first UI-only batch implemented; see scenarios and validation notes.
+Status: read-only E2E checks implemented and compile-verified; live Dev execution is pending a resolvable deployed URL.
 
 Scope: Ledger, payouts and order-level money operations.
 
-When starting this folder, follow the workflow in the [main plan](../../README.md). Record source/page-object references, prerequisites, scenario IDs, implementation links and validation results here. Add `scenarios.md` only at that point.
+Current coverage: ledger filters, validation, data rendering, pagination, payout history search, pending balance display, and Money Operations tab state. Financial mutations remain fixture-gated.
 
 See [validation and pending work](PENDING.md).

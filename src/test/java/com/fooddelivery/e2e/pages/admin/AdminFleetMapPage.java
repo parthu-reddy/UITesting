@@ -40,6 +40,10 @@ public class AdminFleetMapPage {
         return riderMarkers().count();
     }
 
+    public java.util.List<com.microsoft.playwright.Locator> getRiderMarkers() {
+        return riderMarkers().all();
+    }
+
     // ── Driver selection ─────────────────────────────────────────────────
 
     /** A click opens the marker's popup ("Rider: <name>, Status: ...") and copies the rider id. */

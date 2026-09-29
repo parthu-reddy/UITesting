@@ -97,7 +97,9 @@ This run added one delivered development order (`fb775a6b`) and three immutable 
 
 Remaining review E2E coverage after deployment: restaurant review submission and read-only reopening, delivery-partner review submission and read-only reopening, and explicit rejection of cross-order, unrelated-target, self-review, and role-disallowed submissions. Post-delivery support remains outside these review checks.
 
-## 2026-09-29 — deployed participant flows passed; earnings and delivery blockers remain
+## 2026-09-29 earlier run — earnings and delivery blockers not yet revalidated
+
+This was the status before the later same-day full delivery and review checks recorded below. The earnings HTTP 500 and `AT_RESTAURANT` failure were not reproduced by that later delivery; the current rider-review blocker is the off-duty history UI guard described in the latest section.
 
 The previous route blocker is resolved in the deployed UI. Focused live checks against `https://gulf-strike-dark-extras.trycloudflare.com/` show:
 
@@ -114,20 +116,58 @@ Backend verification:
 - FoodDeliveryAppUI: review modal and star-rating unit tests **16 passed**; `npm run typecheck` passed.
 - UITesting E2E sources compile with the new strict earnings-response assertion and status-response diagnostics.
 
-### Production blocker: restaurant order earnings returns HTTP 500
+### Historical restaurant earnings HTTP 500 — later live request returned 2xx
 
 Opening restaurant order details for order `5d82315a-1084-4dbd-ba6c-da302b4fb7c1` repeatedly returned HTTP 500 from `/api/v1/money/restaurant/{outletId}/orders/{orderId}`. The UI silently displayed ₹0.00 for the breakdown. Source inspection found that the controller used the normal `findById` lookup and then iterated lazy `orderItems`, while Open Session in View is off; unlike the other order queries used outside a transaction, this lookup did not fetch `orderItems`.
 
-The CustomerApplication source now uses a dedicated `@EntityGraph(orderItems)` query, with a repository test that clears the persistence context before checking the returned collection. The E2E now fails if the endpoint does not return a 2xx response instead of allowing the zero-value fallback to look successful. These changes have **not** been deployed or verified live. Deploy the CustomerApplication fix, then rerun the existing-order `ReviewFlowTest` before treating restaurant order details as healthy.
+The CustomerApplication source now uses a dedicated `@EntityGraph(orderItems)` query, with a repository test that clears the persistence context before checking the returned collection. The E2E now fails if the endpoint does not return a 2xx response instead of allowing the zero-value fallback to look successful. The later 2026-09-29 full review flow received 2xx from the earnings request, so this earlier 500 is not currently reproduced.
 
-### Delivery lifecycle HTTP 500
+### Historical delivery lifecycle HTTP 500 — not reproduced by the later full delivery
 
-An attempt to create another full delivery failed on the rider `/status` request for `AT_RESTAURANT` with HTTP 500, leaving order `7166ba95-a3cc-4475-81f8-f745294fba35` at `READY_FOR_PICKUP`. Do not create more orders until the service-side failure and this fixture's state are checked. This failure is separate from review submission.
+An attempt to create another full delivery failed on the rider `/status` request for `AT_RESTAURANT` with HTTP 500, leaving order `7166ba95-a3cc-4475-81f8-f745294fba35` at `READY_FOR_PICKUP`. A later same-day order completed delivery, so this status failure is not currently reproduced. This failure is separate from review submission.
 
-The source path validates the active assignment, records `AT_RESTAURANT`, and writes an outbox event, but no server-side exception details were available from that run, so the exact failure remains unconfirmed. `CompletedDeliveryFixture.confirmStatus` now includes the HTTP response body in a failed assertion, and `OrderExecutionService` now logs unexpected status-transition exceptions with driver, order, and status context. These are diagnostic changes, not a confirmed fix; they have not been deployed or exercised against a new order. Check the existing incomplete order before placing another one.
+The source path validates the active assignment, records `AT_RESTAURANT`, and writes an outbox event, but no server-side exception details were available from that run, so the exact cause remains unconfirmed. `CompletedDeliveryFixture.confirmStatus` now includes the HTTP response body in a failed assertion, and `OrderExecutionService` now logs unexpected status-transition exceptions with driver, order, and status context. These diagnostics did not reproduce an error in the later delivery.
 
 ### Scope and persistent test data
 
 The successful customer review submission for order `5d82315a-1084-4dbd-ba6c-da302b4fb7c1` created immutable restaurant, delivery-partner, and dish reviews. The later participant run added immutable restaurant-authored and rider-authored reviews for that order. The customer history and public restaurant feed checks are read-only. Live negative POST cases remain intentionally unprobed because a validation defect could create irreversible invalid review rows; the backend authorization tests cover those denials.
 
-Overall status remains **not production-ready** until the backend fix is deployed and the live earnings request passes, and the rider `AT_RESTAURANT` 500 is understood and retested safely. Post-delivery support scenarios above are not part of this review validation and remain unverified.
+At the time of this earlier run, status was **not production-ready** pending deployment and retest of the earnings fix. That blocker was cleared by the later live 2xx response recorded below. Post-delivery support scenarios above are not part of this review validation and remain unverified.
+
+## 2026-09-29 — latest deployed review and history validation
+
+Focused checks against the currently deployed development environment (`https://gulf-strike-dark-extras.trycloudflare.com/`) show:
+
+- `CustomerSettingsUiTest#myReviewsTabShowsReviewsOrDefinedEmptyState`: **1 passed, 0 failures/errors/skips** for seeded customer `8000000005`.
+- `CustomerSettingsUiTest#deliveredOrderReviewRequiresAtLeastOneRating`: **1 passed, 0 failures/errors/skips**. This uses an isolated intercepted delivered-order fixture, renders restaurant/driver/dish targets, confirms submission stays disabled before a rating, and blocks the review POST. It creates no review row.
+- `RestaurantNavigationUiTest#restaurantReviewsShowPublicFeedbackAndAggregate`: **1 passed, 0 failures/errors/skips** for Brand 1 Outlet 9 with the comment `E2E automated review verification.` This is the populated list/aggregate case; the earlier empty-state case also passed.
+- `RiderReviewHistoryApiTest#riderCanReadCompletedHistoryWhileOffline`: **1 passed, 0 failures/errors/skips** for delivered order `cf6a8d4d-bfe6-4a97-b402-8bd3f038d45f`. The seeded rider remained Offline; an authenticated GET returned HTTP 2xx and the response contained the order.
+- `ReviewFlowTest#submitReview`: **1 test, 0 assertion failures, 1 error, 0 skipped** against the deployed UI. Delivery, customer review, restaurant order details/earnings, and the restaurant review step completed. It then failed waiting for the delivered order in the rider's Completed Deliveries list. The screenshot showed the rider Offline and an empty history list.
+
+### Confirmed UI defect; backend history read is healthy
+
+The deployed frontend's `useDeliveryOrders` history effect returned early when `isOnline` was false. This made the rider's read-only completed-delivery history unavailable off duty, even though the UI allowed opening that panel. The direct authenticated history E2E above confirms that the backend returned this exact order while the rider was Offline, so no backend history-query fix is indicated.
+
+The UI source now fetches the rider's read-only history independently of duty state. `useDeliveryOrders.reping.test.ts` adds an offline-history regression assertion; the focused Vitest file passed **3 tests**, and `npm run typecheck` passed. `ReviewFlowTest` now records the history endpoint response and includes a guarded opt-in (`-Dreview.submit.rider.existing=true`) to finish only the rider's still-pending reviews on an explicitly supplied order. `-Dreview.require-rider-offline=true` makes the follow-up prove off-duty access without toggling rider duty. Java E2E `test-compile` passed.
+
+**Pending deployment:** the source change is not in the deployed UI yet. After deploying it, reuse the known delivered order rather than creating another order:
+
+```text
+-Dtest=ReviewFlowTest#submitReview
+-Dreview.order.id=cf6a8d4d-bfe6-4a97-b402-8bd3f038d45f
+-Dreview.outlet.name=Brand 1 Outlet 9
+-Dreview.submit.rider.existing=true
+-Dreview.require-rider-offline=true
+-Drestaurant.phone=9000000001
+-Drider.phone=7000000001
+```
+
+That flow is expected to create at most the rider's two immutable reviews (Customer and Restaurant), then reopen them read-only. The current order already has the customer reviews and restaurant-authored participant reviews from the earlier run. Do not rerun the full create-order flow for this check.
+
+### Backend status and separate stream observation
+
+No backend change is proposed for rider history: the direct API check passed. The restaurant order earnings request for the new order also returned 2xx during the latest full flow, so the earlier 500 is no longer reproduced on this deployment. The existing local backend suite counts above were run earlier; no backend files were changed in this validation.
+
+The browser logged one `403` for `/api/delivery/drivers/{driverId}/orders/{orderId}/restaurant-status-stream` during the same delivery, but pickup and delivery still completed. The endpoint intentionally denies streams when `OrderAssignment.authorises(driverId)` is false, including after release. The exact timing/state behind this single 403 is not established. If investigating that independent issue, first add a response-level check during an active assignment and correlate it with the assignment row/state; only propose a backend change if that proves a live-assignment request is rejected. Preserve the existing cross-rider authorization check.
+
+Live negative review POST cases (self-review, unrelated target, wrong role, nonparticipant, duplicate) remain unprobed to avoid creating invalid or irreversible data. ReviewsService and CustomerApplication tests cover these denial cases. Post-delivery support scenarios remain outside this review validation and unverified.

@@ -3,13 +3,19 @@ package com.fooddelivery.e2e.tests.features.admin;
 import com.fooddelivery.e2e.base.TestBase;
 import com.fooddelivery.e2e.pages.admin.*;
 import org.junit.jupiter.api.*;
+import com.microsoft.playwright.Locator;
+import com.microsoft.playwright.Response;
+import com.microsoft.playwright.options.AriaRole;
+
+import java.util.List;
+import java.util.regex.Pattern;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
- * Tests for Admin Ledger advanced filters, pagination, statement panel,
- * and extended Payout actions (reject, force-create, draft).
- * Covers: LEDGER-ADV-01..14, PAYOUT-08..12
+ * Read-only checks for the Admin Ledger and payout navigation. Mutating payout actions require
+ * a disposable financial fixture and are deliberately not exercised against shared Dev data.
  */
 @Tag("admin-ledger")
 public class AdminLedgerAdvancedTest extends TestBase {
@@ -31,6 +37,10 @@ public class AdminLedgerAdvancedTest extends TestBase {
         portal.openLedgerTab();
         AdminLedgerPage ledger = new AdminLedgerPage(adminPage);
         assertThat(ledger.isLedgerVisible()).isTrue();
+        com.microsoft.playwright.assertions.PlaywrightAssertions
+                .assertThat(adminPage.getByPlaceholder("Transaction ID")).isVisible();
+        com.microsoft.playwright.assertions.PlaywrightAssertions
+                .assertThat(adminPage.getByPlaceholder("Owner ID")).isVisible();
     }
 
     @Test
@@ -64,6 +74,91 @@ public class AdminLedgerAdvancedTest extends TestBase {
         AdminLedgerPage ledger = new AdminLedgerPage(adminPage);
         ledger.selectDirection("CREDIT");
         assertThat(ledger.applyFilter("direction=CREDIT")).isEqualTo(200);
+        ledger.waitForResultsLoaded();
+    }
+
+    @Test
+    @DisplayName("LEDGER-ADV-05: Category filter uses a supported category and returns matching rows")
+    void filterByCategory() {
+        portal.openLedgerTab();
+        AdminLedgerPage ledger = new AdminLedgerPage(adminPage);
+        ledger.selectCategory("DELIVERY_FEE");
+        assertThat(ledger.applyFilter("category=DELIVERY_FEE")).isEqualTo(200);
+        ledger.waitForResultsLoaded();
+
+        List<Locator> rows = ledger.getTransactionRows();
+        if (rows.isEmpty()) {
+            assertThat(adminPage.getByText("No ledger transactions found.",
+                    new com.microsoft.playwright.Page.GetByTextOptions().setExact(true)).isVisible()).isTrue();
+            return;
+        }
+        for (Locator row : rows) {
+            com.microsoft.playwright.assertions.PlaywrightAssertions
+                    .assertThat(row.locator("td").nth(1)).containsText("DELIVERY FEE");
+        }
+    }
+
+    @Test
+    @DisplayName("LEDGER-ADV-03: Owner type without owner ID is rejected before a request is sent")
+    void ownerTypeRequiresOwnerId() {
+        AtomicInteger ledgerRequests = new AtomicInteger();
+        adminPage.onRequest(request -> {
+            if ("GET".equals(request.method())
+                    && request.url().contains("/api/v1/internal/admin/ledger/transactions")) {
+                ledgerRequests.incrementAndGet();
+            }
+        });
+
+        portal.openLedgerTab();
+        AdminLedgerPage ledger = new AdminLedgerPage(adminPage);
+        ledger.waitForResultsLoaded();
+        int requestsBeforeInvalidFilter = ledgerRequests.get();
+
+        ledger.selectOwnerType("RESTAURANT_PAYABLE");
+        adminPage.getByRole(AriaRole.BUTTON,
+                new com.microsoft.playwright.Page.GetByRoleOptions().setName("Apply Filters").setExact(true)).click();
+
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(
+                adminPage.getByText("Please enter an Owner ID when filtering by Owner Type",
+                        new com.microsoft.playwright.Page.GetByTextOptions().setExact(true))).isVisible();
+        assertThat(ledgerRequests.get()).isEqualTo(requestsBeforeInvalidFilter);
+    }
+
+    @Test
+    @DisplayName("LEDGER-ADV-10: Visible ledger rows have real amounts, dates and account values")
+    void ledgerRowsHaveCompleteFinancialValues() {
+        Response response = adminPage.waitForResponse(r ->
+                        r.url().contains("/api/v1/internal/admin/ledger/transactions")
+                                && "GET".equals(r.request().method()),
+                portal::openLedgerTab);
+        assertThat(response.status()).isEqualTo(200);
+        String payload = response.text();
+        assertThat(Pattern.compile("\"amount\"\\s*:\\s*null").matcher(payload).find())
+                .as("the API must not omit a ledger amount and let the UI render it as ₹0.00")
+                .isFalse();
+
+        AdminLedgerPage ledger = new AdminLedgerPage(adminPage);
+        ledger.waitForResultsLoaded();
+        List<Locator> rows = ledger.getTransactionRows();
+        if (rows.isEmpty()) {
+            assertThat(adminPage.getByText("No ledger transactions found.",
+                    new com.microsoft.playwright.Page.GetByTextOptions().setExact(true)).isVisible())
+                    .isTrue();
+            return;
+        }
+
+        for (Locator row : rows) {
+            List<Locator> cells = row.locator("td").all();
+            assertThat(cells).hasSize(5);
+            assertThat(cells.get(0).innerText().trim()).isNotBlank();
+            assertThat(cells.get(1).innerText().trim()).isNotBlank();
+            assertThat(cells.get(2).innerText().trim()).isNotBlank();
+            assertThat(cells.get(3).innerText().trim()).isNotBlank();
+            String displayedAmount = cells.get(4).innerText().trim();
+            assertThat(displayedAmount).matches("^₹[0-9,]+\\.[0-9]{2}$");
+            double amount = Double.parseDouble(displayedAmount.substring(1).replace(",", ""));
+            assertThat(amount).isGreaterThanOrEqualTo(0d);
+        }
     }
 
     @Test
@@ -99,17 +194,36 @@ public class AdminLedgerAdvancedTest extends TestBase {
     void ledgerPagination() {
         portal.openLedgerTab();
         AdminLedgerPage ledger = new AdminLedgerPage(adminPage);
+        ledger.waitForResultsLoaded();
         String initialPage = ledger.getPageInfo();
-        try {
-            ledger.nextPage();
-            adminPage.waitForTimeout(500);
-            String nextPageInfo = ledger.getPageInfo();
-            // Page should have changed
-            ledger.prevPage();
-            adminPage.waitForTimeout(500);
-        } catch (Exception e) {
-            System.out.println("[INFO] Pagination not available (likely only 1 page): " + e.getMessage());
+        assertThat(initialPage).matches("Page 1 of [1-9][0-9]*");
+        int totalPages = Integer.parseInt(initialPage.substring("Page 1 of ".length()));
+
+        if (totalPages == 1) {
+            assertThat(ledger.canGoPreviousPage()).isFalse();
+            assertThat(ledger.canGoNextPage()).isFalse();
+            return;
         }
+
+        Response next = adminPage.waitForResponse(r ->
+                        r.url().contains("/api/v1/internal/admin/ledger/transactions")
+                                && r.url().matches(".*[?&]page=1(?:&|$).*")
+                                && "GET".equals(r.request().method()),
+                ledger::nextPage);
+        assertThat(next.status()).isEqualTo(200);
+        adminPage.getByText(Pattern.compile("^Page 2 of [0-9]+$"))
+                .waitFor(new Locator.WaitForOptions().setTimeout(15000));
+        assertThat(ledger.getPageInfo()).startsWith("Page 2 of ");
+
+        Response previous = adminPage.waitForResponse(r ->
+                        r.url().contains("/api/v1/internal/admin/ledger/transactions")
+                                && r.url().matches(".*[?&]page=0(?:&|$).*")
+                                && "GET".equals(r.request().method()),
+                ledger::prevPage);
+        assertThat(previous.status()).isEqualTo(200);
+        adminPage.getByText(Pattern.compile("^Page 1 of [0-9]+$"))
+                .waitFor(new Locator.WaitForOptions().setTimeout(15000));
+        assertThat(ledger.getPageInfo()).startsWith("Page 1 of ");
     }
 
     // ── PAYOUT ADVANCED SCENARIOS ────────────────────────────────────────
@@ -120,5 +234,71 @@ public class AdminLedgerAdvancedTest extends TestBase {
         portal.openPayoutsTab(); // "Pending Payouts" in the admin sidebar
         AdminPayoutsPage payouts = new AdminPayoutsPage(adminPage);
         assertThat(payouts.isPayoutsVisible()).isTrue();
+    }
+
+    @Test
+    @DisplayName("PAYOUT-05/07: Pending queue has an explicit empty state or positive unsettled balances")
+    void pendingPayoutsHavePositiveBalances() {
+        Response response = adminPage.waitForResponse(r ->
+                        r.url().contains("/api/v1/internal/admin/payouts/pending")
+                                && "GET".equals(r.request().method()),
+                portal::openPayoutsTab);
+        assertThat(response.status()).isEqualTo(200);
+        adminPage.getByText("Loading pending payouts...",
+                        new com.microsoft.playwright.Page.GetByTextOptions().setExact(true))
+                .waitFor(new Locator.WaitForOptions()
+                        .setState(com.microsoft.playwright.options.WaitForSelectorState.HIDDEN)
+                        .setTimeout(30000));
+
+        Locator cards = adminPage.locator("div.cursor-pointer:has-text('Unsettled Balance')");
+        if (cards.count() == 0) {
+            assertThat(adminPage.getByRole(AriaRole.HEADING,
+                    new com.microsoft.playwright.Page.GetByRoleOptions().setName("All Caught Up!").setExact(true)).isVisible())
+                    .isTrue();
+            return;
+        }
+
+        for (Locator card : cards.all()) {
+            assertThat(card.getByText(Pattern.compile("^(RESTAURANT|DRIVER)$")).first().innerText().trim())
+                    .matches("RESTAURANT|DRIVER");
+            String displayedBalance = card.locator("div.text-4xl").innerText().trim();
+            assertThat(displayedBalance).matches("^₹[0-9,]+\\.[0-9]{2}$");
+            double amount = Double.parseDouble(displayedBalance.substring(1).replace(",", ""));
+            assertThat(amount).isPositive();
+        }
+    }
+
+    @Test
+    @DisplayName("PAYOUT-03: Empty payout search is disabled and an unknown payee returns an empty result")
+    void payoutHistoryRequiresPayeeAndShowsUnknownAsEmpty() {
+        portal.openPayoutsTab();
+        AdminPayoutsPage payouts = new AdminPayoutsPage(adminPage);
+        payouts.openHistory();
+
+        Locator search = adminPage.getByRole(AriaRole.BUTTON,
+                new com.microsoft.playwright.Page.GetByRoleOptions().setName("Search").setExact(true));
+        assertThat(search.isDisabled()).isTrue();
+        assertThat(adminPage.getByRole(AriaRole.HEADING,
+                new com.microsoft.playwright.Page.GetByRoleOptions().setName("Search Payouts").setExact(true)).isVisible())
+                .isTrue();
+
+        String unknownPayee = "00000000-0000-0000-0000-000000000000";
+        adminPage.getByPlaceholder("Enter UUID...").fill(unknownPayee);
+        assertThat(search.isEnabled()).isTrue();
+        Response response = adminPage.waitForResponse(r ->
+                        r.url().contains("/api/v1/internal/admin/payouts")
+                                && r.url().contains("payeeId=" + unknownPayee)
+                                && "GET".equals(r.request().method()),
+                search::click);
+        assertThat(response.status()).isEqualTo(200);
+        adminPage.getByText("Loading payout history...",
+                        new com.microsoft.playwright.Page.GetByTextOptions().setExact(true))
+                .waitFor(new Locator.WaitForOptions()
+                        .setState(com.microsoft.playwright.options.WaitForSelectorState.HIDDEN)
+                        .setTimeout(30000));
+        assertThat(adminPage.getByRole(AriaRole.HEADING,
+                new com.microsoft.playwright.Page.GetByRoleOptions().setName("Search Payouts").setExact(true)).isVisible())
+                .isTrue();
+        assertThat(adminPage.locator("table tbody tr").count()).isZero();
     }
 }

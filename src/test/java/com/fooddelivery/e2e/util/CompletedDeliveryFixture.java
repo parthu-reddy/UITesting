@@ -89,11 +89,14 @@ public final class CompletedDeliveryFixture {
                                                    Consumer<Result> afterRiderAccept,
                                                    SeededRiderDuty riderDuty) {
 
+        assertNoExistingRiderAssignment(riderPage);
+
         int brandNumber = Integer.parseInt(restaurantPhone.substring(7));
         String selectedOutlet = new NearbyOutletPage(customerPage)
                 .openBrandAndSelectNearby("Brand " + brandNumber);
         CustomerMenuViewPage menu = new CustomerMenuViewPage(customerPage);
         menu.addQuickPrepItemToCart();
+        assertNoActiveCustomerOrder(customerPage);
         // addQuickPrepItemToCart may move away from an empty nearby outlet. Use the outlet the
         // customer actually ordered from when processing the matching restaurant order.
         String outletName = menu.getSelectedOutletName();
@@ -166,6 +169,36 @@ public final class CompletedDeliveryFixture {
                 .waitFor(new Locator.WaitForOptions().setTimeout(90000));
 
         return result;
+    }
+
+    private static void assertNoExistingRiderAssignment(Page riderPage) {
+        Locator activeContract = riderPage.getByRole(AriaRole.HEADING,
+                new Page.GetByRoleOptions().setName("Active Contract").setExact(true));
+        if (activeContract.isVisible()) {
+            throw new IllegalStateException("Refusing to start another E2E order while the seeded rider has an active contract");
+        }
+        Locator dispatchOffer = riderPage.getByRole(AriaRole.ALERT)
+                .filter(new Locator.FilterOptions().setHasText("New Dispatch"));
+        if (dispatchOffer.count() > 0 && dispatchOffer.first().isVisible()) {
+            throw new IllegalStateException("Refusing to start another E2E order while the seeded rider has an unaccepted dispatch offer");
+        }
+    }
+
+    private static void assertNoActiveCustomerOrder(Page customerPage) {
+        Locator trackers = customerPage.locator("[data-testid='order-tracker']");
+        for (int index = 0; index < trackers.count(); index++) {
+            Locator tracker = trackers.nth(index);
+            if (!tracker.isVisible()) continue;
+            boolean delivered = tracker.getByRole(AriaRole.HEADING,
+                    new Locator.GetByRoleOptions().setName("Order delivered").setExact(true)).count() > 0;
+            boolean failed = tracker.getByRole(AriaRole.HEADING,
+                    new Locator.GetByRoleOptions().setName("This order was not completed").setExact(true)).count() > 0;
+            if (!delivered && !failed) {
+                String orderId = tracker.getAttribute("data-order-id");
+                throw new IllegalStateException("Refusing to place another E2E order while customer order "
+                        + orderId + " is still active");
+            }
+        }
     }
 
     private static boolean hasNewTracker(Page customerPage, Set<String> existingOrderIds) {

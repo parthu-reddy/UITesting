@@ -75,6 +75,21 @@ public class AdminLedgerPage {
                 .waitFor(new com.microsoft.playwright.Locator.WaitForOptions().setTimeout(10000));
     }
 
+    /** Wait until the table has either real rows or its explicit empty state. */
+    public void waitForResultsLoaded() {
+        com.microsoft.playwright.Locator realRows = rows();
+        com.microsoft.playwright.Locator emptyState = page.getByText(
+                "No ledger transactions found.", new Page.GetByTextOptions().setExact(true));
+        realRows.first().or(emptyState).first().waitFor(new com.microsoft.playwright.Locator.WaitForOptions()
+                .setState(com.microsoft.playwright.options.WaitForSelectorState.VISIBLE)
+                .setTimeout(30000));
+    }
+
+    /** Real rows only: loading and the empty state occupy a full-width cell. */
+    public java.util.List<com.microsoft.playwright.Locator> getTransactionRows() {
+        return rows().all();
+    }
+
     // ── Transaction list ─────────────────────────────────────────────────
 
     /** Real rows only: loading and "No ledger transactions found." are one full-width cell. */
@@ -112,6 +127,16 @@ public class AdminLedgerPage {
         if (button.count() == 0 || !button.isEnabled()) return;
         button.click();
         page.waitForTimeout(500);
+    }
+
+    public boolean canGoNextPage() {
+        com.microsoft.playwright.Locator button = page.locator("button:has(svg.lucide-chevron-right)").first();
+        return button.count() > 0 && button.isEnabled();
+    }
+
+    public boolean canGoPreviousPage() {
+        com.microsoft.playwright.Locator button = page.locator("button:has(svg.lucide-chevron-left)").first();
+        return button.count() > 0 && button.isEnabled();
     }
 
     public String getPageInfo() {

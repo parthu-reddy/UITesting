@@ -78,11 +78,20 @@ public class AdminReviewsPage {
         return page.locator("article").count();
     }
 
+    public java.util.List<com.microsoft.playwright.Locator> getReviewCards() {
+        return page.locator("article").all();
+    }
+
     public boolean hasStarRatings() {
         return page.locator("article [role='img']").first().isVisible();
     }
 
     public boolean isEmptyState() {
         return page.getByText("No reviews found", new Page.GetByTextOptions().setExact(true)).isVisible();
+    }
+
+    public boolean isSearchDisabled() {
+        return page.getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
+                new Page.GetByRoleOptions().setName("Search").setExact(true)).isDisabled();
     }
 }

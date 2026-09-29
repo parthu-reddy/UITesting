@@ -1,7 +1,9 @@
 # live-operations-fleet-and-interventions
 
-Status: not started; scenarios intentionally deferred.
+Status: read-only E2E checks implemented and compile-verified; live Dev execution is pending a resolvable deployed URL.
 
 Scope: Live operations, fleet map and manual interventions.
 
-When starting this folder, follow the workflow in the [main plan](../../README.md). Record source/page-object references, prerequisites, scenario IDs, implementation links and validation results here. Add `scenarios.md` only at that point.
+Current coverage: active-order empty/list states, pagination, refresh, selected-order driver panel, zero-refund validation, fleet map markers when a rider fixture exists, manual intervention queue and safe force-assignment cancellation, and Money Operations tabs.
+
+See [validation and pending work](PENDING.md).

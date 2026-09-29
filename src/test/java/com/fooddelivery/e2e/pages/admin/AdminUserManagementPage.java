@@ -53,6 +53,19 @@ public class AdminUserManagementPage {
         return users().count();
     }
 
+    public java.util.List<Locator> getUserCards() {
+        return users().all();
+    }
+
+    public String getUserCardText(int index) {
+        return users().nth(index).innerText().trim();
+    }
+
+    public boolean isNoUsersStateVisible() {
+        return page.getByRole(com.microsoft.playwright.options.AriaRole.HEADING,
+                new Page.GetByRoleOptions().setName("No Users Found").setExact(true)).isVisible();
+    }
+
     public void selectUser(int index) {
         users().nth(index).click();
         page.waitForTimeout(500);
@@ -77,6 +90,10 @@ public class AdminUserManagementPage {
 
     public String getUserPhone() {
         return field("Phone");
+    }
+
+    public String getUserStatus() {
+        return field("Status");
     }
 
     /** The first role chip under the "Roles" heading. */
@@ -105,7 +122,28 @@ public class AdminUserManagementPage {
     // ── User active orders ───────────────────────────────────────────────
 
     public int getUserActiveOrderCount() {
-        return page.locator("[data-testid='user-active-order'], .user-order-card").count();
+        return page.locator("h3:text-matches('^Active Orders \\\\(\\\\d+\\\\)$') + div.space-y-3 > div").count();
+    }
+
+    public boolean hasNoActiveOrders() {
+        return page.getByText("No active orders for this user.",
+                new Page.GetByTextOptions().setExact(true)).isVisible();
+    }
+
+    public String getPageInfo() {
+        return page.getByText(java.util.regex.Pattern.compile("^Page \\d+ of \\d+$")).innerText().trim();
+    }
+
+    public boolean canGoNextPage() {
+        com.microsoft.playwright.Locator next = page.getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
+                new Page.GetByRoleOptions().setName("Next").setExact(true));
+        return next.count() > 0 && next.isEnabled();
+    }
+
+    public boolean canGoPreviousPage() {
+        com.microsoft.playwright.Locator previous = page.getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
+                new Page.GetByRoleOptions().setName("Prev").setExact(true));
+        return previous.count() > 0 && previous.isEnabled();
     }
 
     // ── Pagination ───────────────────────────────────────────────────────

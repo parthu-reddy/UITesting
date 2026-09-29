@@ -10,15 +10,15 @@ Prerequisite: at least one completed order in the customer's history. Uses: `Rat
 | REVIEW-02 | Customer submits ratings | Rate one or more targets and optionally comment on each rated target. | Only rated targets are submitted; success is shown. |
 | REVIEW-03 | Customer review is immutable | Reopen the same order's review action. | Saved ratings/comments are visible without rating controls, text fields, or submit action. |
 | REVIEW-04 | Restaurant reviews participants | Restaurant opens a delivered order and its review action. | Only Customer and Delivery partner targets are available; submit and reopen as read-only. |
-| REVIEW-05 | Delivery partner reviews participants | Assigned rider opens the delivered order and its review action. | Only Customer and Restaurant targets are available; submit and reopen as read-only. |
-| REVIEW-06 | Empty submission blocked | Open an eligible review dialog without selecting stars. | Submit stays disabled; a review cannot be saved without a rating. |
+| REVIEW-05 | Delivery partner reviews participants | Assigned rider opens a delivered order from Completed Deliveries while Off duty, then opens its review action. | Rider history loads while Offline; only Customer and Restaurant targets are available; submit once and reopen as read-only. Live rider UI validation is pending deployment of the off-duty history fix. |
+| REVIEW-06 | Empty submission blocked | Open an eligible review dialog without selecting stars. | Submit stays disabled; a review cannot be saved without a rating. The browser E2E uses an isolated intercepted order fixture and blocks the write request. |
 | REVIEW-07 | Ineligible target rejected | Attempt self-review, review of an unrelated dish, a target outside the actor's role matrix, or an order the actor did not participate in. | Backend rejects the request; no review is created. Covered by service/controller tests; not posted to the live immutable review endpoint. |
 
 ## Batch 2 — Restaurant sees review
 
 | ID | Description | Action | Expected result |
 |---|---|---|---|
-| REVIEW-09 | Restaurant reviews tab | Login as restaurant → open Reviews tab. | Reviews list renders; most recent review visible with star count and text. |
+| REVIEW-09 | Restaurant reviews tab | Login as restaurant → open Reviews tab. | Review list and aggregate requests succeed; public feedback and aggregate render, or the defined empty state renders when the outlet has no reviews. Populated Outlet 9 and empty Outlet 9 states were verified on 2026-09-29 in separate focused runs. |
 | REVIEW-10 | Review shows customer name or "Anonymous" | On the review entry. | Customer identifier is non-empty ("Customer" or name); not `null`. |
 | REVIEW-11 | Review timestamp | Each review entry shows a date/time. | Date is non-empty and in a readable format. |
 | REVIEW-12 | Multiple reviews visible | If more than one review exists. | List shows all reviews; pagination works if many reviews exist. |

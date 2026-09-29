@@ -1,5 +1,6 @@
 package com.fooddelivery.e2e.pages.admin;
 
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 
 /**
@@ -27,6 +28,18 @@ public class AdminSupportTicketsPage {
                 new Page.GetByRoleOptions().setName("Support Tickets").setExact(true)).isVisible();
     }
 
+    public String getStatusHeader() {
+        return page.getByRole(com.microsoft.playwright.options.AriaRole.HEADING,
+                new Page.GetByRoleOptions().setName(java.util.regex.Pattern.compile(
+                        "^(OPEN|IN REVIEW|RESOLVED|REJECTED) Tickets \\(\\d+\\)$")))
+                .innerText().trim();
+    }
+
+    public boolean isEmptyStateVisible() {
+        return page.getByText("No tickets found",
+                new Page.GetByTextOptions().setExact(true)).isVisible();
+    }
+
     // ── Tab navigation ───────────────────────────────────────────────────
 
     /** Tabs read OPEN, IN REVIEW, RESOLVED, REJECTED -- the status with its underscore replaced. */
@@ -51,6 +64,24 @@ public class AdminSupportTicketsPage {
         return tickets().count();
     }
 
+    public boolean hasPagination() {
+        return page.getByText(java.util.regex.Pattern.compile("^Page \\d+ of \\d+$")).count() > 0;
+    }
+
+    public String getPageInfo() {
+        return page.getByText(java.util.regex.Pattern.compile("^Page \\d+ of \\d+$")).innerText().trim();
+    }
+
+    public boolean canGoNextPage() {
+        com.microsoft.playwright.Locator next = button("Next");
+        return next.count() > 0 && next.isEnabled();
+    }
+
+    public boolean canGoPreviousPage() {
+        com.microsoft.playwright.Locator previous = button("Previous");
+        return previous.count() > 0 && previous.isEnabled();
+    }
+
     public void selectTicket(int index) {
         tickets().nth(index).click();
         page.waitForTimeout(500);
@@ -67,28 +98,21 @@ public class AdminSupportTicketsPage {
         page.getByPlaceholder("Add admin notes (required for rejection)").fill(notes);
     }
 
-    /**
-     * "Resolve Ticket" approves. Exact name: a has-text('Resolve') match finds the RESOLVED tab
-     * first. Approving asks nothing -- see the admin-refund finding in reviews-and-support/PENDING.md.
-     */
-    public void resolveTicket() {
-        button("Resolve Ticket").click();
-        page.waitForTimeout(2000);
-    }
-
-    /** "Reject Request" (enabled once notes exist), then the danger confirm "Reject request". */
-    public void rejectTicket() {
+    /** Opens a confirmation and leaves the final resolution uncommitted. */
+    public void openRejectConfirmation() {
         button("Reject Request").click();
-        page.getByRole(com.microsoft.playwright.options.AriaRole.DIALOG)
-                .getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
-                        new com.microsoft.playwright.Locator.GetByRoleOptions().setName("Reject request").setExact(true))
-                .click();
-        page.waitForTimeout(2000);
+        confirmationDialog().waitFor();
     }
 
-    public void resolveTicketWithNotes(String notes) {
-        fillResolutionNotes(notes);
-        resolveTicket();
+    public Locator confirmationDialog() {
+        return page.getByRole(com.microsoft.playwright.options.AriaRole.DIALOG);
+    }
+
+    public void cancelConfirmation() {
+        confirmationDialog().getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
+                new com.microsoft.playwright.Locator.GetByRoleOptions().setName("Cancel").setExact(true)).click();
+        confirmationDialog().waitFor(new com.microsoft.playwright.Locator.WaitForOptions()
+                .setState(com.microsoft.playwright.options.WaitForSelectorState.HIDDEN));
     }
 
     // ── Pagination (rendered only when there is more than one page) ─────

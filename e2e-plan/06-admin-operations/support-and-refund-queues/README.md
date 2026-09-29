@@ -1,9 +1,9 @@
 # support-and-refund-queues
 
-Status: first UI-only checks implemented; broader scenarios remain pending.
+Status: read-only E2E checks implemented and compile-verified; live Dev execution is pending a resolvable deployed URL and disposable tickets for mutation tests.
 
 Scope: Administrative support and refund workflows.
 
-When starting this folder, follow the workflow in the [main plan](../../README.md). Record source/page-object references, prerequisites, scenario IDs, implementation links and validation results here. Add `scenarios.md` only at that point.
+Current coverage: support/refund queue requests and empty states, support pagination, and cancelable approval/rejection confirmations. No ticket or refund is resolved by these tests.
 
 See [validation and pending items](PENDING.md).

@@ -29,13 +29,9 @@ public class RefundRequestTest extends TestBase {
     @DisplayName("CHAT-REFUND-01..04: Refund quote modal validates and sends a chat request")
     void requestRefundQuoteForDeliveredTestOrder() {
         ChatTelemetry telemetry = observeChatTraffic(customerPage);
-        CompletedDeliveryFixture.Result order = CompletedDeliveryFixture.completeOrder(
-                customerPage, restaurantPage, riderPage,
-                testCustomerPhone, testRestaurantPhone, testRiderPhone);
-
         AtomicBoolean allowChatReconnect = new AtomicBoolean(false);
         AtomicInteger blockedChatSockets = new AtomicInteger();
-        customerPage.routeWebSocket("**/ws/chat**", socket -> {
+        customerPage.routeWebSocket(url -> url.contains("/ws/chat"), socket -> {
             if (allowChatReconnect.get()) {
                 socket.connectToServer();
             } else {
@@ -43,6 +39,9 @@ public class RefundRequestTest extends TestBase {
                 socket.close();
             }
         });
+        CompletedDeliveryFixture.Result order = CompletedDeliveryFixture.completeOrder(
+                customerPage, restaurantPage, riderPage,
+                testCustomerPhone, testRestaurantPhone, testRiderPhone);
 
         ChatWidgetPage refund = new ChatWidgetPage(customerPage);
         Response sessionResponse = customerPage.waitForResponse(
@@ -78,8 +77,10 @@ public class RefundRequestTest extends TestBase {
 
         Locator connectingStatus = refund.refundModal().getByRole(
                 com.microsoft.playwright.options.AriaRole.STATUS);
+        customerPage.waitForCondition(() -> blockedChatSockets.get() > 0,
+                new Page.WaitForConditionOptions().setTimeout(15000));
         customerPage.waitForCondition(
-                () -> blockedChatSockets.get() > 0 && connectingStatus.isVisible(),
+                connectingStatus::isVisible,
                 new Page.WaitForConditionOptions().setTimeout(15000));
         assertThat(submitButton.isDisabled())
                 .as("a valid quote cannot be discarded while the chat WebSocket is disconnected")
@@ -90,6 +91,19 @@ public class RefundRequestTest extends TestBase {
         customerPage.waitForCondition(submitButton::isEnabled,
                 new Page.WaitForConditionOptions().setTimeout(15000));
         com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(submitButton).isEnabled();
+
+        refund.fillRefundReason("");
+        assertThat(submitButton.isDisabled())
+                .as("a connected chat still requires a refund reason")
+                .isTrue();
+        assertThat(customerPage.getByText("Requesting quote...",
+                new Page.GetByTextOptions().setExact(true)).count())
+                .as("no quote message is created while the connected form has no reason")
+                .isZero();
+
+        refund.fillRefundReason(reason);
+        customerPage.waitForCondition(submitButton::isEnabled,
+                new Page.WaitForConditionOptions().setTimeout(10000));
         refund.submitRefundRequest();
         refund.refundModal().waitFor(
                 new Locator.WaitForOptions().setState(WaitForSelectorState.HIDDEN));

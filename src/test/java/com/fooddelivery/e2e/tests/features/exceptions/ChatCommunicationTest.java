@@ -4,6 +4,7 @@ import com.fooddelivery.e2e.base.TestBase;
 import com.fooddelivery.e2e.pages.customer.CustomerOrderChatPage;
 import com.fooddelivery.e2e.pages.restaurant.RestaurantOrderActionsPage;
 import com.fooddelivery.e2e.util.CompletedDeliveryFixture;
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Response;
 import org.junit.jupiter.api.DisplayName;
@@ -149,8 +150,12 @@ public class ChatCommunicationTest extends TestBase {
         boolean riderMessageVisible = false;
         boolean riderReplyVisible = false;
         boolean customerReplyVisible = false;
+        String stage = "waiting for customer tracker to show rider assignment";
 
         try {
+            waitForCustomerOrderRiderAssignment(customerPage, order.orderId());
+
+            stage = "opening customer chat session";
             customerSessionStatus = openParticipantChat(
                     customerPage, customerChat, order.orderId(), customerTelemetry);
             customerChatOpened = true;
@@ -160,19 +165,23 @@ public class ChatCommunicationTest extends TestBase {
                         customerMessageVisible, riderMessageVisible, false, false,
                         "customer session request was rejected");
             }
+            stage = "waiting for customer chat connection";
             waitForConnected(customerPage, customerChat, customerTelemetry);
 
+            stage = "opening rider chat session";
             riderSessionStatus = openParticipantChat(
                     riderPage, riderChat, order.orderId(), riderTelemetry);
             if (!isSuccessfulStatus(riderSessionStatus)) {
                 return snapshot(customerTelemetry, riderTelemetry, customerSessionStatus,
                         riderSessionStatus, customerChatOpened, false, false,
                         customerMessageVisible, riderMessageVisible, false, false,
-                        "rider session request was rejected after bounded retries; HTTP "
+                        "rider session request was rejected after customer tracking showed assignment; HTTP "
                                 + riderSessionStatus);
             }
+            stage = "waiting for rider chat connection";
             waitForConnected(riderPage, riderChat, riderTelemetry);
 
+            stage = "sending customer message to rider";
             String message = "E2E customer-to-rider message " + order.shortOrderId();
             customerChat.sendMessage(message);
             assertMessageVisible(customerPage, message);
@@ -180,6 +189,7 @@ public class ChatCommunicationTest extends TestBase {
             assertMessageVisible(riderPage, message);
             riderMessageVisible = true;
 
+            stage = "sending rider reply";
             String reply = "E2E rider reply " + order.shortOrderId();
             riderChat.sendMessage(reply);
             assertMessageVisible(riderPage, reply);
@@ -195,7 +205,8 @@ public class ChatCommunicationTest extends TestBase {
             return snapshot(customerTelemetry, riderTelemetry, customerSessionStatus,
                     riderSessionStatus, customerChatOpened, false, false,
                     customerMessageVisible, riderMessageVisible, riderReplyVisible,
-                    customerReplyVisible, failure.getClass().getSimpleName());
+                    customerReplyVisible, failure.getClass().getSimpleName() + " at " + stage
+                            + (failure.getMessage() == null ? "" : ": " + failure.getMessage()));
         } finally {
             closeChatIfOpen(customerChat);
             closeChatIfOpen(riderChat);
@@ -269,6 +280,18 @@ public class ChatCommunicationTest extends TestBase {
                 new Page.WaitForConditionOptions().setTimeout(15000));
     }
 
+    private static void waitForCustomerOrderRiderAssignment(Page customerPage, String orderId) {
+        Locator riderCard = customerPage.locator(
+                "[data-testid='order-tracker'][data-order-id='" + orderId + "'] [data-testid='rider-card']");
+        // The customer order hook polls accepted/preparing orders every 30 seconds; allow one
+        // complete poll while preserving the selected tracker used by the delivery fixture.
+        customerPage.waitForCondition(riderCard::isVisible,
+                new Page.WaitForConditionOptions().setTimeout(35000));
+        assertThat(riderCard.isVisible())
+                .as("the customer live tracker shows the rider assigned to order %s before rider chat opens", orderId)
+                .isTrue();
+    }
+
     private static Integer openParticipantChat(Page page, CustomerOrderChatPage chat,
                                                String orderId, ChatTelemetry telemetry) {
         Integer existingSessionStatus = telemetry.sessionResponseStatus().get();
@@ -282,21 +305,7 @@ public class ChatCommunicationTest extends TestBase {
                         && response.url().contains("/api/v1/chat/sessions"),
                 new Page.WaitForResponseOptions().setTimeout(20000),
                 () -> chat.openChatLauncher(orderId));
-        Integer status = session.status();
-        for (int retry = 0; retry < 4 && status == 403; retry++) {
-            // Rider assignment is published asynchronously to the customer order store. A
-            // legitimate rider can briefly receive 403 until that authorized participant is
-            // visible; exercise the chat's explicit retry affordance, but do not retry other
-            // failures or loop indefinitely.
-            page.waitForTimeout(750);
-            Response retriedSession = page.waitForResponse(
-                    response -> response.request().method().equals("POST")
-                            && response.url().contains("/api/v1/chat/sessions"),
-                    new Page.WaitForResponseOptions().setTimeout(10000),
-                    chat::retrySession);
-            status = retriedSession.status();
-        }
-        return status;
+        return session.status();
     }
 
     private static boolean isSuccessfulStatus(Integer status) {

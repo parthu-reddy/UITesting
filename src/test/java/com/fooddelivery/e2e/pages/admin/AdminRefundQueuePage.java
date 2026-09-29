@@ -32,25 +32,37 @@ public class AdminRefundQueuePage {
         return rows().count();
     }
 
+    public boolean isQueueEmpty() {
+        return page.getByRole(AriaRole.HEADING,
+                new Page.GetByRoleOptions().setName("Queue Empty").setExact(true)).isVisible();
+    }
+
     public void openRefundTicket(int index) {
         waitForQueue();
         rows().nth(index).click();
         page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Ticket Details")).waitFor();
     }
 
-    public void approveRefund() { resolveRefund(true); }
-
-    public void rejectRefund() { resolveRefund(false); }
-
-    private void resolveRefund(boolean approved) {
+    /** Opens the final confirmation only; tests must cancel against shared live data. */
+    public void openResolutionConfirmation(boolean approved) {
         page.getByRole(AriaRole.GROUP, new Page.GetByRoleOptions().setName("Resolution").setExact(true))
                 .getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName(approved ? "Approve" : "Reject").setExact(true))
                 .click();
         page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(approved ? "Approve Refund" : "Reject Refund").setExact(true)).click();
-        page.getByRole(AriaRole.DIALOG)
-                .getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName(approved ? "Approve refund" : "Reject refund").setExact(true))
-                .click();
-        page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Ticket Details"))
-                .waitFor(new Locator.WaitForOptions().setState(com.microsoft.playwright.options.WaitForSelectorState.HIDDEN));
+        confirmationDialog().waitFor();
+        confirmationDialog().getByRole(AriaRole.BUTTON,
+                new Locator.GetByRoleOptions().setName(approved ? "Approve refund" : "Reject refund").setExact(true))
+                .waitFor();
+    }
+
+    public Locator confirmationDialog() {
+        return page.getByRole(AriaRole.DIALOG);
+    }
+
+    public void cancelConfirmation() {
+        confirmationDialog().getByRole(AriaRole.BUTTON,
+                new Locator.GetByRoleOptions().setName("Cancel").setExact(true)).click();
+        confirmationDialog().waitFor(new Locator.WaitForOptions()
+                .setState(com.microsoft.playwright.options.WaitForSelectorState.HIDDEN));
     }
 }

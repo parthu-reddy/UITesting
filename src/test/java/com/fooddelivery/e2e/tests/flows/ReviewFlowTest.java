@@ -4,6 +4,7 @@ import com.fooddelivery.e2e.base.TestBase;
 import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.common.LoginPage;
 import com.fooddelivery.e2e.pages.delivery.DeliveryDashboardPage;
+import com.fooddelivery.e2e.pages.delivery.DeliveryOnlineTogglePage;
 import com.fooddelivery.e2e.pages.restaurant.RestaurantDashboardPage;
 import com.fooddelivery.e2e.util.CompletedDeliveryFixture;
 import com.microsoft.playwright.Locator;
@@ -27,6 +28,8 @@ public class ReviewFlowTest extends TestBase {
     void submitReview() {
         String existingOrderId = System.getProperty("review.order.id");
         boolean createOrder = existingOrderId == null || existingOrderId.isBlank();
+        boolean allowExistingRiderSubmission = !createOrder
+                && Boolean.parseBoolean(System.getProperty("review.submit.rider.existing", "false"));
         String outletName = createOrder ? null : System.getProperty("review.outlet.name");
         if (!createOrder && (outletName == null || outletName.isBlank())) {
             throw new IllegalArgumentException("Set -Dreview.outlet.name when reusing -Dreview.order.id");
@@ -95,11 +98,15 @@ public class ReviewFlowTest extends TestBase {
             assertReadOnly(reviewDialog, 3);
         }
 
-        reviewAsRestaurant(deliveredOrder, !createOrder);
-        reviewAsDeliveryPartner(deliveredOrder, !createOrder);
+        // Reusing a delivered order is verification-only by default. Rider submission can be
+        // explicitly enabled for a known order to finish the rider role's one-time review flow.
+        reviewAsRestaurant(deliveredOrder, !createOrder, createOrder);
+        reviewAsDeliveryPartner(deliveredOrder, !createOrder,
+                createOrder || allowExistingRiderSubmission);
     }
 
-    private void reviewAsRestaurant(CompletedDeliveryFixture.Result deliveredOrder, boolean login) {
+    private void reviewAsRestaurant(CompletedDeliveryFixture.Result deliveredOrder, boolean login,
+                                    boolean allowSubmission) {
         RestaurantDashboardPage dashboard = new RestaurantDashboardPage(restaurantPage);
         AtomicReference<Integer> restaurantEarningsStatus = new AtomicReference<>();
         restaurantPage.onResponse(response -> {
@@ -145,19 +152,48 @@ public class ReviewFlowTest extends TestBase {
         Locator reviewDialog = openPartnerReview(restaurantPage, orderDetails);
         submitAndVerifyReadOnly(restaurantPage, reviewDialog,
                 List.of("Customer", "Delivery partner"),
-                "E2E restaurant review verification.", deliveredOrder);
+                "E2E restaurant review verification.", deliveredOrder, allowSubmission);
     }
 
-    private void reviewAsDeliveryPartner(CompletedDeliveryFixture.Result deliveredOrder, boolean login) {
+    private void reviewAsDeliveryPartner(CompletedDeliveryFixture.Result deliveredOrder, boolean login,
+                                         boolean allowSubmission) {
         if (login) {
             riderPage.navigate(TestConfig.APP_URL);
             new LoginPage(riderPage).loginAs("Delivery Executive", testRiderPhone);
             new DeliveryDashboardPage(riderPage).waitForDashboard();
         }
+        if (Boolean.parseBoolean(System.getProperty("review.require-rider-offline", "false"))) {
+            org.assertj.core.api.Assertions.assertThat(
+                            new DeliveryOnlineTogglePage(riderPage).isOffline())
+                    .as("review history is available while the rider is off duty")
+                    .isTrue();
+        }
+        AtomicReference<Integer> historyResponseStatus = new AtomicReference<>();
+        AtomicReference<String> historyResponseBody = new AtomicReference<>();
+        riderPage.onResponse(response -> {
+            if ("GET".equals(response.request().method())
+                    && response.url().contains("/api/v1/delivery/orders/history")) {
+                historyResponseStatus.set(response.status());
+                try {
+                    historyResponseBody.set(response.text());
+                } catch (RuntimeException unreadableBody) {
+                    historyResponseBody.set("<unreadable response body>");
+                }
+            }
+        });
         new DeliveryDashboardPage(riderPage).openHistoryTab();
         riderPage.getByRole(AriaRole.HEADING,
                 new Page.GetByRoleOptions().setName("Completed Deliveries").setExact(true))
                 .waitFor(new Locator.WaitForOptions().setTimeout(15000));
+
+        riderPage.waitForCondition(() -> historyResponseStatus.get() != null,
+                new Page.WaitForConditionOptions().setTimeout(15000));
+        org.assertj.core.api.Assertions.assertThat(historyResponseStatus.get())
+                .as("rider history API response for delivered order " + deliveredOrder.orderId())
+                .isBetween(200, 299);
+        org.assertj.core.api.Assertions.assertThat(historyResponseBody.get())
+                .as("rider history response must include the completed order")
+                .contains(deliveredOrder.orderId());
 
         Locator historyCard = riderPage.getByRole(AriaRole.BUTTON)
                 .filter(new Locator.FilterOptions()
@@ -170,7 +206,7 @@ public class ReviewFlowTest extends TestBase {
         Locator reviewDialog = openPartnerReview(riderPage, orderDetails);
         submitAndVerifyReadOnly(riderPage, reviewDialog,
                 List.of("Customer", "Restaurant"),
-                "E2E delivery-partner review verification.", deliveredOrder);
+                "E2E delivery-partner review verification.", deliveredOrder, allowSubmission);
     }
 
     private Locator restaurantOrderDetails(CompletedDeliveryFixture.Result deliveredOrder) {
@@ -199,8 +235,15 @@ public class ReviewFlowTest extends TestBase {
 
     private void submitAndVerifyReadOnly(Page page, Locator reviewDialog,
                                          List<String> expectedTargets, String comment,
-                                         CompletedDeliveryFixture.Result deliveredOrder) {
+                                         CompletedDeliveryFixture.Result deliveredOrder,
+                                         boolean allowSubmission) {
         waitForEligibilityResult(page, reviewDialog);
+        if (!allowSubmission) {
+            // Existing deployed fixtures are shared and review rows are immutable. Reused-order
+            // runs prove the saved state only; they must not submit if any target is still pending.
+            assertReadOnly(reviewDialog, expectedTargets.size());
+            return;
+        }
         Locator ratingGroups = reviewDialog.locator("[role='radiogroup']");
         if (ratingGroups.count() == 0) {
             assertReadOnly(reviewDialog, expectedTargets.size());

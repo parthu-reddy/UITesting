@@ -24,4 +24,13 @@ public class AdminCategoriesPage {
     public int getCategoryCount() {
         return page.locator("h3:text-is('Existing Categories') + div > div").count();
     }
+
+    public boolean isEmptyStateVisible() {
+        return page.getByText("No categories found.",
+                new Page.GetByTextOptions().setExact(true)).isVisible();
+    }
+
+    public java.util.List<com.microsoft.playwright.Locator> getCategoryCards() {
+        return page.locator("h3:text-is('Existing Categories') + div > div").all();
+    }
 }
