@@ -1,6 +1,7 @@
 package com.fooddelivery.e2e.pages.admin;
 
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.AriaRole;
 
 /**
  * Page Object for the Admin Order Money view.
@@ -21,13 +22,37 @@ public class AdminOrderMoneyPage {
     // ── Visibility ───────────────────────────────────────────────────────
 
     public boolean isOrderMoneyVisible() {
-        return page.locator("text=Customer Paid, text=Restaurant Payout, text=Rider Payout").first().isVisible();
+        return customerPaidHeading().isVisible()
+                && restaurantPayoutHeading().isVisible()
+                && riderPayoutHeading().isVisible();
+    }
+
+    public void waitForOrderMoney() {
+        customerPaidHeading().waitFor();
+        restaurantPayoutHeading().waitFor();
+        riderPayoutHeading().waitFor();
+    }
+
+    private com.microsoft.playwright.Locator customerPaidHeading() {
+        return page.getByRole(AriaRole.HEADING,
+                new Page.GetByRoleOptions().setName("Customer Paid").setExact(true));
+    }
+
+    private com.microsoft.playwright.Locator restaurantPayoutHeading() {
+        return page.getByRole(AriaRole.HEADING,
+                new Page.GetByRoleOptions().setName("Restaurant Payout").setExact(true));
+    }
+
+    private com.microsoft.playwright.Locator riderPayoutHeading() {
+        return page.getByRole(AriaRole.HEADING,
+                new Page.GetByRoleOptions().setName("Rider Payout").setExact(true));
     }
 
     // ── Customer section ─────────────────────────────────────────────────
 
     public String getCustomerTotal() {
-        return page.locator("text=Customer Paid").locator("xpath=../../..").locator("text=Total").locator("xpath=..").locator("span").last().innerText().trim();
+        return customerPaidHeading().locator("xpath=..").getByText("Total", new com.microsoft.playwright.Locator.GetByTextOptions().setExact(true))
+                .locator("xpath=..").locator("span").last().innerText().trim();
     }
 
     public String getFoodCost() {
@@ -49,18 +74,14 @@ public class AdminOrderMoneyPage {
     // ── Restaurant section ───────────────────────────────────────────────
 
     public String getRestaurantNetPayout() {
-        return page.locator("text=Net Payout").first().locator("xpath=..").locator("span").last().innerText().trim();
+        return restaurantPayoutHeading().locator("xpath=..").getByText("Net Payout", new com.microsoft.playwright.Locator.GetByTextOptions().setExact(true))
+                .locator("xpath=..").locator("span").last().innerText().trim();
     }
 
     // ── Rider section ────────────────────────────────────────────────────
 
     public String getRiderNetPayout() {
-        return page.locator("text=Net Rider, text=Final Rider").first().locator("xpath=..").locator("span").last().innerText().trim();
-    }
-
-    // ── Platform revenue ─────────────────────────────────────────────────
-
-    public String getPlatformRevenue() {
-        return page.locator("text=Platform Revenue, text=Platform Net").first().locator("xpath=..").locator("span").last().innerText().trim();
+        return riderPayoutHeading().locator("xpath=..").getByText("Net Payout", new com.microsoft.playwright.Locator.GetByTextOptions().setExact(true))
+                .locator("xpath=..").locator("span").last().innerText().trim();
     }
 }

@@ -1,6 +1,6 @@
 # 06-admin-operations
 
-Status: all four functionality folders source-audited; read-only E2E coverage is implemented and compile-verified. Deployed browser execution is pending confirmation of the authoritative Oracle tunnel hostname because the rule-file hostname currently fails DNS.
+Status: all four functionality folders are source-audited. The earlier focused Dev run completed 48 tests with 0 assertion failures, 1 error, and 5 skips; the error was the zero-height Fleet Map viewport. Local browser-routed coverage now exercises admin navigation, users, catalog, reviews, support, refunds, chat, manual intervention, Fleet Map scope, ledger, Money Operations, and the payout lifecycle with disposable fixtures. Deployment and controlled target validation remain required for cross-service, financial, and dispatch outcomes.
 
 Validate administration after confirming a usable existing admin account.
 

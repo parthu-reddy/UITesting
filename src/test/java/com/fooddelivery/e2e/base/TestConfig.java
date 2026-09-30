@@ -28,6 +28,32 @@ public final class TestConfig {
     public static final boolean RECORD_VIDEO = Boolean.parseBoolean(
             System.getProperty("record.video", "true"));
 
+    /** The retained runner-secret OTP harness is disabled until explicitly re-enabled. */
+    public static boolean e2eOtpEnabled() {
+        return Boolean.parseBoolean(System.getProperty("e2e.otp.enabled",
+                System.getenv().getOrDefault("E2E_OTP_ENABLED", "false")));
+    }
+
+    /**
+     * Reads the credential used by the non-browser E2E OTP harness. It is intentionally not a
+     * constant so test output and browser state cannot accidentally expose it.
+     */
+    public static String e2eRunnerSecret() {
+        if (!e2eOtpEnabled()) {
+            throw new IllegalStateException(
+                    "The E2E runner-secret OTP feature is disabled");
+        }
+        String configured = System.getProperty("e2e.runner.secret");
+        if (configured == null || configured.isBlank()) {
+            configured = System.getenv("E2E_RUNNER_SECRET");
+        }
+        if (configured == null || configured.isBlank()) {
+            throw new IllegalStateException(
+                    "Set e2e.runner.secret or E2E_RUNNER_SECRET before running browser E2E tests");
+        }
+        return configured;
+    }
+
     // ── Test User Profiles ──────────────────────────────────────────
 
     /** Used only when the selected admin reaches first-login profile completion. */

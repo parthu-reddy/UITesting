@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@Tag("admin")
 @Tag("ui-only")
 public class AdminUiTest extends TestBase {
 

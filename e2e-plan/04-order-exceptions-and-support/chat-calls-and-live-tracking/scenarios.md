@@ -15,6 +15,20 @@ Uses: `ChatWidgetPage`, `CustomerOrderChatPage`, `RestaurantChatPage`, `CallOver
 | CHAT-07 | Long message handling | Customer sends a message over 200 characters. | The UI has no 200-character cap; the full message is sent and displayed wrapped. The server controller currently rejects content over 10,000 characters. |
 | CHAT-12 | Chat during delivered-order grace period | Customer reopens chat after delivery and sends a message within the grace period. | The existing order session remains available and the message is sent. |
 
+## Batch 1A — Chat-window reliability and attachments
+
+| ID | Description | Action | Expected result |
+|---|---|---|---|
+| CHAT-13 | Session initialization retry | Return one temporary session-creation failure, then select “Try again”. | The error is actionable and the second request restores the composer. |
+| CHAT-14 | Stored history after reload | Send a unique text message, reload the customer application, and reopen that order’s chat. | The message is loaded from authorized server history. |
+| CHAT-15 | Multiline composer | Enter a line break with Shift+Enter, then submit with Enter. | Shift+Enter keeps the newline; Enter sends one text message containing it. |
+| CHAT-16 | Typing indicator | Customer begins composing while restaurant chat is open, then sends the text. | The restaurant sees the indicator and it clears after the message arrives. |
+| CHAT-17 | Unread count | Close the customer chat and send one restaurant message. | The launcher shows one unread message; reopening clears it and displays the message. |
+| CHAT-18 | Reconnect after a live socket closes | Close an already-connected customer chat WebSocket, wait for the next connection, then send a message. | Reconnect state disables the composer; the restored subscription delivers the new message to the restaurant. |
+| CHAT-19 | Message size boundary | Send a 10,000-character message, then enter 10,001 characters. | The exact server limit is accepted; the over-limit value disables Send and explains the limit. |
+| CHAT-20 | Image attachment contract | Upload a valid fixture image from the gallery control. | Upload succeeds, both participants render the attachment, and no upload-failed toast appears. |
+| CHAT-21 | Image upload limits and failure | Reach the four-image per-user cap, then simulate a response without an image URL. | Both upload controls disable at the cap; an invalid response shows the upload error. |
+
 ## Batch 2 — Customer-to-Rider chat
 
 | ID | Description | Action | Expected result |

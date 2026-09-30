@@ -1,10 +1,12 @@
 package com.fooddelivery.e2e.tests.features.admin;
 
 import com.fooddelivery.e2e.base.TestBase;
+import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.admin.*;
 import org.junit.jupiter.api.*;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Response;
+import com.microsoft.playwright.Route;
 import com.microsoft.playwright.options.AriaRole;
 
 import java.util.List;
@@ -17,6 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Read-only checks for the Admin Ledger and payout navigation. Mutating payout actions require
  * a disposable financial fixture and are deliberately not exercised against shared Dev data.
  */
+@Tag("admin")
 @Tag("admin-ledger")
 public class AdminLedgerAdvancedTest extends TestBase {
 
@@ -68,13 +71,20 @@ public class AdminLedgerAdvancedTest extends TestBase {
     }
 
     @Test
-    @DisplayName("LEDGER-ADV-06: Filter by direction CREDIT")
+    @DisplayName("LEDGER-ADV-06: CREDIT direction is sent and a known-empty result renders explicitly")
     void filterByDirectionCredit() {
         portal.openLedgerTab();
         AdminLedgerPage ledger = new AdminLedgerPage(adminPage);
+        // A zero UUID is not present in the seeded ledger.  Combining it with CREDIT lets this
+        // read-only live check assert both the actual request parameter and the visible empty
+        // result without claiming that shared Dev data contains a representative credit row.
+        ledger.filterByTransactionId("00000000-0000-0000-0000-000000000000");
         ledger.selectDirection("CREDIT");
-        assertThat(ledger.applyFilter("direction=CREDIT")).isEqualTo(200);
-        ledger.waitForResultsLoaded();
+        assertThat(ledger.applyFilter(
+                "transactionId=00000000-0000-0000-0000-000000000000&direction=CREDIT"))
+                .isEqualTo(200);
+        ledger.waitForEmptyResults();
+        assertThat(ledger.getTransactionCount()).isZero();
     }
 
     @Test
@@ -175,18 +185,6 @@ public class AdminLedgerAdvancedTest extends TestBase {
         assertThat(ledger.clearFilters()).isEqualTo(200);
         assertThat(adminPage.getByPlaceholder("Transaction ID").inputValue()).isEmpty();
         assertThat(adminPage.getByPlaceholder("Owner ID").inputValue()).isEmpty();
-    }
-
-    @Test
-    @Disabled("AdminLedgerView has no statement or detail panel; a row's only action copies its transaction id. Recorded in e2e-plan/NOT-DEFECTS/README.md")
-    @DisplayName("LEDGER-ADV-11: Open statement detail panel")
-    void openStatementDetailPanel() {
-        portal.openLedgerTab();
-        AdminLedgerPage ledger = new AdminLedgerPage(adminPage);
-        if (ledger.getTransactionCount() > 0) {
-            ledger.openStatement(0);
-            assertThat(ledger.isStatementPanelOpen()).isTrue();
-        }
     }
 
     @Test
@@ -300,5 +298,57 @@ public class AdminLedgerAdvancedTest extends TestBase {
                 new com.microsoft.playwright.Page.GetByRoleOptions().setName("Search Payouts").setExact(true)).isVisible())
                 .isTrue();
         assertThat(adminPage.locator("table tbody tr").count()).isZero();
+    }
+
+    @Test
+    @DisplayName("PAYOUT-ORDER-01: A payout order link opens its read-only money breakdown")
+    void payoutOrderMoneyRouteUsesTheSelectedOrderAndSendsNoWrite() {
+        String orderId = "d0000000-0000-4000-8000-000000000101";
+        AtomicInteger moneyReads = new AtomicInteger();
+        AtomicInteger moneyWrites = new AtomicInteger();
+        String moneyResponse = """
+                {
+                  "orderId": "%s",
+                  "foodCost": 400.0,
+                  "deliveryFee": 30.0,
+                  "customerPlatformFee": 5.0,
+                  "sgst": 10.0,
+                  "cgst": 10.0,
+                  "totalAmount": 455.0,
+                  "restaurantPayout": 355.0,
+                  "restaurantPlatformFee": 25.0,
+                  "restaurantDeliveryContribution": 20.0,
+                  "driverGrossPayout": 50.0,
+                  "driverTaxes": 5.0,
+                  "driverNetPayout": 45.0,
+                  "platformBonus": 0.0,
+                  "ledgerLines": []
+                }
+                """.formatted(orderId);
+
+        adminPage.route("**/api/v1/internal/admin/orders/" + orderId + "/money", route -> {
+            if ("GET".equals(route.request().method())) {
+                moneyReads.incrementAndGet();
+                route.fulfill(new Route.FulfillOptions()
+                        .setStatus(200)
+                        .setContentType("application/json")
+                        .setBody(moneyResponse));
+            } else {
+                moneyWrites.incrementAndGet();
+                route.abort();
+            }
+        });
+
+        adminPage.navigate(TestConfig.APP_URL.replaceAll("/$", "") + "/admin/orders/" + orderId + "/money");
+        AdminOrderMoneyPage money = new AdminOrderMoneyPage(adminPage);
+        money.waitForOrderMoney();
+
+        assertThat(adminPage.url()).contains("/admin/orders/" + orderId + "/money");
+        assertThat(money.isOrderMoneyVisible()).isTrue();
+        assertThat(money.getCustomerTotal()).isEqualTo("₹455.00");
+        assertThat(money.getRestaurantNetPayout()).isEqualTo("₹355.00");
+        assertThat(money.getRiderNetPayout()).isEqualTo("₹45.00");
+        assertThat(moneyReads.get()).isEqualTo(1);
+        assertThat(moneyWrites.get()).isZero();
     }
 }

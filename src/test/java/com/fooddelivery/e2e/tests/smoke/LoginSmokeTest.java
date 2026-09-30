@@ -12,7 +12,7 @@ import org.junit.jupiter.params.provider.EnumSource;
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThat;
 
-/** Real UI and backend OTP tests; requires the development OTP autofill feature. */
+/** Real UI and backend OTP tests using the same Dev autofill control as manual login. */
 @Tag("smoke")
 @Tag("login")
 public class LoginSmokeTest extends TestBase {

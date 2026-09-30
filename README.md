@@ -1,8 +1,29 @@
 # Food Delivery UI end-to-end tests
 
+## Current OTP mode — 2026-09-30
+
+The runner-secret OTP feature is disabled at the user's request. `E2E_OTP_ENABLED` defaults to
+`false` in deployment and in the Java runner. Its implementation is retained for future use;
+setting a runner secret alone does not enable it.
+
+Manual Dev login and automatic browser tests use the same **Autofill Code** button after
+requesting an OTP in the normal UI. ApiGateway and IdentityService must run with `dev` (without
+`prod`) and `DEV_OTP_ENABLED=true`. Normal Dev defaults enable this facility, which supports only
+the seeded test phone/portal pairs below. Production does not advertise or serve it.
+
+The UI discovers availability from the normal OTP initiation response; no Vite build flag or
+runner secret is required. The OTP remains random, expires after five minutes, and is consumed
+by normal verification. The admin account must already have an active ADMIN role.
+
+Deploy FoodDeliveryAppUI, IdentityService, ApiGateway and the updated Deployment configuration
+together before using this restored flow. Local source changes alone do not prove deployed login.
+
 ## Run only login tests
 
-Requires Java 17+, Maven and the Playwright Chromium browser. The development deployment must expose OTP autofill and the configured non-admin accounts must have complete profiles. The admin positive case can complete its required profile through the UI. Tests use real UI interactions and backend authentication, without mocked responses or bypass tokens.
+Requires Java 17+, Maven and the Playwright Chromium browser. The configured non-admin accounts
+must have complete profiles; the admin positive case can complete its required profile through
+the UI. Tests click Dev Autofill Code, then verify through the normal backend authentication
+endpoint. They do not create privileged role assignments or use mocked tokens.
 
 ```sh
 cd '/Users/parthureddy/Documents/Food Delivery.nosync/UITesting'
@@ -19,7 +40,11 @@ E2E_APP_URL=https://your-new-host.example mvn test -Dtest=LoginSmokeTest
 mvn test -Dtest=LoginSmokeTest -Dapp.url=https://your-new-host.example
 ```
 
-Accounts can be overridden with `-Dcustomer.phone=...`, `-Drestaurant.phone=...`, `-Drider.phone=...`, `-Dadmin.phone=...`. See `TestConfig.java` for defaults. `-Dheadless=false` shows the browser; `-Drecord.video=false` disables recordings. Reports are in `target/surefire-reports`, videos in `target/videos`. Use dedicated test accounts if active-session limits prevent additional logins; the suite does not evict existing sessions. The admin positive case may complete its profile using configurable `admin.profile.name` and `admin.profile.email`; other profiles are unchanged.
+Dev autofill only permits the seeded ranges: customer `8000000001`–`8000000500`, restaurant `9000000001`–`9000000010`, rider `7000000001`–`7000000030`, and admin `1000000001`. Accounts can be overridden only within those ranges. See `TestConfig.java` for defaults. `-Dheadless=false` shows the browser; `-Drecord.video=false` disables recordings. Reports are in `target/surefire-reports`, videos in `target/videos`. Use dedicated test accounts if active-session limits prevent additional logins; the suite does not evict existing sessions. The admin positive case may complete its profile using configurable `admin.profile.name` and `admin.profile.email`; other profiles are unchanged.
+
+The parked `E2eOtpClient` and runner-secret server feature are retained for future activation.
+Ordinary login page objects no longer call that client. See the [retained harness guide](../Deployment/E2E-OTP-HARNESS.md)
+if the user later requests re-enabling it.
 
 ## Folder map
 

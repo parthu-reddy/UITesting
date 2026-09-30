@@ -66,8 +66,9 @@ The earlier dashboard timeout is retained as historical context and was not repr
   correctly rejected by the audit: it disappears once the field has a value.)
 
 **This changes the DOM under existing tests.** Sibling combinators `~ input` / `+ input` no
-longer match a `FormField`; the descendant form does. `RestaurantMenuEditorPage` and
-`AdminCampaignsPage` were updated accordingly and the suite recompiles.
+longer match a `FormField`; the descendant form does. `RestaurantMenuEditorPage` was updated
+accordingly. The obsolete admin campaigns page object was removed because campaigns are a
+restaurant-only surface.
 
 **Outlet selector** -- both defects fixed in
 `features/catalog/components/customer/CustomerOutletSelectorModal.tsx`:

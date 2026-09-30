@@ -67,14 +67,6 @@ public class AdminPortalPage {
 
     public void openReviewsTab() { nav("Review Moderation"); }
 
-    /**
-     * Admin has no campaigns screen: campaigns are a RESTAURANT tab (RestaurantTabPanels ->
-     * CampaignManagement). See e2e-plan/NOT-DEFECTS/README.md.
-     */
-    public void openCampaignsTab() {
-        throw new UnsupportedOperationException("The admin portal has no campaigns screen; campaigns are a restaurant tab");
-    }
-
     public void openRefundsTab() {
         nav("Refund Queue");
     }

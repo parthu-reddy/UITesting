@@ -123,11 +123,10 @@ deleted. Listed here so they stop being read as product failures.
 **Scenario assumes:** the admin portal has a Campaigns tab with campaign cards, budgets, a
 wallet balance and an ad-performance dashboard.
 
-**The product:** the admin sidebar (`pages/admin/AdminPortal.tsx`) has ten items and none is
-campaigns. `CampaignManagement` is imported only by `RestaurantTabPanels` — campaigns are a
-**restaurant** tab. `AdminCampaignTest` is `@Disabled` with this reason and
-`AdminPortalPage.openCampaignsTab()` throws rather than clicking whatever `has-text('Campaigns')`
-happened to match.
+**The product:** the admin sidebar (`pages/admin/AdminPortal.tsx`) has no campaigns item.
+`CampaignManagement` is imported only by `RestaurantTabPanels` — campaigns are a **restaurant**
+tab. The obsolete disabled admin test and page object were removed so they cannot be mistaken for
+admin coverage or inflate the suite's skipped-test count.
 
 **To make the scenario valid:** either build an admin campaigns screen, or rewrite these
 scenarios against the restaurant's Campaigns tab.
@@ -139,8 +138,8 @@ scenarios against the restaurant's Campaigns tab.
 **Scenario assumes:** clicking a ledger row opens a statement or transaction-detail panel.
 
 **The product:** `AdminLedgerView.tsx` renders a filter form over a plain table. A row's only
-action is a button that copies its transaction id; there is no panel. The test is `@Disabled`
-and `AdminLedgerPage.openStatement()` throws.
+action is a button that copies its transaction id; there is no panel. The obsolete disabled
+scenario and its unsupported page-object methods were removed from the E2E suite.
 
 ---
 

@@ -13,6 +13,7 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.Instant;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -42,11 +43,25 @@ public class RiderReviewHistoryApiTest extends TestBase {
         String riderTimeZone = (String) riderPage.evaluate(
                 "() => Intl.DateTimeFormat().resolvedOptions().timeZone");
         ZoneId riderZone = ZoneId.of(riderTimeZone);
-        LocalDate riderDate = LocalDate.now(riderZone);
-        String from = URLEncoder.encode(riderDate.atStartOfDay(riderZone).toInstant().toString(),
-                StandardCharsets.UTF_8);
-        String to = URLEncoder.encode(riderDate.plusDays(1).atStartOfDay(riderZone).toInstant().toString(),
-                StandardCharsets.UTF_8);
+        Instant fromInstant;
+        Instant toInstant;
+        String configuredFrom = System.getProperty("review.history.from");
+        String configuredTo = System.getProperty("review.history.to");
+        if ((configuredFrom == null) != (configuredTo == null)) {
+            throw new IllegalArgumentException(
+                    "Set both -Dreview.history.from and -Dreview.history.to, or neither");
+        }
+        if (configuredFrom != null) {
+            fromInstant = Instant.parse(configuredFrom);
+            toInstant = Instant.parse(configuredTo);
+        } else {
+            LocalDate riderDate = LocalDate.now(riderZone);
+            fromInstant = riderDate.atStartOfDay(riderZone).toInstant();
+            toInstant = riderDate.plusDays(1).atStartOfDay(riderZone).toInstant();
+        }
+        assertThat(fromInstant).isBefore(toInstant);
+        String from = URLEncoder.encode(fromInstant.toString(), StandardCharsets.UTF_8);
+        String to = URLEncoder.encode(toInstant.toString(), StandardCharsets.UTF_8);
         String historyUrl = "/api/v1/delivery/orders/history?from=" + from + "&to=" + to;
 
         @SuppressWarnings("unchecked")

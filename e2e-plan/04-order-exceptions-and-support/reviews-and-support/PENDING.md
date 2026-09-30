@@ -171,3 +171,37 @@ No backend change is proposed for rider history: the direct API check passed. Th
 The browser logged one `403` for `/api/delivery/drivers/{driverId}/orders/{orderId}/restaurant-status-stream` during the same delivery, but pickup and delivery still completed. The endpoint intentionally denies streams when `OrderAssignment.authorises(driverId)` is false, including after release. The exact timing/state behind this single 403 is not established. If investigating that independent issue, first add a response-level check during an active assignment and correlate it with the assignment row/state; only propose a backend change if that proves a live-assignment request is rejected. Preserve the existing cross-rider authorization check.
 
 Live negative review POST cases (self-review, unrelated target, wrong role, nonparticipant, duplicate) remain unprobed to avoid creating invalid or irreversible data. ReviewsService and CustomerApplication tests cover these denial cases. Post-delivery support scenarios remain outside this review validation and unverified.
+
+## 2026-09-29 — current deployed retest: off-duty history works; optimistic rider payout crashes the dashboard
+
+The earlier order `cf6a8d4d-bfe6-4a97-b402-8bd3f038d45f` no longer exists in the currently deployed data. Authenticated customer history and rider history requests both returned empty pages, including a rider query spanning September. This is a replaced/stale development fixture, not evidence that the deployed off-duty history fix regressed.
+
+A new controlled delivery completed successfully as order `b9eabdf6-b1aa-491d-9093-f3ea30a32b05`. `ReviewFlowTest#submitReview` completed the delivery, customer review step, restaurant review step, and their read-only checks. It then reached the rider dashboard and received the UI error boundary before it could open Completed Deliveries: **1 test, 0 assertion failures, 1 error, 0 skipped**. The test therefore did not submit the rider's two pending immutable reviews.
+
+The product cause is frontend-only. `useRiderJobActions` adds a just-delivered job to local history before the server returns its calculated payout. `useDeliveryOrders` treated the missing `earnings.netPayout` as fatal while calculating today’s total and threw, which replaced the dashboard with the error boundary. The fix reads the existing owner-scoped driver-money endpoint for that exact order after the delivery-status POST succeeds; it does not depend on date-filtered or paginated history results.
+
+The local UI change retains completed-job counts, totals only payouts already received from the server, and displays `Payout updating` while it makes at most four read-only payout checks (immediately, then after 2, 5, and 10 seconds). It then displays `Payout unavailable` rather than hiding an authorization, data-integrity, or persistent-server failure behind normal processing copy. If history later supplies the confirmed amount, it clears that status and restores the paid total. Focused hook/action tests now pass **12 tests**: the missing-payout regression, offline reconciliation, capped retries, unmount cleanup, the rule that reconciliation starts only after a successful delivery-status POST, rejection of authorization failures, protection against a late history response overwriting a confirmed payout, and recovery when history catches up. `npm run typecheck` plus `git diff --check` pass.
+
+The read-only live check below passed for the new order while the rider was Offline, proving that the currently deployed history API returns the completed order when normal server data includes its payout:
+
+```text
+-Dtest=RiderReviewHistoryApiTest#riderCanReadCompletedHistoryWhileOffline
+-Dreview.order.id=b9eabdf6-b1aa-491d-9093-f3ea30a32b05
+-Drider.phone=7000000001
+```
+
+**Pending deployment and final review validation:** deploy the local frontend payout-reconciliation fix, then reuse the existing order with this command. It will not create another delivery. It will only submit a rider review if that immutable review is still absent, then reopen all participant reviews read-only.
+
+```text
+-Dtest=ReviewFlowTest#submitReview
+-Dreview.order.id=b9eabdf6-b1aa-491d-9093-f3ea30a32b05
+-Dreview.outlet.name=Brand 1 Outlet 9
+-Dreview.submit.rider.existing=true
+-Dreview.require-rider-offline=true
+-Drestaurant.phone=9000000001
+-Drider.phone=7000000001
+```
+
+### Separate production follow-up requiring backend approval
+
+The current rider history query and UI label it as Completed Deliveries but date it by `createdAt`, while delivery completion and rider money summaries use `deliveredAt`. A delivery created before midnight and completed after midnight will appear on the previous day. The endpoint also defaults to 20 records while the client locally paginates in groups of 100 and discards server pagination metadata. These are real product semantics and scalability defects, but they did not cause the current empty old fixture or dashboard crash. A backend and UI correction plan must be reviewed and approved before implementation.

@@ -14,8 +14,8 @@ Uses: `AdminUserManagementPage`, `AdminReviewsPage`, `AdminPortalPage`.
 | ADMIN-USER-06 | Search with empty query | Leave the field blank. | The role list is shown; Search itself does not submit an empty lookup. |
 | ADMIN-USER-07 | View user profile | Click a search result. | Detail shows UUID, status, phone, roles, and active orders; it does not show registration date or full history. |
 | ADMIN-USER-08 | Suspend user | On an active seeded user, tap "Suspend User". | Confirmation dialog appears with the suspend action. Cancel it for shared Dev data. |
-| ADMIN-USER-09 | Confirm suspension | Confirm only in a disposable user fixture. | User status changes to "Suspended" and audit/access behavior is verified. |
-| ADMIN-USER-10 | Reinstate user | Reactivate only a disposable suspended fixture. | User status returns to "Active" and login is verified. |
+| ADMIN-USER-09 | Confirm suspension | Confirm only in a disposable user fixture. | User status changes to "Suspended" and the detail action changes to Activate User. Durable access revocation still needs a target check. |
+| ADMIN-USER-10 | Reinstate user | Reactivate only a disposable suspended fixture. | User status returns to "Active" and the detail action changes to Suspend User. Login revocation/renewal still needs a target check. |
 
 ## Batch 2 — Category management
 
@@ -27,8 +27,9 @@ Uses: `AdminUserManagementPage`, `AdminReviewsPage`, `AdminPortalPage`.
 | ADMIN-CAT-04 | Cancel category edit | Edit a saved category → click the X cancel control. | Form returns to Global Categories without a PUT. |
 | ADMIN-CAT-05 | Add category form | Open Categories. | Name/description form is present; there is no separate Add Category dialog. |
 | ADMIN-CAT-06 | Invalid category name blocked | Enter a one-character name → submit. | "Category name is required" appears and no POST is sent. A blank name currently returns without a message. |
-| ADMIN-CAT-07 | Add valid category | Create a unique category in an isolated catalog fixture. | New category appears after the save and refresh. Do not add shared Dev data. |
+| ADMIN-CAT-07 | Add valid category | Create a unique category in an isolated catalog fixture. | New category appears after the fixture-backed save and refresh. Do not add shared Dev data. |
 | ADMIN-CAT-08 | Delete category | — | Not supported by the current admin category UI. |
+| ADMIN-CAT-11 | Rejected category create recovery | Submit a valid new category through a browser-local fixture that returns a rejection. | The name and description stay editable; the existing list is unchanged and no creation success notice appears. |
 
 ## Batch 3 — Review moderation
 
@@ -48,7 +49,7 @@ Uses: `AdminUserManagementPage`, `AdminReviewsPage`, `AdminPortalPage`.
 | ADMIN-USER-11 | Filter by role | `filterByRole("CUSTOMER")`. | Only customer users listed; `getUserCount()` matches visible cards. |
 | ADMIN-USER-12 | Filter by role — DELIVERY | `filterByRole("DELIVERY")`. | Only delivery users listed. |
 | ADMIN-USER-13 | Filter by role — RESTAURANT | `filterByRole("RESTAURANT")`. | Only restaurant users listed. |
-| ADMIN-USER-14 | Assign role to user | Select a user → `assignRole("ADMIN")` or `assignRole("ADMIN", userId)`. | User's role updated; `getUserRole()` reflects new role. |
+| ADMIN-USER-14 | Assign role to user | Select a user and grant a role in an isolated fixture. | User role chips update after the confirmed fixture response. Actual role assignment and session revocation remain target-fixture-gated. |
 | ADMIN-USER-15 | Detail panel shows phone | After `selectUser(0)`, `isDetailPanelOpen()` returns true. | `getUserPhone()` exactly matches the searched phone. |
 | ADMIN-USER-16 | Detail panel shows name | After selecting user. | Not displayed by the current detail panel. |
 | ADMIN-USER-17 | User active orders | After selecting user. | Active order cards render or the explicit "No active orders for this user." state appears. |

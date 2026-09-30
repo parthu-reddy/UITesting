@@ -105,13 +105,32 @@ public class AdminUserManagementPage {
 
     // ── Role management ──────────────────────────────────────────────────
 
+    /** The role editor is a constrained custom Select, so unsupported strings cannot be entered. */
     public void fillNewRole(String roleName) {
-        page.locator("input[placeholder*='Role'], input[placeholder*='role']").first().fill(roleName);
+        page.getByRole(com.microsoft.playwright.options.AriaRole.COMBOBOX,
+                new Page.GetByRoleOptions().setName("New role").setExact(true)).click();
+        page.getByRole(com.microsoft.playwright.options.AriaRole.OPTION,
+                new Page.GetByRoleOptions().setName(roleName).setExact(true)).click();
     }
 
+    /** Selects a role the UI says is not already assigned, without making any server-side change. */
+    public String selectFirstAvailableNewRole() {
+        page.getByRole(com.microsoft.playwright.options.AriaRole.COMBOBOX,
+                new Page.GetByRoleOptions().setName("New role").setExact(true)).click();
+        Locator option = page.locator("[role='option']:not([aria-disabled='true'])").first();
+        if (option.count() == 0) {
+            page.keyboard().press("Escape");
+            return null;
+        }
+        String role = option.innerText().trim();
+        option.click();
+        return role;
+    }
+
+    /** Opens the role confirmation; callers must explicitly confirm or cancel it. */
     public void assignRole() {
-        page.locator("button:has-text('Assign'), button:has-text('Add Role')").first().click();
-        page.waitForTimeout(1000);
+        page.getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
+                new Page.GetByRoleOptions().setName("Add").setExact(true)).click();
     }
 
     public void assignRole(String roleName) {

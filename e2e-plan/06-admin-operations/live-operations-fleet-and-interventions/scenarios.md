@@ -20,8 +20,9 @@ Uses: `AdminLiveOpsPage`, `AdminManualInterventionsPage`, `AdminPortalPage`.
 | ADMIN-OPS-07 | Re-assign rider | Admin selects a delayed order → assigns to a different available rider. | Order reassigned; new rider's context receives dispatch ping; original rider context loses the active job. |
 | ADMIN-OPS-08 | Re-assign with no available riders | Admin tries to re-assign with no other riders online. | Warning: "No available riders" shown; re-assignment blocked. |
 | ADMIN-OPS-09 | Cancel and refund order | Admin selects an intervention and taps "Cancel & Refund (Normal)" in an isolated disposable fixture. | Order cancellation and refund state are verified across the customer, restaurant and rider views. Do not run against shared Dev data. |
-| ADMIN-OPS-10 | Cancellation confirmation and reason | Inspect "Cancel & Refund (Normal)" on a selected intervention. | **Current source gap:** action posts immediately and accepts an empty reason. Add a confirmation/reason guard before enabling this scenario. |
+| ADMIN-OPS-10 | Cancellation confirmation and reason | Enter a reason of at least five characters and request cancellation on a selected intervention. | An order-specific confirmation appears; canceling it sends no request. A confirmed action is covered only through an isolated fixture. |
 | ADMIN-OPS-11 | Cancellation refund | After cancellation in an isolated paid-order fixture. | Refund queue shows the matching order and amount. Do not run against shared Dev data. |
+| ADMIN-OPS-15 | Rejected cancellation recovery | Confirm a cancellation in a browser-local fixture that returns a rejection. | The intervention and typed reason remain visible, the control is enabled for correction, and no success notice or queue removal is shown. |
 
 ## Batch 3 — Fleet visibility
 

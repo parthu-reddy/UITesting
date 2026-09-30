@@ -23,8 +23,9 @@ Uses: `AdminOperationsPage`, `AdminOrderMoneyPage`, `AdminPayoutsPage`, `Transac
 | ID | Description | Action | Expected result |
 |---|---|---|---|
 | MONEY-01 | Money Operations tabs render | Open Money Operations and select Ledger Rejections, Reconciliation Runs, Payment DLQ, and Wallet DLQ. | Each selected tab renders its matching heading. |
-| MONEY-02 | Order money breakdown | Open an order-specific admin money panel. | **Not currently reachable from `AdminPortal.tsx`:** `AdminOrderMoney.tsx` has no portal route or import, so this scenario cannot be driven through the deployed admin UI. |
-| MONEY-03 | Order money amounts | Verify order money amounts and ledger trace. | Blocked with MONEY-02 until the admin UI exposes the order breakdown; the standalone component has UI unit coverage only. |
+| MONEY-02 | Order money breakdown | Open an order-specific admin money panel from a payout-history entry. | `/admin/orders/:orderId/money` renders the selected order's read-only money panel. Browser-routed coverage verifies the route and request contract. |
+| MONEY-03 | Order money amounts | Verify order money amounts and ledger trace with a controlled order fixture. | Amounts and ledger references agree with the authoritative fixture. A real target check remains fixture-gated. |
+| MONEY-04 | Failed DLQ retry | In a browser-local fixture, retry a payment webhook or wallet outbox event that returns a controlled conflict. | The error is visible, the original queue item remains, and retry becomes available again. A persisted target mutation remains fixture-gated. |
 
 ## Batch 3 — Payouts
 
@@ -35,12 +36,12 @@ Uses: `AdminOperationsPage`, `AdminOrderMoneyPage`, `AdminPayoutsPage`, `Transac
 | PAYOUT-03 | Search payout with empty UUID | Inspect the Search button with a blank UUID. | Search is disabled; no request can be submitted. |
 | PAYOUT-04 | Return to pending queue | After viewing history, tap "Back" / "Pending Queue". | Returns to pending payout queue; no crash. |
 | PAYOUT-05 | Pending payout list | Open pending queue. | Pending payees and unsettled balance are shown, or "All Caught Up!" appears. Each listed balance must be positive. |
-| PAYOUT-06 | Approve payout | Approve a payout in an isolated disposable fixture only. | Payout status changes to "Processing" or "Approved"; entry moves to appropriate tab. Do not run against shared Dev data. |
+| PAYOUT-06 | Approve payout | Approve a draft using an isolated disposable fixture that represents a permitted second administrator. | Payout status changes to `APPROVED`; Mark Paid and Fail Payout become available. Do not run against shared Dev data. |
 | PAYOUT-07 | Payout amount non-zero | All pending payouts. | Every payout amount > ₹0. Zero-amount payouts should not appear in the queue. |
 
 ## Batch 4 — Advanced Ledger Filters (`AdminLedgerPage`)
 
-Full filter suite: transaction ID, owner ID, owner type, category, direction, date range, pagination, and statement detail panel.
+Implemented filter suite: transaction ID, owner ID, owner type, category, direction, and pagination. The current ledger view has no date-range controls or statement-detail panel.
 
 | ID | Description | Action | Expected result |
 |---|---|---|---|
@@ -63,8 +64,11 @@ Full filter suite: transaction ID, owner ID, owner type, category, direction, da
 
 | ID | Description | Action | Expected result |
 |---|---|---|---|
-| PAYOUT-08 | Reject payout | Reject a payout in an isolated disposable fixture only. | Payout status changes to "Rejected"; entry removed from pending queue. Do not run against shared Dev data. |
+| PAYOUT-08 | Cancel draft payout | Cancel a draft in an isolated disposable fixture only. | Payout status changes to `CANCELLED`; approval and terminal actions disappear. Do not run against shared Dev data. |
 | PAYOUT-09 | Create draft payout | Create a draft payout in an isolated disposable fixture only. | Draft payout appears with its persisted status. Do not run against shared Dev data. |
 | PAYOUT-10 | Force-create payout | Exercise only with an isolated disposable fixture and an approved test plan. | Payout is created with a recorded reason and appears in the queue. Do not run against shared Dev data. |
 | PAYOUT-11 | Open payout history tab | `openHistory()` → `openHistoryPayout()`. | History tab shows processed payouts with timestamps and amounts. |
-| PAYOUT-12 | Open pending payout | `openPendingQueue()` → `openPendingPayout()`. | Pending payout details visible with approve/reject buttons. |
+| PAYOUT-12 | Open pending payout | `openPendingQueue()` → `openPendingPayout()`. | Pending payout details and a create-draft flow are visible; a draft detail exposes Approve and Cancel as appropriate. |
+| PAYOUT-13 | Explicit unverified-bank override | Open a named but unverified payee in a browser-local fixture. | Create remains unavailable until the checkbox is selected; the intercepted request sends `force: true`. A persisted target override remains fixture-gated. |
+| PAYOUT-14 | Ambiguous draft-create retry | Simulate a committed draft whose first response is lost, then retry from the same dialog. | The retry sends the original idempotency key and receives the existing draft rather than becoming a new request. |
+| PAYOUT-15 | Four-eyes approval guard | Open a fixture draft whose `createdBy` matches the authenticated admin. | Approve stays visible but disabled and sends no payout write. |

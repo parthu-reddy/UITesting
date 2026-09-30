@@ -1,6 +1,18 @@
 # 01 — Environment and Test-Data — All Scenarios
 
-Prerequisites for every scenario in this folder: the configured deployment is reachable (`TestConfig.APP_URL`), OTP autofill is available, and the four seeded accounts have complete profiles.
+Current state (2026-09-30): the runner-secret OTP feature is parked at the user's request and
+defaults to disabled. Manual and automatic login both use the normal UI's Dev Autofill Code
+button. ApiGateway and IdentityService need `dev` without `prod`, and `DEV_OTP_ENABLED=true`;
+the selected phone/portal must be seeded. The restored source awaits deployment and live
+validation; no scenario is declared passing from this change alone.
+
+For any browser scenario, the configured deployment must be reachable over HTTPS and the
+seeded accounts must have complete profiles (with explicit admin profile setup where authorised).
+For future runner-secret harness activation, additional prerequisites are: the configured deployment is reachable over
+HTTPS (`TestConfig.APP_URL`, with local loopback HTTP allowed only for local development), only
+API Gateway and IdentityService have the `e2e` profile enabled alongside `dev`, those services
+and the Java runner explicitly set `E2E_OTP_ENABLED=true`, the Java test process has
+`E2E_RUNNER_SECRET`, and the four seeded accounts have complete profiles.
 
 | ID | Role / context | Action | Expected result | Notes |
 |---|---|---|---|---|

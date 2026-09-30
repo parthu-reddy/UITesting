@@ -1,12 +1,16 @@
 # 01 — Login and OTP — All Scenarios
 
-All scenarios use real backend authentication. No mocked tokens. OTP is read via dev autofill endpoint.
+All scenarios use real backend authentication and no mocked tokens. After the browser requests
+an OTP through the normal login flow, the test clicks the same Dev Autofill Code button used
+for manual developer login. This facility is enabled only for seeded accounts on a Dev backend
+with `DEV_OTP_ENABLED=true`; it is absent in production. The runner-secret harness is parked.
+These source changes await deployment and live validation.
 
 ## Batch 1 — Happy-path login per role
 
 | ID | Role / phone | Action | Expected result |
 |---|---|---|---|
-| AUTH-01 | Customer 8000000001 | Select "Order Food" role → enter phone → tap "Send OTP" → autofill OTP → tap "Verify". | `CustomerDashboardPage.waitForDashboard()` resolves; profile role stored as `CUSTOMER`. |
+| AUTH-01 | Customer 8000000001 | Select "Order Food" role → enter phone → tap "Send OTP" → tap "Autofill Code" → tap "Verify". | `CustomerDashboardPage.waitForDashboard()` resolves; profile role stored as `CUSTOMER`. |
 | AUTH-02 | Restaurant 9000000001 | Select "Restaurant Partner" → same OTP flow. | `RestaurantDashboardPage.waitForDashboard()` resolves; role `RESTAURANT`. |
 | AUTH-03 | Rider 7000000001 | Select "Delivery Executive" → same OTP flow. | `DeliveryDashboardPage.waitForDashboard()` resolves; role `DELIVERY`. |
 | AUTH-04 | Admin 1000000001 | Same OTP flow → if profile-modal appears complete it. | `AdminPortalPage` visible; role `ADMIN`. |
@@ -42,7 +46,7 @@ All scenarios use real backend authentication. No mocked tokens. OTP is read via
 
 | ID | Role | Action | Expected result |
 |---|---|---|---|
-| AUTH-17 | Customer | Request OTP → click "Resend OTP" → autofill new OTP → verify. | New OTP accepted; dashboard renders. |
+| AUTH-17 | Customer | Request OTP → click "Resend OTP" → click "Autofill Code" to enter the new OTP → verify. | New OTP accepted; dashboard renders. |
 | AUTH-18 | Restaurant | Same resend flow. | Same result. |
 | AUTH-19 | Rider | Same resend flow. | Same result. |
 | AUTH-20 | Admin | Same resend flow. | Same result. |

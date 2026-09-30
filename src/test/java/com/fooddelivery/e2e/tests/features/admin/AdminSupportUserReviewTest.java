@@ -14,6 +14,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /** Strict, read-only checks for admin support, user, review and category screens. */
+@Tag("admin")
 @Tag("admin-support-users")
 public class AdminSupportUserReviewTest extends TestBase {
 
@@ -173,8 +174,8 @@ public class AdminSupportUserReviewTest extends TestBase {
     }
 
     @Test
-    @DisplayName("ADMIN-USER: Suspending an active user opens a confirmation that can be canceled")
-    void suspendConfirmationCanBeCanceled() {
+    @DisplayName("ADMIN-USER: Status controls are state-aware, and an available suspension confirmation can be canceled")
+    void statusControlIsStateAwareAndSuspensionConfirmationCanBeCanceled() {
         AdminUserManagementPage users = openUsersAndWaitForInitialList();
         Response response = searchSeededCustomer(users);
         assertThat(response.status()).isEqualTo(200);
@@ -185,8 +186,9 @@ public class AdminSupportUserReviewTest extends TestBase {
 
         Locator suspend = adminPage.getByRole(AriaRole.BUTTON,
                 new com.microsoft.playwright.Page.GetByRoleOptions().setName("Suspend User").setExact(true));
-        Assumptions.assumeTrue(suspend.count() == 1,
-                "The seeded user is already suspended; do not activate or otherwise mutate it in this check");
+        Locator activate = adminPage.getByRole(AriaRole.BUTTON,
+                new com.microsoft.playwright.Page.GetByRoleOptions().setName("Activate User").setExact(true));
+        assertThat(suspend.count() + activate.count()).isEqualTo(1);
 
         AtomicInteger statusUpdates = new AtomicInteger();
         adminPage.onRequest(request -> {
@@ -196,6 +198,13 @@ public class AdminSupportUserReviewTest extends TestBase {
                 statusUpdates.incrementAndGet();
             }
         });
+        if (suspend.count() == 0) {
+            assertThat(users.getUserStatus()).isEqualTo("Suspended");
+            assertThat(activate.isEnabled()).isTrue();
+            assertThat(statusUpdates.get()).isZero();
+            return;
+        }
+
         suspend.click();
         Locator dialog = adminPage.getByRole(AriaRole.DIALOG);
         assertThat(dialog.isVisible()).isTrue();
@@ -206,6 +215,56 @@ public class AdminSupportUserReviewTest extends TestBase {
         dialog.waitFor(new Locator.WaitForOptions()
                 .setState(com.microsoft.playwright.options.WaitForSelectorState.HIDDEN));
         assertThat(statusUpdates.get()).isZero();
+    }
+
+    @Test
+    @DisplayName("ADMIN-USER: Available role changes require confirmation and cancellation sends no write")
+    void roleChangeConfirmationCanBeCanceled() {
+        AdminUserManagementPage users = openUsersAndWaitForInitialList();
+        Response response = searchSeededCustomer(users);
+        assertThat(response.status()).isEqualTo(200);
+        assertThat(users.getUserCount()).isEqualTo(1);
+        Response activeOrders = selectUserAndWaitForOrderLookup(users);
+        assertThat(activeOrders.status()).isEqualTo(200);
+        assertThat(users.isDetailPanelOpen()).isTrue();
+
+        AtomicInteger roleWrites = new AtomicInteger();
+        adminPage.onRequest(request -> {
+            if ("POST".equals(request.method())
+                    && request.url().contains("/api/v1/internal/admin/users/")
+                    && request.url().endsWith("/roles")) {
+                roleWrites.incrementAndGet();
+            }
+        });
+        String role = users.selectFirstAvailableNewRole();
+        String dialogTitle;
+        String confirmationButton;
+        if (role != null) {
+            users.assignRole();
+            dialogTitle = "Grant " + role + " role?";
+            confirmationButton = "Grant role";
+        } else {
+            Locator removeRole = adminPage.locator("button[aria-label^='Remove '][aria-label$=' role']").first();
+            assertThat(removeRole.count()).isPositive();
+            String removeLabel = removeRole.getAttribute("aria-label");
+            assertThat(removeLabel).matches("^Remove .+ role$");
+            role = removeLabel.substring("Remove ".length(), removeLabel.length() - " role".length());
+            removeRole.click();
+            dialogTitle = "Remove " + role + " role?";
+            confirmationButton = "Remove role";
+        }
+
+        Locator dialog = adminPage.getByRole(AriaRole.DIALOG,
+                new com.microsoft.playwright.Page.GetByRoleOptions().setName(dialogTitle).setExact(true));
+        assertThat(dialog.isVisible()).isTrue();
+        assertThat(dialog.getByRole(AriaRole.BUTTON,
+                new Locator.GetByRoleOptions().setName(confirmationButton).setExact(true)).isVisible()).isTrue();
+        assertThat(roleWrites.get()).isZero();
+        dialog.getByRole(AriaRole.BUTTON,
+                new Locator.GetByRoleOptions().setName("Cancel").setExact(true)).click();
+        dialog.waitFor(new Locator.WaitForOptions()
+                .setState(com.microsoft.playwright.options.WaitForSelectorState.HIDDEN));
+        assertThat(roleWrites.get()).isZero();
     }
 
     // ── REVIEW MODERATION ───────────────────────────────────────────────
@@ -316,13 +375,16 @@ public class AdminSupportUserReviewTest extends TestBase {
     }
 
     @Test
-    @DisplayName("ADMIN-CAT: Existing category opens an edit form without saving")
-    void existingCategoryEditFormOpensWithoutSaving() {
+    @DisplayName("ADMIN-CAT: The live category list exposes its empty state or an edit form without saving")
+    void categoryListEmptyStateOrEditFormIsReadOnly() {
         Response response = openCategoriesAndWait();
         assertThat(response.status()).isEqualTo(200);
         AdminCategoriesPage categories = new AdminCategoriesPage(adminPage);
         List<Locator> cards = categories.getCategoryCards();
-        Assumptions.assumeTrue(!cards.isEmpty(), "A category fixture is required to open the edit form");
+        if (cards.isEmpty()) {
+            assertThat(categories.isEmptyStateVisible()).isTrue();
+            return;
+        }
         String categoryName = cards.get(0).locator("p.font-bold").innerText().trim();
 
         AtomicInteger writes = new AtomicInteger();

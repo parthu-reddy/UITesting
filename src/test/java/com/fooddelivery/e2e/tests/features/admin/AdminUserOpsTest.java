@@ -10,6 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /**
  * Tests admin user management operations.
  */
+@Tag("admin")
 @Tag("feature")
 public class AdminUserOpsTest extends TestBase {
 

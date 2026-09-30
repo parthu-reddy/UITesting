@@ -32,11 +32,18 @@ public class CustomerOrderChatPage {
 
     /** Clicks the launcher without assuming session initialization succeeds. */
     public void openChatLauncher(String orderId) {
-        String floatingLabel = "#" + orderId.substring(0, Math.min(6, orderId.length()));
-        Locator launcher = page.getByRole(AriaRole.BUTTON,
-                new Page.GetByRoleOptions().setName(floatingLabel).setExact(true));
+        Locator launcher = launcher(orderId);
         assertThat(launcher).hasCount(1);
         launcher.click();
+    }
+
+    public Locator launcher(String orderId) {
+        Locator launcher = page.locator("[data-testid='chat-launcher'][data-order-id='" + orderId + "']");
+        if (launcher.count() == 0) {
+            String floatingLabel = "#" + orderId.substring(0, Math.min(6, orderId.length()));
+            launcher = page.locator("button:has-text('" + floatingLabel + "')");
+        }
+        return launcher;
     }
 
     /** Retries session initialization from the error state shown by ChatWidget. */
@@ -51,8 +58,43 @@ public class CustomerOrderChatPage {
         return page.getByPlaceholder("Type a message...");
     }
 
+    public Locator composerForm() {
+        return page.getByTestId("chat-composer");
+    }
+
+    /** The actionable error state shown when the chat session could not be initialized. */
+    public Locator sessionInitializationAlert() {
+        return page.getByRole(AriaRole.ALERT);
+    }
+
+    /** The transport state shown after a session exists but its WebSocket is unavailable. */
+    public Locator reconnectingStatus() {
+        return page.getByTestId("chat-reconnecting-status");
+    }
+
     public Locator sendButton() {
         return page.locator("form:has(textarea[placeholder='Type a message...']) button[type='submit']");
+    }
+
+    public Locator unreadCount(String orderId) {
+        Locator unread = page.getByTestId("chat-unread-count");
+        return unread.count() > 0 ? unread : launcher(orderId).locator("span.absolute");
+    }
+
+    public Locator typingIndicator() {
+        return page.getByTestId("chat-typing-indicator");
+    }
+
+    public Locator messages() {
+        return page.getByTestId("chat-message");
+    }
+
+    public Locator messageById(String messageId) {
+        return page.locator("[data-testid='chat-message'][data-message-id='" + messageId + "']");
+    }
+
+    public Locator galleryFileInput() {
+        return page.getByTestId("chat-gallery-file-input");
     }
 
     public void closeChat() {
@@ -74,6 +116,6 @@ public class CustomerOrderChatPage {
     }
 
     public int getMessageCount() {
-        return page.locator(".chat-message, [data-testid='chat-bubble']").count();
+        return messages().count();
     }
 }

@@ -53,8 +53,9 @@ Re-run the tests in this folder after deployment.
   correctly rejected by the audit: it disappears once the field has a value.)
 
 **This changes the DOM under existing tests.** Sibling combinators `~ input` / `+ input` no
-longer match a `FormField`; the descendant form does. `RestaurantMenuEditorPage` and
-`AdminCampaignsPage` were updated accordingly and the suite recompiles.
+longer match a `FormField`; the descendant form does. `RestaurantMenuEditorPage` was updated
+accordingly. The obsolete admin campaigns page object was removed because campaigns are a
+restaurant-only surface.
 
 These changes are applied to `FoodDeliveryAppUI` source and pass typecheck, lint and the 339
 unit tests. **They are not verified**: nothing here is proven until the UI is deployed and the

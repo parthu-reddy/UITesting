@@ -25,7 +25,9 @@ Uses: `AdminSupportTicketsPage`, `AdminRefundQueuePage`.
 | REFUND-QUEUE-04 | Approve refund | Open a ticket in a disposable financial fixture → open approval confirmation. | Confirmation states the amount and ledger consequence; cancel against shared Dev. |
 | REFUND-QUEUE-05 | Reject refund | Open a ticket in a disposable fixture → open rejection confirmation. | Confirmation appears; cancel against shared Dev. |
 | REFUND-QUEUE-06 | Approved refund credited to customer | After approval in an isolated fixture. | Customer order, refund record, and ledger amount agree. |
-| REFUND-QUEUE-07 | Filter by status | Choose OPEN, IN REVIEW, RESOLVED, REJECTED, or ALL. | Queue request uses the selected status and renders rows or the empty state. There is no date filter. |
+| REFUND-QUEUE-07 | Failed refund resolution recovery | Return a controlled resolver failure from a browser-local fixture after confirmation. | Error is visible; ticket details and the operator's note remain editable, with no false success or queue refresh. |
+| REFUND-QUEUE-08 | Filter by status | Choose OPEN, IN REVIEW, RESOLVED, REJECTED, or ALL. | Queue request uses the selected status and renders rows or the empty state. There is no date filter. |
+| REFUND-QUEUE-09 | Confirmed fixture rejection | In a browser-local fixture, choose Reject, add the audit note, and confirm. | The resolver receives `approved: false` with the note and fault type; only the fixture queue closes. |
 
 ## Batch 3 — Support ticket advanced features (`AdminSupportTicketsPage`)
 
@@ -34,12 +36,16 @@ Uses: `AdminSupportTicketsPage`, `AdminRefundQueuePage`.
 | SUPPORT-ADV-01 | Approve ticket | Select a ticket in an isolated fixture → use Resolve Ticket. | Approval requires a valid refund amount and an amount-specific confirmation; final approval is not run on shared Dev. |
 | SUPPORT-ADV-02 | Reject ticket | Select OPEN ticket → add notes → open reject confirmation. | Rejection confirmation appears; final rejection requires an isolated support fixture. |
 | SUPPORT-ADV-03 | Resolve with notes | — | No convenience shortcut is exposed by the current UI/page object. |
-| SUPPORT-ADV-04 | Open ticket chat | Select a ticket → open details/chat. | Chat view opens; sending a message requires an explicitly isolated test conversation. |
+| SUPPORT-ADV-04 | Open ticket chat | Select a ticket → open details/chat. | Chat view opens. Browser-routed coverage verifies session isolation plus moderator send/receipt using a disposable STOMP fixture; live cross-role delivery still needs a controlled order. |
 | SUPPORT-ADV-05 | Ticket detail panel | `selectTicket(0)` → `isTicketDetailOpen()`. | Ticket Details heading and the selected order ID render. |
 | SUPPORT-ADV-06 | Support pagination — next | With more than one page, `nextPage()`. | Request changes to page 2 and the page label advances. |
 | SUPPORT-ADV-07 | Support pagination — prev | After navigating forward, `prevPage()`. | Request returns to page 1. |
 | SUPPORT-ADV-08 | Open each status tab | Open each of OPEN, IN REVIEW, RESOLVED, REJECTED. | The matching status request succeeds and the queue shows rows or an explicit empty state. |
 | SUPPORT-ADV-09 | Ticket count per tab | On each status tab. | Header count matches the visible ticket buttons. |
+| SUPPORT-ADV-10 | Resolver failure recovery | Return an HTTP 409 from a browser-local refund resolver after approval confirmation. | Error is visible; the selected ticket and audit note stay open and the form is ready to retry, with no false success or queue refresh. |
+| SUPPORT-ADV-11 | Moderator image upload contract | In a browser-local ticket/chat fixture, choose the gallery image input for the selected ticket. | The request is multipart to that session, the `data.url` response plus its authoritative IMAGE broadcast render one attachment in that ticket, and no upload error appears. |
+| SUPPORT-ADV-12 | Image upload missing URL recovery | Return a successful-looking upload envelope without `data.url` from a browser-local fixture. | The moderator sees the upload error, no attachment is forged, and the composer becomes usable again. |
+| SUPPORT-ADV-13 | Call a ticket participant | Start a call from an open ticket chat. | The local `useWebRTC` lifecycle repair permits an outgoing offer. Browser E2E remains pending a controlled, isolated cross-role WebRTC fixture that can prove the remote answer, media state, and safe end-to-end cleanup. |
 
 ## Batch 4 — Refund queue ticket detail (`AdminRefundQueuePage`)
 

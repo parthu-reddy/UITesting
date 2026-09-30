@@ -7,11 +7,19 @@ import com.fooddelivery.e2e.util.CompletedDeliveryFixture;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Response;
+import com.microsoft.playwright.Route;
+import com.microsoft.playwright.WebSocketRoute;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import java.nio.file.Paths;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.function.Consumer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -54,6 +62,269 @@ public class ChatCommunicationTest extends TestBase {
         ChatAttempt attempt = trySendMessage(customerPage, order,
                 "E2E delivery-window check " + order.shortOrderId(), customerTelemetry);
         assertSuccessfulChatAttempt(attempt, "after delivery", false);
+    }
+
+    @Test
+    @DisplayName("Chat window shows typing, unread messages, reconnects, and sends an attachment")
+    void chatWindowMaintainsRealtimeState() {
+        ChatTelemetry customerTelemetry = observeChatTraffic(customerPage);
+        ChatTelemetry restaurantTelemetry = observeChatTraffic(restaurantPage);
+        AtomicReference<WebSocketRoute> customerSocket = new AtomicReference<>();
+        AtomicInteger customerSocketConnections = new AtomicInteger();
+        AtomicReference<ChatWindowAttempt> interaction = new AtomicReference<>();
+        AtomicBoolean rejectFirstSessionRequest = new AtomicBoolean(true);
+        Consumer<Route> rejectInitialSession = route -> {
+            if (route.request().method().equals("POST")
+                    && route.request().url().contains("/api/v1/chat/sessions")
+                    && rejectFirstSessionRequest.getAndSet(false)) {
+                route.fulfill(new Route.FulfillOptions()
+                        .setStatus(503)
+                        .setContentType("application/json")
+                        .setBody("{\"success\":false,\"message\":\"E2E session retry fixture\"}"));
+            } else {
+                route.resume();
+            }
+        };
+
+        // Proxy the real socket so the test can close an already-connected connection and prove
+        // the widget resubscribes before accepting another message.
+        customerPage.routeWebSocket(url -> url.contains("/ws/chat"), socket -> {
+            customerSocket.set(socket.connectToServer());
+            customerSocketConnections.incrementAndGet();
+        });
+        customerPage.route("**/api/v1/chat/sessions", rejectInitialSession);
+
+        try {
+            CompletedDeliveryFixture.completeOrder(
+                    customerPage, restaurantPage, riderPage,
+                    testCustomerPhone, testRestaurantPhone, testRiderPhone,
+                    activeOrder -> interaction.set(tryChatWindowInteractions(
+                            customerPage, restaurantPage, activeOrder, customerTelemetry,
+                            restaurantTelemetry, customerSocket, customerSocketConnections,
+                            rejectInitialSession)));
+        } finally {
+            customerPage.unroute("**/api/v1/chat/sessions", rejectInitialSession);
+        }
+
+        assertSuccessfulChatWindowInteraction(interaction.get());
+    }
+
+    private static ChatWindowAttempt tryChatWindowInteractions(
+            Page customerPage, Page restaurantPage, CompletedDeliveryFixture.Result order,
+            ChatTelemetry customerTelemetry, ChatTelemetry restaurantTelemetry,
+            AtomicReference<WebSocketRoute> customerSocket, AtomicInteger customerSocketConnections,
+            Consumer<Route> rejectInitialSession) {
+        CustomerOrderChatPage customerChat = new CustomerOrderChatPage(customerPage);
+        CustomerOrderChatPage restaurantChat = new CustomerOrderChatPage(restaurantPage);
+        Integer customerSessionStatus = null;
+        Integer restaurantSessionStatus = null;
+        Integer imageUploadStatus = null;
+        boolean typingVisible = false;
+        boolean typingCleared = false;
+        boolean sessionRetryVisible = false;
+        boolean sessionRetrySucceeded = false;
+        boolean overlongMessageBlocked = false;
+        boolean overlongMessageExplained = false;
+        boolean historySurvivedReload = false;
+        boolean unreadVisible = false;
+        boolean unreadCleared = false;
+        boolean reconnectBannerVisible = false;
+        boolean composerDisabledDuringReconnect = false;
+        boolean reconnected = false;
+        boolean postReconnectMessageVisible = false;
+        boolean customerImageVisible = false;
+        boolean restaurantImageVisible = false;
+        boolean uploadErrorToastVisible = false;
+        String stage = "opening customer chat";
+
+        try {
+            customerChat.openChatLauncher(order.orderId());
+            customerPage.waitForCondition(customerChat.sessionInitializationAlert()::isVisible,
+                    new Page.WaitForConditionOptions().setTimeout(10_000));
+            sessionRetryVisible = true;
+            customerPage.unroute("**/api/v1/chat/sessions", rejectInitialSession);
+            Response retriedSession = customerPage.waitForResponse(
+                    response -> response.request().method().equals("POST")
+                            && response.url().contains("/api/v1/chat/sessions"),
+                    new Page.WaitForResponseOptions().setTimeout(20_000),
+                    customerChat::retrySession);
+            customerSessionStatus = retriedSession.status();
+            sessionRetrySucceeded = retriedSession.ok();
+            if (!isSuccessfulStatus(customerSessionStatus)) {
+                return snapshotChatWindow(customerSessionStatus, restaurantSessionStatus, imageUploadStatus,
+                        sessionRetryVisible, sessionRetrySucceeded, overlongMessageBlocked,
+                        overlongMessageExplained, historySurvivedReload, typingVisible, typingCleared,
+                        unreadVisible, unreadCleared, reconnectBannerVisible,
+                        composerDisabledDuringReconnect, reconnected, postReconnectMessageVisible,
+                        customerImageVisible, restaurantImageVisible, uploadErrorToastVisible,
+                        "customer session request was rejected");
+            }
+            stage = "waiting for customer chat connection";
+            waitForConnected(customerPage, customerChat, customerTelemetry);
+
+            stage = "checking the server message-length boundary in the composer";
+            customerChat.composer().fill("x".repeat(10_001));
+            com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(customerChat.sendButton())
+                    .isDisabled();
+            overlongMessageBlocked = true;
+            com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(customerPage.getByText(
+                    "Messages can contain up to 10,000 characters.",
+                    new Page.GetByTextOptions().setExact(true))).isVisible();
+            overlongMessageExplained = true;
+            customerChat.composer().fill("");
+
+            stage = "opening restaurant chat";
+            Response restaurantSession = restaurantPage.waitForResponse(
+                    response -> response.request().method().equals("POST")
+                            && response.url().contains("/api/v1/chat/sessions"),
+                    new Page.WaitForResponseOptions().setTimeout(20_000),
+                    () -> {
+                        new RestaurantOrderActionsPage(restaurantPage).openChat(order.shortOrderId());
+                        restaurantChat.openChat(order.orderId());
+                    });
+            restaurantSessionStatus = restaurantSession.status();
+            if (!restaurantSession.ok()) {
+                return snapshotChatWindow(customerSessionStatus, restaurantSessionStatus, imageUploadStatus,
+                        sessionRetryVisible, sessionRetrySucceeded, overlongMessageBlocked,
+                        overlongMessageExplained, historySurvivedReload, typingVisible, typingCleared,
+                        unreadVisible, unreadCleared, reconnectBannerVisible,
+                        composerDisabledDuringReconnect, reconnected, postReconnectMessageVisible,
+                        customerImageVisible, restaurantImageVisible, uploadErrorToastVisible,
+                        "restaurant session request was rejected");
+            }
+            stage = "waiting for restaurant chat connection";
+            waitForConnected(restaurantPage, restaurantChat, restaurantTelemetry);
+
+            stage = "accepting exactly the server maximum message length";
+            String maximumLengthMessage = "x".repeat(10_000);
+            customerChat.composer().fill(maximumLengthMessage);
+            assertThat(customerChat.sendButton().isDisabled())
+                    .as("the composer accepts a message at the 10,000-character server limit")
+                    .isFalse();
+            customerChat.sendButton().click();
+            assertMessageVisible(restaurantPage, maximumLengthMessage);
+
+            stage = "proving messages survive a customer page reload";
+            String persistedMessage = "E2E persisted chat message " + order.shortOrderId();
+            customerChat.sendMessage(persistedMessage);
+            assertMessageVisible(restaurantPage, persistedMessage);
+            customerPage.reload();
+            com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(
+                    customerChat.launcher(order.orderId())).isVisible();
+            customerChat.openChat(order.orderId());
+            customerPage.waitForCondition(customerChat.composer()::isEnabled,
+                    new Page.WaitForConditionOptions().setTimeout(20_000));
+            assertMessageVisible(customerPage, persistedMessage);
+            historySurvivedReload = true;
+
+            stage = "sending typing indicator";
+            customerChat.composer().fill("E2E typing indicator " + order.shortOrderId());
+            Locator typingIndicator = restaurantPage.getByText("Someone is typing...",
+                    new Page.GetByTextOptions().setExact(true));
+            restaurantPage.waitForCondition(typingIndicator::isVisible,
+                    new Page.WaitForConditionOptions().setTimeout(10_000));
+            typingVisible = true;
+
+            String typingMessage = "E2E typing completion " + order.shortOrderId();
+            customerChat.sendMessage(typingMessage);
+            assertMessageVisible(restaurantPage, typingMessage);
+            restaurantPage.waitForCondition(typingIndicator::isHidden,
+                    new Page.WaitForConditionOptions().setTimeout(10_000));
+            typingCleared = true;
+
+            stage = "recording unread message while the customer chat is closed";
+            customerChat.closeChat();
+            customerPage.waitForCondition(() -> customerChat.launcher(order.orderId()).isVisible(),
+                    new Page.WaitForConditionOptions().setTimeout(5_000));
+            String unreadMessage = "E2E unread message " + order.shortOrderId();
+            restaurantChat.sendMessage(unreadMessage);
+            customerPage.waitForCondition(
+                    () -> customerChat.unreadCount(order.orderId()).isVisible()
+                            && "1".equals(customerChat.unreadCount(order.orderId()).innerText().trim()),
+                    new Page.WaitForConditionOptions().setTimeout(10_000));
+            unreadVisible = true;
+            customerChat.openChat(order.orderId());
+            assertMessageVisible(customerPage, unreadMessage);
+            customerPage.waitForCondition(
+                    () -> customerChat.unreadCount(order.orderId()).count() == 0,
+                    new Page.WaitForConditionOptions().setTimeout(5_000));
+            unreadCleared = true;
+
+            stage = "closing an established customer socket";
+            WebSocketRoute activeSocket = customerSocket.get();
+            if (activeSocket == null) {
+                throw new AssertionError("the customer chat WebSocket route was not established");
+            }
+            int connectionsBeforeClose = customerSocketConnections.get();
+            int stompConnectionsBeforeClose = customerTelemetry.stompConnectedCount().get();
+            activeSocket.close();
+            Locator reconnectBanner = customerChat.reconnectingStatus();
+            customerPage.waitForCondition(reconnectBanner::isVisible,
+                    new Page.WaitForConditionOptions().setTimeout(10_000));
+            reconnectBannerVisible = true;
+            composerDisabledDuringReconnect = customerChat.composer().isDisabled();
+
+            customerPage.waitForCondition(() -> customerSocketConnections.get() > connectionsBeforeClose,
+                    new Page.WaitForConditionOptions().setTimeout(15_000));
+            customerPage.waitForCondition(
+                    () -> customerTelemetry.stompConnectedCount().get() > stompConnectionsBeforeClose,
+                    new Page.WaitForConditionOptions().setTimeout(15_000));
+            customerPage.waitForCondition(customerChat.composer()::isEnabled,
+                    new Page.WaitForConditionOptions().setTimeout(15_000));
+            reconnected = true;
+
+            stage = "sending after socket reconnection";
+            String postReconnectMessage = "E2E message after reconnect " + order.shortOrderId();
+            customerChat.sendMessage(postReconnectMessage);
+            assertMessageVisible(restaurantPage, postReconnectMessage);
+            String postReconnectReply = "E2E reply after reconnect " + order.shortOrderId();
+            restaurantChat.sendMessage(postReconnectReply);
+            assertMessageVisible(customerPage, postReconnectReply);
+            postReconnectMessageVisible = true;
+
+            stage = "uploading an image attachment";
+            Response imageUpload = customerPage.waitForResponse(
+                    response -> response.request().method().equals("POST")
+                            && response.url().contains("/upload-image"),
+                    new Page.WaitForResponseOptions().setTimeout(20_000),
+                    () -> customerChat.galleryFileInput().setInputFiles(Paths.get("src/test/resources/dummy.png")));
+            imageUploadStatus = imageUpload.status();
+            String imageMessageId = uploadedMessageId(imageUpload);
+            customerPage.waitForCondition(
+                    () -> customerChat.messageById(imageMessageId).isVisible(),
+                    new Page.WaitForConditionOptions().setTimeout(15_000));
+            customerImageVisible = true;
+            restaurantPage.waitForCondition(
+                    () -> restaurantChat.messageById(imageMessageId).isVisible(),
+                    new Page.WaitForConditionOptions().setTimeout(15_000));
+            restaurantImageVisible = true;
+            customerPage.waitForCondition(
+                    () -> "false".equals(customerChat.composerForm().getAttribute("aria-busy"))
+                            && customerChat.composer().isEnabled(),
+                    new Page.WaitForConditionOptions().setTimeout(5_000));
+            uploadErrorToastVisible = customerPage.getByText(
+                    "Could not upload that image. Check it is under 5MB and try again.",
+                    new Page.GetByTextOptions().setExact(true)).isVisible();
+
+            return snapshotChatWindow(customerSessionStatus, restaurantSessionStatus, imageUploadStatus,
+                    sessionRetryVisible, sessionRetrySucceeded, overlongMessageBlocked,
+                    overlongMessageExplained, historySurvivedReload, typingVisible, typingCleared,
+                    unreadVisible, unreadCleared, reconnectBannerVisible,
+                    composerDisabledDuringReconnect, reconnected, postReconnectMessageVisible,
+                    customerImageVisible, restaurantImageVisible, uploadErrorToastVisible, "");
+        } catch (RuntimeException | AssertionError failure) {
+            return snapshotChatWindow(customerSessionStatus, restaurantSessionStatus, imageUploadStatus,
+                    sessionRetryVisible, sessionRetrySucceeded, overlongMessageBlocked,
+                    overlongMessageExplained, historySurvivedReload, typingVisible, typingCleared,
+                    unreadVisible, unreadCleared, reconnectBannerVisible,
+                    composerDisabledDuringReconnect, reconnected, postReconnectMessageVisible,
+                    customerImageVisible, restaurantImageVisible, uploadErrorToastVisible,
+                    failure.getClass().getSimpleName() + " at " + stage
+                            + (failure.getMessage() == null ? "" : ": " + failure.getMessage()));
+        } finally {
+            closeChatIfOpen(customerChat);
+            closeChatIfOpen(restaurantChat);
+        }
     }
 
     private static ChatAttempt tryRestaurantRoundTrip(Page customerPage, Page restaurantPage,
@@ -264,7 +535,10 @@ public class ChatCommunicationTest extends TestBase {
                 String text = frame.text();
                 if (text == null) return;
                 String trimmed = text.stripLeading();
-                if (trimmed.startsWith("CONNECTED")) telemetry.websocketState().set("STOMP CONNECTED");
+                if (trimmed.startsWith("CONNECTED")) {
+                    telemetry.websocketState().set("STOMP CONNECTED");
+                    telemetry.stompConnectedCount().incrementAndGet();
+                }
                 else if (trimmed.startsWith("ERROR")) telemetry.websocketState().set("STOMP ERROR");
             });
         });
@@ -330,6 +604,23 @@ public class ChatCommunicationTest extends TestBase {
                 customerReplyVisible, failure);
     }
 
+    private static ChatWindowAttempt snapshotChatWindow(
+            Integer customerSessionStatus, Integer restaurantSessionStatus, Integer imageUploadStatus,
+            boolean sessionRetryVisible, boolean sessionRetrySucceeded,
+            boolean overlongMessageBlocked, boolean overlongMessageExplained,
+            boolean historySurvivedReload, boolean typingVisible, boolean typingCleared,
+            boolean unreadVisible, boolean unreadCleared,
+            boolean reconnectBannerVisible, boolean composerDisabledDuringReconnect, boolean reconnected,
+            boolean postReconnectMessageVisible, boolean customerImageVisible, boolean restaurantImageVisible,
+            boolean uploadErrorToastVisible, String failure) {
+        return new ChatWindowAttempt(customerSessionStatus, restaurantSessionStatus, imageUploadStatus,
+                sessionRetryVisible, sessionRetrySucceeded, overlongMessageBlocked,
+                overlongMessageExplained, historySurvivedReload, typingVisible, typingCleared,
+                unreadVisible, unreadCleared, reconnectBannerVisible,
+                composerDisabledDuringReconnect, reconnected, postReconnectMessageVisible,
+                customerImageVisible, restaurantImageVisible, uploadErrorToastVisible, failure);
+    }
+
     private static void closeChatIfOpen(CustomerOrderChatPage chat) {
         try {
             if (chat.isChatOpen()) chat.closeChat();
@@ -341,6 +632,15 @@ public class ChatCommunicationTest extends TestBase {
     private static void assertMessageVisible(Page page, String message) {
         com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(
                 page.getByText(message, new Page.GetByTextOptions().setExact(true))).isVisible();
+    }
+
+    private static String uploadedMessageId(Response uploadResponse) {
+        Matcher matcher = Pattern.compile("\\\"messageId\\\"\\s*:\\s*\\\"([^\\\"]+)\\\"")
+                .matcher(uploadResponse.text());
+        if (!matcher.find()) {
+            throw new AssertionError("a successful image upload response did not include data.messageId");
+        }
+        return matcher.group(1);
     }
 
     private static void assertSuccessfulRoundTrip(ChatAttempt attempt, String orderState) {
@@ -399,11 +699,79 @@ public class ChatCommunicationTest extends TestBase {
         }
     }
 
+    private static void assertSuccessfulChatWindowInteraction(ChatWindowAttempt attempt) {
+        assertThat(attempt)
+                .as("chat window interaction result")
+                .isNotNull();
+        assertThat(attempt.failure())
+                .as("chat window interaction reports no failure")
+                .isEmpty();
+        assertThat(attempt.customerSessionStatus())
+                .as("customer chat session is created")
+                .isBetween(200, 299);
+        assertThat(attempt.restaurantSessionStatus())
+                .as("restaurant chat session is created")
+                .isBetween(200, 299);
+        assertThat(attempt.sessionRetryVisible())
+                .as("a failed initial session request shows the retry action")
+                .isTrue();
+        assertThat(attempt.sessionRetrySucceeded())
+                .as("retrying the initial session request opens chat")
+                .isTrue();
+        assertThat(attempt.overlongMessageBlocked())
+                .as("the composer blocks text above the server's 10,000-character limit")
+                .isTrue();
+        assertThat(attempt.overlongMessageExplained())
+                .as("the composer explains the text-length limit")
+                .isTrue();
+        assertThat(attempt.historySurvivedReload())
+                .as("messages are loaded from history after the customer reloads the page")
+                .isTrue();
+        assertThat(attempt.typingVisible())
+                .as("restaurant sees the customer typing")
+                .isTrue();
+        assertThat(attempt.typingCleared())
+                .as("sending a message clears the peer typing indicator")
+                .isTrue();
+        assertThat(attempt.unreadVisible())
+                .as("a peer message increments the closed customer chat unread count")
+                .isTrue();
+        assertThat(attempt.unreadCleared())
+                .as("opening the customer chat clears its unread count")
+                .isTrue();
+        assertThat(attempt.reconnectBannerVisible())
+                .as("an established socket close shows the reconnect state")
+                .isTrue();
+        assertThat(attempt.composerDisabledDuringReconnect())
+                .as("the composer cannot send while the socket is disconnected")
+                .isTrue();
+        assertThat(attempt.reconnected())
+                .as("the widget reconnects after the socket closes")
+                .isTrue();
+        assertThat(attempt.postReconnectMessageVisible())
+                .as("both participants receive a message after the customer reconnects")
+                .isTrue();
+        assertThat(attempt.imageUploadStatus())
+                .as("image upload returns a successful HTTP response")
+                .isBetween(200, 299);
+        assertThat(attempt.customerImageVisible())
+                .as("the customer sees the uploaded attachment")
+                .isTrue();
+        assertThat(attempt.restaurantImageVisible())
+                .as("the restaurant receives the uploaded attachment")
+                .isTrue();
+        assertThat(attempt.uploadErrorToastVisible())
+                .as("a successful image upload does not show an upload-failed toast")
+                .isFalse();
+    }
+
     private record ChatTelemetry(AtomicReference<Integer> sessionResponseStatus,
                                  AtomicReference<Integer> websocketResponseStatus,
-                                 AtomicReference<String> websocketState) {
+                                 AtomicReference<String> websocketState,
+                                 AtomicInteger stompConnectedCount) {
         private ChatTelemetry() {
-            this(new AtomicReference<>(), new AtomicReference<>(), new AtomicReference<>("not opened"));
+            this(new AtomicReference<>(), new AtomicReference<>(), new AtomicReference<>("not opened"),
+                    new AtomicInteger());
         }
     }
 
@@ -414,4 +782,16 @@ public class ChatCommunicationTest extends TestBase {
                                boolean whitespaceMessageBlocked, boolean customerMessageVisible,
                                boolean recipientMessageVisible, boolean peerReplyVisible,
                                boolean customerReplyVisible, String failure) { }
+
+    private record ChatWindowAttempt(Integer customerSessionStatus, Integer restaurantSessionStatus,
+                                     Integer imageUploadStatus, boolean sessionRetryVisible,
+                                     boolean sessionRetrySucceeded, boolean overlongMessageBlocked,
+                                     boolean overlongMessageExplained, boolean historySurvivedReload,
+                                     boolean typingVisible,
+                                     boolean typingCleared, boolean unreadVisible, boolean unreadCleared,
+                                     boolean reconnectBannerVisible,
+                                     boolean composerDisabledDuringReconnect, boolean reconnected,
+                                     boolean postReconnectMessageVisible, boolean customerImageVisible,
+                                     boolean restaurantImageVisible, boolean uploadErrorToastVisible,
+                                     String failure) { }
 }

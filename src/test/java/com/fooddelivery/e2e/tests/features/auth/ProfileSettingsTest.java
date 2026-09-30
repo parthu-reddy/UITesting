@@ -20,7 +20,7 @@ public class ProfileSettingsTest extends TestBase {
     // ── PROFILE COMPLETION MODAL SCENARIOS ───────────────────────────────
 
     @Test
-    @Disabled("Uses an unseeded phone and permanently completes a new profile")
+    @Disabled("Dev autofill permits only seeded accounts; disposable registration needs an SMS inbox")
     @DisplayName("PROFILE-16/17: Complete profile modal prompt")
     void completeProfileModalPrompt() {
         // Use a new unique phone to trigger the profile setup
@@ -32,7 +32,7 @@ public class ProfileSettingsTest extends TestBase {
         login.fillPhoneNumber(newPhone);
         login.clickSendOtp();
         login.waitForOtpInput();
-        login.clickAutofillCode();
+        login.fillOtp("000000");
         login.clickVerifyAndLogin();
         
         CompleteProfileModalPage profile = new CompleteProfileModalPage(customerPage);

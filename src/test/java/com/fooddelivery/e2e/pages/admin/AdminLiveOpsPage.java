@@ -5,8 +5,8 @@ import com.microsoft.playwright.Page;
 /**
  * Maps to: {@code AdminLiveOperations.tsx}
  * <p>
- * Admin live operations: order list with pagination, driver assignment panel,
- * partial/post-delivery refunds, map view.
+ * Admin live operations: order list with pagination, read-only nearby rider telemetry,
+ * routes to the audited intervention and refund workflows, and map view.
  * </p>
  */
 public class AdminLiveOpsPage {
@@ -61,9 +61,9 @@ public class AdminLiveOpsPage {
                 new Page.GetByRoleOptions().setName("Refund Actions").setExact(true)).isVisible();
     }
 
-    public String getAvailableDriverHeading() {
+    public String getNearbyReadyDriverHeading() {
         return page.getByRole(com.microsoft.playwright.options.AriaRole.HEADING,
-                new Page.GetByRoleOptions().setName(java.util.regex.Pattern.compile("^Available Drivers \\(\\d+\\)$")))
+                new Page.GetByRoleOptions().setName(java.util.regex.Pattern.compile("^Nearby Ready Drivers \\(\\d+\\)$")))
                 .innerText().trim();
     }
 
@@ -109,41 +109,35 @@ public class AdminLiveOpsPage {
         return previous.count() > 0 && previous.isEnabled();
     }
 
-    // ── Driver assignment ────────────────────────────────────────────────
+    // ── Nearby rider telemetry and manual-intervention handoff ────────────
 
-    public int getAvailableDriverCount() {
-        return page.locator("text=Available Drivers").first()
-                .locator("xpath=..").locator("button:has-text('Assign')").count();
+    public int getNearbyReadyDriverCount() {
+        return page.getByTestId("nearby-ready-driver").count();
     }
 
-    public void assignDriver(int driverIndex) {
-        page.locator("button:has-text('Assign')").nth(driverIndex).click();
-        page.waitForTimeout(2000);
+    /** The selected order's candidate request has completed with cards, an empty state, or an error. */
+    public void waitForNearbyDriverResult() {
+        page.getByTestId("nearby-ready-drivers")
+                .locator("[data-testid='nearby-ready-driver'], p:has-text('No available drivers nearby.'), p[role='alert']")
+                .first()
+                .waitFor(new com.microsoft.playwright.Locator.WaitForOptions()
+                        .setState(com.microsoft.playwright.options.WaitForSelectorState.VISIBLE)
+                        .setTimeout(15000));
     }
 
-    // ── Refund actions ───────────────────────────────────────────────────
-
-    public void fillRefundAmount(String amount) {
-        page.locator("input[type='number'][placeholder*='Amount']").first().fill(amount);
+    public boolean hasDirectAssignmentAction() {
+        return page.getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
+                new Page.GetByRoleOptions().setName("Assign").setExact(true)).count() > 0;
     }
 
-    public void clickPartialRefund() {
-        page.locator("button:has-text('Partial Refund')").first().click();
-        page.waitForTimeout(2000);
+    public boolean isManualInterventionHandoffVisible() {
+        return page.getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
+                new Page.GetByRoleOptions().setName("Open Manual Interventions").setExact(true)).isVisible();
     }
 
-    public void clickPostDeliveryRefund() {
-        page.locator("button:has-text('Post-Delivery')").first().click();
-        page.waitForTimeout(2000);
+    public void openManualInterventions() {
+        page.getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
+                new Page.GetByRoleOptions().setName("Open Manual Interventions").setExact(true)).click();
     }
 
-    public void initiatePartialRefund(String amount) {
-        fillRefundAmount(amount);
-        clickPartialRefund();
-    }
-
-    public void initiatePostDeliveryRefund(String amount) {
-        fillRefundAmount(amount);
-        clickPostDeliveryRefund();
-    }
 }

@@ -93,13 +93,10 @@ public class LoginValidationTest extends TestBase {
         login.fillPhoneNumber(phoneStr);
         login.clickSendOtp();
         login.waitForOtpInput();
-        // Wait for the second dev OTP fetch to avoid autofilling stale React state.
-        Response fetched = page.waitForResponse(
-                r -> r.url().contains("/auth/admin/otp") && r.request().method().equals("GET"),
+        Response resent = page.waitForResponse(
+                r -> r.url().contains("/auth/initiate") && r.request().method().equals("POST"),
                 login::clickResendSmsCode);
-        assertThat(fetched.ok()).isTrue();
-        page.getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
-                new Page.GetByRoleOptions().setName(Pattern.compile("SMS GATEWAY"))).waitFor();
+        assertThat(resent.ok()).isTrue();
         login.clickAutofillCode();
         assertThat(page.getByPlaceholder("- - - - - -")).hasValue(Pattern.compile("[0-9]{6}"));
         Response verified = page.waitForResponse(

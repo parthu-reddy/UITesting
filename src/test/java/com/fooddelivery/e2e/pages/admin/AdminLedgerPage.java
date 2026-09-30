@@ -4,10 +4,10 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Response;
 
 /**
- * Maps to: {@code AdminLedgerView.tsx, LedgerStatementPanel.tsx}
+ * Maps to: {@code AdminLedgerView.tsx}
  * <p>
  * Admin ledger: transaction search, filtering (transactionId, ownerId, ownerType,
- * category, direction), pagination, statement detail panel, copy actions.
+ * category, direction), pagination, and transaction-id copy actions.
  * </p>
  */
 public class AdminLedgerPage {
@@ -99,18 +99,6 @@ public class AdminLedgerPage {
 
     public int getTransactionCount() {
         return rows().count();
-    }
-
-    /**
-     * The ledger has no statement or detail panel: a row's only action is copying its
-     * transaction id. LEDGER-ADV-11 is recorded in e2e-plan/NOT-DEFECTS/README.md.
-     */
-    public void openStatement(int index) {
-        throw new UnsupportedOperationException("AdminLedgerView has no statement/detail panel");
-    }
-
-    public boolean isStatementPanelOpen() {
-        throw new UnsupportedOperationException("AdminLedgerView has no statement/detail panel");
     }
 
     // ── Pagination: icon-only chevrons either side of "Page n of m" ────

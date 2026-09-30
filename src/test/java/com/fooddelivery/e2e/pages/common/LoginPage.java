@@ -14,7 +14,7 @@ import com.microsoft.playwright.options.WaitForSelectorState;
  * </p>
  * <p>
  * Also covers sub-components: {@code LoginHeader.tsx}, {@code LoginFooter.tsx},
- * {@code RoleCard.tsx}, {@code PersonRow.tsx}, {@code OtpNotification.tsx}
+ * {@code RoleCard.tsx}, {@code PersonRow.tsx}, and {@code OtpNotification.tsx}.
  * </p>
  */
 public class LoginPage {
@@ -82,9 +82,12 @@ public class LoginPage {
         page.getByPlaceholder("- - - - - -").fill(otp);
     }
 
+    /** Uses the same Dev autofill control as a developer signing in manually. */
     public void clickAutofillCode() {
-        page.getByRole(AriaRole.BUTTON,
-                new Page.GetByRoleOptions().setName("Autofill Code")).click();
+        page.getByTestId("dev-otp-autofill").click();
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(
+                page.getByPlaceholder("- - - - - -"))
+                .hasValue(java.util.regex.Pattern.compile("[0-9]{6}"));
     }
 
     public void clickResendSmsCode() {

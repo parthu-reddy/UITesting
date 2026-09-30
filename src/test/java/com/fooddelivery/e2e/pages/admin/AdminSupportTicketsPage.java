@@ -98,6 +98,23 @@ public class AdminSupportTicketsPage {
         page.getByPlaceholder("Add admin notes (required for rejection)").fill(notes);
     }
 
+    /** The operator note stays editable when a resolver response is rejected. */
+    public Locator resolutionNotes() {
+        return page.getByPlaceholder("Add admin notes (required for rejection)");
+    }
+
+    public Locator resolveTicketButton() {
+        return button("Resolve Ticket");
+    }
+
+    public Locator rejectRequestButton() {
+        return button("Reject Request");
+    }
+
+    public Locator statusMessages() {
+        return page.getByRole(com.microsoft.playwright.options.AriaRole.STATUS);
+    }
+
     /** Opens a confirmation and leaves the final resolution uncommitted. */
     public void openRejectConfirmation() {
         button("Reject Request").click();
