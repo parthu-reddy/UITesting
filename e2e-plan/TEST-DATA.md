@@ -53,8 +53,10 @@ python3 scripts/run_registration_e2e.py --app-url '<current Dev URL>'
 
 The runner checks Dev, allocates unused `8999` + six-digit customer, `7999` + six-digit rider,
 and `9999` + six-digit restaurant phones, and invokes existing browser signup coverage.
-These pools must never be seeded. Dev Autofill Code supports them only with the existing Dev
-feature flag enabled; production uses ordinary SMS. The parked runner-secret OTP facility
+These pools must never be seeded; they are a test-isolation convention, not an authentication restriction.
+With the existing Dev feature flag enabled, customer, rider and restaurant autofill supports any
+valid 10-digit number. Only admin autofill is restricted to `1000000001` and `1000000002`.
+Production uses ordinary SMS. The parked runner-secret OTP facility
 continues to be disabled and does not admit these disposable pools.
 
 The runner logs out/blacklists remaining sessions, deactivates the created accounts and their
