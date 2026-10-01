@@ -24,9 +24,29 @@ public class CustomerHomeAddressTest extends TestBase {
     @BeforeEach
     void loginCustomer() {
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
+        if ("8000000502".equals(testCustomerPhone)) {
+            var addresses = customerPage.waitForResponse(
+                    r -> r.url().contains("/customers/db45c5f8-71b5-57ff-94fb-4af8f99930c7/addresses")
+                            && r.request().method().equals("GET"),
+                    () -> new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone));
+            assertThat(addresses.status()).isEqualTo(200);
+            assertThat(customerPage.evaluate("body => JSON.parse(body).success", addresses.text())).isEqualTo(true);
+            assertThat(customerPage.evaluate("body => JSON.parse(body).data", addresses.text()))
+                    .isEqualTo(java.util.List.of());
+        } else {
+            new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
+        }
         dashboard = new CustomerDashboardPage(customerPage);
-        dashboard.waitForDashboard();
+        if ("8000000502".equals(testCustomerPhone)) {
+            new CustomerAddressModalPage(customerPage).waitForModalOpen();
+        } else {
+            dashboard.waitForDashboard();
+        }
+    }
+
+    @AfterEach
+    void logoutScenarioSession() {
+        if ("8000000502".equals(testCustomerPhone)) new LoginPage(customerPage).logoutCurrentSession();
     }
 
     // ── HOME PAGE SCENARIOS ──────────────────────────────────────────────
@@ -49,7 +69,16 @@ public class CustomerHomeAddressTest extends TestBase {
     void restaurantCountOnHome() {
         CustomerHomePage home = new CustomerHomePage(customerPage);
         int count = home.getVisibleRestaurantCount();
-        assertThat(count).isGreaterThanOrEqualTo(1);
+        if ("8000000502".equals(testCustomerPhone)) {
+            assertThat(count).isZero();
+            assertThat(customerPage.getByText("No saved addresses found.",
+                    new Page.GetByTextOptions().setExact(true))).isVisible();
+            assertThat(customerPage.getByRole(AriaRole.BUTTON,
+                    new Page.GetByRoleOptions().setName("Add New Address"))).isVisible();
+            assertThat(customerPage.evaluate("() => localStorage.getItem('deliveryAddressId')")).isIn("", null);
+        } else {
+            assertThat(count).isGreaterThanOrEqualTo(1);
+        }
     }
 
     @Test
@@ -67,7 +96,7 @@ public class CustomerHomeAddressTest extends TestBase {
     @Test
     @DisplayName("ADDR-MODAL-01: Address modal opens via Deliver to")
     void addressModalOpens() {
-        dashboard.clickDeliverTo();
+        if (!new CustomerAddressModalPage(customerPage).isModalOpen()) dashboard.clickDeliverTo();
         CustomerAddressModalPage modal = new CustomerAddressModalPage(customerPage);
         modal.waitForModalOpen();
         assertThat(modal.isModalOpen()).isTrue();
@@ -76,7 +105,7 @@ public class CustomerHomeAddressTest extends TestBase {
     @Test
     @DisplayName("ADDR-MODAL-02: Select existing Home address")
     void selectExistingHomeAddress() {
-        dashboard.clickDeliverTo();
+        if (!new CustomerAddressModalPage(customerPage).isModalOpen()) dashboard.clickDeliverTo();
         CustomerAddressModalPage modal = new CustomerAddressModalPage(customerPage);
         modal.waitForModalOpen();
         modal.selectExistingAddress("Home");
@@ -89,11 +118,20 @@ public class CustomerHomeAddressTest extends TestBase {
     @Test
     @DisplayName("ADDR-MODAL-07: Address count is accurate")
     void addressCountAccurate() {
-        dashboard.clickDeliverTo();
+        if (!new CustomerAddressModalPage(customerPage).isModalOpen()) dashboard.clickDeliverTo();
         CustomerAddressModalPage modal = new CustomerAddressModalPage(customerPage);
         modal.waitForModalOpen();
         int count = modal.getAddressCount();
-        assertThat(count).isGreaterThanOrEqualTo(1);
+        if ("8000000502".equals(testCustomerPhone)) {
+            assertThat(count).isZero();
+            assertThat(customerPage.getByText("No saved addresses found.",
+                    new Page.GetByTextOptions().setExact(true))).isVisible();
+            assertThat(customerPage.getByRole(AriaRole.BUTTON,
+                    new Page.GetByRoleOptions().setName("Add New Address"))).isVisible();
+            assertThat(customerPage.evaluate("() => localStorage.getItem('deliveryAddressId')")).isIn("", null);
+        } else {
+            assertThat(count).isGreaterThanOrEqualTo(1);
+        }
     }
 
     // ── FREE DELIVERY TRACKER SCENARIOS ──────────────────────────────────

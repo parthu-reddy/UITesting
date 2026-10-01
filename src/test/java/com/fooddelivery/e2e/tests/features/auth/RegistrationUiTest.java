@@ -81,7 +81,21 @@ public class RegistrationUiTest extends TestBase {
         
         // Complete the dev mode onboarding which includes clicking through the auto-approved
         // sections and uploading a selfie at the end.
-        wizard.completeDevModeOnboarding();
+        var selfie = new java.util.concurrent.atomic.AtomicReference<com.microsoft.playwright.Response>();
+        var refreshedStatus = riderPage.waitForResponse(response -> {
+            String path = java.net.URI.create(response.url()).getPath();
+            if (path.equals("/api/delivery/verification/biometric") && response.request().method().equals("POST")) {
+                selfie.set(response);
+            }
+            return selfie.get() != null && path.equals("/api/delivery/verification/status")
+                    && response.request().method().equals("GET");
+        }, wizard::completeDevModeOnboarding);
+        assertThat(selfie.get().status()).isEqualTo(200);
+        assertThat(riderPage.evaluate("body => JSON.parse(body).success", selfie.get().text())).isEqualTo(true);
+        assertThat(refreshedStatus.status()).isEqualTo(200);
+        assertThat(riderPage.evaluate("body => JSON.parse(body).data.biometricStatus", refreshedStatus.text()))
+                .as("The submitted selfie must be persisted for the current rider")
+                .isEqualTo("VERIFIED");
         
         // Post-onboarding, should reach the dashboard.
         DeliveryDashboardPage dashboard = new DeliveryDashboardPage(riderPage);

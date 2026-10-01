@@ -2,9 +2,10 @@
 
 All scenarios use real backend authentication and no mocked tokens. After the browser requests
 an OTP through the normal login flow, the test clicks the same Dev Autofill Code button used
-for manual developer login. This facility is enabled only for seeded accounts on a Dev backend
-with `DEV_OTP_ENABLED=true`; it is absent in production. The runner-secret harness is parked.
-These source changes await deployment and live validation.
+for manual developer login. On a Dev backend with `DEV_OTP_ENABLED=true`, this facility accepts valid 10-digit
+customer/rider/restaurant numbers. Administrator autofill is allowlisted to the two provisioned
+Dev administrators. It is absent in production. The runner-secret harness is parked.
+The deployed login and registration results are recorded in PENDING.md.
 
 ## Batch 1 — Happy-path login per role
 
@@ -68,3 +69,18 @@ These source changes await deployment and live validation.
 | AUTH-26 | Restaurant | Same logout flow. | Active and failing: profile/settings navigation returns to Live Kitchen, so no Log Out control appears. |
 | AUTH-27 | Rider | Same logout flow. | Implemented and live-passed; role selector remains after reload. |
 | AUTH-28 | Admin | Same logout flow. | Role selector visible. |
+
+## Seeded customer states — 2026-10-01
+
+These checks use existing coverage and leave fixture profiles, addresses and active flags unchanged.
+Each isolated test session is logged out afterward. Snapshot the fixture state before and after.
+
+| ID | Fixture | Action | Required result | Existing coverage |
+|---|---|---|---|---|
+| CUSTOMER-STATE-01 | `8000000501`, incomplete profile | Login with a valid Dev OTP | Verify and profile reads return 200; mandatory profile form appears with empty name/email; no profile save | `ProfileSettingsTest#completeProfileModalPrompt`, opt in with `scenario.customer.enabled=true` |
+| CUSTOMER-STATE-02 | `8000000502`, no addresses | Login and inspect automatic location selector | Address read returns 200 with an empty list; selector visible | `CustomerHomeAddressTest#addressModalOpens` |
+| CUSTOMER-STATE-03 | `8000000502`, no addresses | Inspect saved address list | Exact empty-state message and Add New Address action visible; zero saved addresses and no selected persisted address ID | `CustomerHomeAddressTest#addressCountAccurate` |
+| CUSTOMER-STATE-04 | `8000000503`, suspended identity | Submit its valid OTP | Verify returns 403; visible inactive-account error; OTP form remains; no token/profile stored | `LoginSmokeTest#failedLogin`, `login.roles=CUSTOMER`, `login.rejection=inactive` |
+
+All four seeded customer cases passed live on 2026-10-01, without failures, errors or skips.
+Profiles, active flags and saved addresses were unchanged afterward; active session lists were empty.

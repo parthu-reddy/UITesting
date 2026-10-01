@@ -66,4 +66,6 @@ accounts predating the run or riders who are no longer OFFLINE. Manifests are wr
 
 New signup grants only the selected customer/partner enrollment role. Existing rider KYC,
 biometric and duty gates remain authoritative. Administrator signup is forbidden.
-Full deployed registration/onboarding proof remains pending the coordinated deployment.
+The coordinated deployment was verified on 2026-10-01: all three fresh-account registration
+flows and all eight four-role login smoke cases passed without skips. See the login-and-OTP
+pending notes for the exact scope and remaining validation.

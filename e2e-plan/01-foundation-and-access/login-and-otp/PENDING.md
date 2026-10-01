@@ -61,7 +61,7 @@ These changes are applied to `FoodDeliveryAppUI` source and pass typecheck, lint
 unit tests. **They are not verified**: nothing here is proven until the UI is deployed and the
 owning test is re-run live. Do not mark anything validated on the strength of this note.
 
-## Explicit signup — 2026-10-01 deployment pending
+## Explicit signup — 2026-10-01 deployed validation
 
 Existing REG-01/02/03 coverage now selects Create account and verifies through `/auth/register`.
 The customer test completes profile and persists an address without assuming a seeded Home.
@@ -69,7 +69,30 @@ The rider test completes Dev onboarding and stops before duty/dispatch. The rest
 completes profile, brand and outlet onboarding. Run via `scripts/run_registration_e2e.py`;
 ordinary seeded-account login must continue to use `/auth/verify`.
 
-Source validation passed (identity/gateway security checks, UI unit tests/typecheck/build,
-E2E compilation). These three browser flows are not yet deployed proof. Re-run after deploying
-IdentityService, ApiGateway and FoodDeliveryAppUI, and report fixture/environment failures as
-unverified flows rather than skipped passes.
+Deployed REG-01/02/03 passed: 3 tests, 0 failures, 0 errors, 0 skips, using fresh unused
+phone numbers. Run manifest: `target/registration/3a361a1da0ff00a4.json`; the runner retired
+all three accounts and revoked remaining sessions. LoginSmokeTest also passed all 8 four-role
+valid/invalid-OTP checks, and live seed primary-key/admin-role verification passed after signup.
+The runner initially omitted Maven's `test` goal and stopped before creating accounts; that
+harness defect is fixed and covered by a new runner unit check (5 runner checks passed).
+Rider duty, dispatch and financial operations remain outside this registration run.
+
+## Seeded account-state validation — 2026-10-01
+
+Live existing E2E checks passed without failures/errors/skips: incomplete customer profile (1),
+no-address customer (2), suspended customer with valid OTP (1), restaurant no-brand/pending/
+rejected/inactive-outlet states (4), customer and restaurant admin deep-link/API denial (2).
+Database snapshots proved profiles, active flags, addresses, brand/outlet states and rider states
+were unchanged; all tested scenario active-session lists were empty afterward.
+
+The first no-address attempt stopped at an assertion expecting a bare array; the real API returns
+its standard response envelope. The assertion now checks success=true and data=[]; both cases
+passed on rerun. This was a harness correction.
+
+Rider pending/rejected/inactive live checks are not passes: Dev verification summary overwrote
+stored results, and onboarding refresh could reactivate an approved inactive rider. Fixes in
+GovernmentIDValidationService and DeliveryExecutiveApplication passed 7 and 4 unit tests
+respectively. Deploy both services, then run existing RiderOnboardingTest with the documented
+scenario opt-in and take another before/after snapshot. Repeat fresh rider registration afterward
+to verify the retained Dev shortcut and actual selfie persistence. No duty/dispatch action has
+been exercised. Rider admin-route denial also remains pending that deployment.

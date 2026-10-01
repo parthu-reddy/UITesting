@@ -53,6 +53,7 @@ def main():
         selector='RegistrationUiTest'+('#'+methods[args.only] if args.only else '')
         command=['mvn','-q','-Dtest='+selector,'-Dapp.url='+args.app_url,'-Dregistration.enabled=true','-Dregistration.preflight=true','-Dheadless=true','-Dslow.mo=0','-Drecord.video=false','-De2e.otp.enabled=false']
         command += ['-Dregistration.'+persona+'.phone='+phone for persona,phone in phones.items()]
+        command.append('test')
         print('Running existing registration tests; allocation manifest: '+str(manifest),flush=True)
         code=1
         try:

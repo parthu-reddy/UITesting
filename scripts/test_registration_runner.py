@@ -50,6 +50,12 @@ class RegistrationRunnerIsolationTest(unittest.TestCase):
         self.assertTrue(report['retired'])
         self.assertEqual([self.user],report['accountIds'])
 
+    def test_invokes_maven_test_goal_for_selected_registration_flow(self):
+        self.assertEqual(0,self.run_fixture())
+        command=next(c for c in self.commands if c[0]=='mvn')
+        self.assertEqual('test',command[-1])
+        self.assertIn('-Dtest=RegistrationUiTest#customerRegistrationFlow',command)
+
     def test_refuses_to_retire_an_account_older_than_the_run(self):
         self.new=False
         with self.assertRaisesRegex(RuntimeError,'predates'):self.run_fixture()

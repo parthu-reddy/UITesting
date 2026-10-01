@@ -2,7 +2,6 @@ package com.fooddelivery.e2e.tests.features.auth;
 
 import com.fooddelivery.e2e.base.TestBase;
 import com.fooddelivery.e2e.base.TestConfig;
-import com.fooddelivery.e2e.pages.common.CompleteProfileModalPage;
 import com.fooddelivery.e2e.pages.common.LoginPage;
 import com.fooddelivery.e2e.pages.common.SharedSettingsPage;
 import com.fooddelivery.e2e.pages.customer.CustomerDashboardPage;
@@ -20,30 +19,41 @@ public class ProfileSettingsTest extends TestBase {
     // ── PROFILE COMPLETION MODAL SCENARIOS ───────────────────────────────
 
     @Test
-    @Disabled("Dev autofill permits only seeded accounts; disposable registration needs an SMS inbox")
-    @DisplayName("PROFILE-16/17: Complete profile modal prompt")
+    @org.junit.jupiter.api.condition.EnabledIfSystemProperty(named = "scenario.customer.enabled", matches = "true")
+    @DisplayName("PROFILE-16/17: Incomplete seeded profile requires completion")
     void completeProfileModalPrompt() {
-        // Use a new unique phone to trigger the profile setup
-        String newPhone = "9998887776";
+        assertThat(testCustomerPhone).isEqualTo("8000000501");
         customerPage.navigate(TestConfig.APP_URL);
-        
         LoginPage login = new LoginPage(customerPage);
         login.selectRole("Order Food");
-        login.fillPhoneNumber(newPhone);
+        login.fillPhoneNumber(testCustomerPhone);
         login.clickSendOtp();
         login.waitForOtpInput();
-        login.fillOtp("000000");
-        login.clickVerifyAndLogin();
-        
-        CompleteProfileModalPage profile = new CompleteProfileModalPage(customerPage);
-        // Sometimes it takes a moment to appear after login
-        customerPage.waitForTimeout(2000);
-        
-        if (profile.isProfilePromptVisible()) {
-            profile.fillName("Test Customer");
-            profile.fillEmail("testcustomer@example.com");
-            profile.submit();
-        }
+        login.clickAutofillCode();
+        var profileResponse = customerPage.waitForResponse(
+                r -> r.url().contains("/api/v1/users/profile") && r.request().method().equals("GET"),
+                () -> {
+                    var response = customerPage.waitForResponse(
+                            r -> r.url().contains("/auth/verify") && r.request().method().equals("POST"),
+                            login::clickVerifyAndLogin);
+                    assertThat(response.status()).isEqualTo(200);
+                });
+        assertThat(profileResponse.status()).isEqualTo(200);
+        var name = customerPage.getByPlaceholder("Enter your full name");
+        var email = customerPage.getByPlaceholder("Enter your email address");
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(name).isVisible();
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(name).hasValue("");
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(email).hasValue("");
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(customerPage.getByText(
+                "Please complete your profile to continue. This is required to process your orders.",
+                new com.microsoft.playwright.Page.GetByTextOptions().setExact(true))).isVisible();
+        assertThat(customerPage.evaluate("() => localStorage.getItem('auth_token')")).isInstanceOf(String.class);
+        // Leave this reusable incomplete-profile fixture incomplete.
+    }
+
+    @AfterEach
+    void logoutScenarioSession() {
+        if ("8000000501".equals(testCustomerPhone)) new LoginPage(customerPage).logoutCurrentSession();
     }
 
     // ── SHARED SETTINGS TABS SCENARIOS ───────────────────────────────────

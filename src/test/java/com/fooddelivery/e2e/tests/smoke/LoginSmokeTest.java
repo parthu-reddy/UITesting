@@ -7,7 +7,10 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Response;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.EnumSource;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.api.AfterEach;
+import java.util.Arrays;
+import java.util.stream.Stream;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -29,6 +32,17 @@ public class LoginSmokeTest extends TestBase {
         }
     }
 
+    static Stream<Account> accounts() {
+        String roles = System.getProperty("login.roles");
+        return roles == null ? Arrays.stream(Account.values())
+                : Arrays.stream(roles.split(",")).map(String::trim).map(Account::valueOf);
+    }
+
+    @AfterEach
+    void logoutScenarioSession() {
+        if ("8000000503".equals(testCustomerPhone)) new LoginPage(customerPage).logoutCurrentSession();
+    }
+
     private Page pageFor(Account account) {
         return switch (account) {
             case CUSTOMER -> customerPage;
@@ -48,7 +62,7 @@ public class LoginSmokeTest extends TestBase {
     }
 
     @ParameterizedTest(name = "{0}: valid OTP opens the correct dashboard")
-    @EnumSource(Account.class)
+    @MethodSource("accounts")
     void successfulLogin(Account account) {
         Page page = pageFor(account);
         String phone = phoneFor(account);
@@ -67,8 +81,8 @@ public class LoginSmokeTest extends TestBase {
                 .isInstanceOf(String.class);
     }
 
-    @ParameterizedTest(name = "{0}: wrong OTP is rejected and stays logged out")
-    @EnumSource(Account.class)
+    @ParameterizedTest(name = "{0}: rejected login stays logged out")
+    @MethodSource("accounts")
     void failedLogin(Account account) {
         Page page = pageFor(account);
         String phone = phoneFor(account);
@@ -81,14 +95,23 @@ public class LoginSmokeTest extends TestBase {
         login.clickAutofillCode();
         var input = page.getByPlaceholder("- - - - - -");
         assertThat(input).hasValue(java.util.regex.Pattern.compile("[0-9]{6}"));
-        // Mutate the actual code so the negative case cannot accidentally use a valid OTP.
-        String valid = input.inputValue();
-        login.fillOtp((valid.charAt(0) == '0' ? "1" : "0") + valid.substring(1));
+        boolean inactive = "inactive".equals(System.getProperty("login.rejection"));
+        if (inactive) {
+            assertThat(account).isEqualTo(Account.CUSTOMER);
+            assertThat(phone).isEqualTo("8000000503");
+        } else {
+            // Mutate the actual code so the wrong-OTP case cannot use a valid OTP.
+            String valid = input.inputValue();
+            login.fillOtp((valid.charAt(0) == '0' ? "1" : "0") + valid.substring(1));
+        }
         Response response = page.waitForResponse(
                 r -> r.url().contains("/auth/verify") && r.request().method().equals("POST"),
                 login::clickVerifyAndLogin);
-        assertThat(response.status()).isIn(400, 401, 403, 422);
+        if (inactive) assertThat(response.status()).isEqualTo(403);
+        else assertThat(response.status()).isIn(400, 401, 403, 422);
         assertThat(page.locator("div:has(> svg.lucide-circle-alert) > span")).isVisible();
+        if (inactive) assertThat(page.locator("div:has(> svg.lucide-circle-alert) > span"))
+                .containsText("inactive");
         assertThat(input).isVisible();
         assertThat(page.evaluate("() => localStorage.getItem('auth_token')")).isNull();
         assertThat(page.evaluate("() => localStorage.getItem('user_profile')")).isNull();

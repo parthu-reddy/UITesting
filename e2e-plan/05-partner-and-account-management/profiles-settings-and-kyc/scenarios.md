@@ -108,3 +108,31 @@ Active sessions modal: view devices, terminate individual or all sessions.
 | ADDR-MODAL-06 | Incomplete address blocked | Leave required fields empty or incomplete. | Implemented and live-passed: Save Address remains disabled until every required field is populated, then becomes enabled; the form is closed without saving and no address is created. |
 | ADDR-MODAL-07 | Address count accurate | After saving. | `getAddressCount()` matches the number of visible address entries. |
 | ADDR-MODAL-08 | Dismissed draft is cleared | Fill every required field, close without saving, then reopen Add / Manage Addresses. | Implemented: all required inputs reopen blank, preventing a discarded draft from leaking into a later address attempt. |
+
+## Seeded restaurant account states — 2026-10-01
+
+Run existing `RestaurantUiTest#verifyRestaurantDashboardUI` with each restaurant phone override.
+These checks perform no onboarding submissions or status toggles and log out their own session.
+
+| Fixture | Required UI result |
+|---|---|
+| `9000000011`, no brand | Brand list 200 with zero rows; No Outlet Registered; Register New Brand available; Menu Catalog Editor disabled |
+| `9000000012`, pending brand | Brand list 200 with one row; settings shows GSTIN: PENDING and BANK: PENDING |
+| `9000000013`, rejected brand | Brand list 200 with one row; settings shows GSTIN: REJECTED and BANK: REJECTED |
+| `9000000014`, inactive outlet | Select E2E Inactive Outlet; outlet toggle aria-pressed=false and STORE OFFLINE visible; do not toggle |
+
+Rider pending/rejected/inactive checks are blocked before execution: the Dev Government ID
+verification summary currently overrides stored verification states, and the delivery status
+reader invokes onboarding evaluation that can activate the account. These fixtures must remain
+unchanged while this behavior is corrected; do not report a skipped or mocked rider pass.
+
+All four restaurant account-state cases passed live on 2026-10-01 with no failures/errors/skips.
+Partner fixture state was unchanged afterward and active sessions were empty.
+
+Rider fixes are prepared in GovernmentIDValidationService and DeliveryExecutiveApplication:
+stored KYC results take precedence over Dev shortcuts; biometric summary uses the real stored
+time; an approved-but-inactive rider stays inactive on onboarding refresh. Local backend tests
+passed, but deployed rider proof remains pending. After deploying both services, run existing
+`RiderOnboardingTest#checkOnboardingWizard` with `scenario.rider.enabled=true` and each
+rider override `7000000031`, `7000000032`, `7000000034`. Check the fixture snapshot afterward.
+The inactive case checks the displayed offline state; no online-duty action is part of this run.
