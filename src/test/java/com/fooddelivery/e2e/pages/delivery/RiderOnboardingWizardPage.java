@@ -32,10 +32,13 @@ public class RiderOnboardingWizardPage {
 
     public void completeOnboarding() {
         // Step 0: Basic Profile
-        page.locator("input[type='text']").first().fill("Test Rider");
+        // Signup's complete-profile step already supplies a name; that field is disabled.
+        if (page.getByLabel("Full Name").isEditable()) {
+            page.getByLabel("Full Name").fill("E2E Test Rider");
+        }
         page.getByRole(com.microsoft.playwright.options.AriaRole.COMBOBOX, new Page.GetByRoleOptions().setName("Vehicle Type")).click();
         page.getByRole(com.microsoft.playwright.options.AriaRole.OPTION, new Page.GetByRoleOptions().setName("Motorcycle / Scooter")).click();
-        page.locator("input[type='text']").nth(1).fill("KA01AB1234");
+        page.getByLabel("Vehicle Number (if applicable)").fill("KA01AB1234");
         uploadDummyFile();
         clickContinue();
 
@@ -66,7 +69,7 @@ public class RiderOnboardingWizardPage {
 
     private void uploadDummyFile() {
         page.locator("input[type='file']").setInputFiles(Paths.get("src/test/resources/dummy.png"));
-        page.getByText("Click to replace").waitFor();
+        page.getByText(java.util.regex.Pattern.compile("Click to replace|Document Uploaded")).first().waitFor();
     }
 
     private void clickContinue() {
@@ -76,10 +79,13 @@ public class RiderOnboardingWizardPage {
 
     public void completeDevModeOnboarding() {
         // Step 0: Basic Profile
-        page.locator("input[type='text']").first().fill("Test Rider");
+        // Signup's complete-profile step already supplies a name; that field is disabled.
+        if (page.getByLabel("Full Name").isEditable()) {
+            page.getByLabel("Full Name").fill("E2E Test Rider");
+        }
         page.getByRole(com.microsoft.playwright.options.AriaRole.COMBOBOX, new Page.GetByRoleOptions().setName("Vehicle Type")).click();
         page.getByRole(com.microsoft.playwright.options.AriaRole.OPTION, new Page.GetByRoleOptions().setName("Motorcycle / Scooter")).click();
-        page.locator("input[type='text']").nth(1).fill("KA01AB1234");
+        page.getByLabel("Vehicle Number (if applicable)").fill("KA01AB1234");
         uploadDummyFile();
         clickContinue();
 

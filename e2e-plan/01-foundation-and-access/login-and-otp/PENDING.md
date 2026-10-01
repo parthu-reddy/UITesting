@@ -60,3 +60,16 @@ restaurant-only surface.
 These changes are applied to `FoodDeliveryAppUI` source and pass typecheck, lint and the 339
 unit tests. **They are not verified**: nothing here is proven until the UI is deployed and the
 owning test is re-run live. Do not mark anything validated on the strength of this note.
+
+## Explicit signup — 2026-10-01 deployment pending
+
+Existing REG-01/02/03 coverage now selects Create account and verifies through `/auth/register`.
+The customer test completes profile and persists an address without assuming a seeded Home.
+The rider test completes Dev onboarding and stops before duty/dispatch. The restaurant test
+completes profile, brand and outlet onboarding. Run via `scripts/run_registration_e2e.py`;
+ordinary seeded-account login must continue to use `/auth/verify`.
+
+Source validation passed (identity/gateway security checks, UI unit tests/typecheck/build,
+E2E compilation). These three browser flows are not yet deployed proof. Re-run after deploying
+IdentityService, ApiGateway and FoodDeliveryAppUI, and report fixture/environment failures as
+unverified flows rather than skipped passes.

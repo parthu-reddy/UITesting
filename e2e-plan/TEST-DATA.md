@@ -7,11 +7,11 @@ User-confirmed on 2026-09-19 from the deployed development setup:
 | Customer | random `8000000001`–`8000000500` | Existing seeded customers with saved addresses |
 | Restaurant | random `9000000001`–`9000000010` | Existing seeded restaurant partners |
 | Rider / delivery executive | random `7000000001`–`7000000030` | Existing seeded, approved riders |
-| Admin | `1000000001` | User selected earlier default; no dedicated admin account seeded |
+| Admin | `1000000001`, `1000000002` | Provisioned Dev test administrators; default remains `1000000001` |
 
 Prefer these existing accounts when creating tests. Do not create replacement accounts merely to simplify setup. Their current login/profile state still needs live validation. The user-confirmed rider number supersedes the earlier choice `5000000001` for planned tests; it is not evidence that the older seed ranges have been removed.
 
-Each test run chooses one account randomly from each seeded range to spread OTP traffic. Override any random selection when reproducing a failure using `-Dcustomer.phone=8000000001 -Drestaurant.phone=9000000001 -Drider.phone=7000000001`. User subsequently confirmed using admin `1000000001` and said any number can be used because no dedicated admin account was created. The authorized admin profile-completion flow has now passed live validation; retain this test profile for reuse.
+Each test run chooses one account randomly from each seeded range to spread OTP traffic. Override any random selection when reproducing a failure using `-Dcustomer.phone=8000000001 -Drestaurant.phone=9000000001 -Drider.phone=7000000001`. Administrator login requires an active account and an assigned ADMIN role. Arbitrary phone numbers cannot become administrators. The existing `1000000001` UUID and profile were preserved when adding the second administrator.
 
 ## Rider duty state and availability
 
@@ -35,3 +35,33 @@ The rider-duty rules in [`RandomDocuments/RiderDutyConsistency_2026-09-27`](../.
 - Read current account/outlet state before changing it. Preserve shared seeded data and restore test changes.
 
 The development URL can change. Use the central TestConfig / URL overrides documented in the project README.
+
+## Registration and scenario fixtures — 2026-10-01
+
+Baseline random account selection remains at 500 customers, 30 riders and 10 restaurant owners.
+The additive scenario pack is separate: customers `8000000501`–`8000000504`, riders
+`7000000031`–`7000000034`, and restaurant owners `9000000011`–`9000000014`.
+See `Deployment/OracleDeployment/DummyData/scenario_accounts.json` for scenario-to-account mappings.
+Do not randomly select these negative-state fixtures for ordinary checkout tests.
+
+Existing `RegistrationUiTest` requires explicit opt-in and unused disposable numbers. After
+IdentityService, ApiGateway and FoodDeliveryAppUI have been deployed, run:
+
+```bash
+python3 scripts/run_registration_e2e.py --app-url '<current Dev URL>'
+```
+
+The runner checks Dev, allocates unused `8999` + six-digit customer, `7999` + six-digit rider,
+and `9999` + six-digit restaurant phones, and invokes existing browser signup coverage.
+These pools must never be seeded. Dev Autofill Code supports them only with the existing Dev
+feature flag enabled; production uses ordinary SMS. The parked runner-secret OTP facility
+continues to be disabled and does not admit these disposable pools.
+
+The runner logs out/blacklists remaining sessions, deactivates the created accounts and their
+rider/outlet records, and retains onboarding and financial/audit history. It refuses to retire
+accounts predating the run or riders who are no longer OFFLINE. Manifests are written under
+`target/registration/`. Cleanup failures are failures, never green test evidence.
+
+New signup grants only the selected customer/partner enrollment role. Existing rider KYC,
+biometric and duty gates remain authoritative. Administrator signup is forbidden.
+Full deployed registration/onboarding proof remains pending the coordinated deployment.

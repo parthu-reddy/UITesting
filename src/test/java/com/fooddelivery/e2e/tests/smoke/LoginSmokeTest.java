@@ -19,7 +19,7 @@ public class LoginSmokeTest extends TestBase {
     enum Account {
         CUSTOMER("Order Food", "Deliver to"),
         RESTAURANT("Restaurant Partner", "Updates every 5 s"),
-        DELIVERY("Delivery Executive", "Today’s Earnings"),
+        DELIVERY("Delivery Executive", "Trips Completed"),
         ADMIN("System Admin", "Live Operations");
 
         final String label, dashboardText;

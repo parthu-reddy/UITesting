@@ -48,6 +48,18 @@ public class LoginPage {
         waitForLoginComplete(profileName, profileEmail);
     }
 
+    /** Signup is explicit; ordinary partner login never enrolls a new role. */
+    public void registerAs(String roleLabel, String phone, String profileName, String profileEmail) {
+        selectRole(roleLabel);
+        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Create account").setExact(true)).click();
+        fillPhoneNumber(phone);
+        clickSendOtp();
+        waitForOtpInput();
+        clickAutofillCode();
+        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Verify & Create Account").setExact(true)).click();
+        waitForLoginComplete(profileName, profileEmail);
+    }
+
     // ── Role selection ───────────────────────────────────────────────────
 
     public void selectRole(String roleLabel) {

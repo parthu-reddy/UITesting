@@ -3,7 +3,6 @@ package com.fooddelivery.e2e.tests.features.admin;
 import com.fooddelivery.e2e.base.TestBase;
 import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.common.LoginPage;
-import com.fooddelivery.e2e.pages.customer.CustomerDashboardPage;
 import com.microsoft.playwright.Request;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -34,13 +33,13 @@ public class AdminAuthorizationLiveE2ETest extends TestBase {
         customerPage.setViewportSize(1280, 900);
         customerPage.navigate(TestConfig.APP_URL);
         new LoginPage(customerPage).loginAs("Order Food", SEEDED_CUSTOMER_PHONE);
-        new CustomerDashboardPage(customerPage).waitForDashboard();
+        assertCustomerDashboard();
 
         AtomicInteger clientAdminRequests = new AtomicInteger();
         customerPage.onRequest(request -> recordAdminRequest(request, clientAdminRequests));
         customerPage.navigate(TestConfig.APP_URL.replaceAll("/$", "") + "/admin/ledger");
         customerPage.waitForURL("**/customer**");
-        new CustomerDashboardPage(customerPage).waitForDashboard();
+        assertCustomerDashboard();
 
         assertThat(clientAdminRequests.get())
                 .as("RoleGuard must redirect before an admin screen can request protected data")
@@ -49,7 +48,12 @@ public class AdminAuthorizationLiveE2ETest extends TestBase {
 
         Object statusValue = customerPage.evaluate("""
                 async (path) => {
-                  const response = await fetch(path, { credentials: 'same-origin' });
+                  const token = localStorage.getItem('auth_token');
+                  if (!token) throw new Error('Authenticated customer token is missing');
+                  const response = await fetch(path, {
+                    headers: { Authorization: `Bearer ${token}`, Accept: 'application/json' },
+                    credentials: 'omit'
+                  });
                   return response.status;
                 }
                 """, ADMIN_INTERVENTIONS_PATH);
@@ -57,6 +61,16 @@ public class AdminAuthorizationLiveE2ETest extends TestBase {
         assertThat(status)
                 .as("an authenticated CUSTOMER must be denied the read-only administrator endpoint")
                 .isEqualTo(403);
+    }
+
+    private void assertCustomerDashboard() {
+        // Authorization does not require a saved address or delivery-location selection.
+        assertThat(URI.create(customerPage.url()).getPath()).startsWith("/customer");
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(
+                customerPage.getByText("Deliver to", new com.microsoft.playwright.Page.GetByTextOptions()
+                        .setExact(true)).first()).isVisible();
+        assertThat(customerPage.evaluate("() => JSON.parse(localStorage.getItem('user_profile')).role"))
+                .isEqualTo("CUSTOMER");
     }
 
     private static void recordAdminRequest(Request request, AtomicInteger count) {
