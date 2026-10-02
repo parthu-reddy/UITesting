@@ -1,31 +1,33 @@
 # Login and OTP
 
-Status: first batch validated — **8 tests passed, 0 failures, 0 errors, 0 skipped** against the configured development deployment.
+## Current retained-data policy — 2026-10-01
 
-See [scenarios.md](scenarios.md). Customer, restaurant, rider and admin successful login passed; wrong-OTP rejection passed for all four. The authorized admin first-login profile flow now uses the existing profile page object with exact selectors and a checked backend save response before dashboard assertions.
+The user explicitly requested no automatic test cleanup, with rider duty as the exception. Preserve created users, profiles, addresses, brands, outlets, orders and server sessions. Do not deactivate, delete, revoke or restore them as teardown. Retain run manifests to identify test-created data. Explicit logout/device removal/cancellation actions stay when they are the behavior being tested; they are not automatic teardown. Browser/tab/resource disposal remains normal. An authenticated idle rider is made OFFLINE at teardown, with authoritative server confirmation; an active delivery is preserved until completion. Slow and rate-limit scenarios remain opt-in and excluded.
 
-Run: `mvn -f UITesting/pom.xml -Dtest=LoginSmokeTest -Dheadless=true -Dslow.mo=0 -Drecord.video=false -Ddefault.timeout=20000 test`
+Earlier cleanup/retirement evidence below describes past runs before this instruction. It does not govern future execution. Retained state must be checked as each feature is reviewed; do not rely on an automatically empty session list or restored stock.
 
-Evidence: `UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.smoke.LoginSmokeTest.xml` (overwritten on subsequent runs).
 
-Implementation: LoginSmokeTest, LoginPage, CompleteProfileModalPage and TestConfig under `src/test/java/com/fooddelivery/e2e`. UI source inspected: `FoodDeliveryAppUI/src/features/identity/model/useOtpLogin.ts` and `src/shared/ui/CompleteProfileModal.tsx`.
+Current audit, 2026-10-01: 39 required fast invocations passed, zero failures/errors/skips. Slow and rate-limit cases are excluded at the user's request. This is the login feature result, not a complete suite or session-management claim.
 
-Admin profile setup is explicitly enabled only in the admin positive login case; name/email can be overridden with `admin.profile.name` / `admin.profile.email`. Other roles retain the requirement for existing complete profiles. Failed saves stop the test instead of being swallowed. The admin test profile is retained for reuse.
+| Test selection | Fresh invocations |
+|---|---:|
+| LoginSmokeTest: four-role successful/wrong OTP plus fresh contexts; JWT identity matches selected account | 9 |
+| RoleNavigationUiTest: desktop/mobile reset plus repeated mobile role switching | 9 |
+| LoginValidationTest: short OTP/Back, resend, old-code rejection, unknown admin denial | 13 |
+| LoginValidationTest#phoneValidation after user deployment | 4 |
+| ProfileSettingsTest#completeProfileModalPrompt: invalid name/email without saving fixture | 1 |
+| RegistrationUiTest: explicit fresh customer/rider/restaurant Dev signup | 3 |
 
-Further input-validation, resend/expiry and profile validation batches remain planned; this result does not claim exhaustive authentication coverage.
+The +91 phone form previously accepted short input. The fix requires ten national digits before network submission; the wider API schema and non-admin Dev OTP policy remain unchanged. Eighteen hook checks, typecheck and lint passed locally, followed by four live boundary checks after the user deployed.
 
-`SessionUiTest` live-passed logout and post-logout reload for customer and rider using randomized seeded accounts. Restaurant reload persistence passed, but logout is blocked by the deployed restaurant settings navigation defect. Admin is excluded from this operational-role run per current project scope.
+Durable proof is in RandomDocuments/E2ECoverageAudit_2026-10-01/evidence; 02-fast-results.json lists all 39 selected cases. Reports in target/surefire-reports are overwritten by subsequent runs. Earlier failed rate probes used unsuitable production thresholds on relaxed Dev configuration and are retained separately; they do not affect current fast totals.
 
-## Second batch validation
+Signup used the existing Dev-only disposable-account runner. Its manifest 9248d2b153ff2d41 records unused phones and created UUIDs; cleanup deactivated only those users/rider/outlets and revoked sessions, retaining onboarding/audit records. Independent read-only verification confirmed cleanup, correct rider biometric ownership and unchanged seeded fixtures. No real government provider, order, duty or financial action was triggered.
 
-LoginValidationTest: **12 passed, 0 failures, 0 errors, 0 skipped** against the configured deployment. Covers required/normalized phone and OTP inputs, Back navigation, and successful resent-code login for every role. See AUTH-09–20 in scenarios.md.
+The session feature owns four-role reload/logout, simultaneous customer/restaurant/rider sessions and device management. Other profile/settings methods belong to phase 05. Historical evidence remains distinguishable from this current run.
 
-Command: `mvn -f UITesting/pom.xml -Dtest=LoginValidationTest -Dheadless=true -Dslow.mo=0 -Drecord.video=false -Ddefault.timeout=20000 test`
+## Deferred cases
 
-Evidence: `UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.smoke.LoginValidationTest.xml`. Together with the previously passing eight smoke cases, 20 login cases are implemented. The original eight were not rerun in this batch to avoid unnecessarily consuming shared OTP limits.
+See [DEFERRED-WAIT-TESTS.md](DEFERRED-WAIT-TESTS.md) and [DEFERRED-RATE-LIMIT-TESTS.md](DEFERRED-RATE-LIMIT-TESTS.md). Their tests are opt-in; leave auth.slow.enabled/auth.limits.enabled unset and use -DexcludedGroups=slow-auth,auth-rate-limit for current runs. Do not count deferred cases as passes.
 
-Browser console reported four HTTP 403 resource responses during this run; the asserted resend verification responses and dashboards passed. These resource errors have not been attributed to a particular endpoint and are not proof of a clean application console.
-
-Remaining scope: short-input validation expectations, expiry/rate-limit tests under controlled scheduling, profile-form validation, and the separate sessions-and-role-access phase. This folder remains in progress.
-
-See [pending work, failures and confirmations](PENDING.md).
+See [scenarios.md](scenarios.md) and [PENDING.md](PENDING.md) for the mapping and outstanding dependent verification.

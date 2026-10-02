@@ -28,11 +28,11 @@ public class ReorderStripPage {
     }
 
     public boolean isReorderVisible() {
-        return page.locator("button:has-text('Reorder'), text=Reorder").first().isVisible();
+        return page.getByTestId("reorder-order").first().isVisible();
     }
 
     public void clickReorder() {
-        page.locator("button:has-text('Reorder')").first().click();
-        page.waitForTimeout(2000);
+        page.getByTestId("reorder-order").first().click();
+
     }
 }

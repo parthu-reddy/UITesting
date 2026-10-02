@@ -42,7 +42,8 @@ public final class OtpExtractor {
      * @return the 6-digit OTP string
      */
     public static String getRestaurantPickupOtp(Page page, String shortOrderId) {
-        Locator container = page.locator("div:has(span:has-text('#" + shortOrderId + "'))").first();
+        Locator container = page.locator("[data-testid='restaurant-order-card'][data-order-id^='" + shortOrderId.toLowerCase() + "']");
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(container).hasCount(1);
         Locator otpButton = container.locator("button:has-text('Show pickup code')").first();
         otpButton.waitFor(new Locator.WaitForOptions()
                 .setState(WaitForSelectorState.VISIBLE)

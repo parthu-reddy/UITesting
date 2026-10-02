@@ -1,6 +1,5 @@
-package com.fooddelivery.e2e.tests.features.exceptions;
+package com.fooddelivery.e2e.util;
 
-import com.fooddelivery.e2e.base.TestBase;
 import com.fooddelivery.e2e.pages.customer.CustomerOrderChatPage;
 import com.fooddelivery.e2e.pages.restaurant.RestaurantOrderActionsPage;
 import com.fooddelivery.e2e.util.CompletedDeliveryFixture;
@@ -9,9 +8,6 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Response;
 import com.microsoft.playwright.Route;
 import com.microsoft.playwright.WebSocketRoute;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
 
 import java.nio.file.Paths;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -23,92 +19,97 @@ import java.util.regex.Pattern;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-/**
- * UI-only coverage for order chat while active, after dispatch, and during the delivered-order
- * grace period. The order fixture always finishes delivery before a captured chat failure is
- * asserted, so a chat regression cannot strand an order or rider.
- */
-@Tag("feature")
-@Tag("chat")
-public class ChatCommunicationTest extends TestBase {
+/** Shared assertions for the happy lifecycle; no order creation or standalone test. */
+public final class OrderChatChecks implements AutoCloseable {
+    private final Page customer;
+    private final Page restaurant;
+    private final Page rider;
+    private final ChatTelemetry customerTelemetry;
+    private final ChatTelemetry restaurantTelemetry;
+    private final ChatTelemetry riderTelemetry;
+    private final AtomicReference<WebSocketRoute> customerSocket = new AtomicReference<>();
+    private final AtomicInteger customerSocketConnections = new AtomicInteger();
+    private final AtomicBoolean rejectFirstSession = new AtomicBoolean(true);
+    private final Consumer<Route> retryFixture;
+    private ChatWindowAttempt reliability;
+    private ChatAttempt restaurantConversation;
+    private ChatAttempt riderConversation;
+    private ChatAttempt deliveredConversation;
 
-    @Test
-    @DisplayName("Customer, restaurant, and rider exchange messages through the order lifecycle")
-    void orderParticipantsCanChatThroughDelivery() {
-        ChatTelemetry customerTelemetry = observeChatTraffic(customerPage);
-        ChatTelemetry restaurantTelemetry = observeChatTraffic(restaurantPage);
-        ChatTelemetry riderTelemetry = observeChatTraffic(riderPage);
-        AtomicReference<ChatAttempt> restaurantConversation = new AtomicReference<>();
-        AtomicReference<ChatAttempt> riderConversation = new AtomicReference<>();
-
-        CompletedDeliveryFixture.Result order = CompletedDeliveryFixture.completeOrder(
-                customerPage, restaurantPage, riderPage,
-                testCustomerPhone, testRestaurantPhone, testRiderPhone,
-                activeOrder -> restaurantConversation.set(tryRestaurantRoundTrip(
-                        customerPage, restaurantPage, activeOrder, customerTelemetry, restaurantTelemetry)),
-                dispatchedOrder -> riderConversation.set(tryRiderRoundTrip(
-                        customerPage, riderPage, dispatchedOrder, customerTelemetry, riderTelemetry)));
-
-        ChatAttempt restaurantAttempt = restaurantConversation.get();
-        assertSuccessfulRoundTrip(restaurantAttempt, "while the order is active");
-        assertThat(restaurantAttempt.emptyMessageBlocked())
-                .as("empty messages are disabled while the order is active")
-                .isTrue();
-        assertThat(restaurantAttempt.whitespaceMessageBlocked())
-                .as("whitespace-only messages are disabled while the order is active")
-                .isTrue();
-        assertSuccessfulRoundTrip(riderConversation.get(), "after rider dispatch");
-
-        ChatAttempt attempt = trySendMessage(customerPage, order,
-                "E2E delivery-window check " + order.shortOrderId(), customerTelemetry);
-        assertSuccessfulChatAttempt(attempt, "after delivery", false);
-    }
-
-    @Test
-    @DisplayName("Chat window shows typing, unread messages, reconnects, and sends an attachment")
-    void chatWindowMaintainsRealtimeState() {
-        ChatTelemetry customerTelemetry = observeChatTraffic(customerPage);
-        ChatTelemetry restaurantTelemetry = observeChatTraffic(restaurantPage);
-        AtomicReference<WebSocketRoute> customerSocket = new AtomicReference<>();
-        AtomicInteger customerSocketConnections = new AtomicInteger();
-        AtomicReference<ChatWindowAttempt> interaction = new AtomicReference<>();
-        AtomicBoolean rejectFirstSessionRequest = new AtomicBoolean(true);
-        Consumer<Route> rejectInitialSession = route -> {
-            if (route.request().method().equals("POST")
-                    && route.request().url().contains("/api/v1/chat/sessions")
-                    && rejectFirstSessionRequest.getAndSet(false)) {
-                route.fulfill(new Route.FulfillOptions()
-                        .setStatus(503)
-                        .setContentType("application/json")
+    public OrderChatChecks(Page customer, Page restaurant, Page rider) {
+        this.customer=customer; this.restaurant=restaurant; this.rider=rider;
+        customerTelemetry=observeChatTraffic(customer);
+        restaurantTelemetry=observeChatTraffic(restaurant);
+        riderTelemetry=observeChatTraffic(rider);
+        retryFixture=route -> {
+            if (route.request().method().equals("POST") && rejectFirstSession.getAndSet(false)) {
+                route.fulfill(new Route.FulfillOptions().setStatus(503).setContentType("application/json")
                         .setBody("{\"success\":false,\"message\":\"E2E session retry fixture\"}"));
-            } else {
-                route.resume();
-            }
+            } else route.resume();
         };
-
-        // Proxy the real socket so the test can close an already-connected connection and prove
-        // the widget resubscribes before accepting another message.
-        customerPage.routeWebSocket(url -> url.contains("/ws/chat"), socket -> {
-            customerSocket.set(socket.connectToServer());
-            customerSocketConnections.incrementAndGet();
+        customer.route("**/api/v1/chat/sessions",retryFixture);
+        // Observe the proxied server frames as well as native sockets. Playwright-routed
+        // sockets may not emit Page.onWebSocket events. Forward every frame unchanged.
+        customer.routeWebSocket(url -> url.contains("/ws/chat"), socket -> {
+            WebSocketRoute server=socket.connectToServer();
+            customerSocket.set(server); customerSocketConnections.incrementAndGet();
+            server.onMessage(frame -> {
+                if(frame.text()!=null) {
+                    observeStompFrame(customerTelemetry,frame.text()); socket.send(frame.text());
+                } else socket.send(frame.binary());
+            });
         });
-        customerPage.route("**/api/v1/chat/sessions", rejectInitialSession);
-
-        try {
-            CompletedDeliveryFixture.completeOrder(
-                    customerPage, restaurantPage, riderPage,
-                    testCustomerPhone, testRestaurantPhone, testRiderPhone,
-                    activeOrder -> interaction.set(tryChatWindowInteractions(
-                            customerPage, restaurantPage, activeOrder, customerTelemetry,
-                            restaurantTelemetry, customerSocket, customerSocketConnections,
-                            rejectInitialSession)));
-        } finally {
-            customerPage.unroute("**/api/v1/chat/sessions", rejectInitialSession);
-        }
-
-        assertSuccessfulChatWindowInteraction(interaction.get());
     }
 
+    /** The dispatch is accepted first, so chat checks cannot exhaust an offer's countdown. */
+    public void afterDispatch(String orderId,String outlet) {
+        var order=new CompletedDeliveryFixture.Result(orderId,outlet);
+        try {
+            reliability=tryChatWindowInteractions(customer,restaurant,order,
+                    customerTelemetry,restaurantTelemetry,customerSocket,
+                    customerSocketConnections,retryFixture);
+        } finally { customer.unroute("**/api/v1/chat/sessions",retryFixture); }
+        restaurantConversation=tryRestaurantRoundTrip(customer,restaurant,order,
+                customerTelemetry,restaurantTelemetry);
+        riderConversation=tryRiderRoundTrip(customer,rider,order,customerTelemetry,riderTelemetry);
+    }
+
+    public void afterDelivery(String orderId,String outlet) {
+        deliveredConversation=trySendMessage(customer,new CompletedDeliveryFixture.Result(orderId,outlet),
+                "E2E delivery-window check "+orderId.substring(0,8),customerTelemetry);
+    }
+
+    /** Assert captured failures after delivering the package; a failed chat check stays failed. */
+    public void assertPassed() {
+        org.junit.jupiter.api.Assertions.assertAll("Order chat",
+                () -> assertSuccessfulChatWindowInteraction(reliability),
+                () -> {
+                    assertSuccessfulRoundTrip(restaurantConversation,"with the restaurant");
+                    assertThat(restaurantConversation.emptyMessageBlocked()).isTrue();
+                    assertThat(restaurantConversation.whitespaceMessageBlocked()).isTrue();
+                },
+                () -> assertSuccessfulRoundTrip(riderConversation,"with the assigned rider"),
+                () -> assertSuccessfulChatAttempt(deliveredConversation,"after delivery",false));
+    }
+
+    public java.util.Map<String,Object> evidence() {
+        var data=new java.util.LinkedHashMap<String,Object>();
+        data.put("reliability",String.valueOf(reliability));
+        data.put("restaurant",String.valueOf(restaurantConversation));
+        data.put("rider",String.valueOf(riderConversation));
+        data.put("delivered",String.valueOf(deliveredConversation));
+        data.put("orderCreatedByHelper",false);
+        return data;
+    }
+
+    @Override public void close() { customer.unroute("**/api/v1/chat/sessions",retryFixture); }
+
+    private static void observeStompFrame(ChatTelemetry telemetry,String text) {
+        if(text.stripLeading().startsWith("CONNECTED")) {
+            telemetry.websocketState().set("STOMP CONNECTED");
+            telemetry.stompConnectedCount().incrementAndGet();
+        } else if(text.stripLeading().startsWith("ERROR")) telemetry.websocketState().set("STOMP ERROR");
+    }
     private static ChatWindowAttempt tryChatWindowInteractions(
             Page customerPage, Page restaurantPage, CompletedDeliveryFixture.Result order,
             ChatTelemetry customerTelemetry, ChatTelemetry restaurantTelemetry,
@@ -179,7 +180,7 @@ public class ChatCommunicationTest extends TestBase {
                             && response.url().contains("/api/v1/chat/sessions"),
                     new Page.WaitForResponseOptions().setTimeout(20_000),
                     () -> {
-                        new RestaurantOrderActionsPage(restaurantPage).openChat(order.shortOrderId());
+                        new RestaurantOrderActionsPage(restaurantPage).openChat(order.orderId());
                         restaurantChat.openChat(order.orderId());
                     });
             restaurantSessionStatus = restaurantSession.status();
@@ -360,21 +361,12 @@ public class ChatCommunicationTest extends TestBase {
             whitespaceMessageBlocked = customerChat.sendButton().isDisabled();
             customerChat.composer().fill("");
 
-            Response restaurantSession = restaurantPage.waitForResponse(
-                    response -> response.request().method().equals("POST")
-                            && response.url().contains("/api/v1/chat/sessions"),
-                    new Page.WaitForResponseOptions().setTimeout(20000),
-                    () -> {
-                        new RestaurantOrderActionsPage(restaurantPage).openChat(order.shortOrderId());
-                        restaurantChat.openChat(order.orderId());
-                    });
-            restaurantSessionStatus = restaurantSession.status();
-            if (!restaurantSession.ok()) {
-                return snapshot(customerTelemetry, restaurantTelemetry, customerSessionStatus,
-                        restaurantSessionStatus, customerChatOpened, emptyMessageBlocked,
-                        whitespaceMessageBlocked, customerMessageVisible, restaurantMessageVisible,
-                        false, false, "restaurant session request was rejected");
+            if (!restaurantChat.launcher(order.orderId()).isVisible()) {
+                new RestaurantOrderActionsPage(restaurantPage).openChat(order.orderId());
             }
+            restaurantSessionStatus = openParticipantChat(restaurantPage, restaurantChat,
+                    order.orderId(), restaurantTelemetry);
+            assertThat(restaurantSessionStatus).isBetween(200,299);
             waitForConnected(restaurantPage, restaurantChat, restaurantTelemetry);
 
             String longMessage = "E2E long customer message " + "message-part ".repeat(20)

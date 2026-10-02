@@ -13,7 +13,6 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -73,13 +72,10 @@ public abstract class TestBase {
 
     @BeforeEach
     public void setUpContexts() {
-        testCustomerPhone = System.getProperty("customer.phone",
-                String.format("8000000%03d", ThreadLocalRandom.current().nextInt(1, 501)));
-        testRestaurantPhone = System.getProperty("restaurant.phone",
-                String.format("9000000%03d", ThreadLocalRandom.current().nextInt(1, 11)));
-        testRiderPhone = System.getProperty("rider.phone",
-                String.format("7000000%03d", ThreadLocalRandom.current().nextInt(1, 31)));
-        testAdminPhone = System.getProperty("admin.phone", "1000000001");
+        testCustomerPhone = TestConfig.customerPhone();
+        testRestaurantPhone = TestConfig.restaurantPhone();
+        testRiderPhone = TestConfig.riderPhone();
+        testAdminPhone = TestConfig.adminPhone();
 
         customerContext = createContext("customer");
         restaurantContext = createContext("restaurant");
@@ -94,10 +90,14 @@ public abstract class TestBase {
 
     @AfterEach
     public void tearDownContexts() {
-        closeQuietly(customerContext);
-        closeQuietly(restaurantContext);
-        closeQuietly(riderContext);
-        closeQuietly(adminContext);
+        try {
+            com.fooddelivery.e2e.util.SeededRiderDuty.finishOfflineIfIdle(riderPage);
+        } finally {
+            closeQuietly(customerContext);
+            closeQuietly(restaurantContext);
+            closeQuietly(riderContext);
+            closeQuietly(adminContext);
+        }
     }
 
     // ── Helpers ──────────────────────────────────────────────────────────
@@ -155,18 +155,22 @@ public abstract class TestBase {
         page.setDefaultTimeout(TestConfig.DEFAULT_TIMEOUT);
 
         page.onConsoleMessage(msg ->
-                System.out.println("[BROWSER " + msg.type().toUpperCase() + "] " + msg.text()));
+                System.out.println("[BROWSER " + msg.type().toUpperCase() + "] " + redactAuthValues(msg.text())));
         page.onDialog(dialog -> {
             System.out.println("[BROWSER DIALOG] " + dialog.message());
             dialog.dismiss();
         });
         page.onResponse(response -> {
             if (response.status() >= 400) {
-                System.out.println("[BROWSER NETWORK ERROR] " + response.status() + " " + response.request().method() + " " + response.url());
+                System.out.println("[BROWSER NETWORK ERROR] " + response.status() + " " + response.request().method() + " " + redactAuthValues(response.url()));
             }
         });
 
         return page;
+    }
+
+    private static String redactAuthValues(String message) {
+        return message.replaceAll("(?i)([?&](?:token|otp)=)[^&#\\s'\"]+", "$1[redacted]");
     }
 
     private void closeQuietly(BrowserContext ctx) {

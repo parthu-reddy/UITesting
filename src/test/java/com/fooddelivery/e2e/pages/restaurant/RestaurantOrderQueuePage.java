@@ -17,7 +17,10 @@ public class RestaurantOrderQueuePage {
     }
 
     public void waitForQueueLoad() {
-        page.waitForTimeout(4000); // Wait for SSE / API to populate
+        new RestaurantDashboardPage(page).waitForDashboard();
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(
+                page.getByRole(com.microsoft.playwright.options.AriaRole.REGION,
+                        new Page.GetByRoleOptions().setName(java.util.regex.Pattern.compile("^Incoming, [0-9]+ orders?$")))).isVisible();
     }
 
     /**
@@ -27,23 +30,7 @@ public class RestaurantOrderQueuePage {
      * @param outletName partial or full name of the outlet, e.g. "Brand 1 Outlet 1"
      */
     public void selectOutlet(String outletName) {
-        // Click the Select trigger button (aria-label="Outlet")
-        Locator trigger = page.locator("button[aria-label='Outlet']").first();
-        trigger.waitFor(new Locator.WaitForOptions()
-                .setState(WaitForSelectorState.VISIBLE)
-                .setTimeout(10000));
-        trigger.click();
-        page.waitForTimeout(300);
-
-        // Wait for the listbox to appear and click the matching option
-        Locator listbox = page.locator("ul[role='listbox']").first();
-        listbox.waitFor(new Locator.WaitForOptions()
-                .setState(WaitForSelectorState.VISIBLE)
-                .setTimeout(5000));
-
-        Locator option = listbox.locator("li[role='option']:has-text('" + outletName + "')").first();
-        option.click();
-        page.waitForTimeout(500);
+        new RestaurantDashboardPage(page).selectOutlet(outletName);
     }
 
     private Locator cards(String... statuses) {

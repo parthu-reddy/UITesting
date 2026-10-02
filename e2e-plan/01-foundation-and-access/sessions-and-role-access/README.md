@@ -1,3 +1,13 @@
-# Sessions and role access
+# 03 — Sessions and role access
 
-Session persistence and isolation coverage is implemented in `SessionUiTest`. A read-only active-device check also passes through `CustomerSettingsUiTest`, proving the current logged-in device renders with its Last Active text without removing it. See [scenarios.md](scenarios.md) and [pending work and validation notes](PENDING.md). Device eviction and backend authorization remain deferred.
+Current fast core: 21 required live invocations passed with zero failures/errors/skips under the retained-data policy. 03-retained-final-results.json selects durable reports. Thirteen earlier local backend security/revocation checks passed; genuinely signed tuple replay, direct Identity port proof and isolated admin-operation fixtures remain open. This does not declare complete security-report coverage or the whole suite green.
+
+Mapping: SessionUiTest 13 (four reload/logout, four signed-out deep links, four cross-role redirects, one unsigned admin-header denial); CrossRoleSessionIsolationTest 3 (three-role persistence, partner persistence after customer logout, forged peer headers cannot list/evict that peer); SessionManagementTest 5 (two inline visibility/action cases, scoped second-device removal, collision cancel and selected-device replacement). Actual successful session responses must contain this browser's JWT ID and render the matching count. No swallowed loading timeout or empty-list fallback is accepted.
+
+Device mutation/collision runs use the Dev-only allocation runner --session-case device-removal|limit-cancel|limit-replacement. Fresh customers register in the first browser and retain their saved Home. One/two-session ownership assertions prove all selected sessions belong to the test. Removal revokes only the test-created second device and retains the first. Cancel leaves the third logged out and both existing devices valid. Replacement sends the exact second ID, revokes its JWT immediately (401), and retains first/third devices with correct customer identity.
+
+The collision test found useOtpLogin parsing the wrong Axios error fields, preventing the modal despite a valid HTTP 409 response. FoodDeliveryAppUI was fixed, 21 hook checks/typecheck/lint passed, the user deployed, and both real collision cases passed. Read-only PostgreSQL/Redis evidence confirms active fresh accounts with the expected remaining sessions. Ordinary core fixtures also remain active with retained sessions; the rider is authoritatively OFFLINE.
+
+An ordinary-session repeat overlapped deployment, received auth 502/OTP-input timeout, and was interrupted; it is not passing evidence. After the user confirmed deployment complete, all 18 ordinary cases passed. Scoped mutation/modal three also passed. Earlier 19-case proof and failures remain historical.
+
+No automatic account/session/data cleanup. Explicit logout/device removal is the tested action. Idle rider OFFLINE is the sole automatic remote reset; active delivery is preserved. Slow-duration and rate-limit cases remain excluded. See owning PENDING.md for unresolved security work.

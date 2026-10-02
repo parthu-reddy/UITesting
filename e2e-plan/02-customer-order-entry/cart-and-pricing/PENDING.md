@@ -1,42 +1,7 @@
-# Failures and pending work
+# Current validation and remaining scope
 
-## Live-closed: cart drawer increment
+Current cart scope: 13 live invocations passed without skips, plus 5 local monetary-boundary UI checks. See README.md for mapping and selected 05-fast-results.json evidence. No deployment is needed: cart changes strengthen tests and correct plan statements; product cart code was unchanged.
 
-Post-redeploy validation on 2026-09-27 passes 3/3 with seeded customer `8000000005`: drawer increment/decrement/empty, remove-only-item, and menu quantity/removal. The original drawer operation now changes quantity 1 to 2.
+Historical drawer increment defect was already fixed/deployed and now passes. Historical quote 409/unsettled tax and incorrect Place order readiness assumptions are superseded by final successful quoted bill checks with authoritative rider readiness. The original historical report remains unchanged in E2EFullSuite_2026-09-27.
 
-`MenuCartUiTest.addIncrementDecrementAndEmptyCart` was reproduced on 2026-09-27: expected quantity 2 after Add one, displayed 1. The click reached the rendered button once, `food_delivery_carts_v2` remained unchanged, and no cart network request is involved. The cause was the prop contract between `CustomerDashboard` and `CustomerModalStack`: the dashboard renamed the hook function locally but never exposed the `originalAddToCart` property the modal stack destructured, so the drawer received `undefined` instead of the restaurant-aware mutation function.
-
-The UI now exposes that function explicitly as `addToCartForRestaurant`, and the modal stack requires that named prop with the cart drawer's exact function type. `npm run typecheck`, `npm run lint`, the existing cart hook unit tests, and a production build pass. A focused run against the new local build could not reach the cart because Identity returned HTTP 403 from OTP initiation. Redeploy the UI and rerun the three focused cases before marking this live-closed.
-
-Reproduction: customer 8000000001 → existing Home → Brand1 → explicitly select nearest outlet below 5 km (observed Brand 1 Outlet 10) → ADD Brand 1 Item 1-1 → View Cart → Add one. Quantity stayed 1 in that drawer-specific run. Menu-level increment/decrement/removal and final-item empty-cart behavior now pass separately.
-
-Evidence: UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.smoke.MenuCartUiTest.xml and target/screenshots/addIncrementDecrementAndEmptyCart___customer.png / .html. Latest full class run on 2026-09-23: four passes and two failures. This drawer-increment assertion is the confirmed product failure.
-
-Resolved test defect: original locator depended on the ADD button, which disappears after adding. Fixed by retaining data-menu-item identity. The remaining quantity failure occurred after this correction.
-
-No checkout/payment is performed by these cart tests. Cart state is isolated to the test browser and discarded on closure; no other browser's cart is modified. Browser resource errors are tracked separately.
-
-## Independent cart cases
-
-MenuCartUiTest: removeOnlyItemFromCart, menuQuantityControlsAndRemoval, cartSubtotalAndCloseReopen all passed. These separately validate final-item removal, menu increment/decrement/removal, single-item subtotal matching its displayed unit price, Home in the cart and close/reopen retention. They do not resolve the existing drawer increment failure. Successful cases remove added items through the UI; no checkout.
-
-Evidence: UITesting/target/surefire-reports (reports are overwritten by focused reruns); failure screenshots/HTML in target/screenshots. Broader coverage remains pending.
-
-The latest full MenuCartUiTest run passed these three cases plus the basic menu-rendering case. It failed the drawer increment case and the separately documented data-dependent out-of-stock case; the latter is not evidence of a product defect.
-
-Two additional focused cases now pass. `twoDistinctItemsProduceExactSubtotal` adds two different available items, verifies both names in the drawer, and proves the subtotal equals the sum of their displayed menu prices. `cartPersistsAfterSettingsNavigation` adds one item, opens Account Settings, returns home, and proves the exact item remains at quantity 1. No checkout is performed.
-
-The CART-14 through CART-16 conflict-dialog scenarios do not match the current application model. `useCustomerCart` stores independent carts by `restaurantId` within each location, and `addToCart` adds to that restaurant's cart without a clear/replace confirmation. No conflict-dialog test will be fabricated for behavior the UI does not implement; these scenarios should be replaced by multi-restaurant cart coverage if that product behavior is intended.
-
-`cartTotalEqualsDisplayedSubtotalFeesAndTaxes` now implements the strict CART-10 through CART-12 arithmetic check. Its first live run did not reach settled pricing: delivery availability returned HTTP 409 and both tax lines remained `Calculating...`. The test remains active and fails instead of interpreting unresolved values as zero. When the quote settles, it requires Total to equal Subtotal + Platform Fee + Delivery Fee + SGST + CGST within ₹0.01.
-
-## Independent multi-restaurant carts
-
-The obsolete `CustomerCartTest` that referenced nonexistent `Test Brand` data has been replaced with the deployed product contract for CART-14 through CART-16. Its live run passed: one UI-added item from Brand 1 and one from Brand 2 remained in separate outlet sections, each retained its exact item and independent Checkout action, and no cart-replacement dialog appeared. Review endpoints returned HTTP 403 and delivery availability returned HTTP 409 during the run, but neither prevented this non-checkout cart behavior from being verified.
-
-`fiveSequentialIncrementsReachQuantitySix` and the expanded `removeOnlyItemFromCart` live-passed. Five rendered increment-button activations changed quantity 1 to 6. Removing the only item displayed `Your cart is empty`, removed the quantity output, and after closing the drawer the View Cart trigger was hidden. These tests keep their cart state inside the disposable browser context.
-
-
-## 2026-09-28 focused five-class rerun
-
-`MenuCartUiTest` ran 16 cases: 15 passed and 1 failed, with no skips. The out-of-stock case created a temporary unavailable-item fixture through the restaurant UI and restored it. The checkout arithmetic failure was a test defect: it checked whether Place order was enabled before a payment method had been selected. The quote itself had loaded. After changing the test to wait for the final quote lines, the checkout arithmetic case passed in a focused 1-test rerun on 2026-09-28.
+Real long-duration and rate-limit execution stays deferred per the user. Checkout order/payment effects, authoritative quote expiry/tamper, stock/price revalidation and fee policy are assigned to checkout-and-payment. Per-location carts and cross-tab behavior also appear in saved-address/resilience and must be checked in those owning features.

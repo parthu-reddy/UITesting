@@ -1,0 +1,50 @@
+package com.fooddelivery.e2e.util;
+
+import com.fooddelivery.e2e.pages.restaurant.*;
+import com.microsoft.playwright.*;
+import com.microsoft.playwright.options.AriaRole;
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Pattern;
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
+
+/** Restaurant-specific assertions on the happy test's order, without another lifecycle. */
+public final class RestaurantAcceptanceChecks {
+    private RestaurantAcceptanceChecks() {}
+    public static void beforeAccept(Page page,String id,Map<?,?> order) {
+        var actions=new RestaurantOrderActionsPage(page);
+        Locator card=actions.orderCard(id);
+        assertThat(card).hasCount(1);
+        assertThat(card).hasAttribute("data-status","CREATED",
+                new com.microsoft.playwright.assertions.LocatorAssertions.HasAttributeOptions().setTimeout(30000));
+        assertThat(card).containsText("#"+id.substring(0,8).toUpperCase());
+        org.assertj.core.api.Assertions.assertThat(order.get("customerName")).isNotNull();
+        assertThat(card).containsText(order.get("customerName").toString());
+        List<?> items=(List<?>)order.get("items");
+        org.assertj.core.api.Assertions.assertThat(items).isNotEmpty();
+        Locator dishes=card.getByRole(AriaRole.LIST,new Locator.GetByRoleOptions().setName("Dishes").setExact(true));
+        assertThat(dishes.getByRole(AriaRole.LISTITEM)).hasCount(items.size());
+        for(Object value:items) {
+            var item=(Map<?,?>)value;
+            Locator dish=dishes.getByRole(AriaRole.LISTITEM).filter(new Locator.FilterOptions().setHasText(item.get("name").toString()));
+            assertThat(dish).hasCount(1);assertThat(dish).containsText(item.get("quantity")+"×");
+        }
+        assertThat(card).containsText("Order value");assertThat(card).containsText("Your payout");
+        assertThat(card.getByRole(AriaRole.BUTTON,new Locator.GetByRoleOptions().setName(Pattern.compile("^Accept.*[0-9]+ min$")))).isEnabled();
+        assertThat(card.getByRole(AriaRole.BUTTON,new Locator.GetByRoleOptions().setName("Reject").setExact(true))).isEnabled();
+        actions.openOrderDetails(id);
+        Locator modal=page.getByRole(AriaRole.DIALOG,new Page.GetByRoleOptions().setName("Order #"+id.substring(0,8)).setExact(true));
+        assertThat(modal).isVisible();
+        for(Object value:items)assertThat(modal).containsText(((Map<?,?>)value).get("name").toString());
+        assertThat(modal.getByText("Transparent Financial Breakdown",new Locator.GetByTextOptions().setExact(true))).isVisible();
+        new RestaurantOrderDetailsModalPage(page).close();assertThat(modal).isHidden();
+        assertThat(card).hasAttribute("data-status","CREATED");
+    }
+    public static void afterAcceptReload(Page page,String id,String outlet) {
+        page.reload();new RestaurantDashboardPage(page).waitForDashboard();
+        Locator card=new RestaurantOrderActionsPage(page).orderCard(id);
+        assertThat(card).hasAttribute("data-status","ACCEPTED");assertThat(card).hasCount(1);
+        assertThat(page.getByRole(AriaRole.COMBOBOX,new Page.GetByRoleOptions().setName("Outlet").setExact(true))).hasText(outlet);
+        assertThat(card).containsText("ready by");
+    }
+}

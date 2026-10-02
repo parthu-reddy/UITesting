@@ -44,10 +44,7 @@ public class CustomerHomeAddressTest extends TestBase {
         }
     }
 
-    @AfterEach
-    void logoutScenarioSession() {
-        if ("8000000502".equals(testCustomerPhone)) new LoginPage(customerPage).logoutCurrentSession();
-    }
+
 
     // ── HOME PAGE SCENARIOS ──────────────────────────────────────────────
 

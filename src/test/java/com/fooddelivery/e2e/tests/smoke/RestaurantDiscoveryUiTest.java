@@ -4,112 +4,154 @@ import com.fooddelivery.e2e.base.TestBase;
 import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.common.LoginPage;
 import com.fooddelivery.e2e.pages.customer.SavedDeliveryAddressPage;
-import com.microsoft.playwright.Locator;
+import com.microsoft.playwright.*;
+import com.microsoft.playwright.options.AriaRole;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-
-import java.util.HashSet;
-import java.util.Set;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
+import java.util.*;
+import java.util.regex.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-/** Read-only restaurant-browser coverage; no cart or order is created. */
+/** Live browsing and explicit routed UI contracts; no order is created. */
 @Tag("catalog-ui")
 public class RestaurantDiscoveryUiTest extends TestBase {
-
-    private Locator openCustomerHome() {
+    private Response nearby;
+    private Locator cards() { return customerPage.locator("button:has(h5)"); }
+    private void signInHome() {
         customerPage.navigate(TestConfig.APP_URL);
         new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
         new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();
-        Locator cards = customerPage.locator("button:has(h5)");
-        cards.first().waitFor();
-        return cards;
     }
-
-    @Test
-    void multipleRestaurantBrandsAndDisplayedDistancesAreValid() {
+    private Locator openCustomerHome() {
+        customerPage.onResponse(r -> {
+            if (java.net.URI.create(r.url()).getPath().equals("/api/v1/restaurants/nearby")
+                    && r.request().method().equals("GET")) nearby = r;
+        });
+        signInHome();
+        cards().first().waitFor();
+        customerPage.waitForCondition(() -> nearby != null);
+        assertThat(nearby.status()).isEqualTo(200);
+        return cards();
+    }
+    @Test void multipleRestaurantBrandsAndDisplayedDistancesAreValid() {
         Locator cards = openCustomerHome();
         assertThat(cards.count()).isGreaterThanOrEqualTo(2);
-
+        Matcher radius = Pattern.compile("[?&]radius=([0-9.]+)").matcher(nearby.url());
+        assertThat(radius.find()).as("Nearby request declares the discovery radius").isTrue();
+        double discoveryRadius = Double.parseDouble(radius.group(1));
+        assertThat(discoveryRadius).isPositive();
+        int total = ((Number) customerPage.evaluate("text => JSON.parse(text).data.length", nearby.text())).intValue();
+        while (cards.count() < total) {
+            int before = cards.count();
+            cards.last().scrollIntoViewIfNeeded();
+            customerPage.waitForCondition(() -> cards.count() > before);
+        }
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(cards).hasCount(total);
         Set<String> brands = new HashSet<>();
-        Pattern distancePattern = Pattern.compile("([0-9]+(?:\\.[0-9]+)?)\\s*km");
-        for (int index = 0; index < cards.count(); index++) {
-            Locator card = cards.nth(index);
+        for (Locator card : cards.all()) {
             String brand = card.locator("h5").innerText().trim();
-            assertThat(brand).isNotEmpty();
-            brands.add(brand);
-
-            Matcher distance = distancePattern.matcher(card.innerText());
-            assertThat(distance.find()).as("restaurant card %s displays a km distance", index).isTrue();
-            assertThat(Double.parseDouble(distance.group(1))).isGreaterThanOrEqualTo(0);
+            assertThat(brand).isNotEmpty(); brands.add(brand);
+            Matcher distance = Pattern.compile("([0-9]+(?:\\.[0-9]+)?)\\s*km").matcher(card.innerText());
+            assertThat(distance.find()).as("Restaurant displays a km distance").isTrue();
+            // Backend rounds to one decimal. Discovery currently requests 10 km; delivery is 5 km.
+            assertThat(Double.parseDouble(distance.group(1))).isBetween(0.0, discoveryRadius + 0.05);
         }
         assertThat(brands).hasSizeGreaterThanOrEqualTo(2);
     }
-
-    @Test
-    void everyRestaurantCardHasALoadedNamedCoverImage() {
-        Locator cards = openCustomerHome();
-        for (int index = 0; index < cards.count(); index++) {
-            Locator image = cards.nth(index).locator("img");
-            com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(image).hasCount(1);
-            assertThat(image.getAttribute("alt")).isNotBlank();
-            int naturalWidth = ((Number) image.evaluate("element => element.naturalWidth")).intValue();
-            assertThat(naturalWidth)
-                    .as("restaurant card %s must load its cover or the configured fallback", index)
-                    .isGreaterThan(0);
-        }
+    @Test void everyRestaurantCardHasALoadedNamedCoverImage() {
+        assertCoverVisuals(openCustomerHome(), false);
     }
-
-    @Test
-    void searchNoResultsAndClearRestoreRestaurantCards() {
+    @Test void searchNoResultsAndClearRestoreRestaurantCards() {
         Locator cards = openCustomerHome();
-        int initialCount = cards.count();
         String brand = cards.first().locator("h5").innerText().trim();
         Locator search = customerPage.getByPlaceholder("Search restaurants or cuisines");
-
         search.fill(brand);
-        customerPage.waitForTimeout(400);
-        assertThat(cards.count()).isGreaterThan(0).isLessThanOrEqualTo(initialCount);
-        for (int index = 0; index < cards.count(); index++) {
-            assertThat(cards.nth(index).locator("h5").innerText()).containsIgnoringCase(brand);
-        }
-
+        customerPage.waitForCondition(() -> cards.count() > 0 && cards.all().stream()
+                .allMatch(card -> card.locator("h5").innerText().toLowerCase().contains(brand.toLowerCase())));
+        for (Locator card : cards.all()) assertThat(card.locator("h5").innerText()).containsIgnoringCase(brand);
         search.fill("xyzqwerty123-no-kitchen");
-        customerPage.waitForTimeout(400);
-        assertThat(cards.count()).isZero();
-        assertThat(customerPage.getByText("No Kitchens Found").isVisible()).isTrue();
-
-        customerPage.getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
-                new com.microsoft.playwright.Page.GetByRoleOptions().setName("Clear Filters").setExact(true)).click();
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(customerPage.getByText("No Kitchens Found")).isVisible();
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(cards).hasCount(0);
+        customerPage.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Clear Filters").setExact(true)).click();
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(search).hasValue("");
         cards.first().waitFor();
-        assertThat(search.inputValue()).isEmpty();
-        assertThat(cards.count()).isEqualTo(initialCount);
+        // Lazy rendering resets to six on filter changes; the old page's card count is not the contract.
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(cards.first().locator("h5")).hasText(brand);
     }
-
-    @Test
-    void categoryFilterCanBeSelectedAndCleared() {
+    @Test void categoryFilterCanBeSelectedAndCleared() {
         Locator cards = openCustomerHome();
-        int initialCount = cards.count();
-        // Chips are the cuisines on the list, in a group labelled "Filter by cuisine". The row is
-        // drawn only when there are at least two cuisines to choose between.
-        Locator filterSection = customerPage.getByRole(com.microsoft.playwright.options.AriaRole.GROUP,
-                new com.microsoft.playwright.Page.GetByRoleOptions().setName("Filter by cuisine"));
-        Locator categoryButtons = filterSection.getByRole(com.microsoft.playwright.options.AriaRole.BUTTON);
-        assertThat(categoryButtons.count()).isGreaterThanOrEqualTo(2);
-
-        Locator category = categoryButtons.filter(new Locator.FilterOptions().setHasNotText("All")).first();
-        String categoryName = category.innerText().trim();
-        assertThat(categoryName).isNotEmpty();
-        category.click();
-        org.junit.jupiter.api.Assertions.assertEquals("true", category.getAttribute("aria-pressed"));
-        assertThat(cards.count()).isLessThanOrEqualTo(initialCount);
-
-        Locator all = categoryButtons.filter(new Locator.FilterOptions().setHasText(Pattern.compile("^All$"))).first();
+        Locator buttons = customerPage.getByRole(AriaRole.GROUP, new Page.GetByRoleOptions()
+                .setName("Filter by cuisine")).getByRole(AriaRole.BUTTON);
+        assertThat(buttons.count()).isGreaterThanOrEqualTo(2);
+        Locator category = buttons.filter(new Locator.FilterOptions().setHasNotText("All")).first();
+        String cuisine = category.innerText().trim();
+        assertThat(cuisine).isNotBlank(); category.click();
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(category).hasAttribute("aria-pressed", "true");
+        customerPage.waitForCondition(() -> cards.count() > 0 && cards.all().stream()
+                .allMatch(card -> card.locator("p").first().innerText().trim().equals(cuisine)));
+        for (Locator card : cards.all()) assertThat(card.locator("p").first().innerText().trim()).isEqualTo(cuisine);
+        Locator all = buttons.filter(new Locator.FilterOptions().setHasText(Pattern.compile("^All$"))).first();
         all.click();
-        org.junit.jupiter.api.Assertions.assertEquals("true", all.getAttribute("aria-pressed"));
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(all).hasAttribute("aria-pressed", "true");
         cards.first().waitFor();
-        assertThat(cards.count()).isGreaterThan(0).isLessThanOrEqualTo(initialCount);
+        assertThat(cards.count()).isGreaterThan(0);
+    }
+    @Test void cuisineSearchMatchesTheRenderedCuisine() {
+        Locator cards = openCustomerHome();
+        String cuisine = cards.first().locator("p").first().innerText().trim();
+        assertThat(cuisine).isNotBlank();
+        customerPage.getByPlaceholder("Search restaurants or cuisines").fill(cuisine);
+        customerPage.waitForCondition(() -> cards.count() > 0 && cards.all().stream().allMatch(card ->
+                card.locator("p").first().innerText().toLowerCase().contains(cuisine.toLowerCase())));
+        for (Locator card : cards.all()) assertThat(card.locator("p").first().innerText()).containsIgnoringCase(cuisine);
+    }
+    @Test
+    @Tag("routed-ui")
+    void failedCoverImagesRenderNamedFallbacks() {
+        customerPage.route("**/*", route -> {
+            if (route.request().resourceType().equals("image")) route.abort(); else route.resume();
+        });
+        assertCoverVisuals(openCustomerHome(), true);
+    }
+    @Test
+    @Tag("routed-ui")
+    void nearbyFailureShowsRetryAndRecoversWithoutClaimingOutOfRange() {
+        customerPage.route("**/api/v1/restaurants/nearby?*", route -> route.fulfill(new Route.FulfillOptions()
+                .setStatus(503).setContentType("application/json")
+                .setBody("{\"success\":false,\"message\":\"Test nearby outage\"}")));
+        signInHome();
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(customerPage.getByText("Couldn't load restaurants")).isVisible();
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(customerPage.getByText("Out of Range", new Page.GetByTextOptions().setExact(true))).hasCount(0);
+        customerPage.unroute("**/api/v1/restaurants/nearby?*");
+        Response retried = customerPage.waitForResponse(r -> java.net.URI.create(r.url()).getPath().equals("/api/v1/restaurants/nearby"),
+                () -> customerPage.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Try again").setExact(true)).click());
+        assertThat(retried.status()).isEqualTo(200);
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(cards().first()).isVisible();
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(customerPage.getByText("Couldn't load restaurants")).hasCount(0);
+    }
+    @Test
+    @Tag("routed-ui")
+    void emptyNearbyAreaOffersAnAddressChange() {
+        customerPage.route("**/api/v1/restaurants/nearby?*", route -> route.fulfill(new Route.FulfillOptions()
+                .setStatus(200).setContentType("application/json").setBody("{\"success\":true,\"data\":[]}")));
+        signInHome();
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(customerPage.getByText("Out of Range", new Page.GetByTextOptions().setExact(true))).isVisible();
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(cards()).hasCount(0);
+        customerPage.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Change Address").setExact(true)).click();
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(customerPage.getByRole(AriaRole.DIALOG)
+                .getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName(Pattern.compile("^Home\\b")))).isVisible();
+    }
+    private void assertCoverVisuals(Locator cards, boolean requireFallback) {
+        assertThat(cards.count()).isGreaterThan(0);
+        for (Locator card : cards.all()) {
+            card.scrollIntoViewIfNeeded();
+            customerPage.waitForCondition(() -> {
+                Locator image = card.locator("img"), fallback = card.locator("div[role='img'][aria-label]");
+                return (!requireFallback && image.count() == 1 && ((Number) image.evaluate("e => e.naturalWidth")).intValue() > 0)
+                        || (image.count() == 0 && fallback.count() == 1 && fallback.isVisible());
+            });
+            if (card.locator("img").count() == 1) assertThat(card.locator("img").getAttribute("alt")).isNotBlank();
+            else assertThat(card.locator("div[role='img'][aria-label]").getAttribute("aria-label")).isNotBlank();
+        }
     }
 }

@@ -56,6 +56,41 @@ public class CustomerCartTest extends TestBase {
         assertThat(cart.getByRole(AriaRole.BUTTON,
                 new Locator.GetByRoleOptions().setName("Checkout").setExact(true))).hasCount(2);
         assertThat(cart.getByText("Replace cart", new Locator.GetByTextOptions().setExact(false))).hasCount(0);
+
+        // Each outlet heading belongs to its own Surface, which contains that cart's rows,
+        // item total and Checkout. Change Brand 1 while Brand 2 stays exactly unchanged.
+        Locator firstGroup = cart.getByText(firstOutlet,
+                new Locator.GetByTextOptions().setExact(true)).locator("xpath=../..");
+        Locator secondGroup = cart.getByText(secondOutlet,
+                new Locator.GetByTextOptions().setExact(true)).locator("xpath=../..");
+        assertThat(firstGroup.locator("output")).hasText("1");
+        assertThat(secondGroup.locator("output")).hasText("1");
+        String secondSubtotal = subtotal(secondGroup).innerText();
+        firstGroup.getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions()
+                .setName("Add one " + firstItemName).setExact(true)).click(new Locator.ClickOptions().setDelay(100));
+        assertThat(firstGroup.locator("output")).hasText("2");
+        assertThat(secondGroup.locator("output")).hasText("1");
+        assertThat(subtotal(secondGroup)).hasText(secondSubtotal);
+        assertThat(secondGroup.getByText(secondItemName,
+                new Locator.GetByTextOptions().setExact(true))).isVisible();
+
+        firstGroup.getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions()
+                .setName("Remove one " + firstItemName).setExact(true)).click(new Locator.ClickOptions().setDelay(100));
+        assertThat(firstGroup.locator("output")).hasText("1");
+        firstGroup.getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions()
+                .setName("Remove one " + firstItemName).setExact(true)).click(new Locator.ClickOptions().setDelay(100));
+        assertThat(cart.getByText(firstOutlet,
+                new Locator.GetByTextOptions().setExact(true))).hasCount(0);
+        assertThat(secondGroup.locator("output")).hasText("1");
+        assertThat(subtotal(secondGroup)).hasText(secondSubtotal);
+        assertThat(cart.getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions()
+                .setName("Checkout").setExact(true))).hasCount(1);
+
+    }
+
+    private Locator subtotal(Locator group) {
+        return group.getByText("Item total", new Locator.GetByTextOptions().setExact(true))
+                .locator("..").locator("span").last();
     }
 
     private Locator firstOrderableItem() {

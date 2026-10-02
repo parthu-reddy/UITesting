@@ -54,8 +54,5 @@ public class RiderOnboardingTest extends TestBase {
             assertThat(settings.isOnboardingWizardVisible() || settings.isSettingsVisible()).isTrue();
         }
     }
-    @AfterEach
-    void logoutScenarioSession() {
-        if (Boolean.getBoolean("scenario.rider.enabled")) new LoginPage(riderPage).logoutCurrentSession();
-    }
+
 }

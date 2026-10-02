@@ -118,8 +118,10 @@ public class DeliveryActiveJobPage {
     // ── Navigation ───────────────────────────────────────────────────────
 
     public void openNavigationMap() {
-        page.locator("button:has-text('Navigate'), button:has(svg.lucide-navigation)").first().click();
-        page.waitForTimeout(500);
+        page.getByRole(com.microsoft.playwright.options.AriaRole.REGION,
+                new Page.GetByRoleOptions().setName("Live order tracking").setExact(true))
+            .getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
+                new com.microsoft.playwright.Locator.GetByRoleOptions().setName("Open directions to Restaurant").setExact(true)).click();
     }
 
     public void callCustomer() {

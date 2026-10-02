@@ -7,7 +7,6 @@ import com.fooddelivery.e2e.pages.restaurant.RestaurantDashboardPage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.AfterEach;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 
@@ -81,12 +80,7 @@ public class RestaurantUiTest extends TestBase {
         }
     }
 
-    @AfterEach
-    void logoutScenarioSession() {
-        if (testRestaurantPhone.matches("900000001[1-4]")) {
-            new LoginPage(restaurantPage).logoutCurrentSession();
-        }
-    }
+
 
     @Test
     @DisplayName("REST-02: Verify Restaurant Routing persists on page reload")

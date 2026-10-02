@@ -102,8 +102,7 @@ public class PaymentModalPage {
 
     private Locator paymentRadio(String name) {
         return dialog().getByRole(AriaRole.RADIO)
-                .filter(new Locator.FilterOptions().setHasText(name))
-                .first();
+                .filter(new Locator.FilterOptions().setHasText(name));
     }
 
     private Locator placeOrder() {
@@ -111,13 +110,21 @@ public class PaymentModalPage {
                 new Locator.GetByRoleOptions().setName(Pattern.compile("Place order")));
     }
 
-    /** Waits for the quote: Place order is disabled while taxes are still being calculated. */
+    public void assertPaymentMethodSelected(String name) {
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(paymentRadio(name))
+                .hasCount(1);
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(paymentRadio(name))
+                .hasAttribute("aria-checked", "true");
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(dialog()
+                .getByRole(AriaRole.RADIO).filter(new Locator.FilterOptions().setHasText(
+                        Pattern.compile("La Bouffe Wallet|^UPI$|Credit or debit card")))
+                .locator("xpath=self::*[@aria-checked='true']")).hasCount(1);
+    }
+
+    /** Wait for real UI readiness after method selection without fixed polling sleeps. */
     public boolean isPayEnabled() {
-        Locator pay = placeOrder();
-        for (int i = 0; i < 20 && pay.isVisible() && !pay.isEnabled(); i++) {
-            page.waitForTimeout(500);
-        }
-        return pay.isVisible() && pay.isEnabled();
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(placeOrder()).isEnabled();
+        return true;
     }
 
     public void placeOrder(String method) {

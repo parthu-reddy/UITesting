@@ -4,13 +4,7 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.options.AriaRole;
 
-/**
- * Page Object for the Session Management Modal.
- * Maps to: {@code SessionManagementModal.tsx, ActiveSessions.tsx}
- * <p>
- * Shows active device sessions and allows terminating other sessions.
- * </p>
- */
+/** Page object for the inline Logged-in Devices section in ActiveSessions.tsx. */
 public class SessionManagementPage {
 
     private final Page page;
@@ -48,17 +42,11 @@ public class SessionManagementPage {
                 .locator("xpath=..");
     }
 
-    public boolean hasDefinedState() {
-        // If still loading, wait for it to resolve first
-        Locator loading = section().getByText("Loading sessions...",
-                new Locator.GetByTextOptions().setExact(true));
-        try {
-            loading.waitFor(new Locator.WaitForOptions()
-                    .setState(com.microsoft.playwright.options.WaitForSelectorState.HIDDEN)
-                    .setTimeout(10000));
-        } catch (com.microsoft.playwright.TimeoutError ignored) { }
-        return getSessionCount() > 0
+    public void waitForSessions() {
+        // A hidden loading indicator alone is insufficient: it is hidden before the effect starts.
+        // Wait for a row or explicit empty state, then fail if the expected browser row is absent.
+        page.waitForCondition(() -> getSessionCount() > 0
                 || section().getByText("No active sessions found.",
-                        new Locator.GetByTextOptions().setExact(true)).isVisible();
+                        new Locator.GetByTextOptions().setExact(true)).isVisible());
     }
 }

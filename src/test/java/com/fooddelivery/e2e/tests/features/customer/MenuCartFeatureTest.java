@@ -21,14 +21,9 @@ public class MenuCartFeatureTest extends TestBase {
         customerPage.navigate(TestConfig.APP_URL);
         new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
         
+        new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();
         CustomerDashboardPage dashboard = new CustomerDashboardPage(customerPage);
         dashboard.waitForDashboard();
-        
-        // Select Home address if modal is present
-        CustomerAddressModalPage addressModal = new CustomerAddressModalPage(customerPage);
-        if (addressModal.isModalOpen()) {
-            addressModal.selectExistingAddress("Home");
-        }
 
         // Navigate to Brand 1 Outlet 1
         NearbyOutletPage nearbyOutletPage = new NearbyOutletPage(customerPage);
@@ -72,29 +67,17 @@ public class MenuCartFeatureTest extends TestBase {
         CustomerCartDrawerPage cart = new CustomerCartDrawerPage(customerPage);
         cart.waitForCartOpen();
 
-        int initialItems = cart.getItemCount();
-        assertThat(initialItems).isGreaterThan(0);
-
-        // Increment
+        assertThat(cart.getItemCount()).isEqualTo(1);
+        Locator drawer = customerPage.getByRole(com.microsoft.playwright.options.AriaRole.DIALOG,
+                new Page.GetByRoleOptions().setName("Your cart").setExact(true));
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(drawer.locator("output")).hasText("1");
         cart.incrementItem(0);
-        customerPage.waitForTimeout(1000);
-
-        // Decrement
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(drawer.locator("output")).hasText("2");
         cart.removeItem(0);
-        customerPage.waitForTimeout(1000);
-        
-        // Decrement again to empty if it had 2
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(drawer.locator("output")).hasText("1");
         cart.removeItem(0);
-        customerPage.waitForTimeout(1000);
-
-        // Verify empty cart state
-        boolean isEmpty = customerPage.getByText("Your cart is empty", new Page.GetByTextOptions().setExact(true)).isVisible();
-        if(!isEmpty) {
-             System.out.println("Cart not empty yet, trying to click remove again");
-             cart.removeItem(0);
-             customerPage.waitForTimeout(1000);
-             isEmpty = customerPage.getByText("Your cart is empty", new Page.GetByTextOptions().setExact(true)).isVisible();
-        }
-        assertThat(isEmpty).as("Removing every item leaves the drawer's empty state").isTrue();
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(drawer.getByText("Your cart is empty",
+                new Locator.GetByTextOptions().setExact(true))).isVisible();
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(drawer.locator("output")).hasCount(0);
     }
 }

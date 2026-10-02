@@ -194,7 +194,7 @@ public class AdminSupportTicketResolutionRoutedUiTest extends TestBase {
             fixture.webSocketConnections.incrementAndGet();
             socket.onMessage(frame -> {
                 String message = frame.text();
-                if (message != null && message.stripLeading().startsWith("CONNECT\n")) {
+                if (message != null && message.stripLeading().replace("\r\n", "\n").startsWith("CONNECT\n")) {
                     socket.send("CONNECTED\nversion:1.2\n\n\0");
                 } else if (message != null && message.contains("destination:/app/chat.send/")) {
                     fixture.sentChatFrames.incrementAndGet();

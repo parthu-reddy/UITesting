@@ -182,7 +182,7 @@ public class ChatWindowRoutedUiTest extends TestBase {
                 .as("the chat session request is recorded")
                 .isNotBlank()
                 .contains("\"orderId\":\"" + ORDER_ID + "\"")
-                .contains("\"userId\":\"" + fixture.authenticatedCustomerId.get() + "\"");
+                .doesNotContain("\"userId\"", "\"participants\"", "\"customerId\"");
     }
 
     private static boolean isCreateSessionUrl(String url) {
@@ -192,7 +192,7 @@ public class ChatWindowRoutedUiTest extends TestBase {
     }
 
     private static boolean isStompCommand(String frame, String command) {
-        return frame != null && frame.stripLeading().startsWith(command + "\n");
+        return frame != null && frame.stripLeading().replace("\r\n", "\n").startsWith(command + "\n");
     }
 
     private static void fulfillJson(Route route, int status, String body) {

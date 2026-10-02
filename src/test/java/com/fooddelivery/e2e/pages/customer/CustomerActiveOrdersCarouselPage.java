@@ -18,19 +18,25 @@ public class CustomerActiveOrdersCarouselPage {
     }
 
     public boolean isCarouselVisible() {
-        return page.locator("[data-testid='active-orders-carousel'], .active-order-strip").first().isVisible();
+        return page.locator("[data-testid='active-orders-carousel']").first().isVisible();
     }
 
     public int getActiveOrderCount() {
         // Each order card in the carousel is a Surface with status pill
-        return page.locator("[data-testid='active-order-card'], .active-order-strip > div").count();
+        return page.locator("[data-testid='active-order-card']").count();
     }
 
     /**
      * Clicks on the nth active order card to open the order tracker.
      */
+    public void openOrder(String orderId) {
+        page.locator("[data-testid='active-order-card'][data-order-id='" + orderId + "']").click();
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(
+                page.locator("[data-testid='order-tracker'][data-order-id='" + orderId + "']")).isVisible();
+    }
+
     public void openOrder(int index) {
-        page.locator("[data-testid='active-order-card'], .active-order-strip > div").nth(index).click();
-        page.waitForTimeout(500);
+        page.locator("[data-testid='active-order-card']").nth(index).click();
+
     }
 }

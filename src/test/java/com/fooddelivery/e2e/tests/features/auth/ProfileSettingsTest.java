@@ -48,13 +48,41 @@ public class ProfileSettingsTest extends TestBase {
                 "Please complete your profile to continue. This is required to process your orders.",
                 new com.microsoft.playwright.Page.GetByTextOptions().setExact(true))).isVisible();
         assertThat(customerPage.evaluate("() => localStorage.getItem('auth_token')")).isInstanceOf(String.class);
-        // Leave this reusable incomplete-profile fixture incomplete.
+        java.util.List<String> saves = new java.util.ArrayList<>();
+        customerPage.onRequest(request -> {
+            if (request.method().equals("PUT") && java.net.URI.create(request.url()).getPath().equals("/api/v1/users/profile")) {
+                saves.add(request.url());
+            }
+        });
+        customerPage.route("**/api/v1/users/profile", route -> {
+            if (route.request().method().equals("PUT")) route.abort();
+            else route.resume();
+        });
+        var submit = customerPage.getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
+                new com.microsoft.playwright.Page.GetByRoleOptions().setName("Save Profile & Continue").setExact(true));
+        var error = customerPage.getByRole(com.microsoft.playwright.options.AriaRole.DIALOG)
+                .locator("div:has(> svg.lucide-circle-alert) > span");
+        for (String badName : new String[] {"", "   ", "x".repeat(101)}) {
+            name.fill(badName);
+            email.fill("profile-validation@example.com");
+            submit.click();
+            com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(error).isVisible();
+            assertThat(saves).as("Invalid names must not persist the incomplete fixture").isEmpty();
+        }
+        name.fill("Validation Probe");
+        email.fill("");
+        submit.click();
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(error).containsText("email");
+        email.fill("invalid-address");
+        submit.click();
+        assertThat(email.evaluate("element => element.validity.typeMismatch")).isEqualTo(true);
+        assertThat(saves).isEmpty();
+        name.fill("");
+        email.fill("");
+        // Leave this reusable incomplete-profile fixture incomplete; retain its session after execution.
     }
 
-    @AfterEach
-    void logoutScenarioSession() {
-        if ("8000000501".equals(testCustomerPhone)) new LoginPage(customerPage).logoutCurrentSession();
-    }
+
 
     // ── SHARED SETTINGS TABS SCENARIOS ───────────────────────────────────
 

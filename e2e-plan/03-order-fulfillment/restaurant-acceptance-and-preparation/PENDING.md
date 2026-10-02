@@ -1,3 +1,15 @@
+# Current audit2026-10-02
+
+Navigation passed9.482s; queue-only method passed without creating an order.13focused UI checks,8restaurant backend checks and4mocked dispatch checks passed. Historical claims below do not describe current status.
+
+Three owned command tests stopped before any command because a test assertion incorrectly used customer PENDING_ACCEPTANCE for restaurant CREATED. The source uses distinct service statuses. Corrected the assertions and added guarded pending-manifest continuation; rerun the retained orders, no replacements/reset/cleanup. The acceptance and rejection flows remain unverified until those continuations complete.
+
+Reviews aggregate belongs to the later review feature; public SSE and elapsed/quota coverage remain deferred. [Source/scenario audit](../../../../RandomDocuments/E2ECoverageAudit_2026-10-01/11-restaurant-acceptance-and-preparation.md).
+
+---
+
+Historical investigation follows.
+
 # Pending restaurant acceptance and navigation coverage
 
 ## Restaurant section navigation failure

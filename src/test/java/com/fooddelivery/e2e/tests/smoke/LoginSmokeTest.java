@@ -8,7 +8,6 @@ import com.microsoft.playwright.Response;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.jupiter.api.AfterEach;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
@@ -38,10 +37,7 @@ public class LoginSmokeTest extends TestBase {
                 : Arrays.stream(roles.split(",")).map(String::trim).map(Account::valueOf);
     }
 
-    @AfterEach
-    void logoutScenarioSession() {
-        if ("8000000503".equals(testCustomerPhone)) new LoginPage(customerPage).logoutCurrentSession();
-    }
+
 
     private Page pageFor(Account account) {
         return switch (account) {
@@ -61,6 +57,17 @@ public class LoginSmokeTest extends TestBase {
         };
     }
 
+    @org.junit.jupiter.api.Test
+    void isolatedContextsStartWithoutAuthentication() {
+        for (Page page : getAllPages()) {
+            page.navigate(TestConfig.APP_URL);
+            assertThat(page.getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
+                    new Page.GetByRoleOptions().setName(java.util.regex.Pattern.compile("^Order Food\\b"))).first()).isVisible();
+            assertThat(page.evaluate("() => localStorage.getItem('auth_token')")).isNull();
+            assertThat(page.evaluate("() => localStorage.getItem('user_profile')")).isNull();
+        }
+    }
+
     @ParameterizedTest(name = "{0}: valid OTP opens the correct dashboard")
     @MethodSource("accounts")
     void successfulLogin(Account account) {
@@ -77,8 +84,22 @@ public class LoginSmokeTest extends TestBase {
                 .isVisible();
         assertThat(page.evaluate("() => JSON.parse(localStorage.getItem('user_profile')).role"))
                 .isEqualTo(account.name());
-        assertThat(page.evaluate("() => localStorage.getItem('auth_token')"))
-                .isInstanceOf(String.class);
+        Object identity = page.evaluate("""
+                () => {
+                    const token = localStorage.getItem('auth_token');
+                    const profile = JSON.parse(localStorage.getItem('user_profile'));
+                    const claims = JSON.parse(atob(token.split('.')[1].replace(/-/g, '+').replace(/_/g, '/')));
+                    return {phone: claims.phone, roles: claims.roles, subject: claims.sub,
+                        profileId: profile.id, profilePhone: profile.phone};
+                }
+                """);
+        java.util.Map<?, ?> identityFields = (java.util.Map<?, ?>) identity;
+        assertThat(identityFields.get("phone")).isEqualTo(phone);
+        assertThat(identityFields.get("profilePhone")).isEqualTo(phone);
+        assertThat(identityFields.get("subject")).isEqualTo(identityFields.get("profileId"));
+        assertThat(identityFields.get("subject")).isInstanceOf(String.class);
+        assertThat(identityFields.get("roles")).isInstanceOf(java.util.List.class);
+        assertThat(((java.util.List<?>) identityFields.get("roles")).contains(account.name())).isTrue();
     }
 
     @ParameterizedTest(name = "{0}: rejected login stays logged out")

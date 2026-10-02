@@ -23,11 +23,28 @@ public class OutletSelectionTest extends TestBase {
     private Locator outletChoices;
 
     @BeforeEach
-    void openBrandOneOutletSelector() {
+    void openBrandOneOutletSelector(TestInfo info) {
         customerPage.navigate(TestConfig.APP_URL);
         new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
         new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();
         new CustomerDashboardPage(customerPage).waitForDashboard();
+        if (info.getTestMethod().orElseThrow().getName().equals("farOutletsCannotBeSelected")) {
+            // Saved coordinates are now reconciled correctly; a seeded Home can have all
+            // outlets within 5km. Route one distance to guarantee this boundary UI contract.
+            customerPage.route("**/api/v1/restaurants/brands/*/outlets?*", route -> {
+                com.microsoft.playwright.APIResponse original = route.fetch();
+                assertThat(original.status()).isEqualTo(200);
+                String body = (String) customerPage.evaluate("""
+                    text => {
+                        const payload = JSON.parse(text);
+                        if (!payload.data.length) throw new Error('Far-outlet fixture needs an outlet');
+                        payload.data[payload.data.length - 1].distance = 6;
+                        return JSON.stringify(payload);
+                    }
+                    """, original.text());
+                route.fulfill(new com.microsoft.playwright.Route.FulfillOptions().setResponse(original).setBody(body));
+            });
+        }
         customerPage.getByRole(AriaRole.BUTTON,
                 new Page.GetByRoleOptions().setName(Pattern.compile("Brand 1\\b"))).first().click();
         customerPage.getByRole(AriaRole.BUTTON,
@@ -67,6 +84,7 @@ public class OutletSelectionTest extends TestBase {
     }
 
     @Test
+    @Tag("routed-ui")
     @DisplayName("ADDRESS-09: Outlets beyond five kilometres are visibly unavailable")
     void farOutletsCannotBeSelected() {
         int farOutlets = 0;
@@ -76,11 +94,8 @@ public class OutletSelectionTest extends TestBase {
                     .matcher(outlet.innerText());
             if (!distance.find() || Double.parseDouble(distance.group(1)) <= 5.0) continue;
             farOutlets++;
-            boolean labelledUnavailable = Pattern.compile("too far|unavailable|out of range",
-                    Pattern.CASE_INSENSITIVE).matcher(outlet.innerText()).find();
-            assertThat(outlet.isDisabled() || labelledUnavailable)
-                    .as("outlet beyond 5 km must be disabled or clearly unavailable: %s", outlet.innerText())
-                    .isTrue();
+            assertThat(outlet).isDisabled();
+            assertThat(outlet).containsText("Too far to deliver");
         }
         assertThat(farOutlets).as("seeded Brand1 far-outlet fixture").isGreaterThan(0);
     }

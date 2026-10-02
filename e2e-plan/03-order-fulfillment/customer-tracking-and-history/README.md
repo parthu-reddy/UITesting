@@ -1,9 +1,9 @@
-# customer-tracking-and-history
+# Customer tracking and history
 
-Status: source and UI reachability reviewed; lifecycle-backed tracker scenarios remain deferred.
+Status: active feature audit. History/reorder passed13deployed browser methods; map/carousel strengthening is locally verified and deployment/live reruns are in progress. Do not call the whole feature or suite green yet.
 
-Scope: Active orders, progress, history and reorder.
+The mounted history view is Account → History (`SettingsHistoryTab`), with dated/full-ID summaries, pagination and loading/error/empty recovery. Home's `ReorderStrip` now restores validated current-catalogue items through an owned completed order/address-bound quote; it does not submit an order. The standalone old history overlay is not the tested route.
 
-The current `CustomerOrderHistory` implementation is not mounted by any application component. Customer routing uses a wildcard that always renders `CustomerMainView`, so no UI-only interaction or direct URL can currently open the order-history overlay. This blocks HISTORY-01 through HISTORY-06 and reorder-from-history coverage until the UI exposes the component.
+Use customer8000000484's retained completed/cancelled orders. History/reorder tests block all order POSTs. Real happy/concurrent lifecycle methods prove automatic status convergence and independently owned records; the map and carousel assertions are being rerun after UI816c6f6. Delay approvals/rejections are cross-referenced to `04-order-exceptions-and-support/rejection-cancellation-and-delays` and must receive real lifecycle verification there.
 
-Customer home/discovery scenarios HOME-01 through HOME-06 now have UI-only coverage. The free-delivery tracker renders a bounded ARIA progress value plus either an INR remaining-amount message or the unlocked message after an item is added.
+See [scenario matrix](scenarios.md), [remaining work](PENDING.md) and [audit09](../../../../RandomDocuments/E2ECoverageAudit_2026-10-01/09-customer-tracking-and-history.md). Duration/rate tests remain deferred and excluded. No automatic data cleanup; only idle riders becomeOFFLINE.

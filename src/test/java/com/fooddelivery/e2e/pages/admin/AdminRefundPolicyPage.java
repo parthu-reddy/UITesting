@@ -77,7 +77,7 @@ public final class AdminRefundPolicyPage {
     }
 
     public Locator statusMessages() {
-        return page.getByRole(AriaRole.STATUS);
+        return page.locator("[role='status'][aria-live='polite']");
     }
 
     public Locator detailsHeading() {

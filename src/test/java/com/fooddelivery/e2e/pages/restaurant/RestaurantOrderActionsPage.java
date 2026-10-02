@@ -22,8 +22,9 @@ public class RestaurantOrderActionsPage {
      * interface. Public because flow tests scope their own assertions to one card.
      */
     public Locator orderCard(String orderId) {
-        String shortId = orderId.substring(0, Math.min(8, orderId.length())).toLowerCase();
-        return page.locator("[data-testid='restaurant-order-card'][data-order-id^='" + shortId + "']");
+        String id = orderId.toLowerCase();
+        String operator = id.length() == 36 ? "=" : "^=";
+        return page.locator("[data-testid='restaurant-order-card'][data-order-id" + operator + "'" + id + "']");
     }
 
     /**
@@ -36,7 +37,8 @@ public class RestaurantOrderActionsPage {
     }
 
     public void openOrderDetails(String shortOrderId) {
-        orderCard(shortOrderId).locator("button:has(svg.lucide-receipt)").click();
+        orderCard(shortOrderId).getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
+                new Locator.GetByRoleOptions().setName("Order details").setExact(true)).click();
         page.getByRole(com.microsoft.playwright.options.AriaRole.DIALOG)
                 .waitFor(new Locator.WaitForOptions()
                         .setState(WaitForSelectorState.VISIBLE)
@@ -51,7 +53,6 @@ public class RestaurantOrderActionsPage {
                 .setState(WaitForSelectorState.VISIBLE)
                 .setTimeout(15000));
         btn.click();
-        page.waitForTimeout(1000);
     }
 
     public void acceptOrder(String shortOrderId) {
@@ -60,7 +61,6 @@ public class RestaurantOrderActionsPage {
                 .setState(WaitForSelectorState.VISIBLE)
                 .setTimeout(15000));
         btn.click();
-        page.waitForTimeout(1000);
     }
 
     public void startCooking() {
@@ -69,7 +69,6 @@ public class RestaurantOrderActionsPage {
                 .setState(WaitForSelectorState.VISIBLE)
                 .setTimeout(10000));
         btn.click();
-        page.waitForTimeout(500);
     }
 
     public void startCooking(String shortOrderId) {
@@ -78,7 +77,6 @@ public class RestaurantOrderActionsPage {
                 .setState(WaitForSelectorState.VISIBLE)
                 .setTimeout(10000));
         btn.click();
-        page.waitForTimeout(500);
     }
 
     public void markPrepared() {
@@ -87,7 +85,6 @@ public class RestaurantOrderActionsPage {
                 .setState(WaitForSelectorState.VISIBLE)
                 .setTimeout(10000));
         btn.click();
-        page.waitForTimeout(500);
     }
 
     public void markPrepared(String shortOrderId) {
@@ -96,7 +93,6 @@ public class RestaurantOrderActionsPage {
                 .setState(WaitForSelectorState.VISIBLE)
                 .setTimeout(10000));
         btn.click();
-        page.waitForTimeout(500);
     }
 
     public void cancelOrder() {
@@ -106,7 +102,6 @@ public class RestaurantOrderActionsPage {
                 .setState(WaitForSelectorState.VISIBLE)
                 .setTimeout(15000));
         cancelBtn.click();
-        page.waitForTimeout(500);
 
         // Step 1.5: Fill in a cancellation reason
         Locator reasonInput = page.locator("input[placeholder*='Out of stock']").first();
@@ -120,7 +115,6 @@ public class RestaurantOrderActionsPage {
                 .setState(WaitForSelectorState.VISIBLE)
                 .setTimeout(5000));
         confirmBtn.click();
-        page.waitForTimeout(1000);
     }
 
     public void cancelOrder(String shortOrderId) {
@@ -131,7 +125,6 @@ public class RestaurantOrderActionsPage {
                 .setState(WaitForSelectorState.VISIBLE)
                 .setTimeout(15000));
         cancelBtn.click();
-        page.waitForTimeout(500);
 
         // Step 1.5: Fill in a cancellation reason
         Locator reasonInput = page.locator("input[placeholder*='Out of stock']").first();
@@ -145,7 +138,6 @@ public class RestaurantOrderActionsPage {
                 .setState(WaitForSelectorState.VISIBLE)
                 .setTimeout(5000));
         confirmBtn.click();
-        page.waitForTimeout(1000);
     }
 
     // ── OTP extraction ───────────────────────────────────────────────────
@@ -162,7 +154,6 @@ public class RestaurantOrderActionsPage {
     public void openChat() {
         // The chat button is the MessageSquare icon button
         page.locator("button:has(svg.lucide-message-square)").first().click();
-        page.waitForTimeout(500);
     }
 
     public void openChat(String orderId) {
@@ -174,7 +165,6 @@ public class RestaurantOrderActionsPage {
     public void showOrderDetails() {
         // The receipt icon button opens details
         page.locator("button:has(svg.lucide-receipt)").first().click();
-        page.waitForTimeout(500);
     }
 
     public String getOrderValue() {
@@ -190,7 +180,6 @@ public class RestaurantOrderActionsPage {
     public void requestDelay() {
         // The clock icon button opens the delay modal
         page.locator("button:has(svg.lucide-clock)").first().click();
-        page.waitForTimeout(500);
     }
 
     public void requestDelay(String shortOrderId, int minutes, String reason) {

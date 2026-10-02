@@ -119,6 +119,19 @@ public final class SeededRiderDuty implements AutoCloseable {
         }
     }
 
+    /** Recheck server duty and the live location socket immediately before checkout. */
+    public void assertReadyForCheckout() {
+        org.assertj.core.api.Assertions.assertThat(readDutyStatus(page))
+                .as("Server must still report ONLINE immediately before checkout").isEqualTo("ONLINE");
+        org.assertj.core.api.Assertions.assertThat(riderSocket.get()).as("Rider tracking socket exists").isNotNull();
+        org.assertj.core.api.Assertions.assertThat(riderSocket.get().isClosed()).as("Rider tracking socket stays connected").isFalse();
+        org.assertj.core.api.Assertions.assertThat(latestStatus.get()).isEqualTo("ONLINE");
+        org.assertj.core.api.Assertions.assertThat(locationTelemetrySent.get()).isTrue();
+        org.assertj.core.api.Assertions.assertThat(page.getByText(
+                java.util.regex.Pattern.compile("Connection lost|Waiting for your location|your location stopped reaching us")).count())
+                .as("Rider must have no connection/location-loss warning").isZero();
+    }
+
     void preserveOnlineForActiveDelivery() {
         preserveOnlineForActiveDelivery = true;
     }
@@ -157,6 +170,40 @@ public final class SeededRiderDuty implements AutoCloseable {
         } catch (TimeoutError timeout) {
             throw new AssertionError(message, timeout);
         }
+    }
+
+    /** Rider duty is the sole automatic state reset requested by the user. Keep identity/data intact. */
+    public static void finishOfflineIfIdle(Page page) {
+        if (page == null || page.isClosed() || !page.url().startsWith(TestConfig.APP_URL)) return;
+        String status = readDutyStatus(page);
+        if (status == null || "OFFLINE".equals(status)) return;
+        if ("ON_DELIVERY".equals(status)) {
+            System.out.println("[RIDER] Active delivery remains resumable; offline transition waits for completion");
+            return;
+        }
+        if (!"ONLINE".equals(status)) throw new AssertionError("Unexpected rider duty status: " + status);
+        Response offline = page.waitForResponse(r -> java.net.URI.create(r.url()).getPath().equals("/api/delivery/status")
+                && r.request().method().equals("POST"), () -> new DeliveryOnlineTogglePage(page).goOffline());
+        org.assertj.core.api.Assertions.assertThat(offline.status()).as("Rider OFFLINE request must succeed").isEqualTo(200);
+        org.assertj.core.api.Assertions.assertThat(readDutyStatus(page)).as("Server must confirm rider OFFLINE").isEqualTo("OFFLINE");
+    }
+
+    private static String readDutyStatus(Page page) {
+        return (String) page.evaluate("""
+                async () => {
+                    const token = localStorage.getItem('auth_token');
+                    const profile = JSON.parse(localStorage.getItem('user_profile') || 'null');
+                    if (!token || profile?.role !== 'DELIVERY') return null;
+                    const response = await fetch(`/api/delivery/profile?phoneNumber=${encodeURIComponent(profile.phone)}`, {
+                        headers: {Authorization: `Bearer ${token}`}, credentials: 'omit'
+                    });
+                    if (!response.ok) throw new Error(`Cannot confirm rider duty: HTTP ${response.status}`);
+                    const body = await response.json();
+                    const status = (body.data || body).status;
+                    if (!status) throw new Error('Rider profile has no duty status');
+                    return status;
+                }
+                """);
     }
 
     @Override

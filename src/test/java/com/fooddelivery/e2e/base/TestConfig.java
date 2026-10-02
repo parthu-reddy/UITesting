@@ -1,5 +1,7 @@
 package com.fooddelivery.e2e.base;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 /**
  * Centralized configuration for all E2E tests.
  * All values are overridable via system properties for CI flexibility.
@@ -9,8 +11,23 @@ public final class TestConfig {
     private TestConfig() {}
 
     /** Base URL of the application under test. */
-    public static final String APP_URL = System.getProperty("app.url", System.getenv().getOrDefault("E2E_APP_URL",
-            "https://gulf-strike-dark-extras.trycloudflare.com/"));
+    static final String DEFAULT_APP_URL = "https://gulf-strike-dark-extras.trycloudflare.com/";
+    public static final String APP_URL = resolveAppUrl(System.getProperty("app.url"), System.getenv("E2E_APP_URL"));
+
+    static String resolveAppUrl(String property, String environment) {
+        return property != null ? property : environment != null ? environment : DEFAULT_APP_URL;
+    }
+
+    public static String customerPhone() { return seededPhone("customer.phone", "8000000", 500); }
+    public static String restaurantPhone() { return seededPhone("restaurant.phone", "9000000", 10); }
+    public static String riderPhone() { return seededPhone("rider.phone", "7000000", 30); }
+    public static String adminPhone() { return System.getProperty("admin.phone", "1000000001"); }
+
+    private static String seededPhone(String property, String prefix, int upperBound) {
+        String override = System.getProperty(property);
+        return override != null ? override
+                : prefix + String.format("%03d", ThreadLocalRandom.current().nextInt(1, upperBound + 1));
+    }
 
     /** Default timeout for locator waits (ms). */
     public static final int DEFAULT_TIMEOUT = Integer.parseInt(

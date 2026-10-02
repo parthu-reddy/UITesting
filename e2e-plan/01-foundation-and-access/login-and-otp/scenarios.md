@@ -1,6 +1,6 @@
 # 01 — Login and OTP — All Scenarios
 
-All scenarios use real backend authentication and no mocked tokens. After the browser requests
+Successful login, signup, resend and rejection scenarios use real backend authentication and no mocked tokens. Deferred rate-limit response tests use browser routing and are explicitly UI-contract coverage. After the browser requests
 an OTP through the normal login flow, the test clicks the same Dev Autofill Code button used
 for manual developer login. On a Dev backend with `DEV_OTP_ENABLED=true`, this facility accepts valid 10-digit
 customer/rider/restaurant numbers. Administrator autofill is allowlisted to the two provisioned
@@ -59,14 +59,14 @@ The deployed login and registration results are recorded in PENDING.md.
 | AUTH-21 | Desktop 1280px | Cycle through all 4 role tabs via click; verify each shows the correct phone form label. | Labels match role names without OTP being triggered. |
 | AUTH-22 | Mobile 390px | Swipe/tap carousel to each role; verify each phone form appears. | Carousel navigation works; no scroll breakage. |
 | AUTH-23 | Desktop | Select Customer → type partial phone → click Back → select Restaurant → verify phone field is empty. | Back navigation resets form state. |
-| AUTH-24 | Mobile | Toggle between customer and rider roles 3 times; verify no JS errors in console. | Console clean; no duplicate re-renders. |
+| AUTH-24 | Mobile | Toggle between customer and rider roles 3 times; verify no JS errors in console. | No page or console errors and no OTP initiation during three customer/rider switch cycles; rendering performance is not asserted. |
 
 ## Batch 7 — Logout
 
 | ID | Role | Action | Expected result |
 |---|---|---|---|
 | AUTH-25 | Customer | Login → open Settings → tap "Logout". | Implemented and live-passed; role selector remains after reload. |
-| AUTH-26 | Restaurant | Same logout flow. | Active and failing: profile/settings navigation returns to Live Kitchen, so no Log Out control appears. |
+| AUTH-26 | Restaurant | Same logout flow. | Historical navigation blocker; fresh logout verification belongs to sessions-and-role-access. |
 | AUTH-27 | Rider | Same logout flow. | Implemented and live-passed; role selector remains after reload. |
 | AUTH-28 | Admin | Same logout flow. | Role selector visible. |
 
@@ -84,3 +84,19 @@ Each isolated test session is logged out afterward. Snapshot the fixture state b
 
 All four seeded customer cases passed live on 2026-10-01, without failures, errors or skips.
 Profiles, active flags and saved addresses were unchanged afterward; active session lists were empty.
+
+## Current audit additions — 2026-10-01
+
+| ID | Role / action | Required result | Existing class mapping |
+|---|---|---|---|
+| AUTH-29 | All four roles submit phone lengths 1, 7, 8 and 9 | Visible client validation; no OTP initiation; form remains | LoginValidationTest#phoneValidation |
+| AUTH-30 | All four roles submit OTP lengths 1, 3 and 5 | Visible client validation; no verification or token | LoginValidationTest#otpValidationAndBack |
+| AUTH-31 | All four roles resend then submit the previous code and current code | Distinct old code rejected, no token; current code accepted under the selected identity | LoginValidationTest#resendRejectsThePreviousCode |
+| AUTH-32 | Unallowlisted admin 1000000099 | No Create account or Dev autofill; lookup denied 403; no token/profile | LoginValidationTest#unallowlistedAdministratorCannotRetrieveDevOtpOrRegister |
+| AUTH-33 | Seeded incomplete customer 8000000501 submits empty/whitespace/101-character names and missing/malformed email | No profile PUT; fixture stays incomplete; own session revoked | ProfileSettingsTest#completeProfileModalPrompt, scenario.customer.enabled=true |
+| AUTH-34 | Fresh customer, rider and restaurant signup through explicit Create account | Selected role only; profile/onboarding reaches dashboard; Dev government mock; rider biometric owned by that account; created identities/data/sessions are retained; idle rider duty ends OFFLINE | RegistrationUiTest REG-01/02/03 via run_registration_e2e.py |
+| AUTH-35 | Correct role login returns identity token | JWT phone/role/subject matches the selected account and stored profile; successful logout immediately revokes it | LoginSmokeTest#successfulLogin |
+
+All opt-in fixture cases must be run with their designated data. A disabled fixture case is not passing coverage. AUTH-25–28 logout, persistence and cross-role access continue in the sessions feature; this folder must link its fresh evidence instead of retaining stale deployment failures.
+
+Intentional duration and rate-limit scenarios are deferred at the user's request. See DEFERRED-WAIT-TESTS.md and DEFERRED-RATE-LIMIT-TESTS.md for implementation, tags, opt-in flags and final-run requirements. They are excluded from the current fast validation totals.

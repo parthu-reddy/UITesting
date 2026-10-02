@@ -7,8 +7,8 @@ import com.microsoft.playwright.Page;
  * Maps to: {@code MapPanel.tsx}, {@code OrderTrackingMap.tsx}, {@code PlaceSearchField.tsx},
  * {@code CoordinateFields.tsx}
  * <p>
- * Map rendering is not directly E2E testable in headless mode, but the containers,
- * search inputs, and coordinate field interactions can be verified.
+ * Live map canvas and rendered courier movement are verified in HappyDeliveryFlowTest.
+ * Place search and coordinate controls are separate contracts.
  * </p>
  */
 public class MapTrackingPage {
@@ -20,7 +20,8 @@ public class MapTrackingPage {
     }
 
     public boolean isMapContainerVisible() {
-        return page.locator("[data-testid='map-container'], .map-panel").first().isVisible();
+        return page.getByRole(com.microsoft.playwright.options.AriaRole.REGION,
+                new Page.GetByRoleOptions().setName("Live order tracking").setExact(true)).isVisible();
     }
 
     /**

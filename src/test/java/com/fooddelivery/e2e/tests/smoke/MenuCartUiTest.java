@@ -12,6 +12,7 @@ import com.microsoft.playwright.options.AriaRole;
 import org.junit.jupiter.api.*;
 import java.util.regex.Pattern;
 import java.time.Duration;
+import java.util.Map;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
@@ -24,6 +25,11 @@ public class MenuCartUiTest extends TestBase {
         java.util.regex.Matcher amount = Pattern.compile("₹([0-9,]+(?:\\.[0-9]{1,2})?)").matcher(text);
         if (!amount.find()) throw new AssertionError("No INR amount in: " + text);
         return Double.parseDouble(amount.group(1).replace(",", ""));
+    }
+    private long parseInrCents(String text) {
+        java.util.regex.Matcher amount = Pattern.compile("₹([0-9,]+(?:\\.[0-9]{1,2})?)").matcher(text);
+        if (!amount.find()) throw new AssertionError("No INR amount in: " + text);
+        return new java.math.BigDecimal(amount.group(1).replace(",", "")).movePointRight(2).longValueExact();
     }
     @BeforeEach
     void openMenu() {
@@ -145,41 +151,83 @@ public class MenuCartUiTest extends TestBase {
 
     @Test
     void outOfStockItemsCannotBeAdded() {
+        Locator existing = customerPage.locator("[data-menu-item]").filter(new Locator.FilterOptions().setHasText("Out of stock"));
+        if (existing.count() > 0) {
+            assertUnavailable(existing.first());
+            return;
+        }
         Locator orderable = firstOrderableItem();
         String itemId = orderable.getAttribute("data-menu-item");
         String itemName = orderable.locator("h4").innerText().trim();
-
-        // The deployment has no seeded out-of-stock menu item. Create the fixture through the
-        // restaurant's real stock switch, then restore its original state even on assertion failure.
+        // Establish one unavailable item only when no retained fixture exists. Never restore stock.
         restaurantPage.navigate(TestConfig.APP_URL);
         new LoginPage(restaurantPage).loginAs("Restaurant Partner", "9000000001");
         RestaurantDashboardPage restaurant = new RestaurantDashboardPage(restaurantPage);
         restaurant.waitForDashboard();
         restaurant.selectOutlet(selectedOutlet);
         restaurant.openMenuTab();
-
         Locator stockSwitch = restaurantPage.getByRole(AriaRole.SWITCH,
                 new Page.GetByRoleOptions().setName(itemName + " available").setExact(true));
         assertThat(stockSwitch).isVisible();
         assertThat(stockSwitch).hasAttribute("aria-checked", "true");
-        try {
-            setStockAvailability(stockSwitch, false);
+        setStockAvailability(stockSwitch, false);
+        customerPage.reload();
+        String reopenedOutlet = new NearbyOutletPage(customerPage).openBrandCardAndSelectNearby("Brand 1");
+        org.assertj.core.api.Assertions.assertThat(reopenedOutlet).isEqualTo(selectedOutlet);
+        assertUnavailable(customerPage.locator("[data-menu-item=\"" + itemId + "\"]"));
+    }
 
-            customerPage.reload();
-            String reopenedOutlet = new NearbyOutletPage(customerPage)
-                    .openBrandCardAndSelectNearby("Brand 1");
-            org.assertj.core.api.Assertions.assertThat(reopenedOutlet).isEqualTo(selectedOutlet);
-            Locator unavailable = customerPage.locator("[data-menu-item=\"" + itemId + "\"]");
-            // Reload returns to the restaurant feed; reselect the same outlet so this assertion
-            // checks the exact menu item whose stock the restaurant changed.
-            assertThat(unavailable).isVisible();
-            assertThat(unavailable).containsText("Out of stock");
-            assertThat(unavailable.getByRole(AriaRole.BUTTON,
-                    new Locator.GetByRoleOptions().setName("ADD").setExact(true))).hasCount(0);
-            assertThat(unavailable.locator("output")).hasCount(0);
-        } finally {
-            setStockAvailability(stockSwitch, true);
-        }
+    private void assertUnavailable(Locator unavailable) {
+        assertThat(unavailable).isVisible();
+        assertThat(unavailable).containsText("Out of stock");
+        assertThat(unavailable.getByRole(AriaRole.BUTTON,
+                new Locator.GetByRoleOptions().setName("ADD").setExact(true))).hasCount(0);
+        assertThat(unavailable.locator("output")).hasCount(0);
+    }
+
+    @Test
+    void customerOutletSelectorExposesNoManagementActions() {
+        customerPage.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Change outlet").setExact(true)).click();
+        Locator dialog = customerPage.getByRole(AriaRole.DIALOG, new Page.GetByRoleOptions().setName("Select Outlet Location").setExact(true));
+        assertThat(dialog).isVisible();
+        assertThat(dialog.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions()
+                .setHasText(Pattern.compile("edit outlet|manage|delete outlet|add outlet", Pattern.CASE_INSENSITIVE)))).hasCount(0);
+        assertThat(dialog.locator("input, [role='switch']")).hasCount(0);
+    }
+
+    @Test
+    @Tag("routed-ui")
+    void catalogFailureOffersRetryAndRecoversTheSelectedOutlet() {
+        customerPage.route("**/api/v1/restaurants/*/catalog/items", route -> route.fulfill(
+                new Route.FulfillOptions().setStatus(502).setContentType("application/json")
+                        .setBody("{\"success\":false,\"message\":\"Test catalog outage\"}")));
+        customerPage.reload();
+        String reopened = new NearbyOutletPage(customerPage).openBrandCardAndSelectNearby("Brand 1");
+        org.assertj.core.api.Assertions.assertThat(reopened).isEqualTo(selectedOutlet);
+        assertThat(customerPage.getByText("Couldn't load menu", new Page.GetByTextOptions().setExact(true))).isVisible();
+        assertThat(customerPage.locator("[data-menu-item]")).hasCount(0);
+        assertThat(customerPage.getByText("Menu unavailable", new Page.GetByTextOptions().setExact(true))).hasCount(0);
+        customerPage.unroute("**/api/v1/restaurants/*/catalog/items");
+        Response retried = customerPage.waitForResponse(r -> r.url().endsWith("/catalog/items")
+                && r.request().method().equals("GET"), () -> customerPage.getByRole(AriaRole.BUTTON,
+                new Page.GetByRoleOptions().setName("Try again").setExact(true)).click());
+        org.assertj.core.api.Assertions.assertThat(retried.status()).isEqualTo(200);
+        assertThat(customerPage.locator("[data-menu-item]").first()).isVisible();
+        assertThat(customerPage.getByText("Couldn't load menu", new Page.GetByTextOptions().setExact(true))).hasCount(0);
+    }
+
+    @Test
+    @Tag("routed-ui")
+    void successfulEmptyCatalogShowsAnExplicitEmptyState() {
+        customerPage.route("**/api/v1/restaurants/*/catalog/items", route -> route.fulfill(
+                new Route.FulfillOptions().setStatus(200).setContentType("application/json")
+                        .setBody("{\"success\":true,\"data\":[]}")));
+        customerPage.reload();
+        new NearbyOutletPage(customerPage).openBrandCardAndSelectNearby("Brand 1");
+        assertThat(customerPage.getByText("Menu unavailable", new Page.GetByTextOptions().setExact(true))).isVisible();
+        assertThat(customerPage.locator("[data-menu-item]")).hasCount(0);
+        assertThat(customerPage.getByText("Couldn't load menu", new Page.GetByTextOptions().setExact(true))).hasCount(0);
+        assertThat(customerPage.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Try again").setExact(true))).hasCount(0);
     }
 
     private void setStockAvailability(Locator stockSwitch, boolean available) {
@@ -191,7 +239,7 @@ public class MenuCartUiTest extends TestBase {
                         && candidate.url().contains("/menu-overrides/"),
                 stockSwitch::click);
         org.assertj.core.api.Assertions.assertThat(response.status())
-                .as("restaurant stock update should be accepted before checking/restoring customer availability")
+                .as("restaurant stock update should be accepted before checking customer availability")
                 .isBetween(200, 299);
         assertThat(stockSwitch).hasAttribute("aria-checked", Boolean.toString(available));
     }
@@ -300,9 +348,9 @@ public class MenuCartUiTest extends TestBase {
         Locator second = customerPage.locator("[data-menu-item=\"" + orderable.nth(1).getAttribute("data-menu-item") + "\"]");
         String firstName = first.locator("h4").innerText().trim();
         String secondName = second.locator("h4").innerText().trim();
-        double firstPrice = parseInr(first.locator("span").filter(new Locator.FilterOptions()
+        long firstPrice = parseInrCents(first.locator("span").filter(new Locator.FilterOptions()
                 .setHasText(Pattern.compile("^₹[0-9]"))).last().innerText());
-        double secondPrice = parseInr(second.locator("span").filter(new Locator.FilterOptions()
+        long secondPrice = parseInrCents(second.locator("span").filter(new Locator.FilterOptions()
                 .setHasText(Pattern.compile("^₹[0-9]"))).last().innerText());
 
         first.getByRole(AriaRole.BUTTON,
@@ -315,9 +363,17 @@ public class MenuCartUiTest extends TestBase {
                 new Page.GetByRoleOptions().setName("Your cart").setExact(true));
         assertThat(cart.getByText(firstName, new Locator.GetByTextOptions().setExact(true))).isVisible();
         assertThat(cart.getByText(secondName, new Locator.GetByTextOptions().setExact(true))).isVisible();
+        assertThat(cart.locator("output")).hasText(new String[] { "1", "1" });
+        for (String itemName : new String[] { firstName, secondName }) {
+            Locator itemRow = cart.getByText(itemName, new Locator.GetByTextOptions().setExact(true))
+                    .locator("xpath=../..");
+            long expectedPrice = itemName.equals(firstName) ? firstPrice : secondPrice;
+            org.assertj.core.api.Assertions.assertThat(parseInrCents(itemRow.locator("p").innerText()))
+                    .isEqualTo(expectedPrice);
+        }
         String subtotalText = cart.getByText("Item total", new Locator.GetByTextOptions().setExact(true))
                 .locator("..").locator("span").last().innerText();
-        org.assertj.core.api.Assertions.assertThat(parseInr(subtotalText))
+        org.assertj.core.api.Assertions.assertThat(parseInrCents(subtotalText))
                 .isEqualTo(firstPrice + secondPrice);
     }
 
@@ -341,38 +397,60 @@ public class MenuCartUiTest extends TestBase {
     }
 
     @Test void freeDeliveryTrackerShowsProgressAfterAddingItem() {
-        Locator row = firstOrderableItem();
-        row.getByRole(AriaRole.BUTTON,
-                new Locator.GetByRoleOptions().setName("ADD").setExact(true)).click();
-
-        Locator progress = customerPage.getByRole(AriaRole.PROGRESSBAR,
-                new Page.GetByRoleOptions().setName("Progress towards free delivery").setExact(true));
-        assertThat(progress).isVisible();
-        String value = progress.getAttribute("aria-valuenow");
-        org.assertj.core.api.Assertions.assertThat(Integer.parseInt(value)).isBetween(0, 100);
-        Locator message = customerPage.getByText(Pattern.compile(
-                "(?:Add ₹[0-9,.]+ for Free Delivery!|Free Delivery Unlocked!)"));
-        assertThat(message.first()).isVisible();
+        try (SeededRiderDuty ignored = SeededRiderDuty.ensureOnline(riderPage, testRiderPhone)) {
+            Locator row = firstOrderableItem();
+            Map<?, ?> quote = successfulQuote(() -> row.getByRole(AriaRole.BUTTON,
+                    new Locator.GetByRoleOptions().setName("ADD").setExact(true)).click());
+            Locator progress = freeDeliveryProgress();
+            double threshold = ((Number) quote.get("minAmountForFreeDelivery")).doubleValue();
+            double subtotal = ((Number) quote.get("subtotal")).doubleValue();
+            org.assertj.core.api.Assertions.assertThat(threshold).isPositive();
+            int expected = (int) Math.round(Math.min(100, subtotal / threshold * 100));
+            assertThat(progress).hasAttribute("aria-valuenow", Integer.toString(expected));
+            assertThat(customerPage.getByText(Pattern.compile(
+                    "(?:Add ₹[0-9,.]+ for Free Delivery!|Free Delivery Unlocked!)")).first()).isVisible();
+        }
     }
 
     @Test void freeDeliveryCanBeUnlockedThroughCartAdditions() {
-        Locator row = firstOrderableItem();
-        String name = row.locator("h4").innerText().trim();
-        row.getByRole(AriaRole.BUTTON,
-                new Locator.GetByRoleOptions().setName("ADD").setExact(true)).click();
-        Locator progress = customerPage.getByRole(AriaRole.PROGRESSBAR,
-                new Page.GetByRoleOptions().setName("Progress towards free delivery").setExact(true));
-        assertThat(progress).isVisible();
-
-        Locator increment = row.getByRole(AriaRole.BUTTON,
-                new Locator.GetByRoleOptions().setName("Add one " + name).setExact(true));
-        for (int attempt = 0; attempt < 30 && Integer.parseInt(progress.getAttribute("aria-valuenow")) < 100; attempt++) {
-            increment.click(new Locator.ClickOptions().setDelay(100));
+        try (SeededRiderDuty ignored = SeededRiderDuty.ensureOnline(riderPage, testRiderPhone)) {
+            Locator row = firstOrderableItem();
+            String name = row.locator("h4").innerText().trim();
+            Map<?, ?> quote = successfulQuote(() -> row.getByRole(AriaRole.BUTTON,
+                    new Locator.GetByRoleOptions().setName("ADD").setExact(true)).click());
+            double threshold = ((Number) quote.get("minAmountForFreeDelivery")).doubleValue();
+            double unit = ((Number) quote.get("subtotal")).doubleValue();
+            org.assertj.core.api.Assertions.assertThat(threshold).isPositive();
+            org.assertj.core.api.Assertions.assertThat(unit).isPositive();
+            int requiredQuantity = (int) Math.ceil(threshold / unit);
+            org.assertj.core.api.Assertions.assertThat(requiredQuantity)
+                    .as("Fixture must reach configured free delivery with at most 50 units").isBetween(1, 50);
+            Locator increment = row.getByRole(AriaRole.BUTTON,
+                    new Locator.GetByRoleOptions().setName("Add one " + name).setExact(true));
+            for (int quantity = 1; quantity < requiredQuantity; quantity++) {
+                increment.click(new Locator.ClickOptions().setDelay(100));
+                assertThat(row.locator("output")).hasText(Integer.toString(quantity + 1));
+            }
+            customerPage.waitForCondition(() -> freeDeliveryProgress().count() == 1
+                    && "100".equals(freeDeliveryProgress().getAttribute("aria-valuenow")));
+            assertThat(freeDeliveryProgress()).hasAttribute("aria-valuenow", "100");
+            assertThat(customerPage.getByText("Free Delivery Unlocked! 🎉",
+                    new Page.GetByTextOptions().setExact(true))).isVisible();
         }
+    }
 
-        assertThat(progress).hasAttribute("aria-valuenow", "100");
-        assertThat(customerPage.getByText("Free Delivery Unlocked! 🎉",
-                new Page.GetByTextOptions().setExact(true))).isVisible();
+    private Locator freeDeliveryProgress() {
+        return customerPage.getByRole(AriaRole.PROGRESSBAR,
+                new Page.GetByRoleOptions().setName("Progress towards free delivery").setExact(true));
+    }
+
+    private java.util.Map<?, ?> successfulQuote(Runnable action) {
+        Response response = customerPage.waitForResponse(r -> r.url().endsWith("/api/v1/orders/quote")
+                && r.request().method().equals("POST"), action);
+        org.assertj.core.api.Assertions.assertThat(response.status()).isEqualTo(200);
+        java.util.Map<?, ?> body = (java.util.Map<?, ?>) customerPage.evaluate("text => JSON.parse(text)", response.text());
+        org.assertj.core.api.Assertions.assertThat(body.get("success")).isEqualTo(true);
+        return (java.util.Map<?, ?>) body.get("data");
     }
 
     /**

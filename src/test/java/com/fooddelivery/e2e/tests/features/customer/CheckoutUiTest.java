@@ -4,8 +4,10 @@ import com.fooddelivery.e2e.base.TestBase;
 import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.common.LoginPage;
 import com.fooddelivery.e2e.pages.customer.*;
-import com.fooddelivery.e2e.pages.delivery.DeliveryDashboardPage;
-import com.fooddelivery.e2e.pages.delivery.DeliveryOnlineTogglePage;
+import com.fooddelivery.e2e.util.SeededRiderDuty;
+import com.fooddelivery.e2e.util.CheckoutAvailability;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -14,15 +16,20 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @Tag("ui-only")
 public class CheckoutUiTest extends TestBase {
+    private SeededRiderDuty riderDuty;
+
+    @BeforeEach
+    void ensureDedicatedRiderReady() {
+        riderDuty = SeededRiderDuty.ensureOnline(riderPage, testRiderPhone);
+    }
+
+    @AfterEach
+    void finishIdleRiderDuty() {
+        if (riderDuty != null) riderDuty.close();
+    }
+
 
     private String openCartWithOneItem() {
-        riderPage.navigate(TestConfig.APP_URL);
-        new LoginPage(riderPage).loginAs("Delivery Executive", testRiderPhone);
-        new DeliveryDashboardPage(riderPage).waitForDashboard();
-        DeliveryOnlineTogglePage riderDuty = new DeliveryOnlineTogglePage(riderPage);
-        riderDuty.goOnline();
-        assertThat(riderDuty.isOnline()).as("Seeded rider is available before checkout").isTrue();
-
         customerPage.navigate(TestConfig.APP_URL);
         new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
         new CustomerDashboardPage(customerPage).waitForDashboard();
@@ -38,7 +45,12 @@ public class CheckoutUiTest extends TestBase {
 
     private String openCheckoutWithOneItem() {
         String itemName = openCartWithOneItem();
-        new CustomerCartDrawerPage(customerPage).clickPlaceOrder();
+        riderDuty.assertReadyForCheckout();
+        CheckoutAvailability.requireDeliveryAvailable(
+                CheckoutAvailability.clickCheckoutAndWaitForAvailability(customerPage));
+        PaymentModalPage payment = new PaymentModalPage(customerPage);
+        payment.waitForOpen();
+        payment.waitForFinalQuote();
         return itemName;
     }
 
@@ -64,6 +76,7 @@ public class CheckoutUiTest extends TestBase {
         assertThat(payment.hasPaymentMethod("UPI")).isTrue();
         assertThat(payment.hasPaymentMethod("Wallet")).isTrue();
         payment.selectPaymentMethod("UPI");
+        payment.assertPaymentMethodSelected("UPI");
         assertThat(payment.isPayEnabled()).as("A settled quote and available payment method enable Place order").isTrue();
 
         payment.close();
@@ -83,21 +96,32 @@ public class CheckoutUiTest extends TestBase {
         assertThat(payment.isPaymentMethodEnabled("Credit or debit card")).isTrue();
         assertThat(payment.isPaymentMethodEnabled("UPI")).isTrue();
         payment.selectPaymentMethod("UPI");
+        payment.assertPaymentMethodSelected("UPI");
         assertThat(payment.isPayEnabled()).isTrue();
         payment.selectPaymentMethod("Credit or debit card");
+        payment.assertPaymentMethodSelected("Credit or debit card");
         assertThat(payment.isPayEnabled()).isTrue();
         if (payment.isPaymentMethodEnabled("Wallet")) {
             payment.selectPaymentMethod("Wallet");
+            payment.assertPaymentMethodSelected("Wallet");
             assertThat(payment.isPayEnabled()).isTrue();
         }
 
+        // Reopen from an explicitly selected UPI state, independent of the wallet balance.
+        payment.selectPaymentMethod("UPI");
+        payment.assertPaymentMethodSelected("UPI");
         payment.close();
         CustomerCartDrawerPage cart = new CustomerCartDrawerPage(customerPage);
         assertThat(cart.isCartOpen()).isTrue();
         assertThat(cart.getFirstItemName()).isEqualTo(cartItemName);
-        cart.clickPlaceOrder();
+        riderDuty.assertReadyForCheckout();
+        CheckoutAvailability.requireDeliveryAvailable(
+                CheckoutAvailability.clickCheckoutAndWaitForAvailability(customerPage));
+        payment.waitForOpen();
+        payment.waitForFinalQuote();
 
         assertThat(payment.isOpen()).isTrue();
+        payment.assertPaymentMethodSelected("UPI");
         assertThat(payment.hasItem(cartItemName)).isTrue();
         assertThat(payment.hasPaymentMethod("Credit or debit card")).isTrue();
         assertThat(payment.hasPaymentMethod("UPI")).isTrue();
@@ -133,6 +157,7 @@ public class CheckoutUiTest extends TestBase {
                 com.microsoft.playwright.options.AriaRole.BUTTON,
                 new com.microsoft.playwright.Page.GetByRoleOptions()
                         .setName(java.util.regex.Pattern.compile("Checkout|Place Order"))).first();
+        riderDuty.assertReadyForCheckout();
         checkout.focus();
         customerPage.keyboard().press("Enter");
 

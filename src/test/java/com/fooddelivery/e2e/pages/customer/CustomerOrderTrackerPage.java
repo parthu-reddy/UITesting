@@ -21,15 +21,22 @@ import com.fooddelivery.e2e.util.OtpExtractor;
 public class CustomerOrderTrackerPage {
 
     private final Page page;
+    private final String orderId;
 
     public CustomerOrderTrackerPage(Page page) {
+        this(page, null);
+    }
+
+    public CustomerOrderTrackerPage(Page page, String orderId) {
         this.page = page;
+        this.orderId = orderId;
     }
 
     // ── Status verification ──────────────────────────────────────────────
 
     /** The tracker for the order in view (or the first one). */
     public Locator tracker() {
+        if (orderId != null) return page.locator("[data-testid='order-tracker'][data-order-id='" + orderId + "']");
         return page.locator("[data-testid='order-tracker']").first();
     }
 
@@ -118,8 +125,10 @@ public class CustomerOrderTrackerPage {
     }
 
     public void dismissFailedOrder() {
-        page.locator("button:has-text('Dismiss')").first().click();
-        page.waitForTimeout(500);
+        // Failed history is rendered by CustomerOrderTracker + OrderTrackerSettled.
+        // Its header's Back button dismisses the selected details, retaining the record.
+        tracker().locator("..").getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
+                new Locator.GetByRoleOptions().setName("Back").setExact(true)).click();
     }
 
     // ── Order details ────────────────────────────────────────────────────
@@ -133,7 +142,7 @@ public class CustomerOrderTrackerPage {
     }
 
     public String getPaymentMethod() {
-        return page.locator("text=Paid via").first().innerText().trim();
+        return tracker().getByText(java.util.regex.Pattern.compile("^Paid via ")).innerText().trim();
     }
 
     public String getOrderId() {

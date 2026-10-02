@@ -85,8 +85,11 @@ public class PageReloadRecoveryTest extends TestBase {
         CustomerCartDrawerPage cart = new CustomerCartDrawerPage(customerPage);
         cart.waitForCartOpen();
         String itemName = cart.getFirstItemName();
+        cart.incrementItem(0);
         assertThat(customerPage.getByRole(AriaRole.DIALOG,
                 new Page.GetByRoleOptions().setName("Your cart"))).containsText(itemName);
+        assertThat(customerPage.getByRole(AriaRole.DIALOG,
+                new Page.GetByRoleOptions().setName("Your cart")).locator("output")).hasText("2");
 
         customerPage.reload();
         menu.clickViewCart();
@@ -94,6 +97,8 @@ public class PageReloadRecoveryTest extends TestBase {
 
         assertThat(customerPage.getByRole(AriaRole.DIALOG,
                 new Page.GetByRoleOptions().setName("Your cart"))).containsText(itemName);
+        assertThat(customerPage.getByRole(AriaRole.DIALOG,
+                new Page.GetByRoleOptions().setName("Your cart")).locator("output")).hasText("2");
     }
 
     @Test

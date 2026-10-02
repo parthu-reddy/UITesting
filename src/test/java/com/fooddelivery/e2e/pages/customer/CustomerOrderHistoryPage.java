@@ -7,7 +7,7 @@ import com.microsoft.playwright.options.AriaRole;
 
 /**
  * Page Object for Customer Order History.
- * Maps to: {@code CustomerOrderHistory.tsx, OrderCard.tsx}
+ * Maps to the reachable account-settings {@code SettingsHistoryTab.tsx}
  */
 public class CustomerOrderHistoryPage {
 
@@ -18,27 +18,11 @@ public class CustomerOrderHistoryPage {
     }
 
     public void waitForHistoryLoad() {
-        page.getByRole(AriaRole.TAB,
-                new Page.GetByRoleOptions().setName("History").setExact(true))
-                .waitFor(new Locator.WaitForOptions()
-                        .setState(WaitForSelectorState.VISIBLE)
-                        .setTimeout(10000));
-        // First wait for either loading, empty state, or data to appear
-        Locator loading = page.locator("[data-screen='settings']")
-                .getByText("Loading history...", new Locator.GetByTextOptions().setExact(true));
-        Locator anyContent = loading
-                .or(emptyState())
-                .or(historyCards().first());
-        anyContent.first()
-                .waitFor(new Locator.WaitForOptions()
-                        .setState(WaitForSelectorState.VISIBLE)
-                        .setTimeout(20000));
-        // Then wait for Loading to disappear (i.e. data actually loaded)
-        try {
-            loading.waitFor(new Locator.WaitForOptions()
-                    .setState(WaitForSelectorState.HIDDEN)
-                    .setTimeout(15000));
-        } catch (com.microsoft.playwright.TimeoutError ignored) { }
+        // Loading or an error is never successful history readiness. Do not swallow timeouts.
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(
+                page.getByTestId("customer-history-state")).hasAttribute("data-state",
+                java.util.regex.Pattern.compile("^(empty|populated)$"),
+                new com.microsoft.playwright.assertions.LocatorAssertions.HasAttributeOptions().setTimeout(30000));
     }
 
     public int getOrderCount() {
@@ -63,9 +47,7 @@ public class CustomerOrderHistoryPage {
     }
 
     public Locator historyCards() {
-        return page.locator("[data-screen='settings']")
-                .locator("div.flex-1.overflow-y-auto.overscroll-none button[type='button']")
-                .filter(new Locator.FilterOptions().setHas(page.locator("span.font-mono")));
+        return page.getByTestId("customer-history-order");
     }
 
     public Locator emptyState() {

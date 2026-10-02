@@ -1,17 +1,23 @@
 # Pending work and observations
 
-## OTP expiry — deferred slow test
+## Current retained-data policy — 2026-10-01
 
-Not implemented. With current UI-only access, real expiry requires requesting an OTP, waiting the backend's five-minute lifetime plus a small margin, then submitting the original code and checking visible rejection and continued logged-out state. Redis/database manipulation is unavailable and outside scope; no accelerated backend expiry test will be created. Browser clock changes cannot expire a server-side OTP.
+The user explicitly requested no automatic test cleanup, with rider duty as the exception. Preserve created users, profiles, addresses, brands, outlets, orders and server sessions. Do not deactivate, delete, revoke or restore them as teardown. Retain run manifests to identify test-created data. Explicit logout/device removal/cancellation actions stay when they are the behavior being tested; they are not automatic teardown. Browser/tab/resource disposal remains normal. An authenticated idle rider is made OFFLINE at teardown, with authoritative server confirmation; an active delivery is preserved until completion. Slow and rate-limit scenarios remain opt-in and excluded.
 
-Confirmation for later: include this as a separately tagged slow test? It does not block other UI tests. Old-code rejection after resend would test replacement, not natural expiry.
+Earlier cleanup/retirement evidence below describes past runs before this instruction. It does not govern future execution. Retained state must be checked as each feature is reviewed; do not rely on an automatically empty session list or restored stock.
 
-## Other pending cases
 
-- Rate-limit exhaustion: defer to avoid blocking shared seeded accounts.
-- Short phone/OTP input: agree expected validation; generated schemas currently lack length constraints. Do not invent acceptance criteria or create accounts from malformed test data.
-- Profile-form validation remains unimplemented beyond authorized admin completion.
-- Restaurant logout remains blocked in the deployed UI. `SessionUiTest` logs in and survives reload, but opening Profile settings returns to Live Kitchen and no exact `Log Out` button appears; the UI-only test times out at that control. Customer and rider logout plus post-logout reload passed in the same three-role run.
+## Deferred duration and rate-limit cases
+
+The user requested deferral on 2026-10-01. Natural OTP expiry is implemented, opt-in and listed in DEFERRED-WAIT-TESTS.md. Rate-limit UI/backend cases are implemented, opt-in and listed in DEFERRED-RATE-LIMIT-TESTS.md. Do not execute either group during the current Dev feature audit or count them as passing. Dev raises limits to one million, so production thresholds must not be applied to this target.
+
+## Current fast coverage review
+
+Short input is no longer an unresolved acceptance question for this UI: it supplies +91 separately and has a ten-digit national phone field. The prior schema allowed eight digits and issued a request for all four roles; the corrected form rejects them before the backend. Four post-deployment boundary cases passed. OTP schema requires exactly six digits; short-code submission is now exercised, not just input truncation.
+
+The incomplete-profile case now exercises invalid name/email validation without a profile save; it passed and left the fixture incomplete. Login cleanup checks immediate gateway revocation using only its own isolated token.
+
+Restaurant logout and four-role session persistence need fresh proof in sessions-and-role-access. Earlier restaurant navigation failure notes are historical; do not classify the current deployment from those notes.
 
 ## Validation evidence
 

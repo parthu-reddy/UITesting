@@ -1,3 +1,20 @@
+# Current audit status — 2026-10-02
+
+The dated notes below are historical; current source and fresh evidence supersede claims that dates/history/reorder are absent or that terminal tracking still has no proof.
+
+- Automatic customer status/terminal convergence and restored exact receipts passed in feature08's real happy and overlapping-order flows.
+- Mounted populated/date/full-ID/cancelled/pagination history and explicit empty/loading/error-retry UI contracts passed.13combined history/reorder methods passed64.420s without failures/errors/skips, no order POST and no cleanup. Reorder imageee12a98 is verified deployed;48local tests passed.
+- Map/resource/handshake corrections816c6f6, sizinga636fe1 and explicit Nginx forwarding772f50d are deployed/healthy; local41map checks plus2layout checks pass. Real Oracle-origin rendered GPS motion passed44.067s, followed by exact delivery/released assignment/riderOFFLINE. Public Quick Tunnel SSE remains deferred at the user's explicit request; HTTP200 with zero bytes is not a useful-event pass. Strengthened public two-order carousel passed135.077s and both delivered assignments/riderOFFLINE were confirmed read-only.
+- Exact-owned53.53/CARD/rider details were verified before map failure. Strengthened failed-details Back dismissal and retained history passed1test12.151s without cleanup.
+- TRACKER-ADV05/06 real delay lifecycle belongs to `04-order-exceptions-and-support/rejection-cancellation-and-delays`. Current `DelayApprovalFlowTest` still uses old StateSetupHelper, short-ID/absent option-label guesses and reload-based status checks. Its execution is not proof until that owning feature repairs/re-runs it.
+- Duration/quota scenarios are in the separate deferred files and are not passes.
+
+Detailed evidence: [audit09](../../../../RandomDocuments/E2ECoverageAudit_2026-10-01/09-customer-tracking-and-history.md).
+
+---
+
+## Historical notes, prior to the 2026-10-01/02 audit
+
 # Pending: customer tracker after delivery
 
 On 2026-09-23, a UI-only run of `HappyDeliveryFlowTest` completed restaurant acceptance, rider pickup, and delivery. Rider history showed the exact new order as **Delivered**, but the customer's still-open tracker continued to show its earlier active state for 90 seconds and never rendered `rate-order-prompt`. This happened in repeated full-flow runs. The completed lifecycle test therefore asserts the exact order in rider history, while customer terminal-state synchronization remains unverified.

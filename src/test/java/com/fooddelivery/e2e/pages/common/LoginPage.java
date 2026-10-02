@@ -143,26 +143,6 @@ public class LoginPage {
         }, new Page.WaitForConditionOptions().setTimeout(TestConfig.DEFAULT_TIMEOUT));
     }
 
-    /** Revoke only the session held by this isolated page; preserve the seeded profile. */
-    public void logoutCurrentSession() {
-        if (page.isClosed() || !page.url().startsWith(TestConfig.APP_URL)) return;
-        Object status = page.evaluate("""
-                async () => {
-                    const token = localStorage.getItem('auth_token');
-                    if (!token) return 200;
-                    const response = await fetch('/api/v1/internal/auth/logout', {
-                        method: 'POST', headers: {Authorization: `Bearer ${token}`}, credentials: 'omit'
-                    });
-                    if (response.ok) {
-                        localStorage.removeItem('auth_token');
-                        localStorage.removeItem('user_profile');
-                    }
-                    return response.status;
-                }
-                """);
-        org.assertj.core.api.Assertions.assertThat(((Number) status).intValue()).isEqualTo(200);
-    }
-
     // ── Navigation helpers ───────────────────────────────────────────────
 
     public void clickBackButton() {

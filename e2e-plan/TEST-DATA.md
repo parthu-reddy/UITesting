@@ -23,7 +23,7 @@ The rider-duty rules in [`RandomDocuments/RiderDutyConsistency_2026-09-27`](../.
 - Keep the rider browser/context open and its WebSocket and location tracking active throughout checkout and the order lifecycle. Before customer checkout, verify the rider is `ONLINE`, has a current location fix, has no connection/location-loss warning, and is geographically near the selected restaurant.
 - If the server sends `DUTY_STATUS OFFLINE LOCATION_LOST`, accept the server state. Restore location tracking and deliberately go online through the UI again; do not force the client back to Online. Transient position errors do not authorize the client to change the duty state, while permission denial can trigger an offline request.
 - An `ON_DELIVERY` rider must remain on duty across telemetry or connectivity loss. Do not take a rider offline or log them out during an active delivery. The backend may correctly refuse such an offline request.
-- Use a dedicated seeded rider for a state-mutating order flow. Read the rider's current state first. If an already-online rider appears to belong to another active/manual session, choose a different seeded rider instead of commandeering or cycling that session. Restore reversible shared state after the test.
+- Use a dedicated seeded rider for a state-mutating order flow. Read the rider's current state first. If an already-online rider appears to belong to another active/manual session, choose a different seeded rider instead of commandeering or cycling that session. Retain test data and sessions at the user's request. Set an idle test rider OFFLINE with authoritative confirmation; preserve an active delivery.
 
 ## Order prerequisites
 
@@ -32,7 +32,7 @@ The rider-duty rules in [`RandomDocuments/RiderDutyConsistency_2026-09-27`](../.
 - Rider acceptance becomes available after restaurant acceptance and when preparation is within 15 minutes or complete, per the user's project rule. Verify exact timing boundaries in source when defining dispatch scenarios.
 - Reuse the existing **Home** address; do not create a new address for ordinary order tests.
 - For **Brand1**, always open the outlet dropdown and choose an outlet under 4–5 km; backend disallows orders above 5 km. Check displayed distances live rather than assuming a particular outlet remains eligible.
-- Read current account/outlet state before changing it. Preserve shared seeded data and restore test changes.
+- Read current account/outlet state before changing it. Preserve shared seeded data. Do not delete, deactivate, revoke or restore server data as automatic teardown; explicit changes remain only when they are the behavior under test.
 
 The development URL can change. Use the central TestConfig / URL overrides documented in the project README.
 
@@ -44,7 +44,7 @@ The additive scenario pack is separate: customers `8000000501`–`8000000504`, r
 See `Deployment/OracleDeployment/DummyData/scenario_accounts.json` for scenario-to-account mappings.
 Do not randomly select these negative-state fixtures for ordinary checkout tests.
 
-Existing `RegistrationUiTest` requires explicit opt-in and unused disposable numbers. After
+Existing `RegistrationUiTest` requires explicit opt-in and unused generated numbers. After
 IdentityService, ApiGateway and FoodDeliveryAppUI have been deployed, run:
 
 ```bash
@@ -59,10 +59,11 @@ valid 10-digit number. Only admin autofill is restricted to `1000000001` and `10
 Production uses ordinary SMS. The parked runner-secret OTP facility
 continues to be disabled and does not admit these disposable pools.
 
-The runner logs out/blacklists remaining sessions, deactivates the created accounts and their
-rider/outlet records, and retains onboarding and financial/audit history. It refuses to retire
-accounts predating the run or riders who are no longer OFFLINE. Manifests are written under
-`target/registration/`. Cleanup failures are failures, never green test evidence.
+The runner retains all created accounts, partner/outlet records and sessions at the user's request.
+It performs only read-only allocation/audit queries outside the browser tests and writes manifests
+under target/registration with dataPolicy=retain and cleanupPerformed=false, including on failure.
+It never deactivates accounts or issues Redis cleanup writes. Browser contexts close normally;
+only idle rider duty is automatically set OFFLINE and verified against the server.
 
 New signup grants only the selected customer/partner enrollment role. Existing rider KYC,
 biometric and duty gates remain authoritative. Administrator signup is forbidden.

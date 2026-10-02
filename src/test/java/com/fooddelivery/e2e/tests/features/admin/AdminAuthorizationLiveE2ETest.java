@@ -6,7 +6,6 @@ import com.fooddelivery.e2e.pages.common.LoginPage;
 import com.microsoft.playwright.Request;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import java.util.Arrays;
@@ -115,10 +114,7 @@ public class AdminAuthorizationLiveE2ETest extends TestBase {
                 .isEqualTo(account.name());
     }
 
-    @AfterEach
-    void logoutOwnSession() {
-        if (page != null) new LoginPage(page).logoutCurrentSession();
-    }
+
 
     private static void recordAdminRequest(Request request, AtomicInteger count) {
         if (URI.create(request.url()).getPath().startsWith("/api/v1/internal/admin/")) {

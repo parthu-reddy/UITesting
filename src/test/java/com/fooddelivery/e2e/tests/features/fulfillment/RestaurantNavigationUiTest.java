@@ -29,26 +29,44 @@ public class RestaurantNavigationUiTest extends TestBase {
                 testRestaurantPhone);
         new RestaurantDashboardPage(restaurantPage).waitForDashboard();
 
-        clickTab(Pattern.compile("^Orders.*"));
-        waitVisible(restaurantPage.getByText("Incoming", new Page.GetByTextOptions().setExact(true)));
+        RestaurantDashboardPage dashboard=new RestaurantDashboardPage(restaurantPage);
+        String outlet=System.getProperty("restaurant.outlet.name","Brand 1 Outlet 3");
+        dashboard.selectOutlet(outlet);
+        restaurantPage.reload();dashboard.waitForDashboard();
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(restaurantPage.getByRole(AriaRole.COMBOBOX,new Page.GetByRoleOptions().setName("Outlet").setExact(true))).hasText(outlet);
+        String alternate=System.getProperty("restaurant.alternate.outlet.name","Brand 1 Outlet 6");
+        dashboard.selectOutlet(alternate);
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(restaurantPage.getByRole(AriaRole.COMBOBOX,new Page.GetByRoleOptions().setName("Outlet").setExact(true))).hasText(alternate);
+        dashboard.selectOutlet(outlet);
 
+        clickTab(Pattern.compile("^Orders.*"));
+        waitVisible(restaurantPage.getByRole(AriaRole.REGION,new Page.GetByRoleOptions().setName(Pattern.compile("^Incoming, [0-9]+ orders?$"))));
         clickTab(Pattern.compile("^Menu$"));
-        waitVisible(restaurantPage.getByRole(AriaRole.HEADING,
-                new Page.GetByRoleOptions().setName(Pattern.compile("Today.s menu"))));
-
+        waitVisible(restaurantPage.getByRole(AriaRole.HEADING,new Page.GetByRoleOptions().setName(Pattern.compile("Today.s menu"))));
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(restaurantPage.getByText("Updates every 5 s",new Page.GetByTextOptions().setExact(true))).isHidden();
         clickTab(Pattern.compile("^Campaigns$"));
-        waitVisible(restaurantPage.getByRole(AriaRole.HEADING,
-                new Page.GetByRoleOptions().setName("Ad Spending History")));
-
-        clickTab(Pattern.compile("Earnings"));
+        waitVisible(restaurantPage.getByRole(AriaRole.HEADING,new Page.GetByRoleOptions().setName("Ad Spending History")));
+        clickTab(Pattern.compile("^Earnings$"));
         waitVisible(restaurantPage.getByText("Net Earnings", new Page.GetByTextOptions().setExact(true)));
-
-        clickTab(Pattern.compile("Reviews"));
-        waitVisible(restaurantPage.getByRole(AriaRole.REGION,
-                new Page.GetByRoleOptions().setName("What customers said")));
-
+        clickTab(Pattern.compile("^Reviews$"));
+        waitVisible(restaurantPage.getByRole(AriaRole.REGION,new Page.GetByRoleOptions().setName("What customers said").setExact(true)));
+        dashboard.openSettingsTab();
+        waitVisible(restaurantPage.getByRole(AriaRole.HEADING,new Page.GetByRoleOptions().setName("Restaurant Console Settings").setExact(true)));
+        String completed=System.getProperty("restaurant.completed.order.id", "").trim();
+        if(!completed.isEmpty()){
+            assertThat(completed).matches("[0-9a-fA-F-]{36}");
+            restaurantPage.getByRole(AriaRole.TAB,new Page.GetByRoleOptions().setName("Order History").setExact(true)).click();
+            Locator row=restaurantPage.getByRole(AriaRole.ROW).filter(new Locator.FilterOptions().setHasText(completed.substring(0,8)));
+            com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(row).hasCount(1,new com.microsoft.playwright.assertions.LocatorAssertions.HasCountOptions().setTimeout(30000));
+            com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(row).containsText(Pattern.compile("Delivered",Pattern.CASE_INSENSITIVE));
+        }
+        restaurantPage.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("Back to Kitchen Feed").setExact(true)).click();
+        for(String name:new String[]{"Menu","Campaigns","Earnings","Reviews"})clickTab(Pattern.compile("^"+name+"$"));
         clickTab(Pattern.compile("^Orders.*"));
-        waitVisible(restaurantPage.getByText("In the kitchen", new Page.GetByTextOptions().setExact(true)));
+        waitVisible(restaurantPage.getByRole(AriaRole.REGION,new Page.GetByRoleOptions().setName(Pattern.compile("^In the kitchen, [0-9]+ orders?$"))));
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(restaurantPage.getByRole(AriaRole.REGION,new Page.GetByRoleOptions().setName("What customers said").setExact(true))).isHidden();
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(restaurantPage.getByRole(AriaRole.HEADING,new Page.GetByRoleOptions().setName(Pattern.compile("Today.s menu")))).isHidden();
+
     }
 
     @Test

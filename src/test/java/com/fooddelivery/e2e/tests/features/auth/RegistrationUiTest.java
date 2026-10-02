@@ -3,8 +3,6 @@ package com.fooddelivery.e2e.tests.features.auth;
 import com.fooddelivery.e2e.base.TestBase;
 import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.common.LoginPage;
-import com.fooddelivery.e2e.pages.customer.CustomerAddressModalPage;
-import com.fooddelivery.e2e.pages.customer.CustomerDashboardPage;
 import com.fooddelivery.e2e.pages.delivery.DeliveryDashboardPage;
 import com.fooddelivery.e2e.pages.delivery.RiderOnboardingWizardPage;
 import com.fooddelivery.e2e.pages.restaurant.OutletRegistrationPage;
@@ -12,7 +10,6 @@ import com.fooddelivery.e2e.pages.restaurant.RestaurantBrandRegistrationPage;
 import com.fooddelivery.e2e.pages.restaurant.RestaurantDashboardPage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.condition.EnabledIfSystemProperty;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
@@ -28,41 +25,8 @@ public class RegistrationUiTest extends TestBase {
     @Test
     @DisplayName("REG-01: Customer Registration Flow")
     void customerRegistrationFlow() {
-        customerPage.navigate(TestConfig.APP_URL);
-        
-        // Use a new unique phone number to trigger the registration flow
-        String newCustomerPhone = disposablePhone("customer", "8999");
-        
-        LoginPage loginPage = new LoginPage(customerPage);
-        loginPage.registerAs("Order Food", newCustomerPhone, "E2E Test Customer", "customer_" + newCustomerPhone + "@test.com");
-        
-        CustomerDashboardPage dashboard = new CustomerDashboardPage(customerPage);
-        // New users have no seeded Home. Start from their automatic location selector.
-        customerPage.getByRole(com.microsoft.playwright.options.AriaRole.HEADING,
-                new com.microsoft.playwright.Page.GetByRoleOptions().setName("Select Delivery Location").setExact(true)).waitFor();
-        customerPage.getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
-                new com.microsoft.playwright.Page.GetByRoleOptions().setName("Add New Address")).click();
-        
-        CustomerAddressModalPage modal = new CustomerAddressModalPage(customerPage);
-        modal.waitForModalOpen();
-        
-        modal.searchAndSelectLocation("Keerthi Rendezvous");
-        modal.fillAddressLabel("Test Registration Home");
-        modal.fillAddressLine("Keerthi Rendezvous, E2E registration address");
-        modal.fillCity("Bangalore");
-        modal.fillState("Karnataka");
-        modal.fillZipCode("560001");
-        
-        modal.saveAddress();
-        
-        // Wait for the modal to close and the address to be auto-selected
-        customerPage.waitForTimeout(2000);
-        
-        dashboard.waitForDashboard();
-        
-        // The header should now display the label of our newly created and selected address
-        customerPage.locator("header >> text=Test Registration Home").waitFor();
-        assertThat(customerPage.locator("header >> text=Test Registration Home").isVisible()).isTrue();
+        com.fooddelivery.e2e.util.FreshCustomerFixture.registerWithAddress(customerPage,
+                disposablePhone("customer", "8999"), "Test Registration Home");
     }
 
     @Test
@@ -84,10 +48,10 @@ public class RegistrationUiTest extends TestBase {
         var selfie = new java.util.concurrent.atomic.AtomicReference<com.microsoft.playwright.Response>();
         var refreshedStatus = riderPage.waitForResponse(response -> {
             String path = java.net.URI.create(response.url()).getPath();
-            if (path.equals("/api/delivery/verification/biometric") && response.request().method().equals("POST")) {
+            if ("/api/delivery/verification/biometric".equals(path) && response.request().method().equals("POST")) {
                 selfie.set(response);
             }
-            return selfie.get() != null && path.equals("/api/delivery/verification/status")
+            return selfie.get() != null && "/api/delivery/verification/status".equals(path)
                     && response.request().method().equals("GET");
         }, wizard::completeDevModeOnboarding);
         assertThat(selfie.get().status()).isEqualTo(200);
@@ -150,30 +114,13 @@ public class RegistrationUiTest extends TestBase {
 
     private String disposablePhone(String persona, String prefix) {
         assertThat(System.getProperty("registration.preflight"))
-                .as("Use run_registration_e2e.py to allocate unused accounts and retire them afterwards")
+                .as("Use run_registration_e2e.py to allocate unused accounts; created data is retained")
                 .isEqualTo("true");
         String phone = System.getProperty("registration." + persona + ".phone");
         assertThat(phone).matches(prefix + "[0-9]{6}");
         return phone;
     }
 
-    @AfterEach
-    void logOutDisposableSessions() {
-        for (var page : new com.microsoft.playwright.Page[] {customerPage, riderPage, restaurantPage}) {
-            if (page == null || page.isClosed() || !page.url().startsWith(TestConfig.APP_URL)) continue;
-            Object status = page.evaluate("""
-                    async () => {
-                        const token = localStorage.getItem('auth_token');
-                        if (!token) return 200;
-                        const response = await fetch('/api/v1/internal/auth/logout', {
-                            method: 'POST', headers: {Authorization: `Bearer ${token}`}, credentials: 'omit'
-                        });
-                        if (response.ok) localStorage.removeItem('auth_token');
-                        return response.status;
-                    }
-                    """);
-            assertThat(((Number) status).intValue()).isEqualTo(200);
-        }
-    }
+
 
 }

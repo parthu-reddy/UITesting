@@ -1,5 +1,11 @@
 # Pending validation and environment failures
 
+## Current audit checkpoint — 2026-10-01
+
+Fast CROSS01–15 verified in corrected deployed invocations. Backend/config SSE pool fix and UI acceptance/restored receipt fixes deployed. Intentional expiry, long scheduled preparation and quota exhaustion remain explicitly deferred. The 28-feature suite is unfinished.
+
+All original retained orders are terminal now: ced55d8c delivered after deployment; the first failed concurrency pair has one delivered and one naturally timed-out restaurant cancellation. Corrected fresh CROSS15 and full CROSS09 invocations passed. See RandomDocuments/E2ECoverageAudit_2026-10-01/08-cross-role-order-lifecycle.md for exact evidence and explicit deferred coverage. Historical failures below do not describe current assigned rider state.
+
 ## Expanded lifecycle validation
 
 `HappyDeliveryFlowTest` now asserts dispatch pickup/drop-off details, offered payout, countdown and both actions; exact active-contract identity and addresses; accepted-job persistence across reload; delivery-phase persistence across reload; return to the online/available state; exact completed-history details and payout; and the corresponding increase in today's rider earnings.

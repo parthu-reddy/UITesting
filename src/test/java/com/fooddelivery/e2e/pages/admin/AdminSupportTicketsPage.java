@@ -112,7 +112,7 @@ public class AdminSupportTicketsPage {
     }
 
     public Locator statusMessages() {
-        return page.getByRole(com.microsoft.playwright.options.AriaRole.STATUS);
+        return page.locator("[role='status'][aria-live='polite']");
     }
 
     /** Opens a confirmation and leaves the final resolution uncommitted. */

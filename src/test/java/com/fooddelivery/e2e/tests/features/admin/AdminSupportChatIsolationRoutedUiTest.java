@@ -262,7 +262,7 @@ public class AdminSupportChatIsolationRoutedUiTest extends TestBase {
             fixture.webSocketConnections.incrementAndGet();
             socket.onMessage(frame -> {
                 String message = frame.text();
-                if (message != null && message.stripLeading().startsWith("CONNECT\n")) {
+                if (message != null && message.stripLeading().replace("\r\n", "\n").startsWith("CONNECT\n")) {
                     socket.send("CONNECTED\nversion:1.2\n\n\0");
                 } else if (isStompCommand(message, "SUBSCRIBE")) {
                     fixture.captureMessageSubscription(message, socket);
@@ -317,7 +317,7 @@ public class AdminSupportChatIsolationRoutedUiTest extends TestBase {
     }
 
     private static boolean isStompCommand(String frame, String command) {
-        return frame != null && frame.stripLeading().startsWith(command + "\n");
+        return frame != null && frame.stripLeading().replace("\r\n", "\n").startsWith(command + "\n");
     }
 
     private static String sessionIdFromSendFrame(String frame) {

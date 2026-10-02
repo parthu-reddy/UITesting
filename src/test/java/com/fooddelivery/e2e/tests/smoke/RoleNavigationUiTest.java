@@ -39,4 +39,31 @@ public class RoleNavigationUiTest extends TestBase {
         assertThat(customerPage.getByPlaceholder("9876543210")).hasValue("");
         assertThat(customerPage.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Send One-Time OTP"))).isVisible();
     }
+    @org.junit.jupiter.api.Test
+    void repeatedMobileRoleChangesDoNotTriggerRequestsOrPageErrors() {
+        customerPage.setViewportSize(390, 844);
+        java.util.List<String> errors = new java.util.ArrayList<>();
+        java.util.List<String> requests = new java.util.ArrayList<>();
+        customerPage.onPageError(errors::add);
+        customerPage.onConsoleMessage(message -> { if (message.type().equals("error")) errors.add(message.text()); });
+        customerPage.onRequest(request -> {
+            if (request.url().contains("/auth/initiate")) requests.add(request.url());
+        });
+        customerPage.navigate(TestConfig.APP_URL);
+        LoginPage login = new LoginPage(customerPage);
+        for (int cycle = 0; cycle < 3; cycle++) {
+            for (String role : new String[] {"Order Food", "Delivery Executive"}) {
+                var tab = customerPage.getByRole(AriaRole.TAB,
+                        new Page.GetByRoleOptions().setName(role).setExact(true));
+                tab.click();
+                assertThat(tab).hasAttribute("aria-selected", "true");
+                login.selectRole(role);
+                assertThat(customerPage.getByPlaceholder("9876543210")).isVisible();
+                login.clickBackButton();
+            }
+        }
+        org.assertj.core.api.Assertions.assertThat(errors).isEmpty();
+        org.assertj.core.api.Assertions.assertThat(requests).isEmpty();
+    }
+
 }
