@@ -1,0 +1,280 @@
+{
+  "customer_db": {
+    "order": {
+      "status": "DELIVERY_FAILED",
+      "deliveryStatus": "FAILED",
+      "updatedAt": "2026-10-02T10:45:30.907367+00:00",
+      "deliveredAt": "2026-10-02T08:41:08.141848+00:00",
+      "cancellationReason": "Driver abandoned the delivery (no updates for 2 hours)"
+    },
+    "events": [
+      {
+        "id": "3c90e328-1c72-42b1-83c2-3af022e04e07",
+        "type": "ORDER_CREATED",
+        "status": "PROCESSED",
+        "at": "2026-10-02T08:37:26.765719+00:00",
+        "error": null
+      },
+      {
+        "id": "a20fc2a3-af9a-4dd4-b93b-142294e65911",
+        "type": "ORDER_PAID",
+        "status": "PROCESSED",
+        "at": "2026-10-02T08:37:27.976869+00:00",
+        "error": null
+      },
+      {
+        "id": "22367ec1-65b6-42b7-af0e-7000ad802fe8",
+        "type": "DELIVERY_FAILED",
+        "status": "PROCESSED",
+        "at": "2026-10-02T10:45:29.685145+00:00",
+        "error": null
+      },
+      {
+        "id": "16d11dfa-b8b9-4b8c-861b-f7115b278b58",
+        "type": "PAYMENT_REFUND_REQUESTED",
+        "status": "PROCESSED",
+        "at": "2026-10-02T10:45:30.898104+00:00",
+        "error": null
+      }
+    ]
+  },
+  "delivery_db": [
+    {
+      "orderId": "b83c71bd-022c-439d-8586-aa4fe5b1c0d1",
+      "driverId": "5a41832f-5596-4bb1-a9bf-6ce416b38b95",
+      "assignedAt": "2026-10-02T08:37:35.904904+00:00",
+      "releasedAt": "2026-10-02T08:41:08.048835+00:00",
+      "state": "RELEASED",
+      "deliveryStatus": "DELIVERED"
+    }
+  ],
+  "payment_db": {
+    "cols": [
+      {
+        "table": "payment_intents",
+        "col": "id"
+      },
+      {
+        "table": "payment_intents",
+        "col": "version"
+      },
+      {
+        "table": "payment_intents",
+        "col": "retry_count"
+      },
+      {
+        "table": "refunds",
+        "col": "id"
+      },
+      {
+        "table": "refunds",
+        "col": "transaction_id"
+      },
+      {
+        "table": "refunds",
+        "col": "internal_refund_id"
+      },
+      {
+        "table": "refunds",
+        "col": "amount"
+      },
+      {
+        "table": "refunds",
+        "col": "created_at"
+      },
+      {
+        "table": "refunds",
+        "col": "updated_at"
+      },
+      {
+        "table": "refunds",
+        "col": "version"
+      },
+      {
+        "table": "payment_intents",
+        "col": "amount"
+      },
+      {
+        "table": "payment_intents",
+        "col": "created_at"
+      },
+      {
+        "table": "payment_intents",
+        "col": "updated_at"
+      },
+      {
+        "table": "payment_intents",
+        "col": "amount_refunded"
+      },
+      {
+        "table": "payment_intents",
+        "col": "order_id"
+      },
+      {
+        "table": "payment_intents",
+        "col": "gateway_name"
+      },
+      {
+        "table": "payment_intents",
+        "col": "gateway_order_id"
+      },
+      {
+        "table": "refunds",
+        "col": "status"
+      },
+      {
+        "table": "payment_intents",
+        "col": "status"
+      },
+      {
+        "table": "payment_intents",
+        "col": "idempotency_key"
+      },
+      {
+        "table": "refunds",
+        "col": "gateway_refund_id"
+      },
+      {
+        "table": "refunds",
+        "col": "refund_destination"
+      },
+      {
+        "table": "refunds",
+        "col": "reason"
+      }
+    ],
+    "refunds": null
+  },
+  "logs": [
+    {
+      "time": "2026-10-02T10:45:33.043782515Z",
+      "logger": "com.fooddelivery.payments.service.PaymentEventConsumer",
+      "message": "Initiating refund for gatewayOrderId: mock_rzp_txn_b83c71bd-022c-439d-8586-aa4fe5b1c0d1, gateway: RAZORPAY, refundId: cae2548a-5c41-47a0-93d0-c3c2732cd93a"
+    },
+    {
+      "time": "2026-10-02T10:45:33.045780566Z",
+      "logger": "com.fooddelivery.payments.service.PaymentGatewayOrchestrator",
+      "message": "Initiating refund for order: mock_rzp_txn_b83c71bd-022c-439d-8586-aa4fe5b1c0d1 using gateway: RAZORPAY"
+    },
+    {
+      "time": "2026-10-02T10:45:33.046003927Z",
+      "logger": "com.fooddelivery.payments.service.gateway.MockRazorpayStrategy",
+      "message": "[DEBUG PROFILE] Mocking Razorpay Gateway initiate refund for gateway order: mock_rzp_txn_b83c71bd-022c-439d-8586-aa4fe5b1c0d1"
+    },
+    {
+      "time": "2026-10-02T10:45:33.046869772Z",
+      "logger": "com.fooddelivery.payments.service.PaymentGatewayOrchestrator",
+      "message": "Successfully initiated refund for order: mock_rzp_txn_b83c71bd-022c-439d-8586-aa4fe5b1c0d1 using gateway: RAZORPAY"
+    },
+    {
+      "time": "2026-10-02T10:45:33.047755896Z",
+      "logger": "com.fooddelivery.payments.service.PaymentEventConsumer",
+      "message": "Refund initiated successfully for gatewayOrderId: mock_rzp_txn_b83c71bd-022c-439d-8586-aa4fe5b1c0d1"
+    },
+    {
+      "time": "2026-10-02T10:45:35.046709481Z",
+      "logger": "com.fooddelivery.payments.service.gateway.MockRazorpayStrategy",
+      "message": "MockRazorpayStrategy refund scheduled task started for gatewayOrderId: mock_rzp_txn_b83c71bd-022c-439d-8586-aa4fe5b1c0d1"
+    },
+    {
+      "time": "2026-10-02T10:45:35.047095163Z",
+      "logger": "com.fooddelivery.payments.service.gateway.MockRazorpayStrategy",
+      "message": "Calling webhookService.handleRefundSuccess for gatewayOrderId: mock_rzp_txn_b83c71bd-022c-439d-8586-aa4fe5b1c0d1 with refundId: cae2548a-5c41-47a0-93d0-c3c2732cd93a"
+    },
+    {
+      "time": "2026-10-02T10:45:35.072131819Z",
+      "logger": "com.fooddelivery.payments.service.gateway.MockRazorpayStrategy",
+      "message": "Error auto-triggering refund success in MockRazorpayStrategy task"
+    },
+    {
+      "time": "2026-10-02T10:45:29.642925283Z",
+      "logger": "com.fooddelivery.order.scheduler.AbandonedDeliverySweeper",
+      "message": "Found 1 abandoned HANDED_OVER orders. Marking them as DELIVERY_FAILED..."
+    },
+    {
+      "time": "2026-10-02T10:45:29.685238994Z",
+      "logger": "com.fooddelivery.order.service.state.OrderActionService",
+      "message": "Triggering event: DELIVERY_FAILED for order: b83c71bd-022c-439d-8586-aa4fe5b1c0d1"
+    },
+    {
+      "time": "2026-10-02T10:45:29.696155774Z",
+      "logger": "com.fooddelivery.order.scheduler.AbandonedDeliverySweeper",
+      "message": "Marked abandoned order b83c71bd-022c-439d-8586-aa4fe5b1c0d1 as DELIVERY_FAILED"
+    },
+    {
+      "time": "2026-10-02T10:45:30.744800374Z",
+      "logger": "com.fooddelivery.common.outbox.service.OutboxProcessor",
+      "message": "OUTBOX_EVENT_PUBLISHED eventId=22367ec1-65b6-42b7-af0e-7000ad802fe8 eventType=DELIVERY_FAILED aggregateType=ORDER aggregateId=b83c71bd-022c-439d-8586-aa4fe5b1c0d1 topic=order-events"
+    },
+    {
+      "time": "2026-10-02T10:45:30.854589013Z",
+      "logger": "com.fooddelivery.order.entity.Order",
+      "message": "Customer order b83c71bd-022c-439d-8586-aa4fe5b1c0d1 status changing from HANDED_OVER to DELIVERY_FAILED"
+    },
+    {
+      "time": "2026-10-02T10:45:30.862780498Z",
+      "logger": "com.fooddelivery.order.service.state.OrderActionService",
+      "message": "Saved notification request to outbox for order b83c71bd-022c-439d-8586-aa4fe5b1c0d1 to customer 99d619e3-1470-46e8-9e9b-faeced724757"
+    },
+    {
+      "time": "2026-10-02T10:45:32.826779051Z",
+      "logger": "com.fooddelivery.order.service.PaymentEventConsumer",
+      "message": "Payment event for gateway order mock_rzp_txn_b83c71bd-022c-439d-8586-aa4fe5b1c0d1. Finding internal order b83c71bd-022c-439d-8586-aa4fe5b1c0d1. IsFailure: false"
+    },
+    {
+      "time": "2026-10-02T10:45:32.840880248Z",
+      "logger": "com.fooddelivery.order.service.state.impl.TerminalState",
+      "message": "Order b83c71bd-022c-439d-8586-aa4fe5b1c0d1 is in terminal state DELIVERY_FAILED. Processing immediate refund for late payment success."
+    },
+    {
+      "time": "2026-10-02T10:45:32.875146915Z",
+      "logger": "com.fooddelivery.order.service.PaymentEventConsumer",
+      "message": "REFUND_NOT_ROUTED: order b83c71bd-022c-439d-8586-aa4fe5b1c0d1 needs a refund but it could not be routed (REFUND_EXCEEDS_REMAINING). The payment state change is kept; resolve this from the admin refund queue."
+    },
+    {
+      "time": "2026-10-02T10:45:33.896528446Z",
+      "logger": "com.fooddelivery.order.service.PaymentEventConsumer",
+      "message": "Payment event for gateway order mock_rzp_txn_b83c71bd-022c-439d-8586-aa4fe5b1c0d1. Finding internal order b83c71bd-022c-439d-8586-aa4fe5b1c0d1. IsFailure: false"
+    },
+    {
+      "time": "2026-10-02T10:45:33.901034751Z",
+      "logger": "com.fooddelivery.order.service.state.impl.TerminalState",
+      "message": "Order b83c71bd-022c-439d-8586-aa4fe5b1c0d1 is in terminal state DELIVERY_FAILED. Processing immediate refund for late payment success."
+    },
+    {
+      "time": "2026-10-02T10:45:33.911489288Z",
+      "logger": "com.fooddelivery.order.service.PaymentEventConsumer",
+      "message": "REFUND_NOT_ROUTED: order b83c71bd-022c-439d-8586-aa4fe5b1c0d1 needs a refund but it could not be routed (REFUND_EXCEEDS_REMAINING). The payment state change is kept; resolve this from the admin refund queue."
+    },
+    {
+      "time": "2026-10-02T10:45:35.920632728Z",
+      "logger": "com.fooddelivery.order.service.PaymentEventConsumer",
+      "message": "Payment event for gateway order mock_rzp_txn_b83c71bd-022c-439d-8586-aa4fe5b1c0d1. Finding internal order b83c71bd-022c-439d-8586-aa4fe5b1c0d1. IsFailure: false"
+    },
+    {
+      "time": "2026-10-02T10:45:35.925084392Z",
+      "logger": "com.fooddelivery.order.service.state.impl.TerminalState",
+      "message": "Order b83c71bd-022c-439d-8586-aa4fe5b1c0d1 is in terminal state DELIVERY_FAILED. Processing immediate refund for late payment success."
+    },
+    {
+      "time": "2026-10-02T10:45:35.934109201Z",
+      "logger": "com.fooddelivery.order.service.PaymentEventConsumer",
+      "message": "REFUND_NOT_ROUTED: order b83c71bd-022c-439d-8586-aa4fe5b1c0d1 needs a refund but it could not be routed (REFUND_EXCEEDS_REMAINING). The payment state change is kept; resolve this from the admin refund queue."
+    },
+    {
+      "time": "2026-10-02T10:45:39.946937571Z",
+      "logger": "com.fooddelivery.order.service.PaymentEventConsumer",
+      "message": "Payment event for gateway order mock_rzp_txn_b83c71bd-022c-439d-8586-aa4fe5b1c0d1. Finding internal order b83c71bd-022c-439d-8586-aa4fe5b1c0d1. IsFailure: false"
+    },
+    {
+      "time": "2026-10-02T10:45:39.95227824Z",
+      "logger": "com.fooddelivery.order.service.state.impl.TerminalState",
+      "message": "Order b83c71bd-022c-439d-8586-aa4fe5b1c0d1 is in terminal state DELIVERY_FAILED. Processing immediate refund for late payment success."
+    },
+    {
+      "time": "2026-10-02T10:45:39.964693868Z",
+      "logger": "com.fooddelivery.order.service.PaymentEventConsumer",
+      "message": "REFUND_NOT_ROUTED: order b83c71bd-022c-439d-8586-aa4fe5b1c0d1 needs a refund but it could not be routed (REFUND_EXCEEDS_REMAINING). The payment state change is kept; resolve this from the admin refund queue."
+    }
+  ]
+}

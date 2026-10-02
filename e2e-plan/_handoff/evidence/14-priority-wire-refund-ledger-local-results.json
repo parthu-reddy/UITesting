@@ -1,0 +1,187 @@
+{
+  "localOnly": true,
+  "classes": [
+    {
+      "repository": "CustomerApplication",
+      "class": "ChatRefundProcessorServiceTest",
+      "tests": 18,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "repository": "CustomerApplication",
+      "class": "RefundServiceTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "repository": "CustomerApplication",
+      "class": "RefundOverCompletionTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "repository": "CustomerApplication",
+      "class": "RefundNotificationTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "repository": "CustomerApplication",
+      "class": "RefundDestinationMatrixTest",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "repository": "CustomerApplication",
+      "class": "RefundRemainingTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "repository": "CustomerApplication",
+      "class": "RefundStoreCreditHandoffTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "repository": "CustomerApplication",
+      "class": "PayableMatchesPayoutTest",
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "repository": "CustomerApplication",
+      "class": "LedgerInvariantTest",
+      "tests": 16,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "repository": "CustomerApplication",
+      "class": "RiderTipLedgerTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "repository": "CustomerApplication",
+      "class": "GatewayAccountIdentityTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "repository": "CustomerApplication",
+      "class": "ClawbackCapTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "repository": "CustomerApplication",
+      "class": "LedgerBookkeeperTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "repository": "CustomerApplication",
+      "class": "LedgerBookkeeperRefundTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "repository": "CustomerApplication",
+      "class": "LedgerAccountResolverTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "repository": "CustomerApplication",
+      "class": "PaymentEventConsumerTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "repository": "CommunicationService",
+      "class": "RefundDecisionListenerTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "repository": "PaymentGatewayIntegration",
+      "class": "WebhookProcessingServiceTest",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "repository": "PaymentGatewayIntegration",
+      "class": "PaymentEventConsumerRefundIdempotencyTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "repository": "LedgerService",
+      "class": "LedgerRejectionRecorderPersistenceTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "repository": "LedgerService",
+      "class": "LedgerRejectionResolutionPersistenceTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "repository": "LedgerService",
+      "class": "LedgerEventListenerTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  ],
+  "totals": {
+    "tests": 129,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  }
+}

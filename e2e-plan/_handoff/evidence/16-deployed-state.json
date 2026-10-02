@@ -1,0 +1,94 @@
+{
+  "readOnly": true,
+  "services": [
+    {
+      "Service": "chat-service",
+      "Health": "healthy",
+      "State": "running",
+      "Image": "hyd.ocir.io/axekmbadoczl/food-delivery/chat-service:7552808a2f721ad567f854359edc5781ab56534f",
+      "CreatedAt": "2026-10-02 10:38:25 +0000 UTC"
+    },
+    {
+      "Service": "customer-service",
+      "Health": "healthy",
+      "State": "running",
+      "Image": "hyd.ocir.io/axekmbadoczl/food-delivery/customer-service:4efcf76d9477083dd736c55bcc86b395512f3f1e",
+      "CreatedAt": "2026-10-02 11:25:51 +0000 UTC"
+    },
+    {
+      "Service": "ledger-service",
+      "Health": "healthy",
+      "State": "running",
+      "Image": "hyd.ocir.io/axekmbadoczl/food-delivery/ledger-service:8d09c049cc77c9cf4c6b100d21f6deeeb232ac4d",
+      "CreatedAt": "2026-10-02 10:38:25 +0000 UTC"
+    },
+    {
+      "Service": "payment-gateway",
+      "Health": "healthy",
+      "State": "running",
+      "Image": "hyd.ocir.io/axekmbadoczl/food-delivery/payment-gateway:4426e1b5bfd514fa395a619a3cc3c08a54035194",
+      "CreatedAt": "2026-10-02 11:25:11 +0000 UTC"
+    }
+  ],
+  "orders": [
+    {
+      "id": "0b22b53a-c718-4bec-b854-b736e24bee29",
+      "status": "CANCELLED",
+      "deliveryStatus": null,
+      "total": 43.35
+    },
+    {
+      "id": "176fb42c-46e9-49b2-b52f-43c571603199",
+      "status": "CANCELLED_BY_RESTAURANT",
+      "deliveryStatus": null,
+      "total": 43.35
+    },
+    {
+      "id": "b83c71bd-022c-439d-8586-aa4fe5b1c0d1",
+      "status": "DELIVERY_FAILED",
+      "deliveryStatus": "FAILED",
+      "total": 43.35
+    }
+  ],
+  "refunds": [
+    {
+      "id": "61893082-a1fa-47ac-91a2-fde3669c26e9",
+      "orderId": "0b22b53a-c718-4bec-b854-b736e24bee29",
+      "status": "FAILED",
+      "amount": 43.35,
+      "destination": "ORIGINAL_METHOD",
+      "completedAt": null,
+      "attempts": 4
+    },
+    {
+      "id": "1b62e2a8-4aa3-4e1a-bd1c-a8f2c394d8cd",
+      "orderId": "176fb42c-46e9-49b2-b52f-43c571603199",
+      "status": "FAILED",
+      "amount": 43.35,
+      "destination": "ORIGINAL_METHOD",
+      "completedAt": null,
+      "attempts": 4
+    },
+    {
+      "id": "cae2548a-5c41-47a0-93d0-c3c2732cd93a",
+      "orderId": "b83c71bd-022c-439d-8586-aa4fe5b1c0d1",
+      "status": "FAILED",
+      "amount": 43.35,
+      "destination": "ORIGINAL_METHOD",
+      "completedAt": null,
+      "attempts": 4
+    }
+  ],
+  "rider": {
+    "status": "OFFLINE"
+  },
+  "ledgerRejections": [
+    {
+      "eventId": "1173299a-c864-4712-8717-fb664a03e118",
+      "reason": "Failed after all retries: Listener failed; could not execute batch [Batch entry 0 insert into ledger_rejections (created_at,event_id,payload,producer,reason,resolution_note,resolved_at,resolved_by,id) values (('2026-10-02 08:42:58.447114+00'),('1173299a-c864-4712-8717-fb664a03e118'),('{\"leg\": \"DELIV",
+      "createdAt": "2026-10-02T10:39:47.169656+00:00",
+      "resolvedAt": null
+    }
+  ],
+  "asOf": "2026-10-02T17:13:01+05:30"
+}

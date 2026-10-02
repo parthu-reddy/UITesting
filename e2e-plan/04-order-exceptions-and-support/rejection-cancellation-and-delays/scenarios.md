@@ -25,7 +25,7 @@ Uses: `RestaurantOrderActionsPage`, `CustomerOrderTrackerPage`, `DeliveryActiveJ
 | ID | Description | Action | Expected result |
 |---|---|---|---|
 | CANCEL-08 | Cancel before accept removes from restaurant queue | Implemented in `OrderCancellationFlowTest`; the exact order is first observed in Incoming, then must disappear after customer cancellation. |
-| CANCEL-09 | Cancel button hidden after acceptance | Implemented in `RestaurantFulfillmentTest`; the customer reloads after exact-order acceptance and must not see Cancel Order. |
+| CANCEL-09 | Cancel button hidden after acceptance | Implemented in the shared `HappyDeliveryFlowTest` after acceptance/chat reload; the exact tracker must not show Cancel order. |
 | CANCEL-10 | Customer cancel reason (if required) | Customer taps Cancel → provides reason. | Reason submitted; refund initiated. |
 
 ## Planned batch 3 — Rider abandons / delays
@@ -54,3 +54,11 @@ Uses: `RestaurantOrderActionsPage`, `CustomerOrderTrackerPage`, `DeliveryActiveJ
 | DELAY-05 | Customer can reject the delay | Implemented through the prompt's Cancel Order action. |
 | DELAY-06 | Rejected delay terminates customer order | Implemented with the exact tracked order's terminal headline. |
 | DELAY-07 | Rejected delay leaves restaurant queue | Implemented; verifies the exact order card disappears after reload. |
+
+## 2026-10-02 consolidation and money contract
+
+`RestaurantRejectFlowTest` owns required reason, whitespace/Back, rejection, exact terminal reason and retained history label. `OrderCancellationFlowTest` owns one quoted CARD pending order, authoritative rider preflight, cancellation response/status, hidden cancellation action, queue removal and retained history. Both call `RefundRecoveryChecks` on that same order: full original charge, ORIGINAL_METHOD, actual COMPLETED timestamp, customer refund UI, admin payment REFUNDED, exactly one matching refund and balanced REFUND ledger legs, with no earnings booking for an undelivered order. Only normal bounded asynchronous processing is awaited; no expiry/rate/quota waiting tests are introduced.
+
+Duplicate OrderCancellationTest methods and RestaurantFulfillmentTest rejection have been removed. ExceptionsSupportUiTest only asserted absent buttons on pages with no orders; those checks were not rejection/cancellation/review coverage and are removed. Real review coverage remains ReviewFlowTest, not counted as fresh-passed here. RestaurantFulfillmentTest now retains only queue region/count assertions with no lifecycle fixture.
+
+If a financial assertion fails after a terminal outcome, use `-Drefund.resume.order.id=<owned manifest UUID>` in its canonical flow. It validates manifest actor phones and the expected terminal status before reading recovery; it does not create or recancel another order. New financial helpers compile locally; fresh integration execution waits for the current deployment.

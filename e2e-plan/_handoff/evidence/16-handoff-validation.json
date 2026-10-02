@@ -1,0 +1,17 @@
+{
+  "asOf": "2026-10-02T11:59:11+00:00",
+  "markdownFilesChecked": 77,
+  "featureEntries": 28,
+  "preservedCheckpoints": 15,
+  "ownedManifests": 3,
+  "missingLinks": [],
+  "credentialPatternMatches": {
+    "privateKey": 0,
+    "jwt": 0
+  },
+  "mandatoryAgentUpdatesRecorded": true,
+  "decisionsRegisterPresent": true,
+  "noRemoteMutation": true,
+  "currentDeploymentGate": "payment-gateway only for new amount guard; user deployment pending",
+  "resetRequired": false
+}

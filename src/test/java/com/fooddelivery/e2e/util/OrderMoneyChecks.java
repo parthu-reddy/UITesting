@@ -49,6 +49,21 @@ public final class OrderMoneyChecks {
             assertThat(parseInr(page.getRestaurantNetPayout())).isEqualByComparingTo(amount(money,"restaurantPayout"));
             assertThat(parseInr(page.getRiderNetPayout())).isEqualByComparingTo(amount(money,"driverNetPayout"));
             List<?> lines=(List<?>)money.get("ledgerLines");assertThat(lines).as("the exact delivered order has a durable ledger trace").isNotEmpty();
+            for (String payee : List.of("RESTAURANT_PAYABLE", "DRIVER_PAYABLE")) {
+                var payeeLines = lines.stream().map(x -> (Map<?,?>) x).filter(line -> payee.equals(line.get("ownerType"))).toList();
+                assertThat(payeeLines)
+                        .as("delivered order must post %s earnings, not only its payment capture", payee).isNotEmpty();
+                BigDecimal postedPayout = BigDecimal.ZERO;
+                for (Map<?,?> line : payeeLines) {
+                    assertThat(line.get("direction")).isIn("CREDIT", "DEBIT");
+                    BigDecimal value = amount(line, "amount");
+                    postedPayout = postedPayout.add("CREDIT".equals(line.get("direction")) ? value : value.negate());
+                }
+                BigDecimal expectedPayout = payee.equals("RESTAURANT_PAYABLE")
+                        ? amount(money, "restaurantPayout") : amount(money, "driverNetPayout").add(tip);
+                assertThat(postedPayout).as("posted %s payout agrees with the exact order", payee)
+                        .isEqualByComparingTo(expectedPayout);
+            }
             BigDecimal credits=BigDecimal.ZERO,debits=BigDecimal.ZERO;
             for(Object value:lines) {
                 Map<?,?> line=(Map<?,?>)value;

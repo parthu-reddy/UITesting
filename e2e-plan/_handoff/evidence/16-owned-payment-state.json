@@ -1,0 +1,52 @@
+{
+  "customer": [
+    {
+      "orderId": "b83c71bd-022c-439d-8586-aa4fe5b1c0d1",
+      "status": "SUCCESS",
+      "amount": 43.35,
+      "gatewayOrderId": "mock_rzp_txn_b83c71bd-022c-439d-8586-aa4fe5b1c0d1"
+    },
+    {
+      "orderId": "0b22b53a-c718-4bec-b854-b736e24bee29",
+      "status": "SUCCESS",
+      "amount": 43.35,
+      "gatewayOrderId": "mock_rzp_txn_0b22b53a-c718-4bec-b854-b736e24bee29"
+    },
+    {
+      "orderId": "176fb42c-46e9-49b2-b52f-43c571603199",
+      "status": "SUCCESS",
+      "amount": 43.35,
+      "gatewayOrderId": "mock_rzp_txn_176fb42c-46e9-49b2-b52f-43c571603199"
+    }
+  ],
+  "gateway": {
+    "intents": [
+      {
+        "id": "99700392-414b-40cf-af30-b5c1bfb220a5",
+        "orderId": "b83c71bd-022c-439d-8586-aa4fe5b1c0d1",
+        "status": "SUCCESS",
+        "amount": 43.35,
+        "amountRefunded": 0.0,
+        "gatewayOrderId": "mock_rzp_txn_b83c71bd-022c-439d-8586-aa4fe5b1c0d1"
+      },
+      {
+        "id": "584ce07a-0975-42d9-a0b7-77d9c09aee03",
+        "orderId": "0b22b53a-c718-4bec-b854-b736e24bee29",
+        "status": "SUCCESS",
+        "amount": 43.35,
+        "amountRefunded": 0.0,
+        "gatewayOrderId": "mock_rzp_txn_0b22b53a-c718-4bec-b854-b736e24bee29"
+      },
+      {
+        "id": "ad3e2656-12cb-4821-8de2-d0dc6648858a",
+        "orderId": "176fb42c-46e9-49b2-b52f-43c571603199",
+        "status": "SUCCESS",
+        "amount": 43.35,
+        "amountRefunded": 0.0,
+        "gatewayOrderId": "mock_rzp_txn_176fb42c-46e9-49b2-b52f-43c571603199"
+      }
+    ],
+    "transactions": null,
+    "refunds": null
+  }
+}

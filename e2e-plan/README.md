@@ -1,6 +1,15 @@
 # Phased E2E coverage plan
 
-Status: active UI-only implementation across phases 01 through 03. Authentication, reversible checkout presentation, rider availability, and the complete happy delivery lifecycle have passing focused tests. Detailed scenarios are written when work begins on a functionality folder. Existing test files are starting points, not proof that a feature is covered or passing.
+## Resume with another agent — current entry point
+
+Every agent using this plan must follow [AGENTS.md](AGENTS.md) and record its results, failures, decisions and next steps in this folder. This is a standing user instruction, including for future agents.
+
+Start with [_handoff/START-HERE.md](_handoff/START-HERE.md). It contains the user's standing instructions, current deployed state, completed/remaining/deferred work, owned fixtures, commands, evidence boundaries, issue register and all 28 feature status entries. Each feature has AUDIT-STATUS.md. Update this handoff after every meaningful checkpoint so resumption does not depend on the previous chat.
+
+The full audit remains unfinished. Historical passes below may precede database resets. Current priorities are chat, refunds, money and order-related admin flows; prior fixes are deployed and owned recovery is active. The newer payment callback guard is deployed and healthy; see _handoff/CURRENT-STATE.md and checkpoint 17. No database reset/reseed is needed. The current audit includes scoped backend verification and source fixes, so older UI-only text is historical. No server cleanup, duplicate happy lifecycle, intentional slow/rate waits or SSE execution. See the handoff for exact rules.
+
+
+Historical status before the current audit (see _handoff for current state): active UI-only implementation across phases 01 through 03. Authentication, reversible checkout presentation, rider availability, and the complete happy delivery lifecycle have passing focused tests. Detailed scenarios are written when work begins on a functionality folder. Existing test files are starting points, not proof that a feature is covered or passing.
 
 ## Current audit instructions — 2026-10-01
 
@@ -23,7 +32,7 @@ Earlier cleanup/retirement evidence below describes past runs before this instru
 | [03-order-fulfillment](03-order-fulfillment/README.md) | Complete the core journey while monitoring customer, restaurant and rider together. | In progress |
 | [04-order-exceptions-and-support](04-order-exceptions-and-support/README.md) | Extend the working order lifecycle to exception handling and support. | In progress |
 | [05-partner-and-account-management](05-partner-and-account-management/README.md) | Cover supporting workflows using seeded accounts and reversible changes. | In progress |
-| [06-admin-operations](06-admin-operations/README.md) | Validate administration after confirming a usable existing admin account. | Planned |
+| [06-admin-operations](06-admin-operations/README.md) | Validate administration after confirming a usable existing admin account. | In progress |
 | [07-resilience-and-regression](07-resilience-and-regression/README.md) | Make validated functional coverage repeatable across UI and connectivity conditions. | In progress |
 
 ## Work one folder at a time
@@ -34,7 +43,7 @@ Earlier cleanup/retirement evidence below describes past runs before this instru
 4. Run the focused batch against the configured deployment, inspect screenshots/reports, distinguish application failures from environment or test-data blockers, and record evidence.
 5. Mark the folder validated only after implemented cases pass and retained-state/repeatability are checked. Record remaining gaps explicitly, then move to the next folder. Each phase depends on the relevant validated prerequisites in earlier phases.
 
-## Starting point
+## Historical starting point (do not restart the audit here)
 
 Start with phase 01: reconcile configuration with the user-confirmed seeded numbers, validate all four roles, and resolve admin account availability. The previous login run recorded six passes and two profile-form blockers using older rider/admin defaults; do not treat that as current verification of the newly supplied rider account.
 

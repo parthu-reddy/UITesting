@@ -1,0 +1,9 @@
+# Stored confirmation evidence and local capture recovery
+
+Updated 2026-10-02T18:27:17+05:30. Three retained Dev payments had SUCCESS intents and stored PROCESSED PAYMENT_COMPLETED confirmations but no successful Transaction. Completion outbox aggregate_id is business orderID (verified in producer); an initial intentUUID count was corrected. Read specific identities/amounts/counts, never full order payloads with secrets/OTPs.
+
+Use an exact processed confirmation only after validating type/aggregate/payload/order/gateway/cent amount/paidAt and current refunded balance/state. Lock the intent, verify or restore one local capture, preserve original confirmation time, and name the source with a confirmation namespace rather than inventing a provider receipt. Do not republish payment success, change balances/statuses, delete initiation keys, or imply refund/ledger completion. Operator/source/result logging plus immutable source-linked capture reference supports audit. Posttransaction logging avoids logging an uncommitted result as completed.
+
+The new payment-gateway admin endpoint uses existing protected DLQ routing;58selected local checks include committed concurrent exactly-one recovery, nonadmin/anonymous denial and existing contracts/HTTP/startup. No deployed recovery is proved. The Redis mocks in existing startup/HTTP tests returned null opsForValue before BeforeEach, creating4background job errors despite passing methods. Correct test initialization before context scheduled jobs start; final run has0errors. Production scheduler/config untouched. Inspect logs as well as Surefire counts.
+
+Continue from [checkpoint19](../checkpoints/19-stored-confirmation-capture-recovery.md). Hold historical refund retries until downstream exact-ID reconciliation is safe; do not retry the accidental delivered-order refund.

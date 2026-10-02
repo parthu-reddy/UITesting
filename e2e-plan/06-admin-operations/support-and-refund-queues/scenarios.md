@@ -55,3 +55,15 @@ Uses: `AdminSupportTicketsPage`, `AdminRefundQueuePage`.
 | REFUND-ADV-02 | Refund count | On refund queue. | `getRefundCount()` matches visible refund entries. |
 | REFUND-ADV-03 | Approve via detail panel | After opening a ticket, open approval confirmation and cancel. | Confirmation renders without a resolve POST. A committed approval needs an isolated fixture. |
 | REFUND-ADV-04 | Reject via detail panel | After opening a ticket, open rejection confirmation and cancel. | Confirmation renders without a resolve POST. A committed rejection needs an isolated fixture. |
+
+## Batch 5 — Committed support refund decisions on owned delivered orders (2026-10-02)
+
+Implemented in `tests/flows/SupportRefundResolutionFlowTest` (tag `support-refund`), run with `-Dsupport.partial.order.id` and `-Dsupport.deny.order.id`. Each uses an owned, delivered CARD order (manifest-validated); no order is created. Customers raise tickets through the **only rendered customer path**: chat item quote, then "Submit Refund Request" (`useChatSession` always sends `refundType: PARTIAL`). The admin decides in the Refund Queue. Assertions read the ticket, refund, payment and ledger.
+
+| ID | Order | Action | Expected result |
+|---|---|---|---|
+| SUPPORT-REFUND-01 | partial | Customer: chat item quote → Submit Refund Request. Admin: approve with override ₹12.00 < quote, Restaurant Fault. | Ticket OPEN with an item quote = items + taxes → RESOLVED with refundAmount 12.00, notes, resolvedBy. Refund COMPLETED ORIGINAL_METHOD 12.00 with completedAt. Payment PARTIALLY_REFUNDED. REFUND ledger credit = debit = 12.00. Restaurant CLAWBACK = payout × round4(12/total). |
+| SUPPORT-REFUND-02 | deny | Customer: chat item ticket. Admin: reject with a note. | REJECTED with the note and resolvedBy. No refund. Payment status and ledger line count unchanged. |
+| SUPPORT-REFUND-03 | partial (after 01) | Customer: request another item quote. | Chat shows REFUND_ERROR `ITEM_ALREADY_REFUNDED`. No new ticket; still one refund; 01's ticket stays RESOLVED. |
+
+Not reachable through the customer UI (source-verified 2026-10-02): `CustomerOrderHistory.tsx` (the "Report Issue / Request Refund" button and `PostDeliverySupportModal`, calling `POST /api/v1/customer/orders/{id}/refund-request`) and `shared/ui/RefundModal.tsx` (FULL/PARTIAL) are rendered nowhere. A full-order customer ticket, and so the remaining-balance cap at admin approval, cannot occur from the UI. The cap stays covered by backend unit tests (RefundRemainingTest). Product decision pending with the user.

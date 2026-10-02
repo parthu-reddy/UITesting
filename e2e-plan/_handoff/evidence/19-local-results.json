@@ -1,0 +1,117 @@
+{
+  "observedAt": "2026-10-02T12:55:13.603584+00:00",
+  "classes": [
+    {
+      "class": "com.fooddelivery.payments.service.ConfirmedCaptureRecoveryServiceTest",
+      "tests": 15,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.fooddelivery.payments.service.ConfirmedCaptureRecoveryPersistenceTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.fooddelivery.payments.controller.AdminCaptureRecoveryAuthorizationTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.fooddelivery.payments.service.ConfirmedCaptureRefundPersistenceTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.fooddelivery.payments.service.WebhookProcessingServiceTest",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.fooddelivery.payments.WebhookIntegrationTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.fooddelivery.payments.WebhookAmountVerificationTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.fooddelivery.payments.controller.WebhookControllerTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.fooddelivery.payments.service.WebhookDlqJobTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.fooddelivery.payments.service.PaymentEventConsumerRefundIdempotencyTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.fooddelivery.payments.service.PaymentEventConsumerAmountTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.fooddelivery.payments.contract.PaymentEventConsumerContractTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.fooddelivery.payments.controller.PaymentControllerAuthorizationTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.fooddelivery.payments.PaymentServiceApplicationStartupTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.fooddelivery.payments.config.PaymentStartupInvariantsTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  ],
+  "totals": {
+    "tests": 58,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "proof": "Selected local unit, Spring method security, H2 PostgreSQL-mode committed concurrent recovery, existing persistence, producer-stub contract, HTTP webhook and startup checks. No live recovery or full suite."
+}

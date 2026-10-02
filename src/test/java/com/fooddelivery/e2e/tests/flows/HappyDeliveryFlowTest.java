@@ -260,9 +260,14 @@ public class HappyDeliveryFlowTest extends TestBase {
                 card.getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Mark ready").setExact(true)).click();
                 assertThat(card).hasAttribute("data-status", "READY_FOR_PICKUP");
             }
-            if (preparedHere) {
+            // The ready toast arrives only over the restaurant-status SSE stream (parked through the
+            // quick tunnel). Without it, prove the server-backed state the way the main path does.
+            if (preparedHere && SSE_ENABLED) {
                 assertThat(riderPage.getByText("Order " + shortOrderId + " is now ready for pickup!",
                         new Page.GetByTextOptions().setExact(true))).isVisible();
+            } else if (preparedHere) {
+                riderPage.reload();
+                waitForActiveOrder(orderId);
             }
             assertThat(riderPage.getByPlaceholder("Enter 6-digit pickup OTP")).isVisible();
             String pickupOtp = orderActions.getPickupOtp(shortOrderId);
@@ -337,11 +342,60 @@ public class HappyDeliveryFlowTest extends TestBase {
                 .as("resumed order's authorised stream %s", event).isEqualTo(200);
     }
 
+    /** Continue financial/quote checks on this audit's delivered manifest without an order POST. */
+    private void verifyRetainedDeliveredOrder(String id) {
+        try {
+            Map<?,?> manifest=(Map<?,?>)customerPage.evaluate("text=>JSON.parse(text)",
+                    Files.readString(Path.of("target/lifecycle",id+".json")));
+            org.assertj.core.api.Assertions.assertThat(manifest.get("orderId")).isEqualTo(id);
+            org.assertj.core.api.Assertions.assertThat(manifest.get("customerPhone")).isEqualTo(testCustomerPhone);
+            org.assertj.core.api.Assertions.assertThat(manifest.get("riderPhone")).isEqualTo(testRiderPhone);
+            org.assertj.core.api.Assertions.assertThat(manifest.get("restaurantPhone")).isEqualTo(testRestaurantPhone);
+            customerPage.route("**/api/v1/orders",route->{
+                if(route.request().method().equals("POST"))throw new AssertionError("Retained validation must not create an order");
+                route.resume();
+            });
+            Response history=customerPage.waitForResponse(r->r.request().method().equals("GET")
+                    && java.net.URI.create(r.url()).getPath().equals("/api/v1/orders/history"),()->{
+                CustomerDashboardPage.openProfileSettings(customerPage);
+                customerPage.getByRole(AriaRole.TAB,new Page.GetByRoleOptions().setName("History").setExact(true)).click();
+            });
+            org.assertj.core.api.Assertions.assertThat(history.status()).isEqualTo(200);
+            Map<?,?> envelope=(Map<?,?>)customerPage.evaluate("text=>JSON.parse(text)",history.text());
+            java.util.List<?> rows=(java.util.List<?>)((Map<?,?>)envelope.get("data")).get("content");
+            Map<?,?> order=rows.stream().map(x->(Map<?,?>)x).filter(x->id.equals(x.get("id"))).findFirst()
+                    .orElseThrow(()->new AssertionError("Owned retained delivered order missing from this customer history"));
+            org.assertj.core.api.Assertions.assertThat(order.get("deliveryStatus")).isEqualTo("DELIVERED");
+            org.assertj.core.api.Assertions.assertThat(order.get("paymentMethod")).isEqualTo("CARD");
+            customerPage.locator("[data-testid='customer-history-order'][data-order-id='"+id+"']").click();
+            assertThat(new CustomerOrderTrackerPage(customerPage,id).tracker()).isVisible();
+            if(!Boolean.getBoolean("resume.delivered.quote.only")) {
+                riderPage.navigate(TestConfig.APP_URL);
+                new LoginPage(riderPage).loginAs("Delivery Executive",testRiderPhone);
+                new DeliveryDashboardPage(riderPage).waitForDashboard();
+                riderPage.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName(Pattern.compile("Trips Completed"))).click();
+                Locator trip=riderPage.getByRole(AriaRole.BUTTON)
+                        .filter(new Locator.FilterOptions().setHasText("ORDER #"+id.substring(0,8)))
+                        .filter(new Locator.FilterOptions().setHasText("Delivered"));
+                assertThat(trip).isVisible();
+                double payout=parseInr(trip.innerText());
+                loginAsAdmin();
+                com.fooddelivery.e2e.util.OrderMoneyChecks.verify(adminPage,id,order,payout);
+            }
+            com.fooddelivery.e2e.util.RefundQuoteChecks.verify(customerPage,id,Map.of(
+                    "foodCost",com.fooddelivery.e2e.util.OrderMoneyChecks.amount(order,"itemTotal"),
+                    "sgst",com.fooddelivery.e2e.util.OrderMoneyChecks.amount(order,"sgst"),
+                    "cgst",com.fooddelivery.e2e.util.OrderMoneyChecks.amount(order,"cgst")));
+            Files.writeString(Path.of("target/lifecycle",id+"-retained-checks.json"),
+                    "{\"orderId\":\""+id+"\",\"newOrderCreated\":false,\"quotePassed\":true,\"moneyChecked\":"
+                    +!Boolean.getBoolean("resume.delivered.quote.only")+"}");
+        } catch(java.io.IOException failure){throw new AssertionError("Cannot validate owned retained manifest",failure);}
+    }
+
     @Test
     @Order(1)
     @DisplayName("Complete order lifecycle: Customer → Restaurant → Rider → Delivered")
     void completeOrderLifecycle() {
-        chatChecks=new com.fooddelivery.e2e.util.OrderChatChecks(customerPage,restaurantPage,riderPage);
         // ── Step 1: Login all 3 actors ────────────────────────────────────
         System.out.println("═══ STEP 1: Logging in all actors ═══");
         System.out.printf("Customer=%s Restaurant=%s Rider=%s%n",
@@ -351,6 +405,13 @@ public class HappyDeliveryFlowTest extends TestBase {
         new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
         new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();
 
+        String retainedDelivered = System.getProperty("resume.delivered.order.id", "").trim();
+        if (!retainedDelivered.isEmpty()) {
+            verifyRetainedDeliveredOrder(retainedDelivered);
+            return;
+        }
+
+        chatChecks=new com.fooddelivery.e2e.util.OrderChatChecks(customerPage,restaurantPage,riderPage);
         restaurantPage.navigate(TestConfig.APP_URL);
         String restaurantPhone = testRestaurantPhone;
         new LoginPage(restaurantPage).loginAs("Restaurant Partner", restaurantPhone);
@@ -458,7 +519,7 @@ public class HappyDeliveryFlowTest extends TestBase {
         }
         Locator exactTracker = customerPage.locator("[data-testid='order-tracker'][data-order-id='" + orderId + "']");
         assertThat(exactTracker).isVisible();
-        CustomerOrderTrackerPage tracker = new CustomerOrderTrackerPage(customerPage);
+        CustomerOrderTrackerPage tracker = new CustomerOrderTrackerPage(customerPage, orderId);
         org.assertj.core.api.Assertions.assertThat(tracker.getOrderId()).isEqualTo(orderId);
         String shortOrderId = orderId.substring(0, Math.min(8, orderId.length()));
         System.out.println("Tracking Order ID: " + orderId);
@@ -539,6 +600,8 @@ public class HappyDeliveryFlowTest extends TestBase {
         assertThat(orderActions.orderCard(orderId)).hasAttribute("data-status", "ACCEPTED");
         chatChecks.afterDispatch(orderId,selectedOutlet);
         com.fooddelivery.e2e.util.RestaurantAcceptanceChecks.afterAcceptReload(restaurantPage,orderId,selectedOutlet);
+        assertThat(new CustomerOrderTrackerPage(customerPage,orderId).tracker().getByRole(AriaRole.BUTTON,
+                new Locator.GetByRoleOptions().setName("Cancel order").setExact(true))).isHidden();
         System.out.println("═══ STEP 6: Restaurant starting cook ═══");
         orderActions.startCooking(shortOrderId);
         assertThat(orderActions.orderCard(orderId)).hasAttribute("data-status", "PREPARING");

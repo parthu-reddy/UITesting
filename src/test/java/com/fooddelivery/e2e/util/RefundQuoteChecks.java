@@ -27,7 +27,8 @@ public final class RefundQuoteChecks {
         assertThat(submit).isEnabled(new com.microsoft.playwright.assertions.LocatorAssertions.IsEnabledOptions().setTimeout(15000));
         int before=customer.locator("[data-testid='chat-message'][data-message-type='REFUND_QUOTE_RESPONSE']").count();
         refund.submitRefundRequest();assertThat(modal).isHidden();
-        assertThat(customer.getByText("Requesting quote...",new Page.GetByTextOptions().setExact(true))).isVisible();
+        // Retained chat history can contain older requests, and a fast response can
+        // replace the pending label before this assertion. Verify the new quote below.
         Locator quotes=customer.locator("[data-testid='chat-message'][data-message-type='REFUND_QUOTE_RESPONSE']");
         assertThat(quotes).hasCount(before+1,new com.microsoft.playwright.assertions.LocatorAssertions.HasCountOptions().setTimeout(20000));
         Locator quote=quotes.last();

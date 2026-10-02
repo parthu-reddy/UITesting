@@ -26,7 +26,7 @@ public final class AdminMoneyOperationsSafetyPage {
     }
 
     public void waitForRejectedMovement(String eventId) {
-        page.getByText(eventId, new Page.GetByTextOptions().setExact(true)).waitFor(visible());
+        page.locator("span.font-mono").filter(new Locator.FilterOptions().setHasText(eventId)).waitFor(visible());
     }
 
     public void waitForNoUnresolvedRejections() {

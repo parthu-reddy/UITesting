@@ -1,0 +1,61 @@
+{
+  "asOf": "2026-10-02T12:14:47+00:00",
+  "readOnly": true,
+  "paymentService": {
+    "Service": "payment-gateway",
+    "Image": "hyd.ocir.io/axekmbadoczl/food-delivery/payment-gateway:0a0a227fa97e455d90aba2d7f6e9daa1bd558729",
+    "State": "running",
+    "Health": "healthy",
+    "CreatedAt": "2026-10-02 12:12:35 +0000 UTC"
+  },
+  "orders": [
+    {
+      "id": "0b22b53a-c718-4bec-b854-b736e24bee29",
+      "status": "CANCELLED",
+      "deliveryStatus": null,
+      "deliveredAt": null
+    },
+    {
+      "id": "176fb42c-46e9-49b2-b52f-43c571603199",
+      "status": "CANCELLED_BY_RESTAURANT",
+      "deliveryStatus": null,
+      "deliveredAt": null
+    },
+    {
+      "id": "b83c71bd-022c-439d-8586-aa4fe5b1c0d1",
+      "status": "DELIVERY_FAILED",
+      "deliveryStatus": "FAILED",
+      "deliveredAt": "2026-10-02T08:41:08.141848+00:00"
+    }
+  ],
+  "refunds": [
+    {
+      "id": "61893082-a1fa-47ac-91a2-fde3669c26e9",
+      "orderId": "0b22b53a-c718-4bec-b854-b736e24bee29",
+      "status": "FAILED",
+      "amount": 43.35,
+      "completedAt": null,
+      "attempts": 4
+    },
+    {
+      "id": "1b62e2a8-4aa3-4e1a-bd1c-a8f2c394d8cd",
+      "orderId": "176fb42c-46e9-49b2-b52f-43c571603199",
+      "status": "FAILED",
+      "amount": 43.35,
+      "completedAt": null,
+      "attempts": 4
+    },
+    {
+      "id": "cae2548a-5c41-47a0-93d0-c3c2732cd93a",
+      "orderId": "b83c71bd-022c-439d-8586-aa4fe5b1c0d1",
+      "status": "FAILED",
+      "amount": 43.35,
+      "completedAt": null,
+      "attempts": 4
+    }
+  ],
+  "rider": {
+    "status": "OFFLINE"
+  },
+  "mutationPerformed": false
+}

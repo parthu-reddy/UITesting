@@ -1,0 +1,26 @@
+{
+  "checkpoint": 20,
+  "recordedAt": "2026-10-02T19:10:00+05:30",
+  "proofType": "local unit / real Spring context / fake-clock UI; no deployed or live financial proof",
+  "fullSuite": false,
+  "runs": {
+    "CustomerApplication": {"command": "mvn -q clean test -Dtest=<34 classes touching RefundService/RefundRetrySweeper/Refund entity/refund outbox events/migrations>", "classesWithTests": 34, "tests": 176, "failures": 0, "errors": 0, "skipped": 0},
+    "PaymentGatewayIntegration": {"command": "mvn -q clean test -Dtest=<14 classes touching WebhookProcessingService/PaymentEventConsumer/IdempotencyKey/refund>", "classesWithTests": 14, "tests": 40, "failures": 0, "errors": 0, "skipped": 0},
+    "CommunicationService": {"command": "mvn -q clean test -Dtest=<8 classes touching chat history>", "classesWithTests": 8, "tests": 24, "failures": 0, "errors": 0, "skipped": 0, "firstRun": "OpenApiGenerationTest errored: missing ChatEventBroadcaster mock, pre-existing since ddb8264; fixed test-only, rerun counted once"},
+    "FoodDeliveryAppUI": {"typecheck": "pass", "lint": "pass (npm run lint, max-warnings 0)", "vitestFiles": 121, "vitestTests": 737, "failures": 0}
+  },
+  "guardsSeenRed": [
+    {"test": "RefundRetryIsolationTest#adminRetryStartsAFreshSweeperBudget", "defectReintroduced": "retryFailed no longer resets sweepAttempts", "result": "expected <0> but was <4>"},
+    {"test": "RefundServiceTest#retryStuck_redispatchesStoreCreditToTheWallet", "defectReintroduced": "sweeper sends STORE_CREDIT to the gateway", "result": "expected WALLET_CREDIT_REQUESTED but was PAYMENT_REFUND_REQUESTED"},
+    {"test": "PaymentEventConsumerRefundIdempotencyTest#retryAfterDefinitiveFailureInitiatesTheRefundAgain", "defectReintroduced": "handleRefundFailure keeps refund_req key", "result": "Wanted but not invoked (second initiateRefund)"},
+    {"test": "WebhookProcessingServiceTest#failedRefundPublishesAnExplicitFailedResult", "defectReintroduced": "same", "result": "Wanted but not invoked deleteById"},
+    {"test": "usePolling.test#schedules the next poll only after a slow request settles", "defectReintroduced": "HEAD usePolling", "result": "expected 1 call, got 6"},
+    {"test": "usePolling.test#keeps a single polling chain when the key changes while a poll is in flight", "defectReintroduced": "HEAD usePolling", "result": "expected 3, got 6 (duplicate chain)", "note": "first version of this test passed against the old hook and was rewritten"},
+    {"test": "useOrderRefunds.test stop-polling cases (3)", "defectReintroduced": "enabled: active (poll forever)", "result": "3 failed"}
+  ],
+  "workspaceGates": {
+    "audit_money_asis.py": "0/23 (clean)",
+    "validate_lifecycle.py": "68/68",
+    "validate_readiness.py --phase all": "two pre-existing/stale failures: 4.1 single-method persistence tests (files not changed here), 5.4 greps /api/v1/internal/admin/refunds literal hidden by typed client customerApi.adminRefund"
+  }
+}

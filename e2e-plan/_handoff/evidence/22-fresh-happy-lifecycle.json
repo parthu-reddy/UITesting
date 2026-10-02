@@ -1,0 +1,9 @@
+{
+  "checkpoint": 22, "recordedAt": "2026-10-02T21:35:00+05:30",
+  "run": {"test": "HappyDeliveryFlowTest#completeOrderLifecycle", "resume": false, "tests": 1, "failures": 0, "errors": 0, "skipped": 0, "seconds": 352.8, "orderId": "c463191b-a5ff-4fc5-9805-6a39320b49cc"},
+  "proofType": "real deployed cross-role browser flow + Oracle read-only DB",
+  "db": {"order": "HANDED_OVER / DELIVERED, CARD 43.35", "assignment": "RELEASED / DELIVERED",
+         "ledger": "posted directly (no replay): capture 43.35 + 8-leg distribution 50.05; debits=credits=93.40; RESTAURANT_PAYABLE credit 17.05 debit 7.56 (net 9.49); DRIVER_PAYABLE credit 23.00 debit 4.14 (net 18.86)",
+         "ledgerRejections": "1 total (the pre-fix a7862d1a, replayed), none new", "rider7000000026": "OFFLINE"},
+  "proves": ["accept->active gap closed live (checkpoint21 fix)", "delivered distribution posts on PostgreSQL (checkpoint22 fix)", "chat, admin money and refund quote assertions in the full flow"]
+}

@@ -1,0 +1,237 @@
+{
+  "asOf": "2026-10-02T18:13:07+05:30",
+  "customer": {
+    "classes": [
+      {
+        "class": "com.fooddelivery.customer.controller.AdminRefundCommandControllerTest",
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      {
+        "class": "com.fooddelivery.order.contract.PaymentEventConsumerContractTest",
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      {
+        "class": "com.fooddelivery.order.controller.AdminRefundControllerTest",
+        "tests": 6,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      {
+        "class": "com.fooddelivery.order.controller.CustomerOrderControllerTest",
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      {
+        "class": "com.fooddelivery.order.notification.RefundNotificationTest",
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      {
+        "class": "com.fooddelivery.order.refund.RefundCommandValidationTest",
+        "tests": 6,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      {
+        "class": "com.fooddelivery.order.refund.RefundDestinationMatrixTest",
+        "tests": 9,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      {
+        "class": "com.fooddelivery.order.refund.RefundNeverExceedsOrderTest",
+        "tests": 8,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      {
+        "class": "com.fooddelivery.order.refund.RefundOverCompletionTest",
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      {
+        "class": "com.fooddelivery.order.refund.RefundQuoteTest",
+        "tests": 10,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      {
+        "class": "com.fooddelivery.order.refund.RefundRemainingTest",
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      {
+        "class": "com.fooddelivery.order.refund.RefundRetryIsolationTest",
+        "tests": 15,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      {
+        "class": "com.fooddelivery.order.refund.RefundRetryPersistenceTest",
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      {
+        "class": "com.fooddelivery.order.refund.RefundStateMachineTest",
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      {
+        "class": "com.fooddelivery.order.refund.RefundStoreCreditHandoffTest",
+        "tests": 5,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      {
+        "class": "com.fooddelivery.order.scheduler.RefundRetrySweeperTest",
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      {
+        "class": "com.fooddelivery.order.service.ChatRefundProcessorServiceTest",
+        "tests": 18,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      {
+        "class": "com.fooddelivery.order.service.ManualAssignmentFailureEventConsumerTest",
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      {
+        "class": "com.fooddelivery.order.service.PaymentEventConsumerTest",
+        "tests": 12,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      {
+        "class": "com.fooddelivery.order.service.RefundServiceTest",
+        "tests": 7,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    ],
+    "totals": {
+      "tests": 120,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "proof": "local refund/admin/consumer tests, real transaction persistence; no live mutation"
+  },
+  "chat": {
+    "classes": [
+      {
+        "class": "com.fooddelivery.chat.service.ChatHistoryWindowTest",
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      {
+        "class": "com.fooddelivery.chat.service.ChatMessageServiceTest",
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      {
+        "class": "com.fooddelivery.chat.controller.ChatMessagingControllerTest",
+        "tests": 5,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      {
+        "class": "com.fooddelivery.chat.controller.ChatSessionControllerTest",
+        "tests": 9,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      {
+        "class": "com.fooddelivery.chat.service.ChatSessionAccessServiceTest",
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      {
+        "class": "com.fooddelivery.chat.ChatServiceApplicationStartupTest",
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      {
+        "class": "com.fooddelivery.chat.controller.AdminSupportChatRecipientIsolationTest",
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    ],
+    "totals": {
+      "tests": 22,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "proof": "local chat history JPA, controller/access/admin recipient isolation and startup; not deployed history proof"
+  },
+  "ui": {
+    "testFiles": 5,
+    "tests": 30,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "typecheck": "passed",
+    "lint": "passed",
+    "proof": "local Vitest plus fake clocks; no duration-based test executed"
+  },
+  "rerunsCountedOnce": true,
+  "initialFailures": [
+    "Refund unit test used decimalValue on a string wallet amount; assertion corrected to parse asText.",
+    "New persistence test missing TestConfiguration import and ambiguous FaultType; imports corrected.",
+    "Chat timestamp-tie assertion used signed Java UUID comparison; corrected to database-compatible lexical comparison.",
+    "Chat H2 fixture inherited PostgreSQL driver/dialect; explicit test driver/dialect added.",
+    "UI local helper named fetch tripped raw-fetch lint rule; renamed refreshRefunds; typed API client was used throughout."
+  ],
+  "liveFinancialMutation": false,
+  "newE2EClasses": 0,
+  "serverCleanup": false,
+  "resetRequired": false,
+  "wholeSuiteGreen": false
+}

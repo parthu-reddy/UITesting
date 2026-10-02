@@ -1,0 +1,10 @@
+{
+  "checkpoint": 21, "recordedAt": "2026-10-02T20:05:00+05:30",
+  "failedRun": {"test": "HappyDeliveryFlowTest#completeOrderLifecycle", "resume": false, "tests": 1, "failures": 1, "seconds": 67.9, "line": 581,
+    "assertion": "rider DELIVERY ADDRESS not found; rider UI showed 'Scanning for dispatched contracts' after accept",
+    "orderId": "7f7af6a5-1d86-4f29-b4cc-36eefe69a74b"},
+  "authoritativeState": {"delivery_db.order_assignments": "driver 5a41832f... ASSIGNED, assigned_at 14:09:10.73756Z, delivery_status null", "delivery_executives": "ON_DELIVERY", "customer_db.orders": "ACCEPTED / ASSIGNED, delivery_executive_id set, updated_at 14:09:12.769737Z"},
+  "logTimeline": ["14:09:10.738 Recorded assignment", "14:09:10.754 Emitted DRIVER_ASSIGNED", "14:09:12.754 OUTBOX_EVENT_PUBLISHED DRIVER_ASSIGNED", "14:09:12.769 customer order updated"],
+  "localFixVerification": {"CustomerApplication": "full clean test 458/90 classes 0 fail/err/skip", "DeliveryExecutiveApplication": "full clean test 159/44 classes 0 fail/err, 1 pre-existing skip", "FoodDeliveryAppUI": "typecheck+lint pass, 737/121", "guardsSeenRed": 3},
+  "deployed": false
+}

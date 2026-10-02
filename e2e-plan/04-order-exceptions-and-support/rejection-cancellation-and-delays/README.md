@@ -15,3 +15,5 @@ Implemented first UI-only batch in `OrderCancellationFlowTest` (live validation 
 `RestaurantRejectFlowTest` now prepares all three randomized seeded roles, selects the restaurant owner's matching brand and outlet, rejects only the exact new order with a reason, and expects the customer-facing restaurant cancellation source and reason. Live checkout is currently blocked by the delivery-availability failure in `PENDING.md`.
 
 Validation results and deployed-environment limitations belong in this folder's `PENDING.md`.
+
+Current priority checkpoint: ../../../../RandomDocuments/E2ECoverageAudit_2026-10-01/14-postdeployment-financial-contracts.md. Deployed terminal UI evidence is separate from still-blocked refund/ledger completion; reuse owned manifests after deployment.

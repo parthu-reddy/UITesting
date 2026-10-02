@@ -1,0 +1,19 @@
+{
+  "checkpoint": 21,
+  "recordedAt": "2026-10-02T19:40:00+05:30",
+  "environment": {"appUrl": "https://gulf-strike-dark-extras.trycloudflare.com/", "dataReset": "user reset+reseed after checkpoint20 deploy; verified 0 orders/refunds/intents/transactions/refund_req keys before runs", "migration": "customer_db flyway 20261002190000 success=t",
+    "images": {"customer-service": "dee93c0", "payment-gateway": "66f0913", "chat-service": "7cffcad", "food-delivery-app-ui": "71138db"}, "health": "all healthy"},
+  "proofType": "real deployed cross-role browser flow + Oracle read-only DB",
+  "runs": [
+    {"test": "OrderCancellationFlowTest#customerCancelsBeforeAcceptance", "resume": false, "tests": 1, "failures": 0, "errors": 0, "skipped": 0, "seconds": 88.4, "orderId": "b7d01530-ac02-4da1-9be6-303b73bfedc5", "refundId": "faebef3f-c8d1-40e9-ac13-682bd7705b5b"},
+    {"test": "RestaurantRejectFlowTest#restaurantCancelsOrder", "resume": false, "tests": 1, "failures": 0, "errors": 0, "skipped": 0, "orderId": "881ba9a0-1cbe-40a1-95d0-c47811e7ef48", "refundId": "d84bbfe0-fd48-4ab4-8a2b-68621305a3f6"}
+  ],
+  "authoritativeDb": {
+    "customer_db": "orders CANCELLED / CANCELLED_BY_RESTAURANT, CARD 43.35; refunds COMPLETED 43.35 ORIGINAL_METHOD attempts=0 sweep_attempts=0 completed_at set; intents REFUNDED",
+    "payment_db": "intents REFUNDED amount_refunded=43.35; one SUCCESS capture transaction each (confirmed-intent:RAZORPAY:mock_rzp_txn_<order>) amount_refunded=43.35; gateway refunds COMPLETED 43.35; refund_req keys=2 (held for completed refunds, expected)",
+    "ledger (admin order money API)": "ORDER_TOTAL GATEWAY_RECEIVABLE DEBIT 43.35 / PLATFORM_CLEARING CREDIT 43.35; REFUND PLATFORM_CLEARING DEBIT 43.35 / GATEWAY_RECEIVABLE CREDIT 43.35; no payee lines",
+    "rider 7000000026": "OFFLINE after teardown"
+  },
+  "fixtures": ["fixtures/b7d01530-ac02-4da1-9be6-303b73bfedc5.json", "fixtures/881ba9a0-1cbe-40a1-95d0-c47811e7ef48.json"],
+  "preResetFixtures": "moved to fixtures/historical-pre-reset/ (erased by the reset; do not resume)"
+}

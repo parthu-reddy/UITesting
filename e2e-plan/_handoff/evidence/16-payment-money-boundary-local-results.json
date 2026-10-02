@@ -1,0 +1,130 @@
+{
+  "scope": "12 affected local payment classes, including committed H2, HTTP, startup, provider-normalization, retry/DLQ and producer-stub consumer contract; no live mutation",
+  "classes": [
+    {
+      "class": "com.fooddelivery.payments.service.WebhookProcessingServiceTest",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.138,
+      "reportModifiedEpoch": 1790941861.160055
+    },
+    {
+      "class": "com.fooddelivery.payments.service.ConfirmedCaptureRefundPersistenceTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 2.181,
+      "reportModifiedEpoch": 1790942008.5689871
+    },
+    {
+      "class": "com.fooddelivery.payments.WebhookAmountVerificationTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.006,
+      "reportModifiedEpoch": 1790941861.1910346
+    },
+    {
+      "class": "com.fooddelivery.payments.PaymentSchemaConsistencyTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.008,
+      "reportModifiedEpoch": 1790941861.179713
+    },
+    {
+      "class": "com.fooddelivery.payments.WebhookIntegrationTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 3.465,
+      "reportModifiedEpoch": 1790941859.9375837
+    },
+    {
+      "class": "com.fooddelivery.payments.service.PaymentEventConsumerRefundIdempotencyTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.005,
+      "reportModifiedEpoch": 1790941861.1712472
+    },
+    {
+      "class": "com.fooddelivery.payments.service.PaymentEventConsumerAmountTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.006,
+      "reportModifiedEpoch": 1790941861.1659324
+    },
+    {
+      "class": "com.fooddelivery.payments.controller.WebhookControllerTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.139,
+      "reportModifiedEpoch": 1790941860.0725203
+    },
+    {
+      "class": "com.fooddelivery.payments.service.PaymentReconciliationJobTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.018,
+      "reportModifiedEpoch": 1790941860.8168802
+    },
+    {
+      "class": "com.fooddelivery.payments.service.WebhookDlqJobTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.009,
+      "reportModifiedEpoch": 1790941860.8264203
+    },
+    {
+      "class": "com.fooddelivery.payments.PaymentServiceApplicationStartupTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.725,
+      "reportModifiedEpoch": 1790941860.7975082
+    },
+    {
+      "class": "com.fooddelivery.payments.contract.PaymentEventConsumerContractTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 4.144,
+      "reportModifiedEpoch": 1790941856.4887419
+    }
+  ],
+  "totals": {
+    "tests": 32,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "extendedExistingFixture": true,
+  "newE2ETests": 0,
+  "intentionalWaitDrivenCases": 0,
+  "asOf": "2026-10-02T17:26:45+05:30",
+  "finalPersistenceRerun": {
+    "tests": 1,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "reason": "Strengthened exact exception/error-code assertions; rerun not counted twice."
+  }
+}

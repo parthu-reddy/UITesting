@@ -37,7 +37,8 @@ public final class RestaurantRejectionScenario {
         com.fooddelivery.e2e.pages.customer.CustomerDashboardPage.openProfileSettings(customer);
         customer.getByRole(AriaRole.TAB,new Page.GetByRoleOptions().setName("History").setExact(true)).click();
         new com.fooddelivery.e2e.pages.customer.CustomerOrderHistoryPage(customer).waitForHistoryLoad();
-        customer.locator("[data-testid='customer-history-order'][data-order-id='"+id+"']").click();
+        Locator history=customer.locator("[data-testid='customer-history-order'][data-order-id='"+id+"']");
+        assertThat(history).containsText("Cancelled by Restaurant");history.click();
         assertThat(tracker).hasAttribute("data-status","CANCELLED_BY_RESTAURANT");
         assertThat(tracker.getByTestId("cancellation-reason")).containsText("Item out of stock");
     }
