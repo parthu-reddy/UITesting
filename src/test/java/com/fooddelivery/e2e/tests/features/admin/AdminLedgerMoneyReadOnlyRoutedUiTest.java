@@ -63,7 +63,8 @@ public class AdminLedgerMoneyReadOnlyRoutedUiTest extends TestBase {
             if (url.contains("category=FOOD_COST") && url.contains("page=0")) {
                 sawFoodCostFilter.set(true);
             }
-            route.fulfill(json(ledgerPage(url.contains("page=1"))));
+            route.fulfill(json("{\"success\":true,\"message\":\"Fixture ledger transactions\",\"data\":"
+                    + ledgerPage(url.contains("page=1")) + ",\"timestamp\":\"2026-09-29T10:00:00Z\"}"));
         });
 
         assertThat(portal.openLedgerTab()).isEqualTo(200);
