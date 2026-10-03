@@ -1,0 +1,21 @@
+{
+  "runId": "ebd859feeeef6f1a",
+  "startedAt": "2026-10-03 11:51:19.532322+00",
+  "phones": {
+    "a": "8999818715",
+    "b": "8999778335"
+  },
+  "dataPolicy": "retain",
+  "cleanupPerformed": false,
+  "exitCode": 1,
+  "accounts": [
+    {
+      "id": "7f230451-139c-4863-8ce1-5bc452860c02",
+      "phone": "8999778335"
+    },
+    {
+      "id": "4766cf6a-68a5-4f32-bce8-b67a043ddfd1",
+      "phone": "8999818715"
+    }
+  ]
+}

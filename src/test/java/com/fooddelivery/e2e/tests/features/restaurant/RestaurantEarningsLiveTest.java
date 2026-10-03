@@ -54,8 +54,21 @@ public class RestaurantEarningsLiveTest extends TestBase {
                 .as("with no payout yet, pending = net - clawbacks").isEqualByComparingTo(pending);
 
         // EARNINGS-09: the statement is the ledger, line by line, and its signed lines add up to the balance.
-        Locator rows = restaurantPage.getByRole(AriaRole.ROW).filter(new Locator.FilterOptions()
-                .setHasText(java.util.regex.Pattern.compile("[+-]₹[0-9,]+\\.[0-9]{2}")));
+        Locator rows = restaurantPage.getByRole(AriaRole.TABLE,
+                new Page.GetByRoleOptions().setName("Account statement")).locator("tbody tr")
+                .filter(new Locator.FilterOptions().setHasNotText("No transactions found."));
+        // A freshly seeded deployment legitimately has no delivered-money lines. Only opt into
+        // this branch after a read-only DB check; a nonzero fixture still requires the full sum.
+        if (Boolean.getBoolean("earnings.expected.statement.empty")) {
+            org.assertj.core.api.Assertions.assertThat(net).isEqualByComparingTo(BigDecimal.ZERO);
+            org.assertj.core.api.Assertions.assertThat(clawbacks).isEqualByComparingTo(BigDecimal.ZERO);
+            org.assertj.core.api.Assertions.assertThat(pending).isEqualByComparingTo(BigDecimal.ZERO);
+            assertThat(restaurantPage.getByText("No transactions found.",
+                    new Page.GetByTextOptions().setExact(true))).isVisible();
+            assertThat(rows).hasCount(0);
+            System.out.println("Earnings verified: actual fresh-seed zero balances and empty statement; nonzero statement proof remains separate");
+            return;
+        }
         rows.first().waitFor();
         BigDecimal sum = BigDecimal.ZERO;
         for (String text : rows.allInnerTexts()) {

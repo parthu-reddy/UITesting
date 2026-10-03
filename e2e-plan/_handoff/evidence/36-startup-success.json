@@ -1,0 +1,84 @@
+{
+  "startupMessages": [
+    {
+      "service": "event-tracking-service",
+      "time": "2026-10-03T11:34:34.923403227Z",
+      "level": "INFO",
+      "message": "Bootstrapping Spring Data Redis repositories in DEFAULT mode."
+    },
+    {
+      "service": "event-tracking-service",
+      "time": "2026-10-03T11:34:55.115237858Z",
+      "level": "INFO",
+      "message": "Started EventTrackingApplication in 28.212 seconds (process running for 29.573)"
+    },
+    {
+      "service": "event-tracking-service",
+      "time": "2026-10-03T11:35:54.723457732Z",
+      "level": "ERROR",
+      "message": "Failed to export spans. The request could not be executed. Full error message: Failed to connect to localhost/[0:0:0:0:0:0:0:1]:4318"
+    },
+    {
+      "service": "bidding-engine",
+      "time": "2026-10-03T11:34:35.178749974Z",
+      "level": "INFO",
+      "message": "Bootstrapping Spring Data Redis repositories in DEFAULT mode."
+    },
+    {
+      "service": "bidding-engine",
+      "time": "2026-10-03T11:34:56.154597747Z",
+      "level": "INFO",
+      "message": "Started BiddingEngineApplication in 29.096 seconds (process running for 30.582)"
+    },
+    {
+      "service": "bidding-engine",
+      "time": "2026-10-03T11:34:56.172162843Z",
+      "level": "INFO",
+      "message": "Bootstrapping campaign index from CampaignService..."
+    },
+    {
+      "service": "bidding-engine",
+      "time": "2026-10-03T11:34:56.860181663Z",
+      "level": "INFO",
+      "message": "Successfully bootstrapped 0 campaigns into the index."
+    },
+    {
+      "service": "bidding-engine",
+      "time": "2026-10-03T11:34:59.000363256Z",
+      "level": "INFO",
+      "message": "advertisement-service-group-campaigneventconsumer-retry-2000: partitions assigned: [ad-events-retry-2000-0]"
+    },
+    {
+      "service": "bidding-engine",
+      "time": "2026-10-03T11:34:59.002640628Z",
+      "level": "INFO",
+      "message": "advertisement-service-group-campaigneventconsumer-dlt: partitions assigned: [ad-events-dlt-0]"
+    },
+    {
+      "service": "bidding-engine",
+      "time": "2026-10-03T11:34:59.003445993Z",
+      "level": "INFO",
+      "message": "advertisement-service-group-campaigneventconsumer-retry-1000: partitions assigned: [ad-events-retry-1000-0]"
+    },
+    {
+      "service": "bidding-engine",
+      "time": "2026-10-03T11:34:59.04167464Z",
+      "level": "INFO",
+      "message": "advertisement-service-group-campaigneventconsumer-retry-8000: partitions assigned: [ad-events-retry-8000-0]"
+    },
+    {
+      "service": "bidding-engine",
+      "time": "2026-10-03T11:34:59.069908834Z",
+      "level": "INFO",
+      "message": "advertisement-service-group-campaigneventconsumer-retry-4000: partitions assigned: [ad-events-retry-4000-0]"
+    },
+    {
+      "service": "bidding-engine",
+      "time": "2026-10-03T11:34:59.089274299Z",
+      "level": "INFO",
+      "message": "advertisement-service-group-campaigneventconsumer: partitions assigned: [ad-events-0]"
+    }
+  ],
+  "errorCount": 1,
+  "boundary": "Initial repaired-image startup, before tracing config correction; its one exporter error prompted the focused configuration fix."
+}

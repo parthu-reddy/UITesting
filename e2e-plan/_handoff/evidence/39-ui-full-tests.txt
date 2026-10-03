@@ -1,0 +1,13 @@
+
+> food-delivery-app-ui@0.0.0 test
+> vitest run --maxWorkers=4
+
+
+ RUN  v4.1.11 /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI
+
+
+ Test Files  125 passed (125)
+      Tests  785 passed (785)
+   Start at  20:12:47
+   Duration  55.35s (transform 6.55s, setup 31.36s, import 44.90s, tests 40.49s, environment 83.84s)
+

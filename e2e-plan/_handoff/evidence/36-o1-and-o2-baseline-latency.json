@@ -1,0 +1,32 @@
+{
+  "observedAt": "2026-10-03T12:11:46.965126+00:00",
+  "method": "cumulative deployed Prometheus server histogram, interpolate p95; also report enclosing bucket",
+  "sample": "30 successful public Gateway requests per endpoint after service config restarts",
+  "results": [
+    {
+      "service": "identity-service",
+      "uri": "/api/v1/organisations",
+      "successfulSamples": 30,
+      "p95EstimateMs": 30.7582285,
+      "p95BucketUpperMs": 33.554431,
+      "meanMs": 18.064103499999998
+    },
+    {
+      "service": "restaurant-service",
+      "uri": "/api/v1/brands",
+      "successfulSamples": 52,
+      "p95EstimateMs": 30.198987999999993,
+      "p95BucketUpperMs": 33.554431,
+      "meanMs": 11.97099346153846
+    },
+    {
+      "service": "restaurant-service",
+      "uri": "/api/v1/outlets",
+      "successfulSamples": 52,
+      "p95EstimateMs": 63.753419199999996,
+      "p95BucketUpperMs": 67.10886400000001,
+      "meanMs": 38.99987582692307
+    }
+  ],
+  "carriedToO2": "Internal membership lookup and actual generated circuit-breaker IDs have no real consumer in O1; required at first O2 consumer, not a pass"
+}

@@ -21,3 +21,13 @@ Source-reviewed end to end (UI → gateway RBAC → CampaignService → WalletSe
 - Gap for the user: activation is unreachable (no ad-group/creative UI; creative moderation has no caller), so no campaign serves or spends.
 - Next: after deploy, run the commands in [NEXT-STEPS](../../_handoff/NEXT-STEPS.md) (checkpoint34 order).
 
+
+## Current live result — 2026-10-03T17:36:31+05:30
+
+Existing RestaurantCampaignsLiveTest passed3/0/0/0 on Oracle: draftIsDiscardedOnCancel,
+tabMatchesTheOwnersAdvertiser, launchedCampaignIsStoredInRupees. Actual Dev browser login9000000001
+and Brand1Outlet3; fixed/deployed Wallet/Ledger ownership Feign registrations. Retained advertiser
+db69c271-dddd-4cf0-849d-39623906ed66, INR0 wallet2860a080-6025-479b-a470-5133bff81031,
+DRAFT897e5ed4-925b-488a-a364-8a79d0cb0560 (50 daily/500 lifetime/1.5 max bid). SQL fixture in
+checkpoint36. No activation/spend proof; Ads Manager plan owns that gap. Notification codec DLT
+correction under verification; no external notification send authorized by these tests.

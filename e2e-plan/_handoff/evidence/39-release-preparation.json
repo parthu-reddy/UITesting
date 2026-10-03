@@ -1,0 +1,88 @@
+{
+  "timestamp": "2026-10-03T20:21:43+05:30",
+  "proofType": "local/source/publication; Oracle health read-only",
+  "common": {
+    "commit": "37f68545a8293d42c9837c290d7bd62cfd673105",
+    "run": 37130225264,
+    "conclusion": "success"
+  },
+  "suitesBeforeFleetRebuild": {
+    "CustomerApplication": {
+      "tests": 472,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "ReviewsService": {
+      "tests": 96,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "ApiGateway": {
+      "tests": 27,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "ui": {
+    "fullFiles": 125,
+    "fullTests": 785,
+    "failures": 0,
+    "focusedAfterCorrections": 3,
+    "typecheck": true,
+    "lint": true,
+    "buildBeforeCorrections": true,
+    "generationRace": {
+      "failedFiles": 23,
+      "passingFiles": 102,
+      "testsExecuted": 663,
+      "invocationFailed": true
+    },
+    "firstTypecheck": {
+      "exit": 2,
+      "errors": "unsupported exact role option; removed GSTIN property"
+    },
+    "fleetMapExistingTests": 2
+  },
+  "core": {
+    "pass": 56,
+    "total": 56,
+    "selftest": 20
+  },
+  "readiness": {
+    "pass": 61,
+    "total": 61,
+    "optionalExecutionSkip": 1,
+    "selftest": 10
+  },
+  "fleet": {
+    "pass1": "success; all modules",
+    "pass2": {
+      "reported": 1877,
+      "executedPasses": 1876,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 1,
+      "skipReason": "parked future ONDC delivery-status contract",
+      "producerClassesWithReports": 26
+    }
+  },
+  "deployedO2": false,
+  "wipeExecuted": false,
+  "privacyMutation": {
+    "tests": 1,
+    "failures": 1,
+    "errors": 0,
+    "restored": true
+  },
+  "e2eTestCompile": true,
+  "publicOracleHTTP": 200,
+  "updatedAt": "2026-10-03T20:38:03+05:30",
+  "timezone": {
+    "checks": 26,
+    "positive": 26,
+    "negative": 77
+  }
+}

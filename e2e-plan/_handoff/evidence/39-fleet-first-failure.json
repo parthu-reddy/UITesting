@@ -1,0 +1,15 @@
+{
+  "timestamp": "2026-10-03T20:25:58+05:30",
+  "pass1": "success; all modules compile/package/install including compile-only ONDC",
+  "pass2": {
+    "result": "failed",
+    "actualFailure": "IdentityTokenServiceTest environment fixture inherited the parent test-only security.identity.hmac-secret system property",
+    "tests": 8,
+    "failures": 1,
+    "errors": 0,
+    "skipped": 0,
+    "dependentModules": "skipped, unverified"
+  },
+  "fix": "Remove systemProperties only from the isolated fixture Spring Environment; runtime signing configuration unchanged",
+  "next": "8 signing guards, then full clean pass2 repeat; no deployment yet"
+}

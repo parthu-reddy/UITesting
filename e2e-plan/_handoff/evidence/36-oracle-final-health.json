@@ -1,0 +1,63 @@
+{
+  "checkedAt": "2026-10-03T17:18:41+05:30",
+  "services": [
+    {
+      "service": "bidding-engine",
+      "image": "hyd.ocir.io/axekmbadoczl/food-delivery/bidding-engine:aef68bb-dirty-d7bbbdc",
+      "status": "running",
+      "health": "healthy",
+      "restartCount": 0,
+      "startedAt": "2026-10-03T11:40:18.271226713Z",
+      "errors": [],
+      "successMessages": [
+        {
+          "time": "2026-10-03T11:40:35.508635518Z",
+          "message": "Started BiddingEngineApplication in 16.497 seconds (process running for 17.082)"
+        },
+        {
+          "time": "2026-10-03T11:40:35.661040587Z",
+          "message": "Successfully bootstrapped 0 campaigns into the index."
+        },
+        {
+          "time": "2026-10-03T11:41:02.095872668Z",
+          "message": "advertisement-service-group-campaigneventconsumer-dlt: partitions assigned: [ad-events-dlt-0]"
+        },
+        {
+          "time": "2026-10-03T11:41:02.09631351Z",
+          "message": "advertisement-service-group-campaigneventconsumer-retry-8000: partitions assigned: [ad-events-retry-8000-0]"
+        },
+        {
+          "time": "2026-10-03T11:41:02.096997834Z",
+          "message": "advertisement-service-group-campaigneventconsumer-retry-1000: partitions assigned: [ad-events-retry-1000-0]"
+        },
+        {
+          "time": "2026-10-03T11:41:02.098875604Z",
+          "message": "advertisement-service-group-campaigneventconsumer-retry-2000: partitions assigned: [ad-events-retry-2000-0]"
+        },
+        {
+          "time": "2026-10-03T11:41:02.135097161Z",
+          "message": "advertisement-service-group-campaigneventconsumer-retry-4000: partitions assigned: [ad-events-retry-4000-0]"
+        },
+        {
+          "time": "2026-10-03T11:41:02.168798185Z",
+          "message": "advertisement-service-group-campaigneventconsumer: partitions assigned: [ad-events-0]"
+        }
+      ]
+    },
+    {
+      "service": "event-tracking-service",
+      "image": "hyd.ocir.io/axekmbadoczl/food-delivery/event-tracking-service:9cb6beb-dirty-47e5d1e",
+      "status": "running",
+      "health": "healthy",
+      "restartCount": 0,
+      "startedAt": "2026-10-03T11:40:50.335580573Z",
+      "errors": [],
+      "successMessages": [
+        {
+          "time": "2026-10-03T11:41:05.837657463Z",
+          "message": "Started EventTrackingApplication in 14.73 seconds (process running for 15.351)"
+        }
+      ]
+    }
+  ]
+}

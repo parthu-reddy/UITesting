@@ -1,0 +1,12 @@
+{
+  "runId": "c2da4ab0f39317b2",
+  "startedAt": "2026-10-03 11:47:52.519454+00",
+  "phones": {
+    "a": "8999742712",
+    "b": "8999019102"
+  },
+  "dataPolicy": "retain",
+  "cleanupPerformed": false,
+  "exitCode": 1,
+  "accounts": []
+}

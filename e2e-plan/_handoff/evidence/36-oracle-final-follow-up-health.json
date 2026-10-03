@@ -1,0 +1,84 @@
+{
+  "observedAt": "2026-10-03T12:24:30.327763+00:00",
+  "services": {
+    "identity-service": {
+      "image": "hyd.ocir.io/axekmbadoczl/food-delivery/identity-service:979f583-8a86798",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "startedAt": "2026-10-03T12:23:44.710979917Z",
+      "errorCountInFinalWindow": 0,
+      "errors": []
+    },
+    "wallet-service": {
+      "image": "hyd.ocir.io/axekmbadoczl/food-delivery/wallet-service:6443a50-86df50e",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "startedAt": "2026-10-03T12:06:13.658621537Z",
+      "errorCountInFinalWindow": 0,
+      "errors": []
+    },
+    "ledger-service": {
+      "image": "hyd.ocir.io/axekmbadoczl/food-delivery/ledger-service:5140a2d-c405f76",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "startedAt": "2026-10-03T12:06:50.627175552Z",
+      "errorCountInFinalWindow": 0,
+      "errors": []
+    },
+    "bidding-engine": {
+      "image": "hyd.ocir.io/axekmbadoczl/food-delivery/bidding-engine:aef68bb-dirty-d7bbbdc",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "startedAt": "2026-10-03T11:40:18.271226713Z",
+      "errorCountInFinalWindow": 0,
+      "errors": []
+    },
+    "event-tracking-service": {
+      "image": "hyd.ocir.io/axekmbadoczl/food-delivery/event-tracking-service:9cb6beb-dirty-47e5d1e",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "startedAt": "2026-10-03T11:40:50.335580573Z",
+      "errorCountInFinalWindow": 0,
+      "errors": []
+    },
+    "api-gateway": {
+      "image": "hyd.ocir.io/axekmbadoczl/food-delivery/api-gateway:09fa0e54b680f34f6ae7c3fb5e5a307a2593d5b4",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "startedAt": "2026-10-03T12:07:27.51355842Z",
+      "errorCountInFinalWindow": 0,
+      "errors": []
+    },
+    "communication-integration": {
+      "image": "hyd.ocir.io/axekmbadoczl/food-delivery/communication-integration:e4d914c-fbf55a7",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "startedAt": "2026-10-03T12:22:52.44002679Z",
+      "errorCountInFinalWindow": 0,
+      "errors": []
+    }
+  },
+  "logWindowSince": "2026-10-03T12:23:44.710979917Z",
+  "previousPartialOrganisation": {
+    "id": "d93d5f22-6ec4-41a1-8b40-2d146198b1fe",
+    "outbox": [
+      {
+        "type": "ORGANISATION_CREATED",
+        "status": "PROCESSED",
+        "count": 1
+      },
+      {
+        "type": "ORGANISATION_MEMBERSHIP_CHANGED",
+        "status": "PROCESSED",
+        "count": 2
+      }
+    ]
+  }
+}

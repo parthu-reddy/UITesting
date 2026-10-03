@@ -1,0 +1,16 @@
+{
+  "checks": 10,
+  "passed": 10,
+  "names": [
+    "one committed fixture with several assertions",
+    "database slice removed rejected",
+    "write removed rejected",
+    "read removed rejected",
+    "assertions removed rejected",
+    "commented body rejected",
+    "typed rendered calls and producer paths accepted",
+    "commented refund view rejected",
+    "wrong money operation rejected",
+    "missing producer path rejected"
+  ]
+}

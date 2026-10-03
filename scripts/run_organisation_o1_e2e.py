@@ -61,7 +61,7 @@ def main():
                   'phones': phones, 'dataPolicy': 'retain', 'cleanupPerformed': False}
         manifest = folder / ('allocation-' + report['runId'] + '.json')
         manifest.write_text(json.dumps(report, indent=2) + '\n')
-        command = ['mvn', '-q', '-Dtest=OrganisationLifecycleApiTest', '-Dapp.url=' + args.app_url,
+        command = ['mvn', '-q', '-Dtest=OrganisationLifecycleApiTest#organisationLifecycle', '-Dapp.url=' + args.app_url,
                    '-Dbp.o1.preflight=true', '-Dbp.o1.phone.a=' + phones['a'], '-Dbp.o1.phone.b=' + phones['b'],
                    '-Dheadless=true', '-Dslow.mo=0', '-De2e.otp.enabled=false',
                    '-DexcludedGroups=slow-auth,auth-rate-limit', 'test']

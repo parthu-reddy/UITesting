@@ -1,0 +1,21 @@
+{
+  "runId": "4bbc471d321c081b",
+  "startedAt": "2026-10-03 12:03:47.461173+00",
+  "phones": {
+    "a": "8999125840",
+    "b": "8999903312"
+  },
+  "dataPolicy": "retain",
+  "cleanupPerformed": false,
+  "exitCode": 0,
+  "accounts": [
+    {
+      "id": "0abdd8fb-edd2-4afb-abf8-dc776459611f",
+      "phone": "8999125840"
+    },
+    {
+      "id": "e12f1c2e-23cd-45db-ae33-216d4a8c19a1",
+      "phone": "8999903312"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "dataPolicy": "retain",
+  "records": {
+    "campaign_db": [
+      {
+        "advertiserId": "db69c271-dddd-4cf0-849d-39623906ed66",
+        "userId": "426f016b-c98e-43c1-b464-94e1a587f6d3",
+        "companyName": "Brand 1",
+        "walletId": "2860a080-6025-479b-a470-5133bff81031",
+        "timeZone": "Asia/Kolkata"
+      },
+      {
+        "campaignId": "897e5ed4-925b-488a-a364-8a79d0cb0560",
+        "name": "E2E draft f87584d4",
+        "status": "DRAFT",
+        "dailyBudget": 50.0,
+        "lifetimeBudget": 500.0,
+        "maxBid": 1.5
+      }
+    ],
+    "wallet_db": [
+      {
+        "walletId": "2860a080-6025-479b-a470-5133bff81031",
+        "balance": 0.0,
+        "currency": "INR",
+        "entityType": "ADVERTISER",
+        "entityId": "db69c271-dddd-4cf0-849d-39623906ed66"
+      }
+    ]
+  }
+}

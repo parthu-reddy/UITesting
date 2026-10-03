@@ -1,0 +1,66 @@
+{
+  "jars": 15,
+  "unusable": [],
+  "resources": [
+    {
+      "jar": "bidding-engine-1.0-SNAPSHOT-stubs.jar",
+      "stubResources": 2
+    },
+    {
+      "jar": "budget-pacing-service-1.0-SNAPSHOT-stubs.jar",
+      "stubResources": 2
+    },
+    {
+      "jar": "campaign-service-1.0-SNAPSHOT-stubs.jar",
+      "stubResources": 13
+    },
+    {
+      "jar": "delivery-executive-application-1.0-SNAPSHOT-stubs.jar",
+      "stubResources": 10
+    },
+    {
+      "jar": "event-tracking-service-1.0-SNAPSHOT-stubs.jar",
+      "stubResources": 2
+    },
+    {
+      "jar": "food-delivery-backend-1.0-SNAPSHOT-stubs.jar",
+      "stubResources": 32
+    },
+    {
+      "jar": "government-id-validation-service-0.0.1-SNAPSHOT-stubs.jar",
+      "stubResources": 8
+    },
+    {
+      "jar": "identity-service-0.0.1-SNAPSHOT-stubs.jar",
+      "stubResources": 7
+    },
+    {
+      "jar": "ledger-service-1.0-SNAPSHOT-stubs.jar",
+      "stubResources": 4
+    },
+    {
+      "jar": "mapsintegration-0.0.1-SNAPSHOT-stubs.jar",
+      "stubResources": 7
+    },
+    {
+      "jar": "ondc-integration-service-1.0-SNAPSHOT-stubs.jar",
+      "stubResources": 3
+    },
+    {
+      "jar": "payment-service-0.0.1-SNAPSHOT-stubs.jar",
+      "stubResources": 6
+    },
+    {
+      "jar": "restaurant-application-1.0-SNAPSHOT-stubs.jar",
+      "stubResources": 18
+    },
+    {
+      "jar": "reviews-service-1.0-SNAPSHOT-stubs.jar",
+      "stubResources": 1
+    },
+    {
+      "jar": "wallet-service-1.0-SNAPSHOT-stubs.jar",
+      "stubResources": 4
+    }
+  ]
+}

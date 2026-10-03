@@ -1,0 +1,18 @@
+{
+  "customer_db": [
+    {
+      "orders": 0,
+      "net": 0
+    }
+  ],
+  "ledger_db": [
+    {
+      "ledgerEntries": 0,
+      "clawbacks": 0
+    },
+    {
+      "balance": 0,
+      "inflight": 0
+    }
+  ]
+}

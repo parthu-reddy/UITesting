@@ -1,0 +1,142 @@
+{
+  "schemaTests": [
+    {
+      "repo": "IdentityService",
+      "class": "com.fooddelivery.identity.organisation.OrganisationPostgresSchemaIT",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "repo": "RestaurantApplication",
+      "class": "com.fooddelivery.restaurant.RestaurantOrganisationSchemaIT",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  ],
+  "commonCleanInstall": {
+    "tests": 251,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "staticO1": {
+    "pass": 20,
+    "fail": 0,
+    "stale": 0
+  },
+  "staticO2": {
+    "pass": 13,
+    "fail": 0,
+    "stale": 0
+  },
+  "validatorSelftest": {
+    "positiveControls": 27,
+    "negativeControls": 2,
+    "fail": 0
+  },
+  "oracleChanged": false,
+  "deployed": false,
+  "wipePerformed": false,
+  "firstIdentityRun": {
+    "tests": 1,
+    "failures": 0,
+    "errors": 1,
+    "skipped": 0,
+    "cause": "Non-clean build retained retired SQL in target/classes; fixed by clean build, not Flyway repair or suppression."
+  },
+  "retiredSql": [
+    "RestaurantApplication/src/main/resources/db/migration/V20260827170000__add_food_cost.sql",
+    "RestaurantApplication/src/main/resources/db/migration/V20260827171000__add_missing_payout_columns.sql",
+    "RestaurantApplication/src/main/resources/db/migration/V20260827172000__add_total_amount.sql",
+    "RestaurantApplication/src/main/resources/db/migration/V20260904082500__add_customer_and_rider_names.sql",
+    "RestaurantApplication/src/main/resources/db/migration/V20260910130000__restaurant_order_payment_method.sql",
+    "RestaurantApplication/src/main/resources/db/migration/V20260915101000__add_restaurant_order_dispatch_scope.sql",
+    "RestaurantApplication/src/main/resources/db/migration/V20260916101000__enforce_prepaid_orders.sql",
+    "RestaurantApplication/src/main/resources/db/migration/V20260925110000__timestamps_tz.sql",
+    "RestaurantApplication/src/main/resources/db/migration/V20260925120000__outlet_time_zone.sql",
+    "RestaurantApplication/src/main/resources/db/migration/V20260929130000__scope_outlets_to_fleet_city.sql",
+    "CommunicationService/src/main/resources/db/migration/V20260925110000__timestamps_tz.sql",
+    "CommunicationService/src/main/resources/db/migration/V20260929193000__message_sender_metadata.sql",
+    "CommunicationService/src/main/resources/db/migration/V20260929194000__one_order_chat_session.sql",
+    "CommunicationIntegration/src/main/resources/db/migration/V20261003174540__allow_preaccount_otp_audit.sql",
+    "IdentityService/src/main/resources/db/migration/V20260925110000__timestamps_tz.sql",
+    "IdentityService/src/main/resources/db/migration/V20261003150645__organisations.sql",
+    "CommonLibrary/common-core/src/main/resources/db/migration/common/V20260925100000__common_timestamps_tz.sql",
+    "CommonLibrary/common-core/src/main/resources/db/migration/common/V20261003150549__audit_events.sql",
+    "RestaurantApplication/src/main/resources/db/migration/V20261003180333__organisation_owned_brands.sql",
+    "CommunicationService/src/main/resources/db/migration/V20261003181209__chat_entity_participants.sql"
+  ],
+  "currentSchemaResources": {
+    "RestaurantApplication": [
+      "V1__init_schema.sql"
+    ],
+    "CommunicationService": [
+      "V1__create_chat_schema.sql"
+    ],
+    "CommunicationIntegration": [
+      "V1__init_notification_db.sql"
+    ],
+    "IdentityService": [
+      "V1__init_schema.sql"
+    ],
+    "CommonLibrary/common-core": [
+      "common/V20260811150000__add_common_entities.sql"
+    ]
+  },
+  "retiredSqlCount": 20,
+  "fullCleanSuites": [
+    {
+      "repo": "CommonLibrary",
+      "classes": 56,
+      "tests": 251,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "repo": "RestaurantApplication",
+      "classes": 26,
+      "tests": 91,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "repo": "IdentityService",
+      "classes": 24,
+      "tests": 99,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 3
+    },
+    {
+      "repo": "CommunicationService",
+      "classes": 22,
+      "tests": 73,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "repo": "CommunicationIntegration",
+      "classes": 10,
+      "tests": 43,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  ],
+  "identityConditionalRateGuards": {
+    "tests": 3,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "property": "auth.limits.enabled=true",
+    "proof": "Local unit mocks only; no Oracle requests"
+  },
+  "unitDatabaseContainerRemoved": true
+}

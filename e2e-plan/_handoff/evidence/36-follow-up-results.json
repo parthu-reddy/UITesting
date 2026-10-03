@@ -1,0 +1,369 @@
+{
+  "updatedAt": "2026-10-03T17:55:53+05:30",
+  "before": {
+    "WalletService": {
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    },
+    "LedgerService": {
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    },
+    "GatewayCors": {
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    },
+    "IdentityScheduling": {
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    },
+    "NotificationCodec": {
+      "tests": 4,
+      "failures": 2,
+      "errors": 0,
+      "skipped": 0
+    },
+    "NotificationSignupOtp": {
+      "tests": 6,
+      "failures": 0,
+      "errors": 1,
+      "skipped": 0
+    }
+  },
+  "after": {
+    "WalletService": {
+      "tests": 57,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "LedgerService": {
+      "tests": 220,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "ApiGateway": {
+      "tests": 25,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "IdentityService": {
+      "tests": 98,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "CommunicationIntegration": {
+      "tests": 43,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "deployedImages": {
+    "wallet-service": "6443a50-86df50e",
+    "ledger-service": "5140a2d-c405f76",
+    "identity-service": "979f583-8a86798",
+    "communication-integration": "e4d914c-fbf55a7"
+  },
+  "o1Invocations": [
+    {
+      "runId": "c2da4ab0f39317b2",
+      "tests": 1,
+      "failures": 0,
+      "errors": 1,
+      "skipped": 0,
+      "cause": "stale Customer role locator; no accounts created"
+    },
+    {
+      "runId": "ebd859feeeef6f1a",
+      "organisationId": "d93d5f22-6ec4-41a1-8b40-2d146198b1fe",
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "cause": "Gateway CORS rejects PATCH before Identity"
+    },
+    {
+      "runId": "4bbc471d321c081b",
+      "organisationId": "066a3981-fac7-4c49-add1-09f5e336fc0c",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "proof": "real browser Dev signup and public Gateway API lifecycle; exact org SQL/outbox verified"
+    }
+  ],
+  "liveTests": {
+    "RestaurantCampaignsLiveTest": {
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "methods": [
+        "draftIsDiscardedOnCancel",
+        "tabMatchesTheOwnersAdvertiser",
+        "launchedCampaignIsStoredInRupees"
+      ]
+    },
+    "RestaurantEarningsLiveTest": {
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "methods": [
+        "earningsMatchTheLedger"
+      ]
+    }
+  },
+  "notificationCodecProof": "actual Deployment YAML deserialization and retry serialization; no external provider calls",
+  "finalPackageClasses": {
+    "CommunicationIntegration": {
+      "com.fooddelivery.notification.config.TemplateSubstitutionTest": {
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "com.fooddelivery.notification.contract.AdNotificationConsumerContractTest": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "com.fooddelivery.notification.config.TemplateCoverageTest": {
+        "tests": 7,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "com.fooddelivery.notification.NotificationServiceApplicationTests": {
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "com.fooddelivery.notification.service.MissingTemplateIsTerminalTest": {
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "com.fooddelivery.notification.service.AdNotificationListenerTest": {
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "com.fooddelivery.architecture.ArchitectureEnforcementTest": {
+        "tests": 9,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "com.fooddelivery.notification.config.DevNotificationChannelConfigurationTest": {
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "com.fooddelivery.notification.EndpointAuthorizationCoverageTest": {
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "com.fooddelivery.notification.service.NotificationRouterServiceTest": {
+        "tests": 6,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    "IdentityService": {
+      "com.fooddelivery.identity.AutoConfigurationImportsTest": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "com.fooddelivery.identity.organisation.OrganisationControllerAuthorizationTest": {
+        "tests": 6,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "com.fooddelivery.identity.organisation.OrganisationServiceTest": {
+        "tests": 18,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "com.fooddelivery.identity.IdentityApplicationStartupTest": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "com.fooddelivery.identity.service.InternalUserServicePhoneLookupTest": {
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "com.fooddelivery.identity.controller.AdminUserControllerAuthorizationTest": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "com.fooddelivery.identity.adapter.OutboxEventPublisherAdapterTest": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "com.fooddelivery.identity.service.E2eRunnerSecretVerifierTest": {
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "com.fooddelivery.identity.Identity_serviceTest": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "com.fooddelivery.identity.service.AuthServicePortalSecurityTest": {
+        "tests": 14,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "com.fooddelivery.identity.controller.AuthControllerAuthorizationTest": {
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "com.fooddelivery.identity.controller.E2eOtpControllerTest": {
+        "tests": 5,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "com.fooddelivery.identity.service.InternalUserServiceAccessRevocationTest": {
+        "tests": 5,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "com.fooddelivery.identity.ContextLoadTest": {
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "com.fooddelivery.architecture.ArchitectureEnforcementTest": {
+        "tests": 9,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "com.fooddelivery.identity.EndpointAuthorizationCoverageTest": {
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "com.fooddelivery.identity.HttpTest": {
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "com.fooddelivery.identity.organisation.OrganisationQueryCountTest": {
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "com.fooddelivery.identity.organisation.LocalOrganisationAccessPolicyTest": {
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "com.fooddelivery.identity.organisation.OrganisationRateLimitsTest": {
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "com.fooddelivery.identity.service.E2eSeededAccountAllowlistTest": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "com.fooddelivery.identity.MessagingTest": {
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "com.fooddelivery.identity.organisation.OrganisationPersistenceTest": {
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "com.fooddelivery.identity.service.DevOtpAccountPolicyTest": {
+        "tests": 5,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    }
+  },
+  "publishedImages": {
+    "communication-integration": "e4d914c-fbf55a7",
+    "identity-service": "979f583-8a86798"
+  },
+  "commits": {
+    "IdentityService": "979f583",
+    "CommunicationIntegration": "e4d914c",
+    "Deployment": "d3960c2",
+    "ApiGateway": "9d633a7",
+    "WalletService": "6443a50",
+    "LedgerService": "5140a2d"
+  },
+  "latencySample": {
+    "tests": 1,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "method": "readOnlyRequestsForServerLatencyMeasurements",
+    "productWrites": 0,
+    "evidence": "36-o1-and-o2-baseline-latency.json"
+  },
+  "finalLogin": {
+    "tests": 1,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "method": "LoginSmokeTest#successfulLogin(CUSTOMER)",
+    "notificationEvidence": "36-dev-signup-notification-audit.json"
+  }
+}

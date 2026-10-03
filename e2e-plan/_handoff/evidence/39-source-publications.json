@@ -1,0 +1,68 @@
+[
+  {
+    "repository": "IdentitySigning",
+    "commit": "5e7fa87e34e66edd6d967e627ad731714bdd259f",
+    "files": 1,
+    "pushed": true
+  },
+  {
+    "repository": "ApiGateway",
+    "commit": "b19a841d4f922004070b3706d0be2b59a4e27df3",
+    "files": 2,
+    "pushed": true
+  },
+  {
+    "repository": "IdentityService",
+    "commit": "296c9783ed19d16ff5103ddace0751bbc92aa669",
+    "files": 7,
+    "pushed": true
+  },
+  {
+    "repository": "CommunicationIntegration",
+    "commit": "c6333ee6fbcaed6b34035f5c824b832e5f6b4037",
+    "files": 2,
+    "pushed": true
+  },
+  {
+    "repository": "CustomerApplication",
+    "commit": "c0bf9405dd534a4a6bf0786e23b584f2f8163097",
+    "files": 7,
+    "pushed": true
+  },
+  {
+    "repository": "RestaurantApplication",
+    "commit": "21d46e00132fd0151e4616b5bea942818373c9fe",
+    "files": 49,
+    "pushed": true
+  },
+  {
+    "repository": "CommunicationService",
+    "commit": "380a212f756d8fb309f7f1b75b3e2e0b258dd9f2",
+    "files": 28,
+    "pushed": true
+  },
+  {
+    "repository": "ReviewsService",
+    "commit": "8fae4f2e4d72219d19fdfc7932b4ed56ed7b1175",
+    "files": 2,
+    "pushed": true
+  },
+  {
+    "repository": "LedgerService",
+    "commit": "8313ea5e30ddcf16661aa30199cf343a970fd410",
+    "files": 1,
+    "pushed": true
+  },
+  {
+    "repository": "WalletService",
+    "commit": "96e0443bdef82ca921fdf2f3f02bd5eef8791155",
+    "files": 1,
+    "pushed": true
+  },
+  {
+    "repository": "FoodDeliveryContracts",
+    "commit": "b8b73dd386c6e82334a47c586787351f1a42c0d1",
+    "files": 2,
+    "pushed": true
+  }
+]

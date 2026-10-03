@@ -1,0 +1,16 @@
+{
+  "organisationId": "d93d5f22-6ec4-41a1-8b40-2d146198b1fe",
+  "boundary": "lifecycle failed at Gateway CORS PATCH; one owner and manager retained",
+  "outbox": [
+    {
+      "type": "ORGANISATION_CREATED",
+      "status": "UNPROCESSED",
+      "count": 1
+    },
+    {
+      "type": "ORGANISATION_MEMBERSHIP_CHANGED",
+      "status": "UNPROCESSED",
+      "count": 2
+    }
+  ]
+}

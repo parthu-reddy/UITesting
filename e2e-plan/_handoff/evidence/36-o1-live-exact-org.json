@@ -1,0 +1,28 @@
+{
+  "organisationId": "066a3981-fac7-4c49-add1-09f5e336fc0c",
+  "members": [
+    {
+      "userId": "0abdd8fb-edd2-4afb-abf8-dc776459611f",
+      "role": "ADMIN",
+      "status": "ACTIVE"
+    },
+    {
+      "userId": "e12f1c2e-23cd-45db-ae33-216d4a8c19a1",
+      "role": "OWNER",
+      "status": "ACTIVE"
+    }
+  ],
+  "outbox": [
+    {
+      "type": "ORGANISATION_CREATED",
+      "status": "PROCESSED",
+      "count": 1
+    },
+    {
+      "type": "ORGANISATION_MEMBERSHIP_CHANGED",
+      "status": "PROCESSED",
+      "count": 7
+    }
+  ],
+  "boundary": "one ACTIVE OWNER after transfer; all exact-org outbox rows published; no cleanup"
+}

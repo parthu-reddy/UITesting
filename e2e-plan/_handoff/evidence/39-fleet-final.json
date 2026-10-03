@@ -1,0 +1,3144 @@
+{
+  "totals": {
+    "tests": 1877,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 1
+  },
+  "reports": 447,
+  "generatedContractClasses": 26,
+  "executedGeneratedContractClasses": 26,
+  "missing": [],
+  "ONDC": "compile-only excluded from pass2",
+  "reportsByClass": [
+    {
+      "report": "MapsIntegration/target/surefire-reports/TEST-com.fooddelivery.maps.contract.DispatchConsumerContractTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "MapsIntegration/target/surefire-reports/TEST-com.fooddelivery.mapsintegration.websocket.TrackingWebSocketHandlerTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "MapsIntegration/target/surefire-reports/TEST-com.fooddelivery.mapsintegration.TestRestTemplateTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "MapsIntegration/target/surefire-reports/TEST-com.fooddelivery.mapsintegration.service.DispatchEventConsumerTest.xml",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "MapsIntegration/target/surefire-reports/TEST-com.fooddelivery.architecture.ArchitectureEnforcementTest.xml",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "MapsIntegration/target/surefire-reports/TEST-com.fooddelivery.mapsintegration.EndpointAuthorizationCoverageTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "MapsIntegration/target/surefire-reports/TEST-com.fooddelivery.mapsintegration.MapsintegrationApplicationStartupTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "MapsIntegration/target/surefire-reports/TEST-com.fooddelivery.mapsintegration.MapsintegrationTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "MapsIntegration/target/surefire-reports/TEST-com.fooddelivery.mapsintegration.ContextLoadTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "MapsIntegration/target/surefire-reports/TEST-com.fooddelivery.mapsintegration.MessagingTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "MapsIntegration/target/surefire-reports/TEST-com.fooddelivery.mapsintegration.AutoConfigurationImportsTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "MapsIntegration/target/surefire-reports/TEST-com.fooddelivery.mapsintegration.service.FleetAvailabilitySemanticsTest.xml",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "IdentityService/target/surefire-reports/TEST-com.fooddelivery.identity.AutoConfigurationImportsTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "IdentityService/target/surefire-reports/TEST-com.fooddelivery.identity.organisation.OrganisationControllerAuthorizationTest.xml",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "IdentityService/target/surefire-reports/TEST-com.fooddelivery.identity.organisation.OrganisationServiceTest.xml",
+      "tests": 18,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "IdentityService/target/surefire-reports/TEST-com.fooddelivery.identity.IdentityApplicationStartupTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "IdentityService/target/surefire-reports/TEST-com.fooddelivery.identity.service.InternalUserServicePhoneLookupTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "IdentityService/target/surefire-reports/TEST-com.fooddelivery.identity.controller.AdminUserControllerAuthorizationTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "IdentityService/target/surefire-reports/TEST-com.fooddelivery.identity.adapter.OutboxEventPublisherAdapterTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "IdentityService/target/surefire-reports/TEST-com.fooddelivery.identity.service.E2eRunnerSecretVerifierTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "IdentityService/target/surefire-reports/TEST-com.fooddelivery.identity.Identity_serviceTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "IdentityService/target/surefire-reports/TEST-com.fooddelivery.identity.service.AuthServicePortalSecurityTest.xml",
+      "tests": 14,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "IdentityService/target/surefire-reports/TEST-com.fooddelivery.identity.controller.AuthControllerAuthorizationTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "IdentityService/target/surefire-reports/TEST-com.fooddelivery.identity.controller.E2eOtpControllerTest.xml",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "IdentityService/target/surefire-reports/TEST-com.fooddelivery.identity.service.InternalUserServiceAccessRevocationTest.xml",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "IdentityService/target/surefire-reports/TEST-com.fooddelivery.identity.ContextLoadTest.xml",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "IdentityService/target/surefire-reports/TEST-com.fooddelivery.architecture.ArchitectureEnforcementTest.xml",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "IdentityService/target/surefire-reports/TEST-com.fooddelivery.identity.EndpointAuthorizationCoverageTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "IdentityService/target/surefire-reports/TEST-com.fooddelivery.identity.HttpTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "IdentityService/target/surefire-reports/TEST-com.fooddelivery.identity.organisation.OrganisationQueryCountTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "IdentityService/target/surefire-reports/TEST-com.fooddelivery.identity.organisation.LocalOrganisationAccessPolicyTest.xml",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "IdentityService/target/surefire-reports/TEST-com.fooddelivery.identity.organisation.OrganisationRateLimitsTest.xml",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "IdentityService/target/surefire-reports/TEST-com.fooddelivery.identity.service.E2eSeededAccountAllowlistTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "IdentityService/target/surefire-reports/TEST-com.fooddelivery.identity.MessagingTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "IdentityService/target/surefire-reports/TEST-com.fooddelivery.identity.organisation.OrganisationPersistenceTest.xml",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "IdentityService/target/surefire-reports/TEST-com.fooddelivery.identity.service.DevOtpAccountPolicyTest.xml",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "PaymentGatewayIntegration/target/surefire-reports/TEST-com.fooddelivery.payments.CashfreeStrategyStatusMappingTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "PaymentGatewayIntegration/target/surefire-reports/TEST-com.fooddelivery.payments.service.PaymentReconciliationJobTest.xml",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "PaymentGatewayIntegration/target/surefire-reports/TEST-com.fooddelivery.payments.service.gateway.CashfreeStrategyTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "PaymentGatewayIntegration/target/surefire-reports/TEST-com.fooddelivery.payments.service.WebhookProcessingServiceTest.xml",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "PaymentGatewayIntegration/target/surefire-reports/TEST-com.fooddelivery.payments.service.gateway.RazorpayStrategyTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "PaymentGatewayIntegration/target/surefire-reports/TEST-com.fooddelivery.payments.service.PaymentEventConsumerRefundIdempotencyTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "PaymentGatewayIntegration/target/surefire-reports/TEST-com.fooddelivery.payments.PaymentSchemaConsistencyTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "PaymentGatewayIntegration/target/surefire-reports/TEST-com.fooddelivery.payments.strategy.ProdSecretsGuardTest.xml",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "PaymentGatewayIntegration/target/surefire-reports/TEST-com.fooddelivery.payments.EndpointAuthorizationCoverageTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "PaymentGatewayIntegration/target/surefire-reports/TEST-com.fooddelivery.payments.RazorpayStrategyStatusMappingTest.xml",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "PaymentGatewayIntegration/target/surefire-reports/TEST-com.fooddelivery.payments.WebhookIntegrationTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "PaymentGatewayIntegration/target/surefire-reports/TEST-com.fooddelivery.payments.service.WebhookDlqJobTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "PaymentGatewayIntegration/target/surefire-reports/TEST-com.fooddelivery.payments.service.gateway.MockRefundFailureSeamTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "PaymentGatewayIntegration/target/surefire-reports/TEST-com.fooddelivery.payments.service.PaymentEventConsumerAmountTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "PaymentGatewayIntegration/target/surefire-reports/TEST-com.fooddelivery.payments.PaymentServiceApplicationStartupTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "PaymentGatewayIntegration/target/surefire-reports/TEST-com.fooddelivery.payments.config.PaymentStartupInvariantsTest.xml",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "PaymentGatewayIntegration/target/surefire-reports/TEST-com.fooddelivery.payments.contract.PaymentEventConsumerContractTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "PaymentGatewayIntegration/target/surefire-reports/TEST-com.fooddelivery.payments.WebhookAmountVerificationTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "PaymentGatewayIntegration/target/surefire-reports/TEST-com.fooddelivery.architecture.ArchitectureEnforcementTest.xml",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "PaymentGatewayIntegration/target/surefire-reports/TEST-com.fooddelivery.payments.strategy.PaymentGatewayStrategyUniquenessTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "PaymentGatewayIntegration/target/surefire-reports/TEST-com.fooddelivery.payments.controller.WebhookControllerTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "PaymentGatewayIntegration/target/surefire-reports/TEST-com.fooddelivery.payments.service.gateway.VyaparGatewayStrategyTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "PaymentGatewayIntegration/target/surefire-reports/TEST-com.fooddelivery.payments.service.PaymentGatewayOrchestratorTest.xml",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "PaymentGatewayIntegration/target/surefire-reports/TEST-com.fooddelivery.payments.MessagingTest.xml",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "PaymentGatewayIntegration/target/surefire-reports/TEST-com.fooddelivery.payments.PaymentIntentIdempotencyTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "PaymentGatewayIntegration/target/surefire-reports/TEST-com.fooddelivery.payments.controller.PaymentControllerAuthorizationTest.xml",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "PaymentGatewayIntegration/target/surefire-reports/TEST-com.fooddelivery.payments.service.ConfirmedCaptureRefundPersistenceTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "PaymentGatewayIntegration/target/surefire-reports/TEST-com.fooddelivery.payments.PaymentTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "ConfigService/target/surefire-reports/TEST-com.fooddelivery.config.ConfigServerApplicationStartupTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "ConfigService/target/surefire-reports/TEST-com.fooddelivery.architecture.ArchitectureEnforcementTest.xml",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "LedgerService/target/surefire-reports/TEST-com.fooddelivery.ledger.controller.InternalLedgerCategoryTotalControllerTest.xml",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "LedgerService/target/surefire-reports/TEST-com.fooddelivery.ledger.PayoutLineSettledOnceTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "LedgerService/target/surefire-reports/TEST-com.fooddelivery.ledger.service.StatementWithPayoutsTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "LedgerService/target/surefire-reports/TEST-com.fooddelivery.ledger.controller.PayoutRoutingTest.xml",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "LedgerService/target/surefire-reports/TEST-com.fooddelivery.ledger.reconciliation.ReconciliationPartialRunTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "LedgerService/target/surefire-reports/TEST-com.fooddelivery.ledger.reconciliation.ReconciliationWindowTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "LedgerService/target/surefire-reports/TEST-com.fooddelivery.ledger.service.DeliveredDistributionPostingTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "LedgerService/target/surefire-reports/TEST-com.fooddelivery.ledger.service.PendingPayoutQueryTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "LedgerService/target/surefire-reports/TEST-com.fooddelivery.ledger.service.StatementQueryServiceTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "LedgerService/target/surefire-reports/TEST-com.fooddelivery.ledger.controller.PayoutActionControllerTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "LedgerService/target/surefire-reports/TEST-com.fooddelivery.ledger.controller.PayoutDetailTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "LedgerService/target/surefire-reports/TEST-com.fooddelivery.ledger.LedgerSchemaConsistencyTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "LedgerService/target/surefire-reports/TEST-com.fooddelivery.ledger.MockRequestTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "LedgerService/target/surefire-reports/TEST-com.fooddelivery.ledger.MoneyStartupInvariantsTest.xml",
+      "tests": 10,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "LedgerService/target/surefire-reports/TEST-com.fooddelivery.ledger.repository.LedgerEntryLegUniquenessTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "LedgerService/target/surefire-reports/TEST-com.fooddelivery.ledger.service.DoubleEntryLedgerServiceRulesTest.xml",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "LedgerService/target/surefire-reports/TEST-com.fooddelivery.ledger.reconciliation.MoneyReconciliationJobTest.xml",
+      "tests": 14,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "LedgerService/target/surefire-reports/TEST-com.fooddelivery.ledger.service.OwnerNameResolverTest.xml",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "LedgerService/target/surefire-reports/TEST-com.fooddelivery.ledger.service.LedgerTransactionIdValidationTest.xml",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "LedgerService/target/surefire-reports/TEST-com.fooddelivery.ledger.reconciliation.LedgerDltRejectionTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "LedgerService/target/surefire-reports/TEST-com.fooddelivery.ledger.TestSerialization.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "LedgerService/target/surefire-reports/TEST-com.fooddelivery.ledger.contract.LedgerTransactionConsumerContractTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "LedgerService/target/surefire-reports/TEST-com.fooddelivery.ledger.ContractVerifierTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "LedgerService/target/surefire-reports/TEST-com.fooddelivery.ledger.service.DoubleEntryLedgerServiceOrderTotalTest.xml",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "LedgerService/target/surefire-reports/TEST-com.fooddelivery.ledger.service.PayoutServiceTest.xml",
+      "tests": 22,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "LedgerService/target/surefire-reports/TEST-com.fooddelivery.architecture.ArchitectureEnforcementTest.xml",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "LedgerService/target/surefire-reports/TEST-com.fooddelivery.ledger.EndpointAuthorizationCoverageTest.xml",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "LedgerService/target/surefire-reports/TEST-com.fooddelivery.ledger.service.DoubleEntryLedgerServiceCategoryTotalTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "LedgerService/target/surefire-reports/TEST-com.fooddelivery.ledger.repository.LedgerRejectionResolutionPersistenceTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "LedgerService/target/surefire-reports/TEST-com.fooddelivery.ledger.controller.AdminLedgerRejectionControllerTest.xml",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "LedgerService/target/surefire-reports/TEST-com.fooddelivery.ledger.service.LedgerRejectionRecorderPersistenceTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "LedgerService/target/surefire-reports/TEST-com.fooddelivery.ledger.service.PayoutStateMachineTest.xml",
+      "tests": 29,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "LedgerService/target/surefire-reports/TEST-com.fooddelivery.ledger.LedgerServiceApplicationStartupTest.xml",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "LedgerService/target/surefire-reports/TEST-com.fooddelivery.ledger.service.PendingPayoutResilienceTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "LedgerService/target/surefire-reports/TEST-com.fooddelivery.ledger.controller.LedgerControllerAuthorizationTest.xml",
+      "tests": 10,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "LedgerService/target/surefire-reports/TEST-com.fooddelivery.ledger.reconciliation.ReconciliationControllerTest.xml",
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "LedgerService/target/surefire-reports/TEST-com.fooddelivery.ledger.reconciliation.ReconciliationSubjectStabilityTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "LedgerService/target/surefire-reports/TEST-com.fooddelivery.ledger.repository.PayoutTransitionPersistenceTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "LedgerService/target/surefire-reports/TEST-com.fooddelivery.ledger.listener.LedgerEventListenerTest.xml",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "LedgerService/target/surefire-reports/TEST-com.fooddelivery.ledger.PrometheusRulesTest.xml",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CampaignService/target/surefire-reports/TEST-com.fooddelivery.ad.campaign.CampaignServiceApplicationTests.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CampaignService/target/surefire-reports/TEST-com.fooddelivery.ad.campaign.EndpointAuthorizationCoverageTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CampaignService/target/surefire-reports/TEST-com.fooddelivery.ad.campaign.service.AdvertiserRegistrationTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CampaignService/target/surefire-reports/TEST-com.fooddelivery.common.architecture.TimeDisciplineRules.xml",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CampaignService/target/surefire-reports/TEST-com.fooddelivery.ad.campaign.CampaignServiceIntegrationTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CampaignService/target/surefire-reports/TEST-com.fooddelivery.ad.campaign.controller.MyAdvertiserLookupTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CampaignService/target/surefire-reports/TEST-com.fooddelivery.contract.MessagingTest.xml",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CampaignService/target/surefire-reports/TEST-com.fooddelivery.architecture.ArchitectureEnforcementTest.xml",
+      "tests": 0,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CampaignService/target/surefire-reports/TEST-com.fooddelivery.ad.campaign.kafka.CampaignAlertConsumerTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CampaignService/target/surefire-reports/TEST-com.fooddelivery.contract.HttpTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CampaignService/target/surefire-reports/TEST-com.fooddelivery.ad.campaign.ConfigCentralizationTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CampaignService/target/surefire-reports/TEST-com.fooddelivery.contract.CampaignContractConsumerTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "ReviewsService/target/surefire-reports/TEST-com.fooddelivery.reviews.contract.ReviewsCustomerContractConsumerTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "ReviewsService/target/surefire-reports/TEST-com.fooddelivery.reviews.security.ReviewAccessPolicyTest.xml",
+      "tests": 11,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "ReviewsService/target/surefire-reports/TEST-com.fooddelivery.reviews.service.ReviewCommandServiceTest.xml",
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "ReviewsService/target/surefire-reports/TEST-com.fooddelivery.reviews.contract.MessagingTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "ReviewsService/target/surefire-reports/TEST-com.fooddelivery.reviews.mapper.ReviewMapperTest.xml",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "ReviewsService/target/surefire-reports/TEST-com.fooddelivery.reviews.ReviewsApplicationTests.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "ReviewsService/target/surefire-reports/TEST-com.fooddelivery.reviews.service.ReviewQueryServiceTest.xml",
+      "tests": 10,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "ReviewsService/target/surefire-reports/TEST-com.fooddelivery.reviews.service.ReviewEligibilityServiceTest.xml",
+      "tests": 16,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "ReviewsService/target/surefire-reports/TEST-com.fooddelivery.reviews.web.ReviewsGlobalExceptionHandlerTest.xml",
+      "tests": 11,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "ReviewsService/target/surefire-reports/TEST-com.fooddelivery.architecture.ArchitectureEnforcementTest.xml",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "ReviewsService/target/surefire-reports/TEST-com.fooddelivery.reviews.EndpointAuthorizationCoverageTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "ReviewsService/target/surefire-reports/TEST-com.fooddelivery.reviews.entity.ReviewAggregateTest.xml",
+      "tests": 14,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.order.lifecycle.TerminalStatusIsFinalTest.xml",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.customer.service.MenuCacheInvalidationListenerTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.customer.UnpaidOrderCancellerTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.order.security.OrderSecurityHelperTest.xml",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.customer.controller.AdminRefundCommandControllerTest.xml",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.customer.controller.OrderRequestPrepaidOnlyTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.order.service.state.DelayRequestStateTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.order.lifecycle.DispatchFailureTerminationTest.xml",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.order.refund.RefundRetryIsolationTest.xml",
+      "tests": 16,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.order.service.PaymentEventConsumerTest.xml",
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.customer.InternalTest.xml",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.order.service.state.StateRefundTriggerTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.customer.CustomerOrderServiceWalletCheckoutTest.xml",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.FoodDeliveryApplicationStartupTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.order.ledger.GatewayAccountIdentityTest.xml",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.customer.CustomerSchemaConsistencyTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.customer.controller.AdminCustomerControllerFleetScopeTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.order.service.state.HandoverTimeStateTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.order.scheduler.RefundRetrySweeperTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.order.scheduler.AbandonedDeliverySweeperTest.xml",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.customer.EventBinderUnknownPropertiesTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.order.ledger.LedgerBookkeeperRefundTest.xml",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.customer.dto.OrderRequestPaymentMethodValidationTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.order.refund.RefundCommandValidationTest.xml",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.customer.messaging.KafkaResilienceIntegrationTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.order.payment.WalletCaptureTest.xml",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.customer.ContractVerifierTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.order.notification.RefundNotificationTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.customer.controller.CustomerRestaurantControllerAvailabilityTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.order.refund.RefundStoreCreditHandoffTest.xml",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.contract.CustomerContractConsumerTest.xml",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.customer.mapper.DeliveryEtaTest.xml",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.order.refund.RefundRefusalInCallerTransactionTest.xml",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.order.refund.RefundNeverExceedsOrderTest.xml",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.customer.ContractHarnessJacksonTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.order.refund.PaymentRefundRequestedEventSerializationTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.customer.service.PricingChargeConsistencyTest.xml",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.order.lifecycle.StatusFastForwardRejectedTest.xml",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.order.lifecycle.SweeperScopeTest.xml",
+      "tests": 14,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.common.architecture.TimeDisciplineRules.xml",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.order.refund.RefundRetryPersistenceTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.order.ledger.ClawbackCapTest.xml",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.customer.mapper.OrderResponseLeakTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.order.ledger.PayableMatchesPayoutTest.xml",
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.customer.service.DynamicPricingServiceTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.order.contract.PaymentEventConsumerContractTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.order.refund.RefundStateMachineTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.order.service.RefundServiceTest.xml",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.order.ledger.RiderTipLedgerTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.order.payment.PaymentRoutingExhaustivenessTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.order.controller.InternalOrderReviewControllerTest.xml",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.order.controller.AdminRefundControllerTest.xml",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.customer.MessagingTest.xml",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.customer.service.RestaurantSummaryServiceTest.xml",
+      "tests": 20,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.customer.service.DriverSummaryServiceTest.xml",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.architecture.ArchitectureEnforcementTest.xml",
+      "tests": 0,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.customer.EndpointAuthorizationCoverageTest.xml",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.order.payment.PaymentMethodPersistenceTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.order.service.ManualAssignmentFailureEventConsumerTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.customer.service.CustomerReceiptTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.order.lifecycle.OrderPaidEventCompletenessTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.customer.controller.InternalMoneyControllerTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.order.ledger.LedgerBookkeeperTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.order.lifecycle.LateCaptureAlwaysRefundsTest.xml",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.customer.dto.OrderResponseLeakTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.order.service.OrderEventBindingCoverageTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.order.ledger.LedgerAccountResolverTest.xml",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.order.refund.RefundRemainingTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.order.repository.EarningsWindowQueriesTest.xml",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.customer.service.money.SummaryPeriodTest.xml",
+      "tests": 22,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.contract.PaymentContractConsumerTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.contract.MapsContractConsumerTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.order.controller.AdminOrderManualControllerTest.xml",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.order.service.ChatRefundRefusalPersistenceTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.customer.controller.OrderReadOwnershipTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.customer.service.OrderPrepTimeTest.xml",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.customer.service.CustomerOrderPaymentCompensationTest.xml",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.order.refund.RefundDestinationMatrixTest.xml",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.order.repository.ActiveOrdersForDriverQueryTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.order.ledger.LedgerInvariantTest.xml",
+      "tests": 16,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.customer.service.money.CustomerInvoiceServiceTest.xml",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.customer.service.CustomerOrderQuoteValidationTest.xml",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.customer.WalletContractConsumerTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.order.refund.CustomerRefundViewTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.order.service.OrderEventConsumerDispatchRoutingTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.order.service.ChatRefundProcessorServiceTest.xml",
+      "tests": 18,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.customer.controller.DriverMoneyControllerTest.xml",
+      "tests": 13,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.order.refund.RefundOverCompletionTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.order.controller.RestaurantRefundControllerTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.order.refund.RefundQuoteTest.xml",
+      "tests": 10,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.customer.controller.CustomerMoneyControllerWalletTest.xml",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.customer.controller.RestaurantMoneyControllerTest.xml",
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.order.service.OrderEventConsumerRefundRefusalTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CustomerApplication/target/surefire-reports/TEST-com.fooddelivery.order.service.PaymentGatewayOrchestratorTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommunicationIntegration/target/surefire-reports/TEST-com.fooddelivery.notification.config.TemplateSubstitutionTest.xml",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommunicationIntegration/target/surefire-reports/TEST-com.fooddelivery.notification.contract.AdNotificationConsumerContractTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommunicationIntegration/target/surefire-reports/TEST-com.fooddelivery.notification.config.TemplateCoverageTest.xml",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommunicationIntegration/target/surefire-reports/TEST-com.fooddelivery.notification.NotificationServiceApplicationTests.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommunicationIntegration/target/surefire-reports/TEST-com.fooddelivery.notification.service.MissingTemplateIsTerminalTest.xml",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommunicationIntegration/target/surefire-reports/TEST-com.fooddelivery.notification.service.AdNotificationListenerTest.xml",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommunicationIntegration/target/surefire-reports/TEST-com.fooddelivery.architecture.ArchitectureEnforcementTest.xml",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommunicationIntegration/target/surefire-reports/TEST-com.fooddelivery.notification.config.DevNotificationChannelConfigurationTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommunicationIntegration/target/surefire-reports/TEST-com.fooddelivery.notification.EndpointAuthorizationCoverageTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommunicationIntegration/target/surefire-reports/TEST-com.fooddelivery.notification.service.NotificationRouterServiceTest.xml",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "RestaurantApplication/target/surefire-reports/TEST-com.fooddelivery.restaurant.controller.FulfillmentControllerTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "RestaurantApplication/target/surefire-reports/TEST-com.fooddelivery.restaurant.controller.InternalRestaurantOutletSummaryTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "RestaurantApplication/target/surefire-reports/TEST-com.fooddelivery.restaurant.service.OpeningHoursTest.xml",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "RestaurantApplication/target/surefire-reports/TEST-com.fooddelivery.restaurant.controller.RestaurantFleetMapControllerTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "RestaurantApplication/target/surefire-reports/TEST-com.fooddelivery.restaurant.controller.InternalRestaurantInvoiceDetailsTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "RestaurantApplication/target/surefire-reports/TEST-com.fooddelivery.restaurant.service.CrossTenantFulfillmentTest.xml",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "RestaurantApplication/target/surefire-reports/TEST-com.fooddelivery.contract.GovIdContractConsumerTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "RestaurantApplication/target/surefire-reports/TEST-com.fooddelivery.restaurant.RestaurantValidationIntegrationTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "RestaurantApplication/target/surefire-reports/TEST-com.fooddelivery.common.architecture.TimeDisciplineRules.xml",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "RestaurantApplication/target/surefire-reports/TEST-com.fooddelivery.restaurant.MessagingTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "RestaurantApplication/target/surefire-reports/TEST-com.fooddelivery.restaurant.controller.BrandListPrivacyTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "RestaurantApplication/target/surefire-reports/TEST-com.fooddelivery.restaurant.service.OrderEventConsumerTest.xml",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "RestaurantApplication/target/surefire-reports/TEST-com.fooddelivery.architecture.ArchitectureEnforcementTest.xml",
+      "tests": 0,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "RestaurantApplication/target/surefire-reports/TEST-com.fooddelivery.restaurant.service.RestaurantFleetCityScopeTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "RestaurantApplication/target/surefire-reports/TEST-com.fooddelivery.restaurant.RestaurantEndpointPermissionTest.xml",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "RestaurantApplication/target/surefire-reports/TEST-com.fooddelivery.restaurant.service.FulfillmentServiceTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "RestaurantApplication/target/surefire-reports/TEST-com.fooddelivery.restaurant.service.ReviewEventConsumerTest.xml",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "RestaurantApplication/target/surefire-reports/TEST-com.fooddelivery.restaurant.EndpointAuthorizationCoverageTest.xml",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "RestaurantApplication/target/surefire-reports/TEST-com.fooddelivery.contract.OrderEventConsumerContractTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "RestaurantApplication/target/surefire-reports/TEST-com.fooddelivery.restaurant.service.RestaurantOnboardingServiceTest.xml",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "RestaurantApplication/target/surefire-reports/TEST-com.fooddelivery.restaurant.service.CatalogStockToggleTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "RestaurantApplication/target/surefire-reports/TEST-com.fooddelivery.restaurant.ContractVerifierTest.xml",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "RestaurantApplication/target/surefire-reports/TEST-com.fooddelivery.contract.RestaurantContractConsumerTest.xml",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "RestaurantApplication/target/surefire-reports/TEST-com.fooddelivery.restaurant.RestaurantAccessTest.xml",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "RestaurantApplication/target/surefire-reports/TEST-com.fooddelivery.restaurant.messaging.BindingFailureIsNotRetryableTest.xml",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "RestaurantApplication/target/surefire-reports/TEST-com.fooddelivery.restaurant.service.CatalogServiceTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "RestaurantApplication/target/surefire-reports/TEST-com.fooddelivery.restaurant.RestaurantAccessQueryCountTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "UserTrackingService/target/surefire-reports/TEST-com.fooddelivery.tracking.MessagingTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "UserTrackingService/target/surefire-reports/TEST-com.fooddelivery.advertisement.tracking.AutoConfigurationImportsTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "UserTrackingService/target/surefire-reports/TEST-com.fooddelivery.architecture.ArchitectureEnforcementTest.xml",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "UserTrackingService/target/surefire-reports/TEST-com.fooddelivery.ad.tracking.EventTrackingServiceApplicationTests.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "UserTrackingService/target/surefire-reports/TEST-com.fooddelivery.advertisement.tracking.ContextLoadTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "UserTrackingService/target/surefire-reports/TEST-com.fooddelivery.advertisement.tracking.service.SpendDayTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "UserTrackingService/target/surefire-reports/TEST-com.fooddelivery.advertisement.tracking.EndpointAuthorizationCoverageTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "WalletService/target/surefire-reports/TEST-com.fooddelivery.wallet.controller.PayeeWalletControllerAuthorizationTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "WalletService/target/surefire-reports/TEST-com.fooddelivery.wallet.contract.WalletTopupConsumerContractTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "WalletService/target/surefire-reports/TEST-com.fooddelivery.wallet.repository.OutboxDlqRetryRepositoryPersistenceTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "WalletService/target/surefire-reports/TEST-com.fooddelivery.wallet.contract.AdBillingConsumerContractTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "WalletService/target/surefire-reports/TEST-com.fooddelivery.wallet.contract.WalletLedgerProducerContractTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "WalletService/target/surefire-reports/TEST-com.fooddelivery.wallet.WalletSchemaConsistencyTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "WalletService/target/surefire-reports/TEST-com.fooddelivery.wallet.ContractVerifierTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "WalletService/target/surefire-reports/TEST-com.fooddelivery.common.architecture.TimeDisciplineRules.xml",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "WalletService/target/surefire-reports/TEST-com.fooddelivery.wallet.WalletIdempotencyRollbackTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "WalletService/target/surefire-reports/TEST-com.fooddelivery.wallet.controller.WalletDlqReplayTest.xml",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "WalletService/target/surefire-reports/TEST-com.fooddelivery.architecture.ArchitectureEnforcementTest.xml",
+      "tests": 0,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "WalletService/target/surefire-reports/TEST-com.fooddelivery.wallet.WalletServiceApplicationStartupTest.xml",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "WalletService/target/surefire-reports/TEST-com.fooddelivery.wallet.WalletTopupServiceTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "WalletService/target/surefire-reports/TEST-com.fooddelivery.wallet.kafka.BillingEventConsumerTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "WalletService/target/surefire-reports/TEST-com.fooddelivery.wallet.kafka.RefundCreditConsumerTest.xml",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "WalletService/target/surefire-reports/TEST-com.fooddelivery.wallet.MessagingTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "WalletService/target/surefire-reports/TEST-com.fooddelivery.wallet.EndpointAuthorizationCoverageTest.xml",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "WalletService/target/surefire-reports/TEST-com.fooddelivery.wallet.service.WalletServiceTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "WalletService/target/surefire-reports/TEST-com.fooddelivery.wallet.controller.InternalWalletControllerAuthorizationTest.xml",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "DeliveryExecutiveApplication/target/surefire-reports/TEST-com.fooddelivery.delivery.service.ForceAssignRollbackTest.xml",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "DeliveryExecutiveApplication/target/surefire-reports/TEST-com.fooddelivery.delivery.service.RejectRollbackReReservesTest.xml",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "DeliveryExecutiveApplication/target/surefire-reports/TEST-com.fooddelivery.delivery.controller.LogisticsControllerTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "DeliveryExecutiveApplication/target/surefire-reports/TEST-com.fooddelivery.delivery.controller.AdminDeliveryControllerTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "DeliveryExecutiveApplication/target/surefire-reports/TEST-com.fooddelivery.delivery.websocket.SessionRegistryLifecycleTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "DeliveryExecutiveApplication/target/surefire-reports/TEST-com.fooddelivery.delivery.service.state.order.DeliveryAssignmentAuthorizationTest.xml",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "DeliveryExecutiveApplication/target/surefire-reports/TEST-com.fooddelivery.delivery.service.OnboardingActivationStateTest.xml",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "DeliveryExecutiveApplication/target/surefire-reports/TEST-com.fooddelivery.delivery.service.strategy.OrderAcceptedStrategyTest.xml",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "DeliveryExecutiveApplication/target/surefire-reports/TEST-com.fooddelivery.delivery.service.ConfirmedDeliveryProgressTest.xml",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "DeliveryExecutiveApplication/target/surefire-reports/TEST-com.fooddelivery.delivery.service.strategy.DispatchLockAfterCommitTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "DeliveryExecutiveApplication/target/surefire-reports/TEST-com.fooddelivery.delivery.service.task.SchedulerLockOwnershipTest.xml",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "DeliveryExecutiveApplication/target/surefire-reports/TEST-com.fooddelivery.delivery.contract.OrderEventConsumerContractTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "DeliveryExecutiveApplication/target/surefire-reports/TEST-com.fooddelivery.telemetry.service.TelemetryIngestionServiceTest.xml",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "DeliveryExecutiveApplication/target/surefire-reports/TEST-com.fooddelivery.contract.GovIdContractConsumerTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "DeliveryExecutiveApplication/target/surefire-reports/TEST-com.fooddelivery.delivery.service.strategy.TerminalStateStrategyTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "DeliveryExecutiveApplication/target/surefire-reports/TEST-com.fooddelivery.delivery.service.strategy.StrategyDispatchTypingTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "DeliveryExecutiveApplication/target/surefire-reports/TEST-com.fooddelivery.delivery.service.LogisticsDispatchServiceTest.xml",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "DeliveryExecutiveApplication/target/surefire-reports/TEST-com.fooddelivery.delivery.service.StrategyEventTypeCoverageTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "DeliveryExecutiveApplication/target/surefire-reports/TEST-com.fooddelivery.delivery.controller.AvailableOrdersPingWindowTest.xml",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "DeliveryExecutiveApplication/target/surefire-reports/TEST-com.fooddelivery.common.architecture.TimeDisciplineRules.xml",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "DeliveryExecutiveApplication/target/surefire-reports/TEST-com.fooddelivery.delivery.service.AssignmentRecordsDispatchFactsTest.xml",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "DeliveryExecutiveApplication/target/surefire-reports/TEST-com.fooddelivery.delivery.MessagingTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "DeliveryExecutiveApplication/target/surefire-reports/TEST-com.fooddelivery.delivery.websocket.LocationTrackingWebSocketHandlerTest.xml",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "DeliveryExecutiveApplication/target/surefire-reports/TEST-com.fooddelivery.delivery.ContractVerifierTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 1
+    },
+    {
+      "report": "DeliveryExecutiveApplication/target/surefire-reports/TEST-com.fooddelivery.delivery.scheduler.StaleDriverSweeperDaemonTest.xml",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "DeliveryExecutiveApplication/target/surefire-reports/TEST-com.fooddelivery.delivery.service.UnreachedDriverNotPenalisedTest.xml",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "DeliveryExecutiveApplication/target/surefire-reports/TEST-com.fooddelivery.delivery.service.state.order.DeliveryOtpSourceTest.xml",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "DeliveryExecutiveApplication/target/surefire-reports/TEST-com.fooddelivery.delivery.service.strategy.OrderDriverRejectedStrategyTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "DeliveryExecutiveApplication/target/surefire-reports/TEST-com.fooddelivery.delivery.service.strategy.PingDeliveryIsRecordedTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "DeliveryExecutiveApplication/target/surefire-reports/TEST-com.fooddelivery.delivery.InternalTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "DeliveryExecutiveApplication/target/surefire-reports/TEST-com.fooddelivery.architecture.ArchitectureEnforcementTest.xml",
+      "tests": 0,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "DeliveryExecutiveApplication/target/surefire-reports/TEST-com.fooddelivery.delivery.EndpointAuthorizationCoverageTest.xml",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "DeliveryExecutiveApplication/target/surefire-reports/TEST-com.fooddelivery.delivery.service.strategy.CandidateFoundStrategyTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "DeliveryExecutiveApplication/target/surefire-reports/TEST-com.fooddelivery.delivery.scheduler.CappedBatchDrainsTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "DeliveryExecutiveApplication/target/surefire-reports/TEST-com.fooddelivery.delivery.service.RiderGoOnlineTest.xml",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "DeliveryExecutiveApplication/target/surefire-reports/TEST-com.fooddelivery.delivery.controller.RestaurantStatusStreamConnectionTest.xml",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "DeliveryExecutiveApplication/target/surefire-reports/TEST-com.fooddelivery.delivery.service.OrderAssignmentAcceptanceTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "DeliveryExecutiveApplication/target/surefire-reports/TEST-com.fooddelivery.delivery.service.task.RedisLockReaperAssignmentSafetyTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "DeliveryExecutiveApplication/target/surefire-reports/TEST-com.fooddelivery.delivery.service.FleetCityLocationScopeTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "DeliveryExecutiveApplication/target/surefire-reports/TEST-com.fooddelivery.delivery.controller.DeliveryTelemetryControllerTest.xml",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "DeliveryExecutiveApplication/target/surefire-reports/TEST-com.fooddelivery.contract.DeliveryExecutiveContractConsumerTest.xml",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "DeliveryExecutiveApplication/target/surefire-reports/TEST-com.fooddelivery.contract.MapsFleetContractConsumerTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "DeliveryExecutiveApplication/target/surefire-reports/TEST-com.fooddelivery.delivery.DeliveryValidationIntegrationTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "DeliveryExecutiveApplication/target/surefire-reports/TEST-com.fooddelivery.delivery.service.OrderEventConsumerTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "GovernmentIDValidationService/target/surefire-reports/TEST-com.fooddelivery.governmentid.ContextLoadTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "GovernmentIDValidationService/target/surefire-reports/TEST-com.fooddelivery.governmentid.EndpointAuthorizationCoverageTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "GovernmentIDValidationService/target/surefire-reports/TEST-com.fooddelivery.contract.GovIdContractConsumerTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "GovernmentIDValidationService/target/surefire-reports/TEST-com.fooddelivery.governmentid.service.BrandVerificationJsonEscapingTest.xml",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "GovernmentIDValidationService/target/surefire-reports/TEST-com.fooddelivery.governmentid.service.BiometricLockoutSuspensionTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "GovernmentIDValidationService/target/surefire-reports/TEST-com.fooddelivery.govvalidation.Government_id_validation_serviceTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "GovernmentIDValidationService/target/surefire-reports/TEST-com.fooddelivery.architecture.ArchitectureEnforcementTest.xml",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "GovernmentIDValidationService/target/surefire-reports/TEST-com.fooddelivery.govvalidation.ContractVerifierTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "GovernmentIDValidationService/target/surefire-reports/TEST-com.fooddelivery.governmentid.controller.VerificationSummaryStateTest.xml",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "GovernmentIDValidationService/target/surefire-reports/TEST-com.fooddelivery.governmentid.AutoConfigurationImportsTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "BudgetLimitingService/target/surefire-reports/TEST-com.fooddelivery.ad.pacing.BudgetPacingServiceApplicationTests.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "BudgetLimitingService/target/surefire-reports/TEST-com.fooddelivery.advertisement.pacing.AutoConfigurationImportsTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "BudgetLimitingService/target/surefire-reports/TEST-com.fooddelivery.advertisement.pacing.service.PacingEngineServiceTest.xml",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "BudgetLimitingService/target/surefire-reports/TEST-com.fooddelivery.common.architecture.TimeDisciplineRules.xml",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "BudgetLimitingService/target/surefire-reports/TEST-com.fooddelivery.advertisement.pacing.contract.MessagingTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "BudgetLimitingService/target/surefire-reports/TEST-com.fooddelivery.architecture.ArchitectureEnforcementTest.xml",
+      "tests": 0,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "BudgetLimitingService/target/surefire-reports/TEST-com.fooddelivery.contract.BudgetLimitingContractConsumerTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "BudgetLimitingService/target/surefire-reports/TEST-com.fooddelivery.advertisement.pacing.ContextLoadTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "BudgetLimitingService/target/surefire-reports/TEST-com.fooddelivery.advertisement.pacing.contract.CampaignSyncConsumerContractTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "EurekaServer/target/surefire-reports/TEST-com.fooddelivery.architecture.ArchitectureEnforcementTest.xml",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "EurekaServer/target/surefire-reports/TEST-com.fooddelivery.eureka.EurekaServerApplicationStartupTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "BiddingEngine/target/surefire-reports/TEST-com.fooddelivery.advertisement.bidding.contract.CampaignIndexingConsumerContractTest.xml",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "BiddingEngine/target/surefire-reports/TEST-com.fooddelivery.advertisement.bidding.EndpointAuthorizationCoverageTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "BiddingEngine/target/surefire-reports/TEST-com.fooddelivery.advertisement.bidding.filter.FrequencyCappingFilterTest.xml",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "BiddingEngine/target/surefire-reports/TEST-com.fooddelivery.common.architecture.TimeDisciplineRules.xml",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "BiddingEngine/target/surefire-reports/TEST-com.fooddelivery.advertisement.bidding.contract.ContractVerifierTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "BiddingEngine/target/surefire-reports/TEST-com.fooddelivery.architecture.ArchitectureEnforcementTest.xml",
+      "tests": 0,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "BiddingEngine/target/surefire-reports/TEST-com.fooddelivery.ad.bidding.BiddingEngineApplicationTests.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "BiddingEngine/target/surefire-reports/TEST-com.fooddelivery.advertisement.bidding.filter.ContextualKeywordFilterTest.xml",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "ApiGateway/target/surefire-reports/TEST-com.fooddelivery.apigateway.OrganisationGatewayRoutesTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "ApiGateway/target/surefire-reports/TEST-com.fooddelivery.apigateway.security.e2e.E2eOtpRunnerAccessFilterTest.xml",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "ApiGateway/target/surefire-reports/TEST-com.fooddelivery.apigateway.ApiGatewayApplicationStartupTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "ApiGateway/target/surefire-reports/TEST-com.fooddelivery.apigateway.filter.GlobalJwtAuthFilterRevocationTest.xml",
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "ApiGateway/target/surefire-reports/TEST-com.fooddelivery.apigateway.RbacRulesTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "ApiGateway/target/surefire-reports/TEST-com.fooddelivery.architecture.ArchitectureEnforcementTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "ApiGateway/target/surefire-reports/TEST-com.fooddelivery.apigateway.EndpointAuthorizationCoverageTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommunicationService/target/surefire-reports/TEST-com.fooddelivery.chat.entity.ChatSessionTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommunicationService/target/surefire-reports/TEST-com.fooddelivery.chat.ChatServiceApplicationStartupTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommunicationService/target/surefire-reports/TEST-com.fooddelivery.chat.controller.ChatMediaSenderIdentityTest.xml",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommunicationService/target/surefire-reports/TEST-com.fooddelivery.chat.service.ChatRestaurantMemberAccessTest.xml",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommunicationService/target/surefire-reports/TEST-com.fooddelivery.chat.controller.ChatSessionControllerTest.xml",
+      "tests": 13,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommunicationService/target/surefire-reports/TEST-com.fooddelivery.chat.config.StompAuthenticationInterceptorTest.xml",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommunicationService/target/surefire-reports/TEST-com.fooddelivery.chat.service.ChatEventBroadcasterTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommunicationService/target/surefire-reports/TEST-com.fooddelivery.chat.service.ChatMessageServiceTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommunicationService/target/surefire-reports/TEST-com.fooddelivery.chat.service.ChatSessionAccessServiceTest.xml",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommunicationService/target/surefire-reports/TEST-com.fooddelivery.chat.ContextLoadTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommunicationService/target/surefire-reports/TEST-com.fooddelivery.chat.service.OrderChatRosterServiceTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommunicationService/target/surefire-reports/TEST-com.fooddelivery.architecture.ArchitectureEnforcementTest.xml",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommunicationService/target/surefire-reports/TEST-com.fooddelivery.chat.service.ChatHistoryWindowTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommunicationService/target/surefire-reports/TEST-com.fooddelivery.chat.controller.ChatMessagingControllerTest.xml",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommunicationService/target/surefire-reports/TEST-com.fooddelivery.chat.EndpointAuthorizationCoverageTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommunicationService/target/surefire-reports/TEST-com.fooddelivery.chat.controller.AdminSupportChatRecipientIsolationTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommunicationService/target/surefire-reports/TEST-com.fooddelivery.chatcontract.ContractConsumerTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommunicationService/target/surefire-reports/TEST-com.fooddelivery.chat.service.ChatSessionServiceTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommunicationService/target/surefire-reports/TEST-com.fooddelivery.chat.service.ChatSupportSubscriptionRegistryTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommunicationService/target/surefire-reports/TEST-com.fooddelivery.chat.entity.SessionParticipantTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommunicationService/target/surefire-reports/TEST-com.fooddelivery.chat.listener.RefundDecisionListenerTest.xml",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommunicationService/target/surefire-reports/TEST-com.fooddelivery.chat.AutoConfigurationImportsTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "IdentitySigning/target/surefire-reports/TEST-com.fooddelivery.common.security.IdentityTokenServiceTest.xml",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "IdentitySigning/target/surefire-reports/TEST-com.fooddelivery.architecture.ArchitectureEnforcementTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-messaging/target/surefire-reports/TEST-com.fooddelivery.common.messaging.DeadLetterReplayerTest.xml",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-messaging/target/surefire-reports/TEST-com.fooddelivery.common.config.KafkaConfigDeadLetterTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-messaging/target/surefire-reports/TEST-com.fooddelivery.common.outbox.OutboxEventTypeInvariantTest.xml",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-messaging/target/surefire-reports/TEST-com.fooddelivery.common.architecture.TimeDisciplineTest.xml",
+      "tests": 0,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-messaging/target/surefire-reports/TEST-com.fooddelivery.common.architecture.TimeDisciplineRules.xml",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-messaging/target/surefire-reports/TEST-com.fooddelivery.common.outbox.OutboxBacklogMetricsTest.xml",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-messaging/target/surefire-reports/TEST-com.fooddelivery.common.outbox.OutboxAggregateRoutingTest.xml",
+      "tests": 11,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-messaging/target/surefire-reports/TEST-com.fooddelivery.common.messaging.DltHandlerPositionBindingTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-messaging/target/surefire-reports/TEST-com.fooddelivery.common.messaging.DeadLetterPositionTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-messaging/target/surefire-reports/TEST-com.fooddelivery.common.outbox.OutboxBeansAreNotComponentScannedTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-web/target/surefire-reports/TEST-com.fooddelivery.common.security.money.MoneyAccessPolicyTest.xml",
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-web/target/surefire-reports/TEST-com.fooddelivery.common.security.SecurityContextFilterTest.xml",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-web/target/surefire-reports/TEST-com.fooddelivery.common.client.MapsServiceClientContractTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-web/target/surefire-reports/TEST-com.fooddelivery.common.config.OpenApiSortShapeTest.xml",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-web/target/surefire-reports/TEST-com.fooddelivery.common.architecture.TimeDisciplineTest.xml",
+      "tests": 0,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-web/target/surefire-reports/TEST-com.fooddelivery.common.security.SecurityHeaderPropagationInterceptorTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-web/target/surefire-reports/TEST-com.fooddelivery.common.security.organisation.DefaultOrganisationAccessPolicyTest.xml",
+      "tests": 11,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-web/target/surefire-reports/TEST-com.fooddelivery.common.config.PageSerializationShapeTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-web/target/surefire-reports/TEST-com.fooddelivery.common.architecture.TimeDisciplineRules.xml",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-web/target/surefire-reports/TEST-com.fooddelivery.common.filter.IdempotencyFilterTest.xml",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-web/target/surefire-reports/TEST-com.fooddelivery.common.filter.RequestCachingFilterTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-web/target/surefire-reports/TEST-com.fooddelivery.common.security.AuctionTokenServiceTest.xml",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-web/target/surefire-reports/TEST-com.fooddelivery.common.client.MapsServiceClientFallbackTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-web/target/surefire-reports/TEST-com.fooddelivery.common.security.SecurityFilterChainRejectionTest.xml",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-web/target/surefire-reports/TEST-com.fooddelivery.common.security.FeignServiceIdentityTest.xml",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-web/target/surefire-reports/TEST-com.fooddelivery.common.security.organisation.OrganisationFeignBootstrapTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-web/target/surefire-reports/TEST-com.fooddelivery.common.security.WebSocketSecurityInterceptorTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-storage/target/surefire-reports/TEST-com.fooddelivery.common.architecture.TimeDisciplineTest.xml",
+      "tests": 0,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-storage/target/surefire-reports/TEST-com.fooddelivery.common.architecture.TimeDisciplineRules.xml",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-persistence/target/surefire-reports/TEST-com.fooddelivery.common.lock.RedisLockTest.xml",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-persistence/target/surefire-reports/TEST-com.fooddelivery.common.time.ZoneIdConverterTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-persistence/target/surefire-reports/TEST-com.fooddelivery.common.architecture.TimeDisciplineTest.xml",
+      "tests": 0,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-persistence/target/surefire-reports/TEST-com.fooddelivery.common.audit.AuditConfigurationTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-persistence/target/surefire-reports/TEST-com.fooddelivery.common.architecture.TimeDisciplineRules.xml",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-persistence/target/surefire-reports/TEST-com.fooddelivery.common.idempotency.IdempotencyKeySweeperTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-core/target/surefire-reports/TEST-com.fooddelivery.common.event.ObjectMapperUnknownPropertiesTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-core/target/surefire-reports/TEST-com.fooddelivery.common.time.BusinessCalendarTest.xml",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-core/target/surefire-reports/TEST-com.fooddelivery.common.dto.maps.RouteResponseDtoTest.xml",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-core/target/surefire-reports/TEST-com.fooddelivery.common.enums.OrganisationRoleTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-core/target/surefire-reports/TEST-com.fooddelivery.common.config.JacksonBigDecimalConfigTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-core/target/surefire-reports/TEST-com.fooddelivery.common.lock.LockedWorkTimerTest.xml",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-core/target/surefire-reports/TEST-com.fooddelivery.common.time.IanaTimeZoneValidatorTest.xml",
+      "tests": 16,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-core/target/surefire-reports/TEST-com.fooddelivery.common.event.EventBinderTest.xml",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-core/target/surefire-reports/TEST-com.fooddelivery.common.location.FleetCityScopeTest.xml",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-core/target/surefire-reports/TEST-com.fooddelivery.common.config.JacksonTimeWireFormatTest.xml",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-core/target/surefire-reports/TEST-com.fooddelivery.common.util.EventPayloadUtilsTest.xml",
+      "tests": 14,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-core/target/surefire-reports/TEST-com.fooddelivery.common.util.JsonNumberUtilsTest.xml",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-core/target/surefire-reports/TEST-com.fooddelivery.common.util.DeterministicIdUtilsLedgerIdTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-core/target/surefire-reports/TEST-com.fooddelivery.common.event.organisation.OrganisationEventBindingTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-core/target/surefire-reports/TEST-com.fooddelivery.common.event.EventSerializationTest.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-core/target/surefire-reports/TEST-com.fooddelivery.common.event.EventBinderPayloadCollisionTest.xml",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-test/target/surefire-reports/TEST-com.fooddelivery.common.architecture.CommonCoreTimeDisciplineTest.xml",
+      "tests": 0,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-test/target/surefire-reports/TEST-com.fooddelivery.common.architecture.TimeDisciplineRules.xml",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-test/target/surefire-reports/TEST-com.fooddelivery.common.contract.PlatformJsonTest.xml",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-test/target/surefire-reports/TEST-com.fooddelivery.common.architecture.TimeDisciplineRulesTest.xml",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "report": "CommonLibrary/common-test/target/surefire-reports/TEST-com.fooddelivery.common.test.SchemaConsistencyTest.xml",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  ]
+}

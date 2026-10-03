@@ -1,0 +1,72 @@
+{
+  "beforeFix": [
+    {
+      "module": "BiddingEngine",
+      "tests": 1,
+      "failures": 0,
+      "errors": 1,
+      "skipped": 0,
+      "proof": "actual application startup under Compose datasource/JPA exclusions before fix",
+      "observedRed": true,
+      "cause": "auditReader requires absent EntityManagerFactory"
+    },
+    {
+      "module": "UserTrackingService",
+      "tests": 1,
+      "failures": 0,
+      "errors": 1,
+      "skipped": 0,
+      "proof": "actual application startup under Compose datasource/JPA exclusions before fix",
+      "observedRed": true,
+      "cause": "auditReader requires absent EntityManagerFactory"
+    }
+  ],
+  "sharedFix": "AuditConfiguration after Hibernate JPA, conditional on EntityManagerFactory; reader/trail no unconditional component registration",
+  "afterFix": {
+    "BiddingEngine": {
+      "command": "mvn -o -B clean package",
+      "tests": 28,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "UserTrackingService": {
+      "command": "mvn -o -B clean package",
+      "tests": 18,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "IdentityService": {
+      "command": "mvn -o -B clean package -Dauth.limits.enabled=true",
+      "tests": 96,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "CommonLibrary": {
+      "command": "mvn -o -B clean install",
+      "tests": 245,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "embeddedLibrarySha256": "dca346c717cc52ba1545cfb672a8501b34cbc9ec2e5497280550399be9c1055f",
+  "bytecode": "Java 17 class version 61 verified",
+  "publishedImages": {
+    "bidding-engine": "aef68bb-dirty-d7bbbdc",
+    "event-tracking-service": "9cb6beb-dirty-47e5d1e"
+  },
+  "commitsPushed": {
+    "CommonLibrary": "25111e08ba531f1e0669f0d9dd5093eeed43c0f6",
+    "BiddingEngine": "ac5bb03",
+    "UserTrackingService": "6686a80"
+  },
+  "databaseCleanupPerformed": false,
+  "commonLibraryPublication": {
+    "conclusion": "success",
+    "runId": 37120199694,
+    "url": "https://github.com/parthu-reddy/FoodDeliveryCommonLibrary/actions/runs/37120199694"
+  }
+}

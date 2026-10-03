@@ -1,0 +1,79 @@
+{
+  "observedAt": "2026-10-03T12:10:36.652402+00:00",
+  "services": {
+    "identity-service": {
+      "image": "hyd.ocir.io/axekmbadoczl/food-delivery/identity-service:89046b7-0b78a6d",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "startedAt": "2026-10-03T12:05:36.824372632Z",
+      "errorCountSinceStart": 0,
+      "errors": []
+    },
+    "wallet-service": {
+      "image": "hyd.ocir.io/axekmbadoczl/food-delivery/wallet-service:6443a50-86df50e",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "startedAt": "2026-10-03T12:06:13.658621537Z",
+      "errorCountSinceStart": 0,
+      "errors": []
+    },
+    "ledger-service": {
+      "image": "hyd.ocir.io/axekmbadoczl/food-delivery/ledger-service:5140a2d-c405f76",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "startedAt": "2026-10-03T12:06:50.627175552Z",
+      "errorCountSinceStart": 0,
+      "errors": []
+    },
+    "bidding-engine": {
+      "image": "hyd.ocir.io/axekmbadoczl/food-delivery/bidding-engine:aef68bb-dirty-d7bbbdc",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "startedAt": "2026-10-03T11:40:18.271226713Z",
+      "errorCountSinceStart": 1,
+      "errors": [
+        {
+          "logger": "com.fooddelivery.advertisement.bidding.messaging.CampaignEventConsumer",
+          "message": "Campaign event sent to DLT from topic ad-events-dlt: ConsumerRecord(topic = ad-events-dlt, partition = 0, leaderEpoch = 0, offset = 0, CreateTime = 1791028551065, serialized key size = 36, serialized value size = 158, headers = RecordHeaders(headers = [RecordHeader(key = eventType, value = [65, 68, 95, 67, 65, 77, 80, 65, 73, 71, 78, 95, 67, 82, 69, 65, 84, 69, 68]), RecordHeader(key = aggregateTy"
+        }
+      ]
+    },
+    "event-tracking-service": {
+      "image": "hyd.ocir.io/axekmbadoczl/food-delivery/event-tracking-service:9cb6beb-dirty-47e5d1e",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "startedAt": "2026-10-03T11:40:50.335580573Z",
+      "errorCountSinceStart": 0,
+      "errors": []
+    },
+    "api-gateway": {
+      "image": "hyd.ocir.io/axekmbadoczl/food-delivery/api-gateway:09fa0e54b680f34f6ae7c3fb5e5a307a2593d5b4",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "startedAt": "2026-10-03T12:07:27.51355842Z",
+      "errorCountSinceStart": 0,
+      "errors": []
+    }
+  },
+  "previousPartialOrganisation": {
+    "id": "d93d5f22-6ec4-41a1-8b40-2d146198b1fe",
+    "outbox": [
+      {
+        "type": "ORGANISATION_CREATED",
+        "status": "PROCESSED",
+        "count": 1
+      },
+      {
+        "type": "ORGANISATION_MEMBERSHIP_CHANGED",
+        "status": "PROCESSED",
+        "count": 2
+      }
+    ]
+  }
+}

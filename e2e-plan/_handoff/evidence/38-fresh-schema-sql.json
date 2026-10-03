@@ -1,0 +1,32 @@
+[
+  {
+    "database": "identity",
+    "schemaAndSeedsPass": true,
+    "seedFiles": [
+      "dummy_identity_data.sql",
+      "scenario_identity.sql"
+    ],
+    "naiveTimestampColumns": 0
+  },
+  {
+    "database": "restaurant",
+    "schemaAndSeedsPass": true,
+    "seedFiles": [
+      "dummy_data.sql",
+      "scenario_restaurant.sql"
+    ],
+    "naiveTimestampColumns": 0
+  },
+  {
+    "database": "chat",
+    "schemaAndSeedsPass": true,
+    "seedFiles": [],
+    "naiveTimestampColumns": 0
+  },
+  {
+    "database": "notification",
+    "schemaAndSeedsPass": true,
+    "seedFiles": [],
+    "naiveTimestampColumns": 0
+  }
+]

@@ -1,0 +1,19 @@
+
+  destructive_confirm exceptions (1), each with a stated reason:
+    - pages/admin/money/PayoutDetail.tsx
+        Mark Paid and Fail Payout already open dedicated Modals that require the admin to type a bank reference (UTR) or a failure reason before the action commits. That is stronger protection than a yes/no ConfirmDialog, and replacing it with one would delete the fields the action needs — the 'blind swap loses a feature' failure mode this plan has already hit twice. Revisit if those modals ever stop requiring input.
+
+  [FAIL]  1. no component file over 300 lines                   12 files: features/admin-ops/components/AdminManualInterventions.tsx (419); features/maps-tracking/components/AdminFleetMap.tsx (387); pages/admin/money/OperationsPage.tsx (372); features/reviews/components/RateOrderModal.tsx (351)
+  [PASS]  2. safe-area owned by RoleShell alone                 
+  [PASS]  3. no ad-hoc surfaces outside shared/ui/surface       
+  [PASS]  4. radius and shadow scales held (<= 6 each)          
+  [PASS]  5. glass only on floating layers                      
+  [PASS]  6. every role tree is built on the system             
+  [PASS]  7. rider pickup/delivery confirmed by swipe, not tap  
+  [PASS]  8. admin destructive actions behind a danger confirm  
+  [PASS]  9. rider touch targets are 48px or more               
+  [PASS] 10. desktop is designed, not stretched                 
+  [PASS] 11. dark-scheme contrast holds for the rider surfaces  
+  [PASS] 12. the order domain components exist                  
+
+PHASE 4 INCOMPLETE — 1 of 12 checks failing

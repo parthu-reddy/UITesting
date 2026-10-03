@@ -1,0 +1,13 @@
+{
+  "preaccountAuditColumnNullable": true,
+  "appliedMigration": 1,
+  "recentMockAudit": [
+    {
+      "event_id": "2d19ac33-033d-401b-bf28-b21688be1c42",
+      "channel": "SMS",
+      "status": "QUEUED",
+      "preaccount": true,
+      "mocked": true
+    }
+  ]
+}

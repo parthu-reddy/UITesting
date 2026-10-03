@@ -1,0 +1,1653 @@
+
+> food-delivery-app-ui@0.0.0 test
+> vitest run --reporter=default --reporter=json --outputFile=/tmp/bp-o2-ui-current-tests.json
+
+
+ RUN  v4.1.11 /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI
+
+stderr | src/features/delivery-tasks/components/DeliveryActiveJob.test.tsx > prepaid delivery completion > asks only for the delivery OTP and can confirm immediately
+Failed to process pending offline uploads: ReferenceError: indexedDB is not defined
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:23:21
+    at new Promise (<anonymous>)
+    at openDB (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:22:10)
+    at getPendingUploads (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:93:20)
+    at syncOfflineUploads (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/features/communication/models/useWebRTC.ts:367:31)
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/features/communication/models/useWebRTC.ts:414:5
+    at Object.react_stack_bottom_frame (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:25989:20)
+    at runWithFiberInDEV (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:874:13)
+    at commitHookEffectListMount (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:13249:29)
+    at commitHookPassiveMountEffects (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:13336:11)
+Failed to clean orphaned chunks ReferenceError: indexedDB is not defined
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:23:21
+    at new Promise (<anonymous>)
+    at openDB (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:22:10)
+    at cleanOrphanedChunks (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:137:20)
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/features/communication/models/useWebRTC.ts:417:5
+    at Object.react_stack_bottom_frame (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:25989:20)
+    at runWithFiberInDEV (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:874:13)
+    at commitHookEffectListMount (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:13249:29)
+    at commitHookPassiveMountEffects (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:13336:11)
+    at commitPassiveMountOnFiber (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:15484:13)
+
+stderr | src/features/delivery-tasks/components/DeliveryActiveJob.test.tsx > active handover details > shows owned items, quantities, customer and order total, and closes accessibly
+Failed to process pending offline uploads: ReferenceError: indexedDB is not defined
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:23:21
+    at new Promise (<anonymous>)
+    at openDB (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:22:10)
+    at getPendingUploads (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:93:20)
+    at syncOfflineUploads (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/features/communication/models/useWebRTC.ts:367:31)
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/features/communication/models/useWebRTC.ts:414:5
+    at Object.react_stack_bottom_frame (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:25989:20)
+    at runWithFiberInDEV (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:874:13)
+    at commitHookEffectListMount (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:13249:29)
+    at commitHookPassiveMountEffects (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:13336:11)
+Failed to clean orphaned chunks ReferenceError: indexedDB is not defined
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:23:21
+    at new Promise (<anonymous>)
+    at openDB (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:22:10)
+    at cleanOrphanedChunks (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:137:20)
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/features/communication/models/useWebRTC.ts:417:5
+    at Object.react_stack_bottom_frame (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:25989:20)
+    at runWithFiberInDEV (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:874:13)
+    at commitHookEffectListMount (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:13249:29)
+    at commitHookPassiveMountEffects (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:13336:11)
+    at commitPassiveMountOnFiber (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:15484:13)
+
+stderr | src/features/delivery-tasks/components/DeliveryActiveJob.test.tsx > active handover details > does not leave the previous order details open when the active job changes
+Failed to process pending offline uploads: ReferenceError: indexedDB is not defined
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:23:21
+    at new Promise (<anonymous>)
+    at openDB (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:22:10)
+    at getPendingUploads (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:93:20)
+    at syncOfflineUploads (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/features/communication/models/useWebRTC.ts:367:31)
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/features/communication/models/useWebRTC.ts:414:5
+    at Object.react_stack_bottom_frame (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:25989:20)
+    at runWithFiberInDEV (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:874:13)
+    at commitHookEffectListMount (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:13249:29)
+    at commitHookPassiveMountEffects (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:13336:11)
+Failed to clean orphaned chunks ReferenceError: indexedDB is not defined
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:23:21
+    at new Promise (<anonymous>)
+    at openDB (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:22:10)
+    at cleanOrphanedChunks (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:137:20)
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/features/communication/models/useWebRTC.ts:417:5
+    at Object.react_stack_bottom_frame (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:25989:20)
+    at runWithFiberInDEV (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:874:13)
+    at commitHookEffectListMount (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:13249:29)
+    at commitHookPassiveMountEffects (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:13336:11)
+    at commitPassiveMountOnFiber (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:15484:13)
+
+ ✓ src/features/admin-ops/components/AdminUserManagement.test.tsx (8 tests) 1337ms
+     ✓ limits role changes to supported roles and does not submit after the confirmation is cancelled  913ms
+stderr | src/features/delivery-tasks/components/DeliveryActiveJob.test.tsx > active handover details > states when handover items are unavailable instead of claiming an empty checklist
+Failed to process pending offline uploads: ReferenceError: indexedDB is not defined
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:23:21
+    at new Promise (<anonymous>)
+    at openDB (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:22:10)
+    at getPendingUploads (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:93:20)
+    at syncOfflineUploads (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/features/communication/models/useWebRTC.ts:367:31)
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/features/communication/models/useWebRTC.ts:414:5
+    at Object.react_stack_bottom_frame (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:25989:20)
+    at runWithFiberInDEV (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:874:13)
+    at commitHookEffectListMount (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:13249:29)
+    at commitHookPassiveMountEffects (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:13336:11)
+Failed to clean orphaned chunks ReferenceError: indexedDB is not defined
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:23:21
+    at new Promise (<anonymous>)
+    at openDB (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:22:10)
+    at cleanOrphanedChunks (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:137:20)
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/features/communication/models/useWebRTC.ts:417:5
+    at Object.react_stack_bottom_frame (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:25989:20)
+    at runWithFiberInDEV (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:874:13)
+    at commitHookEffectListMount (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:13249:29)
+    at commitHookPassiveMountEffects (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:13336:11)
+    at commitPassiveMountOnFiber (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:15484:13)
+
+ ✓ src/features/delivery-tasks/components/DeliveryActiveJob.test.tsx (4 tests) 1694ms
+     ✓ shows owned items, quantities, customer and order total, and closes accessibly  806ms
+     ✓ does not leave the previous order details open when the active job changes  672ms
+ ✓ src/pages/customer/CustomerDashboard.test.tsx (7 tests) 2708ms
+     ✓ shows the delivered receipt after the order leaves the active list (wide=false)  713ms
+     ✓ shows the delivered receipt after the order leaves the active list (wide=true)  414ms
+   ✓ restored tracker keeps the same order through completion (false, otherActive=false)  368ms
+   ✓ restored tracker keeps the same order through completion (true, otherActive=false)  368ms
+   ✓ restored tracker keeps the same order through completion (false, otherActive=true)  390ms
+   ✓ restored tracker keeps the same order through completion (true, otherActive=true)  416ms
+ ✓ src/features/customer-orders/components/OrderTrackerLive.test.tsx (10 tests) 1029ms
+     ✓ does not cancel on a single tap -- it asks first  879ms
+stderr | src/features/customer-orders/model/useCustomerCart.test.ts > useCustomerCart payment method > an unavailable-item response removes only rejected items and keeps checkout retryable
+AxiosError: Request failed with status code 400
+    at settle (file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/axios/lib/core/settle.js:19:12)
+    at XMLHttpRequest.onloadend (file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/axios/lib/adapters/xhr.js:63:9)
+    at XMLHttpRequest.methodCall (file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@mswjs/interceptors/lib/node/XMLHttpRequest-Dw6Wm-UU.mjs:342:22)
+    at Proxy.<anonymous> (file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@mswjs/interceptors/lib/node/XMLHttpRequest-Dw6Wm-UU.mjs:153:61)
+    at XMLHttpRequestController.trigger (file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@mswjs/interceptors/lib/node/XMLHttpRequest-Dw6Wm-UU.mjs:599:13)
+    at finalizeResponse (file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@mswjs/interceptors/lib/node/XMLHttpRequest-Dw6Wm-UU.mjs:482:9)
+    at readNextResponseBodyChunk (file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@mswjs/interceptors/lib/node/XMLHttpRequest-Dw6Wm-UU.mjs:494:6)
+    at Axios.request (file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/axios/lib/core/Axios.js:46:41)
+    at B.request (file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@zodios/core/lib/index.mjs:9:6356)
+    at Object.processPaymentAndOrder (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/features/customer-orders/model/useCustomerCart.ts:470:19) {
+  isAxiosError: true,
+  code: 'ERR_BAD_REQUEST',
+  config: [Object: null prototype] {
+    transitional: {
+      silentJSONParsing: true,
+      forcedJSONParsing: true,
+      clarifyTimeoutError: false,
+      legacyInterceptorReqResOrdering: true,
+      advertiseZstdAcceptEncoding: false,
+      validateStatusUndefinedResolves: true
+    },
+    adapter: [ 'xhr', 'http', 'fetch' ],
+    transformRequest: [ [Function: transformRequest] ],
+    transformResponse: [ [Function: transformResponse] ],
+    timeout: 0,
+    xsrfCookieName: 'XSRF-TOKEN',
+    xsrfHeaderName: 'X-XSRF-TOKEN',
+    maxContentLength: -1,
+    maxBodyLength: -1,
+    env: { FormData: [Function], Blob: [class Blob] },
+    validateStatus: [Function: validateStatus],
+    headers: Object [AxiosHeaders] {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      'X-Device-Info': 'Mozilla/5.0 (darwin) AppleWebKit/537.36 (KHTML, like Gecko) jsdom/30.0.1',
+      'X-Device-OS': 'Unknown OS',
+      'X-Device-Browser': 'Unknown Browser'
+    },
+    baseURL: 'http://localhost:3000',
+    method: 'post',
+    url: '/api/v1/orders',
+    data: '{"quoteId":"quote-1","customerId":"guest","customerName":"Customer","restaurantId":"44444444-4444-4444-4444-444444444444","deliveryAddressId":"55555555-5555-5555-5555-555555555555","items":[{"menuItemId":"66666666-6666-6666-6666-666666666666","quantity":1},{"menuItemId":"77777777-7777-7777-7777-777777777777","quantity":1}],"paymentMethod":"CARD"}',
+    allowAbsoluteUrls: true
+  },
+  request: XMLHttpRequest {
+    open: [Function: open],
+    setRequestHeader: [Function: setRequestHeader],
+    send: [Function: send],
+    abort: [Function: abort],
+    getResponseHeader: [Function (anonymous)],
+    getAllResponseHeaders: [Function (anonymous)],
+    overrideMimeType: [Function: overrideMimeType],
+    onreadystatechange: [Getter/Setter],
+    readyState: 4,
+    timeout: [Getter/Setter],
+    withCredentials: [Getter/Setter],
+    upload: XMLHttpRequestUpload {},
+    responseURL: 'http://localhost:3000/api/v1/orders',
+    status: 400,
+    statusText: 'Bad Request',
+    responseType: [Getter/Setter],
+    response: [Getter],
+    responseText: [Getter],
+    responseXML: [Getter],
+    UNSENT: 0,
+    OPENED: 1,
+    HEADERS_RECEIVED: 2,
+    LOADING: 3,
+    DONE: 4,
+    Symbol(SameObject caches): [Object: null prototype] { upload: XMLHttpRequestUpload {} }
+  },
+  response: {
+    data: { success: false, message: 'Menu item unavailable', data: [Array] },
+    status: 400,
+    statusText: 'Bad Request',
+    headers: Object [AxiosHeaders] {
+      'content-length': '99',
+      'content-type': 'application/json'
+    },
+    config: [Object: null prototype] {
+      transitional: [Object],
+      adapter: [Array],
+      transformRequest: [Array],
+      transformResponse: [Array],
+      timeout: 0,
+      xsrfCookieName: 'XSRF-TOKEN',
+      xsrfHeaderName: 'X-XSRF-TOKEN',
+      maxContentLength: -1,
+      maxBodyLength: -1,
+      env: [Object],
+      validateStatus: [Function: validateStatus],
+      headers: [Object [AxiosHeaders]],
+      baseURL: 'http://localhost:3000',
+      method: 'post',
+      url: '/api/v1/orders',
+      data: '{"quoteId":"quote-1","customerId":"guest","customerName":"Customer","restaurantId":"44444444-4444-4444-4444-444444444444","deliveryAddressId":"55555555-5555-5555-5555-555555555555","items":[{"menuItemId":"66666666-6666-6666-6666-666666666666","quantity":1},{"menuItemId":"77777777-7777-7777-7777-777777777777","quantity":1}],"paymentMethod":"CARD"}',
+      allowAbsoluteUrls: true
+    },
+    request: XMLHttpRequest {
+      open: [Function: open],
+      setRequestHeader: [Function: setRequestHeader],
+      send: [Function: send],
+      abort: [Function: abort],
+      getResponseHeader: [Function (anonymous)],
+      getAllResponseHeaders: [Function (anonymous)],
+      overrideMimeType: [Function: overrideMimeType],
+      onreadystatechange: [Getter/Setter],
+      readyState: 4,
+      timeout: [Getter/Setter],
+      withCredentials: [Getter/Setter],
+      upload: XMLHttpRequestUpload {},
+      responseURL: 'http://localhost:3000/api/v1/orders',
+      status: 400,
+      statusText: 'Bad Request',
+      responseType: [Getter/Setter],
+      response: [Getter],
+      responseText: [Getter],
+      responseXML: [Getter],
+      UNSENT: 0,
+      OPENED: 1,
+      HEADERS_RECEIVED: 2,
+      LOADING: 3,
+      DONE: 4,
+      Symbol(SameObject caches): [Object: null prototype]
+    }
+  },
+  status: 400
+}
+
+ ✓ src/features/catalog/components/restaurant/BrandRegistration.test.tsx (3 tests) 724ms
+     ✓ creates an organisation only for a caller who has none, then registers the brand against it  565ms
+stderr | src/features/customer-orders/model/useCustomerCart.test.ts > useCustomerCart payment method > removing the only rejected cart item does not fabricate successful payment
+Could not refresh the created order before tracking AxiosError: Network Error
+    at XMLHttpRequest.handleError (file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/axios/lib/adapters/xhr.js:124:21)
+    at XMLHttpRequest.invokeTheCallbackFunction (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/jsdom/lib/generated/idl/EventHandlerNonNull.js:14:28)
+    at XMLHttpRequest.<anonymous> (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/jsdom/lib/jsdom/living/helpers/create-event-accessor.js:57:32)
+    at innerInvokeEventListeners (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:360:16)
+    at invokeEventListeners (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:296:3)
+    at XMLHttpRequestImpl._dispatch (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/jsdom/lib/jsdom/living/events/EventTarget-impl.js:243:9)
+    at fireAnEvent (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/jsdom/lib/jsdom/living/helpers/events.js:18:36)
+    at requestErrorSteps (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/jsdom/lib/jsdom/living/xhr/XMLHttpRequest-impl.js:153:3)
+    at dispatchError (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/jsdom/lib/jsdom/living/xhr/XMLHttpRequest-impl.js:127:3)
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/jsdom/lib/jsdom/living/xhr/XMLHttpRequest-impl.js:748:13
+    at Axios.request (file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/axios/lib/core/Axios.js:46:41)
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)
+    at B.request (file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@zodios/core/lib/index.mjs:9:6356)
+    at Timeout._onTimeout (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/features/customer-orders/model/useCustomerCart.ts:480:29) {
+  isAxiosError: true,
+  code: 'ERR_NETWORK',
+  config: [Object: null prototype] {
+    transitional: {
+      silentJSONParsing: true,
+      forcedJSONParsing: true,
+      clarifyTimeoutError: false,
+      legacyInterceptorReqResOrdering: true,
+      advertiseZstdAcceptEncoding: false,
+      validateStatusUndefinedResolves: true
+    },
+    adapter: [ 'xhr', 'http', 'fetch' ],
+    transformRequest: [ [Function: transformRequest] ],
+    transformResponse: [ [Function: transformResponse] ],
+    timeout: 5000,
+    xsrfCookieName: 'XSRF-TOKEN',
+    xsrfHeaderName: 'X-XSRF-TOKEN',
+    maxContentLength: -1,
+    maxBodyLength: -1,
+    env: { FormData: [Function], Blob: [class Blob] },
+    validateStatus: [Function: validateStatus],
+    headers: Object [AxiosHeaders] {
+      Accept: 'application/json',
+      'Content-Type': undefined,
+      'X-Device-Info': 'Mozilla/5.0 (darwin) AppleWebKit/537.36 (KHTML, like Gecko) jsdom/30.0.1',
+      'X-Device-OS': 'Unknown OS',
+      'X-Device-Browser': 'Unknown Browser'
+    },
+    baseURL: 'http://localhost:3000',
+    method: 'get',
+    url: '/api/v1/orders/ord-1',
+    allowAbsoluteUrls: true,
+    data: undefined
+  },
+  request: XMLHttpRequest {
+    open: [Function: open],
+    setRequestHeader: [Function: setRequestHeader],
+    send: [Function: send],
+    abort: [Function: abort],
+    getResponseHeader: [Function: getResponseHeader],
+    getAllResponseHeaders: [Function: getAllResponseHeaders],
+    overrideMimeType: [Function: overrideMimeType],
+    onreadystatechange: [Getter/Setter],
+    readyState: [Getter],
+    timeout: [Getter/Setter],
+    withCredentials: [Getter/Setter],
+    upload: XMLHttpRequestUpload {},
+    responseURL: [Getter],
+    status: [Getter],
+    statusText: [Getter],
+    responseType: [Getter/Setter],
+    response: [Getter],
+    responseText: [Getter],
+    responseXML: [Getter],
+    UNSENT: 0,
+    OPENED: 1,
+    HEADERS_RECEIVED: 2,
+    LOADING: 3,
+    DONE: 4,
+    Symbol(SameObject caches): [Object: null prototype] { upload: XMLHttpRequestUpload {} }
+  },
+  event: ProgressEvent { isTrusted: [Getter] }
+}
+
+stderr | src/features/customer-orders/model/useCustomerCart.test.ts > useCustomerCart payment method > removing the only rejected cart item does not fabricate successful payment
+AxiosError: Request failed with status code 400
+    at settle (file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/axios/lib/core/settle.js:19:12)
+    at XMLHttpRequest.onloadend (file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/axios/lib/adapters/xhr.js:63:9)
+    at XMLHttpRequest.methodCall (file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@mswjs/interceptors/lib/node/XMLHttpRequest-Dw6Wm-UU.mjs:342:22)
+    at Proxy.<anonymous> (file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@mswjs/interceptors/lib/node/XMLHttpRequest-Dw6Wm-UU.mjs:153:61)
+    at XMLHttpRequestController.trigger (file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@mswjs/interceptors/lib/node/XMLHttpRequest-Dw6Wm-UU.mjs:599:13)
+    at finalizeResponse (file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@mswjs/interceptors/lib/node/XMLHttpRequest-Dw6Wm-UU.mjs:482:9)
+    at readNextResponseBodyChunk (file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@mswjs/interceptors/lib/node/XMLHttpRequest-Dw6Wm-UU.mjs:494:6)
+    at Axios.request (file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/axios/lib/core/Axios.js:46:41)
+    at B.request (file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@zodios/core/lib/index.mjs:9:6356)
+    at Object.processPaymentAndOrder (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/features/customer-orders/model/useCustomerCart.ts:470:19) {
+  isAxiosError: true,
+  code: 'ERR_BAD_REQUEST',
+  config: [Object: null prototype] {
+    transitional: {
+      silentJSONParsing: true,
+      forcedJSONParsing: true,
+      clarifyTimeoutError: false,
+      legacyInterceptorReqResOrdering: true,
+      advertiseZstdAcceptEncoding: false,
+      validateStatusUndefinedResolves: true
+    },
+    adapter: [ 'xhr', 'http', 'fetch' ],
+    transformRequest: [ [Function: transformRequest] ],
+    transformResponse: [ [Function: transformResponse] ],
+    timeout: 0,
+    xsrfCookieName: 'XSRF-TOKEN',
+    xsrfHeaderName: 'X-XSRF-TOKEN',
+    maxContentLength: -1,
+    maxBodyLength: -1,
+    env: { FormData: [Function], Blob: [class Blob] },
+    validateStatus: [Function: validateStatus],
+    headers: Object [AxiosHeaders] {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      'X-Device-Info': 'Mozilla/5.0 (darwin) AppleWebKit/537.36 (KHTML, like Gecko) jsdom/30.0.1',
+      'X-Device-OS': 'Unknown OS',
+      'X-Device-Browser': 'Unknown Browser'
+    },
+    baseURL: 'http://localhost:3000',
+    method: 'post',
+    url: '/api/v1/orders',
+    data: '{"quoteId":"quote-1","customerId":"guest","customerName":"Customer","restaurantId":"44444444-4444-4444-4444-444444444444","deliveryAddressId":"55555555-5555-5555-5555-555555555555","items":[{"menuItemId":"66666666-6666-6666-6666-666666666666","quantity":1}],"paymentMethod":"CARD"}',
+    allowAbsoluteUrls: true
+  },
+  request: XMLHttpRequest {
+    open: [Function: open],
+    setRequestHeader: [Function: setRequestHeader],
+    send: [Function: send],
+    abort: [Function: abort],
+    getResponseHeader: [Function (anonymous)],
+    getAllResponseHeaders: [Function (anonymous)],
+    overrideMimeType: [Function: overrideMimeType],
+    onreadystatechange: [Getter/Setter],
+    readyState: 4,
+    timeout: [Getter/Setter],
+    withCredentials: [Getter/Setter],
+    upload: XMLHttpRequestUpload {},
+    responseURL: 'http://localhost:3000/api/v1/orders',
+    status: 400,
+    statusText: 'Bad Request',
+    responseType: [Getter/Setter],
+    response: [Getter],
+    responseText: [Getter],
+    responseXML: [Getter],
+    UNSENT: 0,
+    OPENED: 1,
+    HEADERS_RECEIVED: 2,
+    LOADING: 3,
+    DONE: 4,
+    Symbol(SameObject caches): [Object: null prototype] { upload: XMLHttpRequestUpload {} }
+  },
+  response: {
+    data: { success: false, message: 'Menu item unavailable', data: [Array] },
+    status: 400,
+    statusText: 'Bad Request',
+    headers: Object [AxiosHeaders] {
+      'content-length': '99',
+      'content-type': 'application/json'
+    },
+    config: [Object: null prototype] {
+      transitional: [Object],
+      adapter: [Array],
+      transformRequest: [Array],
+      transformResponse: [Array],
+      timeout: 0,
+      xsrfCookieName: 'XSRF-TOKEN',
+      xsrfHeaderName: 'X-XSRF-TOKEN',
+      maxContentLength: -1,
+      maxBodyLength: -1,
+      env: [Object],
+      validateStatus: [Function: validateStatus],
+      headers: [Object [AxiosHeaders]],
+      baseURL: 'http://localhost:3000',
+      method: 'post',
+      url: '/api/v1/orders',
+      data: '{"quoteId":"quote-1","customerId":"guest","customerName":"Customer","restaurantId":"44444444-4444-4444-4444-444444444444","deliveryAddressId":"55555555-5555-5555-5555-555555555555","items":[{"menuItemId":"66666666-6666-6666-6666-666666666666","quantity":1}],"paymentMethod":"CARD"}',
+      allowAbsoluteUrls: true
+    },
+    request: XMLHttpRequest {
+      open: [Function: open],
+      setRequestHeader: [Function: setRequestHeader],
+      send: [Function: send],
+      abort: [Function: abort],
+      getResponseHeader: [Function (anonymous)],
+      getAllResponseHeaders: [Function (anonymous)],
+      overrideMimeType: [Function: overrideMimeType],
+      onreadystatechange: [Getter/Setter],
+      readyState: 4,
+      timeout: [Getter/Setter],
+      withCredentials: [Getter/Setter],
+      upload: XMLHttpRequestUpload {},
+      responseURL: 'http://localhost:3000/api/v1/orders',
+      status: 400,
+      statusText: 'Bad Request',
+      responseType: [Getter/Setter],
+      response: [Getter],
+      responseText: [Getter],
+      responseXML: [Getter],
+      UNSENT: 0,
+      OPENED: 1,
+      HEADERS_RECEIVED: 2,
+      LOADING: 3,
+      DONE: 4,
+      Symbol(SameObject caches): [Object: null prototype]
+    }
+  },
+  status: 400
+}
+
+stderr | src/pages/admin/money/OperationsPage.test.tsx > OperationsPage > surfaces a fetch failure to the operator
+Error: ledger service is unavailable
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/pages/admin/money/OperationsPage.test.tsx:219:38
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:2956:64
+
+stderr | src/pages/admin/money/OperationsPage.test.tsx > OperationsPage > keeps a rejected movement open and shows the mutation failure
+Error: resolution was rejected by the ledger
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/pages/admin/money/OperationsPage.test.tsx:230:40
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:2956:64
+
+stderr | src/pages/admin/money/OperationsPage.test.tsx > OperationsPage > surfaces a failed wallet retry instead of silently leaving it in the queue
+Error: wallet publisher is unavailable
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/pages/admin/money/OperationsPage.test.tsx:283:43
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:2956:64
+
+stderr | src/features/customer-orders/model/useCustomerCart.test.ts > useCustomerCart payment method > a failed tracking refresh preserves successful creation without another order POST
+Could not refresh the created order before tracking AxiosError: Request failed with status code 503
+    at settle (file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/axios/lib/core/settle.js:19:12)
+    at XMLHttpRequest.onloadend (file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/axios/lib/adapters/xhr.js:63:9)
+    at XMLHttpRequest.methodCall (file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@mswjs/interceptors/lib/node/XMLHttpRequest-Dw6Wm-UU.mjs:342:22)
+    at Proxy.<anonymous> (file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@mswjs/interceptors/lib/node/XMLHttpRequest-Dw6Wm-UU.mjs:153:61)
+    at XMLHttpRequestController.trigger (file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@mswjs/interceptors/lib/node/XMLHttpRequest-Dw6Wm-UU.mjs:599:13)
+    at finalizeResponse (file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@mswjs/interceptors/lib/node/XMLHttpRequest-Dw6Wm-UU.mjs:482:9)
+    at readNextResponseBodyChunk (file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@mswjs/interceptors/lib/node/XMLHttpRequest-Dw6Wm-UU.mjs:494:6)
+    at Axios.request (file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/axios/lib/core/Axios.js:46:41)
+    at B.request (file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@zodios/core/lib/index.mjs:9:6356)
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/features/customer-orders/model/useCustomerCart.ts:480:29 {
+  isAxiosError: true,
+  code: 'ERR_BAD_RESPONSE',
+  config: [Object: null prototype] {
+    transitional: {
+      silentJSONParsing: true,
+      forcedJSONParsing: true,
+      clarifyTimeoutError: false,
+      legacyInterceptorReqResOrdering: true,
+      advertiseZstdAcceptEncoding: false,
+      validateStatusUndefinedResolves: true
+    },
+    adapter: [ 'xhr', 'http', 'fetch' ],
+    transformRequest: [ [Function: transformRequest] ],
+    transformResponse: [ [Function: transformResponse] ],
+    timeout: 5000,
+    xsrfCookieName: 'XSRF-TOKEN',
+    xsrfHeaderName: 'X-XSRF-TOKEN',
+    maxContentLength: -1,
+    maxBodyLength: -1,
+    env: { FormData: [Function], Blob: [class Blob] },
+    validateStatus: [Function: validateStatus],
+    headers: Object [AxiosHeaders] {
+      Accept: 'application/json',
+      'Content-Type': undefined,
+      'X-Device-Info': 'Mozilla/5.0 (darwin) AppleWebKit/537.36 (KHTML, like Gecko) jsdom/30.0.1',
+      'X-Device-OS': 'Unknown OS',
+      'X-Device-Browser': 'Unknown Browser'
+    },
+    baseURL: 'http://localhost:3000',
+    method: 'get',
+    url: '/api/v1/orders/99999999-9999-4999-8999-999999999999',
+    allowAbsoluteUrls: true,
+    data: undefined
+  },
+  request: XMLHttpRequest {
+    open: [Function: open],
+    setRequestHeader: [Function: setRequestHeader],
+    send: [Function: send],
+    abort: [Function: abort],
+    getResponseHeader: [Function (anonymous)],
+    getAllResponseHeaders: [Function (anonymous)],
+    overrideMimeType: [Function: overrideMimeType],
+    onreadystatechange: [Getter/Setter],
+    readyState: 4,
+    timeout: [Getter/Setter],
+    withCredentials: [Getter/Setter],
+    upload: XMLHttpRequestUpload {},
+    responseURL: 'http://localhost:3000/api/v1/orders/99999999-9999-4999-8999-999999999999',
+    status: 503,
+    statusText: 'Service Unavailable',
+    responseType: [Getter/Setter],
+    response: [Getter],
+    responseText: [Getter],
+    responseXML: [Getter],
+    UNSENT: 0,
+    OPENED: 1,
+    HEADERS_RECEIVED: 2,
+    LOADING: 3,
+    DONE: 4,
+    Symbol(SameObject caches): [Object: null prototype] { upload: XMLHttpRequestUpload {} }
+  },
+  response: {
+    data: { success: false },
+    status: 503,
+    statusText: 'Service Unavailable',
+    headers: Object [AxiosHeaders] {
+      'content-length': '17',
+      'content-type': 'application/json'
+    },
+    config: [Object: null prototype] {
+      transitional: [Object],
+      adapter: [Array],
+      transformRequest: [Array],
+      transformResponse: [Array],
+      timeout: 5000,
+      xsrfCookieName: 'XSRF-TOKEN',
+      xsrfHeaderName: 'X-XSRF-TOKEN',
+      maxContentLength: -1,
+      maxBodyLength: -1,
+      env: [Object],
+      validateStatus: [Function: validateStatus],
+      headers: [Object [AxiosHeaders]],
+      baseURL: 'http://localhost:3000',
+      method: 'get',
+      url: '/api/v1/orders/99999999-9999-4999-8999-999999999999',
+      allowAbsoluteUrls: true,
+      data: undefined
+    },
+    request: XMLHttpRequest {
+      open: [Function: open],
+      setRequestHeader: [Function: setRequestHeader],
+      send: [Function: send],
+      abort: [Function: abort],
+      getResponseHeader: [Function (anonymous)],
+      getAllResponseHeaders: [Function (anonymous)],
+      overrideMimeType: [Function: overrideMimeType],
+      onreadystatechange: [Getter/Setter],
+      readyState: 4,
+      timeout: [Getter/Setter],
+      withCredentials: [Getter/Setter],
+      upload: XMLHttpRequestUpload {},
+      responseURL: 'http://localhost:3000/api/v1/orders/99999999-9999-4999-8999-999999999999',
+      status: 503,
+      statusText: 'Service Unavailable',
+      responseType: [Getter/Setter],
+      response: [Getter],
+      responseText: [Getter],
+      responseXML: [Getter],
+      UNSENT: 0,
+      OPENED: 1,
+      HEADERS_RECEIVED: 2,
+      LOADING: 3,
+      DONE: 4,
+      Symbol(SameObject caches): [Object: null prototype]
+    }
+  },
+  status: 503
+}
+
+ ✓ src/features/customer-orders/model/useCustomerCart.test.ts (8 tests) 5332ms
+     ✓ no payment method means no order and a visible error  625ms
+     ✓ a method the customer chose is sent as-is  522ms
+     ✓ an older empty-menu quote cannot overwrite the cart quote  1525ms
+     ✓ an unavailable-item response removes only rejected items and keeps checkout retryable  1038ms
+     ✓ removing the only rejected cart item does not fabricate successful payment  518ms
+     ✓ tracking starts from the current server order after fast Dev payment completion  539ms
+     ✓ a failed tracking refresh preserves successful creation without another order POST  559ms
+stderr | src/pages/admin/money/OperationsPage.test.tsx > OperationsPage > failed refunds > surfaces a refused retry instead of looking queued
+Error: REFUND_EXCEEDS_REMAINING
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/pages/admin/money/OperationsPage.test.tsx:330:37
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:2956:64
+
+ ✓ src/pages/admin/money/OperationsPage.test.tsx (21 tests) 875ms
+ ✓ src/shared/ui/overlay/ConfirmDialog.test.tsx (5 tests) 905ms
+     ✓ resolves true when confirmed  810ms
+stderr | src/pages/admin/AdminPayoutWorkflow.test.tsx > Admin Payout Workflow > blocks a conflicting draft action while an approval is in flight
+An update to ToastProvider inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to PayoutDetail inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+stderr | src/pages/admin/AdminPayoutWorkflow.test.tsx > Admin Payout Workflow > blocks a conflicting draft action while an approval is in flight
+An update to PayoutDetail inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to PayoutDetail inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+stderr | src/pages/admin/AdminPayoutWorkflow.test.tsx > Admin Payout Workflow > blocks a conflicting draft action while an approval is in flight
+An update to PayoutDetail inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+stderr | src/pages/admin/AdminPayoutWorkflow.test.tsx > Admin Payout Workflow > reuses the payout action key and refreshes details after an ambiguous payment failure
+Error: connection reset after request
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/pages/admin/AdminPayoutWorkflow.test.tsx:184:30
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:2956:64
+
+stderr | src/pages/admin/AdminPayoutWorkflow.test.tsx > Admin Payout Workflow > reuses the create idempotency key after an ambiguous payout creation failure
+Error: connection reset after payout creation
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/pages/admin/AdminPayoutWorkflow.test.tsx:303:30
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:2956:64
+
+ ✓ src/pages/admin/AdminPayoutWorkflow.test.tsx (16 tests) 1169ms
+stderr | src/features/communication/models/useChatSession.test.tsx > useChatSession initialization > keeps the session usable and reports a history failure without restarting initialization
+Error loading chat history.
+
+stderr | src/features/communication/models/useChatSession.test.tsx > useChatSession initialization > exposes a retry after session creation fails and retries the request
+Error initializing chat session.
+
+stderr | src/features/communication/models/useChatSession.test.tsx > useChatSession initialization > exposes a retry after session creation fails and retries the request
+Error initializing chat session.
+
+stderr | src/features/customer-orders/components/CustomerCheckout.test.tsx > CustomerCheckout > starts with no tip -- the customer opts in
+An update to CustomerCheckoutInner inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+stderr | src/features/communication/models/useChatSession.test.tsx > useChatSession initialization > shows a retry action instead of silently leaving the composer disabled
+Error initializing chat session.
+
+stderr | src/features/communication/models/useChatSession.test.tsx > useChatSession initialization > shows a retry action instead of silently leaving the composer disabled
+Error initializing chat session.
+
+stderr | src/features/communication/models/useChatSession.test.tsx > useChatSession initialization > keeps the composer text when the socket closes before publish
+An update to ForwardRef inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to ForwardRef inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+ ✓ src/features/customer-orders/components/CustomerCheckout.test.tsx (10 tests) 912ms
+stderr | src/features/communication/models/useChatSession.test.tsx > useChatSession initialization > blocks text above the server limit and explains why it cannot be sent
+An update to ForwardRef inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to ForwardRef inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+ ✓ src/features/communication/models/useChatSession.test.tsx (15 tests) 876ms
+ ✓ src/pages/admin/AdminRefundQueue.test.tsx (8 tests) 966ms
+ ✓ src/features/admin-ops/components/AdminSupportTickets.test.tsx (12 tests) 856ms
+stderr | src/features/ledger/components/AdminLedgerView.test.tsx > AdminLedgerView > reports a failed fetch instead of showing an empty ledger
+Error: ledger-service unreachable
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/features/ledger/components/AdminLedgerView.test.tsx:146:38
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:2956:64
+
+ ✓ src/features/ledger/components/AdminLedgerView.test.tsx (7 tests) 523ms
+ ✓ src/features/reviews/components/RateOrderModal.test.tsx (10 tests) 664ms
+ ✓ src/shared/ui/action/AddToCartControl.test.tsx (4 tests) 533ms
+stderr | src/pages/admin/AdminPortal.test.tsx > Admin refund navigation > mounts call controls for an administrator-initiated support call
+An update to AdminPortal inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to AdminPortal inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to AdminPortal inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to AdminPortal inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+stderr | src/pages/admin/AdminPortal.test.tsx > Admin refund navigation > gives the compact theme and logout controls accessible names
+An update to AdminPortal inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to AdminPortal inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to AdminPortal inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to AdminPortal inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+stderr | src/pages/admin/AdminPortal.test.tsx > Admin refund navigation > keeps payout statement order links on their money breakdown route
+An update to AdminPortal inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to AdminPortal inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to AdminPortal inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to AdminPortal inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+ ✓ src/pages/admin/AdminPortal.test.tsx (5 tests) 525ms
+stderr | src/features/customer-orders/model/useCustomerOrders.test.ts > useCustomerOrders polling > an order awaiting delay approval keeps the poller running and sees the transition
+An update to TestComponent inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+ ✓ src/features/customer-orders/model/useCustomerOrders.test.ts (4 tests) 502ms
+ ✓ src/features/reviews/components/AdminReviewsView.test.tsx (6 tests) 469ms
+ ✓ src/features/campaigns-ads/components/CampaignManagement.test.tsx (3 tests) 403ms
+stderr | src/shared/ui/SettingsHistoryTab.test.tsx > history readiness and recovery > distinguishes an unavailable history from empty and retries the first page
+Error: history unavailable
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/shared/ui/SettingsHistoryTab.test.tsx:98:31
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:2956:64
+
+stderr | src/shared/ui/SettingsHistoryTab.test.tsx > history readiness and recovery > retains loaded rows after a later page fails and retries that page
+Error: page unavailable
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/shared/ui/SettingsHistoryTab.test.tsx:115:30
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:2956:64
+
+ ✓ src/shared/ui/SettingsHistoryTab.test.tsx (9 tests) 422ms
+ ✓ src/shared/ui/data/DataTable.test.tsx (12 tests) 343ms
+ ✓ src/features/communication/components/RefundRequestModal.test.tsx (2 tests) 333ms
+ ✓ src/features/admin-ops/components/AdminManualInterventions.test.tsx (1 test) 340ms
+     ✓ keeps a new request pending through a stale failure and reopens controls for a new durable failure  335ms
+stderr | src/features/customer-orders/components/CustomerLiveOrderRail.test.tsx > CustomerLiveOrderRail > shows the order beside the menu on a wide screen
+You have Reduced Motion enabled on your device. Animations may not appear as expected.. For more information and steps for solving, visit https://motion.dev/troubleshooting/reduced-motion-disabled
+
+ ✓ src/features/customer-orders/components/CustomerLiveOrderRail.test.tsx (2 tests) 341ms
+     ✓ shows the order beside the menu on a wide screen  318ms
+ ✓ src/features/catalog/components/MenuItemRow.test.tsx (24 tests) 307ms
+ ✓ src/features/maps-tracking/components/AdminFleetMap.test.tsx (2 tests) 328ms
+ ✓ src/features/campaigns-ads/components/CreateCampaignModal.test.tsx (4 tests) 315ms
+ ✓ src/pages/restaurant/RestaurantEarningsTab.test.tsx (3 tests) 294ms
+ ✓ src/shared/ui/overlay/ToastRegion.test.tsx (5 tests) 166ms
+ ✓ src/pages/admin/AdminOrderMoney.test.tsx (8 tests) 286ms
+stderr | src/features/customer-orders/components/OrderDeliveredSummary.test.tsx > OrderDeliveredSummary > offers the tax invoice once the order is delivered
+An update to OrderDeliveredSummary inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to OrderDeliveredSummary inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to OrderDeliveredSummary inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to OrderDeliveredSummary inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to OrderDeliveredSummary inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+stderr | src/features/customer-orders/components/OrderDeliveredSummary.test.tsx > OrderDeliveredSummary > offers "Something wrong with this order?" while the order chat is offered
+An update to OrderDeliveredSummary inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to OrderDeliveredSummary inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to OrderDeliveredSummary inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to OrderDeliveredSummary inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to OrderDeliveredSummary inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+stderr | src/features/customer-orders/components/OrderDeliveredSummary.test.tsx > OrderDeliveredSummary > hides it once the chat it opens is gone, instead of a button that does nothing
+An update to OrderDeliveredSummary inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to OrderDeliveredSummary inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to OrderDeliveredSummary inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to OrderDeliveredSummary inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to OrderDeliveredSummary inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+ ✓ src/features/customer-orders/components/OrderDeliveredSummary.test.tsx (5 tests) 294ms
+ ✓ src/features/customer-orders/components/TaxInvoiceSheet.test.tsx (3 tests) 293ms
+stderr | src/pages/admin/money/AdminPayoutsPage.test.tsx > AdminPayoutsPage > survives a queue the service could not return
+Error: ledger-service unreachable
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/pages/admin/money/AdminPayoutsPage.test.tsx:69:33
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:2956:64
+
+ ✓ src/pages/admin/money/AdminPayoutsPage.test.tsx (4 tests) 295ms
+ ✓ src/shared/ui/navigation/Tabs.test.tsx (10 tests) 285ms
+ ✓ src/features/catalog/components/customer/CustomerMenuView.test.tsx (3 tests) 325ms
+ ✓ src/shared/ui/action/Button.test.tsx (11 tests) 276ms
+ ✓ src/features/campaigns-ads/components/RestaurantCampaigns.test.tsx (6 tests) 313ms
+ ✓ src/pages/delivery/RiderEarnings.test.tsx (3 tests) 355ms
+ ✓ src/features/restaurant-orders/components/RestaurantOrderDrawers.test.tsx (4 tests) 318ms
+ ✓ src/shared/ui/form/Select.test.tsx (8 tests) 265ms
+ ✓ src/shared/ui/overlay/Overlay.test.tsx (9 tests) 248ms
+ ✓ src/features/customer-orders/model/useCustomerAddresses.test.ts (5 tests) 245ms
+ ✓ src/pages/admin/money/PayoutDrawer.test.tsx (1 test) 253ms
+ ✓ src/features/communication/components/ChatMessageList.test.tsx (16 tests) 224ms
+ ✓ src/features/reviews/model/useOrderReviewEligibility.test.tsx (6 tests) 246ms
+ ✓ src/features/admin-ops/components/AdminLiveOperations.test.tsx (1 test) 211ms
+ ✓ src/features/catalog/components/customer/CustomerRestaurantBrowser.test.tsx (2 tests) 215ms
+ ✓ src/features/catalog/model/useCustomerStorefront.test.ts (3 tests) 234ms
+ ✓ src/shared/ui/motion/ScreenTransition.test.tsx (5 tests) 220ms
+ ✓ src/shared/ui/form/Stepper.test.tsx (5 tests) 157ms
+stderr | src/features/maps-tracking/components/OrderTrackingMap.test.tsx > owned live map stream > exposes reconnecting after EOF and resets retry backoff after reconnection
+Could not connect to SSE stream Error: closed
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/features/maps-tracking/components/OrderTrackingMap.test.tsx:102:42
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/@testing-library/react/dist/act-compat.js:47:24
+    at process.env.NODE_ENV.exports.act (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react/cjs/react.development.js:814:22)
+    at Proxy.<anonymous> (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/@testing-library/react/dist/act-compat.js:46:25)
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/features/maps-tracking/components/OrderTrackingMap.test.tsx:102:5
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:20
+Could not connect to SSE stream Error: network
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/features/maps-tracking/components/OrderTrackingMap.test.tsx:104:42
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/@testing-library/react/dist/act-compat.js:47:24
+    at process.env.NODE_ENV.exports.act (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react/cjs/react.development.js:814:22)
+    at Proxy.<anonymous> (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/@testing-library/react/dist/act-compat.js:46:25)
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/features/maps-tracking/components/OrderTrackingMap.test.tsx:104:5
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:20
+
+stderr | src/features/maps-tracking/components/OrderTrackingMap.test.tsx > owned live map stream > exposes reconnecting after EOF and resets retry backoff after reconnection
+Could not connect to SSE stream Error: network
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/features/maps-tracking/components/OrderTrackingMap.test.tsx:107:42
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/@testing-library/react/dist/act-compat.js:47:24
+    at process.env.NODE_ENV.exports.act (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react/cjs/react.development.js:814:22)
+    at Proxy.<anonymous> (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/@testing-library/react/dist/act-compat.js:46:25)
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/features/maps-tracking/components/OrderTrackingMap.test.tsx:107:5
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:20
+
+stderr | src/features/maps-tracking/components/OrderTrackingMap.test.tsx > owned live map stream > stops retrying a denied stream and consumes its rejected promise
+An update to OrderTrackingMapInner inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+ ✓ src/features/maps-tracking/components/OrderTrackingMap.test.tsx (13 tests) 239ms
+stderr | src/features/customer-orders/components/CustomerOrderTracker.test.tsx > CustomerOrderTracker terminal and payment copy > a platform cancellation blames the platform, not the restaurant
+Failed to process pending offline uploads: ReferenceError: indexedDB is not defined
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:23:21
+    at new Promise (<anonymous>)
+    at openDB (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:22:10)
+    at getPendingUploads (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:93:20)
+    at syncOfflineUploads (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/features/communication/models/useWebRTC.ts:367:31)
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/features/communication/models/useWebRTC.ts:414:5
+    at Object.react_stack_bottom_frame (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:25989:20)
+    at runWithFiberInDEV (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:874:13)
+    at commitHookEffectListMount (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:13249:29)
+    at commitHookPassiveMountEffects (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:13336:11)
+Failed to clean orphaned chunks ReferenceError: indexedDB is not defined
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:23:21
+    at new Promise (<anonymous>)
+    at openDB (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:22:10)
+    at cleanOrphanedChunks (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:137:20)
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/features/communication/models/useWebRTC.ts:417:5
+    at Object.react_stack_bottom_frame (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:25989:20)
+    at runWithFiberInDEV (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:874:13)
+    at commitHookEffectListMount (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:13249:29)
+    at commitHookPassiveMountEffects (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:13336:11)
+    at commitPassiveMountOnFiber (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:15484:13)
+
+stderr | src/features/customer-orders/components/CustomerOrderTracker.test.tsx > CustomerOrderTracker terminal and payment copy > a restaurant cancellation says so, and shows the reason the server sent
+Failed to process pending offline uploads: ReferenceError: indexedDB is not defined
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:23:21
+    at new Promise (<anonymous>)
+    at openDB (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:22:10)
+    at getPendingUploads (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:93:20)
+    at syncOfflineUploads (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/features/communication/models/useWebRTC.ts:367:31)
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/features/communication/models/useWebRTC.ts:414:5
+    at Object.react_stack_bottom_frame (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:25989:20)
+    at runWithFiberInDEV (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:874:13)
+    at commitHookEffectListMount (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:13249:29)
+    at commitHookPassiveMountEffects (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:13336:11)
+Failed to clean orphaned chunks ReferenceError: indexedDB is not defined
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:23:21
+    at new Promise (<anonymous>)
+    at openDB (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:22:10)
+    at cleanOrphanedChunks (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:137:20)
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/features/communication/models/useWebRTC.ts:417:5
+    at Object.react_stack_bottom_frame (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:25989:20)
+    at runWithFiberInDEV (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:874:13)
+    at commitHookEffectListMount (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:13249:29)
+    at commitHookPassiveMountEffects (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:13336:11)
+    at commitPassiveMountOnFiber (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:15484:13)
+
+stderr | src/features/customer-orders/components/CustomerOrderTracker.test.tsx > CustomerOrderTracker terminal and payment copy > a refunded order shows where the money went
+Failed to process pending offline uploads: ReferenceError: indexedDB is not defined
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:23:21
+    at new Promise (<anonymous>)
+    at openDB (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:22:10)
+    at getPendingUploads (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:93:20)
+    at syncOfflineUploads (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/features/communication/models/useWebRTC.ts:367:31)
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/features/communication/models/useWebRTC.ts:414:5
+    at Object.react_stack_bottom_frame (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:25989:20)
+    at runWithFiberInDEV (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:874:13)
+    at commitHookEffectListMount (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:13249:29)
+    at commitHookPassiveMountEffects (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:13336:11)
+Failed to clean orphaned chunks ReferenceError: indexedDB is not defined
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:23:21
+    at new Promise (<anonymous>)
+    at openDB (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:22:10)
+    at cleanOrphanedChunks (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:137:20)
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/features/communication/models/useWebRTC.ts:417:5
+    at Object.react_stack_bottom_frame (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:25989:20)
+    at runWithFiberInDEV (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:874:13)
+    at commitHookEffectListMount (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:13249:29)
+    at commitHookPassiveMountEffects (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:13336:11)
+    at commitPassiveMountOnFiber (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:15484:13)
+
+stderr | src/features/customer-orders/components/CustomerOrderTracker.test.tsx > CustomerOrderTracker terminal and payment copy > cancellation is not proof of a completed refund
+Failed to process pending offline uploads: ReferenceError: indexedDB is not defined
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:23:21
+    at new Promise (<anonymous>)
+    at openDB (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:22:10)
+    at getPendingUploads (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:93:20)
+    at syncOfflineUploads (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/features/communication/models/useWebRTC.ts:367:31)
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/features/communication/models/useWebRTC.ts:414:5
+    at Object.react_stack_bottom_frame (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:25989:20)
+    at runWithFiberInDEV (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:874:13)
+    at commitHookEffectListMount (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:13249:29)
+    at commitHookPassiveMountEffects (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:13336:11)
+Failed to clean orphaned chunks ReferenceError: indexedDB is not defined
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:23:21
+    at new Promise (<anonymous>)
+    at openDB (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:22:10)
+    at cleanOrphanedChunks (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:137:20)
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/features/communication/models/useWebRTC.ts:417:5
+    at Object.react_stack_bottom_frame (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:25989:20)
+    at runWithFiberInDEV (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:874:13)
+    at commitHookEffectListMount (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:13249:29)
+    at commitHookPassiveMountEffects (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:13336:11)
+    at commitPassiveMountOnFiber (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:15484:13)
+
+ ✓ src/features/customer-orders/components/CustomerOrderTracker.test.tsx (4 tests) 205ms
+ ✓ src/features/communication/components/CallOverlay.test.tsx (2 tests) 222ms
+ ✓ src/features/catalog/components/admin/AdminCategories.test.tsx (1 test) 170ms
+stderr | src/shared/ui/action/SwipeAction.test.tsx > SwipeAction > confirms on a full swipe
+An update to SwipeAction inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to SwipeAction inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+stderr | src/shared/ui/action/SwipeAction.test.tsx > SwipeAction > is operable from a keyboard, so it is not a drag-only control
+An update to SwipeAction inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to SwipeAction inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+stderr | src/shared/ui/action/SwipeAction.test.tsx > SwipeAction > re-arms after a confirmation that throws
+An update to SwipeAction inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to SwipeAction inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+stderr | src/shared/ui/action/SwipeAction.test.tsx > SwipeAction > says it is confirming once it has been
+An update to SwipeAction inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to SwipeAction inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+ ✓ src/shared/ui/action/SwipeAction.test.tsx (11 tests) 221ms
+ ✓ src/shared/ui/shell/RoleShell.test.tsx (7 tests) 161ms
+ ✓ src/shared/ui/feedback/PullToRefresh.test.tsx (6 tests) 294ms
+stderr | src/features/customer-orders/components/CustomerReceipt.test.tsx > Customer Receipt & Order Details > shows payment method badge on receipt
+Failed to process pending offline uploads: ReferenceError: indexedDB is not defined
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:23:21
+    at new Promise (<anonymous>)
+    at openDB (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:22:10)
+    at getPendingUploads (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:93:20)
+    at syncOfflineUploads (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/features/communication/models/useWebRTC.ts:367:31)
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/features/communication/models/useWebRTC.ts:414:5
+    at Object.react_stack_bottom_frame (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:25989:20)
+    at runWithFiberInDEV (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:874:13)
+    at commitHookEffectListMount (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:13249:29)
+    at commitHookPassiveMountEffects (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:13336:11)
+Failed to clean orphaned chunks ReferenceError: indexedDB is not defined
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:23:21
+    at new Promise (<anonymous>)
+    at openDB (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:22:10)
+    at cleanOrphanedChunks (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:137:20)
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/features/communication/models/useWebRTC.ts:417:5
+    at Object.react_stack_bottom_frame (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:25989:20)
+    at runWithFiberInDEV (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:874:13)
+    at commitHookEffectListMount (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:13249:29)
+    at commitHookPassiveMountEffects (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:13336:11)
+    at commitPassiveMountOnFiber (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:15484:13)
+
+stderr | src/features/customer-orders/components/CustomerReceipt.test.tsx > Customer Receipt & Order Details > shows destination-aware refund copy for failed orders
+Failed to process pending offline uploads: ReferenceError: indexedDB is not defined
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:23:21
+    at new Promise (<anonymous>)
+    at openDB (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:22:10)
+    at getPendingUploads (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:93:20)
+    at syncOfflineUploads (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/features/communication/models/useWebRTC.ts:367:31)
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/features/communication/models/useWebRTC.ts:414:5
+    at Object.react_stack_bottom_frame (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:25989:20)
+    at runWithFiberInDEV (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:874:13)
+    at commitHookEffectListMount (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:13249:29)
+    at commitHookPassiveMountEffects (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:13336:11)
+Failed to clean orphaned chunks ReferenceError: indexedDB is not defined
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:23:21
+    at new Promise (<anonymous>)
+    at openDB (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:22:10)
+    at cleanOrphanedChunks (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/lib/offlineStorage.ts:137:20)
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/features/communication/models/useWebRTC.ts:417:5
+    at Object.react_stack_bottom_frame (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:25989:20)
+    at runWithFiberInDEV (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:874:13)
+    at commitHookEffectListMount (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:13249:29)
+    at commitHookPassiveMountEffects (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:13336:11)
+    at commitPassiveMountOnFiber (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/node_modules/react-dom/cjs/react-dom-client.development.js:15484:13)
+
+ ✓ src/features/customer-orders/components/CustomerReceipt.test.tsx (2 tests) 201ms
+ ✓ src/hooks/usePolling.test.tsx (5 tests) 195ms
+ ✓ src/features/delivery-tasks/components/RiderWalletSection.test.tsx (3 tests) 202ms
+ ✓ src/features/customer-orders/components/CustomerFreeDeliveryTracker.test.tsx (5 tests) 187ms
+ ✓ src/shared/ui/overlay/Modal.test.tsx (4 tests) 195ms
+stderr | src/features/delivery-tasks/model/useDeliveryOrders.reping.test.ts > a lapsed dispatch offer that the server makes again > prompts the rider again on the second offer
+An update to TestComponent inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to TestComponent inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+stderr | src/features/delivery-tasks/model/useDeliveryOrders.reping.test.ts > a lapsed dispatch offer that the server makes again > prompts the rider again on the second offer
+An update to TestComponent inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to TestComponent inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+stderr | src/features/delivery-tasks/model/useDeliveryOrders.reping.test.ts > a lapsed dispatch offer that the server makes again > prompts again when the second offer arrives only through polling (socket push missed)
+An update to TestComponent inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to TestComponent inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+ ✓ src/shared/money/components/StatementTable.test.tsx (4 tests) 193ms
+ ✓ src/features/delivery-tasks/model/useDeliveryOrders.reping.test.ts (10 tests) 217ms
+ ✓ src/features/reviews/components/StarRating.test.tsx (6 tests) 192ms
+ ✓ src/features/catalog/components/restaurant/PrepTimeStepper.test.tsx (4 tests) 176ms
+ ✓ src/shared/money/components/ConfirmMoneyAction.test.tsx (5 tests) 169ms
+ ✓ src/shared/ui/form/Switch.test.tsx (5 tests) 166ms
+ ✓ src/features/reviews/components/DishRatingsPanel.test.tsx (6 tests) 146ms
+ ✓ src/features/customer-orders/components/OrderRefundState.test.tsx (8 tests) 176ms
+ ✓ src/shared/ui/shell/RoleShells.test.tsx (3 tests) 174ms
+ ✓ src/features/reviews/model/useEntityAggregates.test.tsx (7 tests) 162ms
+ ✓ src/shared/ui/ImageLoader.test.tsx (5 tests) 148ms
+ ✓ src/features/customer-orders/components/CustomerActiveOrdersCarousel.test.tsx (3 tests) 163ms
+ ✓ src/shared/ui/feedback/Spinner.test.tsx (4 tests) 139ms
+stderr | src/features/maps-tracking/components/AdminAssignmentMap.test.tsx > AdminAssignmentMap > does not substitute Bangalore coordinates when the restaurant location is missing
+Could not fetch restaurant location Error: Restaurant location is unavailable
+    at placeMarkers (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/features/maps-tracking/components/AdminAssignmentMap.tsx:75:47)
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)
+
+ ✓ src/features/maps-tracking/components/AdminAssignmentMap.test.tsx (1 test) 147ms
+ ✓ src/features/restaurant-orders/components/AcceptClock.test.tsx (3 tests) 147ms
+ ✓ src/features/restaurant-orders/components/RestaurantTabPanels.test.tsx (4 tests) 113ms
+ ✓ src/features/catalog/components/customer/CustomerRestaurantCard.test.tsx (2 tests) 97ms
+ ✓ src/features/reviews/model/useOrderReviewEligibility.failure.test.tsx (1 test) 74ms
+ ✓ src/features/reviews/model/useEntityAggregates.failure.test.tsx (1 test) 72ms
+ ✓ src/shared/ui/feedback/StatusPill.test.tsx (9 tests) 81ms
+ ✓ src/shared/ui/surface/Surface.test.tsx (8 tests) 75ms
+ ✓ src/features/identity/model/useOtpLogin.test.tsx (21 tests) 67ms
+ ✓ src/features/customer-orders/components/OrderMoneyBreakdown.test.tsx (2 tests) 66ms
+ ✓ src/shared/money/components/AmountBreakdown.test.tsx (2 tests) 62ms
+ ✓ src/features/delivery-tasks/model/useDeliveryOrders.afterOtp.test.ts (2 tests) 64ms
+ ✓ src/shared/ui/navigation/RoleGuard.test.tsx (7 tests) 56ms
+ ✓ src/shared/ui/map/mapMarker.test.ts (6 tests) 51ms
+ ✓ src/shared/time/time.test.ts (18 tests) 46ms
+ ✓ src/features/customer-orders/model/useCustomerReorder.test.ts (23 tests) 52ms
+ ✓ src/tests/msw-interception.test.ts (1 test) 40ms
+ ✓ src/features/customer-orders/model/useOrderRefunds.test.tsx (7 tests) 37ms
+ ✓ src/shared/ui/Skeleton.test.tsx (4 tests) 44ms
+ ✓ src/features/delivery-tasks/model/useRiderJobActions.test.ts (8 tests) 42ms
+ ✓ src/features/maps-tracking/model/placeOrderMap.test.ts (1 test) 37ms
+ ✓ src/features/delivery-tasks/model/useRiderDuty.test.ts (7 tests) 34ms
+ ✓ src/features/communication/models/useChatWebSocket.test.tsx (3 tests) 31ms
+ ✓ src/shared/money/format.test.ts (20 tests) 29ms
+stderr | src/features/communication/models/useWebRTC.test.tsx > useWebRTC call setup > keeps a fresh peer connection current through microphone permission and publishes its offer
+Failed to process pending offline uploads: TypeError: pending is not iterable
+    at syncOfflineUploads (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/features/communication/models/useWebRTC.ts:368:30)
+    at processTicksAndRejections (node:internal/process/task_queues:104:5)
+
+stderr | src/features/communication/models/useWebRTC.test.tsx > useWebRTC call setup > still stops a microphone stream granted after cleanup while permission was pending
+Failed to process pending offline uploads: TypeError: pending is not iterable
+    at syncOfflineUploads (/Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/features/communication/models/useWebRTC.ts:368:30)
+
+ ✓ src/features/communication/models/useWebRTC.test.tsx (2 tests) 30ms
+stderr | src/features/customer-orders/model/useLiveOrderActions.test.ts > useLiveOrderActions.answerDelay > leaves the status alone and says why when the server refuses
+Failed to answer delay request {
+  response: { data: { message: 'Order is not awaiting delay approval' } }
+}
+
+ ✓ src/features/customer-orders/model/useLiveOrderActions.test.ts (4 tests) 31ms
+stderr | src/features/restaurant-orders/model/useRestaurantOrders.test.ts > useRestaurantOrders -- optimistic status > puts the old status back when the server refuses, and says so
+Failed to update order status: { response: { data: { message: 'Order already cancelled' } } }
+
+stderr | src/features/restaurant-orders/model/useRestaurantOrders.test.ts > useRestaurantOrders -- optimistic status > clears the "cooking" flag when start-cooking fails, so the poll cannot resurrect it
+Failed to update order status: Error: boom
+    at /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/features/restaurant-orders/model/useRestaurantOrders.test.ts:44:28
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:302:11
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:1903:26
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:2326:20
+    at new Promise (<anonymous>)
+    at runWithCancel (file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:2323:10)
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:2305:20
+    at new Promise (<anonymous>)
+    at runWithTimeout (file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:2272:10)
+    at file:///Users/parthureddy/Documents/Food%20Delivery.nosync/FoodDeliveryAppUI/node_modules/@vitest/runner/dist/chunk-artifact.js:2956:64
+
+ ✓ src/features/restaurant-orders/model/useRestaurantOrders.test.ts (3 tests) 29ms
+ ✓ src/features/restaurant-orders/model/useBrandKycStream.test.tsx (2 tests) 27ms
+ ✓ src/shared/ui/motion/motionPresets.test.ts (4 tests) 26ms
+ ✓ src/features/catalog/model/menuStore.test.ts (6 tests) 15ms
+ ✓ src/features/customer-orders/model/orderStatus.test.ts (24 tests) 14ms
+ ✓ src/features/catalog/model/restaurantFacts.test.ts (3 tests) 26ms
+ ✓ src/features/delivery-tasks/model/dutyStatus.test.ts (11 tests) 12ms
+ ✓ src/features/catalog/model/brandOrganisations.test.ts (7 tests) 12ms
+ ✓ src/lib/notificationPermissions.test.ts (4 tests) 10ms
+ ✓ src/features/customer-orders/model/useReorderSuggestions.test.ts (8 tests) 10ms
+ ✓ src/features/delivery-tasks/model/dispatchOffers.test.ts (4 tests) 9ms
+ ✓ src/features/maps-tracking/model/mapPoints.test.ts (6 tests) 8ms
+ ✓ src/features/reviews/model/reviewCopy.test.ts (6 tests) 9ms
+ ✓ src/features/maps-tracking/model/smoothPosition.test.ts (6 tests) 9ms
+ ✓ src/lib/olaMaps.test.ts (7 tests) 10ms
+ ✓ tests/schemas.test.ts (8 tests) 8ms
+ ✓ src/features/customer-orders/model/addressParts.test.ts (4 tests) 9ms
+ ✓ src/features/delivery-tasks/model/confirmedProgress.test.ts (6 tests) 8ms
+ ✓ src/features/admin-ops/model/userLookup.test.ts (3 tests) 8ms
+ ✓ src/features/catalog/model/prepTime.test.ts (4 tests) 7ms
+ ✓ src/features/restaurant-orders/model/acceptDeadline.test.ts (4 tests) 6ms
+ ✓ src/features/catalog/model/deliveryReason.test.ts (5 tests) 7ms
+ ✓ src/features/admin-ops/model/dispatchScope.test.ts (2 tests) 5ms
+
+ Test Files  125 passed (125)
+      Tests  785 passed (785)
+   Start at  21:02:23
+   Duration  52.17s (transform 4.88s, setup 29.89s, import 39.19s, tests 38.37s, environment 80.50s)
+
+JSON report written to /tmp/bp-o2-ui-current-tests.json

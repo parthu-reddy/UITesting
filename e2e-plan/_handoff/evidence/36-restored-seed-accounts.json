@@ -1,0 +1,32 @@
+{
+  "identity_db": [
+    {
+      "userId": "4e1f984b-ff9f-5af8-82ff-a5923096f1f1",
+      "phone": "1000000001",
+      "active": true,
+      "service": "ADMIN",
+      "role": "ADMIN"
+    },
+    {
+      "userId": "5a41832f-5596-4bb1-a9bf-6ce416b38b95",
+      "phone": "7000000026",
+      "active": true,
+      "service": "delivery-service",
+      "role": "DELIVERY"
+    },
+    {
+      "userId": "426f016b-c98e-43c1-b464-94e1a587f6d3",
+      "phone": "9000000001",
+      "active": true,
+      "service": "restaurant-service",
+      "role": "RESTAURANT"
+    }
+  ],
+  "restaurant_db": [
+    {
+      "outlet": "Brand 1 Outlet 3",
+      "id": "54ba242d-c529-4772-bd8a-6cfdd5b3d7cc",
+      "zone": "Asia/Kolkata"
+    }
+  ]
+}

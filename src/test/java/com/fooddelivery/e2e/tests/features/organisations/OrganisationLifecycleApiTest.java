@@ -12,6 +12,24 @@ import static org.assertj.core.api.Assertions.assertThat;
 /** Two real customer sessions and gateway APIs; run only after the O1 deployment gate. */
 @Tag("business-platform") @Tag("bp-o1")
 public class OrganisationLifecycleApiTest extends TestBase {
+    /** Read-only requests after a rollout; server histograms are captured separately over SSH. */
+    @Test void readOnlyRequestsForServerLatencyMeasurements() {
+        String existingPhone = System.getProperty("bp.o1.measurement.phone");
+        assertThat(existingPhone).as("Use a retained successful O1 customer; never register here").matches("8999[0-9]{6}");
+        customerPage.navigate(TestConfig.APP_URL);
+        new LoginPage(customerPage).loginAs("Order Food", existingPhone);
+        restaurantPage.navigate(TestConfig.APP_URL);
+        new LoginPage(restaurantPage).loginAs("Restaurant Partner", testRestaurantPhone);
+        for (int i = 0; i < 30; i++) {
+            var organisations = GatewayApi.get(customerPage, "/api/v1/organisations");
+            assertThat(organisations.status()).isEqualTo(200);
+            assertThat(content(organisations)).isNotEmpty();
+            assertThat(GatewayApi.get(restaurantPage, "/api/v1/brands").status()).isEqualTo(200);
+            assertThat(GatewayApi.get(restaurantPage, "/api/v1/outlets").status()).isEqualTo(200);
+        }
+        System.out.println("Server histogram sample completed: 30 successful requests per organisation/brand/outlet list; no product writes");
+    }
+
     @Test void organisationLifecycle() throws Exception {
         assertThat(System.getProperty("bp.o1.preflight")).as("Allocate unused phones with run_organisation_o1_e2e.py").isEqualTo("true");
         String phoneA=phone("a"),phoneB=phone("b");assertThat(phoneA).isNotEqualTo(phoneB);
@@ -48,7 +66,7 @@ public class OrganisationLifecycleApiTest extends TestBase {
         System.out.println("O1 lifecycle completed; retained organisationId="+id);
     }
     private String phone(String label){String value=System.getProperty("bp.o1.phone."+label);assertThat(value).matches("8999[0-9]{6}");return value;}
-    private void register(Page page,String phone,String label){page.navigate(TestConfig.APP_URL);new LoginPage(page).registerAs("Customer",phone,"E2E O1 "+label,"o1_"+phone+"@test.com");}
+    private void register(Page page,String phone,String label){page.navigate(TestConfig.APP_URL);new LoginPage(page).registerAs("Order Food",phone,"E2E O1 "+label,"o1_"+phone+"@test.com");}
     private String invite(Page page,String path,String phone,String role){var result=GatewayApi.post(page,path+"/invitations",Map.of("phoneNumber",phone,"role",role));assertThat(result.status()).isEqualTo(201);return (String)result.object().get("id");}
     private void assertRole(Page page,String path,String role){var result=GatewayApi.get(page,path);assertThat(result.status()).isEqualTo(200);assertThat(result.object().get("myRole")).isEqualTo(role);}
     private List<Map<?,?>> content(GatewayApi.Response response){List<Map<?,?>> rows=new ArrayList<>();for(Object row:(List<?>)response.object().get("content")){rows.add((Map<?,?>)row);}return rows;}

@@ -1,0 +1,8 @@
+{
+  "break": "restore raw Brand entity in member list",
+  "exitCode": 1,
+  "tests": 1,
+  "failures": 1,
+  "errors": 0,
+  "skipped": 0
+}

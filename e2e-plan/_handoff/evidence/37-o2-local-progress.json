@@ -1,0 +1,3564 @@
+{
+  "recordedAt": "2026-10-03T18:59:24+05:30",
+  "proofType": "local-only",
+  "o2Published": false,
+  "o2Deployed": false,
+  "wipePerformed": false,
+  "suites": {
+    "CommonLibrary": {
+      "classes": [
+        {
+          "class": "com.fooddelivery.common.config.JacksonBigDecimalConfigTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:07:29+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.config.JacksonTimeWireFormatTest",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:07:29+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.dto.maps.RouteResponseDtoTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:07:28+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.enums.OrganisationRoleTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:07:29+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.event.EventBinderPayloadCollisionTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:07:29+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.event.EventBinderTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:07:29+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.event.EventSerializationTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:07:29+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.event.ObjectMapperUnknownPropertiesTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:07:29+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.event.organisation.OrganisationEventBindingTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:07:29+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.location.FleetCityScopeTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:07:29+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.lock.LockedWorkTimerTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:07:29+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.time.BusinessCalendarTest",
+          "tests": 9,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:07:29+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.time.IanaTimeZoneValidatorTest",
+          "tests": 16,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:07:29+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.util.DeterministicIdUtilsLedgerIdTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:07:28+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.util.EventPayloadUtilsTest",
+          "tests": 14,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:07:28+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.util.JsonNumberUtilsTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:07:28+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.architecture.TimeDisciplineRules",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:07:51+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.architecture.TimeDisciplineTest",
+          "tests": 0,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:07:51+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.config.KafkaConfigDeadLetterTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:07:53+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.messaging.DeadLetterPositionTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:07:53+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.messaging.DeadLetterReplayerTest",
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:07:53+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.messaging.DltHandlerPositionBindingTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:07:53+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.outbox.OutboxAggregateRoutingTest",
+          "tests": 11,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:07:52+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.outbox.OutboxBacklogMetricsTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:07:52+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.outbox.OutboxBeansAreNotComponentScannedTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:07:52+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.outbox.OutboxEventTypeInvariantTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:07:52+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.architecture.TimeDisciplineRules",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:07:42+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.architecture.TimeDisciplineTest",
+          "tests": 0,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:07:42+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.audit.AuditConfigurationTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:07:45+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.idempotency.IdempotencyKeySweeperTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:07:43+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.lock.RedisLockTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:07:43+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.time.ZoneIdConverterTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:07:43+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.architecture.TimeDisciplineRules",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:08:11+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.architecture.TimeDisciplineTest",
+          "tests": 0,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:08:11+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.architecture.CommonCoreTimeDisciplineTest",
+          "tests": 0,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:07:37+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.architecture.TimeDisciplineRules",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:07:37+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.architecture.TimeDisciplineRulesTest",
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:07:36+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.contract.PlatformJsonTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:07:35+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.test.SchemaConsistencyTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:07:35+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.architecture.TimeDisciplineRules",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:08:06+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.architecture.TimeDisciplineTest",
+          "tests": 0,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:08:06+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.client.MapsServiceClientContractTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:08:05+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.client.MapsServiceClientFallbackTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:08:05+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.config.OpenApiSortShapeTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:07:59+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.config.PageSerializationShapeTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:07:59+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.filter.IdempotencyFilterTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:08:05+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.filter.RequestCachingFilterTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:08:05+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.security.AuctionTokenServiceTest",
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:08:05+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.security.FeignServiceIdentityTest",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:08:00+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.security.SecurityContextFilterTest",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:08:00+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.security.SecurityFilterChainRejectionTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:08:04+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.security.SecurityHeaderPropagationInterceptorTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:08:00+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.security.WebSocketSecurityInterceptorTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:08:00+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.security.money.MoneyAccessPolicyTest",
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:08:04+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.security.organisation.DefaultOrganisationAccessPolicyTest",
+          "tests": 11,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:08:05+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.security.organisation.OrganisationFeignBootstrapTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:08:05+05:30"
+        }
+      ],
+      "counts": [
+        251,
+        0,
+        0,
+        0
+      ],
+      "boundary": "Current report snapshot; dates distinguish focused reruns from full clean runs. Not an aggregate claim that all classes were rerun after every change."
+    },
+    "RestaurantApplication": {
+      "classes": [
+        {
+          "class": "com.fooddelivery.architecture.ArchitectureEnforcementTest",
+          "tests": 0,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:26:22+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.architecture.TimeDisciplineRules",
+          "tests": 9,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:26:22+05:30"
+        },
+        {
+          "class": "com.fooddelivery.contract.GovIdContractConsumerTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:26:15+05:30"
+        },
+        {
+          "class": "com.fooddelivery.contract.OrderEventConsumerContractTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:26:18+05:30"
+        },
+        {
+          "class": "com.fooddelivery.contract.RestaurantContractConsumerTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:26:20+05:30"
+        },
+        {
+          "class": "com.fooddelivery.restaurant.ContractVerifierTest",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:26:06+05:30"
+        },
+        {
+          "class": "com.fooddelivery.restaurant.EndpointAuthorizationCoverageTest",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:25:42+05:30"
+        },
+        {
+          "class": "com.fooddelivery.restaurant.MessagingTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:25:53+05:30"
+        },
+        {
+          "class": "com.fooddelivery.restaurant.RestaurantAccessQueryCountTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:25:42+05:30"
+        },
+        {
+          "class": "com.fooddelivery.restaurant.RestaurantEndpointPermissionTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:26:09+05:30"
+        },
+        {
+          "class": "com.fooddelivery.restaurant.RestaurantValidationIntegrationTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:26:05+05:30"
+        },
+        {
+          "class": "com.fooddelivery.restaurant.controller.FulfillmentControllerTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:25:43+05:30"
+        },
+        {
+          "class": "com.fooddelivery.restaurant.controller.InternalRestaurantInvoiceDetailsTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:25:42+05:30"
+        },
+        {
+          "class": "com.fooddelivery.restaurant.controller.InternalRestaurantOutletSummaryTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:25:43+05:30"
+        },
+        {
+          "class": "com.fooddelivery.restaurant.controller.RestaurantFleetMapControllerTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:25:43+05:30"
+        },
+        {
+          "class": "com.fooddelivery.restaurant.messaging.BindingFailureIsNotRetryableTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:26:08+05:30"
+        },
+        {
+          "class": "com.fooddelivery.restaurant.service.CatalogServiceTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:26:07+05:30"
+        },
+        {
+          "class": "com.fooddelivery.restaurant.service.CatalogStockToggleTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:27:33+05:30"
+        },
+        {
+          "class": "com.fooddelivery.restaurant.service.CrossTenantFulfillmentTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:26:08+05:30"
+        },
+        {
+          "class": "com.fooddelivery.restaurant.service.FulfillmentServiceTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:26:08+05:30"
+        },
+        {
+          "class": "com.fooddelivery.restaurant.service.OpeningHoursTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:26:06+05:30"
+        },
+        {
+          "class": "com.fooddelivery.restaurant.service.OrderEventConsumerTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:26:07+05:30"
+        },
+        {
+          "class": "com.fooddelivery.restaurant.service.RestaurantFleetCityScopeTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:26:08+05:30"
+        },
+        {
+          "class": "com.fooddelivery.restaurant.service.RestaurantOnboardingServiceTest",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:26:08+05:30"
+        },
+        {
+          "class": "com.fooddelivery.restaurant.service.ReviewEventConsumerTest",
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:26:06+05:30"
+        }
+      ],
+      "counts": [
+        83,
+        0,
+        0,
+        0
+      ],
+      "boundary": "Current report snapshot; dates distinguish focused reruns from full clean runs. Not an aggregate claim that all classes were rerun after every change."
+    },
+    "CustomerApplication": {
+      "classes": [
+        {
+          "class": "com.fooddelivery.FoodDeliveryApplicationStartupTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:34+05:30"
+        },
+        {
+          "class": "com.fooddelivery.architecture.ArchitectureEnforcementTest",
+          "tests": 0,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:59+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.architecture.TimeDisciplineRules",
+          "tests": 9,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:59+05:30"
+        },
+        {
+          "class": "com.fooddelivery.contract.CustomerContractConsumerTest",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:27+05:30"
+        },
+        {
+          "class": "com.fooddelivery.contract.MapsContractConsumerTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:22+05:30"
+        },
+        {
+          "class": "com.fooddelivery.contract.PaymentContractConsumerTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:19+05:30"
+        },
+        {
+          "class": "com.fooddelivery.customer.ContractHarnessJacksonTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:38+05:30"
+        },
+        {
+          "class": "com.fooddelivery.customer.ContractVerifierTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:42+05:30"
+        },
+        {
+          "class": "com.fooddelivery.customer.CustomerOrderServiceWalletCheckoutTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:37+05:30"
+        },
+        {
+          "class": "com.fooddelivery.customer.CustomerSchemaConsistencyTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:34+05:30"
+        },
+        {
+          "class": "com.fooddelivery.customer.EndpointAuthorizationCoverageTest",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:36+05:30"
+        },
+        {
+          "class": "com.fooddelivery.customer.EventBinderUnknownPropertiesTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:36+05:30"
+        },
+        {
+          "class": "com.fooddelivery.customer.InternalTest",
+          "tests": 9,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:42+05:30"
+        },
+        {
+          "class": "com.fooddelivery.customer.MessagingTest",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:41+05:30"
+        },
+        {
+          "class": "com.fooddelivery.customer.UnpaidOrderCancellerTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:36+05:30"
+        },
+        {
+          "class": "com.fooddelivery.customer.WalletContractConsumerTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:37+05:30"
+        },
+        {
+          "class": "com.fooddelivery.customer.controller.AdminCustomerControllerFleetScopeTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:38+05:30"
+        },
+        {
+          "class": "com.fooddelivery.customer.controller.AdminRefundCommandControllerTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:38+05:30"
+        },
+        {
+          "class": "com.fooddelivery.customer.controller.CustomerMoneyControllerWalletTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:39+05:30"
+        },
+        {
+          "class": "com.fooddelivery.customer.controller.CustomerRestaurantControllerAvailabilityTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:38+05:30"
+        },
+        {
+          "class": "com.fooddelivery.customer.controller.DriverMoneyControllerTest",
+          "tests": 13,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:38+05:30"
+        },
+        {
+          "class": "com.fooddelivery.customer.controller.InternalMoneyControllerTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:38+05:30"
+        },
+        {
+          "class": "com.fooddelivery.customer.controller.OrderReadOwnershipTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:39+05:30"
+        },
+        {
+          "class": "com.fooddelivery.customer.controller.OrderRequestPrepaidOnlyTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:39+05:30"
+        },
+        {
+          "class": "com.fooddelivery.customer.controller.RestaurantMoneyControllerTest",
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:39+05:30"
+        },
+        {
+          "class": "com.fooddelivery.customer.dto.OrderRequestPaymentMethodValidationTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:34+05:30"
+        },
+        {
+          "class": "com.fooddelivery.customer.dto.OrderResponseLeakTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:34+05:30"
+        },
+        {
+          "class": "com.fooddelivery.customer.mapper.DeliveryEtaTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:38+05:30"
+        },
+        {
+          "class": "com.fooddelivery.customer.mapper.OrderResponseLeakTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:38+05:30"
+        },
+        {
+          "class": "com.fooddelivery.customer.messaging.KafkaResilienceIntegrationTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:54+05:30"
+        },
+        {
+          "class": "com.fooddelivery.customer.service.CustomerOrderPaymentCompensationTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:42+05:30"
+        },
+        {
+          "class": "com.fooddelivery.customer.service.CustomerOrderQuoteValidationTest",
+          "tests": 9,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:42+05:30"
+        },
+        {
+          "class": "com.fooddelivery.customer.service.CustomerReceiptTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:43+05:30"
+        },
+        {
+          "class": "com.fooddelivery.customer.service.DriverSummaryServiceTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:42+05:30"
+        },
+        {
+          "class": "com.fooddelivery.customer.service.DynamicPricingServiceTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:42+05:30"
+        },
+        {
+          "class": "com.fooddelivery.customer.service.MenuCacheInvalidationListenerTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:42+05:30"
+        },
+        {
+          "class": "com.fooddelivery.customer.service.OrderPrepTimeTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:42+05:30"
+        },
+        {
+          "class": "com.fooddelivery.customer.service.PricingChargeConsistencyTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:43+05:30"
+        },
+        {
+          "class": "com.fooddelivery.customer.service.RestaurantSummaryServiceTest",
+          "tests": 20,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:43+05:30"
+        },
+        {
+          "class": "com.fooddelivery.customer.service.money.CustomerInvoiceServiceTest",
+          "tests": 9,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:43+05:30"
+        },
+        {
+          "class": "com.fooddelivery.customer.service.money.SummaryPeriodTest",
+          "tests": 22,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:42+05:30"
+        },
+        {
+          "class": "com.fooddelivery.order.contract.PaymentEventConsumerContractTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:09+05:30"
+        },
+        {
+          "class": "com.fooddelivery.order.controller.AdminOrderManualControllerTest",
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:11+05:30"
+        },
+        {
+          "class": "com.fooddelivery.order.controller.AdminRefundControllerTest",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:11+05:30"
+        },
+        {
+          "class": "com.fooddelivery.order.controller.InternalOrderReviewControllerTest",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:11+05:30"
+        },
+        {
+          "class": "com.fooddelivery.order.controller.RestaurantRefundControllerTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:12+05:30"
+        },
+        {
+          "class": "com.fooddelivery.order.ledger.ClawbackCapTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:27:57+05:30"
+        },
+        {
+          "class": "com.fooddelivery.order.ledger.GatewayAccountIdentityTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:27:57+05:30"
+        },
+        {
+          "class": "com.fooddelivery.order.ledger.LedgerAccountResolverTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:27:58+05:30"
+        },
+        {
+          "class": "com.fooddelivery.order.ledger.LedgerBookkeeperRefundTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:27:57+05:30"
+        },
+        {
+          "class": "com.fooddelivery.order.ledger.LedgerBookkeeperTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:27:58+05:30"
+        },
+        {
+          "class": "com.fooddelivery.order.ledger.LedgerInvariantTest",
+          "tests": 16,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:27:58+05:30"
+        },
+        {
+          "class": "com.fooddelivery.order.ledger.PayableMatchesPayoutTest",
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:27:58+05:30"
+        },
+        {
+          "class": "com.fooddelivery.order.ledger.RiderTipLedgerTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:27:57+05:30"
+        },
+        {
+          "class": "com.fooddelivery.order.lifecycle.DispatchFailureTerminationTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:10+05:30"
+        },
+        {
+          "class": "com.fooddelivery.order.lifecycle.LateCaptureAlwaysRefundsTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:10+05:30"
+        },
+        {
+          "class": "com.fooddelivery.order.lifecycle.OrderPaidEventCompletenessTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:09+05:30"
+        },
+        {
+          "class": "com.fooddelivery.order.lifecycle.StatusFastForwardRejectedTest",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:09+05:30"
+        },
+        {
+          "class": "com.fooddelivery.order.lifecycle.SweeperScopeTest",
+          "tests": 14,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:10+05:30"
+        },
+        {
+          "class": "com.fooddelivery.order.lifecycle.TerminalStatusIsFinalTest",
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:10+05:30"
+        },
+        {
+          "class": "com.fooddelivery.order.notification.RefundNotificationTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:09+05:30"
+        },
+        {
+          "class": "com.fooddelivery.order.payment.PaymentMethodPersistenceTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:09+05:30"
+        },
+        {
+          "class": "com.fooddelivery.order.payment.PaymentRoutingExhaustivenessTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:09+05:30"
+        },
+        {
+          "class": "com.fooddelivery.order.payment.WalletCaptureTest",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:09+05:30"
+        },
+        {
+          "class": "com.fooddelivery.order.refund.CustomerRefundViewTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:14+05:30"
+        },
+        {
+          "class": "com.fooddelivery.order.refund.PaymentRefundRequestedEventSerializationTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:14+05:30"
+        },
+        {
+          "class": "com.fooddelivery.order.refund.RefundCommandValidationTest",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:16+05:30"
+        },
+        {
+          "class": "com.fooddelivery.order.refund.RefundDestinationMatrixTest",
+          "tests": 9,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:17+05:30"
+        },
+        {
+          "class": "com.fooddelivery.order.refund.RefundNeverExceedsOrderTest",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:16+05:30"
+        },
+        {
+          "class": "com.fooddelivery.order.refund.RefundOverCompletionTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:14+05:30"
+        },
+        {
+          "class": "com.fooddelivery.order.refund.RefundQuoteTest",
+          "tests": 10,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:17+05:30"
+        },
+        {
+          "class": "com.fooddelivery.order.refund.RefundRefusalInCallerTransactionTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:15+05:30"
+        },
+        {
+          "class": "com.fooddelivery.order.refund.RefundRemainingTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:14+05:30"
+        },
+        {
+          "class": "com.fooddelivery.order.refund.RefundRetryIsolationTest",
+          "tests": 16,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:17+05:30"
+        },
+        {
+          "class": "com.fooddelivery.order.refund.RefundRetryPersistenceTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:16+05:30"
+        },
+        {
+          "class": "com.fooddelivery.order.refund.RefundStateMachineTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:17+05:30"
+        },
+        {
+          "class": "com.fooddelivery.order.refund.RefundStoreCreditHandoffTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:17+05:30"
+        },
+        {
+          "class": "com.fooddelivery.order.repository.ActiveOrdersForDriverQueryTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:27:57+05:30"
+        },
+        {
+          "class": "com.fooddelivery.order.repository.EarningsWindowQueriesTest",
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:27:55+05:30"
+        },
+        {
+          "class": "com.fooddelivery.order.scheduler.AbandonedDeliverySweeperTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:11+05:30"
+        },
+        {
+          "class": "com.fooddelivery.order.scheduler.RefundRetrySweeperTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:10+05:30"
+        },
+        {
+          "class": "com.fooddelivery.order.service.ChatRefundProcessorServiceTest",
+          "tests": 18,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:13+05:30"
+        },
+        {
+          "class": "com.fooddelivery.order.service.ChatRefundRefusalPersistenceTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:14+05:30"
+        },
+        {
+          "class": "com.fooddelivery.order.service.ManualAssignmentFailureEventConsumerTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:13+05:30"
+        },
+        {
+          "class": "com.fooddelivery.order.service.OrderEventBindingCoverageTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:13+05:30"
+        },
+        {
+          "class": "com.fooddelivery.order.service.OrderEventConsumerDispatchRoutingTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:12+05:30"
+        },
+        {
+          "class": "com.fooddelivery.order.service.OrderEventConsumerRefundRefusalTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:12+05:30"
+        },
+        {
+          "class": "com.fooddelivery.order.service.PaymentEventConsumerTest",
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:12+05:30"
+        },
+        {
+          "class": "com.fooddelivery.order.service.PaymentGatewayOrchestratorTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:13+05:30"
+        },
+        {
+          "class": "com.fooddelivery.order.service.RefundServiceTest",
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:14+05:30"
+        },
+        {
+          "class": "com.fooddelivery.order.service.state.DelayRequestStateTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:13+05:30"
+        },
+        {
+          "class": "com.fooddelivery.order.service.state.HandoverTimeStateTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:13+05:30"
+        },
+        {
+          "class": "com.fooddelivery.order.service.state.StateRefundTriggerTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:13+05:30"
+        }
+      ],
+      "counts": [
+        467,
+        0,
+        0,
+        0
+      ],
+      "boundary": "Current report snapshot; dates distinguish focused reruns from full clean runs. Not an aggregate claim that all classes were rerun after every change."
+    },
+    "ReviewsService": {
+      "classes": [
+        {
+          "class": "com.fooddelivery.architecture.ArchitectureEnforcementTest",
+          "tests": 9,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:26:13+05:30"
+        },
+        {
+          "class": "com.fooddelivery.reviews.EndpointAuthorizationCoverageTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:25:55+05:30"
+        },
+        {
+          "class": "com.fooddelivery.reviews.ReviewsApplicationTests",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:26:09+05:30"
+        },
+        {
+          "class": "com.fooddelivery.reviews.contract.MessagingTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:25:55+05:30"
+        },
+        {
+          "class": "com.fooddelivery.reviews.contract.ReviewsCustomerContractConsumerTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:25:47+05:30"
+        },
+        {
+          "class": "com.fooddelivery.reviews.entity.ReviewAggregateTest",
+          "tests": 14,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:25:55+05:30"
+        },
+        {
+          "class": "com.fooddelivery.reviews.mapper.ReviewMapperTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:25:55+05:30"
+        },
+        {
+          "class": "com.fooddelivery.reviews.security.ReviewAccessPolicyTest",
+          "tests": 11,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:25:55+05:30"
+        },
+        {
+          "class": "com.fooddelivery.reviews.service.ReviewCommandServiceTest",
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:26:10+05:30"
+        },
+        {
+          "class": "com.fooddelivery.reviews.service.ReviewEligibilityServiceTest",
+          "tests": 16,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:26:10+05:30"
+        },
+        {
+          "class": "com.fooddelivery.reviews.service.ReviewQueryServiceTest",
+          "tests": 10,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:26:10+05:30"
+        },
+        {
+          "class": "com.fooddelivery.reviews.web.ReviewsGlobalExceptionHandlerTest",
+          "tests": 11,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:25:55+05:30"
+        }
+      ],
+      "counts": [
+        95,
+        0,
+        0,
+        0
+      ],
+      "boundary": "Current report snapshot; dates distinguish focused reruns from full clean runs. Not an aggregate claim that all classes were rerun after every change."
+    },
+    "ApiGateway": {
+      "classes": [
+        {
+          "class": "com.fooddelivery.apigateway.ApiGatewayApplicationStartupTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:27:54+05:30"
+        },
+        {
+          "class": "com.fooddelivery.apigateway.EndpointAuthorizationCoverageTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:27:45+05:30"
+        },
+        {
+          "class": "com.fooddelivery.apigateway.OrganisationGatewayRoutesTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:34:27+05:30"
+        },
+        {
+          "class": "com.fooddelivery.apigateway.RbacRulesTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:03+05:30"
+        },
+        {
+          "class": "com.fooddelivery.apigateway.filter.GlobalJwtAuthFilterRevocationTest",
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:34:33+05:30"
+        },
+        {
+          "class": "com.fooddelivery.apigateway.security.e2e.E2eOtpRunnerAccessFilterTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:27:46+05:30"
+        },
+        {
+          "class": "com.fooddelivery.architecture.ArchitectureEnforcementTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:28:05+05:30"
+        }
+      ],
+      "counts": [
+        27,
+        0,
+        0,
+        0
+      ],
+      "boundary": "Current report snapshot; dates distinguish focused reruns from full clean runs. Not an aggregate claim that all classes were rerun after every change."
+    },
+    "CommunicationService": {
+      "classes": [
+        {
+          "class": "com.fooddelivery.architecture.ArchitectureEnforcementTest",
+          "tests": 9,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T15:47:31+05:30"
+        },
+        {
+          "class": "com.fooddelivery.chat.AutoConfigurationImportsTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T15:47:19+05:30"
+        },
+        {
+          "class": "com.fooddelivery.chat.ChatServiceApplicationStartupTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T15:47:25+05:30"
+        },
+        {
+          "class": "com.fooddelivery.chat.ContextLoadTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T15:47:19+05:30"
+        },
+        {
+          "class": "com.fooddelivery.chat.EndpointAuthorizationCoverageTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T15:47:05+05:30"
+        },
+        {
+          "class": "com.fooddelivery.chat.OpenApiGenerationTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:22:54+05:30"
+        },
+        {
+          "class": "com.fooddelivery.chat.config.StompAuthenticationInterceptorTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T15:47:05+05:30"
+        },
+        {
+          "class": "com.fooddelivery.chat.controller.AdminSupportChatRecipientIsolationTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T15:47:26+05:30"
+        },
+        {
+          "class": "com.fooddelivery.chat.controller.ChatMessagingControllerTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:24:46+05:30"
+        },
+        {
+          "class": "com.fooddelivery.chat.controller.ChatSessionControllerTest",
+          "tests": 13,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:24:46+05:30"
+        },
+        {
+          "class": "com.fooddelivery.chat.entity.ChatSessionTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T15:47:19+05:30"
+        },
+        {
+          "class": "com.fooddelivery.chat.entity.SessionParticipantTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T15:47:19+05:30"
+        },
+        {
+          "class": "com.fooddelivery.chat.listener.RefundDecisionListenerTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T15:47:05+05:30"
+        },
+        {
+          "class": "com.fooddelivery.chat.service.ChatEventBroadcasterTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T15:47:27+05:30"
+        },
+        {
+          "class": "com.fooddelivery.chat.service.ChatHistoryWindowTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T15:47:27+05:30"
+        },
+        {
+          "class": "com.fooddelivery.chat.service.ChatMessageServiceTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:24:46+05:30"
+        },
+        {
+          "class": "com.fooddelivery.chat.service.ChatRestaurantMemberAccessTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:24:46+05:30"
+        },
+        {
+          "class": "com.fooddelivery.chat.service.ChatSessionAccessServiceTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:20:33+05:30"
+        },
+        {
+          "class": "com.fooddelivery.chat.service.ChatSessionServiceTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:20:33+05:30"
+        },
+        {
+          "class": "com.fooddelivery.chat.service.ChatSupportSubscriptionRegistryTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T15:47:27+05:30"
+        },
+        {
+          "class": "com.fooddelivery.chat.service.OrderChatRosterServiceTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:20:33+05:30"
+        },
+        {
+          "class": "com.fooddelivery.chatcontract.ContractConsumerTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T15:47:04+05:30"
+        }
+      ],
+      "counts": [
+        69,
+        0,
+        0,
+        0
+      ],
+      "boundary": "Current report snapshot; dates distinguish focused reruns from full clean runs. Not an aggregate claim that all classes were rerun after every change."
+    },
+    "WalletService": {
+      "classes": [
+        {
+          "class": "com.fooddelivery.architecture.ArchitectureEnforcementTest",
+          "tests": 0,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:19:46+05:30"
+        },
+        {
+          "class": "com.fooddelivery.common.architecture.TimeDisciplineRules",
+          "tests": 9,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:19:46+05:30"
+        },
+        {
+          "class": "com.fooddelivery.wallet.ContractVerifierTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:19:43+05:30"
+        },
+        {
+          "class": "com.fooddelivery.wallet.EndpointAuthorizationCoverageTest",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:19:36+05:30"
+        },
+        {
+          "class": "com.fooddelivery.wallet.MessagingTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:19:43+05:30"
+        },
+        {
+          "class": "com.fooddelivery.wallet.WalletIdempotencyRollbackTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:18:54+05:30"
+        },
+        {
+          "class": "com.fooddelivery.wallet.WalletSchemaConsistencyTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:19:29+05:30"
+        },
+        {
+          "class": "com.fooddelivery.wallet.WalletServiceApplicationStartupTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:15:47+05:30"
+        },
+        {
+          "class": "com.fooddelivery.wallet.WalletTopupServiceTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:19:44+05:30"
+        },
+        {
+          "class": "com.fooddelivery.wallet.contract.AdBillingConsumerContractTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:19:29+05:30"
+        },
+        {
+          "class": "com.fooddelivery.wallet.contract.WalletLedgerProducerContractTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:19:25+05:30"
+        },
+        {
+          "class": "com.fooddelivery.wallet.contract.WalletTopupConsumerContractTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:19:24+05:30"
+        },
+        {
+          "class": "com.fooddelivery.wallet.controller.InternalWalletControllerAuthorizationTest",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:19:39+05:30"
+        },
+        {
+          "class": "com.fooddelivery.wallet.controller.PayeeWalletControllerAuthorizationTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:19:40+05:30"
+        },
+        {
+          "class": "com.fooddelivery.wallet.controller.WalletDlqReplayTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:19:40+05:30"
+        },
+        {
+          "class": "com.fooddelivery.wallet.kafka.BillingEventConsumerTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:19:43+05:30"
+        },
+        {
+          "class": "com.fooddelivery.wallet.kafka.RefundCreditConsumerTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:19:43+05:30"
+        },
+        {
+          "class": "com.fooddelivery.wallet.repository.OutboxDlqRetryRepositoryPersistenceTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:19:07+05:30"
+        },
+        {
+          "class": "com.fooddelivery.wallet.service.WalletServiceTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:19:43+05:30"
+        }
+      ],
+      "counts": [
+        57,
+        0,
+        0,
+        0
+      ],
+      "boundary": "Current report snapshot; dates distinguish focused reruns from full clean runs. Not an aggregate claim that all classes were rerun after every change."
+    },
+    "LedgerService": {
+      "classes": [
+        {
+          "class": "com.fooddelivery.architecture.ArchitectureEnforcementTest",
+          "tests": 9,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:20:09+05:30"
+        },
+        {
+          "class": "com.fooddelivery.ledger.ContractVerifierTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:20:04+05:30"
+        },
+        {
+          "class": "com.fooddelivery.ledger.EndpointAuthorizationCoverageTest",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:19:52+05:30"
+        },
+        {
+          "class": "com.fooddelivery.ledger.LedgerSchemaConsistencyTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:20:04+05:30"
+        },
+        {
+          "class": "com.fooddelivery.ledger.LedgerServiceApplicationStartupTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T18:15:54+05:30"
+        },
+        {
+          "class": "com.fooddelivery.ledger.MockRequestTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:19:34+05:30"
+        },
+        {
+          "class": "com.fooddelivery.ledger.MoneyStartupInvariantsTest",
+          "tests": 10,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:20:07+05:30"
+        },
+        {
+          "class": "com.fooddelivery.ledger.PayoutLineSettledOnceTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:19:56+05:30"
+        },
+        {
+          "class": "com.fooddelivery.ledger.PrometheusRulesTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:20:07+05:30"
+        },
+        {
+          "class": "com.fooddelivery.ledger.TestSerialization",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:19:52+05:30"
+        },
+        {
+          "class": "com.fooddelivery.ledger.contract.LedgerTransactionConsumerContractTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:19:52+05:30"
+        },
+        {
+          "class": "com.fooddelivery.ledger.controller.AdminLedgerRejectionControllerTest",
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:20:02+05:30"
+        },
+        {
+          "class": "com.fooddelivery.ledger.controller.InternalLedgerCategoryTotalControllerTest",
+          "tests": 9,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:19:56+05:30"
+        },
+        {
+          "class": "com.fooddelivery.ledger.controller.LedgerControllerAuthorizationTest",
+          "tests": 10,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:19:56+05:30"
+        },
+        {
+          "class": "com.fooddelivery.ledger.controller.PayoutActionControllerTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:19:56+05:30"
+        },
+        {
+          "class": "com.fooddelivery.ledger.controller.PayoutDetailTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:19:59+05:30"
+        },
+        {
+          "class": "com.fooddelivery.ledger.controller.PayoutRoutingTest",
+          "tests": 4,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:20:04+05:30"
+        },
+        {
+          "class": "com.fooddelivery.ledger.listener.LedgerEventListenerTest",
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:19:52+05:30"
+        },
+        {
+          "class": "com.fooddelivery.ledger.reconciliation.LedgerDltRejectionTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:19:05+05:30"
+        },
+        {
+          "class": "com.fooddelivery.ledger.reconciliation.MoneyReconciliationJobTest",
+          "tests": 14,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:19:06+05:30"
+        },
+        {
+          "class": "com.fooddelivery.ledger.reconciliation.ReconciliationControllerTest",
+          "tests": 12,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:19:15+05:30"
+        },
+        {
+          "class": "com.fooddelivery.ledger.reconciliation.ReconciliationPartialRunTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:19:15+05:30"
+        },
+        {
+          "class": "com.fooddelivery.ledger.reconciliation.ReconciliationSubjectStabilityTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:19:04+05:30"
+        },
+        {
+          "class": "com.fooddelivery.ledger.reconciliation.ReconciliationWindowTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:19:15+05:30"
+        },
+        {
+          "class": "com.fooddelivery.ledger.repository.LedgerEntryLegUniquenessTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:19:37+05:30"
+        },
+        {
+          "class": "com.fooddelivery.ledger.repository.LedgerRejectionResolutionPersistenceTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:19:38+05:30"
+        },
+        {
+          "class": "com.fooddelivery.ledger.repository.PayoutTransitionPersistenceTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:19:37+05:30"
+        },
+        {
+          "class": "com.fooddelivery.ledger.service.DeliveredDistributionPostingTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:20:05+05:30"
+        },
+        {
+          "class": "com.fooddelivery.ledger.service.DoubleEntryLedgerServiceCategoryTotalTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:20:05+05:30"
+        },
+        {
+          "class": "com.fooddelivery.ledger.service.DoubleEntryLedgerServiceOrderTotalTest",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:20:06+05:30"
+        },
+        {
+          "class": "com.fooddelivery.ledger.service.DoubleEntryLedgerServiceRulesTest",
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:20:04+05:30"
+        },
+        {
+          "class": "com.fooddelivery.ledger.service.LedgerRejectionRecorderPersistenceTest",
+          "tests": 1,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:20:05+05:30"
+        },
+        {
+          "class": "com.fooddelivery.ledger.service.LedgerTransactionIdValidationTest",
+          "tests": 6,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:20:06+05:30"
+        },
+        {
+          "class": "com.fooddelivery.ledger.service.OwnerNameResolverTest",
+          "tests": 5,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:20:05+05:30"
+        },
+        {
+          "class": "com.fooddelivery.ledger.service.PayoutServiceTest",
+          "tests": 22,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:20:07+05:30"
+        },
+        {
+          "class": "com.fooddelivery.ledger.service.PayoutStateMachineTest",
+          "tests": 29,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:20:05+05:30"
+        },
+        {
+          "class": "com.fooddelivery.ledger.service.PendingPayoutQueryTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:20:06+05:30"
+        },
+        {
+          "class": "com.fooddelivery.ledger.service.PendingPayoutResilienceTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:20:06+05:30"
+        },
+        {
+          "class": "com.fooddelivery.ledger.service.StatementQueryServiceTest",
+          "tests": 3,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:20:06+05:30"
+        },
+        {
+          "class": "com.fooddelivery.ledger.service.StatementWithPayoutsTest",
+          "tests": 2,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0,
+          "reportModifiedAt": "2026-10-03T17:20:06+05:30"
+        }
+      ],
+      "counts": [
+        220,
+        0,
+        0,
+        0
+      ],
+      "boundary": "Current report snapshot; dates distinguish focused reruns from full clean runs. Not an aggregate claim that all classes were rerun after every change."
+    }
+  },
+  "verifiedCleanSuites": [
+    "CommonLibrary:251/0/0/0",
+    "CustomerApplication:467/0/0/0",
+    "ReviewsService:95/0/0/0"
+  ],
+  "focused": {
+    "uiRoleGuards": "21/0/0/0",
+    "uiEarlierChatCatalogEarnings": "24/0/0/0",
+    "postgresRestaurantOwnershipMigration": "1/0/0/0 (isolated schema, container removed)",
+    "stockPreservesPriceAndPrep": "2/0/0/0",
+    "gatewayNewInternalAndCors": "14/0/0/0: GlobalJwtAuthFilterRevocationTest12 + OrganisationGatewayRoutesTest2 (current total report snapshot27 includes other classes)",
+    "openApiRestaurant": "1/0/0/0 with -Pspecs",
+    "openApiChat": "1/0/0/0 with -Pspecs",
+    "ReviewsCustomerContractConsumerTest": "2/0/0/0",
+    "CustomerContractConsumerTest": "7/0/0/0",
+    "OrderSecurityHelperTest": "4/0/0/0",
+    "RestaurantOrganisationMigrationIT": "1/0/0/0"
+  },
+  "staticO2": {
+    "pass": 13,
+    "fail": 0,
+    "stale": 0
+  },
+  "ui": {
+    "typecheck": "passed",
+    "lint": "passed after correcting explicit safeParse and opening-event loading state",
+    "fullVitest": "782/0/0/0,124 files, --maxWorkers=4; earlier unbounded run781pass/1fail dialog exit animation, isolated10/0/0/0 before rerun",
+    "productionBuild": "pending",
+    "brandRegistration": "3/0/0/0 actual rendered form: no-org creation, existing-owner reuse, retry after brand failure without duplicate organisation"
+  },
+  "e2e": {
+    "class": "OrganisationRestaurantAccessTest",
+    "status": "compiled only; not executed",
+    "phoneAllocated": false,
+    "fixtureCreated": false,
+    "preflightRunner": "implemented, Python compile passed; not run against Oracle"
+  },
+  "latestClean": {
+    "RestaurantApplication": {
+      "counts": [
+        90,
+        0,
+        0,
+        0
+      ],
+      "proofType": "local regular clean suite; Restaurant includes subsequent role-table focused additions",
+      "classes": [
+        {
+          "name": "com.fooddelivery.restaurant.controller.FulfillmentControllerTest",
+          "counts": [
+            2,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.restaurant.controller.InternalRestaurantOutletSummaryTest",
+          "counts": [
+            2,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.restaurant.service.OpeningHoursTest",
+          "counts": [
+            4,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.restaurant.controller.RestaurantFleetMapControllerTest",
+          "counts": [
+            1,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.restaurant.controller.InternalRestaurantInvoiceDetailsTest",
+          "counts": [
+            2,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.restaurant.service.CrossTenantFulfillmentTest",
+          "counts": [
+            5,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.contract.GovIdContractConsumerTest",
+          "counts": [
+            2,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.restaurant.RestaurantValidationIntegrationTest",
+          "counts": [
+            3,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.common.architecture.TimeDisciplineRules",
+          "counts": [
+            9,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.restaurant.MessagingTest",
+          "counts": [
+            2,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.restaurant.service.OrderEventConsumerTest",
+          "counts": [
+            4,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.architecture.ArchitectureEnforcementTest",
+          "counts": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.restaurant.service.RestaurantFleetCityScopeTest",
+          "counts": [
+            3,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.restaurant.RestaurantEndpointPermissionTest",
+          "counts": [
+            4,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.restaurant.service.FulfillmentServiceTest",
+          "counts": [
+            1,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.restaurant.service.ReviewEventConsumerTest",
+          "counts": [
+            7,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.restaurant.EndpointAuthorizationCoverageTest",
+          "counts": [
+            6,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.contract.OrderEventConsumerContractTest",
+          "counts": [
+            1,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.restaurant.service.RestaurantOnboardingServiceTest",
+          "counts": [
+            6,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.restaurant.service.CatalogStockToggleTest",
+          "counts": [
+            2,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.restaurant.ContractVerifierTest",
+          "counts": [
+            8,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.contract.RestaurantContractConsumerTest",
+          "counts": [
+            4,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.restaurant.RestaurantAccessTest",
+          "counts": [
+            6,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.restaurant.messaging.BindingFailureIsNotRetryableTest",
+          "counts": [
+            4,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.restaurant.service.CatalogServiceTest",
+          "counts": [
+            1,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.restaurant.RestaurantAccessQueryCountTest",
+          "counts": [
+            1,
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "IdentityService": {
+      "counts": [
+        99,
+        0,
+        0,
+        0
+      ],
+      "proofType": "local regular clean suite; Restaurant includes subsequent role-table focused additions",
+      "classes": [
+        {
+          "name": "com.fooddelivery.identity.AutoConfigurationImportsTest",
+          "counts": [
+            1,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.identity.organisation.OrganisationControllerAuthorizationTest",
+          "counts": [
+            6,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.identity.organisation.OrganisationServiceTest",
+          "counts": [
+            18,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.identity.IdentityApplicationStartupTest",
+          "counts": [
+            1,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.identity.service.InternalUserServicePhoneLookupTest",
+          "counts": [
+            3,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.identity.controller.AdminUserControllerAuthorizationTest",
+          "counts": [
+            1,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.identity.adapter.OutboxEventPublisherAdapterTest",
+          "counts": [
+            1,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.identity.service.E2eRunnerSecretVerifierTest",
+          "counts": [
+            2,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.identity.Identity_serviceTest",
+          "counts": [
+            1,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.identity.service.AuthServicePortalSecurityTest",
+          "counts": [
+            14,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.identity.controller.AuthControllerAuthorizationTest",
+          "counts": [
+            2,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.identity.controller.E2eOtpControllerTest",
+          "counts": [
+            5,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.identity.service.InternalUserServiceAccessRevocationTest",
+          "counts": [
+            5,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.identity.ContextLoadTest",
+          "counts": [
+            4,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.architecture.ArchitectureEnforcementTest",
+          "counts": [
+            9,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.identity.EndpointAuthorizationCoverageTest",
+          "counts": [
+            2,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.identity.HttpTest",
+          "counts": [
+            2,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.identity.organisation.OrganisationQueryCountTest",
+          "counts": [
+            2,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.identity.organisation.LocalOrganisationAccessPolicyTest",
+          "counts": [
+            4,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.identity.organisation.OrganisationRateLimitsTest",
+          "counts": [
+            4,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.identity.service.E2eSeededAccountAllowlistTest",
+          "counts": [
+            1,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.identity.MessagingTest",
+          "counts": [
+            2,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.identity.organisation.OrganisationPersistenceTest",
+          "counts": [
+            4,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.identity.service.DevOtpAccountPolicyTest",
+          "counts": [
+            5,
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "CommunicationService": {
+      "counts": [
+        73,
+        0,
+        0,
+        0
+      ],
+      "proofType": "local regular clean suite; Restaurant includes subsequent role-table focused additions",
+      "classes": [
+        {
+          "name": "com.fooddelivery.chat.entity.ChatSessionTest",
+          "counts": [
+            2,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.chat.ChatServiceApplicationStartupTest",
+          "counts": [
+            1,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.chat.controller.ChatMediaSenderIdentityTest",
+          "counts": [
+            4,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.chat.service.ChatRestaurantMemberAccessTest",
+          "counts": [
+            4,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.chat.controller.ChatSessionControllerTest",
+          "counts": [
+            13,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.chat.config.StompAuthenticationInterceptorTest",
+          "counts": [
+            5,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.chat.service.ChatEventBroadcasterTest",
+          "counts": [
+            1,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.chat.service.ChatMessageServiceTest",
+          "counts": [
+            3,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.chat.service.ChatSessionAccessServiceTest",
+          "counts": [
+            4,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.chat.ContextLoadTest",
+          "counts": [
+            1,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.chat.service.OrderChatRosterServiceTest",
+          "counts": [
+            2,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.architecture.ArchitectureEnforcementTest",
+          "counts": [
+            9,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.chat.service.ChatHistoryWindowTest",
+          "counts": [
+            1,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.chat.controller.ChatMessagingControllerTest",
+          "counts": [
+            5,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.chat.EndpointAuthorizationCoverageTest",
+          "counts": [
+            3,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.chat.controller.AdminSupportChatRecipientIsolationTest",
+          "counts": [
+            1,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.chatcontract.ContractConsumerTest",
+          "counts": [
+            3,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.chat.service.ChatSessionServiceTest",
+          "counts": [
+            2,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.chat.service.ChatSupportSubscriptionRegistryTest",
+          "counts": [
+            1,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.chat.entity.SessionParticipantTest",
+          "counts": [
+            2,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.chat.listener.RefundDecisionListenerTest",
+          "counts": [
+            5,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.chat.AutoConfigurationImportsTest",
+          "counts": [
+            1,
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "WalletService": {
+      "counts": [
+        57,
+        0,
+        0,
+        0
+      ],
+      "proofType": "local regular clean suite; Restaurant includes subsequent role-table focused additions",
+      "classes": [
+        {
+          "name": "com.fooddelivery.wallet.controller.PayeeWalletControllerAuthorizationTest",
+          "counts": [
+            3,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.wallet.contract.WalletTopupConsumerContractTest",
+          "counts": [
+            1,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.wallet.repository.OutboxDlqRetryRepositoryPersistenceTest",
+          "counts": [
+            1,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.wallet.contract.AdBillingConsumerContractTest",
+          "counts": [
+            1,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.wallet.contract.WalletLedgerProducerContractTest",
+          "counts": [
+            3,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.wallet.WalletSchemaConsistencyTest",
+          "counts": [
+            2,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.wallet.ContractVerifierTest",
+          "counts": [
+            1,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.common.architecture.TimeDisciplineRules",
+          "counts": [
+            9,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.wallet.WalletIdempotencyRollbackTest",
+          "counts": [
+            3,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.wallet.controller.WalletDlqReplayTest",
+          "counts": [
+            4,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.architecture.ArchitectureEnforcementTest",
+          "counts": [
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.wallet.WalletServiceApplicationStartupTest",
+          "counts": [
+            5,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.wallet.WalletTopupServiceTest",
+          "counts": [
+            2,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.wallet.kafka.BillingEventConsumerTest",
+          "counts": [
+            1,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.wallet.kafka.RefundCreditConsumerTest",
+          "counts": [
+            4,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.wallet.MessagingTest",
+          "counts": [
+            2,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.wallet.EndpointAuthorizationCoverageTest",
+          "counts": [
+            6,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.wallet.service.WalletServiceTest",
+          "counts": [
+            3,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.wallet.controller.InternalWalletControllerAuthorizationTest",
+          "counts": [
+            6,
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "LedgerService": {
+      "counts": [
+        220,
+        0,
+        0,
+        0
+      ],
+      "proofType": "local regular clean suite; Restaurant includes subsequent role-table focused additions",
+      "classes": [
+        {
+          "name": "com.fooddelivery.ledger.controller.InternalLedgerCategoryTotalControllerTest",
+          "counts": [
+            9,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.ledger.PayoutLineSettledOnceTest",
+          "counts": [
+            3,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.ledger.service.StatementWithPayoutsTest",
+          "counts": [
+            2,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.ledger.controller.PayoutRoutingTest",
+          "counts": [
+            4,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.ledger.reconciliation.ReconciliationPartialRunTest",
+          "counts": [
+            2,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.ledger.reconciliation.ReconciliationWindowTest",
+          "counts": [
+            3,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.ledger.service.DeliveredDistributionPostingTest",
+          "counts": [
+            2,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.ledger.service.PendingPayoutQueryTest",
+          "counts": [
+            3,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.ledger.service.StatementQueryServiceTest",
+          "counts": [
+            3,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.ledger.controller.PayoutActionControllerTest",
+          "counts": [
+            3,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.ledger.controller.PayoutDetailTest",
+          "counts": [
+            3,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.ledger.LedgerSchemaConsistencyTest",
+          "counts": [
+            3,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.ledger.MockRequestTest",
+          "counts": [
+            1,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.ledger.MoneyStartupInvariantsTest",
+          "counts": [
+            10,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.ledger.repository.LedgerEntryLegUniquenessTest",
+          "counts": [
+            2,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.ledger.service.DoubleEntryLedgerServiceRulesTest",
+          "counts": [
+            7,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.ledger.reconciliation.MoneyReconciliationJobTest",
+          "counts": [
+            14,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.ledger.service.OwnerNameResolverTest",
+          "counts": [
+            5,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.ledger.service.LedgerTransactionIdValidationTest",
+          "counts": [
+            6,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.ledger.reconciliation.LedgerDltRejectionTest",
+          "counts": [
+            3,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.ledger.TestSerialization",
+          "counts": [
+            1,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.ledger.contract.LedgerTransactionConsumerContractTest",
+          "counts": [
+            1,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.ledger.ContractVerifierTest",
+          "counts": [
+            2,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.ledger.service.DoubleEntryLedgerServiceOrderTotalTest",
+          "counts": [
+            6,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.ledger.service.PayoutServiceTest",
+          "counts": [
+            22,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.architecture.ArchitectureEnforcementTest",
+          "counts": [
+            9,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.ledger.EndpointAuthorizationCoverageTest",
+          "counts": [
+            6,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.ledger.service.DoubleEntryLedgerServiceCategoryTotalTest",
+          "counts": [
+            3,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.ledger.repository.LedgerRejectionResolutionPersistenceTest",
+          "counts": [
+            1,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.ledger.controller.AdminLedgerRejectionControllerTest",
+          "counts": [
+            7,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.ledger.service.LedgerRejectionRecorderPersistenceTest",
+          "counts": [
+            1,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.ledger.service.PayoutStateMachineTest",
+          "counts": [
+            29,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.ledger.LedgerServiceApplicationStartupTest",
+          "counts": [
+            4,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.ledger.service.PendingPayoutResilienceTest",
+          "counts": [
+            3,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.ledger.controller.LedgerControllerAuthorizationTest",
+          "counts": [
+            10,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.ledger.reconciliation.ReconciliationControllerTest",
+          "counts": [
+            12,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.ledger.reconciliation.ReconciliationSubjectStabilityTest",
+          "counts": [
+            2,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.ledger.repository.PayoutTransitionPersistenceTest",
+          "counts": [
+            1,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.ledger.listener.LedgerEventListenerTest",
+          "counts": [
+            7,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "name": "com.fooddelivery.ledger.PrometheusRulesTest",
+          "counts": [
+            5,
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    }
+  },
+  "temporaryPostgresContainer": "removed after restored uniqueness guard passed",
+  "mutations": "9 unique successful guard labels, all source restored; one initial positive-path denial classified as error, improved to explicit assertion and rerun; original evidence retained"
+}

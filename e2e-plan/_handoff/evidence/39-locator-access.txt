@@ -1,0 +1,4 @@
+
+locator call sites: 9 in 1 files -- PASS 6, FAIL 0 (in 0 files), EXCEPTED 0, DYNAMIC 3 (runtime-only, not checkable), DEAD 0 (fail, but in page-object methods no test reaches; --show-dead)
+UI corpus: 336 source files, 50 raw sibling labels, 56 nesting labels
+E2E LOCATOR AUDIT: PASS

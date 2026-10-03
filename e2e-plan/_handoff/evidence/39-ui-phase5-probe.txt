@@ -1,0 +1,21 @@
+
+  motion not applied, for want of a component (1):
+    - Error
+        PARKED by the owner 2026-09-19. Errors surface as a toast or an AlertBanner, both of which already animate; a shake belongs on an inline field error and no field renders one. Do not re-propose it.
+
+  [PASS]  1. only transform, opacity and filter are animated          
+  [PASS]  2. no layout property is animated                           
+  [PASS]  3. progress bars scale rather than resize                   
+  [PASS]  4. no blanket transitions (Phase 1 invariant)               
+  [PASS]  5. one animation library (Phase 1 invariant)                
+  [PASS]  6. JS-driven motion honours reduced motion                  
+  [PASS]  7. press and hover motion lives in shared/ui                
+  [PASS]  8. every interaction in the plan has a test that proves it  
+  [PASS]  9. every motion test has a reduced-motion assertion         
+  [PASS] 10. the elevation ladder holds: content stays below chrome   
+  [PASS] 11. every elevation step carries an inset highlight          
+  [PASS] 12. stagger stays within 40ms and 8 items                    
+  [PASS] 13. shared elements are only the ones the plan names         
+  [PASS] 16. every motion primitive is rendered somewhere             
+
+PHASE 5 COMPLETE — 14/14 checks pass

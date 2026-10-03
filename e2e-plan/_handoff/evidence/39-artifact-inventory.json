@@ -1,0 +1,312 @@
+[
+  {
+    "service": "api-gateway",
+    "jar": "ApiGateway/target/api-gateway-0.0.1-SNAPSHOT.jar",
+    "bytes": 74832938,
+    "ownSql": [],
+    "sharedModules": [],
+    "fresh": true
+  },
+  {
+    "service": "bidding-engine",
+    "jar": "BiddingEngine/target/bidding-engine-1.0-SNAPSHOT.jar",
+    "bytes": 127405174,
+    "ownSql": [],
+    "sharedModules": [
+      "BOOT-INF/lib/common-core-1.0-SNAPSHOT.jar",
+      "BOOT-INF/lib/common-persistence-1.0-SNAPSHOT.jar",
+      "BOOT-INF/lib/common-web-1.0-SNAPSHOT.jar"
+    ],
+    "fresh": true
+  },
+  {
+    "service": "budget-pacing-service",
+    "jar": "BudgetLimitingService/target/budget-pacing-service-1.0-SNAPSHOT.jar",
+    "bytes": 121820953,
+    "ownSql": [],
+    "sharedModules": [
+      "BOOT-INF/lib/common-core-1.0-SNAPSHOT.jar",
+      "BOOT-INF/lib/common-messaging-1.0-SNAPSHOT.jar",
+      "BOOT-INF/lib/common-persistence-1.0-SNAPSHOT.jar"
+    ],
+    "fresh": true
+  },
+  {
+    "service": "campaign-service",
+    "jar": "CampaignService/target/campaign-service-1.0-SNAPSHOT.jar",
+    "bytes": 133086130,
+    "ownSql": [
+      "BOOT-INF/classes/db/migration/V20260925120000__advertiser_time_zone.sql",
+      "BOOT-INF/classes/db/migration/V1__init_schema.sql"
+    ],
+    "sharedModules": [
+      "BOOT-INF/lib/common-core-1.0-SNAPSHOT.jar",
+      "BOOT-INF/lib/common-messaging-1.0-SNAPSHOT.jar",
+      "BOOT-INF/lib/common-persistence-1.0-SNAPSHOT.jar",
+      "BOOT-INF/lib/common-web-1.0-SNAPSHOT.jar"
+    ],
+    "fresh": true
+  },
+  {
+    "service": "chat-service",
+    "jar": "CommunicationService/target/chat-service-1.0-SNAPSHOT.jar",
+    "bytes": 138076081,
+    "ownSql": [
+      "BOOT-INF/classes/db/migration/V1__create_chat_schema.sql"
+    ],
+    "sharedModules": [
+      "BOOT-INF/lib/common-core-1.0-SNAPSHOT.jar",
+      "BOOT-INF/lib/common-messaging-1.0-SNAPSHOT.jar",
+      "BOOT-INF/lib/common-persistence-1.0-SNAPSHOT.jar",
+      "BOOT-INF/lib/common-storage-1.0-SNAPSHOT.jar",
+      "BOOT-INF/lib/common-web-1.0-SNAPSHOT.jar"
+    ],
+    "fresh": true
+  },
+  {
+    "service": "communication-integration",
+    "jar": "CommunicationIntegration/target/notification-service-0.0.1-SNAPSHOT.jar",
+    "bytes": 171476044,
+    "ownSql": [
+      "BOOT-INF/classes/db/migration/V1__init_notification_db.sql"
+    ],
+    "sharedModules": [
+      "BOOT-INF/lib/common-core-1.0-SNAPSHOT.jar",
+      "BOOT-INF/lib/common-messaging-1.0-SNAPSHOT.jar",
+      "BOOT-INF/lib/common-persistence-1.0-SNAPSHOT.jar"
+    ],
+    "fresh": true
+  },
+  {
+    "service": "config-service",
+    "jar": "ConfigService/target/config-service-1.0-SNAPSHOT.jar",
+    "bytes": 62244101,
+    "ownSql": [],
+    "sharedModules": [],
+    "fresh": true
+  },
+  {
+    "service": "customer-service",
+    "jar": "CustomerApplication/target/food-delivery-backend-1.0-SNAPSHOT.jar",
+    "bytes": 131351866,
+    "ownSql": [
+      "BOOT-INF/classes/db/migration/V20260924110000__add_order_delivery_eta.sql",
+      "BOOT-INF/classes/db/migration/V20261002220000__drop_unused_refund_item_amount.sql",
+      "BOOT-INF/classes/db/migration/V20261002190000__refund_sweep_attempts.sql",
+      "BOOT-INF/classes/db/migration/V20260916100000__disable_new_cod_orders.sql",
+      "BOOT-INF/classes/db/migration/V20260929130000__scope_customer_addresses_to_fleet_city.sql",
+      "BOOT-INF/classes/db/migration/V20260926100000__payment_intent_status_prepaid.sql",
+      "BOOT-INF/classes/db/migration/V20260924130000__add_order_tip.sql",
+      "BOOT-INF/classes/db/migration/V20260924100000__add_order_delay_request.sql",
+      "BOOT-INF/classes/db/migration/V1__init_schema.sql",
+      "BOOT-INF/classes/db/migration/V20260915100000__add_order_dispatch_scope.sql",
+      "BOOT-INF/classes/db/migration/V20260924120000__create_order_invoices.sql",
+      "BOOT-INF/classes/db/migration/V20260929140000__manual_intervention_operation_audit.sql",
+      "BOOT-INF/classes/db/migration/V20260925110000__timestamps_tz.sql"
+    ],
+    "sharedModules": [
+      "BOOT-INF/lib/common-core-1.0-SNAPSHOT.jar",
+      "BOOT-INF/lib/common-messaging-1.0-SNAPSHOT.jar",
+      "BOOT-INF/lib/common-persistence-1.0-SNAPSHOT.jar",
+      "BOOT-INF/lib/common-web-1.0-SNAPSHOT.jar"
+    ],
+    "fresh": true
+  },
+  {
+    "service": "delivery-service",
+    "jar": "DeliveryExecutiveApplication/target/delivery-executive-application-1.0-SNAPSHOT.jar",
+    "bytes": 131250380,
+    "ownSql": [
+      "BOOT-INF/classes/db/migration/V20260929140000__manual_force_assignment_concurrency.sql",
+      "BOOT-INF/classes/db/migration/V20260910120000__order_assignments.sql",
+      "BOOT-INF/classes/db/migration/V20260825200001__alter_city_id_type_to_varchar.sql",
+      "BOOT-INF/classes/db/migration/V20260910140000__order_assignment_payment_method.sql",
+      "BOOT-INF/classes/db/migration/V20260825200002__alter_telemetry_location_to_geometry.sql",
+      "BOOT-INF/classes/db/migration/V20260825200000__add_city_id_to_delivery_executives.sql",
+      "BOOT-INF/classes/db/migration/V1__init_schema.sql",
+      "BOOT-INF/classes/db/migration/V20260927120000__order_assignment_delivery_status.sql",
+      "BOOT-INF/classes/db/migration/V20260916102000__enforce_prepaid_assignments.sql"
+    ],
+    "sharedModules": [
+      "BOOT-INF/lib/common-core-1.0-SNAPSHOT.jar",
+      "BOOT-INF/lib/common-messaging-1.0-SNAPSHOT.jar",
+      "BOOT-INF/lib/common-persistence-1.0-SNAPSHOT.jar",
+      "BOOT-INF/lib/common-web-1.0-SNAPSHOT.jar"
+    ],
+    "fresh": true
+  },
+  {
+    "service": "eureka-server-1",
+    "jar": "EurekaServer/target/eureka-server-1.0-SNAPSHOT.jar",
+    "bytes": 74455189,
+    "ownSql": [],
+    "sharedModules": [],
+    "fresh": true
+  },
+  {
+    "service": "eureka-server-2",
+    "jar": "EurekaServer/target/eureka-server-1.0-SNAPSHOT.jar",
+    "bytes": 74455189,
+    "ownSql": [],
+    "sharedModules": [],
+    "fresh": true
+  },
+  {
+    "service": "event-tracking-service",
+    "jar": "UserTrackingService/target/event-tracking-service-1.0-SNAPSHOT.jar",
+    "bytes": 119845567,
+    "ownSql": [],
+    "sharedModules": [
+      "BOOT-INF/lib/common-core-1.0-SNAPSHOT.jar",
+      "BOOT-INF/lib/common-persistence-1.0-SNAPSHOT.jar",
+      "BOOT-INF/lib/common-web-1.0-SNAPSHOT.jar"
+    ],
+    "fresh": true
+  },
+  {
+    "service": "government-id-service",
+    "jar": "GovernmentIDValidationService/target/government-id-validation-service-0.0.1-SNAPSHOT.jar",
+    "bytes": 135546300,
+    "ownSql": [
+      "BOOT-INF/classes/db/migration/V1__init.sql",
+      "BOOT-INF/classes/db/migration/V20260822100000__add_missing_columns.sql",
+      "BOOT-INF/classes/db/migration/V20260925110000__timestamps_tz.sql"
+    ],
+    "sharedModules": [
+      "BOOT-INF/lib/common-core-1.0-SNAPSHOT.jar",
+      "BOOT-INF/lib/common-persistence-1.0-SNAPSHOT.jar",
+      "BOOT-INF/lib/common-storage-1.0-SNAPSHOT.jar",
+      "BOOT-INF/lib/common-web-1.0-SNAPSHOT.jar"
+    ],
+    "fresh": true
+  },
+  {
+    "service": "identity-service",
+    "jar": "IdentityService/target/identity-service-0.0.1-SNAPSHOT.jar",
+    "bytes": 124700450,
+    "ownSql": [
+      "BOOT-INF/classes/db/migration/V1__init_schema.sql"
+    ],
+    "sharedModules": [
+      "BOOT-INF/lib/common-core-1.0-SNAPSHOT.jar",
+      "BOOT-INF/lib/common-messaging-1.0-SNAPSHOT.jar",
+      "BOOT-INF/lib/common-persistence-1.0-SNAPSHOT.jar",
+      "BOOT-INF/lib/common-web-1.0-SNAPSHOT.jar"
+    ],
+    "fresh": true
+  },
+  {
+    "service": "ledger-service",
+    "jar": "LedgerService/target/ledger-service-1.0-SNAPSHOT.jar",
+    "bytes": 126945299,
+    "ownSql": [
+      "BOOT-INF/classes/db/migration/V20261001035500__fix_payout_operations_request_hash_type.sql",
+      "BOOT-INF/classes/db/migration/V20260916103000__remove_cash_collection_schema.sql",
+      "BOOT-INF/classes/db/migration/V20260929153000__lock_and_audit_payout_operations.sql",
+      "BOOT-INF/classes/db/migration/V1__init_ledger.sql",
+      "BOOT-INF/classes/db/migration/V20261002210000__ledger_entries_unique_per_leg.sql"
+    ],
+    "sharedModules": [
+      "BOOT-INF/lib/common-core-1.0-SNAPSHOT.jar",
+      "BOOT-INF/lib/common-persistence-1.0-SNAPSHOT.jar",
+      "BOOT-INF/lib/common-web-1.0-SNAPSHOT.jar"
+    ],
+    "fresh": true,
+    "privacyCommit": "0aca2ee09a6c63fa2b2ea7dce11312a083e5d8ec"
+  },
+  {
+    "service": "maps-integration",
+    "jar": "MapsIntegration/target/mapsintegration-0.0.1-SNAPSHOT.jar",
+    "bytes": 104347354,
+    "ownSql": [],
+    "sharedModules": [
+      "BOOT-INF/lib/common-core-1.0-SNAPSHOT.jar",
+      "BOOT-INF/lib/common-web-1.0-SNAPSHOT.jar"
+    ],
+    "fresh": true
+  },
+  {
+    "service": "payment-gateway",
+    "jar": "PaymentGatewayIntegration/target/payment-service-0.0.1-SNAPSHOT.jar",
+    "bytes": 132213335,
+    "ownSql": [
+      "BOOT-INF/classes/db/migration/V1__init_schema.sql"
+    ],
+    "sharedModules": [
+      "BOOT-INF/lib/common-core-1.0-SNAPSHOT.jar",
+      "BOOT-INF/lib/common-messaging-1.0-SNAPSHOT.jar",
+      "BOOT-INF/lib/common-persistence-1.0-SNAPSHOT.jar",
+      "BOOT-INF/lib/common-web-1.0-SNAPSHOT.jar"
+    ],
+    "fresh": true
+  },
+  {
+    "service": "restaurant-service",
+    "jar": "RestaurantApplication/target/restaurant-application-1.0-SNAPSHOT.jar",
+    "bytes": 140430770,
+    "ownSql": [
+      "BOOT-INF/classes/db/migration/V1__init_schema.sql"
+    ],
+    "sharedModules": [
+      "BOOT-INF/lib/common-core-1.0-SNAPSHOT.jar",
+      "BOOT-INF/lib/common-messaging-1.0-SNAPSHOT.jar",
+      "BOOT-INF/lib/common-persistence-1.0-SNAPSHOT.jar",
+      "BOOT-INF/lib/common-storage-1.0-SNAPSHOT.jar",
+      "BOOT-INF/lib/common-web-1.0-SNAPSHOT.jar",
+      "BOOT-INF/lib/common-lang-3.10.1.jar",
+      "BOOT-INF/lib/common-io-3.10.1.jar",
+      "BOOT-INF/lib/common-image-3.10.1.jar"
+    ],
+    "fresh": true
+  },
+  {
+    "service": "wallet-service",
+    "jar": "WalletService/target/wallet-service-1.0-SNAPSHOT.jar",
+    "bytes": 124350042,
+    "ownSql": [
+      "BOOT-INF/classes/db/migration/V1__init.sql",
+      "BOOT-INF/classes/db/migration/V3__index_wallet_topup_gateway_order_id.sql",
+      "BOOT-INF/classes/db/migration/V2__money_timestamps_tz.sql",
+      "BOOT-INF/classes/db/migration/V20260916105700__persist_provider_gateway_order_id.sql"
+    ],
+    "sharedModules": [
+      "BOOT-INF/lib/common-core-1.0-SNAPSHOT.jar",
+      "BOOT-INF/lib/common-messaging-1.0-SNAPSHOT.jar",
+      "BOOT-INF/lib/common-persistence-1.0-SNAPSHOT.jar",
+      "BOOT-INF/lib/common-web-1.0-SNAPSHOT.jar"
+    ],
+    "fresh": true
+  },
+  {
+    "service": "ondc-integration-service",
+    "jar": "ONDCIntegrationService/target/ondc-integration-service-1.0-SNAPSHOT.jar",
+    "bytes": 126509971,
+    "ownSql": [
+      "BOOT-INF/classes/db/migration/V1__init_ondc_schema.sql",
+      "BOOT-INF/classes/db/migration/V20260925110000__timestamps_tz.sql"
+    ],
+    "sharedModules": [
+      "BOOT-INF/lib/common-core-1.0-SNAPSHOT.jar",
+      "BOOT-INF/lib/common-persistence-1.0-SNAPSHOT.jar",
+      "BOOT-INF/lib/common-web-1.0-SNAPSHOT.jar"
+    ],
+    "fresh": true
+  },
+  {
+    "service": "reviews-service",
+    "jar": "ReviewsService/target/reviews-service-1.0-SNAPSHOT.jar",
+    "bytes": 114403137,
+    "ownSql": [
+      "BOOT-INF/classes/db/migration/V20260928090000__support_private_multi_actor_reviews.sql",
+      "BOOT-INF/classes/db/migration/V20260911000000__order_scoped_reviews.sql",
+      "BOOT-INF/classes/db/migration/V20260913000000__drop_reviews_metadata.sql",
+      "BOOT-INF/classes/db/migration/V1__init_schema.sql"
+    ],
+    "sharedModules": [
+      "BOOT-INF/lib/common-core-1.0-SNAPSHOT.jar",
+      "BOOT-INF/lib/common-messaging-1.0-SNAPSHOT.jar",
+      "BOOT-INF/lib/common-web-1.0-SNAPSHOT.jar"
+    ],
+    "fresh": true
+  }
+]

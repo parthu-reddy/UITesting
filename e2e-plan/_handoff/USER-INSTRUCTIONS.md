@@ -94,3 +94,52 @@ performance and observability requirements (`SECURITY-AND-PERFORMANCE.md`), adde
 ## Business Platform — 2026-10-03T15:50:36+05:30
 
 Direct user request: understand every line of RandomDocuments/BusinessPlatform_2026-10-03 and finish its application production-ready with UI/UX consistent with the current application. Follow the supplied phase release gates and existing owner-only commit/publish/deploy rules. This request does not confirm the five marked owner design choices.
+
+## Publishing and deployment authorized through Business Platform completion — 2026-10-03T16:57:40+05:30
+
+Direct user request: investigate restarting bidding-engine/event-tracking-service; make services
+production ready. User authorizes publishing and deployment as required until the current work is
+completely done. This supersedes the owner-only publish/deploy restriction for this task. Use existing
+protected workflows/scripts unchanged. The permanent never-commit/push instruction has not been
+explicitly revoked. No DB reset/seed/cleanup authorization inferred. Product defaults D3/D4/D6/D13/D15
+remain unconfirmed; a bundled clarification is pending while the startup incident is being fixed.
+
+## Required publishing commits/pushes authorized — 2026-10-03T17:04:49+05:30
+
+Owner explicitly authorized the commits and pushes required by the publishing workflows for this
+Business Platform task. This is a task-specific override of the standing no-commit/no-push rule, lasting
+until this work is complete. Commit/push only reviewed changes needed for this work; preserve unrelated
+user changes. Existing protected workflows/scripts remain unchanged. Publishing/deployment is also
+authorized for this duration; Dev data reset/seed/cleanup is not authorized by this choice.
+
+## Dev seed-only authorization — 2026-10-03T17:13:03+05:30
+
+Owner explicitly authorized the existing Dev seed workflow **without reset** after deployed Identity and restaurant tables were found empty. Use Deployment/dummy-data.sh --load-only, preserve records, no Redis flush or cleanup. Verify current relationships and browser login afterward. This supersedes the no-seed rule only for this restoration. Authoritative dated choices remain in RandomDocuments/BusinessPlatform_2026-10-03/DECISIONS.md.
+
+## Clean wipe/reseed authorized — 2026-10-03
+
+Owner permits clean-deploy --wipe followed by fresh seeding for this Business Platform task. This supersedes the previous no-reset rule within this task; use when the reviewed phase rollout requires schema recreation, not for a configuration fix. Existing protected workflow scripts remain unchanged. Decisions and Dev phone policy review are authoritative beside the plan in DECISIONS.md. Non-admin Dev autofill supports any ten-digit phone; only provisioned test admins are allowlisted.
+
+## Firebase preference confirmed — 2026-10-03
+
+Owner confirmed mock push in Dev, Firebase credentials required in production. Record is authoritative
+in RandomDocuments/BusinessPlatform_2026-10-03/DECISIONS.md. Existing Dev image follows this; no real
+Firebase/provider delivery claim from a mocked audit. No pending owner answer for this preference.
+
+### 2026-10-03T18:40:34+05:30 — Owner clarification: Dev-only fresh recreation
+
+Owner confirms nothing is in production; all current application data is Dev and may be completely deleted and recreated using dummy seeds. No legacy data transfer, preservation or backfill is required. Use the already-authorised unchanged clean-deploy --wipe followed by updated dummy seeds for this organisation transition. Update schema definitions needed by the new code and dummy organisation/member/brand relationships; Flyway SQL runs during fresh database recreation (ddl-auto=validate), not a migration of existing business data. Do not add production-data conversion or infer old owners. The two existing O2 SQL files only establish required schema fields/constraints on fresh Dev databases; they contain no data backfill. Earlier retained fixture evidence remains historical after the authorised wipe. No wipe has run yet.
+
+### 2026-10-03T18:41:50+05:30 — Persistent Dev policy requested
+
+Owner explicitly requests this Dev-only disposable-data/no-legacy-migration guidance be remembered permanently until they ask to forget it or report deployment to production. Persistent note saved under Codex memories/extensions/ad_hoc/notes/2026-10-03T18-41-39-food-delivery-dev-data-recreation.md. That future production report ends the disposable-data assumption and requires reassessing preservation/migration/deployment before destructive actions. This applies across the Food Delivery workspace, including the active Business Platform plan.
+
+
+## Migration cleanup with SQL correctness — 2026-10-03T19:49:03+05:30
+
+Direct owner request: remove migration code, taking appropriate decisions rather than blindly removing files. Preserve required schema creation and constraints; consolidate only inspected definitions and verify fresh schema plus seeds before retirement. Dev-only policy remains in force. Full wipe, clean builds, republishing affected shared-library consumers and fresh seeding are prerequisites to rollout of changed baselines; no Flyway-repair workaround. Current scoped removal and proof are in checkpoint38 and the Business Platform DECISIONS.md.
+
+
+### 2026-10-03T19:50:18+05:30 — Publishing precedes deployment
+
+Owner reiterates that publishing must happen before deployment. Required order: validate source and clean outputs; publish CommonLibrary and the current producer stubs; clean-build/publish the dependent service and UI images; verify registry tags and record them in Deployment; execute the appropriate existing deployment workflow (full authorised wipe for consolidated baseline changes); seed fresh Dev data; inspect every service log and run live regressions. Configuration goes through the existing Config Server bundle workflow before application consumers start. Do not deploy stale/unpublished images or treat successful local tests as publication. No cleanup changes have been published or deployed yet.

@@ -1,0 +1,155 @@
+{
+  "proofType": "local deliberate break guards",
+  "mutations": [
+    {
+      "mutation": "permission-ignored",
+      "startedAt": "2026-10-03T18:49:45+05:30",
+      "caught": true,
+      "exitCode": 1,
+      "testClass": "RestaurantEndpointPermissionTest",
+      "counts": [
+        4,
+        2,
+        0,
+        0
+      ],
+      "originalSourceSha256": "45203f1c76b56f5feed15aa7e5c4fa91adebd0569cd576827ffc6ae724c5f928",
+      "sourceRestored": true
+    },
+    {
+      "mutation": "stock-requires-menu",
+      "startedAt": "2026-10-03T18:49:58+05:30",
+      "caught": false,
+      "exitCode": 1,
+      "testClass": "RestaurantEndpointPermissionTest",
+      "counts": [
+        4,
+        0,
+        1,
+        0
+      ],
+      "originalSourceSha256": "b7ae27eba8ac0ba9af72d17b0bc3a520acd8fde297519c4243eb90154981a05e",
+      "sourceRestored": true
+    },
+    {
+      "mutation": "stock-requires-menu",
+      "startedAt": "2026-10-03T18:52:18+05:30",
+      "caught": true,
+      "exitCode": 1,
+      "testClass": "RestaurantEndpointPermissionTest",
+      "counts": [
+        4,
+        1,
+        0,
+        0
+      ],
+      "originalSourceSha256": "b7ae27eba8ac0ba9af72d17b0bc3a520acd8fde297519c4243eb90154981a05e",
+      "sourceRestored": true
+    },
+    {
+      "mutation": "staff-earnings-view",
+      "startedAt": "2026-10-03T18:52:30+05:30",
+      "caught": true,
+      "exitCode": 1,
+      "testClass": "MoneyAccessPolicyTest",
+      "counts": [
+        12,
+        5,
+        0,
+        0
+      ],
+      "originalSourceSha256": "93727364af164afbe2e28905fc01f8d31ee632a7fba18dd0180fe34db1270165",
+      "sourceRestored": true
+    },
+    {
+      "mutation": "roster-user-key",
+      "startedAt": "2026-10-03T18:52:39+05:30",
+      "caught": true,
+      "exitCode": 1,
+      "testClass": "OrderChatRosterServiceTest",
+      "counts": [
+        2,
+        1,
+        0,
+        0
+      ],
+      "originalSourceSha256": "b13be90ea3b30d48a7650c09e854df42b601bbdcc6b0e4e179957e6abd7c3738",
+      "sourceRestored": true
+    },
+    {
+      "mutation": "chat-nonmember",
+      "startedAt": "2026-10-03T18:52:48+05:30",
+      "caught": true,
+      "exitCode": 1,
+      "testClass": "ChatRestaurantMemberAccessTest",
+      "counts": [
+        4,
+        2,
+        0,
+        0
+      ],
+      "originalSourceSha256": "cdf6ebb9886c0c11d40c6b3d1523505482c8d7d400be1e4324551949555ef440",
+      "sourceRestored": true
+    },
+    {
+      "mutation": "query-loop",
+      "startedAt": "2026-10-03T18:52:57+05:30",
+      "caught": true,
+      "exitCode": 1,
+      "testClass": "RestaurantAccessQueryCountTest",
+      "counts": [
+        1,
+        1,
+        0,
+        0
+      ],
+      "originalSourceSha256": "9815a700ed5b8b9803895604fcf1f3633357d678c436367d1dc6c6f190554a95",
+      "sourceRestored": true
+    },
+    {
+      "mutation": "restaurant-timeouts",
+      "startedAt": "2026-10-03T18:53:11+05:30",
+      "caught": true,
+      "exitCode": 1,
+      "testClass": null,
+      "counts": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "originalSourceSha256": "c8622ca2257cfbda629026d040621bc53078eb3eebbcf69b5ba6e95c72f1c0d9",
+      "sourceRestored": true
+    },
+    {
+      "mutation": "seed-missing-organisation",
+      "startedAt": "2026-10-03T18:53:13+05:30",
+      "caught": true,
+      "exitCode": 1,
+      "testClass": null,
+      "counts": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "originalSourceSha256": "88a312e0a421ed134d733de6b102a0d51c3f55ab2f11577d03e614d381aac8f3",
+      "sourceRestored": true
+    },
+    {
+      "mutation": "unique-brand-index",
+      "startedAt": "2026-10-03T18:56:05+05:30",
+      "proofType": "isolated disposable PostgreSQL unit schema; not Oracle",
+      "sourceRestored": true,
+      "originalSourceSha256": "c84af2a70ac54190303cb69a22f0a9ec87a3e71be9dba003bca417d71e2a56a0",
+      "counts": [
+        1,
+        1,
+        0,
+        0
+      ],
+      "exitCode": 1,
+      "caught": true
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "proof": "read-only deployed logs",
+  "failures": [
+    {
+      "service": "event-tracking-service",
+      "timestamp": "2026-10-03T11:25:17.667646903Z",
+      "level": "WARN",
+      "message": "Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'auditReader': Injection of persistence dependencies failed"
+    },
+    {
+      "service": "event-tracking-service",
+      "timestamp": "2026-10-03T11:25:17.830909308Z",
+      "level": "ERROR",
+      "message": "\n\n***************************\nAPPLICATION FAILED TO START\n***************************\n\nDescription:\n\nA component required a bean of type 'jakarta.persistence.EntityManagerFactory' that could not be found.\n\n\nAction:\n\nConsider defining a bean of type 'jakarta.persistence.EntityManagerFactory' in your configuration.\n"
+    },
+    {
+      "service": "event-tracking-service",
+      "timestamp": "2026-10-03T11:25:38.565122094Z",
+      "level": "WARN",
+      "message": "Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'auditReader': Injection of persistence dependencies failed"
+    },
+    {
+      "service": "event-tracking-service",
+      "timestamp": "2026-10-03T11:25:38.836522084Z",
+      "level": "ERROR",
+      "message": "\n\n***************************\nAPPLICATION FAILED TO START\n***************************\n\nDescription:\n\nA component required a bean of type 'jakarta.persistence.EntityManagerFactory' that could not be found.\n\n\nAction:\n\nConsider defining a bean of type 'jakarta.persistence.EntityManagerFactory' in your configuration.\n"
+    },
+    {
+      "service": "bidding-engine",
+      "timestamp": "2026-10-03T11:25:18.304598954Z",
+      "level": "WARN",
+      "message": "Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'auditReader': Injection of persistence dependencies failed"
+    },
+    {
+      "service": "bidding-engine",
+      "timestamp": "2026-10-03T11:25:18.40357229Z",
+      "level": "ERROR",
+      "message": "\n\n***************************\nAPPLICATION FAILED TO START\n***************************\n\nDescription:\n\nA component required a bean of type 'jakarta.persistence.EntityManagerFactory' that could not be found.\n\n\nAction:\n\nConsider defining a bean of type 'jakarta.persistence.EntityManagerFactory' in your configuration.\n"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+
+ RUN  v4.1.11 /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI
+
+
+ Test Files  1 passed (1)
+      Tests  2 passed (2)
+   Start at  20:35:31
+   Duration  1.40s (transform 311ms, setup 191ms, import 534ms, tests 195ms, environment 416ms)
+

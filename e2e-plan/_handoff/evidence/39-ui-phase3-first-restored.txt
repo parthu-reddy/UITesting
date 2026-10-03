@@ -1,0 +1,16 @@
+
+  [PASS]  1. no ad-hoc status maps outside the model modules        
+  [PASS]  2. StatusPill exists and is exported                      
+  [PASS]  3. previously-identical statuses now differ               
+  [PASS]  4. all three menu screens reach MenuItemRow               
+  [PASS]  5. menu screens at least 40% smaller                      
+  [PASS]  6. veg marker derived in one place                        
+  [PASS]  7. veg rule not re-implemented in presentation code       
+  [FAIL]  8. no role-literal branching in shared domain components  1 files: features/communication/components/ChatWidget.tsx
+  [PASS]  9. no cross-role component imports                        
+  [PASS] 10. no cross-file JSX duplication (>= 10 nodes)            
+  [PASS] 11. shared/money still the only money formatter            
+  [PASS] 12. one maplibre wrapper                                   
+  [PASS] 13. typecheck + lint + test clean                          
+
+PHASE 3 INCOMPLETE — 1 of 13 checks failing

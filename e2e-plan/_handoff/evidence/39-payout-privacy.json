@@ -1,0 +1,26 @@
+{
+  "date": "2026-10-03T20:53:03+05:30",
+  "red": {
+    "tests": 3,
+    "failures": 2,
+    "errors": 0,
+    "skipped": 0,
+    "log": "/tmp/bp-o2-payout-privacy-before.log"
+  },
+  "restoredFocused": {
+    "tests": 3,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "log": "/tmp/bp-o2-payout-privacy-restored.log"
+  },
+  "choice": "Earnings readers retain amounts but beneficiarySnapshot requires PAYOUTS_MANAGE; redact DTO without mutating entity.",
+  "fullLedger": {
+    "date": "2026-10-03T20:54:48+05:30",
+    "tests": 223,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "log": "/tmp/bp-o2-ledger-final-privacy-verify.log"
+  }
+}
