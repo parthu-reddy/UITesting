@@ -42,24 +42,34 @@ public class ChatAndRefundIsolationTest extends TestBase {
               const url = (location.protocol === 'https:' ? 'wss:' : 'ws:') + '//' + location.host
                   + '/ws/chat?token=' + encodeURIComponent(token);
               return await new Promise(resolve => {
-                const frames = []; let done = false; const ws = new WebSocket(url);
-                const finish = result => { if (done) return; done = true; try { ws.close(); } catch (e) {} resolve(result); };
+                const frames = []; let done = false, buffer = '', actionSent = false;
+                const ws = new WebSocket(url); ws.binaryType = 'arraybuffer';
+                const finish = result => { if (done) return; done = true; clearTimeout(limit);
+                  try { ws.close(); } catch (e) {} resolve(result); };
                 const limit = setTimeout(() => finish({frames, error: false}), mode === 'owner-subscribe' ? 4000 : 15000);
                 ws.onopen = () => ws.send('CONNECT\\naccept-version:1.2,1.1\\nheart-beat:0,0\\nhost:' + location.host
                     + '\\nAuthorization:Bearer ' + token + '\\n\\n\\0');
                 ws.onmessage = event => {
-                  const frame = String(event.data); const command = frame.split('\\n')[0];
-                  const message = (frame.match(/\\nmessage:([^\\n]*)/) || [])[1] || '';
-                  frames.push(command + (message ? ':' + message : ''));
-                  if (command === 'CONNECTED') {
-                    if (mode === 'send') {
-                      ws.send('SEND\\ndestination:/app/chat.send/' + sessionId + '\\ncontent-type:application/json\\n\\n'
-                          + JSON.stringify({content: %s, messageType: 'TEXT'}) + '\\0');
-                    } else {
-                      ws.send('SUBSCRIBE\\nid:probe-0\\ndestination:/user/queue/chat/' + sessionId + '\\n\\n\\0');
+                  buffer += typeof event.data === 'string' ? event.data : new TextDecoder().decode(event.data);
+                  let boundary;
+                  while ((boundary = buffer.indexOf('\\0')) >= 0) {
+                    const frame = buffer.slice(0, boundary).replace(/^[\\r\\n]+/, '');
+                    buffer = buffer.slice(boundary + 1);
+                    if (!frame) continue;
+                    const command = frame.split('\\n')[0].replace(/\\r$/, '');
+                    const message = (frame.match(/\\nmessage:([^\\r\\n]*)/) || [])[1] || '';
+                    frames.push(command + (message ? ':' + message : ''));
+                    if (command === 'CONNECTED' && !actionSent) {
+                      actionSent = true;
+                      if (mode === 'send') {
+                        ws.send('SEND\\ndestination:/app/chat.send/' + sessionId + '\\ncontent-type:application/json\\n\\n'
+                            + JSON.stringify({content: %s, messageType: 'TEXT'}) + '\\0');
+                      } else {
+                        ws.send('SUBSCRIBE\\nid:probe-0\\ndestination:/user/queue/chat/' + sessionId + '\\n\\n\\0');
+                      }
                     }
+                    if (command === 'ERROR') { finish({frames, error: true}); return; }
                   }
-                  if (command === 'ERROR') { clearTimeout(limit); finish({frames, error: true}); }
                 };
                 ws.onclose = event => { clearTimeout(limit); finish({frames, error: frames.some(f => f.startsWith('ERROR')), closed: event.code}); };
               });
@@ -105,10 +115,9 @@ public class ChatAndRefundIsolationTest extends TestBase {
             orderRead = status(intruder, "GET", "/api/v1/orders/" + ORDER, null);
 
             Map<?, ?> subscribe = stomp(intruder, sessionId, "subscribe");
-            assertThat(subscribe.get("error")).as("outsider subscription refused: %s", subscribe.get("frames")).isEqualTo(true);
-            assertThat((List<?>) subscribe.get("frames")).anyMatch(f -> String.valueOf(f).contains("Access Denied"));
+            assertRefused(subscribe, "subscription");
             Map<?, ?> send = stomp(intruder, sessionId, "send");
-            assertThat(send.get("error")).as("outsider send refused: %s", send.get("frames")).isEqualTo(true);
+            assertRefused(send, "send");
         } finally {
             intruderContext.close();
         }
@@ -153,6 +162,23 @@ public class ChatAndRefundIsolationTest extends TestBase {
         assertThat((List<?>) subscribed.get("frames"))
                 .as("the real socket must authenticate, an empty timeout is not a pass")
                 .anyMatch(frame -> "CONNECTED".equals(frame));
+        assertThat(subscribed.get("closed")).as("a legitimate subscription stays open for the observation window")
+                .isNull();
+    }
+
+    private static void assertRefused(Map<?, ?> result, String operation) {
+        assertThat((List<?>) result.get("frames")).as("the outsider authenticated before the %s probe", operation)
+                .anyMatch(frame -> "CONNECTED".equals(frame));
+        if (Boolean.TRUE.equals(result.get("error"))) {
+            assertThat((List<?>) result.get("frames")).as("explicit %s refusal: %s", operation, result)
+                    .anyMatch(frame -> String.valueOf(frame).contains("Access Denied"));
+        } else {
+            // Spring 6.1.8 StompSubProtocolHandler closes with PROTOCOL_ERROR after
+            // rejecting an inbound frame, including if delivering its ERROR frame fails.
+            // A timeout, normal close, missing authentication, or live subscription fails.
+            assertThat(result.get("closed")).as("server closed the refused %s: %s", operation, result)
+                    .isEqualTo(1002);
+        }
     }
 
     private static int messageCount(Page page, String path) {

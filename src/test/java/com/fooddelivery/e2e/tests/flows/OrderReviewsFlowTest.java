@@ -105,9 +105,11 @@ public class OrderReviewsFlowTest extends TestBase {
                 .contains("\"" + ORDER + "\"").contains(testCustomerPhone);
         Path evidence = Path.of("target/lifecycle", ORDER + "-dish-review-cache.json");
         if (Files.exists(evidence)) {
-            org.assertj.core.api.Assertions.assertThat(Files.readString(evidence))
-                    .as("an already submitted immutable dish review must be audited, never submitted again")
-                    .doesNotContain("\"submitted\":true");
+            Map<?, ?> existing = (Map<?, ?>) customerPage.evaluate("json => JSON.parse(json)", Files.readString(evidence));
+            org.assertj.core.api.Assertions.assertThat(existing.get("submitted"))
+                    .as("an already submitted immutable dish review must be audited, never submitted again").isNotEqualTo(true);
+            org.assertj.core.api.Assertions.assertThat(existing.get("submissionAttempted"))
+                    .as("an ambiguous prior submission must be audited before another write").isNotEqualTo(true);
         }
         customerPage.navigate(TestConfig.APP_URL);
         new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
@@ -143,7 +145,10 @@ public class OrderReviewsFlowTest extends TestBase {
         group.getByRole(AriaRole.RADIO, new Locator.GetByRoleOptions().setName("5 stars").setExact(true)).click();
         String comment = "E2E cache review " + ORDER.substring(0, 8);
         dialog.getByRole(AriaRole.TEXTBOX, new Locator.GetByRoleOptions().setName("Comment about " + name)).fill(comment);
-        var submitted = customerPage.waitForResponse(response -> response.url().endsWith("/api/v1/reviews")
+        Files.writeString(evidence, (String) customerPage.evaluate("json => { const m=JSON.parse(json);"
+                + "m.submissionAttempted=true; return JSON.stringify(m); }", Files.readString(evidence)));
+        var submitted = customerPage.waitForResponse(response -> "/api/v1/reviews".equals(java.net.URI.create(response.url()).getPath())
+                        && "actorRole=CUSTOMER".equals(java.net.URI.create(response.url()).getQuery())
                         && "POST".equals(response.request().method()), () -> dialog.getByRole(AriaRole.BUTTON,
                 new Locator.GetByRoleOptions().setName("Submit 1 review").setExact(true)).click());
         org.assertj.core.api.Assertions.assertThat(submitted.status()).isEqualTo(201);
@@ -172,8 +177,134 @@ public class OrderReviewsFlowTest extends TestBase {
         saveCacheReview(evidence, dishId, true, true);
     }
 
+    @Test
+    @DisplayName("REVIEW-CACHE-02: the retained submitted dish review and earlier reviews stay read-only")
+    void submittedDishReviewRemainsReadOnly() throws java.io.IOException {
+        org.assertj.core.api.Assertions.assertThat(ORDER).isNotEmpty();
+        Path evidence = Path.of("target/lifecycle", ORDER + "-dish-review-cache.json");
+        Map<?, ?> manifest = (Map<?, ?>) customerPage.evaluate("json => JSON.parse(json)", Files.readString(evidence));
+        org.assertj.core.api.Assertions.assertThat(manifest.get("submitted")).isEqualTo(true);
+        Locator tracker = openCustomerHistoryTracker();
+        List<Map<?, ?>> current = targets(customerPage, "CUSTOMER");
+        Map<?, ?> dish = current.stream().filter(target -> manifest.get("dishId").equals(target.get("entityId")))
+                .findFirst().orElseThrow();
+        org.assertj.core.api.Assertions.assertThat(dish.get("alreadyReviewed")).isEqualTo(true);
+        org.assertj.core.api.Assertions.assertThat(dish.get("existingRating")).isEqualTo(5);
+        String comment = "E2E cache review " + ORDER.substring(0, 8);
+        org.assertj.core.api.Assertions.assertThat(dish.get("existingComment")).isEqualTo(comment);
+        for (var old : current) {
+            if ("RESTAURANT".equals(old.get("entityType"))) {
+                org.assertj.core.api.Assertions.assertThat(old.get("existingRating")).isEqualTo(4);
+                org.assertj.core.api.Assertions.assertThat(old.get("existingComment"))
+                        .isEqualTo("E2E review " + ORDER.substring(0, 8) + ": hot and on time");
+            } else if ("DRIVER".equals(old.get("entityType"))) {
+                org.assertj.core.api.Assertions.assertThat(old.get("existingRating")).isEqualTo(5);
+            }
+        }
+        for (int i = 0; i < 2; i++) {
+            Map<?, ?> value = aggregate("/api/v1/reviews/aggregate?entityType=PRODUCT&entityId=" + manifest.get("dishId"));
+            assertAggregate(value, 1, "5.00");
+        }
+        tracker.getByTestId("rate-order-prompt").click();
+        Locator dialog = customerPage.getByRole(AriaRole.DIALOG, new Page.GetByRoleOptions().setName("Rate your order"));
+        assertThat(dialog.getByRole(AriaRole.RADIOGROUP,
+                new Locator.GetByRoleOptions().setName("Rate " + uiName(dish) + " out of 5 stars"))).hasCount(0);
+        assertThat(dialog.getByText(comment)).isVisible();
+        customerPage.keyboard().press("Escape");
+        Files.writeString(evidence, (String) customerPage.evaluate("json => { const m=JSON.parse(json);"
+                + "m.readOnlyVerified=true; return JSON.stringify(m); }", Files.readString(evidence)));
+    }
+
+    @Test
+    @DisplayName("REVIEW-CACHE-03: a remaining restaurant driver review immediately refreshes the driver's own warmed aggregate")
+    void remainingDriverReviewRefreshesTheCachedAggregate() throws java.io.IOException {
+        org.assertj.core.api.Assertions.assertThat(ORDER).isNotEmpty();
+        String manifest = Files.readString(Path.of("target/lifecycle", ORDER + ".json"));
+        org.assertj.core.api.Assertions.assertThat(manifest).contains(testRestaurantPhone).contains(testRiderPhone);
+        Map<?, ?> actors = (Map<?, ?>) customerPage.evaluate("json => JSON.parse(json)", manifest);
+        Path evidence = Path.of("target/lifecycle", ORDER + "-driver-review-cache.json");
+        org.assertj.core.api.Assertions.assertThat(Files.exists(evidence))
+                .as("an attempted immutable review must be inspected, never repeated").isFalse();
+        restaurantPage.navigate(TestConfig.APP_URL);
+        new LoginPage(restaurantPage).loginAs("Restaurant Partner", testRestaurantPhone);
+        RestaurantDashboardPage restaurant = new RestaurantDashboardPage(restaurantPage);
+        restaurant.waitForDashboard();
+        restaurant.selectOutlet((String) actors.get("outlet"));
+        restaurant.openSettingsTab();
+        restaurantPage.getByRole(AriaRole.TAB, new Page.GetByRoleOptions().setName("Order History").setExact(true)).click();
+        restaurantPage.getByRole(AriaRole.ROW).filter(new Locator.FilterOptions().setHasText(ORDER.substring(0, 8) + "..."))
+                .getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Details")).click();
+        List<Map<?, ?>> before = targets(restaurantPage, "RESTAURANT");
+        Map<?, ?> customer = before.stream().filter(target -> "CUSTOMER".equals(target.get("entityType"))).findFirst().orElseThrow();
+        org.assertj.core.api.Assertions.assertThat(customer.get("alreadyReviewed")).isEqualTo(true);
+        org.assertj.core.api.Assertions.assertThat(customer.get("existingRating")).isEqualTo(5);
+        Map<?, ?> driver = before.stream().filter(target -> "DRIVER".equals(target.get("entityType"))).findFirst().orElseThrow();
+        org.assertj.core.api.Assertions.assertThat(driver.get("alreadyReviewed")).isEqualTo(false);
+        riderPage.navigate(TestConfig.APP_URL);
+        new LoginPage(riderPage).loginAs("Delivery Executive", testRiderPhone);
+        new DeliveryDashboardPage(riderPage).waitForDashboard();
+        org.assertj.core.api.Assertions.assertThat(new DeliveryOnlineTogglePage(riderPage).isOffline()).isTrue();
+        String aggregatePath = "/api/v1/reviews/aggregate?entityType=DRIVER&entityId=" + driver.get("entityId");
+        // Private driver aggregates are read only by the assigned rider, using that rider's normal login.
+        for (int i = 0; i < 2; i++) assertAggregate(aggregate(riderPage, aggregatePath), 1, "5.00");
+        detailsDialog(restaurantPage, ORDER.substring(0, 8)).getByTestId("rate-order-prompt").click();
+        Locator dialog = restaurantPage.getByRole(AriaRole.DIALOG, new Page.GetByRoleOptions().setName("Review this delivery"));
+        String name = uiName(driver), comment = "E2E driver cache review " + ORDER.substring(0, 8);
+        dialog.getByRole(AriaRole.RADIOGROUP, new Locator.GetByRoleOptions().setName("Rate " + name + " out of 5 stars"))
+                .getByRole(AriaRole.RADIO, new Locator.GetByRoleOptions().setName("4 stars").setExact(true)).click();
+        dialog.getByRole(AriaRole.TEXTBOX, new Locator.GetByRoleOptions().setName("Comment about " + name)).fill(comment);
+        saveDriverCacheReview(evidence, (String) driver.get("entityId"), false, false);
+        var submitted = restaurantPage.waitForResponse(response -> "/api/v1/reviews".equals(java.net.URI.create(response.url()).getPath())
+                && "actorRole=RESTAURANT".equals(java.net.URI.create(response.url()).getQuery())
+                && "POST".equals(response.request().method()), () -> dialog.getByRole(AriaRole.BUTTON,
+                new Locator.GetByRoleOptions().setName("Submit 1 review").setExact(true)).click());
+        org.assertj.core.api.Assertions.assertThat(submitted.status()).isEqualTo(201);
+        saveDriverCacheReview(evidence, (String) driver.get("entityId"), true, false);
+        assertAggregate(aggregate(riderPage, aggregatePath), 2, "4.50");
+        assertThat(dialog.getByRole(AriaRole.HEADING, new Locator.GetByRoleOptions().setName("Thanks for that"))).isVisible();
+        dialog.getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Done").setExact(true)).click();
+        var after = targets(restaurantPage, "RESTAURANT");
+        var previousCustomer = after.stream().filter(target -> "CUSTOMER".equals(target.get("entityType"))).findFirst().orElseThrow();
+        org.assertj.core.api.Assertions.assertThat(previousCustomer.get("existingRating")).isEqualTo(5);
+        detailsDialog(restaurantPage, ORDER.substring(0, 8)).getByTestId("rate-order-prompt").click();
+        Locator reopened = restaurantPage.getByRole(AriaRole.DIALOG, new Page.GetByRoleOptions().setName("Review this delivery"));
+        assertThat(reopened.getByRole(AriaRole.RADIOGROUP,
+                new Locator.GetByRoleOptions().setName("Rate " + name + " out of 5 stars"))).hasCount(0);
+        assertThat(reopened.getByText(comment)).isVisible();
+        restaurantPage.keyboard().press("Escape");
+        saveDriverCacheReview(evidence, (String) driver.get("entityId"), true, true);
+    }
+
+    private Locator openCustomerHistoryTracker() {
+        customerPage.navigate(TestConfig.APP_URL);
+        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
+        new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();
+        CustomerDashboardPage.openProfileSettings(customerPage);
+        customerPage.getByRole(AriaRole.TAB, new Page.GetByRoleOptions().setName("History").setExact(true)).click();
+        customerPage.locator("[data-testid='customer-history-order'][data-order-id='" + ORDER + "']").click();
+        Locator tracker = new CustomerOrderTrackerPage(customerPage, ORDER).tracker();
+        assertThat(tracker).isVisible();
+        return tracker;
+    }
+
+    private static void assertAggregate(Map<?, ?> value, int expectedCount, String expectedAverage) {
+        org.assertj.core.api.Assertions.assertThat(((Number) value.get("totalReviews")).intValue()).isEqualTo(expectedCount);
+        org.assertj.core.api.Assertions.assertThat(new java.math.BigDecimal(value.get("averageRating").toString()))
+                .isEqualByComparingTo(expectedAverage);
+    }
+
+    private void saveDriverCacheReview(Path path, String driverId, boolean submitted, boolean complete) throws java.io.IOException {
+        Files.writeString(path, (String) customerPage.evaluate("value => JSON.stringify(value)",
+                Map.of("orderId", ORDER, "driverId", driverId, "rating", 4, "submissionAttempted", true,
+                        "submitted", submitted, "complete", complete, "dataPolicy", "retain", "newOrderCreated", false)));
+    }
+
     private Map<?, ?> aggregate(String path) {
-        Map<?, ?> response = RefundRecoveryChecks.read(customerPage, path);
+        return aggregate(customerPage, path);
+    }
+
+    private Map<?, ?> aggregate(Page page, String path) {
+        Map<?, ?> response = RefundRecoveryChecks.read(page, path);
         org.assertj.core.api.Assertions.assertThat(response.get("status")).isEqualTo(200);
         return (Map<?, ?>) ((Map<?, ?>) response.get("body")).get("data");
     }
@@ -181,7 +312,7 @@ public class OrderReviewsFlowTest extends TestBase {
     private void saveCacheReview(Path path, String dishId, boolean submitted, boolean complete) throws java.io.IOException {
         Files.writeString(path, (String) customerPage.evaluate("value => JSON.stringify(value)",
                 Map.of("orderId", ORDER, "dishId", dishId, "rating", 5, "submitted", submitted,
-                        "complete", complete, "dataPolicy", "retain", "newOrderCreated", false)));
+                        "complete", complete, "submissionAttempted", submitted, "dataPolicy", "retain", "newOrderCreated", false)));
     }
 
     private record Rating(int stars, String comment) {}
