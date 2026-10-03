@@ -9,3 +9,5 @@ Owning portable checkpoint(s): 08-cross-role-order-lifecycle.md.
 Next: follow [../../_handoff/NEXT-STEPS.md](../../_handoff/NEXT-STEPS.md) and the local scenarios/PENDING mapping. Slow/rate/SSE work is excluded as indexed in [../../_handoff/DEFERRED.md](../../_handoff/DEFERRED.md). Never count skipped/no-op/blocked cases as passes. Do not rerun successful lifecycle coverage merely because it is referenced here.
 
 Every continuing agent must update this feature's results and the central handoff inside this plan folder; see [mandatory agent update instructions](../../AGENTS.md).
+
+Checkpoint26 (2026-10-03T07:40:00+05:30): a fresh HappyDeliveryFlowTest delivered bb43e2a4 (DB: DELIVERED, RELEASED, ledger balanced) but failed at :732: the delivered summary was not visible within 5s after the History click; teardown DOM shows it rendered, no console errors. Unexplained timing miss. Together with checkpoint25's accept-navigation wait, two consecutive fresh runs hit harness timing misses after successful server actions; investigate the waits if a third occurs. The delivered follow-up (`-Dresume.delivered.order.id`) passed on the same order.

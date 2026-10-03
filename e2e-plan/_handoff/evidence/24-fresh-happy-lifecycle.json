@@ -1,0 +1,19 @@
+{
+  "checkpoint": 24, "recordedAt": "2026-10-02T23:27:00+05:30",
+  "preconditions": {
+    "deployed": "customer-service 2b103b2, api-gateway 3074b96, food-delivery-app-ui 08d086d (all services healthy; full redeploy 2026-10-02T17:28:58Z)",
+    "gatewayConfig": "Config Server /config/api-gateway.yml md5 12d3928485b825f56f117a9f3b02b5a0 = local Deployment/api-gateway.yml; POST /api/v1/customer/orders/{id}/refund-request -> 404 (route deleted), /api/v1/money/... unauthenticated -> 401",
+    "customerDb": "flyway 20261002220000 success; refund_items columns id,refund_id,order_item_id,quantity,created_at (amount dropped)",
+    "commonLibrary": "Publish to GitHub Packages run 37035377453 success on d43af60 (2026-10-02T16:39Z)",
+    "dataReset": "All DBs recreated 2026-10-02T17:32Z; 554 users, 504 customers, 104 outlets, 34 riders (all OFFLINE), 0 orders. Checkpoint23 fixtures c463191b/7f7af6a5 and ticket 2f5d7acf no longer exist"
+  },
+  "run": {"test": "HappyDeliveryFlowTest#completeOrderLifecycle", "resume": false, "tests": 1, "failures": 0, "errors": 0, "skipped": 0,
+          "testcaseSeconds": 397.5, "orderId": "0554f250-eade-4677-8e51-18f4aacd22f5", "outlet": "Brand 1 Outlet 3"},
+  "consoleNoise": {
+    "503 POST /api/v1/chat/sessions": "deliberate: OrderChatChecks retryFixture fails the customer's first session POST to exercise the UI retry; nginx/gateway/chat logs show only the retried POST (200, session 3e585519)",
+    "409 GET /restaurants/{id}/delivery-availability": "expected: DeliveryPartnerUnavailableException once the only online rider was assigned"
+  },
+  "proofType": "real deployed cross-role browser flow + Oracle read-only DB",
+  "db": {"order": "HANDED_OVER / DELIVERED, deliveredAt set, CARD 53.53, 1 item x1", "tickets": 0, "refunds": 0,
+         "ledger": "18 entries, debits = credits = 115.46", "ledgerRejections": 0, "rider7000000026": "OFFLINE"}
+}

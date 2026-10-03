@@ -87,3 +87,7 @@ A naturally abandoned delivery is FAILED in customer state but remains ASSIGNED/
 ## Latest checkpoint 15 — deployment gate
 
 See [15-delivered-terminal-and-capture.md](../checkpoints/15-delivered-terminal-and-capture.md). Four prior services are deployed/healthy; PostgreSQL rejection persistence and 16 ledger dependency checks are verified. Retained quote rerun failed before submission because abandonment erroneously changed the delivered order to DELIVERY_FAILED. Delivered-state guards, explicit payment event routing and confirmed capture persistence are ready: 81 affected local checks passed. Deploy customer-service and payment-gateway; retained recovery, chat/quote and real support decisions remain unverified. No new lifecycle or cleanup.
+
+## Checkpoint24 (2026-10-02T23:58:00+05:30)
+
+Rows above are historical (17:47). Current per-feature state is in FEATURE-STATUS.md. Changes since: `06-admin-operations/support-and-refund-queues` is no longer "Not run": denial and reduced award pass live, SUPPORT-REFUND-03 fails on a product defect that is fixed locally. Refund item completion is proven live. Chat refund refusal replies were lost to a transactional rollback; fixed locally. See [checkpoint24](../checkpoints/24-support-refunds-live-and-refusal-rollback.md).

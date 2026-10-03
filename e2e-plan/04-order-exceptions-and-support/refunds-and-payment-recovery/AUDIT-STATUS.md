@@ -22,3 +22,12 @@ Checkpoint19 (2026-10-02T18:27:17+05:30): exact stored-confirmation capture reco
 
 Review result: the checkpoint19 recovery endpoint is deleted, and the checkpoint18 retry is fixed so it can actually complete (the gateway releases its held key on definitive failure; customer service has a separate `sweep_attempts` budget and routes by destination). Refund UI polling stops once refunds settle. Local proof only, with every guard seen red; see [checkpoint20](../../_handoff/checkpoints/20-review-and-refund-retry-fix.md). The three retained fixtures will be erased by the user's data reset. Next: after deployment and reset, run cancellation and rejection without resume properties and assert actual completion (refund COMPLETED, payment REFUNDED, balanced REFUND ledger, UI state).
 
+
+## Checkpoint24 (2026-10-02T23:58:00+05:30)
+
+- Item-level refund completion is now proven live (support award fe60ce55 COMPLETED with CLAWBACK posted), closing the checkpoint23 `refund_items.amount` defect on deployed code.
+- New defect class found and fixed locally: an automatic refund **routing refusal** (`REFUND_STATE_INVALID`, `REFUND_EXCEEDS_REMAINING`) inside `OrderEventConsumer`/`PaymentEventConsumer` was caught "so the state change is kept", but crossing RefundService's transactional proxy had already marked the transaction rollback-only: the cancellation, delivery-failure or payment-state change would have rolled back and the event gone to the DLT. Now `RefundService.requestUnlessRefused` returns pre-write refusals; `RefundRefusalInCallerTransactionTest` proves it with real transactions (control, keep, accept, post-write rollback), with mutations seen red. Local proof only; not exercised live (needs an INITIATED-intent cancellation, not part of this run). Deployment pending with customer-service.
+
+Checkpoint27 (2026-10-03T08:00:00+05:30): refund reads are isolated live (another customer 403). Admin retry on a definitive provider FAILED has no live path in Dev: every payment mock always succeeds a refund. Its proof remains checkpoint20's local real-transaction tests; a Dev-mock failure seam is a pending user decision.
+
+Checkpoint29 (2026-10-03T08:50:00+05:30): passed live on deployed code — see [checkpoint29](../../_handoff/checkpoints/29-deployed-priority-runs.md) (isolation on d3acfc93; CHAT-22 and REFUND-RETRY-01 on cf608115).

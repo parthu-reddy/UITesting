@@ -17,3 +17,9 @@ Checkpoint19 (2026-10-02T18:27:17+05:30): exact stored-confirmation capture reco
 ## Checkpoint22 (2026-10-02)
 
 Delivered earnings had never posted on PostgreSQL: the ledger's UNIQUE(transaction_id, account_id, direction) rejected compound distributions. The fix is a per-leg unique key plus migration V20261002210000, deployed. The user-approved DLT replay posted 7f7af6a5. A fresh lifecycle (c463191b) posts directly, balanced 93.40, restaurant net 9.49, rider net 18.86, and the strict admin money check PASSES. See [checkpoint22](../../_handoff/checkpoints/22-delivered-ledger-posting-fix.md).
+
+## Checkpoint30 (2026-10-03T09:05:00+05:30)
+
+The order-money panel lacked payment, refunds and booked amounts; fixed locally (UI). MONEY-05 (`AdminOrderMoneyOutcomesTest`) covers delivered, partial refund, cancelled and rejected owned orders; red on the deployed UI, rerun after deploy. See [checkpoint30](../../_handoff/checkpoints/30-admin-order-money-outcomes.md).
+
+Checkpoint31 (2026-10-03T09:32:00+05:30): MONEY-05 passes 5/5 on UI 6eb1743 — see [checkpoint31](../../_handoff/checkpoints/31-priority-list-complete.md).

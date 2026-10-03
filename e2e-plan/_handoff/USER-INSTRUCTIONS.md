@@ -58,3 +58,39 @@ The user explicitly resumed continuing work with a reset usage window, supersedi
 
 "Currently nothing is deployed to production. If there's data inconsistency let me know; I'll delete all data and reinitialize with dummy data so that new tests can be executed again." Report inconsistencies to the user instead of writing recovery code for them. This supersedes "Do not reset", "a failed retained lifecycle must be resumed on its exact owned ID" and "an audited correction/recovery" wherever the inconsistency comes from a since-fixed bug. Agents still never reset the data themselves: the user does it.
 
+
+## Never commit or push. User, 2026-10-02T23:40+05:30 (permanent)
+
+"Never commit and push changes, always keep changes locally. Remember this permanently for any future sessions as well." Agents leave every change in the local working tree. The user commits, pushes, publishes and deploys, then confirms. This holds for every future session and agent, alongside the deployment restrictions above.
+
+## Continuation after the checkpoint23 deployment. User, 2026-10-02
+
+The user handed the work to a new agent with the checkpoint23 screenshot ("Deploy customer-service, the gateway config and the UI. Publish CommonLibrary. After that I'll rerun the support-refund test") and asked it to continue from this handoff. Reaffirmed: never assume, always check the code; the goal is a production-ready application; use CommonMistakesDocumentation and CodingPracticesAcrossAllServices to take decisions.
+
+## Two-hour support window stays UI-only. User, 2026-10-03
+
+"Keep the 2-hour window UI-only, continue the priority list." Do not add a server-side support window. The backend keeps accepting chat refund quotes and requests on a delivered order of any age; the customer UI offers the chat and its entry point for two hours after the order's last update (`isOrderChatOffered`).
+
+## Dev-mock refund failure seam. User, 2026-10-03
+
+Asked how to prove the admin refund retry live, the user chose "Add a Dev-mock failure seam": the Dev-only mock gateways fail the first attempt of a deliberately marked refund and succeed on retry, so one live E2E can run fail → admin retry → money returned across customer-service, Kafka and payment-gateway. Mocks stay excluded from the prod profile.
+
+## Restaurant advertiser onboarding. User, 2026-10-03
+
+Asked how a restaurant becomes an advertiser, the user chose the "Start advertising" step: the Campaigns tab looks up the owner's advertiser (`GET /api/v1/advertisers/me`); if there is none it offers a short form (company name from the brand, time zone from the outlet) that calls the existing `POST /api/v1/advertisers`, then loads campaigns. Nothing is created without the owner's action; no backend auto-provisioning.
+
+## Business platform plan. User, 2026-10-03
+
+The owner asked for an implementation plan (no implementation yet) for organisations (groups of users
+owning businesses), one login with a Google-style portal switcher where any user reaches a portal once
+the business/service behind it is verified and approved, a business wallet per organisation (separate
+from the personal customer wallet, by the owner's choice), and a separate Ads Manager portal for any
+business type. The plan, with E2E gates per phase (explicitly requested), is
+`RandomDocuments/BusinessPlatform_2026-10-03/`. It supersedes the restaurant-portal Campaigns tab from
+checkpoint 34 at its phase A4; checkpoint 34 should still be deployed first. Five decisions there are
+marked CONFIRM for the owner (D3, D4, D6, D13, D15). The plan also carries cross-cutting security,
+performance and observability requirements (`SECURITY-AND-PERFORMANCE.md`), added at the owner's request.
+
+## Business Platform — 2026-10-03T15:50:36+05:30
+
+Direct user request: understand every line of RandomDocuments/BusinessPlatform_2026-10-03 and finish its application production-ready with UI/UX consistent with the current application. Follow the supplied phase release gates and existing owner-only commit/publish/deploy rules. This request does not confirm the five marked owner design choices.

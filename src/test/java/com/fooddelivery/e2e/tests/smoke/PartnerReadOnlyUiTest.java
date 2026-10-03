@@ -96,18 +96,8 @@ public class PartnerReadOnlyUiTest extends TestBase {
         assertThat(restaurantPage.getByRole(AriaRole.SWITCH).first()).isVisible();
         assertThat(restaurantPage.getByRole(AriaRole.SWITCH).first()).hasAttribute("aria-checked",Pattern.compile("true|false"));
     }
-    @Test void campaignDraftCanBeCancelled() {
-        login(restaurantPage,"Restaurant Partner",testRestaurantPhone);
-        restaurantPage.getByRole(AriaRole.TAB,new Page.GetByRoleOptions().setName("Campaigns").setExact(true)).click();
-        restaurantPage.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("New Campaign").setExact(true)).click();
-        Locator dialog=restaurantPage.getByRole(AriaRole.DIALOG);
-        assertThat(dialog.getByText("New Ad Campaign",new Locator.GetByTextOptions().setExact(true))).isVisible();
-        dialog.getByPlaceholder("e.g. Summer Special Boost").fill("Unsaved E2E draft");
-        dialog.getByRole(AriaRole.BUTTON,new Locator.GetByRoleOptions().setName("Cancel").setExact(true)).click();
-        assertThat(dialog).isHidden();
-        assertThat(restaurantPage.getByRole(AriaRole.HEADING,new Page.GetByRoleOptions().setName("Ad Spending History"))).isVisible();
-        assertThat(restaurantPage.getByRole(AriaRole.HEADING,new Page.GetByRoleOptions().setName("Unsaved E2E draft").setExact(true))).isHidden();
-    }
+    // The unsaved-draft check moved to RestaurantCampaignsLiveTest.draftIsDiscardedOnCancel: the
+    // New Campaign button exists only once the owner has an advertiser, which this smoke cannot know.
     @Test void riderVerificationAndWalletSectionsRender() {
         login(riderPage,"Delivery Executive",testRiderPhone);
         riderPage.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("Profile settings").setExact(true)).click();

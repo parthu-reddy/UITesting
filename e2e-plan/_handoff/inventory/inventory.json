@@ -1297,6 +1297,32 @@
       ],
       "reviewStatus": "not-reviewed",
       "executionStatus": "not-run"
+    },
+    {
+      "feature": "05-partner-and-account-management/organisations-and-portal-access",
+      "documents": [
+        "README.md",
+        "scenarios.md",
+        "AUDIT-STATUS.md",
+        "PENDING.md"
+      ],
+      "referencedClasses": [
+        "OrganisationLifecycleApiTest",
+        "GatewayApi",
+        "LoginPage"
+      ],
+      "scenarioIds": [
+        "ORG-01",
+        "ORG-02",
+        "ORG-03",
+        "ORG-04",
+        "ORG-05",
+        "ORG-06"
+      ],
+      "reviewStatus": "reviewed-O1-local",
+      "executionStatus": "compile-only-live-not-run",
+      "evidence": "35-local-results.json",
+      "updatedAt": "2026-10-03T15:50:36+05:30"
     }
   ],
   "tests": [
@@ -6268,6 +6294,27 @@
       "executionStatus": "passed",
       "feature": "rider-duty-teardown",
       "evidence": "retention-SeededRiderDutyTest.xml"
+    },
+    {
+      "class": "OrganisationLifecycleApiTest",
+      "method": "organisationLifecycle",
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/organisations/OrganisationLifecycleApiTest.java",
+      "line": 15,
+      "package": "com.fooddelivery.e2e.tests.features.organisations",
+      "parameterized": false,
+      "classOptIns": [],
+      "methodOptIns": [],
+      "classTags": [
+        "business-platform",
+        "bp-o1"
+      ],
+      "methodTags": [],
+      "disabled": false,
+      "reviewStatus": "reviewed",
+      "executionStatus": "compile-only-live-not-run",
+      "feature": "organisations-and-portal-access",
+      "evidence": "35-local-results.json",
+      "updatedAt": "2026-10-03T15:50:36+05:30"
     }
   ],
   "backendDocuments": [
@@ -6936,9 +6983,9 @@
     "Fixture-routed UI checks are separate from deployed persistence proof."
   ],
   "counts": {
-    "testClasses": 71,
-    "testMethods": 325,
-    "features": 28
+    "testClasses": 72,
+    "testMethods": 326,
+    "features": 29
   },
   "consolidatedTests": [
     {
@@ -6998,9 +7045,27 @@
       "priorAssertionQuality": "vacuous-absent-button"
     }
   ],
-  "latestCheckpoint": "19",
-  "latestDeploymentGate": "checkpoint18 customer/chat/UI confirmation pending; checkpoint19 payment-gateway local, deployment needed",
+  "latestCheckpoint": "35",
+  "latestDeploymentGate": "checkpoint34 prerequisite then O1 CommonLibrary/Identity/config owner rollout and live gate; D15 confirmation pending",
   "resumeState": {
+    "updatedAt": "2026-10-03T15:50:36+05:30",
+    "scope": "Business Platform O1 local; full platform not complete",
+    "workingChange": "organisation model, security/audit/outbox/client/config and compiled lifecycle test",
+    "deploymentConfirmed": false,
+    "deployedReadOnlySnapshot": {
+      "identity": "c050459409dde7c686eaa2bcebc91a43c4a09c27",
+      "campaign": "53a7887fe595f031bc7e7378dabf755c65d4ea1e",
+      "wallet": "63f546d4d12c536b60ac079a1b318c29144138b0",
+      "UI": "6eb1743d36e084107c047763f7e71dd8097deb11"
+    },
+    "liveO1": "not-run",
+    "liveFixturesCreated": 0,
+    "databaseResetRequired": false,
+    "serverCleanupPerformed": false,
+    "ownerDecision": "D15 unconfirmed; D3/D4/D6/D13 later-phase confirmations open"
+  },
+  "countsScope": "Historical 2026-10-01 snapshot with incremental O1 addition; not a full current source rescan or passing count.",
+  "historicalResumeState_checkpoint19": {
     "deploymentConfirmed": {
       "customer": "4efcf76d9477083dd736c55bcc86b395512f3f1e",
       "payment": "0a0a227fa97e455d90aba2d7f6e9daa1bd558729"

@@ -1,0 +1,25 @@
+{
+  "checkpoint": 25, "recordedAt": "2026-10-03T04:40:00+05:30",
+  "deployed": {"customer-service": "cc04ed7 (exactly the 8 checkpoint24 files), running and healthy; Dev data NOT reset this time (0554f250 intact)"},
+  "runs": [
+    {"test": "SupportRefundResolutionFlowTest#refundedItemCannotBeRefundedAgain", "order": "0554f250", "result": "ERROR 97.9s: 'Request refund quote' dialog never opened",
+     "cause": "order last updated 5h earlier; CustomerOrderChat offers chat only 2h after updatedAt, so the widget was unmounted and 'Something wrong with this order?' was a silent no-op. Precondition miss, not the fix. Checkpoint24's 'precondition holds' was wrong: only tickets/refunds were checked."},
+    {"test": "HappyDeliveryFlowTest#completeOrderLifecycle (fresh)", "order": "d3acfc93-7aa2-4aae-aad0-7a9711c31b8d", "result": "ERROR 332.9s at DispatchPingPage.acceptDispatch:64",
+     "cause": "click done, then Playwright 'waiting for scheduled navigations to finish' exceeded the 5s click timeout. nginx: accept POST 200 at 22:53:50Z, no document request from the rider; DB ACCEPTED/ASSIGNED, rider ON_DELIVERY. Harness transient, unexplained; same code passed at checkpoint24."},
+    {"test": "HappyDeliveryFlowTest#completeOrderLifecycle (-Dresume.order.id=d3acfc93, resume.outlet=Brand 1 Outlet 3)", "result": "PASS 1/1, 0 skip, 73.1s",
+     "db": "HANDED_OVER/DELIVERED at 22:59:03Z; 18 ledger entries 115.46/115.46; 0 rejections; rider OFFLINE"},
+    {"test": "SupportRefundResolutionFlowTest (full class)", "order": "d3acfc93", "result": "PASS 3/3, 0 skip, 73.4s",
+     "methods": {"deniedRequestMovesNoMoney": "26.6s", "reducedAwardWithRestaurantFault": "27.4s", "refundedItemCannotBeRefundedAgain": "16.7s"}},
+    {"test": "precondition guard, SUPPORT-REFUND-03 only", "stale 0554f250": "FAIL 13.9s with 'must be within the two-hour post-delivery chat window ... 5H12M'", "fresh d3acfc93": "PASS 19.3s"}
+  ],
+  "proofType": "real deployed cross-role browser flow + Oracle read-only DB + bounded redacted service logs",
+  "db": {
+    "chatSession": "6727419f-b346-4577-86b7-efd79d050331",
+    "customerOutbox": "CHAT_REFUND_ERROR x2 PROCESSED, payload {\"error\": \"ITEM_ALREADY_REFUNDED\"}; CHAT_REFUND_QUOTE_RESPONSE x2; CHAT_REFUND_DECISION x2",
+    "chatMessages": "REFUND_ERROR present (customer sees the refusal)",
+    "tickets": "005c08a4 REJECTED 29.79 resolvedBy; a301b711 RESOLVED 12.00 resolvedBy; 0 OPEN",
+    "refund": "d3e4b73c COMPLETED 12.00 ORIGINAL_METHOD RESTAURANT_FAULT completedAt; intent PARTIALLY_REFUNDED",
+    "ledger": "REFUND 12.00/12.00; CLAWBACK 4.28 RESTAURANT_PAYABLE -> PLATFORM_CLEARING; 22 entries 131.74/131.74; 0 rejections"
+  },
+  "logs": "customer-service since deploy: 0 DLT_RECORD_WRITTEN, 0 UnexpectedRollbackException, 2x 'Business validation failed for quote request: ITEM_ALREADY_REFUNDED' (one per 03 run, no retries)"
+}

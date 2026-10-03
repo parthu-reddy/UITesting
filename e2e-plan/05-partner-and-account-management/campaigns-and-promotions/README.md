@@ -1,6 +1,6 @@
 # campaigns-and-promotions
 
-Status: first UI-only checks are implemented, but current live validation is blocked by the restaurant dashboard redirect recorded in `PENDING.md`; broader coverage remains pending.
+Status (2026-10-03, checkpoint34): reviewed in source; start-advertising step and ten defects fixed locally; `RestaurantCampaignsLiveTest` awaits deploy. Activation is unreachable in the product (user decision).
 
 Scope: Campaigns, advertisements and promotion management.
 

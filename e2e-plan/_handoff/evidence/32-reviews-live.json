@@ -1,0 +1,15 @@
+{
+  "checkpoint": 32, "recordedAt": "2026-10-03T09:47:00+05:30",
+  "validator": {"before": "81/85, 4 open, 1 warning", "after": "85/85, 0 open",
+                "stale": ["P1-OUTBOX-KEY-ORDER-SCOPED (author added by design 0227db8)", "P2-POLICY-DRIVER-SELF (private-by-default policy, equalsIgnoreCase)", "P2-PRINCIPAL-NOT-HEADER (Authentication, not java.security.Principal text)", "P5-REFUSAL-VOCABULARY-MATCHES (type derived from generated API; label maps in the same file)", "P3-TAG-PRESENT (pins moved to env_deployments/dev)"],
+                "breakTests": "red on: key without author; DRIVER in public branch; isSelf=true with comparison parked elsewhere (red only after tightening); X-User-Id read; SELF_REVIEW copy removed. Tag check not mutated."},
+  "runs": {
+    "OrderReviewsFlowTest": "PASS 1/1 42.1s on bb43e2a4 (two earlier attempts failed on test-side label assumptions before any review was written; reviews_total stayed 0)",
+    "RestaurantNavigationUiTest#restaurantReviewsShowPublicFeedbackAndAggregate": "PASS with outlet Brand 1 Outlet 3 + the exact comment",
+    "CustomerSettingsUiTest#myReviewsTabShowsReviewsOrDefinedEmptyState": "PASS with the comment; FAIL with an unwritten comment (tightened check seen red)",
+    "RiderReviewHistoryApiTest": "PASS on bb43e2a4"
+  },
+  "db": {"reviews": "customer->RESTAURANT PUBLIC 4 'E2E review bb43e2a4: hot and on time'; customer->DRIVER PRIVATE 5; restaurant->CUSTOMER PRIVATE 5; rider->RESTAURANT PRIVATE 4",
+         "aggregates": "RESTAURANT 54ba242d 1 review 4.00; DRIVER 5a41832f 1 review 5.00", "outbox": "REVIEW_CREATED x1 PROCESSED", "restaurant_db": "Brand 1 Outlet 3 rating 4, reviews_count 1"},
+  "proofType": "real deployed cross-role UI + Oracle read-only DB; validator is source analysis"
+}

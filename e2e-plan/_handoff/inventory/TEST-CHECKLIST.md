@@ -300,7 +300,7 @@ Checked means current reviewed source and passing execution; previous evidence a
 - [ ] `ResponsiveAccessibilityTest#unknownRouteRendersAuthenticatedCustomerSafely` — not-reviewed; not-run
 ## PartnerOperationsUiTest
 
-- [ ] `PartnerOperationsUiTest#verifyCampaignManagement` — not-reviewed; not-run
+- [ ] `PartnerOperationsUiTest#verifyCampaignManagement` — reviewed checkpoint34 (accepts either Campaigns screen); not-run since
 - [ ] `PartnerOperationsUiTest#verifyRiderEarnings` — not-reviewed; not-run
 ## RestaurantMenuManagementTest
 
@@ -439,7 +439,7 @@ Checked means current reviewed source and passing execution; previous evidence a
 - [ ] `PartnerReadOnlyUiTest#restaurantEarningsPanel` — not-reviewed; not-run
 - [ ] `PartnerReadOnlyUiTest#restaurantProfileCanCloseWithoutChanges` — not-reviewed; not-run
 - [ ] `PartnerReadOnlyUiTest#restaurantStockControlsRenderWithoutToggling` — not-reviewed; not-run
-- [ ] `PartnerReadOnlyUiTest#campaignDraftCanBeCancelled` — not-reviewed; not-run
+- ~~`PartnerReadOnlyUiTest#campaignDraftCanBeCancelled`~~ — moved to `RestaurantCampaignsLiveTest#draftIsDiscardedOnCancel` (checkpoint34)
 - [ ] `PartnerReadOnlyUiTest#riderVerificationAndWalletSectionsRender` — not-reviewed; not-run
 - [ ] `PartnerReadOnlyUiTest#riderProfileValuesArePopulatedWithoutEditing` — not-reviewed; not-run
 ## RestaurantDiscoveryUiTest
@@ -487,3 +487,37 @@ Checked means current reviewed source and passing execution; previous evidence a
 - [x] `SeededRiderDutyTest#activeDeliveryIsNotForcedOffline` — reviewed; passed; r, e, t, e, n, t, i, o, n, -, S, e, e, d, e, d, R, i, d, e, r, D, u, t, y, T, e, s, t, ., x, m, l
 - [x] `SeededRiderDutyTest#rejectedOfflineRequestIsReported` — reviewed; passed; r, e, t, e, n, t, i, o, n, -, S, e, e, d, e, d, R, i, d, e, r, D, u, t, y, T, e, s, t, ., x, m, l
 - [x] `SeededRiderDutyTest#optimisticButtonCannotReplaceServerOfflineConfirmation` — reviewed; passed; r, e, t, e, n, t, i, o, n, -, S, e, e, d, e, d, R, i, d, e, r, D, u, t, y, T, e, s, t, ., x, m, l
+
+## SupportRefundResolutionFlowTest (added checkpoint23; this entry 2026-10-02T23:58+05:30, checkpoint24)
+
+Rescanned from source: 3 methods, run in `@Order` on one delivered order (`-Dsupport.order.id`).
+- [x] `SupportRefundResolutionFlowTest#deniedRequestMovesNoMoney` — SUPPORT-REFUND-02; reviewed; passed live on 0554f250 (evidence/24-support-refund-run.json)
+- [x] `SupportRefundResolutionFlowTest#reducedAwardWithRestaurantFault` — SUPPORT-REFUND-01; reviewed; passed live on 0554f250 with DB money proof
+- [x] `SupportRefundResolutionFlowTest#refundedItemCannotBeRefundedAgain` — SUPPORT-REFUND-03; failed live at checkpoint24 on a product defect; **passed on deployed cc04ed7 at checkpoint25** (d3acfc93)
+
+Checkpoint25: all three passed together on d3acfc93 (3/3, 73.4s). Precondition: order updated within two hours.
+
+## ChatSupportWindowClosedTest (added checkpoint26, 2026-10-03T07:40+05:30)
+
+- [x] `ChatSupportWindowClosedTest#closedWindowOffersNoSupportEntry` (parameterized by `-Dsupport.closed.order.ids`) — CHAT-REFUND-05; reviewed; passed live 2/2 on 0554f250, d3acfc93 (UI 41578ee)
+
+## Checkpoint27 additions (2026-10-03T08:00+05:30)
+
+- [x] `ChatAndRefundIsolationTest#outsidersAreRefused` — CHAT-ISO-01..03; passed live at checkpoint29 on d3acfc93 (order read now 404)
+- [x] `ChatHistoryPagingTest#earlierMessagesCanBeLoaded` — CHAT-22; red on UI 41578ee, passed live on UI 766b214 (cf608115)
+- [x] `AdminRefundRetryFlowTest#declinedRefundIsRetriedAndCompletes` — REFUND-RETRY-01; passed live at checkpoint29 (cf608115, refund 67562478)
+- [x] `AdminOrderMoneyOutcomesTest#panelShowsTheOutcome` — MONEY-05, 5 outcome cases; red on UI 766b214, passed 5/5 on UI 6eb1743
+- [x] `OrderCancellationFlowTest#customerCancelsBeforeAcceptance` — passed live at checkpoint30 (19359711)
+- [x] `RestaurantRejectFlowTest#restaurantCancelsOrder` — passed live at checkpoint30 (bf109947)
+- [x] `OrderReviewsFlowTest#participantsReviewEachOther` — REVIEW-01..06; passed live at checkpoint32 (bb43e2a4)
+- [x] `RestaurantNavigationUiTest#restaurantReviewsShowPublicFeedbackAndAggregate` — REVIEW-AGG-01 with outlet+comment; passed checkpoint32
+- [x] `CustomerSettingsUiTest#myReviewsTabShowsReviewsOrDefinedEmptyState` — REVIEW-13, now requires `-Dreview.customer.comment` when set; passed checkpoint32
+- [x] `RiderReviewHistoryApiTest` — REVIEW-05 history read; passed checkpoint32
+- [ ] `RestaurantEarningsLiveTest#earningsMatchTheLedger` — EARNINGS-01..04/09; red on UI 6eb1743 ("—"), awaits checkpoint34 deploy
+- [ ] `RestaurantCampaignsLiveTest#tabMatchesTheOwnersAdvertiser` — CAMPAIGN-01/02/03, ONBOARD-01/02, WALLET-01; written checkpoint34, awaits deploy
+- [ ] `RestaurantCampaignsLiveTest#draftIsDiscardedOnCancel` — CAMPAIGN-05..07; needs an advertiser; awaits deploy
+- [ ] `RestaurantCampaignsLiveTest#launchedCampaignIsStoredInRupees` — CAMPAIGN-14; `-Dcampaign.create=true`; awaits deploy
+
+## OrganisationLifecycleApiTest — 2026-10-03T15:50:36+05:30
+
+- [ ] `OrganisationLifecycleApiTest#organisationLifecycle` — reviewed; compile passed; live not run; ORG-01..06; checkpoint35 owner rollout gate.

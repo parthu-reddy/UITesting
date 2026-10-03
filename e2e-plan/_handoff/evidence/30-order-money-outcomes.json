@@ -1,0 +1,14 @@
+{
+  "checkpoint": 30, "recordedAt": "2026-10-03T09:05:00+05:30",
+  "finding": "AdminOrderMoney.tsx rendered the quoted split and ledger trace but no payment status, no refunds and no booked amounts, although GET /api/v1/internal/admin/orders/{id}/money returns paymentMethod/paymentStatus/gatewayName/refunds. A cancelled or rejected order showed 'Net Payout' figures as if earned; a refunded order looked unrefunded.",
+  "quotedVsPostedCheck": "bb43e2a4 (delivered, no refund): quoted restaurant 19.11 / rider 18.86 = ledger nets RESTAURANT_PAYABLE 19.11 / DRIVER_PAYABLE 18.86",
+  "fixLocal": "FoodDeliveryAppUI AdminOrderMoney: 'Payment and Refunds' section (method, gateway, status pill; refund rows with status/amount/destination/fault/completed or failure reason; 'No refunds.'), 'Posted to ledger' per payee from ledger lines ('Not posted' when none). Tests +4 (direction mutation red); typecheck 0, npm run lint 0, vitest 758 / 121",
+  "fixtures": {
+    "19359711-45d4-4d44-b17b-cbf9405419de": "OrderCancellationFlowTest PASS 1/1 99.6s: CANCELLED, intent REFUNDED, refund COMPLETED 53.53 SYSTEM_CANCELLATION; ledger capture + refund only, balanced",
+    "bf109947-3f5c-4033-885a-0b3b0e309159": "RestaurantRejectFlowTest PASS 1/1 129.4s: CANCELLED_BY_RESTAURANT, intent REFUNDED, refund COMPLETED 53.53 RESTAURANT/RESTAURANT_FAULT; ledger capture + refund only, balanced"
+  },
+  "outcomesTest": {"test": "AdminOrderMoneyOutcomesTest (new, MONEY-05)", "cases": "bb43e2a4 DELIVERED, d3acfc93 PARTIAL, cf608115 PARTIAL, 19359711 CANCELLED, bf109947 REJECTED",
+                   "result": "FAIL 5/5 on deployed UI 766b214 at line 59 (payment section not found) — the expected red before the UI deploy",
+                   "note": "first attempt errored on a JUnit argument-binding mistake in the test (String[] spread), fixed before the counted run"},
+  "riders": "all OFFLINE after the two flows"
+}

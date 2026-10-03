@@ -45,7 +45,7 @@ public class RestaurantNavigationUiTest extends TestBase {
         waitVisible(restaurantPage.getByRole(AriaRole.HEADING,new Page.GetByRoleOptions().setName(Pattern.compile("Today.s menu"))));
         com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(restaurantPage.getByText("Updates every 5 s",new Page.GetByTextOptions().setExact(true))).isHidden();
         clickTab(Pattern.compile("^Campaigns$"));
-        waitVisible(restaurantPage.getByRole(AriaRole.HEADING,new Page.GetByRoleOptions().setName("Ad Spending History")));
+        waitVisible(dashboard.campaignsScreen());
         clickTab(Pattern.compile("^Earnings$"));
         waitVisible(restaurantPage.getByText("Net Earnings", new Page.GetByTextOptions().setExact(true)));
         clickTab(Pattern.compile("^Reviews$"));

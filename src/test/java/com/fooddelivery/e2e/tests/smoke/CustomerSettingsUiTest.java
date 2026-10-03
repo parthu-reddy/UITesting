@@ -173,6 +173,13 @@ public class CustomerSettingsUiTest extends TestBase {
     @Test void myReviewsTabShowsReviewsOrDefinedEmptyState() {
         customerPage.getByRole(AriaRole.TAB,
                 new Page.GetByRoleOptions().setName("My Reviews").setExact(true)).click();
+        // With -Dreview.customer.comment (a review this customer submitted), require that exact review;
+        // without it, any review or the defined empty state is accepted.
+        String submitted = System.getProperty("review.customer.comment", "").trim();
+        if (!submitted.isEmpty()) {
+            assertThat(customerPage.locator("article").filter(new Locator.FilterOptions().setHasText(submitted))).hasCount(1);
+            return;
+        }
         Locator outcome = customerPage.locator("article").first().or(
                 customerPage.getByText("You haven't reviewed anything yet",
                         new Page.GetByTextOptions().setExact(true)));

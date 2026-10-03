@@ -1,0 +1,123 @@
+{
+  "checkpoint": 34,
+  "updated": "2026-10-03T10:27:00+05:30",
+  "proofType": "local unit/contract/validator; nothing deployed",
+  "ui": {
+    "typecheck": 0,
+    "lint": 0,
+    "vitest": {
+      "tests": 771,
+      "files": 123,
+      "failed": 0
+    }
+  },
+  "mutations": [
+    {
+      "name": "budget x100",
+      "result": "red"
+    },
+    {
+      "name": "any lookup error treated as not advertising",
+      "result": "red"
+    },
+    {
+      "name": "first brand instead of the outlet's brand",
+      "result": "red"
+    },
+    {
+      "name": "no wallet load on open",
+      "result": "red"
+    },
+    {
+      "name": "card reads totalBudget",
+      "result": "red"
+    },
+    {
+      "name": "registration zone not from the outlet",
+      "result": "red"
+    },
+    {
+      "name": "top-up PaymentModal amount x100",
+      "result": "red"
+    },
+    {
+      "name": "CampaignService /me back to IllegalArgumentException",
+      "result": "red (404 expected, 400 actual)"
+    },
+    {
+      "name": "PayeeWalletController hasAnyRole ADVERTISER",
+      "result": "red (test: owner 403) and validate_role_names FAIL"
+    },
+    {
+      "name": "AdvertiserService wallet currency AD_CREDIT",
+      "result": "red (expected INR)"
+    }
+  ],
+  "services": {
+    "campaign-service": {
+      "cleanTest": {
+        "run": 32,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "contractClasses": {
+        "HttpTest": 2,
+        "MessagingTest": 9,
+        "CampaignContractConsumerTest": 1
+      }
+    },
+    "wallet-service": {
+      "cleanTest": {
+        "run": 56,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "contractClasses": {
+        "ContractVerifierTest": 1,
+        "AdBillingConsumerContractTest": 1,
+        "WalletLedgerProducerContractTest": 3,
+        "WalletTopupConsumerContractTest": 1
+      }
+    },
+    "governmentid-service": {
+      "cleanTest": {
+        "run": 33,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "contractClasses": {
+        "ContractVerifierTest": 3,
+        "GovIdContractConsumerTest": 1
+      }
+    }
+  },
+  "validators": {
+    "validate_role_names": "PASS 255 checked, 0 unknown",
+    "validate_ad_platform": "PASS 40 (4 db checks skipped, no --db)",
+    "audit_money_asis": "0/23 (clean)",
+    "validate_readiness_all": "fails only 4.1 and 5.4 (pre-existing)"
+  },
+  "e2e": {
+    "RestaurantCampaignsLiveTest": "compiled, not run (needs deploy)",
+    "locatorAudit": {
+      "pass": 26,
+      "fail": 0,
+      "dynamic": 3
+    }
+  },
+  "devData": {
+    "campaign_db.advertiser_profiles": "0 rows at checkpoint33; nothing written since"
+  },
+  "devReadOnly": {
+    "wallet_db.wallets.currency": "character varying(3)",
+    "wallets": {
+      "CUSTOMER/INR": 1
+    },
+    "campaign_db.advertiser_profiles": 0,
+    "campaign_db.campaigns": 0,
+    "readAt": "2026-10-03T10:25:00+05:30"
+  }
+}

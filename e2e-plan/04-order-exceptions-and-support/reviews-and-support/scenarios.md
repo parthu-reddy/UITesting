@@ -1,6 +1,6 @@
 # 04 — Reviews and Support — All Scenarios
 
-Prerequisite: at least one completed order in the customer's history. Uses: `RateOrderModalPage`, `CustomerReviewsPage`, `PostDeliverySupportModalPage`, `AdminSupportTicketsPage`.
+Prerequisite: at least one completed order in the customer's history. Uses (2026-10-03): the real dialogs by accessible name (`rate-order-prompt`, "Rate {target} out of 5 stars"); `RateOrderModalPage`'s old text/SVG selectors are not used. `PostDeliverySupportModalPage` was deleted with its component (checkpoint23).
 
 ## Batch 1 — Participants review order-related targets
 
@@ -23,29 +23,26 @@ Prerequisite: at least one completed order in the customer's history. Uses: `Rat
 | REVIEW-11 | Review timestamp | Each review entry shows a date/time. | Date is non-empty and in a readable format. |
 | REVIEW-12 | Multiple reviews visible | If more than one review exists. | List shows all reviews; pagination works if many reviews exist. |
 
-## Batch 3 — Post-delivery support ticket
+## Batches 3 and 4 — retired 2026-10-03
 
-| ID | Description | Action | Expected result |
-|---|---|---|---|
-| SUPPORT-01 | Help button on completed order | Customer opens a completed order. | "Help" / "Need Support" button visible. |
-| SUPPORT-02 | Support modal opens | Tap "Help". | `PostDeliverySupportModalPage` opens with issue categories. |
-| SUPPORT-03 | Select "Missing Item" category | Tap "Missing Item". | Category selected; text field for details appears. |
-| SUPPORT-04 | Submit support ticket | Fill in details → tap Submit. | Success message; ticket created with a ticket ID. |
-| SUPPORT-05 | Ticket ID is non-empty | After submission. | Ticket ID shown to customer; non-empty string. |
-| SUPPORT-06 | Submit ticket without category blocked | Open support modal → tap Submit without selecting a category. | Validation prevents submission. |
-| SUPPORT-07 | Support ticket in customer ticket list | After submission. | Ticket appears in customer's "My Tickets" or "Support History" list. |
-
-## Batch 4 — Admin sees support ticket
-
-| ID | Description | Action | Expected result |
-|---|---|---|---|
-| SUPPORT-08 | Admin support queue | Login as admin → open Support Tickets. | Ticket submitted in SUPPORT-04 appears in the queue. |
-| SUPPORT-09 | Ticket shows correct category | On admin side. | Ticket category is "Missing Item" matching what customer selected. |
-| SUPPORT-10 | Ticket shows order ID | On admin side. | Order ID on ticket matches the customer's order. |
-| SUPPORT-11 | Admin can change ticket status | Admin selects a status (e.g. "In Review", "Resolved"). | Status updates and ticket moves to corresponding tab. |
+SUPPORT-01..11 described a post-delivery "Help" button, `PostDeliverySupportModal` and its category form. That UI and its endpoint were deleted by user decision at checkpoint23 (dead code: rendered nowhere). Customer support now runs through the order chat (item quote → Submit Refund Request) and is decided in the admin Refund Queue; it is covered live by `06-admin-operations/support-and-refund-queues` Batches 5 and 6 (SUPPORT-REFUND-01..03, REFUND-RETRY-01) and CHAT-REFUND-01..05. Do not reimplement these IDs.
 
 ## Batch 5 — Customer review history
 
 | ID | Description | Action | Expected result |
 |---|---|---|---|
 | REVIEW-13 | My Reviews resolves | Customer opens Account Settings → My Reviews. | At least one review article or the defined empty state renders. Focused deployed check passed on 2026-09-29; older HTTP 403 is historical. |
+
+## Live status (2026-10-03, order bb43e2a4)
+
+| ID | Proof |
+|---|---|
+| REVIEW-01, 02, 03, 06 (customer) | `OrderReviewsFlowTest` PASS: targets = eligibility (RESTAURANT, DRIVER, PRODUCT); "Pick a rating to continue" disabled until rated; restaurant 4 + comment, rider 5 submitted; reopen shows them under "Already reviewed", the dish still rateable |
+| REVIEW-04 (restaurant) | same test: targets CUSTOMER, DRIVER only; customer 5; read-only on reopen |
+| REVIEW-05 (rider, off duty) | same test from Completed Deliveries with duty OFFLINE: targets CUSTOMER, RESTAURANT only; restaurant 4; plus `RiderReviewHistoryApiTest` PASS |
+| REVIEW-07 | backend tests (not posted live by design) |
+| REVIEW-09/10/11 | `RestaurantNavigationUiTest` REVIEW-AGG-01 PASS with `-Dreview.outlet.name="Brand 1 Outlet 3" -Dreview.customer.comment=...`: the exact public review appears |
+| REVIEW-12 | not exercised (single review on the outlet) |
+| REVIEW-13 | `CustomerSettingsUiTest#myReviewsTabShowsReviewsOrDefinedEmptyState` PASS with `-Dreview.customer.comment` (now required to find that review; seen red with an unwritten comment) |
+
+DB: four reviews (customer→restaurant PUBLIC 4 with comment; customer→driver PRIVATE 5; restaurant→customer PRIVATE 5; rider→restaurant PRIVATE 4). Aggregates: RESTAURANT 1 review 4.00 (public only), DRIVER 1 review 5.00 (driver reviews count by design); one REVIEW_CREATED event PROCESSED; Brand 1 Outlet 3 rating 4 from 1 review in restaurant_db.

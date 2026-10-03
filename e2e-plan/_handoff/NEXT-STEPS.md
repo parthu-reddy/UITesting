@@ -1,5 +1,96 @@
 # Ordered continuation
 
+## Current order (checkpoint35 — 2026-10-03T15:50:36+05:30)
+
+1. Owner deploy/prove checkpoint34; confirm D15 before O1 deployment.
+2. Publish CommonLibrary/Identity stubs; rebuild/deploy Identity; sync gateway/shared/five histogram configs. No O1 reset/seed.
+3. Read-only verify versions/health/migrations; resolve current Dev URL from deployment-context.md.
+4. UITesting: `python3 scripts/run_organisation_o1_e2e.py --app-url <current-Dev-URL>`; preserve exact manifests, including failures.
+5. Exact-org SQL/outbox and real p95/breaker proof per [checkpoint35](checkpoints/35-business-platform-o1-local.md). Compilation is not live proof.
+6. Once O1 live green, confirm D3 and start O2. D4/D6/D13 gate later phases; UI work O5/W3/A4.
+
+
+## Current order (checkpoint34)
+
+0. Owner's next big work item is planned in `RandomDocuments/BusinessPlatform_2026-10-03/` (organisations, one login + launcher, business wallet, Ads Manager). Deploy checkpoint 34 before its phase O1 starts; its A4 phase deletes the restaurant Campaigns tab and the campaign E2E tests below.
+
+1. Wait for the user to deploy **food-delivery-app-ui**, **campaign-service**, **wallet-service** (governmentid-service optional). Verify images/health read-only.
+2. Earnings: re-read the three figures read-only (76.44 / 8.96 / 67.48 at checkpoint33), then `PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 mvn -q -Dtest=RestaurantEarningsLiveTest -Dapp.url=<tunnel> -Drestaurant.phone=9000000001 '-Dearnings.outlet=Brand 1 Outlet 3' -Dearnings.expected.net=<db> -Dearnings.expected.clawbacks=<db> -Dearnings.expected.pending=<db> -DexcludedGroups=slow-auth,auth-rate-limit test`.
+3. Campaigns, read-only first: `-Dtest=RestaurantCampaignsLiveTest '-Dcampaign.outlet=Brand 1 Outlet 3'` (same base flags). With 0 advertisers this verifies the start step and stops (assumption, not a pass for ONBOARD). Then `-Dcampaign.onboard=true` once (creates the owner's advertiser + ad wallet permanently; the user chose this flow), then `-Dcampaign.create=true` once (one DRAFT; never serves or spends). Check campaign_db/wallet_db read-only after.
+4. Ask the user about the activation gap (ad group + creative + moderation + activate) before building any of it.
+5. Then rider-wallet-earnings-and-history (locator audit already shows "Today’s Earnings" missing in PartnerReadOnlyUiTest:64,75), profiles-settings-and-kyc, restaurant-outlets-and-menu-management.
+
+## Current order (checkpoint33)
+
+1. User decision: how a restaurant becomes an advertiser (campaigns).
+2. Deploy the UI (earnings wiring; plus the campaigns UI if decided in time), then run `RestaurantEarningsLiveTest` with `'-Dearnings.outlet=Brand 1 Outlet 3' -Dearnings.expected.net=<db> -Dearnings.expected.clawbacks=<db> -Dearnings.expected.pending=<db>` (re-read the three figures read-only first; 76.44 / 8.96 / 67.48 at checkpoint33).
+3. Then rider-wallet-earnings-and-history, profiles-settings-and-kyc, restaurant-outlets-and-menu-management.
+
+## Current order (checkpoint32)
+
+1. Next feature: phase 05 — campaigns-and-promotions, profiles-settings-and-kyc, restaurant-earnings, restaurant-outlets-and-menu-management, rider-wallet-earnings-and-history (one at a time, source first).
+2. A review flow needs a delivered order with no reviews (14-day window); bb43e2a4 is used.
+3. Carry-overs: SupportRefundResolutionFlowTest live re-run; page-size/validation task; validate_core_services 6 pre-existing; readiness 4.1/5.4.
+
+## Current order (checkpoint31)
+
+1. Priority list complete. Next features from FEATURE-STATUS, one at a time: 04 reviews-and-support, then phase 05 (partner and account management), 06 live operations and users/moderation, 07 resilience.
+2. Re-prove SupportRefundResolutionFlowTest at its next natural run (needs a fresh in-window delivered order).
+3. Separately: the page-size/validation task, validate_core_services' 6 pre-existing findings, readiness 4.1/5.4.
+
+## Current order (checkpoint30)
+
+1. Wait for the user to deploy **food-delivery-app-ui**; verify image/health.
+2. Rerun: `PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 mvn -q '-Dtest=AdminOrderMoneyOutcomesTest' -Dapp.url=https://gulf-strike-dark-extras.trycloudflare.com/ -Dcustomer.phone=8000000484 -Drestaurant.phone=9000000001 -Drider.phone=7000000026 -Dadmin.phone=1000000001 '-Dmoney.outcomes=bb43e2a4-5e05-4a7c-9e0d-7f3d5e7c9fb4:DELIVERED,d3acfc93-7aa2-4aae-aad0-7a9711c31b8d:PARTIAL,cf608115-ee1e-468c-8a7f-1212e1cef902:PARTIAL,19359711-45d4-4d44-b17b-cbf9405419de:CANCELLED,bf109947-3f5c-4033-885a-0b3b0e309159:REJECTED' -DexcludedGroups=slow-auth,auth-rate-limit test` (expect 5/5; read-only, no time window).
+3. The priority list is then complete. Next: re-prove SupportRefundResolutionFlowTest at its next natural run, then the remaining features in FEATURE-STATUS.
+
+## Current order (checkpoint29)
+
+1. Priority list next: admin order-money views per outcome (delivered, cancelled, rejected, refunded, failed).
+2. Re-prove SupportRefundResolutionFlowTest live at its next natural run (it now uses `SupportRefundSteps`).
+3. Separately: the page-size/validation-handler task, validate_core_services' 6 pre-existing findings, readiness 4.1/5.4. Then the remaining features in FEATURE-STATUS.
+
+## Current order (checkpoint28, supersedes 27's run list)
+
+1. Wait for the user to deploy **customer-service, chat-service, payment-gateway, food-delivery-app-ui**. Verify images/health read-only.
+2. Isolation (any time): the ChatAndRefundIsolationTest command under checkpoint27 below (expect 1/1).
+3. One fresh `HappyDeliveryFlowTest#completeOrderLifecycle` (no resume) → order X. Within two hours of its delivery, run in this order, each with `-Dcustomer.phone=8000000484 -Drestaurant.phone=9000000001 -Drider.phone=7000000026 -Dadmin.phone=1000000001 -DexcludedGroups=slow-auth,auth-rate-limit`:
+   - `-Dtest=ChatHistoryPagingTest -Dchat.history.order.id=X` (expect 1/1);
+   - `-Dtest=AdminRefundRetryFlowTest -Dretry.order.id=X` (expect 1/1; needs X to have no tickets or refunds).
+   If the lifecycle errors after a successful server action, resume X on its own id.
+4. SupportRefundResolutionFlowTest now uses `SupportRefundSteps` (moved helpers); re-prove it live at its next natural run on a fresh order rather than spending a lifecycle on it alone.
+5. Then: admin order-money views per outcome.
+
+## Current order (checkpoint27)
+
+1. Wait for the user to deploy **customer-service, chat-service, food-delivery-app-ui**. Verify images/health read-only.
+2. Rerun: `PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 mvn -q '-Dtest=ChatAndRefundIsolationTest' -Dapp.url=https://gulf-strike-dark-extras.trycloudflare.com/ -Dcustomer.phone=8000000484 -Disolation.customer.phone=8000000485 -Drestaurant.phone=9000000002 -Drider.phone=7000000027 -Dadmin.phone=1000000001 -Disolation.order.id=d3acfc93-7aa2-4aae-aad0-7a9711c31b8d -DexcludedGroups=slow-auth,auth-rate-limit test` (expect 1/1).
+3. Rerun: `PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 mvn -q '-Dtest=ChatHistoryPagingTest' -Dapp.url=https://gulf-strike-dark-extras.trycloudflare.com/ -Dcustomer.phone=8000000484 -Drestaurant.phone=9000000001 -Drider.phone=7000000026 -Dadmin.phone=1000000001 -Dchat.history.order.id=<order inside its 2h window> -DexcludedGroups=slow-auth,auth-rate-limit test`. bb43e2a4 qualifies until about 09:29 IST; after that a fresh delivered order (lifecycle) is needed.
+4. Admin refund retry live: waits on the user's decision (Dev mocks cannot fail a refund).
+5. Then the priority list continues with admin order-money views per outcome.
+
+## Current order (checkpoint26)
+
+1. ~~Server-side support window~~: decided 2026-10-03, stays UI-only (USER-INSTRUCTIONS).
+2. Watch HappyDeliveryFlowTest reliability: two consecutive fresh runs each hit a different harness timing miss after successful server actions (accept-navigation wait at :563 via DispatchPingPage:64, delivered-summary 5s at :732). On a third, inspect the waits before creating more orders; resume the exact order each time.
+3. Continue the priority list: admin refund retry live on a definitive provider FAILED, chat isolation and history beyond 50 messages, admin order-money views per outcome, then the remaining features. Separately: validate_core_services' 6 pre-existing findings and readiness 4.1/5.4.
+
+## Current order (checkpoint25)
+
+1. Wait for the user to deploy **food-delivery-app-ui** (dead-button fix). Then check in the browser, on 0554f250 (outside the window), that "Something wrong with this order?" is gone, and on an order within two hours of its last update that it still opens the chat.
+2. Ask/record the user's decision on enforcing the two-hour support window server-side.
+3. Support-refund reruns need an order **last updated less than two hours ago** (the test now asserts it). d3acfc93's window closes about 2026-10-03T06:29+05:30. After that, the full class needs a fresh delivered order (fresh lifecycle, then `-Dsupport.order.id`).
+4. Continue the priority list: admin refund retry live on a definitive provider FAILED, chat isolation and history beyond 50 messages, admin order-money views per outcome, then the remaining features in FEATURE-STATUS. Separately: the pre-existing validate_core_services findings and readiness 4.1/5.4.
+
+## Current order (checkpoint24)
+
+1. Wait for the user to deploy **customer-service** ([DEPLOYMENT-GATE](DEPLOYMENT-GATE.md)). Verify the image and health (read-only).
+2. Rerun SUPPORT-REFUND-03 on the owned order (its precondition holds: one COMPLETED award, one RESOLVED ticket):
+   `PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 mvn -q '-Dtest=SupportRefundResolutionFlowTest#refundedItemCannotBeRefundedAgain' -Dapp.url=https://gulf-strike-dark-extras.trycloudflare.com/ -Dcustomer.phone=8000000484 -Drestaurant.phone=9000000001 -Drider.phone=7000000026 -Dadmin.phone=1000000001 -Dsupport.order.id=0554f250-eade-4677-8e51-18f4aacd22f5 -DexcludedGroups=slow-auth,auth-rate-limit test`
+   Needs `target/lifecycle/0554f250-eade-4677-8e51-18f4aacd22f5.json` (copy from fixtures/ if absent). Check the customer outbox gets a CHAT_REFUND_ERROR and nothing new lands in chat-events.DLT.
+3. The full class (02 → 01 → 03) needs a delivered order with no tickets or refunds: one fresh happy lifecycle, then `-Dsupport.order.id=<new id>`. Run it only when the full chain must be re-proven, not as a routine rerun.
+4. Then the priority list below (admin retry live, chat isolation/history >50, admin order-money views per outcome), then the remaining features. Separately: the 6 pre-existing validate_core_services findings and readiness 4.1/5.4.
+
 ## Current order (checkpoint23)
 
 1. Deploy customer-service, the gateway config and the UI; publish CommonLibrary. Verify images, the flyway row, and that the column is dropped.

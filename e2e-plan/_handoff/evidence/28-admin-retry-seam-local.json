@@ -1,0 +1,12 @@
+{
+  "checkpoint": 28, "recordedAt": "2026-10-03T08:10:00+05:30",
+  "userDecision": "add a Dev-mock refund failure seam",
+  "finding": "the admin UI had no screen to list or retry failed refunds: customer-service AdminDlqController getFailedRefunds/retryRefund and their generated client existed, nothing in FoodDeliveryAppUI called them",
+  "paymentGateway": {"change": "MockRefundFailureSeam (profile !prod & (debug|dev|default|test|local)): a refund of exactly 1.13 is declined on its first initiation (Redis SETNX mock:refund-declined:<refundId>, 7 days) and accepted after; wired into MockRazorpay/MockCashfree/MockVyapar initiateRefund; WebhookProcessingServiceTest sets the seam",
+                     "tests": "MockRefundFailureSeamTest 3 (other amounts untouched; declined once then accepted; real MockRazorpayStrategy returns false without scheduling success, then true); mutation (never decline) -> 2 red; full clean test 93 tests / 28 classes, 0 fail/error/skip"},
+  "ui": {"change": "Money Operations 'Failed Refunds' tab: lists customerApi.adminDlq.getFailedRefunds(page 0, size 50) with amount/refund/order/reason; 'Retry Refund' confirms 'Retry refund of ₹X?' then customerApi.adminDlq.retryRefund and refreshes",
+         "tests": "OperationsPage.test +4 (list, confirm-then-retry exact id + refresh, empty state, refused retry surfaced); tab removed -> 4 red; typecheck 0, npm run lint 0, vitest 754 / 121"},
+  "e2e": {"new": "AdminRefundRetryFlowTest (REFUND-RETRY-01) on -Dretry.order.id: chat item ticket -> admin award ₹1.13 -> refund FAILED -> Money Operations retry -> same refund COMPLETED, PARTIALLY_REFUNDED, REFUND 1.13 balanced, gone from the failed list",
+          "refactor": "SupportRefundResolutionFlowTest helpers moved unchanged into util/SupportRefundSteps (compile-checked; not yet re-run live)"},
+  "proofType": "local unit/component only; nothing deployed yet"
+}

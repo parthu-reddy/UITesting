@@ -1,5 +1,65 @@
 # Current checkpoint
 
+## Latest: checkpoint35 (2026-10-03T15:50:36+05:30)
+
+**O1 local verified; not deployed/live verified.** Read [checkpoint35](checkpoints/35-business-platform-o1-local.md).
+Complete BusinessPlatform folder read. Organisation/security/audit/event work and clean shared-consumer
+suites pass; E2E compiles only. D15 unconfirmed. Owner checkpoint34 deployment remains first prerequisite,
+then O1 publish/deploy/config rollout/live gate. No Dev writes or new fixtures. O2+ waits on deployed
+O1 green; O5/W3/A4 own requested UI/UX consistency.
+
+## Latest: checkpoint34 (2026-10-03T10:27:00+05:30)
+
+**Local, not deployed.** Campaigns start-advertising step (user decision) and ten defects: registration always failed (ad wallet currency "AD_CREDIT" into `wallets.currency VARCHAR(3)`; now INR, backfill runner deleted) and `/advertisers/me` 400→404 (campaign-service); advertiser wallet gated on a role nobody has (wallet-service, now RESTAURANT/ADMIN); UI sent ad budgets/bid ×100 and showed top-ups ×100; card read a field the server never sends; balance never loaded; dead radius field; the always-empty restaurantId chain and dead RestaurantPortal removed; dead RESTAURANT_MANAGER role (governmentid-service). **Pending deploy:** food-delivery-app-ui (checkpoint33 earnings + campaigns), campaign-service, wallet-service; governmentid-service optional. Dev data unchanged: 0 advertiser profiles. Product gap for the user: no campaign can reach ACTIVE (creative moderation has no caller). See [checkpoint34](checkpoints/34-campaigns-onboarding-and-ad-money.md).
+
+## Latest: checkpoint33 (2026-10-03T09:55:00+05:30)
+
+Restaurant earnings never loaded (dashboard restaurantId is always ""); fixed locally, **UI deploy pending**. Campaigns cannot work end to end: no advertiser profile exists or can be created; **decision pending with the user**. See [checkpoint33](checkpoints/33-restaurant-earnings-and-campaigns.md).
+
+## Latest: checkpoint32 (2026-10-03T09:47:00+05:30)
+
+Reviews and support: proven live, no product defects, no deployment needed. bb43e2a4 now carries four immutable reviews (do not reuse it for a review flow). Reviews validator 85/85. See [checkpoint32](checkpoints/32-reviews-and-support.md).
+
+## Latest: checkpoint31 (2026-10-03T09:32:00+05:30)
+
+Deployed and verified: UI `6eb1743` (order-money panel), customer `07ea84f`, chat `089e5eb`, payment-gateway `5220632`. **No deployment pending. The priority list is complete** (table in [checkpoint31](checkpoints/31-priority-list-complete.md)). Owned orders: 0554f250, d3acfc93, bb43e2a4, cf608115, 19359711 (cancelled), bf109947 (rejected). Riders OFFLINE.
+
+## Latest: checkpoint30 (2026-10-03T09:05:00+05:30)
+
+Deployed unchanged since 29. **Pending:** food-delivery-app-ui (admin order-money panel shows payment, refunds and booked amounts). New owned orders: **19359711** (customer-cancelled, refunded 53.53) and **bf109947** (restaurant-rejected, refunded 53.53). MONEY-05 is red on the deployed UI as expected. See [checkpoint30](checkpoints/30-admin-order-money-outcomes.md).
+
+## Latest: checkpoint29 (2026-10-03T08:50:00+05:30)
+
+Deployed and verified: customer `07ea84f`, chat `089e5eb`, payment-gateway `5220632`, UI `766b214`. **No deployment pending.** Isolation, CHAT-22 and REFUND-RETRY-01 all pass live. Owned orders: 0554f250, d3acfc93 (support outcomes, isolation fixture), bb43e2a4 (60-message chat), **cf608115** (history paging + ₹1.13 refund declined once, retried, COMPLETED). Rider 7000000026 OFFLINE. See [checkpoint29](checkpoints/29-deployed-priority-runs.md).
+
+## Latest: checkpoint28 (2026-10-03T08:10:00+05:30)
+
+Still deployed: customer `cc04ed7`, UI `41578ee`; chat `7cffcad` and payment-gateway `eea4bfe` unchanged. **Pending deployment (checkpoints 27 + 28):** customer-service, chat-service, payment-gateway, food-delivery-app-ui. New since 27: the Dev refund failure seam (₹1.13 declined once) and the Money Operations **Failed Refunds** tab (the admin UI had no retry screen). See [checkpoint28](checkpoints/28-admin-retry-seam-and-ui.md).
+
+## Latest: checkpoint27 (2026-10-03T08:00:00+05:30)
+
+Deployed: customer `cc04ed7`, UI `41578ee` (unchanged). **Pending deployment:** customer-service (order read 404), chat-service (history page bound) and UI (load earlier messages). Live isolation holds for chat and refunds; the order read answered 500 to an outsider (fixed locally). Long chat history was unreachable past 50 (fixed locally; CHAT-22 red on the deployed UI as expected). bb43e2a4's chat now holds 60 messages (40 seeded "E2E history …", retained). Admin retry live is not reachable in Dev (decision asked). See [checkpoint27](checkpoints/27-priority-chat-isolation-history.md).
+
+## Latest: checkpoint26 (2026-10-03T07:40:00+05:30)
+
+**Deployed and verified:** UI `41578ee` (support-button fix) and customer-service `cc04ed7`. **No deployment pending.** The button is hidden after the two-hour chat window (CHAT-REFUND-05 PASS on 0554f250 and d3acfc93) and still opens the quote form inside it (delivered follow-up PASS on new order **bb43e2a4-5e05-4a7c-9e0d-7f3d5e7c9fb4**: DELIVERED, quoted, no tickets or refunds, ledger 115.46 balanced). Rider 7000000026 OFFLINE. The fresh lifecycle itself failed at :732 on an unexplained 5s timing miss (see [checkpoint26](checkpoints/26-ui-support-button-verified.md)).
+
+## Latest: checkpoint25 (2026-10-03T04:40:00+05:30)
+
+**Deployed and verified:** customer-service `cc04ed7` (the checkpoint24 fix). No data reset. **SupportRefundResolutionFlowTest PASS 3/3** on fresh order **d3acfc93-7aa2-4aae-aad0-7a9711c31b8d** (delivered 2026-10-02T22:59:03Z by a resumed lifecycle). The refusal is now answered and committed; 0 dead letters and 0 rollback-only errors since the deploy.
+
+Owned orders: d3acfc93 (denial 005c08a4, award a301b711 → refund d3e4b73c COMPLETED ₹12.00, CLAWBACK 4.28, item consumed, two refusals answered) and 0554f250 (the same outcomes from checkpoint24; outside the chat window). Rider 7000000026 OFFLINE.
+
+**Local, pending the user:** FoodDeliveryAppUI dead-button fix ("Something wrong with this order?" shown only while the order chat is offered). **Decision pending:** the two-hour support window is UI-only; the backend accepts refund requests at any age. See [checkpoint25](checkpoints/25-support-refunds-pass-deployed.md).
+
+## Latest: checkpoint24 (2026-10-02T23:58:00+05:30)
+
+**Deployed and verified:** the checkpoint23 gate (customer `2b103b2`, gateway `3074b96` + its served config, UI `08d086d`, CommonLibrary published). **The Dev data was reset with that deploy:** checkpoint23's orders and ticket are gone; actors keep their UUIDs.
+
+**Owned order:** `0554f250-eade-4677-8e51-18f4aacd22f5`. Customer 8000000484, restaurant 9000000001, rider 7000000026 (OFFLINE), Brand 1 Outlet 3, CARD ₹53.53, one item `aa2d832f` ×1. DELIVERED by a fresh full lifecycle (PASS). Ticket 054a652b REJECTED (denial), ticket 25ac7a74 RESOLVED with refund fe60ce55 COMPLETED ₹12.00 (restaurant fault, CLAWBACK 4.28), intent PARTIALLY_REFUNDED, ledger balanced at 131.74, 0 rejections. The item is consumed: any new quote for it must answer ITEM_ALREADY_REFUNDED.
+
+**Support refunds live:** denial PASS, reduced award PASS (proves the checkpoint23 item-refund fix). SUPPORT-REFUND-03 FAIL: the refusal dead-lettered (`chat-events.DLT` p0 o0) instead of answering. Root cause is a refusal thrown through a `@Transactional` proxy inside the listener's transaction (rollback-only). The same defect is in OrderEventConsumer and PaymentEventConsumer refund routing refusals. **Fixed locally in CustomerApplication; 465/92 clean test green; pending deployment of customer-service.** See [checkpoint24](checkpoints/24-support-refunds-live-and-refusal-rollback.md).
+
 ## Latest: checkpoint23 (2026-10-02T22:15:00+05:30)
 
 The ledger rejection a7862d1a is resolved. Support ticket 2f5d7acf (c463191b, item quote 17.91) is **OPEN**: its approval failed on the refund_items defect and rolled back. No support refunds exist yet. **Pending: deploy customer-service** (migration V20261002220000), then rerun SupportRefundResolutionFlowTest (the command is in checkpoint23).

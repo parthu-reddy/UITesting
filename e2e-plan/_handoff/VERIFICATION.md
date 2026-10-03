@@ -29,3 +29,22 @@ Checkpoint18 adds 172 selected unique local invocations:120customer backend acro
 Checkpoint19:58selected unique payment-gateway local invocations across15classes passed, failures/errors/skips0.22new invocations (15service,1committed concurrent JPA,6method security) plus affected existing persistence/HTTP/consumer contract/startup checks. Initial broader run passed57tests but logged4background Redis mock errors; final setup-corrected run logs0unexpected scheduled task errors and is counted once. Recovery endpoint uses existing admin route confirmed from gateway source. No deployed financial recovery/provider receipt/full-suite claim. Exact class counts: evidence/19-local-results.json.
 
 Checkpoint19 handoff relative-link verification checked48documents (handoff Markdown plus root AGENTS/README);0missing links. Refund capture recovery is REFUND-22; REFUND-21 remains initiation-versus-completion. No duplicate scenario IDs introduced.
+
+
+Checkpoint24: real deployed flows: fresh HappyDeliveryFlowTest PASS 1/1 (order 0554f250); SupportRefundResolutionFlowTest 3 run, 2 pass (denial, reduced award; DB money confirmed), 1 fail (product defect). Local: customer full `clean test` 465 tests / 92 classes, 0 fail/error/skip, including 9 new tests in 3 classes. The new real-proxy test reproduced the production `UnexpectedRollbackException` before the fix, and three mutations were seen red. The consumer refusal fix has local proof only; no live INITIATED-intent cancellation was run. Validators: money audit 0/23 (clean), readiness 59/61 without --with-tests (4.1/5.4 pre-existing), lifecycle 68/68, validate_core_services 50/56 (6 pre-existing). [Local results](evidence/24-local-results.json).
+
+Checkpoint25: real deployed flows on customer-service cc04ed7. Resumed HappyDeliveryFlowTest PASS 1/1 (d3acfc93; the fresh attempt's error is recorded, not counted as a pass). SupportRefundResolutionFlowTest PASS 3/3, plus the 03 precondition both ways (stale fails fast, fresh passes). DB/outbox/log proof in evidence/25-deployed-support-refunds.json. The earlier 03-only attempt on 0554f250 errored on the chat window, not the fix. Local UI: typecheck, lint, vitest 743/121; guard seen red. The UI change is not deployed.
+
+Checkpoint26: real deployed UI 41578ee. ChatSupportWindowClosedTest (new, CHAT-REFUND-05) PASS 2/2 invocations on aged orders; delivered follow-up PASS 1/1 on bb43e2a4 (quote through the button). The fresh lifecycle that delivered bb43e2a4 FAILED at :732 (timing) and is not counted as a pass. Evidence: evidence/26-ui-button-fix-verified.json.
+
+Checkpoint27: real deployed: ChatAndRefundIsolationTest 1 run, all probes pass except the order read (500, defect); ChatHistoryPagingTest red on UI 41578ee as expected. Local: customer 467/93, chat 63/20, UI 750/121 + typecheck/lint; guards seen red (OrderReadOwnershipTest 500 before fix; chat bound mutation 3 red; UI paging mutations 2 red). No deployed proof yet for the three fixes.
+
+Checkpoint28: local only. payment-gateway clean test 93/28 (seam test seen red); UI vitest 754/121 + typecheck/lint (tab tests seen red). AdminRefundRetryFlowTest written and compiled, not run. SupportRefundResolutionFlowTest helper move compile-checked, not re-run live.
+
+Checkpoint29: real deployed, all 1/1 with 0 skips: ChatAndRefundIsolationTest, fresh HappyDeliveryFlowTest (cf608115), ChatHistoryPagingTest, AdminRefundRetryFlowTest; DB and log proof in evidence/29-deployed-priority-runs.json. SupportRefundResolutionFlowTest not re-run after its helper move.
+
+Checkpoint30: real deployed: OrderCancellationFlowTest PASS (19359711), RestaurantRejectFlowTest PASS (bf109947); AdminOrderMoneyOutcomesTest 5/5 red on UI 766b214 (expected). Local UI 758/121 + typecheck/lint, mutation seen red.
+
+Checkpoint31: real deployed: AdminOrderMoneyOutcomesTest 5/5, 0 skips (red 5/5 on the previous UI).
+
+Checkpoint32: real deployed: OrderReviewsFlowTest PASS (after two test-side attempts that wrote nothing), REVIEW-AGG-01 PASS, My Reviews PASS (tightened; seen red), RiderReviewHistoryApiTest PASS. Reviews validator 85/85 after stale-check updates, each seen red except the warn-level tag check.

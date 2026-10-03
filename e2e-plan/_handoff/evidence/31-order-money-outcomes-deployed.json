@@ -1,0 +1,8 @@
+{
+  "checkpoint": 31, "recordedAt": "2026-10-03T09:32:00+05:30",
+  "deployed": {"food-delivery-app-ui": "6eb1743 (commit titled 'Fix UI dispatch gap'; contents exactly AdminOrderMoney.tsx + its test), healthy"},
+  "run": {"test": "AdminOrderMoneyOutcomesTest (MONEY-05)", "tests": 5, "failures": 0, "errors": 0, "skipped": 0, "seconds": 31.5,
+          "cases": {"bb43e2a4 DELIVERED": "PASS", "d3acfc93 PARTIAL": "PASS", "cf608115 PARTIAL": "PASS", "19359711 CANCELLED": "PASS", "bf109947 REJECTED": "PASS"},
+          "before": "5/5 red on UI 766b214 (checkpoint30)"},
+  "proofType": "real deployed admin UI against owned orders, assertions derived from the admin money API plus per-outcome rules; DB cross-checks in evidence/29 and evidence/30"
+}

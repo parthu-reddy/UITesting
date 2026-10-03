@@ -39,3 +39,25 @@ Checkpoint21: after the reset, cancellation and rejection pass end to end on fre
 Checkpoint22: delivered orders never posted restaurant/rider earnings on PostgreSQL. The ledger UNIQUE(transaction_id, account_id, direction) can't hold a compound distribution (clearing debited 4×). The fix is a per-leg unique key plus migration (local, deploy pending). The resume-path test asserted an SSE-only toast without the SSE guard; fixed.
 
 Checkpoint23: item-level refunds (every admin approval of a chat support ticket) failed on refund_items.amount NOT NULL, a column no entity wrote and no code read. Fixed with a drop-column migration (deploy pending). Also: the full-order customer support UI (CustomerOrderHistory/PostDeliverySupportModal, shared RefundModal) and its /refund-request endpoint are unreachable dead code; decision pending.
+
+Checkpoint21 correction: the active-orders contracts overlapped without `priority`, so the consumer test passed locally only by stub load order and failed in CI Phase 2. Fixed with priority 1/2 in the publish run. See issue-notes/overlapping-stub-priority-mistake.md.
+
+Checkpoint24: the checkpoint23 item-refund fix is proven live (support award COMPLETED with CLAWBACK). New: a business refusal thrown through a `@Transactional` proxy marks the caller's transaction rollback-only even when caught. In `ChatRefundProcessorService` an ITEM_ALREADY_REFUNDED quote lost its reply and dead-lettered (seen live, chat-events.DLT p0 o0). In `OrderEventConsumer`/`PaymentEventConsumer` a refund routing refusal would have rolled back the state change it meant to keep (found by a whole-workspace scan; local proof). Fixed locally: refusals decided before the write transaction; `RefundService.requestUnlessRefused`. Deploy customer-service pending. Lesson: [issue-notes/transactional-refusal-rollback-only-2026-10-02.md](issue-notes/transactional-refusal-rollback-only-2026-10-02.md).
+
+Checkpoint25: the checkpoint24 refusal fix is proven live (CHAT_REFUND_ERROR committed, 0 DLT, 0 rollback-only). New: "Something wrong with this order?" stayed visible after the two-hour post-delivery chat window and did nothing (fixed locally in the UI; deploy pending). The two-hour support window exists only in the UI (decision pending). The rider accept click once waited on a navigation past its 5s timeout although the accept returned 200 (unexplained harness transient; resumed on the same order).
+
+Checkpoint26: the dead support button fix is deployed (UI 41578ee) and verified both ways live. New observation: HappyDeliveryFlowTest:732 missed the delivered summary within 5s once although it rendered (unexplained harness timing; second consecutive fresh-run timing miss after checkpoint25's).
+
+Checkpoint27: another customer's order read answered 500 (bare RuntimeException) instead of 404; fixed locally. Chat history beyond 50 messages was unreachable in the UI and the history `size` unbounded; fixed locally (UI paging, server 1..100). Isolation of chat (HTTP and STOMP) and refunds proven live. Dev payment mocks cannot fail a refund, so admin retry has no live path (decision pending). Platform: 26/34 paged endpoints unbounded and validation exceptions possibly 500 (flagged as a separate task).
+
+Checkpoint28: the admin UI had no way to list or retry failed refunds although the backend and generated client existed (fixed locally: Money Operations Failed Refunds tab). Dev mocks could not decline a refund (user-approved seam: ₹1.13 declined once).
+
+Checkpoint29: the order-read 404, chat history paging and the Failed Refunds retry are verified live on deployed code; REFUND-RETRY-01 shows one decline, one retry, one gateway refund and a balanced ledger.
+
+Checkpoint30: the admin order-money panel showed quoted payouts but no payment status, refunds or booked amounts, so outcomes looked alike (a cancelled order showed payouts as if earned). Fixed locally in the UI; MONEY-05 red before deploy.
+
+Checkpoint31: the order-money panel fix is verified live (MONEY-05 5/5 on UI 6eb1743).
+
+Checkpoint33: the restaurant dashboard's restaurantId is always "" (App.tsx), so the Earnings tab never fetched and the Campaigns tab never loaded. Earnings now follow the selected outlet (local). Campaigns also lack any way to create an advertiser profile (decision pending).
+
+Checkpoint34 (local): campaigns could not start (no advertiser creatable, `/me` 400), the advertiser wallet refused every owner (role ADVERTISER does not exist), the campaign form charged budgets and bids ×100, top-ups displayed ×100, the card read a field the server never sends, and the balance never loaded. All fixed locally with guards seen red; `tools/validate_role_names.py` now checks every role name in the workspace. Open: no campaign can be activated (creative moderation has no caller).

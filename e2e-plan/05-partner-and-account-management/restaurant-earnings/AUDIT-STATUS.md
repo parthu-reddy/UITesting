@@ -9,3 +9,5 @@ Owning portable checkpoint(s): 13,14,15 in _handoff/checkpoints for priority wor
 Next: follow [../../_handoff/NEXT-STEPS.md](../../_handoff/NEXT-STEPS.md) and the local scenarios/PENDING mapping. Slow/rate/SSE work is excluded as indexed in [../../_handoff/DEFERRED.md](../../_handoff/DEFERRED.md). Never count skipped/no-op/blocked cases as passes. Do not rerun successful lifecycle coverage merely because it is referenced here.
 
 Every continuing agent must update this feature's results and the central handoff inside this plan folder; see [mandatory agent update instructions](../../AGENTS.md).
+
+Checkpoint33 (2026-10-03T09:55:00+05:30): see [checkpoint33](../../_handoff/checkpoints/33-restaurant-earnings-and-campaigns.md).

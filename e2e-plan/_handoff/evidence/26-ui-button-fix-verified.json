@@ -1,0 +1,16 @@
+{
+  "checkpoint": 26, "recordedAt": "2026-10-03T07:40:00+05:30",
+  "deployed": {"food-delivery-app-ui": "41578ee ('Fix UI refund logic'; exactly the 5 checkpoint25 files), running and healthy", "customer-service": "cc04ed7 unchanged"},
+  "closedSide": {"test": "ChatSupportWindowClosedTest (new, CHAT-REFUND-05)", "orders": {"0554f250": "last update 7h58m earlier", "d3acfc93": "last update 2h53m earlier"},
+                 "result": "PASS 2/2 invocations, 0 skip, 25.6s: summary + receipt + Tax invoice render; no 'Something wrong with this order?' button; no chat-launcher",
+                 "redState": "observed on the pre-fix UI 08d086d at 2026-10-03T04:19+05:30: the same 5h-old 0554f250 showed the button (checkpoint25 failure screenshot)"},
+  "openSide": [
+    {"test": "HappyDeliveryFlowTest fresh", "order": "bb43e2a4-5e05-4a7c-9e0d-7f3d5e7c9fb4", "result": "FAIL 338.3s at :732 (delivered summary not visible within 5s after the History click)",
+     "evidence": "teardown screenshot/DOM: tracker data-order-id=bb43e2a4 with 'Order delivered', the support button and the chat launcher all present; no browser console errors. DB: DELIVERED 01:59:01Z, assignment RELEASED, ledger 18 entries 115.46/115.46, rider OFFLINE. Unexplained 5s timing miss; not attributed to the UI change (synchronous render condition)."},
+    {"test": "HappyDeliveryFlowTest -Dresume.delivered.order.id=bb43e2a4 (strict money + quote)", "result": "PASS 1/1, 0 skip, 29.5s",
+     "manifest": {"newOrderCreated": false, "quotePassed": true, "moneyChecked": true},
+     "meaning": "RefundQuoteChecks clicked 'Something wrong with this order?' inside the window, the quote form opened and a real quote returned",
+     "db": "CHAT_REFUND_QUOTE_RESPONSE committed for the order's chat; 0 tickets; 0 refunds"}
+  ],
+  "proofType": "real deployed cross-role browser flow + Oracle read-only DB"
+}

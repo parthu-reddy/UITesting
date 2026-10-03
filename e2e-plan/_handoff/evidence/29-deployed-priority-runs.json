@@ -1,0 +1,22 @@
+{
+  "checkpoint": 29, "recordedAt": "2026-10-03T08:50:00+05:30",
+  "deployed": {"customer-service": "07ea84f", "chat-service": "089e5eb", "payment-gateway": "5220632", "food-delivery-app-ui": "766b214",
+               "note": "each commit holds exactly the checkpoint27/28 files; all healthy; Dev data intact (3 orders before this run)"},
+  "runs": [
+    {"test": "ChatAndRefundIsolationTest", "order": "d3acfc93", "result": "PASS 1/1, 0 skip, 57.9s",
+     "logs": "customer-service since deploy: 0 'Unhandled exception', 1 'Resource not found: Order not found' (the outsider's read, now 404)"},
+    {"test": "HappyDeliveryFlowTest#completeOrderLifecycle (fresh)", "order": "cf608115-ee1e-468c-8a7f-1212e1cef902", "result": "PASS 1/1, 0 skip, 421.7s"},
+    {"test": "ChatHistoryPagingTest (CHAT-22)", "order": "cf608115", "result": "PASS 1/1, 0 skip, 25.9s (red on UI 41578ee at checkpoint27)"},
+    {"test": "AdminRefundRetryFlowTest (REFUND-RETRY-01)", "order": "cf608115", "result": "PASS 1/1, 0 skip, 48.2s",
+     "manifest": {"refundId": "67562478-d50d-4246-96b8-9b5f8f7d46db", "amount": "1.13", "declinedOnce": true, "newOrderCreated": false}}
+  ],
+  "proofType": "real deployed cross-role browser flows + Oracle read-only DB + bounded service logs",
+  "db": {
+    "customerRefund": "67562478 COMPLETED 1.13 ORIGINAL_METHOD attempts 1 sweep_attempts 0 completedAt set; the only refund on the order",
+    "ticket": "RESOLVED 1.13", "intent": "PARTIALLY_REFUNDED",
+    "gatewayRefunds": "exactly one row: COMPLETED 1.13 ORIGINAL_METHOD",
+    "ledger": "REFUND 1.13/1.13; CLAWBACK 0.40 RESTAURANT_PAYABLE -> PLATFORM_CLEARING; 22 entries 116.99/116.99; 0 rejections"
+  },
+  "gatewayTimeline": ["03:15:06.030Z initiation 1", "03:15:06.033Z [DEV MOCK] declining first attempt (seam)", "03:15:12.039Z initiation 2 (admin retry)", "03:15:14.045Z handleRefundSuccess"],
+  "logs": "since deploy: 0 DLT_RECORD_WRITTEN and 0 UnexpectedRollbackException in customer-service and payment-gateway"
+}

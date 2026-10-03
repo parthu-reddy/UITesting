@@ -36,3 +36,8 @@ owning test is re-run live. Do not mark anything validated on the strength of th
 ## 2026-09-28 focused five-class rerun
 
 `PartnerReadOnlyUiTest.campaignDraftCanBeCancelled` passed: the unsaved campaign draft opened and closed without persisting. This validates draft cancellation only; the campaign navigation and persisted campaign scenarios recorded above remain separate.
+
+## 2026-10-03 checkpoint34 (supersedes the blocked-navigation notes above for current state)
+
+The navigation redirect is long fixed; the tab rendered an empty shell because `advertiserId` was always "". The tab now resolves the owner's advertiser or offers "Start advertising". `PartnerReadOnlyUiTest.campaignDraftCanBeCancelled` moved to `RestaurantCampaignsLiveTest.draftIsDiscardedOnCancel` (needs an advertiser). Nothing here is validated live until the checkpoint34 deploy and run.
+

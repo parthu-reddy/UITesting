@@ -1,0 +1,42 @@
+{
+  "checkpoint": 24, "recordedAt": "2026-10-02T23:58:00+05:30",
+  "repo": "CustomerApplication (local, uncommitted)",
+  "proofType": "local unit + local real-proxy JPA (H2, PostgreSQL mode, committed rows); no deployed proof",
+  "changed": {
+    "main": ["order/service/ChatRefundProcessorService.java", "order/refund/RefundService.java",
+             "order/service/OrderEventConsumer.java", "order/service/PaymentEventConsumer.java"],
+    "test": ["order/service/ChatRefundRefusalPersistenceTest.java (new, 3)", "order/refund/RefundRefusalInCallerTransactionTest.java (new, 4)",
+             "order/service/OrderEventConsumerRefundRefusalTest.java (new, 2)", "order/service/PaymentEventConsumerTest.java (updated to requestUnlessRefused, 12)"]
+  },
+  "seenRed": {
+    "ChatRefundRefusalPersistenceTest on unfixed code": "2 of 3 failed with UnexpectedRollbackException: Transaction silently rolled back because it has been marked as rollback-only (the production exception); control passed",
+    "RefundRefusalInCallerTransactionTest, mutation M1 (requestUnlessRefused throws its refusal)": "1 error",
+    "RefundRefusalInCallerTransactionTest, mutation M2 (post-write ISE converted to a refusal)": "1 failure",
+    "OrderEventConsumerRefundRefusalTest, mutation (consumer reverted to request()+catch)": "1 failure: Wanted but not invoked",
+    "restored": "all green, files byte-identical to the fix (cmp)"
+  },
+  "selectedBatch": {"classes": 10, "tests": 77, "failures": 0, "errors": 0, "skipped": 0,
+                    "list": "RefundRefusalInCallerTransactionTest 4, PaymentEventConsumerTest 12, ChatRefundRefusalPersistenceTest 3, ChatRefundProcessorServiceTest 18, RefundNeverExceedsOrderTest 8, AdminRefundControllerTest 6, AdminRefundCommandControllerTest 4, RefundRetryPersistenceTest 1, RefundStoreCreditHandoffTest 5, RefundRetryIsolationTest 16"},
+  "fullCleanTest": {"classes": 92, "tests": 465, "failures": 0, "errors": 0, "skipped": 0,
+                    "baseline": "456 tests / 89 classes at checkpoint23; +9 tests / +3 classes are the new ones"},
+  "validators": {
+    "audit_money_asis.py": "0/23 (a PASS means a historical defect is present: clean)",
+    "validate_readiness.py --phase all (no --with-tests)": "59/61, 5.7 skipped; 4.1 and 5.4 pre-existing (checkpoint22 recorded both). 4.1 lists 5 pre-existing single-method classes; the new OrderEventConsumerRefundRefusalTest was given a second case so it is not one of them",
+    "validate_lifecycle.py --phase all": "68/68",
+    "FoodDeliveryContracts/validate_core_services.py": "50/56, the same 6 pre-existing findings as checkpoint23 (I-16, I-19c, SCHEMA-STRICT, SPEC-DRIFT, SCHEMA-IMMUTABLE, check_gateway_rate_limits)"
+  },
+  "wholeSetScan": {
+    "tool": "scratch scan for: transactional context + try calling another @Transactional bean/repository + catch without rethrow; proven on the HEAD ChatRefundProcessorService (flags both handlers) and clean on the fix",
+    "workspaceCandidates": 6,
+    "classified": {
+      "CustomerApplication PaymentEventConsumer:194": "DEFECT, fixed (refund routing refusal rolled back the payment-state change)",
+      "CustomerApplication OrderEventConsumer:221 via requestRefundWithoutPoisoningTheEvent": "DEFECT, fixed (found by reading: helper hides the try/catch from a textual scan)",
+      "CustomerApplication OrderEventConsumer:180": "false positive: IllegalStateTransitionException comes from OrderState POJOs, no proxy",
+      "CustomerApplication RefundService.retryStuck:405": "not a refusal trap: only private self-calls and a repository read; an infrastructure failure fails loudly",
+      "CampaignService KafkaAnalyticsConsumer:77": "false positive: caught exceptions come from local parsing",
+      "DeliveryExecutiveApplication DeliveryExecutiveProfileService:136": "read-only; only an infrastructure failure crosses a proxy, fails loudly",
+      "DeliveryExecutiveApplication OnboardingOrchestratorService:29": "not a refusal trap; observation: catch(Exception) is scoped wider than the Feign call it was written for (not changed)"
+    },
+    "limitation": "text-based; fields must be private final; indirect helpers need reading"
+  }
+}

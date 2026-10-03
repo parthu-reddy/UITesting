@@ -1,5 +1,65 @@
 # Deployment gate — checkpoint 18
 
+## Checkpoint35 gate (current; checkpoint34 first)
+
+Confirm D15. After checkpoint34 deployment/proof, owner publishes CommonLibrary/Identity stubs,
+rebuilds/deploys Identity and syncs Deployment gateway/shared/five histogram configurations. No O1
+reset or seed. Read [checkpoint35](checkpoints/35-business-platform-o1-local.md) for exact rollout and
+live runner/SQL/outbox/latency requirements. Local O1 and consumer suites passed; live gate remains open.
+
+
+## Checkpoint34 gate (current, includes 33)
+
+Deploy **food-delivery-app-ui** (earnings follow the outlet; Campaigns start step; ad budgets/bid/top-up in rupees; lifetimeBudget; balance on open; restaurantId chain and RestaurantPortal removed), **campaign-service** (`/advertisers/me` 404 when absent; ad wallet minted in INR, which registration needs to succeed at all; startup backfill runner removed) and **wallet-service** (`/api/v1/money/advertiser/**` gated RESTAURANT/ADMIN). **governmentid-service** optional (dead RESTAURANT_MANAGER role removed; no behaviour change). No migration, config or gateway change. UI vitest 771/123, typecheck, lint; clean tests campaign 32, wallet 56, governmentid 33.
+
+## Checkpoint33 gate (current)
+
+Deploy **food-delivery-app-ui**: the Earnings tab follows the selected outlet (`RestaurantTabPanels`, `RestaurantEarningsTab`). vitest 759/121, typecheck, lint.
+
+## No gate pending (checkpoint31)
+
+UI `6eb1743` deployed and verified (MONEY-05 5/5).
+
+## Checkpoint30 gate (current)
+
+Deploy **food-delivery-app-ui** only: `AdminOrderMoney.tsx` gains Payment and Refunds plus Posted to ledger. No backend change. vitest 758/121, typecheck, lint.
+
+## No gate pending (checkpoint29)
+
+Checkpoints 27/28 deployed (customer `07ea84f`, chat `089e5eb`, payment-gateway `5220632`, UI `766b214`) and verified live.
+
+## Checkpoint28 gate (current, includes 27)
+
+Deploy **customer-service** (order read 404), **chat-service** (history page bound), **payment-gateway** (Dev-only `MockRefundFailureSeam`; prod profile unaffected) and **food-delivery-app-ui** (load earlier messages; Failed Refunds tab). No migration, config or gateway change. Clean tests: customer 467/93, chat 63/20, payment 93/28; UI vitest 754/121, typecheck, lint.
+
+## Checkpoint27 gate (current)
+
+Deploy **customer-service**, **chat-service** and **food-delivery-app-ui**. No migration, config or gateway change; chat openapi.json unchanged.
+- customer-service: another customer's (or a missing) order reads as 404 instead of 500; dead `getOrderById` removed. Clean test 467/93.
+- chat-service: history `page`/`size` bounded (400 outside 0.. / 1..100). Clean test 63/20.
+- UI: "Load earlier messages" in chat. typecheck, lint, vitest 750/121.
+
+## No gate pending (checkpoint26)
+
+Checkpoint25's UI gate is deployed (`41578ee`) and verified live, both sides. Checkpoint24's customer-service gate is deployed (`cc04ed7`).
+
+## Checkpoint25 gate (current)
+
+Deploy **food-delivery-app-ui** only. Local, uncommitted in FoodDeliveryAppUI: `isOrderChatOffered` in `features/customer-orders/model/orderStatus.ts`, used by `CustomerOrderChat` and `OrderDeliveredSummary` so "Something wrong with this order?" is hidden once the order chat is no longer offered (it was a silent no-op). typecheck, `npm run lint` and vitest (743/121) pass. No backend, config or migration change.
+
+Checkpoint24 gate (customer-service `cc04ed7`): deployed and verified at checkpoint25.
+
+## Checkpoint24 gate (current)
+
+Deploy **customer-service** only. No migration, no Config Server or gateway change, no UI change, no reset needed. Local, uncommitted in CustomerApplication:
+
+- `ChatRefundProcessorService`: refusals are decided before the write transaction, so ITEM_ALREADY_REFUNDED (and every other quote/request refusal) reaches the customer as CHAT_REFUND_ERROR instead of a dead letter.
+- `RefundService`: `request()` split into a write-free `plan()` and `record()`; new `requestUnlessRefused()` returns pre-write refusals.
+- `OrderEventConsumer`, `PaymentEventConsumer`: use `requestUnlessRefused`, so a refund routing refusal keeps the order/payment state change.
+- Tests: 3 new classes (9 tests), PaymentEventConsumerTest updated. Full clean test 465/92 green.
+
+Checkpoint23 gate: deployed and verified (checkpoint24).
+
 ## Checkpoint23 gate (current)
 
 - **customer-service:** migration `V20261002220000__drop_unused_refund_item_amount.sql` plus removal of `CustomerOrderController`. Full suite 456/456.

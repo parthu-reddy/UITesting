@@ -1,0 +1,13 @@
+{
+  "checkpoint": 33, "recordedAt": "2026-10-03T09:55:00+05:30",
+  "earnings": {
+    "expectedFromDb": {"outlet": "Brand 1 Outlet 3 (54ba242d, Asia/Kolkata)", "net": "76.44 = 4 delivered x 19.11 (cancelled/rejected excluded)", "clawbacks": "8.96 = 4.28+4.28+0.40", "pending": "67.48 = RESTAURANT_PAYABLE net over 15 lines; 0 payouts"},
+    "live": "RestaurantEarningsLiveTest FAIL on UI 6eb1743: Net Earnings card shows '—'; gateway logged no /summary or /statement request",
+    "rootCause": "App.tsx:96-97 mounts RestaurantDashboard with restaurantId=\"\"; RestaurantTabPanels passed it to RestaurantEarningsTab, whose polling is enabled only when the id is truthy. RestaurantPortal (outlets[0]?.id) is imported nowhere.",
+    "fixLocal": "RestaurantEarningsTab takes outletId; RestaurantTabPanels passes selectedOutletId. Wiring test (production restaurantId=\"\") seen red when reverted. typecheck 0, lint 0, vitest 759/121"
+  },
+  "campaigns": {
+    "finding": "CampaignManagement gets advertiserId={restaurantId} = \"\" and returns early, so the restaurant Campaigns tab never loads. CampaignService authorizes by AdvertiserProfile owned by the user; GET /api/v1/advertisers/me and POST /api/v1/advertisers exist, but nothing calls them and campaign_db has 0 advertiser_profiles.",
+    "status": "decision asked of the user: how a restaurant becomes an advertiser"
+  }
+}

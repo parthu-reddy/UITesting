@@ -1,0 +1,18 @@
+{
+  "checkpoint": 27, "recordedAt": "2026-10-03T08:00:00+05:30",
+  "userDecision": "two-hour support window stays UI-only",
+  "adminRetryLive": {"status": "not reachable in Dev", "evidence": "MockRazorpayStrategy/MockCashfreeStrategy/MockVyaparGatewayStrategy.initiateRefund always return true and always call handleRefundSuccess; PaymentEventConsumer:105 failure branch needs initiateRefund=false; provider refund-failure webhooks need the webhook secret. Decision asked of the user."},
+  "isolation": {
+    "test": "ChatAndRefundIsolationTest (new) on d3acfc93, owner 8000000484, intruders customer 8000000485, restaurant 9000000002 (Brand 1 is owned only by 9000000001's 426f016b), rider 7000000027",
+    "result": "FAIL 1/1 on the last assertion only (by design ordered last)",
+    "passed": ["owner reads session + history, owner STOMP subscription accepted", "outsider: history 403, session lookup 403, join 403, refunds 403", "outsider STOMP SUBSCRIBE -> ERROR 'Access Denied', STOMP SEND -> ERROR", "other brand owner history 403", "unassigned rider history 403", "owner history unchanged, no probe text"],
+    "failed": "outsider GET /api/v1/orders/d3acfc93 -> 500 (expected 404); customer-service log: RuntimeException 'Order not found or access denied' at CustomerOrderService.java:102, 'Unhandled exception' at ERROR"
+  },
+  "fixLocal": {
+    "customer-service": "getOrderByIdAndCustomer throws ResourceNotFoundException('Order not found') -> 404; dead getOrderById deleted (+ its ContractTestBase stub). OrderReadOwnershipTest (new, 2): red before (500), green after; full clean test 467 tests / 93 classes, 0 fail/error/skip",
+    "chat-service": "getMessages refuses page<0 or size outside 1..100 with 400 after the membership check. ChatSessionControllerTest 13 (3 parameterized bounds + control; mutation -> 3 red); full clean test 63 / 20, 0 fail/error/skip; openapi.json unchanged",
+    "food-delivery-app-ui": "useChatSession: explicit page 0 size 50, tracks server 'last', loadOlderMessages (page n, merge by id in time order, error toast + retry), ChatMessageList 'Load earlier messages' control; +4 hook +3 list tests, two mutations red; typecheck 0, npm run lint 0, vitest 750 / 121"
+  },
+  "history": {"test": "ChatHistoryPagingTest (new, CHAT-22) on bb43e2a4", "result": "FAIL on deployed UI 41578ee as expected: chat topped up 13 -> 60 messages; newest visible, oldest text absent, no 'Load earlier messages' control", "proofType": "real deployed UI + DB count 60"},
+  "outOfScopeFlagged": "26 of 34 paged endpoints across 9 services have no size bound, and the shared GlobalExceptionHandler maps no ConstraintViolationException/HandlerMethodValidationException (existing @Max bounds may answer 500; source reading, not run). Separate task chip task_2fd5451a."
+}

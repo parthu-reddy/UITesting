@@ -48,3 +48,7 @@ My first caller enumeration searched only for the repository method and missed `
    `PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 mvn -q '-Dtest=HappyDeliveryFlowTest#completeOrderLifecycle' -Dapp.url=https://gulf-strike-dark-extras.trycloudflare.com/ -Dcustomer.phone=8000000484 -Drestaurant.phone=9000000001 -Drider.phone=7000000026 -Dadmin.phone=1000000001 -Dresume.order.id=7f7af6a5-1d86-4f29-b4cc-36eefe69a74b '-Dresume.outlet=Brand 1 Outlet 3' -DexcludedGroups=slow-auth,auth-rate-limit test`
    The rider is ON_DELIVERY on that order; keep it until delivery completes.
 3. Then run a fresh full happy lifecycle once, to prove the accept→active gap closes live; the resume skips the accept step.
+
+## Correction recorded 2026-10-02T23:20:00+05:30
+
+The new contract `getActiveOrdersForDriverWithConfirmedAssignments.groovy` overlapped the existing `getActiveOrdersForDriver.groovy` (WireMock ignores the extra `confirmedOrderIds` parameter on the old stub). The local `DeliveryExecutiveContractConsumerTest` 5/5 pass depended on stub load order; CI Phase 2 contract testing failed for DeliveryExecutiveApplication. Fixed in the publish run by `priority 1` (specific) and `priority 2` (general). The claim above that the consumer contract was verified was stronger than the evidence. Lesson: [overlapping-stub-priority-mistake.md](../issue-notes/overlapping-stub-priority-mistake.md).

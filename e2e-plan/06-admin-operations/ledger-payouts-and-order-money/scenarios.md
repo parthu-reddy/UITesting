@@ -22,10 +22,11 @@ Uses: `AdminOperationsPage`, `AdminOrderMoneyPage`, `AdminPayoutsPage`, `Transac
 
 | ID | Description | Action | Expected result |
 |---|---|---|---|
-| MONEY-01 | Money Operations tabs render | Open Money Operations and select Ledger Rejections, Reconciliation Runs, Payment DLQ, and Wallet DLQ. | Each selected tab renders its matching heading. |
+| MONEY-01 | Money Operations tabs render | Open Money Operations and select Ledger Rejections, Failed Refunds (added 2026-10-03), Reconciliation Runs, Payment DLQ, and Wallet DLQ. | Each selected tab renders its matching heading. |
 | MONEY-02 | Order money breakdown | Open an order-specific admin money panel from a payout-history entry. | `/admin/orders/:orderId/money` renders the selected order's read-only money panel. Browser-routed coverage verifies the route and request contract. |
 | MONEY-03 | Order money amounts | Verify order money amounts and ledger trace with a controlled order fixture. | Amounts and ledger references agree with the authoritative fixture. A real target check remains fixture-gated. |
 | MONEY-04 | Failed DLQ retry | In a browser-local fixture, retry a payment webhook or wallet outbox event that returns a controlled conflict. | The error is visible, the original queue item remains, and retry becomes available again. A persisted target mutation remains fixture-gated. |
+| MONEY-05 | Order money per outcome (2026-10-03) | `AdminOrderMoneyOutcomesTest`, `-Dmoney.outcomes=<id>:<DELIVERED|PARTIAL|CANCELLED|REJECTED>,...` on owned orders, read-only. | The panel shows payment method and status and every refund row (status, amount). Delivered: SUCCESS, no refunds, each payee booked its quoted payout. Partial restaurant-fault refund: PARTIALLY_REFUNDED, restaurant booked its payout less the clawback. Cancelled/rejected: REFUNDED, one COMPLETED full refund, neither payee booked anything. |
 
 ## Batch 3 — Payouts
 

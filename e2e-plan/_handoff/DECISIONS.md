@@ -45,3 +45,34 @@ Independent priority recovery uses the original persisted payment confirmation a
 |---|---|---|
 | Delete the unreachable full-order customer support path (UI modal and history button, shared RefundModal, `/api/v1/customer/orders/{id}/refund-request`, gateway route/RBAC) | Rendered nowhere; the no-dead-code rule | Customers raise support refunds only via chat item quotes; full-order refunds remain admin/system actions; the remaining-cap at approval is unit-tested only |
 | Add the reverse schema guard to the shared SchemaConsistency | refund_items.amount broke every item refund and no test saw it | Every service schema test now flags required columns no entity writes once CommonLibrary is published |
+
+
+## 2026-10-02T23:40:00+05:30: checkpoint24 decisions
+
+| Decision | Reason | Consequence |
+|---|---|---|
+| Never commit or push (user, permanent) | Explicit user instruction for this and all future sessions | Changes stay local; the user commits/pushes/deploys |
+| SupportRefundResolutionFlowTest runs on **one** delivered order (`-Dsupport.order.id`), denial → reduced award → refusal; replaces `-Dsupport.partial.order.id`/`-Dsupport.deny.order.id` | The reset erased both fixtures. Source shows only an OPEN ticket blocks a new one (`ChatRefundProcessorService:196`) and a denial consumes no quantity (`sumCompletedQuantity` counts completed refunds), so the outcomes are compatible on one order. "Separate orders only for incompatible outcomes" | One fresh happy lifecycle per run instead of two; the award also asserts the earlier REJECTED ticket is unchanged |
+
+## 2026-10-03T04:40:00+05:30: checkpoint25
+
+| Decision | Reason | Consequence |
+|---|---|---|
+| Resume the errored fresh lifecycle on its own order (d3acfc93), not a replacement | Standing rule: a failed retained lifecycle is resumed on its exact owned id | Resume passed; the support class ran on it |
+| Hide "Something wrong with this order?" whenever the order chat is not offered (agent, local) | It opened nothing after the two-hour window: a silent no-op. Same rule for both, from one function | UI deploy pending; the window itself is unchanged |
+| Server-side two-hour support window: **not implemented, asked** | The backend accepts refund chat commands at any age; enforcing it is a product decision | Pending with the user |
+
+## 2026-10-03: support window (user)
+
+| Decision | Reason | Consequence |
+|---|---|---|
+| Keep the two-hour post-delivery support window UI-only | User decision after checkpoint26 asked | No backend change; do not re-raise. E2E support tests still need an order updated within two hours |
+
+| Decision (2026-10-03, user) | Reason | Consequence |
+|---|---|---|
+| Add a Dev-mock refund failure seam | Dev mocks always succeed refunds, so admin retry had no live path | Seam lives only in the profile-gated mocks; no production contract or endpoint gains a test flag |
+| Restaurant advertiser onboarding: "Start advertising" step (2026-10-03, user) | Campaigns need an advertiser profile and nothing created one | UI looks up `/advertisers/me`; a 404 offers the form (brand name, outlet zone) calling `POST /advertisers`; nothing auto-created. Implemented locally at checkpoint34 |
+
+## Business Platform — 2026-10-03T15:50:36+05:30
+
+Implementation follows supplied dependency/release order. O1 local only pending checkpoint34 rollout and O1 live gate; no permission to skip prerequisites inferred. D15 60 s bounded operational stale access implemented for review, not confirmed. D3/D4/D6/D13 remain unconfirmed. UI consistency belongs to O5/W3/A4.

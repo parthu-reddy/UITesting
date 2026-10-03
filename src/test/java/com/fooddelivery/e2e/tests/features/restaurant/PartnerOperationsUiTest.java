@@ -4,6 +4,7 @@ import com.microsoft.playwright.Locator;
 import com.fooddelivery.e2e.base.TestBase;
 import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.common.LoginPage;
+import com.fooddelivery.e2e.pages.restaurant.RestaurantDashboardPage;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import org.junit.jupiter.api.DisplayName;
@@ -16,21 +17,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PartnerOperationsUiTest extends TestBase {
 
     @Test
-    @DisplayName("CAMPAIGN-01: Restaurant accesses campaign management")
+    @DisplayName("CAMPAIGN-01: Restaurant reaches the Campaigns tab")
     void verifyCampaignManagement() {
         restaurantPage.navigate(TestConfig.APP_URL);
         new LoginPage(restaurantPage).loginAs("Restaurant Partner", testRestaurantPhone);
-        
-        restaurantPage.getByRole(AriaRole.TAB,
-                new Page.GetByRoleOptions().setName("Campaigns").setExact(true)).click();
-        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(
-                restaurantPage.getByRole(AriaRole.HEADING,
-                        new Page.GetByRoleOptions().setName("Ad Spending History")))
-                .isVisible();
-        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(
-                restaurantPage.getByRole(AriaRole.BUTTON,
-                        new Page.GetByRoleOptions().setName("New Campaign").setExact(true)))
-                .isVisible();
+        RestaurantDashboardPage dashboard = new RestaurantDashboardPage(restaurantPage);
+        dashboard.waitForDashboard();
+        // Which screen depends on whether this owner advertises yet; RestaurantCampaignsLiveTest checks
+        // that it is the right one against /api/v1/advertisers/me.
+        dashboard.openCampaignsTab();
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(dashboard.campaignsScreen()).isVisible();
     }
 
     @Test

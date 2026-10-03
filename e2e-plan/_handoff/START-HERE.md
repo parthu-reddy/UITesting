@@ -1,6 +1,15 @@
 # Resume the Food Delivery E2E audit
 
-Latest: [checkpoint23](checkpoints/23-support-refunds-item-refund-defect.md), updated 2026-10-02T23:05:00+05:30. Item-refund defect fixed by migration; dead full-order support UI and endpoint deleted; reverse schema guard added to CommonLibrary (all local). **Deploy customer-service, gateway config and UI, and publish CommonLibrary**, then rerun SupportRefundResolutionFlowTest.
+Latest: [checkpoint35](checkpoints/35-business-platform-o1-local.md), updated 2026-10-03T15:50:36+05:30. BusinessPlatform O1
+local security/transactions/contracts/PostgreSQL/shared-consumer regressions verified; E2E compiles only.
+**Full platform/production readiness incomplete.** Owner checkpoint34 rollout first, then D15 confirmation,
+O1 publish/deploy/config rollout/live gate. No Dev writes/new fixtures. Never commit/push.
+
+The checkpoint34 entry below is prerequisite history.
+
+Latest: [checkpoint34](checkpoints/34-campaigns-onboarding-and-ad-money.md), updated 2026-10-03T10:27:00+05:30. Campaigns "Start advertising" step built per the user's decision, plus ten defects (registration could never succeed: wallet currency "AD_CREDIT" into VARCHAR(3); 100× ad budgets/bids; an advertiser wallet no owner could read; …), all local. **Deploy pending: UI, campaign-service, wallet-service** (governmentid-service optional). Then run RestaurantEarningsLiveTest and RestaurantCampaignsLiveTest. Open question for the user: no campaign can ever be activated (no creative/moderation path). **Never commit or push** (permanent user rule).
+
+Timestamps: read `date` before stamping. Checkpoints 32 and 33 were stamped ahead of real time and corrected at checkpoint34.
 
 Updated 2026-10-02T17:13:01+05:30 (Asia/Kolkata). This folder contains the durable handoff for switching agents after a usage limit. It records project/task context and decisions, not hidden reasoning or credentials. Read this file, USER-INSTRUCTIONS.md, CURRENT-STATE.md and NEXT-STEPS.md before running anything. Read the owning feature's AUDIT-STATUS.md, scenarios.md and PENDING.md (where present) next; do not load every source/report at once.
 

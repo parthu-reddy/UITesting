@@ -1,0 +1,27 @@
+{
+  "checkpoint": 24, "recordedAt": "2026-10-02T23:50:00+05:30",
+  "run": {"test": "SupportRefundResolutionFlowTest", "orderId": "0554f250-eade-4677-8e51-18f4aacd22f5",
+          "property": "-Dsupport.order.id (single-order design)", "tests": 3, "failures": 1, "errors": 0, "skipped": 0, "suiteSeconds": 91.3,
+          "methods": {
+            "deniedRequestMovesNoMoney (SUPPORT-REFUND-02, runs 1st)": "PASS 24.97s",
+            "reducedAwardWithRestaurantFault (SUPPORT-REFUND-01, runs 2nd)": "PASS 27.06s",
+            "refundedItemCannotBeRefundedAgain (SUPPORT-REFUND-03, runs 3rd)": "FAIL 36.46s: expected 4 REFUND_QUOTE_RESPONSE/REFUND_ERROR chat messages, got 3 within 20s"}},
+  "proofType": "real deployed cross-role browser flow + Oracle read-only DB + bounded redacted service logs",
+  "db": {
+    "tickets": [
+      {"id": "054a652b-647b-4bf8-8a2f-29fd39aabac3", "status": "REJECTED", "refundAmount": "29.79", "resolvedBy": true},
+      {"id": "25ac7a74-4a20-4cd5-a850-64bce52862e6", "status": "RESOLVED", "refundAmount": "12.00", "resolvedBy": true}],
+    "refund": {"id": "fe60ce55-e9fc-4fb8-9862-45c4a3a9e1c7", "status": "COMPLETED", "amount": "12.00", "destination": "ORIGINAL_METHOD",
+               "source": "CUSTOMER_TICKET", "faultType": "RESTAURANT_FAULT", "initiatedBy": "ADMIN", "completedAt": true,
+               "ticketId": "25ac7a74-4a20-4cd5-a850-64bce52862e6", "refundItems": "aa2d832f x1"},
+    "paymentIntent": "PARTIALLY_REFUNDED 53.53",
+    "ledger": "REFUND 12.00 debit PLATFORM_CLEARING / credit GATEWAY_RECEIVABLE; CLAWBACK 4.28 debit RESTAURANT_PAYABLE / credit PLATFORM_CLEARING (19.11 x round4(12/53.53)); 22 entries debits = credits = 131.74; 0 ledger rejections"},
+  "item_refund_defect_checkpoint23": "fixed live: the award approval inserted refund_items and completed",
+  "support03_failure_root_cause": {
+    "chat": "REFUND_QUOTE_REQUEST persisted 17:56:25Z; chat outbox CHAT_REFUND_QUOTE_REQUESTED PROCESSED",
+    "customer": "ChatRefundProcessorService logged 'Business validation failed for quote request: ITEM_ALREADY_REFUNDED', then UnexpectedRollbackException (rollback-only) x4, then DLT_RECORD_WRITTEN chat-events.DLT partition 0 offset 0 (eventType CHAT_REFUND_QUOTE_REQUESTED, key session 3e585519)",
+    "cause": "RefundService.quote (@Transactional proxy) threw inside the listener's TransactionTemplate; rollback-only discarded the CHAT_REFUND_ERROR reply and idempotency key",
+    "fix": "local, customer-service: checkpoint24"
+  },
+  "dltRecordLeftInPlace": {"dltTopic": "chat-events.DLT", "partition": 0, "offset": 0, "note": "audit record of the pre-fix failure; replay is not needed, rerun SUPPORT-REFUND-03 after deploy"}
+}

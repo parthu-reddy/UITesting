@@ -28,6 +28,7 @@ Uses: `ChatWidgetPage`, `CustomerOrderChatPage`, `RestaurantChatPage`, `CallOver
 | CHAT-19 | Message size boundary | Send a 10,000-character message, then enter 10,001 characters. | The exact server limit is accepted; the over-limit value disables Send and explains the limit. |
 | CHAT-20 | Image attachment contract | Upload a valid fixture image from the gallery control. | Upload succeeds, both participants render the attachment, and no upload-failed toast appears. |
 | CHAT-21 | Image upload limits and failure | Reach the four-image per-user cap, then simulate a response without an image URL. | Both upload controls disable at the cap; an invalid response shows the upload error. |
+| CHAT-22 | History longer than one page (2026-10-03) | `ChatHistoryPagingTest`, `-Dchat.history.order.id` (an owned order inside its chat window). Tops the chat up to 60 messages as its customer, opens it from History. | The newest page shows and the oldest text is absent; “Load earlier messages” brings the oldest in and disappears at the last page. Red on UI 41578ee (no control); expected green after the checkpoint27 UI deploy. |
 
 ## Batch 2 — Customer-to-Rider chat
 
@@ -66,6 +67,7 @@ Uses: `ChatWidgetPage`, `CustomerOrderChatPage`, `RestaurantChatPage`, `CallOver
 | CHAT-REFUND-02 | Item, reason, and chat connection are required | Select an item and leave the reason blank, then provide a reason while the chat WebSocket is disconnected. | “Request Quote” stays disabled until the form is valid and chat reconnects; it then enables. |
 | CHAT-REFUND-03 | Submit a refund quote request | Submit a reasoned quote request for the test-created order. | The accepted `REFUND_QUOTE_REQUEST` appears in chat as “Requesting quote...”; no refund decision or payout is made. |
 | CHAT-REFUND-04 | Missing reason blocked on connected chat | Leave the reason blank after selecting an item while chat is connected. | The request stays disabled and no quote message appears. |
+| CHAT-REFUND-05 | Support entry closes with the chat window (2026-10-03) | Open, from History, an owned delivered order last updated two or more hours ago (`ChatSupportWindowClosedTest`, `-Dsupport.closed.order.ids`). Uses orders that aged naturally; no waiting. | The delivered summary and receipt render; there is no “Something wrong with this order?” button and no chat launcher. Inside the window the button opens the quote form (CHAT-REFUND-01). |
 
 ## Batch 6 — Map Search and Place Autocomplete (`MapTrackingPage`)
 
@@ -76,3 +78,15 @@ Uses: `ChatWidgetPage`, `CustomerOrderChatPage`, `RestaurantChatPage`, `CallOver
 | MAP-SEARCH-03 | Search results visible | After searching. | `hasSearchResults()` returns true. |
 | MAP-SEARCH-04 | Select first result | `selectFirstResult()`. | Map centers on the selected place; marker or pin placed. |
 | MAP-SEARCH-05 | Fill coordinates manually | `fillCoordinates("12.9716,77.5946")`. | Map centers on the specified coordinates. |
+
+## Batch 7 — Isolation (2026-10-03)
+
+`ChatAndRefundIsolationTest`: the order's customer (`-Dcustomer.phone`) reads the chat first as the control; intruders are `-Disolation.customer.phone`, `-Drestaurant.phone` (another brand's owner) and `-Drider.phone` (never assigned), on `-Disolation.order.id`.
+
+| ID | Actor | Action | Expected result |
+|---|---|---|---|
+| CHAT-ISO-01 | Unrelated customer | Read history, look up and join the session, read refunds and the order; STOMP subscribe and send. | 403 for history, lookup, join and refunds; 404 for the order; STOMP ERROR "Access Denied" for subscribe and send; owner history unchanged. |
+| CHAT-ISO-02 | Another brand's owner | Read history. | 403. |
+| CHAT-ISO-03 | Rider never assigned | Read history. | 403. |
+
+Run 2026-10-03 on d3acfc93: all pass except the order read (500, defect; fixed locally to 404, customer-service deploy pending).

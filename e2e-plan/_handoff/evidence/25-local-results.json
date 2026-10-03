@@ -1,0 +1,13 @@
+{
+  "checkpoint": 25, "recordedAt": "2026-10-03T04:40:00+05:30",
+  "repo": "FoodDeliveryAppUI (local, uncommitted) + UITesting test precondition",
+  "proofType": "local vitest/typecheck/lint; no deployed proof for the UI change",
+  "changed": ["src/features/customer-orders/model/orderStatus.ts (isOrderChatOffered, CHAT_AFTER_FINISH_MS)",
+              "src/features/customer-orders/components/CustomerOrderChat.tsx (uses it)",
+              "src/features/customer-orders/components/OrderDeliveredSummary.tsx (button only while chat is offered)",
+              "orderStatus.test.ts (+4), OrderDeliveredSummary.test.tsx (+2)",
+              "UITesting SupportRefundResolutionFlowTest: two-hour chat-window precondition in openDeliveredOrder"],
+  "seenRed": "OrderDeliveredSummary 'hides it once the chat it opens is gone' failed with the guard removed; restored (cmp) and green",
+  "results": {"typecheck": "exit 0", "npm run lint": "exit 0 (first attempt flagged Date.parse in the new test; replaced by parseInstant)",
+              "vitest": "121 files, 743 tests passed (737 + 6 new)"}
+}
