@@ -6,6 +6,7 @@ import com.fooddelivery.e2e.pages.common.LoginPage;
 import com.fooddelivery.e2e.pages.restaurant.RestaurantDashboardPage;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Locator;
+import com.microsoft.playwright.Response;
 import com.microsoft.playwright.options.AriaRole;
 import com.microsoft.playwright.options.WaitForSelectorState;
 import org.junit.jupiter.api.DisplayName;
@@ -13,6 +14,8 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.util.regex.Pattern;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -55,10 +58,25 @@ public class RestaurantNavigationUiTest extends TestBase {
         String completed=System.getProperty("restaurant.completed.order.id", "").trim();
         if(!completed.isEmpty()){
             assertThat(completed).matches("[0-9a-fA-F-]{36}");
-            restaurantPage.getByRole(AriaRole.TAB,new Page.GetByRoleOptions().setName("Order History").setExact(true)).click();
+            Response history = restaurantPage.waitForResponse(response ->
+                    response.url().contains("/fulfillment/orders/history")
+                            && "GET".equals(response.request().method()), () ->
+                    restaurantPage.getByRole(AriaRole.TAB,new Page.GetByRoleOptions().setName("Order History").setExact(true)).click());
+            assertThat(history.status()).as("the selected outlet's order history loads").isEqualTo(200);
             Locator row=restaurantPage.getByRole(AriaRole.ROW).filter(new Locator.FilterOptions().setHasText(completed.substring(0,8)));
             com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(row).hasCount(1,new com.microsoft.playwright.assertions.LocatorAssertions.HasCountOptions().setTimeout(30000));
             com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(row).containsText(Pattern.compile("Delivered",Pattern.CASE_INSENSITIVE));
+            String expectedRider = System.getProperty("restaurant.completed.rider.name", "").trim();
+            if (!expectedRider.isEmpty()) {
+                Map<?, ?> envelope = (Map<?, ?>) restaurantPage.evaluate("json => JSON.parse(json)", history.text());
+                List<?> orders = (List<?>) ((Map<?, ?>) envelope.get("data")).get("content");
+                List<?> matching = orders.stream().map(value -> (Map<?, ?>) value)
+                        .filter(order -> completed.equals(order.get("orderId"))).toList();
+                assertThat(matching).as("history response contains the retained order once").hasSize(1);
+                assertThat(((Map<?, ?>) matching.get(0)).get("deliveryExecutiveName"))
+                        .as("the real signed SERVICE summary enriches the completed order")
+                        .isEqualTo(expectedRider);
+            }
         }
         restaurantPage.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("Back to Kitchen Feed").setExact(true)).click();
         for(String name:new String[]{"Menu","Campaigns","Earnings","Reviews"})clickTab(Pattern.compile("^"+name+"$"));

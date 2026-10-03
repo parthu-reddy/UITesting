@@ -39,21 +39,38 @@ public class OrganisationRestaurantAccessTest extends TestBase {
         String outletId=(String)outlet.get("id");
         assertThat(outlet.get("brandId")).isEqualTo(brand.get("id"));
         var items=listData(GatewayApi.get(restaurantPage,"/api/v1/restaurants/"+outletId+"/catalog/items"));
-        var item=items.stream().filter(i -> Boolean.TRUE.equals(i.get("isAvailable"))).findFirst().orElseThrow();
+        boolean resume=Boolean.getBoolean("bp.o2.resume");
+        Path retained=Path.of("target/business-platform/o2/member-"+phone+".json");
+        Map<?,?> previous=resume ? (Map<?,?>)restaurantPage.evaluate("text => JSON.parse(text)",Files.readString(retained)) : Map.of();
+        var overrides=listData(GatewayApi.get(restaurantPage,"/api/v1/outlets/"+outletId+"/menu-overrides"));
+        // Effective availability also respects category hours. Stock remains operable after close.
+        var item=items.stream().filter(i -> resume ? previous.get("itemId").equals(i.get("id")) :
+            overrides.stream().noneMatch(o -> i.get("id").equals(o.get("masterMenuItemId")) && Boolean.FALSE.equals(o.get("isAvailable"))))
+            .findFirst().orElseThrow();
         String itemId=(String)item.get("id"),itemName=(String)item.get("name");
         String stockPath="/api/v1/outlets/"+outletId+"/menu-items/"+itemId+"/stock";
         var manifest=new LinkedHashMap<String,Object>();
         manifest.put("organisationId",org);manifest.put("outletId",outletId);manifest.put("itemId",itemId);
         manifest.put("phone",phone);manifest.put("dataPolicy","retain");manifest.put("cleanupPerformed",false);
-        Path retained=Path.of("target/business-platform/o2/member-"+phone+".json");
+        if(resume){
+            assertThat(previous.get("organisationId")).isEqualTo(org);
+            assertThat(previous.get("outletId")).isEqualTo(outletId);
+            assertThat(previous.get("itemId")).isEqualTo(itemId);
+            assertThat(previous.get("phone")).isEqualTo(phone);
+            manifest.put("invitationId",previous.get("invitationId"));
+            manifest.put("userId",previous.get("userId"));
+            manifest.put("resumedFromRetainedFixture",true);
+        }
         saveManifest(retained,manifest);
 
-        customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).registerAs("Restaurant Partner",phone,"E2E O2 Staff","o2_"+phone+"@test.com");
-        var invited=GatewayApi.post(restaurantPage,orgPath+"/invitations",Map.of("phoneNumber",phone,"role","STAFF"));
-        assertThat(invited.status()).isEqualTo(201);
-        String invitation=(String)invited.object().get("id");manifest.put("invitationId",invitation);saveManifest(retained,manifest);
-        assertThat(GatewayApi.post(customerPage,"/api/v1/organisation-invitations/"+invitation+"/accept",null).status()).isEqualTo(200);
+        if(resume){login(customerPage,phone);}else{
+            customerPage.navigate(TestConfig.APP_URL);
+            new LoginPage(customerPage).registerAs("Restaurant Partner",phone,"E2E O2 Staff","o2_"+phone+"@test.com");
+            var invited=GatewayApi.post(restaurantPage,orgPath+"/invitations",Map.of("phoneNumber",phone,"role","STAFF"));
+            assertThat(invited.status()).isEqualTo(201);
+            String invitation=(String)invited.object().get("id");manifest.put("invitationId",invitation);saveManifest(retained,manifest);
+            assertThat(GatewayApi.post(customerPage,"/api/v1/organisation-invitations/"+invitation+"/accept",null).status()).isEqualTo(200);
+        }
         var member=content(GatewayApi.get(restaurantPage,orgPath+"/members")).stream()
             .filter(m -> phone.equals(m.get("phoneNumber"))).findFirst().orElseThrow();
         assertThat(member.get("role")).isEqualTo("STAFF");assertThat(member.get("status")).isEqualTo("ACTIVE");
@@ -64,15 +81,17 @@ public class OrganisationRestaurantAccessTest extends TestBase {
         staffDashboard.waitForDashboard();staffDashboard.selectOutlet(outletName);staffDashboard.openMenuTab();
         Locator stock=customerPage.getByRole(AriaRole.SWITCH,new Page.GetByRoleOptions().setName(itemName+" available").setExact(true));
         com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(stock).isChecked();
-        stock.click();assertStock(customerPage,outletId,itemId,false);
+        toggleStock(customerPage,stock,stockPath,false);assertStock(customerPage,outletId,itemId,false);
         com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(stock).not().isChecked();
-        stock.click();assertStock(customerPage,outletId,itemId,true);
+        toggleStock(customerPage,stock,stockPath,true);assertStock(customerPage,outletId,itemId,true);
         com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(stock).isChecked();
         assertThat(GatewayApi.post(customerPage,"/api/v1/outlets/"+outletId+"/menu-overrides/"+itemId,
-            Map.of("overriddenPrice",123.45)).status()).isEqualTo(403);
+            Map.of("overriddenPrice",123.45,"isAvailable",true)).status()).isEqualTo(403);
         String moneyPath="/api/v1/money/restaurant/"+outletId;
+        assertThat(GatewayApi.get(customerPage,moneyPath+"/refund-requests").status()).isEqualTo(200);
         assertThat(GatewayApi.get(customerPage,moneyPath+"/summary").status()).isEqualTo(403);
         assertThat(GatewayApi.get(customerPage,moneyPath+"/statement").status()).isEqualTo(403);
+        assertThat(GatewayApi.get(customerPage,moneyPath+"/refunds").status()).isEqualTo(403);
         staffDashboard.openEarningsTab();
         com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(customerPage.getByText("Not permitted",new Page.GetByTextOptions().setExact(true))).hasCount(3);
 
@@ -94,9 +113,11 @@ public class OrganisationRestaurantAccessTest extends TestBase {
         assertThat(GatewayApi.put(customerPage,stockPath,Map.of("inStock",false)).status()).isEqualTo(403);
         double elapsed=(System.nanoTime()-removedAt)/1_000_000d;
         assertThat(elapsed).as("Revoked stock access within six seconds of membership removal").isLessThanOrEqualTo(6000);
+        assertThat(GatewayApi.get(customerPage,moneyPath+"/refund-requests").status()).isEqualTo(403);
         manifest.put("finalMembershipStatus","REMOVED");manifest.put("revocationObservedMs",elapsed);saveManifest(retained,manifest);
         login(adminPage,"9000000002");
         assertThat(GatewayApi.put(adminPage,stockPath,Map.of("inStock",false)).status()).isEqualTo(403);
+        assertThat(GatewayApi.get(adminPage,moneyPath+"/refund-requests").status()).isEqualTo(403);
         for(String internal:List.of("/api/v1/internal/restaurants/users/"+userId+"/outlets?permission=ORG_VIEW",
             "/api/v1/internal/restaurants/outlets/"+outletId+"/organisation")){
             assertThat(GatewayApi.get(customerPage,internal).status()).isEqualTo(403);
@@ -107,9 +128,16 @@ public class OrganisationRestaurantAccessTest extends TestBase {
     }
     private void login(Page page,String phone){page.navigate(TestConfig.APP_URL);new LoginPage(page).loginAs("Restaurant Partner",phone);}
     private void assertStock(Page page,String outlet,String item,boolean available){
-        page.waitForCondition(() -> listData(GatewayApi.get(page,"/api/v1/restaurants/"+outlet+"/catalog/items")).stream()
-            .anyMatch(row -> item.equals(row.get("id")) && Boolean.valueOf(available).equals(row.get("isAvailable"))),
+        page.waitForCondition(() -> listData(GatewayApi.get(page,"/api/v1/outlets/"+outlet+"/menu-overrides")).stream()
+            .anyMatch(row -> item.equals(row.get("masterMenuItemId")) && Boolean.valueOf(available).equals(row.get("isAvailable"))),
             new Page.WaitForConditionOptions().setTimeout(10_000));
+    }
+    private void toggleStock(Page page,Locator control,String path,boolean available){
+        var response=page.waitForResponse(r -> r.url().endsWith(path) && r.request().method().equals("PUT"),control::click);
+        assertThat(response.status()).isEqualTo(200);
+        Map<?,?> body=(Map<?,?>)page.evaluate("text => JSON.parse(text)",response.text());
+        assertThat(((Map<?,?>)body.get("data")).get("isAvailable")).isEqualTo(available);
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(control).isEnabled();
     }
     private List<Map<?,?>> content(GatewayApi.Response response){assertThat(response.status()).isEqualTo(200);return rows(response.object().get("content"));}
     private List<Map<?,?>> listData(GatewayApi.Response response){assertThat(response.status()).isEqualTo(200);return rows(response.object().get("data"));}

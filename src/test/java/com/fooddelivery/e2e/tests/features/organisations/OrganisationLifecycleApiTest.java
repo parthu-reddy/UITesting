@@ -15,13 +15,17 @@ public class OrganisationLifecycleApiTest extends TestBase {
     /** Read-only requests after a rollout; server histograms are captured separately over SSH. */
     @Test void readOnlyRequestsForServerLatencyMeasurements() {
         String existingPhone = System.getProperty("bp.o1.measurement.phone");
-        assertThat(existingPhone).as("Use a retained successful O1 customer; never register here").matches("8999[0-9]{6}");
-        customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", existingPhone);
         restaurantPage.navigate(TestConfig.APP_URL);
         new LoginPage(restaurantPage).loginAs("Restaurant Partner", testRestaurantPhone);
+        Page organisationPage = restaurantPage;
+        if (existingPhone != null) {
+            assertThat(existingPhone).as("Use an existing O1 customer; never register here").matches("8999[0-9]{6}");
+            customerPage.navigate(TestConfig.APP_URL);
+            new LoginPage(customerPage).loginAs("Order Food", existingPhone);
+            organisationPage = customerPage;
+        }
         for (int i = 0; i < 30; i++) {
-            var organisations = GatewayApi.get(customerPage, "/api/v1/organisations");
+            var organisations = GatewayApi.get(organisationPage, "/api/v1/organisations");
             assertThat(organisations.status()).isEqualTo(200);
             assertThat(content(organisations)).isNotEmpty();
             assertThat(GatewayApi.get(restaurantPage, "/api/v1/brands").status()).isEqualTo(200);

@@ -8,6 +8,7 @@ import argparse
 import fcntl
 import json
 import os
+import re
 from pathlib import Path
 import secrets
 import shlex
@@ -21,6 +22,7 @@ COMPOSE = 'Food Delivery.nosync/Deployment'
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--app-url', required=True)
+    parser.add_argument('--resume-phone', help='Resume this run\'s retained ACTIVE STAFF fixture without another signup/invitation')
     args = parser.parse_args()
     url = urlparse(args.app_url)
     if url.scheme != 'https' or not url.hostname or not url.hostname.endswith('.trycloudflare.com'):
@@ -73,20 +75,38 @@ def main():
     registration.mkdir(parents=True, exist_ok=True)
     with (registration / 'runner.lock').open('w') as lock:
         fcntl.flock(lock, fcntl.LOCK_EX)
-        for _ in range(100):
-            phone = '9999' + f'{secrets.randbelow(1000000):06d}'
-            if sql('identity_db', f"SELECT EXISTS(SELECT FROM users WHERE phone_number='{phone}');") == 'f':
-                break
+        if args.resume_phone:
+            phone = args.resume_phone
+            if not re.fullmatch(r'9999[0-9]{6}', phone):
+                raise ValueError('Resume requires an owned 9999 phone')
+            retained = folder / ('member-' + phone + '.json')
+            previous = json.loads(retained.read_text())
+            user = str(UUID(previous['userId']))
+            if previous['phone'] != phone or previous['organisationId'] != org or previous['dataPolicy'] != 'retain':
+                raise ValueError('Retained fixture does not match this deployment/organisation')
+            if sql('identity_db', "SELECT count(*)=1 FROM organisation_members m JOIN users u ON u.id=m.user_id "
+                   f"WHERE u.phone_number='{phone}' AND u.id='{user}' AND m.organisation_id='{org}' "
+                   "AND m.role='STAFF' AND m.status='ACTIVE';") != 't':
+                raise RuntimeError('Resume requires the same retained ACTIVE STAFF membership')
         else:
-            raise RuntimeError('No unused O2 restaurant phone could be allocated')
+            for _ in range(100):
+                phone = '9999' + f'{secrets.randbelow(1000000):06d}'
+                if sql('identity_db', f"SELECT EXISTS(SELECT FROM users WHERE phone_number='{phone}');") == 'f':
+                    break
+            else:
+                raise RuntimeError('No unused O2 restaurant phone could be allocated')
         report = {'runId': secrets.token_hex(8), 'startedAt': sql('identity_db', 'SELECT clock_timestamp();'),
                   'phone': phone, 'organisationId': org, 'dataPolicy': 'retain', 'cleanupPerformed': False}
+        if args.resume_phone:
+            report['resumedFromRetainedFixture'] = retained.name
         manifest = folder / ('allocation-' + report['runId'] + '.json')
         manifest.write_text(json.dumps(report, indent=2) + '\n')
         command = ['mvn', '-q', '-Dtest=OrganisationRestaurantAccessTest#organisationRestaurantAccess',
                    '-Dapp.url=' + args.app_url, '-Dbp.o2.preflight=true', '-Dbp.o2.phone=' + phone,
                    '-Dheadless=true', '-Dslow.mo=0', '-De2e.otp.enabled=false',
                    '-DexcludedGroups=slow-auth,auth-rate-limit', 'test']
+        if args.resume_phone:
+            command.insert(-1, '-Dbp.o2.resume=true')
         print('Running O2; retained allocation manifest: ' + str(manifest), flush=True)
         code = 1
         try:

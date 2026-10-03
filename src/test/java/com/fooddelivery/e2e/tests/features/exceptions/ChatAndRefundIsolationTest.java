@@ -82,7 +82,14 @@ public class ChatAndRefundIsolationTest extends TestBase {
         String messagesPath = "/api/v1/chat/sessions/" + sessionId + "/messages";
         int ownerMessages = messageCount(customerPage, messagesPath);
         assertThat(ownerMessages).as("owner reads the history").isPositive();
-        assertThat(stomp(customerPage, sessionId, "owner-subscribe").get("error")).as("owner subscription accepted").isEqualTo(false);
+        assertParticipantSubscription(customerPage, sessionId);
+        Map<?, ?> actors = (Map<?, ?>) customerPage.evaluate("json => JSON.parse(json)", manifest);
+        // Check every legitimate participant before the outsider refusals. These real member
+        // reads also exercise the deployed organisation lookup after the Chat resilience rollout.
+        participantReadsAndSubscribes("Restaurant Partner", (String) actors.get("restaurantPhone"),
+                messagesPath, sessionId, ownerMessages);
+        participantReadsAndSubscribes("Delivery Executive", (String) actors.get("riderPhone"),
+                messagesPath, sessionId, ownerMessages);
 
         // CHAT-ISO-01: an unrelated customer.
         int orderRead;
@@ -123,6 +130,29 @@ public class ChatAndRefundIsolationTest extends TestBase {
         page.navigate(TestConfig.APP_URL);
         new LoginPage(page).loginAs(portal, phone);
         page.waitForCondition(() -> (Boolean) page.evaluate("() => !!localStorage.getItem('auth_token')"));
+    }
+
+    private void participantReadsAndSubscribes(String portal, String phone, String path, String sessionId, int expectedMessages) {
+        assertThat(phone).as("retained manifest identifies its %s", portal).isNotBlank();
+        BrowserContext context = customerPage.context().browser().newContext(
+                new com.microsoft.playwright.Browser.NewContextOptions().setViewportSize(1280, 900));
+        try {
+            Page participant = context.newPage();
+            login(participant, portal, phone);
+            assertThat(status(participant, "GET", path, null)).as("%s participant reads history", portal).isEqualTo(200);
+            assertThat(messageCount(participant, path)).isEqualTo(expectedMessages);
+            assertParticipantSubscription(participant, sessionId);
+        } finally {
+            context.close();
+        }
+    }
+
+    private static void assertParticipantSubscription(Page page, String sessionId) {
+        Map<?, ?> subscribed = stomp(page, sessionId, "owner-subscribe");
+        assertThat(subscribed.get("error")).as("legitimate participant subscription has no refusal").isEqualTo(false);
+        assertThat((List<?>) subscribed.get("frames"))
+                .as("the real socket must authenticate, an empty timeout is not a pass")
+                .anyMatch(frame -> "CONNECTED".equals(frame));
     }
 
     private static int messageCount(Page page, String path) {
