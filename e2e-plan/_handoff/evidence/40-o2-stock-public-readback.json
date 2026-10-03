@@ -1,0 +1,19 @@
+{
+  "observedAt": "2026-10-03T16:37:37.364517+00:00",
+  "proof": "public Oracle catalog GET",
+  "item": [
+    {
+      "id": "0109c0b8-a2f1-4a3a-a254-41b318268aed",
+      "restaurantId": "54ba242d-c529-4772-bd8a-6cfdd5b3d7cc",
+      "name": "Brand 1 Item 1-1",
+      "description": "Yummy Brand 1 item 1 in category 1",
+      "price": 12.88,
+      "isAvailable": false,
+      "prepTimeMinutes": 22,
+      "imageUrl": "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=800&q=80",
+      "categoryId": "ce5e7f87-7196-4324-896b-c191cc5ef3d7",
+      "categoryName": "Food",
+      "isVeg": false
+    }
+  ]
+}

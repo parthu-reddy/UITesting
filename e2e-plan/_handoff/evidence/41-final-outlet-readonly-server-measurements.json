@@ -1,0 +1,185 @@
+{
+  "observedAt": "2026-10-03T19:07:56.733584+00:00",
+  "method": "deployed cumulative server histograms; interpolated p95 and enclosing bucket",
+  "proof": "protected telemetry only; public Gateway E2E recorded separately",
+  "results": [
+    {
+      "service": "identity-service",
+      "uri": "/api/v1/organisations",
+      "successfulSamples": 123,
+      "p95EstimateMs": 13.771295849999992,
+      "p95BucketUpperMs": 13.981011,
+      "meanMs": 7.5786183739837405
+    },
+    {
+      "service": "identity-service",
+      "uri": "/api/v1/internal/organisations/{organisationId}/members/{userId}",
+      "successfulSamples": 178,
+      "p95EstimateMs": 21.307064049999997,
+      "p95BucketUpperMs": 22.369621,
+      "meanMs": 8.102295960674157
+    },
+    {
+      "service": "identity-service",
+      "uri": "/api/v1/internal/users/{userId}/organisations",
+      "successfulSamples": 672,
+      "p95EstimateMs": 21.788010879999995,
+      "p95BucketUpperMs": 22.369621,
+      "meanMs": 7.982762139880952
+    },
+    {
+      "service": "restaurant-service",
+      "uri": "/api/v1/brands",
+      "successfulSamples": 48,
+      "p95EstimateMs": 31.317468999999974,
+      "p95BucketUpperMs": 33.554431,
+      "meanMs": 15.429819125000002
+    },
+    {
+      "service": "restaurant-service",
+      "uri": "/api/v1/outlets",
+      "successfulSamples": 48,
+      "p95EstimateMs": 53.68708899999997,
+      "p95BucketUpperMs": 55.924051000000006,
+      "meanMs": 24.374104229166665
+    },
+    {
+      "service": "restaurant-service",
+      "uri": "/api/v1/restaurants/{restaurantId}/catalog/items",
+      "successfulSamples": 12,
+      "p95EstimateMs": 210.27443839999995,
+      "p95BucketUpperMs": 223.696211,
+      "meanMs": 63.582430249999994
+    },
+    {
+      "service": "restaurant-service",
+      "uri": "/api/v1/internal/restaurants/outlets/{outletId}/organisation",
+      "successfulSamples": 22,
+      "p95EstimateMs": 55.36481049999999,
+      "p95BucketUpperMs": 55.924051000000006,
+      "meanMs": 19.216774863636363
+    },
+    {
+      "service": "restaurant-service",
+      "uri": "/api/v1/internal/restaurants/users/{userId}/outlets",
+      "successfulSamples": 3,
+      "p95EstimateMs": 27.123165249999996,
+      "p95BucketUpperMs": 27.962026,
+      "meanMs": 20.713165666666665
+    }
+  ],
+  "circuitBreakers": {
+    "identity-service": [],
+    "restaurant-service": [
+      {
+        "name": "OrganisationServiceClientgetMembershipUUIDUUID",
+        "kind": "failed",
+        "calls": 0
+      },
+      {
+        "name": "OrganisationServiceClientgetMembershipUUIDUUID",
+        "kind": "ignored",
+        "calls": 0
+      },
+      {
+        "name": "OrganisationServiceClientgetMembershipUUIDUUID",
+        "kind": "successful",
+        "calls": 7
+      },
+      {
+        "name": "OrganisationServiceClientgetUserOrganisationsUUID",
+        "kind": "failed",
+        "calls": 0
+      },
+      {
+        "name": "OrganisationServiceClientgetUserOrganisationsUUID",
+        "kind": "ignored",
+        "calls": 0
+      },
+      {
+        "name": "OrganisationServiceClientgetUserOrganisationsUUID",
+        "kind": "successful",
+        "calls": 23
+      }
+    ],
+    "customer-service": [
+      {
+        "name": "OrganisationServiceClientgetMembershipUUIDUUID",
+        "kind": "failed",
+        "calls": 3
+      },
+      {
+        "name": "OrganisationServiceClientgetMembershipUUIDUUID",
+        "kind": "ignored",
+        "calls": 0
+      },
+      {
+        "name": "OrganisationServiceClientgetMembershipUUIDUUID",
+        "kind": "successful",
+        "calls": 57
+      },
+      {
+        "name": "RestaurantServiceClientgetOutletOrganisationUUID",
+        "kind": "failed",
+        "calls": 0
+      },
+      {
+        "name": "RestaurantServiceClientgetOutletOrganisationUUID",
+        "kind": "ignored",
+        "calls": 0
+      },
+      {
+        "name": "RestaurantServiceClientgetOutletOrganisationUUID",
+        "kind": "successful",
+        "calls": 80
+      }
+    ],
+    "chat-service": [
+      {
+        "name": "OrganisationServiceClientgetMembersUUIDOrganisationPermission",
+        "kind": "failed",
+        "calls": 0
+      },
+      {
+        "name": "OrganisationServiceClientgetMembersUUIDOrganisationPermission",
+        "kind": "ignored",
+        "calls": 0
+      },
+      {
+        "name": "OrganisationServiceClientgetMembersUUIDOrganisationPermission",
+        "kind": "successful",
+        "calls": 15
+      },
+      {
+        "name": "OrganisationServiceClientgetMembershipUUIDUUID",
+        "kind": "failed",
+        "calls": 13
+      },
+      {
+        "name": "OrganisationServiceClientgetMembershipUUIDUUID",
+        "kind": "ignored",
+        "calls": 0
+      },
+      {
+        "name": "OrganisationServiceClientgetMembershipUUIDUUID",
+        "kind": "successful",
+        "calls": 4
+      },
+      {
+        "name": "RestaurantServiceClientgetOutletOrganisationUUID",
+        "kind": "failed",
+        "calls": 0
+      },
+      {
+        "name": "RestaurantServiceClientgetOutletOrganisationUUID",
+        "kind": "ignored",
+        "calls": 0
+      },
+      {
+        "name": "RestaurantServiceClientgetOutletOrganisationUUID",
+        "kind": "successful",
+        "calls": 56
+      }
+    ]
+  }
+}

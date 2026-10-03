@@ -1,0 +1,8 @@
+{
+  "observedAt": "2026-10-03T18:05:36.968229+00:00",
+  "tests": 3,
+  "failures": 2,
+  "errors": 0,
+  "skipped": 0,
+  "reason": "Rollback guards incorrectly counted Spring mock bean lifecycle callbacks as Redis operations; assert no delete operation specifically, preserving strict rollback requirement. Own transaction commit guard already passed."
+}

@@ -1,0 +1,154 @@
+==> syncing local Deployment repo
+Already up to date.
+==> deploying 2 service(s) to ubuntu@140.245.234.137
+    restaurant-service -> hyd.ocir.io/axekmbadoczl/food-delivery/restaurant-service:3ab2a2c-d32f146
+    chat-service -> hyd.ocir.io/axekmbadoczl/food-delivery/chat-service:52463c3-b74099e
+ Image hyd.ocir.io/axekmbadoczl/food-delivery/chat-service:52463c3-b74099e Pulling 
+ Image hyd.ocir.io/axekmbadoczl/food-delivery/restaurant-service:3ab2a2c-d32f146 Pulling 
+ fbc20c5027cc Pulling fs layer 0B
+ 2e9548f33f5d Pulling fs layer 0B
+ 71f99599ea59 Pulling fs layer 0B
+ 95d1896cb48c Pulling fs layer 0B
+ 9fc207103a44 Pulling fs layer 0B
+ bfbc83240a25 Pulling fs layer 0B
+ eae6bcd588c7 Pulling fs layer 0B
+ 9fc207103a44 Pulling fs layer 0B
+ 9ea805b35f4e Pulling fs layer 0B
+ 7bd777918126 Pulling fs layer 0B
+ 2fe3cfd58540 Pulling fs layer 0B
+ 95d1896cb48c Pulling fs layer 0B
+ fbc20c5027cc Downloading 161.6kB
+ 95d1896cb48c Download complete 0B
+ 9fc207103a44 Download complete 0B
+ fbc20c5027cc Download complete 0B
+ 71f99599ea59 Download complete 0B
+ 9ea805b35f4e Download complete 0B
+ 7bd777918126 Download complete 0B
+ 95d1896cb48c Download complete 0B
+ eae6bcd588c7 Download complete 0B
+ 9fc207103a44 Download complete 0B
+ bfbc83240a25 Download complete 0B
+ 9fc207103a44 Extracting 1B
+ 95d1896cb48c Pull complete 0B
+ 9fc207103a44 Pull complete 0B
+ 2fe3cfd58540 Downloading 7.34MB
+ 2fe3cfd58540 Downloading 30.41MB
+ 2e9548f33f5d Downloading 6.291MB
+ 2e9548f33f5d Downloading 17.83MB
+ 2fe3cfd58540 Downloading 50.33MB
+ 2e9548f33f5d Downloading 25.3MB
+ 2fe3cfd58540 Downloading 58.72MB
+ 2fe3cfd58540 Downloading 74.45MB
+ 2e9548f33f5d Downloading 38.8MB
+ 2fe3cfd58540 Downloading 94.37MB
+ 2e9548f33f5d Downloading 48.86MB
+ 2fe3cfd58540 Downloading 102.8MB
+ 2e9548f33f5d Downloading 56.62MB
+ 2fe3cfd58540 Downloading 120.6MB
+ 2e9548f33f5d Downloading 69.21MB
+ 2e9548f33f5d Downloading 76.55MB
+ 2fe3cfd58540 Downloading 124.4MB
+ 2e9548f33f5d Downloading 82.84MB
+ 2fe3cfd58540 Downloading 124.4MB
+ 2fe3cfd58540 Downloading 124.4MB
+ 2e9548f33f5d Downloading 93.32MB
+ 2fe3cfd58540 Downloading 124.4MB
+ 2e9548f33f5d Downloading 102.8MB
+ 2fe3cfd58540 Download complete 0B
+ 2e9548f33f5d Downloading 114.3MB
+ 2fe3cfd58540 Extracting 1B
+ 2e9548f33f5d Downloading 126.3MB
+ 2fe3cfd58540 Extracting 1B
+ 2e9548f33f5d Downloading 126.3MB
+ 2fe3cfd58540 Extracting 1B
+ 2e9548f33f5d Downloading 126.3MB
+ 2fe3cfd58540 Extracting 1B
+ 2e9548f33f5d Downloading 126.3MB
+ 2fe3cfd58540 Extracting 1B
+ 2e9548f33f5d Downloading 126.3MB
+ 2fe3cfd58540 Extracting 1B
+ 2e9548f33f5d Downloading 126.3MB
+ 2fe3cfd58540 Extracting 1B
+ 2e9548f33f5d Download complete 0B
+ 2e9548f33f5d Extracting 1B
+ 2fe3cfd58540 Extracting 1B
+ 2fe3cfd58540 Extracting 1B
+ 2e9548f33f5d Extracting 1B
+ 2e9548f33f5d Extracting 1B
+ 2fe3cfd58540 Extracting 1B
+ 2e9548f33f5d Extracting 1B
+ 2fe3cfd58540 Extracting 1B
+ 2e9548f33f5d Extracting 1B
+ 2fe3cfd58540 Extracting 2B
+ 2e9548f33f5d Extracting 1B
+ 2fe3cfd58540 Extracting 2B
+ 2e9548f33f5d Extracting 1B
+ 2fe3cfd58540 Extracting 2B
+ 2e9548f33f5d Extracting 1B
+ 2fe3cfd58540 Extracting 2B
+ 9ea805b35f4e Pull complete 0B
+ 7bd777918126 Pull complete 0B
+ 2e9548f33f5d Extracting 1B
+ eae6bcd588c7 Extracting 1B
+ 2fe3cfd58540 Pull complete 0B
+ eae6bcd588c7 Pull complete 0B
+ Image hyd.ocir.io/axekmbadoczl/food-delivery/chat-service:52463c3-b74099e Pulled 
+ 2e9548f33f5d Extracting 1B
+ 2e9548f33f5d Extracting 1B
+ 2e9548f33f5d Extracting 2B
+ 2e9548f33f5d Extracting 2B
+ fbc20c5027cc Extracting 1B
+ 71f99599ea59 Pull complete 0B
+ bfbc83240a25 Pull complete 0B
+ 2e9548f33f5d Pull complete 0B
+ fbc20c5027cc Pull complete 0B
+ Image hyd.ocir.io/axekmbadoczl/food-delivery/restaurant-service:3ab2a2c-d32f146 Pulled 
+==> starting independent services: chat-service
+ Container shared_zookeeper Running 
+ Container shared_postgres Running 
+ Container config-service Running 
+ Container shared_kafka Running 
+ Container eureka-server-1 Running 
+ Container shared_redis Running 
+ Container chat-service Recreate 
+ Container chat-service Recreated 
+ Container shared_redis Waiting 
+ Container config-service Waiting 
+ Container eureka-server-1 Waiting 
+ Container shared_postgres Waiting 
+ Container shared_kafka Waiting 
+ Container eureka-server-1 Healthy 
+ Container shared_postgres Healthy 
+ Container config-service Healthy 
+ Container shared_kafka Healthy 
+ Container shared_redis Healthy 
+ Container chat-service Starting 
+ Container chat-service Started 
+==> waiting for health (timeout 150s)
+==> starting contract service: restaurant-service
+ Container config-service Running 
+ Container shared_postgres Running 
+ Container shared_redis Running 
+ Container shared_kafka Running 
+ Container eureka-server-1 Running 
+ Container shared_zookeeper Running 
+ Container restaurant-service Recreate 
+ Container restaurant-service Recreated 
+ Container shared_postgres Waiting 
+ Container shared_kafka Waiting 
+ Container shared_redis Waiting 
+ Container config-service Waiting 
+ Container eureka-server-1 Waiting 
+ Container shared_postgres Healthy 
+ Container config-service Healthy 
+ Container shared_kafka Healthy 
+ Container shared_redis Healthy 
+ Container eureka-server-1 Healthy 
+ Container restaurant-service Starting 
+ Container restaurant-service Started 
+==> waiting for health (timeout 150s)
+    OK  restaurant-service -> hyd.ocir.io/axekmbadoczl/food-delivery/restaurant-service:3ab2a2c-d32f146
+    OK  chat-service -> hyd.ocir.io/axekmbadoczl/food-delivery/chat-service:52463c3-b74099e
+    VM .env now pins REGISTRY and 22 image tags
+    pruned superseded images on the VM: Total reclaimed space: 534.6MB
+==> done

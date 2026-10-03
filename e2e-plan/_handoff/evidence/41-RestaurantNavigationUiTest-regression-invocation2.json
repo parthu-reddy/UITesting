@@ -1,0 +1,18 @@
+{
+  "observedAt": "2026-10-03T17:56:40.757750+00:00",
+  "proof": "public Oracle browser E2E",
+  "batchInvocation": 2,
+  "orderId": "e82f8c51-6041-4987-88b9-c3f02ac781a8",
+  "class": "com.fooddelivery.e2e.tests.features.fulfillment.RestaurantNavigationUiTest",
+  "tests": 1,
+  "failures": 1,
+  "errors": 0,
+  "skipped": 0,
+  "seconds": "10.638",
+  "methods": [
+    "restaurantSectionsRender"
+  ],
+  "dataPolicy": "retain",
+  "cleanupPerformed": false,
+  "failureClassification": "Test used Java riderName field; Jackson explicitly publishes deliveryExecutiveName. Correct assertion without runtime changes; rerun mandatory."
+}

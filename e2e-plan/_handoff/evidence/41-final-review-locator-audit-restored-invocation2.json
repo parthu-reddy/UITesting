@@ -1,0 +1,578 @@
+[
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 64,
+  "call": "getByRole",
+  "text": "AriaRole.TAB, new Page.GetByRoleOptions().setName(\"History\").setExact(true)",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 65,
+  "call": "locator",
+  "text": "\"[data-testid='customer-history-order'][data-order-id='\" + ORDER + \"']\"",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 77,
+  "call": "getByRole",
+  "text": "AriaRole.TAB, new Page.GetByRoleOptions().setName(\"Order History\").setExact(true)",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 78,
+  "call": "getByRole",
+  "text": "AriaRole.ROW",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 78,
+  "call": "setHasText",
+  "text": "short8 + \"...\"",
+  "status": "DYNAMIC",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 79,
+  "call": "getByRole",
+  "text": "AriaRole.BUTTON, new Locator.GetByRoleOptions().setName(\"Details\")",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 89,
+  "call": "getByRole",
+  "text": "AriaRole.BUTTON, new Page.GetByRoleOptions().setName(Pattern.compile(\"Trips Completed\"))",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 90,
+  "call": "getByRole",
+  "text": "AriaRole.BUTTON",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 90,
+  "call": "setHasText",
+  "text": "\"ORDER #\" + short8",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 118,
+  "call": "getByRole",
+  "text": "AriaRole.TAB, new Page.GetByRoleOptions().setName(\"History\").setExact(true)",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 119,
+  "call": "locator",
+  "text": "\"[data-testid='customer-history-order'][data-order-id='\" + ORDER + \"']\"",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 139,
+  "call": "getByTestId",
+  "text": "\"rate-order-prompt\"",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 140,
+  "call": "getByRole",
+  "text": "AriaRole.DIALOG, new Page.GetByRoleOptions().setName(\"Rate your order\")",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 141,
+  "call": "getByRole",
+  "text": "AriaRole.RADIOGROUP, new Locator.GetByRoleOptions().setName(\"Rate \" + uiName(old) + \" out of 5 stars\")",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 143,
+  "call": "getByRole",
+  "text": "AriaRole.RADIOGROUP, new Locator.GetByRoleOptions().setName(\"Rate \" + name + \" out of 5 stars\")",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 145,
+  "call": "getByRole",
+  "text": "AriaRole.RADIO, new Locator.GetByRoleOptions().setName(\"5 stars\").setExact(true)",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 147,
+  "call": "getByRole",
+  "text": "AriaRole.TEXTBOX, new Locator.GetByRoleOptions().setName(\"Comment about \" + name)",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 152,
+  "call": "getByRole",
+  "text": "AriaRole.BUTTON, new Locator.GetByRoleOptions().setName(\"Submit 1 review\").setExact(true)",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 161,
+  "call": "getByRole",
+  "text": "AriaRole.HEADING, new Locator.GetByRoleOptions().setName(\"Thanks for that\")",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 162,
+  "call": "getByRole",
+  "text": "AriaRole.BUTTON, new Locator.GetByRoleOptions().setName(\"Done\").setExact(true)",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 171,
+  "call": "getByTestId",
+  "text": "\"rate-order-prompt\"",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 172,
+  "call": "getByRole",
+  "text": "AriaRole.DIALOG, new Page.GetByRoleOptions().setName(\"Rate your order\")",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 173,
+  "call": "getByRole",
+  "text": "AriaRole.RADIOGROUP, new Locator.GetByRoleOptions().setName(\"Rate \" + name + \" out of 5 stars\")",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 175,
+  "call": "getByText",
+  "text": "comment",
+  "status": "DYNAMIC",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 208,
+  "call": "getByTestId",
+  "text": "\"rate-order-prompt\"",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 209,
+  "call": "getByRole",
+  "text": "AriaRole.DIALOG, new Page.GetByRoleOptions().setName(\"Rate your order\")",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 210,
+  "call": "getByRole",
+  "text": "AriaRole.RADIOGROUP, new Locator.GetByRoleOptions().setName(\"Rate \" + uiName(dish) + \" out of 5 stars\")",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 212,
+  "call": "getByText",
+  "text": "comment",
+  "status": "DYNAMIC",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 234,
+  "call": "getByRole",
+  "text": "AriaRole.TAB, new Page.GetByRoleOptions().setName(\"Order History\").setExact(true)",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 235,
+  "call": "getByRole",
+  "text": "AriaRole.ROW",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 235,
+  "call": "setHasText",
+  "text": "ORDER.substring(0, 8) + \"...\"",
+  "status": "DYNAMIC",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 236,
+  "call": "getByRole",
+  "text": "AriaRole.BUTTON, new Locator.GetByRoleOptions().setName(\"Details\")",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 250,
+  "call": "getByTestId",
+  "text": "\"rate-order-prompt\"",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 251,
+  "call": "getByRole",
+  "text": "AriaRole.DIALOG, new Page.GetByRoleOptions().setName(\"Review this delivery\")",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 253,
+  "call": "getByRole",
+  "text": "AriaRole.RADIOGROUP, new Locator.GetByRoleOptions().setName(\"Rate \" + name + \" out of 5 stars\")",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 254,
+  "call": "getByRole",
+  "text": "AriaRole.RADIO, new Locator.GetByRoleOptions().setName(\"4 stars\").setExact(true)",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 255,
+  "call": "getByRole",
+  "text": "AriaRole.TEXTBOX, new Locator.GetByRoleOptions().setName(\"Comment about \" + name)",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 259,
+  "call": "getByRole",
+  "text": "AriaRole.BUTTON, new Locator.GetByRoleOptions().setName(\"Submit 1 review\").setExact(true)",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 264,
+  "call": "getByRole",
+  "text": "AriaRole.HEADING, new Locator.GetByRoleOptions().setName(\"Thanks for that\")",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 265,
+  "call": "getByRole",
+  "text": "AriaRole.BUTTON, new Locator.GetByRoleOptions().setName(\"Done\").setExact(true)",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 269,
+  "call": "getByTestId",
+  "text": "\"rate-order-prompt\"",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 270,
+  "call": "getByRole",
+  "text": "AriaRole.DIALOG, new Page.GetByRoleOptions().setName(\"Review this delivery\")",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 271,
+  "call": "getByRole",
+  "text": "AriaRole.RADIOGROUP, new Locator.GetByRoleOptions().setName(\"Rate \" + name + \" out of 5 stars\")",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 273,
+  "call": "getByText",
+  "text": "comment",
+  "status": "DYNAMIC",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 283,
+  "call": "getByRole",
+  "text": "AriaRole.TAB, new Page.GetByRoleOptions().setName(\"History\").setExact(true)",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 284,
+  "call": "locator",
+  "text": "\"[data-testid='customer-history-order'][data-order-id='\" + ORDER + \"']\"",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 323,
+  "call": "getByRole",
+  "text": "AriaRole.DIALOG",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 323,
+  "call": "setHasText",
+  "text": "Pattern.compile(short8, Pattern.CASE_INSENSITIVE)",
+  "status": "DYNAMIC",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 335,
+  "call": "getByTestId",
+  "text": "\"rate-order-prompt\"",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 336,
+  "call": "getByRole",
+  "text": "AriaRole.DIALOG, new Page.GetByRoleOptions().setName(title)",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 337,
+  "call": "getByRole",
+  "text": "AriaRole.RADIOGROUP",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 342,
+  "call": "getByRole",
+  "text": "AriaRole.RADIOGROUP, new Locator.GetByRoleOptions().setName(\"Rate \" + name + \" out of 5 stars\")",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 346,
+  "call": "getByRole",
+  "text": "AriaRole.BUTTON, new Locator.GetByRoleOptions().setName(\"Pick a rating to continue\").setExact(true)",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 350,
+  "call": "getByRole",
+  "text": "AriaRole.RADIOGROUP, new Locator.GetByRoleOptions().setName(\"Rate \" + name + \" out of 5 stars\")",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 351,
+  "call": "getByRole",
+  "text": "AriaRole.RADIO, new Locator.GetByRoleOptions().setName(rating.stars() + \" star\" + (rating.stars() == 1 ? \"\" : \"s\")).setExact(true)",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 354,
+  "call": "getByRole",
+  "text": "AriaRole.TEXTBOX, new Locator.GetByRoleOptions().setName(\"Comment about \" + name)",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 358,
+  "call": "getByRole",
+  "text": "AriaRole.BUTTON, new Locator.GetByRoleOptions().setName(submitName).setExact(true)",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 359,
+  "call": "getByRole",
+  "text": "AriaRole.HEADING, new Locator.GetByRoleOptions().setName(\"Thanks for that\")",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 360,
+  "call": "getByRole",
+  "text": "AriaRole.BUTTON, new Locator.GetByRoleOptions().setName(\"Done\").setExact(true)",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 375,
+  "call": "getByTestId",
+  "text": "\"rate-order-prompt\"",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 376,
+  "call": "getByRole",
+  "text": "AriaRole.DIALOG, new Page.GetByRoleOptions().setName(title)",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 377,
+  "call": "getByText",
+  "text": "\"Already reviewed\", new Locator.GetByTextOptions().setExact(true)",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 378,
+  "call": "getByRole",
+  "text": "AriaRole.RADIOGROUP, new Locator.GetByRoleOptions().setName(\"Rate \" + nameByType.get(type) + \" out of 5 stars\")",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 380,
+  "call": "getByRole",
+  "text": "AriaRole.RADIOGROUP",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 382,
+  "call": "getByText",
+  "text": "r.comment()",
+  "status": "DYNAMIC",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 61,
+  "call": "loginAs->locator",
+  "text": "roleLabel=\"Order Food\" via LoginPage.java > LoginPage.java > LoginPage.java: \"button:has-text('\" + roleLabel + \"'):visible\"",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 72,
+  "call": "loginAs->locator",
+  "text": "roleLabel=\"Restaurant Partner\" via LoginPage.java > LoginPage.java > LoginPage.java: \"button:has-text('\" + roleLabel + \"'):visible\"",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 85,
+  "call": "loginAs->locator",
+  "text": "roleLabel=\"Delivery Executive\" via LoginPage.java > LoginPage.java > LoginPage.java: \"button:has-text('\" + roleLabel + \"'):visible\"",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 115,
+  "call": "loginAs->locator",
+  "text": "roleLabel=\"Order Food\" via LoginPage.java > LoginPage.java > LoginPage.java: \"button:has-text('\" + roleLabel + \"'):visible\"",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 229,
+  "call": "loginAs->locator",
+  "text": "roleLabel=\"Restaurant Partner\" via LoginPage.java > LoginPage.java > LoginPage.java: \"button:has-text('\" + roleLabel + \"'):visible\"",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 244,
+  "call": "loginAs->locator",
+  "text": "roleLabel=\"Delivery Executive\" via LoginPage.java > LoginPage.java > LoginPage.java: \"button:has-text('\" + roleLabel + \"'):visible\"",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/flows/OrderReviewsFlowTest.java",
+  "line": 280,
+  "call": "loginAs->locator",
+  "text": "roleLabel=\"Order Food\" via LoginPage.java > LoginPage.java > LoginPage.java: \"button:has-text('\" + roleLabel + \"'):visible\"",
+  "status": "PASS",
+  "reasons": []
+ }
+]

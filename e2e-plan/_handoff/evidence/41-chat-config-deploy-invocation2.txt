@@ -1,0 +1,14 @@
+==> syncing local Deployment repo
+Already up to date.
+==> config files: chat-service.yml
+==> readers to restart sequentially (1): chat-service
+==> pushing 1 config(s) to VM
+    chat-service.yml
+==> done
+    Config pushed, but no services were restarted.
+    Run: Deployment/deploy.sh --config <service>... to restart the readers.
+==> restarting config consumer: chat-service
+ Container chat-service Restarting 
+ Container chat-service Started 
+==> waiting for health (timeout 150s)
+==> config publish and restart complete

@@ -1,0 +1,12 @@
+{
+  "observedAt": "2026-10-03T18:07:56.769412+00:00",
+  "control": "membership",
+  "selected": "RestaurantMembershipsTest#cacheHitsCannotExtendTheFiveSecondRevocationWindow",
+  "exitCode": 1,
+  "tests": 1,
+  "failures": 1,
+  "errors": 0,
+  "skipped": 0,
+  "sourceRestored": true,
+  "restoredSourceSha256": "50b07a837cfdcb8d696ae73aee9fee7d6f198a5aabf37cc3e8d5bd5cd9d69a9d"
+}

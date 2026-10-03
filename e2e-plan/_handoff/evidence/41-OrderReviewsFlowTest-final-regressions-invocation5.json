@@ -1,0 +1,19 @@
+{
+  "source": "Oracle public Gateway; final deployed Restaurant5b93a8d image",
+  "invocation": 5,
+  "class": "OrderReviewsFlowTest",
+  "counts": {
+    "tests": 1,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "timeSeconds": 9.72,
+  "methods": [
+    {
+      "name": "submittedDishReviewRemainsReadOnly",
+      "timeSeconds": 9.343,
+      "outcome": "passed"
+    }
+  ]
+}

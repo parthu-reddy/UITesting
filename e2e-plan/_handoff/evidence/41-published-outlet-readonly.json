@@ -1,0 +1,16 @@
+{
+  "observedAt": "2026-10-03T18:59:10.383450+00:00",
+  "method": "Existing native build/push steps only; no registry retention/deletion or protected script changes",
+  "images": [
+    {
+      "service": "restaurant-service",
+      "sourceHead": "5b93a8d524dca534da6b2bf4720abd8b327c99cf",
+      "tag": "5b93a8d-29997b7",
+      "image": "hyd.ocir.io/axekmbadoczl/food-delivery/restaurant-service:5b93a8d-29997b7",
+      "digest": "sha256:fa92146a3a09922e56079c8bb9e82a0ca07eb8c4e16ff1e9bf9aa823ce1f3c56",
+      "architecture": "arm64",
+      "os": "linux",
+      "artifactContentSha256": "29997b7b78e7f42c8c4bf7ff0c34bc10abd791bf6f74da942d617f484c39c4af"
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "observedAt": "2026-10-03T16:46:09.304522+00:00",
+  "method": "deployed cumulative server histograms; interpolated p95 and enclosing bucket",
+  "proof": "protected telemetry only; public Gateway E2E recorded separately",
+  "results": [
+    {
+      "service": "identity-service",
+      "uri": "/api/v1/organisations",
+      "successfulSamples": 2,
+      "p95EstimateMs": 243.82886990000003,
+      "p95BucketUpperMs": 246.065832,
+      "meanMs": 130.914745
+    },
+    {
+      "service": "identity-service",
+      "uri": "/api/v1/internal/organisations/{organisationId}/members/{userId}",
+      "successfulSamples": 18,
+      "p95EstimateMs": 50.890886499999986,
+      "p95BucketUpperMs": 55.924051000000006,
+      "meanMs": 18.229049777777774
+    },
+    {
+      "service": "identity-service",
+      "uri": "/api/v1/internal/users/{userId}/organisations",
+      "successfulSamples": 110,
+      "p95EstimateMs": 51.72974725,
+      "p95BucketUpperMs": 55.924051000000006,
+      "meanMs": 17.00533048181818
+    },
+    {
+      "service": "restaurant-service",
+      "uri": "/api/v1/brands",
+      "successfulSamples": 14,
+      "p95EstimateMs": 742.6714264999999,
+      "p95BucketUpperMs": 805.306366,
+      "meanMs": 111.67277078571428
+    },
+    {
+      "service": "restaurant-service",
+      "uri": "/api/v1/outlets",
+      "successfulSamples": 14,
+      "p95EstimateMs": 2254.8578292999996,
+      "p95BucketUpperMs": 2505.3975880000003,
+      "meanMs": 233.291731
+    },
+    {
+      "service": "restaurant-service",
+      "uri": "/api/v1/internal/restaurants/outlets/{outletId}/organisation",
+      "successfulSamples": 2,
+      "p95EstimateMs": 32.9951905,
+      "p95BucketUpperMs": 33.554431,
+      "meanMs": 18.357678999999997
+    },
+    {
+      "service": "restaurant-service",
+      "uri": "/api/v1/internal/restaurants/users/{userId}/outlets",
+      "successfulSamples": 0
+    }
+  ],
+  "circuitBreakers": {
+    "identity-service": [],
+    "restaurant-service": [
+      {
+        "name": "OrganisationServiceClientgetMembershipUUIDUUID",
+        "kind": "failed",
+        "calls": 0
+      },
+      {
+        "name": "OrganisationServiceClientgetMembershipUUIDUUID",
+        "kind": "ignored",
+        "calls": 0
+      },
+      {
+        "name": "OrganisationServiceClientgetMembershipUUIDUUID",
+        "kind": "successful",
+        "calls": 11
+      },
+      {
+        "name": "OrganisationServiceClientgetUserOrganisationsUUID",
+        "kind": "failed",
+        "calls": 0
+      },
+      {
+        "name": "OrganisationServiceClientgetUserOrganisationsUUID",
+        "kind": "ignored",
+        "calls": 0
+      },
+      {
+        "name": "OrganisationServiceClientgetUserOrganisationsUUID",
+        "kind": "successful",
+        "calls": 110
+      }
+    ]
+  }
+}

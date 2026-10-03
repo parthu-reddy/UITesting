@@ -1,0 +1,5 @@
+Static seed validation passed: 14 organisations with one ACTIVE OWNER each, 554 identities, 504 customers, 1003 addresses, 34 riders, 13 brands, 104 outlets, 504 dishes
+Static seed validation passed: 14 organisations with one ACTIVE OWNER each, 554 identities, 504 customers, 1003 addresses, 34 riders, 13 brands, 104 outlets, 504 dishes
+restaurant.outlet_category_timings=308
+Live seed primary-key and admin-role verification passed
+Dummy data loaded and fixture relationships verified.

@@ -1,0 +1,250 @@
+{
+  "observedAt": "2026-10-03T18:11:36.806025+00:00",
+  "repo": "RestaurantApplication",
+  "command": "mvn -o clean verify -Dnet.bytebuddy.experimental=true",
+  "reports": [
+    {
+      "class": "com.fooddelivery.architecture.ArchitectureEnforcementTest",
+      "seconds": "2.161",
+      "tests": 0,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.fooddelivery.common.architecture.TimeDisciplineRules",
+      "seconds": "0.108",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.fooddelivery.contract.GovIdContractConsumerTest",
+      "seconds": "3.881",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.fooddelivery.contract.OrderEventConsumerContractTest",
+      "seconds": "3.292",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.fooddelivery.contract.RestaurantContractConsumerTest",
+      "seconds": "2.749",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.fooddelivery.restaurant.ContractVerifierTest",
+      "seconds": "0.521",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.fooddelivery.restaurant.EndpointAuthorizationCoverageTest",
+      "seconds": "0.143",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.fooddelivery.restaurant.MessagingTest",
+      "seconds": "5.846",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.fooddelivery.restaurant.RestaurantAccessQueryCountTest",
+      "seconds": "7.281",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.fooddelivery.restaurant.RestaurantAccessTest",
+      "seconds": "0.07",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.fooddelivery.restaurant.RestaurantEndpointPermissionTest",
+      "seconds": "0.129",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.fooddelivery.restaurant.RestaurantValidationIntegrationTest",
+      "seconds": "6.853",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.fooddelivery.restaurant.controller.BrandListPrivacyTest",
+      "seconds": "0.601",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.fooddelivery.restaurant.controller.FulfillmentControllerTest",
+      "seconds": "0.15",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.fooddelivery.restaurant.controller.InternalRestaurantInvoiceDetailsTest",
+      "seconds": "0.202",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.fooddelivery.restaurant.controller.InternalRestaurantOutletSummaryTest",
+      "seconds": "0.009",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.fooddelivery.restaurant.controller.RestaurantFleetMapControllerTest",
+      "seconds": "0.018",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.fooddelivery.restaurant.messaging.BindingFailureIsNotRetryableTest",
+      "seconds": "0.002",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.fooddelivery.restaurant.service.CatalogAvailabilityBoundaryTest",
+      "seconds": "0.465",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.fooddelivery.restaurant.service.CatalogServiceTest",
+      "seconds": "0.083",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.fooddelivery.restaurant.service.CatalogStockToggleTest",
+      "seconds": "0.007",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.fooddelivery.restaurant.service.CrossTenantFulfillmentTest",
+      "seconds": "0.031",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.fooddelivery.restaurant.service.FulfillmentServiceTest",
+      "seconds": "0.191",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.fooddelivery.restaurant.service.OpeningHoursTest",
+      "seconds": "0.003",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.fooddelivery.restaurant.service.OrderEventConsumerTest",
+      "seconds": "0.472",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.fooddelivery.restaurant.service.RestaurantFleetCityScopeTest",
+      "seconds": "0.005",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.fooddelivery.restaurant.service.RestaurantMembershipsTest",
+      "seconds": "0.028",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.fooddelivery.restaurant.service.RestaurantOnboardingServiceTest",
+      "seconds": "0.211",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.fooddelivery.restaurant.service.ReviewEventConsumerTest",
+      "seconds": "0.243",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  ],
+  "tests": 103,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "freshBootJars": [
+    {
+      "file": "restaurant-application-1.0-SNAPSHOT.jar",
+      "bytes": 140431961,
+      "modifiedAt": "2026-10-03T18:10:09.042761+00:00"
+    }
+  ]
+}

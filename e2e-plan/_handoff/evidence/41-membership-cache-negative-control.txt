@@ -1,0 +1,101 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------< com.fooddelivery:restaurant-application >---------------
+[INFO] Building restaurant-application 1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ restaurant-application ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 2 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ restaurant-application ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 83 source files with javac [forked debug parameters release 17] to target/classes
+[INFO] 
+[INFO] --- spring-cloud-contract:4.1.2:generateTests (default-generateTests) @ restaurant-application ---
+[INFO] Generating server tests source code for Spring Cloud Contract Verifier contract verification
+[INFO] Will use contracts provided in the folder [/Users/parthureddy/Documents/Food Delivery.nosync/RestaurantApplication/src/test/resources/contracts]
+[INFO] Directory with contract is present at [/Users/parthureddy/Documents/Food Delivery.nosync/RestaurantApplication/src/test/resources/contracts]
+[INFO] Nothing to generate - all classes are up to date
+[INFO] 
+[INFO] --- exec:3.1.0:exec (check-stale-contracts) @ restaurant-application ---
+[INFO] 
+[INFO] --- spring-cloud-contract:4.1.2:convert (default-convert) @ restaurant-application ---
+[INFO] Will use contracts provided in the folder [/Users/parthureddy/Documents/Food Delivery.nosync/RestaurantApplication/src/test/resources/contracts]
+[INFO] Nothing to generate - all stubs are up to date
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ restaurant-application ---
+[INFO] Copying 13 resources from src/test/resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ restaurant-application ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 32 source files with javac [forked debug parameters release 17] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ restaurant-application ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[WARNING] The system property spring.cloud.config.fail-fast is configured twice! The property appears in <argLine/> and any of <systemPropertyVariables/>, <systemProperties/> or user property.
+[WARNING] The system property net.bytebuddy.experimental is configured twice! The property appears in <argLine/> and any of <systemPropertyVariables/>, <systemProperties/> or user property.
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.fooddelivery.restaurant.service.RestaurantMembershipsTest
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by net.bytebuddy.dynamic.loading.ClassInjector$UsingUnsafe$Dispatcher$CreationAction (file:/Users/parthureddy/.m2/repository/net/bytebuddy/byte-buddy/1.14.17/byte-buddy-1.14.17.jar)
+WARNING: Please consider reporting this to the maintainers of class net.bytebuddy.dynamic.loading.ClassInjector$UsingUnsafe$Dispatcher$CreationAction
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+[ERROR] Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.647 s <<< FAILURE! -- in com.fooddelivery.restaurant.service.RestaurantMembershipsTest
+[ERROR] com.fooddelivery.restaurant.service.RestaurantMembershipsTest.cacheHitsCannotExtendTheFiveSecondRevocationWindow -- Time elapsed: 0.065 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+
+Expecting actual:
+  [MembershipDto[organisationId=34b64e85-8a18-4fc6-9bf4-9a6238c81d08, organisationStatus=ACTIVE, userId=40d87f11-4945-482c-acb4-8c3c85243f8b, role=MANAGER, status=ACTIVE]]
+to contain exactly (and in same order):
+  [MembershipDto[organisationId=34b64e85-8a18-4fc6-9bf4-9a6238c81d08, organisationStatus=ACTIVE, userId=40d87f11-4945-482c-acb4-8c3c85243f8b, role=MANAGER, status=REMOVED]]
+but some elements were not found:
+  [MembershipDto[organisationId=34b64e85-8a18-4fc6-9bf4-9a6238c81d08, organisationStatus=ACTIVE, userId=40d87f11-4945-482c-acb4-8c3c85243f8b, role=MANAGER, status=REMOVED]]
+and others were not expected:
+  [MembershipDto[organisationId=34b64e85-8a18-4fc6-9bf4-9a6238c81d08, organisationStatus=ACTIVE, userId=40d87f11-4945-482c-acb4-8c3c85243f8b, role=MANAGER, status=ACTIVE]]
+
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at com.fooddelivery.restaurant.service.RestaurantMembershipsTest.cacheHitsCannotExtendTheFiveSecondRevocationWindow(RestaurantMembershipsTest.java:41)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Failures: 
+[ERROR]   RestaurantMembershipsTest.cacheHitsCannotExtendTheFiveSecondRevocationWindow:41 
+Expecting actual:
+  [MembershipDto[organisationId=34b64e85-8a18-4fc6-9bf4-9a6238c81d08, organisationStatus=ACTIVE, userId=40d87f11-4945-482c-acb4-8c3c85243f8b, role=MANAGER, status=ACTIVE]]
+to contain exactly (and in same order):
+  [MembershipDto[organisationId=34b64e85-8a18-4fc6-9bf4-9a6238c81d08, organisationStatus=ACTIVE, userId=40d87f11-4945-482c-acb4-8c3c85243f8b, role=MANAGER, status=REMOVED]]
+but some elements were not found:
+  [MembershipDto[organisationId=34b64e85-8a18-4fc6-9bf4-9a6238c81d08, organisationStatus=ACTIVE, userId=40d87f11-4945-482c-acb4-8c3c85243f8b, role=MANAGER, status=REMOVED]]
+and others were not expected:
+  [MembershipDto[organisationId=34b64e85-8a18-4fc6-9bf4-9a6238c81d08, organisationStatus=ACTIVE, userId=40d87f11-4945-482c-acb4-8c3c85243f8b, role=MANAGER, status=ACTIVE]]
+
+[INFO] 
+[ERROR] Tests run: 1, Failures: 1, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  13.595 s
+[INFO] Finished at: 2026-10-03T23:37:56+05:30
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.2.5:test (default-test) on project restaurant-application: There are test failures.
+[ERROR] 
+[ERROR] Please refer to /Users/parthureddy/Documents/Food Delivery.nosync/RestaurantApplication/target/surefire-reports for the individual test results.
+[ERROR] Please refer to dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

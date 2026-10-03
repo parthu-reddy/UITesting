@@ -1,0 +1,139 @@
+{
+  "observedAt": "2026-10-03T17:06:09.584204+00:00",
+  "servicesChecked": 22,
+  "matched": 22,
+  "checks": [
+    {
+      "service": "api-gateway",
+      "expectedImage": "hyd.ocir.io/axekmbadoczl/food-delivery/api-gateway:b19a841-92dbe50",
+      "registryDigest": "sha256:26eda8eeef5f09a5b1521787adfce3ca31d1705d028a359c6fc8c7dba16737e0",
+      "matchesDeployedImageDigestPlatform": true
+    },
+    {
+      "service": "bidding-engine",
+      "expectedImage": "hyd.ocir.io/axekmbadoczl/food-delivery/bidding-engine:ac5bb03-b9065b3",
+      "registryDigest": "sha256:80cede164781cebec6f6b08983c62c08a0408b4b28508643f54622dfb31d36ec",
+      "matchesDeployedImageDigestPlatform": true
+    },
+    {
+      "service": "budget-pacing-service",
+      "expectedImage": "hyd.ocir.io/axekmbadoczl/food-delivery/budget-pacing-service:160c2a2-ee15d39",
+      "registryDigest": "sha256:913a65fc963489dd44c6f0c312fb5a0fd425723779629f2f781ccb84040a8778",
+      "matchesDeployedImageDigestPlatform": true
+    },
+    {
+      "service": "campaign-service",
+      "expectedImage": "hyd.ocir.io/axekmbadoczl/food-delivery/campaign-service:54d8857-d193748",
+      "registryDigest": "sha256:6b43339c2e2ea97e2eb77b3cd7efcd337605be5bd1374f9faa8febb04bc20ba0",
+      "matchesDeployedImageDigestPlatform": true
+    },
+    {
+      "service": "chat-service",
+      "expectedImage": "hyd.ocir.io/axekmbadoczl/food-delivery/chat-service:380a212-bdaeed3",
+      "registryDigest": "sha256:7c9ed4a49f0e35aa28efae4260d69ac4455a00fbc613f872fd51d59587f7659e",
+      "matchesDeployedImageDigestPlatform": true
+    },
+    {
+      "service": "communication-integration",
+      "expectedImage": "hyd.ocir.io/axekmbadoczl/food-delivery/communication-integration:c6333ee-dd5d4c5",
+      "registryDigest": "sha256:7c7ddeb1f72b5773180bc048cdc6ead29bd983326b69738b9728f2e58098aeb3",
+      "matchesDeployedImageDigestPlatform": true
+    },
+    {
+      "service": "config-service",
+      "expectedImage": "hyd.ocir.io/axekmbadoczl/food-delivery/config-service:894d5c1-0a7a2a9",
+      "registryDigest": "sha256:916acf4de523fa3affaaeb7b6008d32d2e16ddc290ac183bcbe744d59bca4dee",
+      "matchesDeployedImageDigestPlatform": true
+    },
+    {
+      "service": "customer-service",
+      "expectedImage": "hyd.ocir.io/axekmbadoczl/food-delivery/customer-service:c5001e8-712cd8c",
+      "registryDigest": "sha256:9f8760e1977e1f628cb74f6fe3d54bd271d8e10a0c8d55ae1d98a7c163c32dfa",
+      "matchesDeployedImageDigestPlatform": true
+    },
+    {
+      "service": "delivery-service",
+      "expectedImage": "hyd.ocir.io/axekmbadoczl/food-delivery/delivery-service:8429333-3cce210",
+      "registryDigest": "sha256:3bd2a38064c63955ecedbd353f77eb735931b17a7dd6707b48bd80760e1eb018",
+      "matchesDeployedImageDigestPlatform": true
+    },
+    {
+      "service": "eureka-server-1",
+      "expectedImage": "hyd.ocir.io/axekmbadoczl/food-delivery/eureka-server-1:65c9b03-53978ac",
+      "registryDigest": "sha256:6cb5489361b059020b20184be6d4fe15cb2a46cc55736c7eaebc90b2e689480b",
+      "matchesDeployedImageDigestPlatform": true
+    },
+    {
+      "service": "eureka-server-2",
+      "expectedImage": "hyd.ocir.io/axekmbadoczl/food-delivery/eureka-server-2:65c9b03-53978ac",
+      "registryDigest": "sha256:57f5b7a3a29750b262d5dfa4e98906ddd8517e7d427f258b4bc525e716dff35c",
+      "matchesDeployedImageDigestPlatform": true
+    },
+    {
+      "service": "event-tracking-service",
+      "expectedImage": "hyd.ocir.io/axekmbadoczl/food-delivery/event-tracking-service:6686a80-a92d957",
+      "registryDigest": "sha256:e30fe45aa5081a0211795ae8a8b2491605c5303c70a8a2e7accc3a5d65253a09",
+      "matchesDeployedImageDigestPlatform": true
+    },
+    {
+      "service": "food-delivery-app-ui",
+      "expectedImage": "hyd.ocir.io/axekmbadoczl/food-delivery/food-delivery-app-ui:42f92fb-3664d99",
+      "registryDigest": "sha256:dc1f38c3d51d71d4d88de6aab64a8eb64bbaa07dcba2d9dbb5e40f81918e6571",
+      "matchesDeployedImageDigestPlatform": true
+    },
+    {
+      "service": "government-id-service",
+      "expectedImage": "hyd.ocir.io/axekmbadoczl/food-delivery/government-id-service:4bd7a11-31ad339",
+      "registryDigest": "sha256:da6c57d40404cb0d58e81f3ea0eadd3c6e70f27341302ef4e68975a4f35aec7e",
+      "matchesDeployedImageDigestPlatform": true
+    },
+    {
+      "service": "identity-service",
+      "expectedImage": "hyd.ocir.io/axekmbadoczl/food-delivery/identity-service:296c978-bb84693",
+      "registryDigest": "sha256:f24b3ede27a4235f8e7bc545f1c4f54c3f8b05b6d7f96e3efe26b418d0144e01",
+      "matchesDeployedImageDigestPlatform": true
+    },
+    {
+      "service": "ledger-service",
+      "expectedImage": "hyd.ocir.io/axekmbadoczl/food-delivery/ledger-service:0aca2ee-db7ba18",
+      "registryDigest": "sha256:d7d75d7e28779caee6a07bc781be203ca4e927d4939357e7369d116c90e80fc8",
+      "matchesDeployedImageDigestPlatform": true
+    },
+    {
+      "service": "maps-integration",
+      "expectedImage": "hyd.ocir.io/axekmbadoczl/food-delivery/maps-integration:4e50915-778508f",
+      "registryDigest": "sha256:dd8baa9a8edcb6f64f1f4eb9fb31bafcee0fb705dcb57d83e34a768aebd9cf25",
+      "matchesDeployedImageDigestPlatform": true
+    },
+    {
+      "service": "payment-gateway",
+      "expectedImage": "hyd.ocir.io/axekmbadoczl/food-delivery/payment-gateway:5220632-3cfcb61",
+      "registryDigest": "sha256:8f9fdf24c2a489a7c81b017faf00a63f8f8295e58288d46d196913e9497f399a",
+      "matchesDeployedImageDigestPlatform": true
+    },
+    {
+      "service": "restaurant-service",
+      "expectedImage": "hyd.ocir.io/axekmbadoczl/food-delivery/restaurant-service:4a37fba-fe7c9eb",
+      "registryDigest": "sha256:d5fef065ae9ea5531f00e0c7e1534c93b42e2d03b67cba7a53aa04f429139049",
+      "matchesDeployedImageDigestPlatform": true
+    },
+    {
+      "service": "wallet-service",
+      "expectedImage": "hyd.ocir.io/axekmbadoczl/food-delivery/wallet-service:96e0443-39c25bb",
+      "registryDigest": "sha256:f2694d1e070d5b6ae99327d98a4ff491a299ec3d126b06653fda62a66a38bb08",
+      "matchesDeployedImageDigestPlatform": true
+    },
+    {
+      "service": "ondc-integration-service",
+      "expectedImage": "hyd.ocir.io/axekmbadoczl/food-delivery/ondc-integration-service:7d620ee-c501dbb",
+      "registryDigest": "sha256:179066f00650eed7f7f2857275e68b009c338f6da3851e9f9a9696e1756a7a6b",
+      "matchesDeployedImageDigestPlatform": true
+    },
+    {
+      "service": "reviews-service",
+      "expectedImage": "hyd.ocir.io/axekmbadoczl/food-delivery/reviews-service:8fae4f2-437b19e",
+      "registryDigest": "sha256:e67e244fc8c081170369b76a4cde9f87c1ba56689fd1132adf3aeff13b541f61",
+      "matchesDeployedImageDigestPlatform": true
+    }
+  ]
+}

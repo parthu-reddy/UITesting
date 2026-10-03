@@ -1,0 +1,7 @@
+{
+  "invocation": 5,
+  "executedTests": 0,
+  "liveRequests": 0,
+  "outcome": "test compilation error",
+  "reason": "AssertJ wildcard map/list generic capture; current prior XML is not a report from this invocation"
+}

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.fooddelivery.e2e.tests.features.fulfillment.RestaurantNavigationUiTest" time="28.892" tests="2" errors="0" skipped="0" failures="1">
+  <properties>
+    <property name="restaurant.alternate.outlet.name" value="Brand 1 Outlet 6"/>
+    <property name="java.specification.version" value="26"/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.class.path" value="/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/test-classes:/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/classes:/Users/parthureddy/.m2/repository/com/microsoft/playwright/playwright/1.63.0/playwright-1.63.0.jar:/Users/parthureddy/.m2/repository/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar:/Users/parthureddy/.m2/repository/com/google/errorprone/error_prone_annotations/2.48.0/error_prone_annotations-2.48.0.jar:/Users/parthureddy/.m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/Users/parthureddy/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/parthureddy/.m2/repository/com/microsoft/playwright/driver/1.63.0/driver-1.63.0.jar:/Users/parthureddy/.m2/repository/com/microsoft/playwright/driver-bundle/1.63.0/driver-bundle-1.63.0.jar:/Users/parthureddy/.m2/repository/org/junit/jupiter/junit-jupiter/5.11.4/junit-jupiter-5.11.4.jar:/Users/parthureddy/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.11.4/junit-jupiter-api-5.11.4.jar:/Users/parthureddy/.m2/repository/org/junit/platform/junit-platform-commons/1.11.4/junit-platform-commons-1.11.4.jar:/Users/parthureddy/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/parthureddy/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.11.4/junit-jupiter-params-5.11.4.jar:/Users/parthureddy/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.11.4/junit-jupiter-engine-5.11.4.jar:/Users/parthureddy/.m2/repository/org/junit/platform/junit-platform-engine/1.11.4/junit-platform-engine-1.11.4.jar:/Users/parthureddy/.m2/repository/org/assertj/assertj-core/3.26.3/assertj-core-3.26.3.jar:/Users/parthureddy/.m2/repository/net/bytebuddy/byte-buddy/1.14.18/byte-buddy-1.14.18.jar:"/>
+    <property name="java.vm.vendor" value="Homebrew"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="restaurant.phone" value="9000000001"/>
+    <property name="admin.phone" value="1000000001"/>
+    <property name="rider.phone" value="7000000001"/>
+    <property name="java.vendor.url" value="https://github.com/Homebrew/homebrew-core/issues"/>
+    <property name="user.timezone" value="Asia/Kolkata"/>
+    <property name="java.vm.specification.version" value="26"/>
+    <property name="os.name" value="Mac OS X"/>
+    <property name="customer.phone" value="8000000001"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="IN"/>
+    <property name="sun.boot.library.path" value="/opt/homebrew/Cellar/openjdk/26.0.1/libexec/openjdk.jdk/Contents/Home/lib"/>
+    <property name="sun.java.command" value="/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire/surefirebooter-20261003232702410_3.jar /Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire 2026-10-03T23-27-02_331-jvmRun1 surefire-20261003232702410_1tmp surefire_0-20261003232702410_2tmp"/>
+    <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="slow.mo" value="0"/>
+    <property name="test" value="RestaurantNavigationUiTest#restaurantSectionsRender+restaurantReviewsShowPublicFeedbackAndAggregate,OrganisationLifecycleApiTest#readOnlyRequestsForServerLatencyMeasurements"/>
+    <property name="surefire.test.class.path" value="/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/test-classes:/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/classes:/Users/parthureddy/.m2/repository/com/microsoft/playwright/playwright/1.63.0/playwright-1.63.0.jar:/Users/parthureddy/.m2/repository/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar:/Users/parthureddy/.m2/repository/com/google/errorprone/error_prone_annotations/2.48.0/error_prone_annotations-2.48.0.jar:/Users/parthureddy/.m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/Users/parthureddy/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/parthureddy/.m2/repository/com/microsoft/playwright/driver/1.63.0/driver-1.63.0.jar:/Users/parthureddy/.m2/repository/com/microsoft/playwright/driver-bundle/1.63.0/driver-bundle-1.63.0.jar:/Users/parthureddy/.m2/repository/org/junit/jupiter/junit-jupiter/5.11.4/junit-jupiter-5.11.4.jar:/Users/parthureddy/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.11.4/junit-jupiter-api-5.11.4.jar:/Users/parthureddy/.m2/repository/org/junit/platform/junit-platform-commons/1.11.4/junit-platform-commons-1.11.4.jar:/Users/parthureddy/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/parthureddy/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.11.4/junit-jupiter-params-5.11.4.jar:/Users/parthureddy/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.11.4/junit-jupiter-engine-5.11.4.jar:/Users/parthureddy/.m2/repository/org/junit/platform/junit-platform-engine/1.11.4/junit-platform-engine-1.11.4.jar:/Users/parthureddy/.m2/repository/org/assertj/assertj-core/3.26.3/assertj-core-3.26.3.jar:/Users/parthureddy/.m2/repository/net/bytebuddy/byte-buddy/1.14.18/byte-buddy-1.14.18.jar:"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="/Users/parthureddy"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2026-04-21"/>
+    <property name="java.home" value="/opt/homebrew/Cellar/openjdk/26.0.1/libexec/openjdk.jdk/Contents/Home"/>
+    <property name="file.separator" value="/"/>
+    <property name="basedir" value="/Users/parthureddy/Documents/Food Delivery.nosync/UITesting"/>
+    <property name="java.vm.compressedOopsMode" value="Non-zero disjoint base"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="apple.awt.application.name" value="ForkedBooter"/>
+    <property name="app.url" value="https://gulf-strike-dark-extras.trycloudflare.com/"/>
+    <property name="surefire.real.class.path" value="/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire/surefirebooter-20261003232702410_3.jar"/>
+    <property name="restaurant.outlet.name" value="Brand 1 Outlet 10"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="java.runtime.version" value="26.0.1"/>
+    <property name="user.name" value="parthureddy"/>
+    <property name="stdout.encoding" value="UTF-8"/>
+    <property name="path.separator" value=":"/>
+    <property name="e2e.otp.enabled" value="false"/>
+    <property name="os.version" value="27.0.1"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="review.customer.comment" value="E2E review e82f8c51: hot and on time"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="restaurant.completed.order.id" value="e82f8c51-6041-4987-88b9-c3f02ac781a8"/>
+    <property name="java.vendor.version" value="Homebrew"/>
+    <property name="localRepository" value="/Users/parthureddy/.m2/repository"/>
+    <property name="java.vendor.url.bug" value="https://github.com/Homebrew/homebrew-core/issues"/>
+    <property name="java.io.tmpdir" value="/var/folders/0h/ntc9lth93bq3sgfrgr9f9ylm0000gn/T/"/>
+    <property name="java.version" value="26.0.1"/>
+    <property name="user.dir" value="/Users/parthureddy/Documents/Food Delivery.nosync/UITesting"/>
+    <property name="os.arch" value="aarch64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="headless" value="true"/>
+    <property name="excludedGroups" value="slow-auth,auth-rate-limit"/>
+    <property name="native.encoding" value="UTF-8"/>
+    <property name="java.library.path" value="/Users/parthureddy/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="stderr.encoding" value="UTF-8"/>
+    <property name="java.vendor" value="Homebrew"/>
+    <property name="java.vm.version" value="26.0.1"/>
+    <property name="stdin.encoding" value="UTF-8"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
+    <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="java.class.version" value="70.0"/>
+    <property name="restaurant.completed.rider.name" value="Rider 1"/>
+    <property name="review.outlet.name" value="Brand 1 Outlet 10"/>
+  </properties>
+  <testcase name="restaurantReviewsShowPublicFeedbackAndAggregate" classname="com.fooddelivery.e2e.tests.features.fulfillment.RestaurantNavigationUiTest" time="13.696">
+    <failure message="Locator expected to have text matching regex&#10;Error: element(s) not found&#10;Expected: ^[1-5]\.\d$&#10;Received: - banner:&#10;  - img&#10;  - heading &quot;Brand 1 Outlet 10&quot; [level=3]&#10;  - combobox &quot;Outlet&quot;: Brand 1 Outlet 10&#10;  - text: ACCEPTING LIVE ORDERS&#10;  - button &quot;Active&quot; [pressed]&#10;  - button &quot;Switch to dark mode&quot;&#10;  - button &quot;Profile settings&quot;&#10;  - button &quot;Restaurant registration and menu settings&quot;&#10;- navigation:&#10;  - tablist &quot;Restaurant sections&quot;:&#10;    - tab &quot;Orders (0)&quot;&#10;    - tab &quot;Menu&quot;&#10;    - tab &quot;Campaigns&quot;&#10;    - tab &quot;Earnings&quot;&#10;    - tab &quot;Reviews&quot; [selected]&#10;- main &quot;Restaurant&quot;:&#10;  - region &quot;What customers said&quot;:&#10;    - heading &quot;What customers said&quot; [level=3]&#10;    - img &quot;0.0 out of 5 stars&quot;&#10;    - text: No reviews yet&#10;    - article:&#10;      - paragraph: Customer 1.&#10;      - img &quot;4.0 out of 5 stars&quot;&#10;      - time: Oct 3, 2026&#10;      - paragraph: &quot;E2E review e82f8c51: hot and on time&quot;&#10;  - region &quot;Private delivery partner feedback&quot;:&#10;    - heading &quot;Private delivery partner feedback&quot; [level=3]&#10;    - button &quot;Refresh private feedback&quot;: Refresh&#10;    - paragraph: Only participants who receive this feedback can read it. Reviewer names and order details are hidden.&#10;    - article:&#10;      - paragraph: From a delivery partner&#10;      - img &quot;4.0 out of 5 stars&quot;&#10;      - time: Oct 3, 2026&#10;      - paragraph: No written comment.&#10;  - region &quot;Dish ratings&quot;:&#10;    - heading &quot;Dish ratings&quot; [level=3]&#10;    - paragraph: 0 of 50 dishes rated. Lowest rated first.&#10;    - text: Brand 1 Item 1-1 Not rated yet Brand 1 Item 1-2 Not rated yet Brand 1 Item 1-3 Not rated yet Brand 1 Item 1-4 Not rated yet Brand 1 Item 1-5 Not rated yet Brand 1 Item 10-1 Not rated yet Brand 1 Item 10-2 Not rated yet Brand 1 Item 10-3 Not rated yet Brand 1 Item 10-4 Not rated yet Brand 1 Item 10-5 Not rated yet Brand 1 Item 2-1 Not rated yet Brand 1 Item 2-2 Not rated yet Brand 1 Item 2-3 Not rated yet Brand 1 Item 2-4 Not rated yet Brand 1 Item 2-5 Not rated yet Brand 1 Item 3-1 Not rated yet Brand 1 Item 3-2 Not rated yet Brand 1 Item 3-3 Not rated yet Brand 1 Item 3-4 Not rated yet Brand 1 Item 3-5 Not rated yet Brand 1 Item 4-1 Not rated yet Brand 1 Item 4-2 Not rated yet Brand 1 Item 4-3 Not rated yet Brand 1 Item 4-4 Not rated yet Brand 1 Item 4-5 Not rated yet Brand 1 Item 5-1 Not rated yet Brand 1 Item 5-2 Not rated yet Brand 1 Item 5-3 Not rated yet Brand 1 Item 5-4 Not rated yet Brand 1 Item 5-5 Not rated yet Brand 1 Item 6-1 Not rated yet Brand 1 Item 6-2 Not rated yet Brand 1 Item 6-3 Not rated yet Brand 1 Item 6-4 Not rated yet Brand 1 Item 6-5 Not rated yet Brand 1 Item 7-1 Not rated yet Brand 1 Item 7-2 Not rated yet Brand 1 Item 7-3 Not rated yet Brand 1 Item 7-4 Not rated yet Brand 1 Item 7-5 Not rated yet Brand 1 Item 8-1 Not rated yet Brand 1 Item 8-2 Not rated yet Brand 1 Item 8-3 Not rated yet Brand 1 Item 8-4 Not rated yet Brand 1 Item 8-5 Not rated yet Brand 1 Item 9-1 Not rated yet Brand 1 Item 9-2 Not rated yet Brand 1 Item 9-3 Not rated yet Brand 1 Item 9-4 Not rated yet Brand 1 Item 9-5 Not rated yet&#10;  - button &quot;Messages&quot;&#10;- status&#10;&#10;Call log:&#10;  - Assert &quot;hasText&quot; getByRole(AriaRole.REGION, new Page.GetByRoleOptions().setName(&quot;What customers said&quot;).setExact(true)).locator(&quot;span.text-3xl.font-black&quot;) with timeout 5000ms&#10;  - waiting for getByRole(AriaRole.REGION, new Page.GetByRoleOptions().setName(&quot;What customers said&quot;).setExact(true)).locator(&quot;span.text-3xl.font-black&quot;)" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: 
+Locator expected to have text matching regex
+Error: element(s) not found
+Expected: ^[1-5]\.\d$
+Received: - banner:
+  - img
+  - heading "Brand 1 Outlet 10" [level=3]
+  - combobox "Outlet": Brand 1 Outlet 10
+  - text: ACCEPTING LIVE ORDERS
+  - button "Active" [pressed]
+  - button "Switch to dark mode"
+  - button "Profile settings"
+  - button "Restaurant registration and menu settings"
+- navigation:
+  - tablist "Restaurant sections":
+    - tab "Orders (0)"
+    - tab "Menu"
+    - tab "Campaigns"
+    - tab "Earnings"
+    - tab "Reviews" [selected]
+- main "Restaurant":
+  - region "What customers said":
+    - heading "What customers said" [level=3]
+    - img "0.0 out of 5 stars"
+    - text: No reviews yet
+    - article:
+      - paragraph: Customer 1.
+      - img "4.0 out of 5 stars"
+      - time: Oct 3, 2026
+      - paragraph: "E2E review e82f8c51: hot and on time"
+  - region "Private delivery partner feedback":
+    - heading "Private delivery partner feedback" [level=3]
+    - button "Refresh private feedback": Refresh
+    - paragraph: Only participants who receive this feedback can read it. Reviewer names and order details are hidden.
+    - article:
+      - paragraph: From a delivery partner
+      - img "4.0 out of 5 stars"
+      - time: Oct 3, 2026
+      - paragraph: No written comment.
+  - region "Dish ratings":
+    - heading "Dish ratings" [level=3]
+    - paragraph: 0 of 50 dishes rated. Lowest rated first.
+    - text: Brand 1 Item 1-1 Not rated yet Brand 1 Item 1-2 Not rated yet Brand 1 Item 1-3 Not rated yet Brand 1 Item 1-4 Not rated yet Brand 1 Item 1-5 Not rated yet Brand 1 Item 10-1 Not rated yet Brand 1 Item 10-2 Not rated yet Brand 1 Item 10-3 Not rated yet Brand 1 Item 10-4 Not rated yet Brand 1 Item 10-5 Not rated yet Brand 1 Item 2-1 Not rated yet Brand 1 Item 2-2 Not rated yet Brand 1 Item 2-3 Not rated yet Brand 1 Item 2-4 Not rated yet Brand 1 Item 2-5 Not rated yet Brand 1 Item 3-1 Not rated yet Brand 1 Item 3-2 Not rated yet Brand 1 Item 3-3 Not rated yet Brand 1 Item 3-4 Not rated yet Brand 1 Item 3-5 Not rated yet Brand 1 Item 4-1 Not rated yet Brand 1 Item 4-2 Not rated yet Brand 1 Item 4-3 Not rated yet Brand 1 Item 4-4 Not rated yet Brand 1 Item 4-5 Not rated yet Brand 1 Item 5-1 Not rated yet Brand 1 Item 5-2 Not rated yet Brand 1 Item 5-3 Not rated yet Brand 1 Item 5-4 Not rated yet Brand 1 Item 5-5 Not rated yet Brand 1 Item 6-1 Not rated yet Brand 1 Item 6-2 Not rated yet Brand 1 Item 6-3 Not rated yet Brand 1 Item 6-4 Not rated yet Brand 1 Item 6-5 Not rated yet Brand 1 Item 7-1 Not rated yet Brand 1 Item 7-2 Not rated yet Brand 1 Item 7-3 Not rated yet Brand 1 Item 7-4 Not rated yet Brand 1 Item 7-5 Not rated yet Brand 1 Item 8-1 Not rated yet Brand 1 Item 8-2 Not rated yet Brand 1 Item 8-3 Not rated yet Brand 1 Item 8-4 Not rated yet Brand 1 Item 8-5 Not rated yet Brand 1 Item 9-1 Not rated yet Brand 1 Item 9-2 Not rated yet Brand 1 Item 9-3 Not rated yet Brand 1 Item 9-4 Not rated yet Brand 1 Item 9-5 Not rated yet
+  - button "Messages"
+- status
+
+Call log:
+  - Assert "hasText" getByRole(AriaRole.REGION, new Page.GetByRoleOptions().setName("What customers said").setExact(true)).locator("span.text-3xl.font-black") with timeout 5000ms
+  - waiting for getByRole(AriaRole.REGION, new Page.GetByRoleOptions().setName("What customers said").setExact(true)).locator("span.text-3xl.font-black")
+	at com.microsoft.playwright.impl.AssertionsBase.expectImpl(AssertionsBase.java:81)
+	at com.microsoft.playwright.impl.AssertionsBase.expectImpl(AssertionsBase.java:47)
+	at com.microsoft.playwright.impl.AssertionsBase.expectImpl(AssertionsBase.java:39)
+	at com.microsoft.playwright.impl.LocatorAssertionsImpl.hasText(LocatorAssertionsImpl.java:313)
+	at com.microsoft.playwright.assertions.LocatorAssertions.hasText(LocatorAssertions.java:2084)
+	at com.fooddelivery.e2e.tests.features.fulfillment.RestaurantNavigationUiTest.restaurantReviewsShowPublicFeedbackAndAggregate(RestaurantNavigationUiTest.java:152)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+]]></failure>
+    <system-out><![CDATA[[E2E STARTUP] Creating Playwright driver
+[E2E STARTUP] Launching Chromium (headless=true)
+[E2E STARTUP] Chromium ready
+]]></system-out>
+  </testcase>
+  <testcase name="restaurantSectionsRender" classname="com.fooddelivery.e2e.tests.features.fulfillment.RestaurantNavigationUiTest" time="12.837">
+    <system-out><![CDATA[[BROWSER NETWORK ERROR] 404 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/advertisers/me
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 404 ()
+[BROWSER NETWORK ERROR] 404 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/advertisers/me
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 404 ()
+]]></system-out>
+  </testcase>
+</testsuite>

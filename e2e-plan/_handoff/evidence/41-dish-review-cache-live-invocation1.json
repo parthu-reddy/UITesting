@@ -1,0 +1,18 @@
+{
+  "tests": 1,
+  "failures": 0,
+  "errors": 1,
+  "skipped": 0,
+  "time": "85.646",
+  "methods": [
+    {
+      "name": "remainingDishReviewRefreshesTheCachedAggregate",
+      "time": "83.145",
+      "outcome": "error"
+    }
+  ],
+  "proof": "deployed Oracle UI",
+  "invocation": 1,
+  "orderId": "e82f8c51-6041-4987-88b9-c3f02ac781a8",
+  "rerunPolicy": "Read Oracle records first; a submitted=false manifest does not prove no POST was committed"
+}

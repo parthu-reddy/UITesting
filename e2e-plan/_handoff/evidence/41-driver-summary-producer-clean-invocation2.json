@@ -1,0 +1,7 @@
+{
+  "tests": 164,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 1,
+  "parkedSkip": "pre-existing future ONDC getDeliveryStatus contract"
+}

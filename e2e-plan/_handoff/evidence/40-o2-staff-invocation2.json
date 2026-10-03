@@ -1,0 +1,14 @@
+{
+  "invocation": 2,
+  "allocationId": "6993e245b9d59a3c",
+  "tests": 1,
+  "failures": 0,
+  "errors": 1,
+  "skipped": 0,
+  "status": "failed",
+  "proof": "live Oracle public gateway and rendered browser",
+  "failure": "stock ON catalog readback did not become true within 10000 ms after UI switch click",
+  "fixturePolicy": "retain; no cleanup; same ACTIVE STAFF membership",
+  "additionalObservation": "403 on STAFF restaurant pending-refund-requests read",
+  "report": "40-o2-staff-invocation2.txt"
+}

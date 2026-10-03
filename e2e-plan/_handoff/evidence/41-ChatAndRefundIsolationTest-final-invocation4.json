@@ -1,0 +1,17 @@
+{
+  "tests": 1,
+  "failures": 1,
+  "errors": 0,
+  "skipped": 0,
+  "time": "39.131",
+  "invocation": 4,
+  "proof": "deployed Oracle public URL",
+  "orderId": "e82f8c51-6041-4987-88b9-c3f02ac781a8",
+  "methods": [
+    {
+      "name": "outsidersAreRefused",
+      "time": "36.624",
+      "outcome": "failure"
+    }
+  ]
+}

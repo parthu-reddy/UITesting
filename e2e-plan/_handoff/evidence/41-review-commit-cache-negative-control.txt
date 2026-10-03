@@ -1,0 +1,117 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ------------------< com.fooddelivery:reviews-service >------------------
+[INFO] Building reviews-service 1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ reviews-service ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 4 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ reviews-service ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 37 source files with javac [forked debug parameters release 17] to target/classes
+[INFO] 
+[INFO] --- spring-cloud-contract:4.1.2:generateTests (default-generateTests) @ reviews-service ---
+[INFO] Generating server tests source code for Spring Cloud Contract Verifier contract verification
+[INFO] Will use contracts provided in the folder [/Users/parthureddy/Documents/Food Delivery.nosync/ReviewsService/src/test/resources/contracts]
+[INFO] Directory with contract is present at [/Users/parthureddy/Documents/Food Delivery.nosync/ReviewsService/src/test/resources/contracts]
+[INFO] Nothing to generate - all classes are up to date
+[INFO] 
+[INFO] --- exec:3.1.0:exec (check-stale-contracts) @ reviews-service ---
+[INFO] 
+[INFO] --- spring-cloud-contract:4.1.2:convert (default-convert) @ reviews-service ---
+[INFO] Will use contracts provided in the folder [/Users/parthureddy/Documents/Food Delivery.nosync/ReviewsService/src/test/resources/contracts]
+[INFO] Nothing to generate - all stubs are up to date
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ reviews-service ---
+[INFO] Copying 3 resources from src/test/resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ reviews-service ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 15 source files with javac [forked debug parameters release 17] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ reviews-service ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[WARNING] The system property net.bytebuddy.experimental is configured twice! The property appears in <argLine/> and any of <systemPropertyVariables/>, <systemProperties/> or user property.
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.fooddelivery.reviews.service.ReviewCacheCommitTest
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by net.bytebuddy.dynamic.loading.ClassInjector$UsingUnsafe$Dispatcher$CreationAction (file:/Users/parthureddy/.m2/repository/net/bytebuddy/byte-buddy/1.14.17/byte-buddy-1.14.17.jar)
+WARNING: Please consider reporting this to the maintainers of class net.bytebuddy.dynamic.loading.ClassInjector$UsingUnsafe$Dispatcher$CreationAction
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release
+07:52:54.771 [main] INFO com.fooddelivery.reviews.service.ReviewCommandService -- Creating 1 review(s) for order=2c5b3812-49b6-4ce5-b7e4-1e2cae95b26b by user=88888888-8888-8888-8888-888888888888
+07:52:55.009 [main] INFO com.fooddelivery.reviews.service.ReviewCommandService -- Creating 1 review(s) for order=6e66fe74-3a04-43b4-8318-757108c59f39 by user=88888888-8888-8888-8888-888888888888
+07:52:55.083 [main] INFO com.fooddelivery.reviews.service.ReviewCommandService -- Creating 1 review(s) for order=a4510027-e475-4d14-a6b4-c83fb8328220 by user=88888888-8888-8888-8888-888888888888
+07:52:55.086 [main] INFO com.fooddelivery.reviews.service.ReviewCommandService -- Recorded 1 review(s) for order=a4510027-e475-4d14-a6b4-c83fb8328220
+[ERROR] Tests run: 3, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 2.703 s <<< FAILURE! -- in com.fooddelivery.reviews.service.ReviewCacheCommitTest
+[ERROR] com.fooddelivery.reviews.service.ReviewCacheCommitTest.committedReviewEvictsItsCachedAggregateBeforeTheCommandReturns -- Time elapsed: 2.495 s <<< ERROR!
+java.lang.reflect.UndeclaredThrowableException: 
+Failed to invoke event listener method
+HandlerMethod details: 
+Bean [com.fooddelivery.reviews.service.ReviewCacheCommitTest$Observer]
+Method [public void com.fooddelivery.reviews.service.ReviewCacheCommitTest$Observer.onAggregate(com.fooddelivery.reviews.event.AggregateUpdatedLocalEvent)]
+Resolved arguments: 
+[0] [type=com.fooddelivery.reviews.event.AggregateUpdatedLocalEvent] [value=com.fooddelivery.reviews.event.AggregateUpdatedLocalEvent[source=com.fooddelivery.reviews.service.ReviewCommandService@7e2bd5e6]]
+
+	at org.springframework.context.event.ApplicationListenerMethodAdapter.doInvoke(ApplicationListenerMethodAdapter.java:382)
+	at org.springframework.context.event.ApplicationListenerMethodAdapter.processEvent(ApplicationListenerMethodAdapter.java:237)
+	at org.springframework.context.event.ApplicationListenerMethodAdapter.onApplicationEvent(ApplicationListenerMethodAdapter.java:168)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.doInvokeListener(SimpleApplicationEventMulticaster.java:185)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.invokeListener(SimpleApplicationEventMulticaster.java:178)
+	at org.springframework.context.event.SimpleApplicationEventMulticaster.multicastEvent(SimpleApplicationEventMulticaster.java:156)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:451)
+	at org.springframework.context.support.AbstractApplicationContext.publishEvent(AbstractApplicationContext.java:384)
+	at com.fooddelivery.reviews.service.ReviewCommandService.lambda$createReviews$5(ReviewCommandService.java:235)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at com.fooddelivery.reviews.service.ReviewCommandService.createReviews(ReviewCommandService.java:234)
+	at com.fooddelivery.reviews.service.ReviewCacheCommitTest.committedReviewEvictsItsCachedAggregateBeforeTheCommandReturns(ReviewCacheCommitTest.java:78)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+Caused by: org.opentest4j.AssertionFailedError: [the publication registers before commit] 
+expected: 0
+ but was: 1
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at com.fooddelivery.reviews.service.ReviewCacheCommitTest$Observer.onAggregate(ReviewCacheCommitTest.java:133)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.springframework.context.event.ApplicationListenerMethodAdapter.doInvoke(ApplicationListenerMethodAdapter.java:365)
+	... 14 more
+
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Errors: 
+[ERROR]   ReviewCacheCommitTest.committedReviewEvictsItsCachedAggregateBeforeTheCommandReturns:78 » UndeclaredThrowable Failed to invoke event listener method
+HandlerMethod details: 
+Bean [com.fooddelivery.reviews.service.ReviewCacheCommitTest$Observer]
+Method [public void com.fooddelivery.reviews.service.ReviewCacheCommitTest$Observer.onAggregate(com.fooddelivery.reviews.event.AggregateUpdatedLocalEvent)]
+Resolved arguments: 
+[0] [type=com.fooddelivery.reviews.event.AggregateUpdatedLocalEvent] [value=com.fooddelivery.reviews.event.AggregateUpdatedLocalEvent[source=com.fooddelivery.reviews.service.ReviewCommandService@7e2bd5e6]]
+
+[INFO] 
+[ERROR] Tests run: 3, Failures: 0, Errors: 1, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  13.711 s
+[INFO] Finished at: 2026-10-03T23:37:55+05:30
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.2.5:test (default-test) on project reviews-service: 
+[ERROR] 
+[ERROR] Please refer to /Users/parthureddy/Documents/Food Delivery.nosync/ReviewsService/target/surefire-reports for the individual test results.
+[ERROR] Please refer to dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

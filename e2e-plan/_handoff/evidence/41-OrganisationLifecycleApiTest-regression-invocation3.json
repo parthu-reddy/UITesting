@@ -1,0 +1,19 @@
+{
+  "observedAt": "2026-10-03T17:58:20.904199+00:00",
+  "batchInvocation": 3,
+  "proof": "public Oracle browser E2E",
+  "tests": 1,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "methods": [
+    {
+      "method": "readOnlyRequestsForServerLatencyMeasurements",
+      "seconds": "13.253",
+      "failed": false,
+      "errored": false
+    }
+  ],
+  "orderId": "e82f8c51-6041-4987-88b9-c3f02ac781a8",
+  "dataPolicy": "retain"
+}

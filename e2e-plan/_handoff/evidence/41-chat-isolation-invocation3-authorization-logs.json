@@ -1,0 +1,96 @@
+{
+  "intervalStart": "2026-10-03T18:35:00Z",
+  "intervalEnd": "2026-10-03T18:38:00Z",
+  "records": [
+    {
+      "@timestamp": "2026-10-03T18:35:34.178520226Z",
+      "level": "INFO",
+      "logger_name": "com.fooddelivery.chat.config.StompAuthenticationInterceptor",
+      "message": "STOMP CONNECT authenticated: userId=ebc621a5-22bd-40f6-b62e-f62d85d75f7b, roles=[ROLE_CUSTOMER]"
+    },
+    {
+      "@timestamp": "2026-10-03T18:35:34.76978486Z",
+      "level": "INFO",
+      "logger_name": "com.fooddelivery.chat.config.StompAuthenticationInterceptor",
+      "message": "STOMP CONNECT authenticated: userId=ebc621a5-22bd-40f6-b62e-f62d85d75f7b, roles=[ROLE_CUSTOMER]"
+    },
+    {
+      "@timestamp": "2026-10-03T18:35:41.161424827Z",
+      "level": "INFO",
+      "logger_name": "com.fooddelivery.chat.config.StompAuthenticationInterceptor",
+      "message": "STOMP CONNECT authenticated: userId=426f016b-c98e-43c1-b464-94e1a587f6d3, roles=[ROLE_RESTAURANT]"
+    },
+    {
+      "@timestamp": "2026-10-03T18:35:41.327980207Z",
+      "level": "INFO",
+      "logger_name": "com.fooddelivery.chat.config.StompAuthenticationInterceptor",
+      "message": "STOMP CONNECT authenticated: userId=426f016b-c98e-43c1-b464-94e1a587f6d3, roles=[ROLE_RESTAURANT]"
+    },
+    {
+      "@timestamp": "2026-10-03T18:35:47.785362368Z",
+      "level": "INFO",
+      "logger_name": "com.fooddelivery.chat.config.StompAuthenticationInterceptor",
+      "message": "STOMP CONNECT authenticated: userId=d1db951e-0538-47a7-883e-f4d995a1d248, roles=[ROLE_DELIVERY]"
+    },
+    {
+      "@timestamp": "2026-10-03T18:35:47.939568321Z",
+      "level": "INFO",
+      "logger_name": "com.fooddelivery.chat.config.StompAuthenticationInterceptor",
+      "message": "STOMP CONNECT authenticated: userId=d1db951e-0538-47a7-883e-f4d995a1d248, roles=[ROLE_DELIVERY]"
+    },
+    {
+      "@timestamp": "2026-10-03T18:35:53.849984087Z",
+      "level": "ERROR",
+      "logger_name": "com.fooddelivery.common.security.SecurityContextFilter",
+      "message": "SecurityContextFilter - 403 FORBIDDEN on [GET /api/v1/chat/sessions/853d8fb0-fa5f-4bfa-836a-c977517a24a1/messages] User: 76ef750c-d5ca-4bf5-9212-f4be3735d406 Roles: CUSTOMER"
+    },
+    {
+      "@timestamp": "2026-10-03T18:35:53.947845856Z",
+      "level": "ERROR",
+      "logger_name": "com.fooddelivery.common.security.SecurityContextFilter",
+      "message": "SecurityContextFilter - 403 FORBIDDEN on [GET /api/v1/chat/sessions] User: 76ef750c-d5ca-4bf5-9212-f4be3735d406 Roles: CUSTOMER"
+    },
+    {
+      "@timestamp": "2026-10-03T18:35:54.031537268Z",
+      "level": "ERROR",
+      "logger_name": "com.fooddelivery.common.security.SecurityContextFilter",
+      "message": "SecurityContextFilter - 403 FORBIDDEN on [POST /api/v1/chat/sessions] User: 76ef750c-d5ca-4bf5-9212-f4be3735d406 Roles: CUSTOMER"
+    },
+    {
+      "@timestamp": "2026-10-03T18:35:54.083165067Z",
+      "level": "INFO",
+      "logger_name": "com.fooddelivery.chat.config.StompAuthenticationInterceptor",
+      "message": "STOMP CONNECT authenticated: userId=76ef750c-d5ca-4bf5-9212-f4be3735d406, roles=[ROLE_CUSTOMER]"
+    },
+    {
+      "@timestamp": "2026-10-03T18:35:54.761491531Z",
+      "level": "INFO",
+      "logger_name": "com.fooddelivery.chat.config.StompAuthenticationInterceptor",
+      "message": "STOMP CONNECT authenticated: userId=76ef750c-d5ca-4bf5-9212-f4be3735d406, roles=[ROLE_CUSTOMER]"
+    },
+    {
+      "@timestamp": "2026-10-03T18:35:54.834938128Z",
+      "level": "WARN",
+      "logger_name": "com.fooddelivery.chat.config.StompAuthenticationInterceptor",
+      "message": "User 76ef750c-d5ca-4bf5-9212-f4be3735d406 denied access to destination /user/queue/chat/853d8fb0-fa5f-4bfa-836a-c977517a24a1"
+    },
+    {
+      "@timestamp": "2026-10-03T18:35:54.835029848Z",
+      "level": "ERROR",
+      "logger_name": "org.springframework.web.socket.messaging.StompSubProtocolHandler",
+      "message": "Failed to send message to MessageChannel in session 944ea657-76a9-bcdb-41a0-2f68e36f10a6:Access Denied: Not a participant of this chat session"
+    },
+    {
+      "@timestamp": "2026-10-03T18:35:58.79704317Z",
+      "level": "INFO",
+      "logger_name": "com.fooddelivery.chat.config.StompAuthenticationInterceptor",
+      "message": "STOMP CONNECT authenticated: userId=ebc621a5-22bd-40f6-b62e-f62d85d75f7b, roles=[ROLE_CUSTOMER]"
+    },
+    {
+      "@timestamp": "2026-10-03T18:36:02.248595694Z",
+      "level": "INFO",
+      "logger_name": "com.fooddelivery.chat.config.StompAuthenticationInterceptor",
+      "message": "STOMP CONNECT authenticated: userId=ebc621a5-22bd-40f6-b62e-f62d85d75f7b, roles=[ROLE_CUSTOMER]"
+    }
+  ]
+}

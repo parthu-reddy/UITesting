@@ -1,0 +1,11 @@
+-------------------------------------------------------------------------------
+Test set: com.fooddelivery.customer.controller.RestaurantRefundPermissionTest
+-------------------------------------------------------------------------------
+Tests run: 4, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.766 s <<< FAILURE! -- in com.fooddelivery.customer.controller.RestaurantRefundPermissionTest
+com.fooddelivery.customer.controller.RestaurantRefundPermissionTest.anUnavailableOrMismatchedOutletCannotGrantQueueAccess -- Time elapsed: 0.017 s <<< ERROR!
+java.lang.IllegalStateException: Unavailable
+	at com.fooddelivery.customer.controller.RestaurantRefundPermissionTest.anUnavailableOrMismatchedOutletCannotGrantQueueAccess(RestaurantRefundPermissionTest.java:102)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+

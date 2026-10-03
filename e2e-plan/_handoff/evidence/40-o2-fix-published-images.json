@@ -1,0 +1,32 @@
+{
+  "observedAt": "2026-10-03T16:56:59.317719+00:00",
+  "images": [
+    {
+      "module": "RestaurantApplication",
+      "service": "restaurant-service",
+      "tag": "4a37fba-fe7c9eb",
+      "image": "hyd.ocir.io/axekmbadoczl/food-delivery/restaurant-service:4a37fba-fe7c9eb",
+      "registryDigest": "sha256:d5fef065ae9ea5531f00e0c7e1534c93b42e2d03b67cba7a53aa04f429139049",
+      "architecture": "arm64",
+      "os": "linux"
+    },
+    {
+      "module": "CustomerApplication",
+      "service": "customer-service",
+      "tag": "c5001e8-712cd8c",
+      "image": "hyd.ocir.io/axekmbadoczl/food-delivery/customer-service:c5001e8-712cd8c",
+      "registryDigest": "sha256:9f8760e1977e1f628cb74f6fe3d54bd271d8e10a0c8d55ae1d98a7c163c32dfa",
+      "architecture": "arm64",
+      "os": "linux"
+    },
+    {
+      "module": "FoodDeliveryAppUI",
+      "service": "food-delivery-app-ui",
+      "tag": "42f92fb-3664d99",
+      "image": "hyd.ocir.io/axekmbadoczl/food-delivery/food-delivery-app-ui:42f92fb-3664d99",
+      "registryDigest": "sha256:dc1f38c3d51d71d4d88de6aab64a8eb64bbaa07dcba2d9dbb5e40f81918e6571",
+      "architecture": "arm64",
+      "os": "linux"
+    }
+  ]
+}

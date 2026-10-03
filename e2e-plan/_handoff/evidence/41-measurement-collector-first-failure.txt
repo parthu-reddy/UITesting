@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/Users/parthureddy/Documents/Food Delivery.nosync/RandomDocuments/BusinessPlatform_2026-10-03/tools/collect_server_measurements.py", line 92, in <module>
+    main()
+    ~~~~^^
+  File "/Users/parthureddy/Documents/Food Delivery.nosync/RandomDocuments/BusinessPlatform_2026-10-03/tools/collect_server_measurements.py", line 73, in main
+    response = subprocess.run(ssh + [command], text=True, capture_output=True, check=True, timeout=45)
+  File "/opt/homebrew/Cellar/python@3.14/3.14.6/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 578, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['ssh', '-o', 'BatchMode=yes', '-o', 'ConnectTimeout=20', '-i', '/Users/parthureddy/Documents/OracleSSH/ssh-key-2026-08-16.key', 'ubuntu@140.245.234.137', "cd 'Food Delivery.nosync/Deployment' && docker compose exec -T chat-service wget -qO- http://chat-service:8096/actuator/prometheus"]' returned non-zero exit status 8.

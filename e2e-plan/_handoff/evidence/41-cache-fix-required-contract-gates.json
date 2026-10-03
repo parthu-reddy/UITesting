@@ -1,0 +1,37 @@
+{
+  "observedAt": "2026-10-03T18:23:38.723655+00:00",
+  "gates": [
+    {
+      "service": "restaurant",
+      "kind": "producer",
+      "databaseId": 37143374142,
+      "headSha": "74b006a2c25db5ea166a170139fb83f1206dc6d0",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "service": "restaurant",
+      "kind": "consumer",
+      "databaseId": 37143711734,
+      "headSha": "74b006a2c25db5ea166a170139fb83f1206dc6d0",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "service": "reviews",
+      "kind": "producer",
+      "databaseId": 37143378521,
+      "headSha": "d035d2e7a90dfae75fec5ba1a7d66079c385cd62",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "service": "reviews",
+      "kind": "consumer",
+      "databaseId": 37143715976,
+      "headSha": "d035d2e7a90dfae75fec5ba1a7d66079c385cd62",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ]
+}

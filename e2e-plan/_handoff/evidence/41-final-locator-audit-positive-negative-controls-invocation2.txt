@@ -1,0 +1,31 @@
+[VERIFIED] conditional-role-name  expected PASS  got PASS         control: conditional radiogroup role and dynamic accessible label
+[MISSED  ] conditional-role-wrong-name expected FAIL  got PASS         conditional role still rejects a wrong label prefix
+[VERIFIED] radio-template-name    expected PASS  got PASS         control: an accessible star label with a conditional plural suffix
+[VERIFIED] radio-template-wrong-name expected FAIL  got FAIL         a different unit is not a star label
+[VERIFIED] visible-template-name  expected PASS  got PASS         control: the actual review submission text template
+[VERIFIED] visible-template-wrong-name expected FAIL  got FAIL         a wrong visible suffix must remain a failure
+[VERIFIED] visible-template-negative-length expected FAIL  got FAIL         a collection length template cannot produce a negative length
+[VERIFIED] text-missing           expected FAIL  got FAIL         text that no UI file contains
+[VERIFIED] text-present           expected PASS  got PASS         control: the real empty-cart text
+[VERIFIED] text-union             expected FAIL  got FAIL         `text=A, text=B` is one query, never a union
+[VERIFIED] text-single            expected PASS  got PASS         control: a single text= query
+[VERIFIED] css-parse-error        expected FAIL  got FAIL         an engine prefix inside a CSS list throws
+[VERIFIED] formfield-sibling      expected FAIL  got FAIL         `label ~ input` cannot reach a FormField's nested control
+[VERIFIED] formfield-descendant   expected PASS  got PASS         control: the descendant form reaches it
+[VERIFIED] raw-label-sibling      expected PASS  got PASS         control: a RAW label's sibling combinator is fine
+[VERIFIED] testid-prefix          expected FAIL  got FAIL         a test id must EQUAL a real one, not be a prefix of it
+[VERIFIED] testid-real            expected PASS  got PASS         control: a real test id
+[VERIFIED] class-apart            expected FAIL  got FAIL         classes that never share one class string
+[VERIFIED] class-together         expected PASS  got PASS         control: classes that do (SharedSettingsView's scroll container)
+[VERIFIED] lucide-missing         expected FAIL  got FAIL         a lucide icon nothing imports
+[VERIFIED] lucide-real            expected PASS  got PASS         control: an imported icon (MapPin)
+[VERIFIED] role-scoped            expected FAIL  got FAIL         a radio name that exists only on another screen (campaign top-up modal)
+[VERIFIED] role-scoped-real       expected PASS  got PASS         control: the checkout radio's real name
+[VERIFIED] regex-case             expected FAIL  got FAIL         a regex in capitals against source written in title case
+[VERIFIED] disabled-reach         expected DEAD  got DEAD         a method called only from a @Disabled test reaches nothing
+[VERIFIED] disabled-control       expected FAIL  got FAIL         control: the same call from an enabled test reaches it
+[MISSED  ] param-passthrough      expected FAIL  got PASS         a stale literal passed through two page-object methods
+[VERIFIED] dead-method            expected DEAD  got DEAD         a bad locator in a method no test calls is DEAD, not FAIL
+[VERIFIED] live-method            expected FAIL  got FAIL         the same bad locator in a method tests DO call is FAIL
+
+27/29 probes verified, 2 missed

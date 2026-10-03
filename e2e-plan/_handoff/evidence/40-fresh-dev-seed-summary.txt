@@ -1,0 +1,26 @@
+Static seed validation passed: 14 organisations with one ACTIVE OWNER each, 554 identities, 504 customers, 1003 addresses, 34 riders, 13 brands, 104 outlets, 504 dishes
+Static seed validation passed: 14 organisations with one ACTIVE OWNER each, 554 identities, 504 customers, 1003 addresses, 34 riders, 13 brands, 104 outlets, 504 dishes
+identity.users=552
+identity.user_roles=552
+identity.organisations=14
+identity.organisation_members=14
+customer.customers=504
+customer.customer_addresses=1003
+delivery.delivery_executives=34
+restaurant.brands=13
+restaurant.outlets=104
+restaurant.categories=103
+restaurant.master_menu_items=504
+restaurant.category_timings=101
+restaurant.brand_category_timings=49
+restaurant.outlet_category_timings=307
+restaurant.outlet_timings=101
+restaurant.outlet_menu_overrides=1
+government_id.brand_documents=36
+government_id.executive_documents=98
+government_id.executive_bank_details=34
+government_id.biometric_verifications=30
+government_id.brand_bank_details=3
+Live seed primary-key and admin-role verification passed
+Dummy data loaded and fixture relationships verified.
+ Dummy data loaded.

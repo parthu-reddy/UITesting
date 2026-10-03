@@ -1,0 +1,17 @@
+{
+  "observedAt": "2026-10-03T17:54:30.910532+00:00",
+  "proof": "public Oracle browser E2E after corrected Restaurant/Chat rollout",
+  "orderId": "e82f8c51-6041-4987-88b9-c3f02ac781a8",
+  "class": "com.fooddelivery.e2e.tests.features.exceptions.ChatAndRefundIsolationTest",
+  "invocation": 2,
+  "tests": "1",
+  "failures": "0",
+  "errors": "0",
+  "skipped": "0",
+  "seconds": "21.955",
+  "methods": [
+    "outsidersAreRefused"
+  ],
+  "dataPolicy": "retain",
+  "cleanupPerformed": false
+}

@@ -70,3 +70,15 @@ biometric and duty gates remain authoritative. Administrator signup is forbidden
 The coordinated deployment was verified on 2026-10-01: all three fresh-account registration
 flows and all eight four-role login smoke cases passed without skips. See the login-and-OTP
 pending notes for the exact scope and remaining validation.
+
+
+## 2026-10-03T22:19:36+05:30 — Canonical Dev opening window
+
+Food at Brand1 Outlet3 has an explicit all-day dummy seed window00:00–23:59:59 for the shared canonical order flow. Other category windows remain realistic. This seed change is not yet loaded; prove current configured hours/public orderability, Home distance and authoritative rider readiness before checkout. No application hours bypass.
+
+
+Updated 2026-10-03T23:15:39+05:30: the additive Brand1Outlet3 Food window was loaded successfully at22:37 IST without a wipe. Actual canonical order e82f8c51 selected the live nearby Brand1Outlet10; its retained manifest is authoritative for downstream regression inputs. Food/category windows and outlet/rider readiness must still be verified at checkout; do not assume the preferred outlet is always selected.
+
+## 2026-10-04T00:40:47+05:30 — O2 final retained state
+
+Canonical e82f8c51-6041-4987-88b9-c3f02ac781a8 remains delivered at Brand1Outlet10/4a187e63-659d-4ba6-925f-52cd278f8bf1 with all six immutable reviews; driver2/4.50, product1/5.00, restaurant public1/4.00. Final read-only earnings19.11/0/19.11 and riderOFFLINE verified. Restaurant driver reviewaa4134fc-837e-4b99-8cba-4efcacbd240c retained. O2 complete; never rerun either remaining writer. Chat window ends2026-10-03T19:12:46Z; completed final chat gates preceded expiry. Evidence41-final-retained-readonly-state.json. STAFF9999887458 remains MANAGER/REMOVED.

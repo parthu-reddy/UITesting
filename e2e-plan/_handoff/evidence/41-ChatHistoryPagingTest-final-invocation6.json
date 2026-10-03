@@ -1,0 +1,17 @@
+{
+  "tests": 1,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "time": "7.253",
+  "invocation": 6,
+  "proof": "deployed Oracle public URL",
+  "orderId": "e82f8c51-6041-4987-88b9-c3f02ac781a8",
+  "methods": [
+    {
+      "name": "earlierMessagesCanBeLoaded",
+      "time": "6.855",
+      "outcome": "passed"
+    }
+  ]
+}

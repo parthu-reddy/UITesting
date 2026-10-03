@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.fooddelivery.e2e.tests.features.exceptions.ChatAndRefundIsolationTest" time="39.131" tests="1" errors="0" skipped="0" failures="1">
+  <testcase name="outsidersAreRefused" classname="com.fooddelivery.e2e.tests.features.exceptions.ChatAndRefundIsolationTest" time="36.624">
+    <failure message="[outsider subscription refused: {frames=[CONNECTED], error=false, closed=1002}] &#10;expected: true&#10; but was: false" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: 
+[outsider subscription refused: {frames=[CONNECTED], error=false, closed=1002}] 
+expected: true
+ but was: false
+	at com.fooddelivery.e2e.tests.features.exceptions.ChatAndRefundIsolationTest.outsidersAreRefused(ChatAndRefundIsolationTest.java:118)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+</failure>
+    <system-out>[E2E STARTUP] Creating Playwright driver
+[E2E STARTUP] Launching Chromium (headless=true)
+[E2E STARTUP] Chromium ready
+</system-out>
+  </testcase>
+</testsuite>

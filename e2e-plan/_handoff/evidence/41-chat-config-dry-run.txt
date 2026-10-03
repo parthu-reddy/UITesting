@@ -1,0 +1,7 @@
+==> syncing local Deployment repo
+Already up to date.
+==> config files: chat-service.yml
+==> readers to restart sequentially (1): chat-service
+==> dry-run: would push 1 config(s) to ubuntu@140.245.234.137
+    chat-service.yml
+==> dry-run complete; no files were published and no services restarted

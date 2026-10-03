@@ -1,0 +1,16 @@
+-------------------------------------------------------------------------------
+Test set: com.fooddelivery.e2e.tests.features.organisations.OrganisationRestaurantAccessTest
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 29.68 s <<< FAILURE! -- in com.fooddelivery.e2e.tests.features.organisations.OrganisationRestaurantAccessTest
+com.fooddelivery.e2e.tests.features.organisations.OrganisationRestaurantAccessTest.organisationRestaurantAccess -- Time elapsed: 26.90 s <<< ERROR!
+com.microsoft.playwright.TimeoutError: Timeout 10000ms exceeded
+	at com.microsoft.playwright.impl.WaitableTimeout.get(WaitableTimeout.java:41)
+	at com.microsoft.playwright.impl.WaitableRace.get(WaitableRace.java:46)
+	at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:147)
+	at com.microsoft.playwright.impl.PageImpl.waitForCondition(PageImpl.java:1635)
+	at com.fooddelivery.e2e.tests.features.organisations.OrganisationRestaurantAccessTest.assertStock(OrganisationRestaurantAccessTest.java:123)
+	at com.fooddelivery.e2e.tests.features.organisations.OrganisationRestaurantAccessTest.organisationRestaurantAccess(OrganisationRestaurantAccessTest.java:82)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+

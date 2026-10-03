@@ -1,0 +1,10 @@
+{
+  "tests": 1,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "time": "7.44",
+  "invocation": 7,
+  "proof": "Oracle after final read-only Restaurant rollout",
+  "orderId": "e82f8c51-6041-4987-88b9-c3f02ac781a8"
+}

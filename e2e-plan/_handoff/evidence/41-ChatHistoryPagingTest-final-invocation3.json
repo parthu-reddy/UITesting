@@ -1,0 +1,17 @@
+{
+  "tests": 1,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "time": "7.752",
+  "methods": [
+    {
+      "name": "earlierMessagesCanBeLoaded",
+      "time": "7.364",
+      "outcome": "passed"
+    }
+  ],
+  "invocation": 3,
+  "proof": "Oracle deployed public URL",
+  "orderId": "e82f8c51-6041-4987-88b9-c3f02ac781a8"
+}

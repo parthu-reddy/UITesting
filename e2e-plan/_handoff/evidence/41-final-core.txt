@@ -1,0 +1,60 @@
+[PASS] I-1                      reversal catch block does not fall through and is transactional
+[PASS] COMPILE                  no orphaned annotations (dangling after a removed member)
+[PASS] AUTHZ                    every endpoint has authorization or is allowlisted (171 endpoints scanned)
+[PASS] I-2                      KYC verification callback is authorized
+[PASS] I-13                     order invoice and participants are authorized
+[PASS] I-14                     driver suspension and fleet mutation are authorized
+[PASS] I-3a                     /api/v1/internal/** is not blanket permitAll
+[PASS] I-3b                     SecurityContextFilter verifies the identity it trusts
+[PASS] I-4                      WebSocket handlers bind driverId to the session user
+[PASS] I-5a                     OutboxProcessor publishes an eventId header
+[PASS] I-5b                     no consumer falls back to a random idempotency key
+[PASS] I-5c                     13 consumers read the eventId header
+         └─ informational: MenuCacheInvalidationListener.java, OrderEventConsumer.java, PaymentEventConsumer.java, ChatRefundProcessorService.java, OrderEventConsumer.java, ReviewEventConsumer.java, DelayedDispatchPoller.java, OrderEventConsumer.java, LogisticsDispatchService.java, DispatchEventConsumer.java, EventPayloadConstants.java, DeadLetterReplayer.java, OutboxProcessor.java
+[PASS] I-8                      outbox_events is created by exactly one migration
+[PASS] I-9a                     MapsIntegration does not bypass the filter chain
+[PASS] I-9b                     no endpoint returns the Maps API key to the client
+[PASS] I-10                     no CommandLineRunner dumps a whole table at boot
+[PASS] I-15                     cityId is not hardwired at call sites
+[PASS] I-16                     no delomboked boilerplate in main sources
+[PASS] I-17                     no test asserts a tautology
+[PASS] I-17b                    no test package without a corresponding main package
+[PASS] I-18a                    a root aggregator pom exists for the CI build step (workflow is aspirational)
+[PASS] I-18b                    the CI workflow text does not reference Testcontainers
+[PASS] I-18c                    the UI gates run in CI
+[PASS] I-19a                    an npm script runs ESLint
+[PASS] I-19d                    the ESLint warning budget is pinned (ratchet)
+[PASS] I-19b                    tsconfig enables strict
+[PASS] I-19c                    no unallowlisted raw fetch() in src (20 files allowlisted)
+[PASS] I-22                     the outbox retention query has a caller
+[PASS] I-26                     every executor field is used and shut down
+[PASS] I-27                     InterruptedException always restores the interrupt flag
+[PASS] I-29                     no empty catch blocks
+[PASS] I-28                     outbox send is awaited with a timeout
+[PASS] I-31                     no zero-byte, duplicate-named or stray .java files
+[PASS] I-32                     gateway RBAC prefix match checks a path boundary
+[PASS] I-34                     an unreachable Config Server fails startup (fail-fast)
+[PASS] I-35                     outbox status default is a real OutboxStatus
+[PASS] I-36a                    BFF CORS restricts origins
+[PASS] I-36b                    the log-ingest endpoint is authenticated
+[PASS] I-37                     no WebSocket handler allows all origins
+[PASS] MCP-IDENTITY             no @Tool manufactures an Authentication, and MCP is not routed at the edge
+[PASS] SCHEDULE-CLASSIFIED      every @Scheduled class records its behaviour under replication
+[PASS] IDEMPOTENCY-RETENTION    idempotency keys are swept centrally and not re-copied per service
+[PASS] MONEY-PRECISION          monetary values are not read out of JSON through a double
+[PASS] MESSAGING-CONTEXT        messaging contract bases stay minimal and keep exclusions in properties
+[PASS] MODIFYING-TRANSACTIONAL  every @Modifying repository query carries its own @Transactional
+[PASS] CI-ROOT-POM              the CI copy of the aggregator pom matches the real one
+[PASS] QUERY-PARAMS-BOUND       every @Query named parameter is supplied by the method it annotates
+[PASS] BOOT-CONFIG-AMBIGUITY    no test relying on the configuration search resolves to two candidates
+[PASS] STUB-CYCLES              contract stub graph (informational, never fails)
+         └─ informational: 31 stub edges, 6 mutual pair(s) -- use FoodDeliveryContracts/build_verify.sh so build order cannot matter: CustomerApplication <-> LedgerService; CustomerApplication <-> PaymentGatewayIntegration; CustomerApplication <-> RestaurantApplication; DeliveryExecutiveApplication <-> GovernmentIDValidationService; DeliveryExecutiveApplication <-> MapsIntegration; GovernmentIDValidationService <-> RestaurantApplication
+[PASS] SCHEMA-STRICT            schemas on the strictness ratchet keep their required fields (165 listed)
+[PASS] SPEC-DRIFT               controller routes present in openapi.json (294 routes, budget 0)
+[PASS] G-10                     IdempotencyFilter is registered in a filter chain
+[PASS] SCHEMA-IMMUTABLE         published SQL protected; reviewed fresh-Dev recreation scoped (13 modules)
+[PASS] GW-RATELIMIT             every gateway route declares its own rate limit
+[PASS] EVENT-BINDING            event binding ratchet passes
+[PASS] EVENT-BIND-NO-RETRY      an unbindable payload goes straight to the DLT
+
+56/56 checks passed, 0 findings open

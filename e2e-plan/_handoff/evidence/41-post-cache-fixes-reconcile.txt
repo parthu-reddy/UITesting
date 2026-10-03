@@ -1,0 +1,8 @@
+  declared and running : 29
+  declared, NOT running: 0
+  running, NOT declared: 0
+
+  image drift (declared vs running):
+    29 services checked, 0 drifting
+
+  no undeclared containers to reconcile.

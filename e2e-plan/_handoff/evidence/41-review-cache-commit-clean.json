@@ -1,0 +1,122 @@
+{
+  "observedAt": "2026-10-03T18:11:36.822134+00:00",
+  "repo": "ReviewsService",
+  "command": "mvn -o clean verify -Dnet.bytebuddy.experimental=true",
+  "reports": [
+    {
+      "class": "com.fooddelivery.architecture.ArchitectureEnforcementTest",
+      "seconds": "1.921",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.fooddelivery.reviews.EndpointAuthorizationCoverageTest",
+      "seconds": "0.047",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.fooddelivery.reviews.ReviewsApplicationTests",
+      "seconds": "7.471",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.fooddelivery.reviews.contract.MessagingTest",
+      "seconds": "3.433",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.fooddelivery.reviews.contract.ReviewsCustomerContractConsumerTest",
+      "seconds": "11.444",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.fooddelivery.reviews.entity.ReviewAggregateTest",
+      "seconds": "0.023",
+      "tests": 14,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.fooddelivery.reviews.mapper.ReviewMapperTest",
+      "seconds": "0.012",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.fooddelivery.reviews.security.ReviewAccessPolicyTest",
+      "seconds": "0.011",
+      "tests": 11,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.fooddelivery.reviews.service.ReviewCacheCommitTest",
+      "seconds": "0.136",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.fooddelivery.reviews.service.ReviewCommandServiceTest",
+      "seconds": "0.307",
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.fooddelivery.reviews.service.ReviewEligibilityServiceTest",
+      "seconds": "0.138",
+      "tests": 16,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.fooddelivery.reviews.service.ReviewQueryServiceTest",
+      "seconds": "0.559",
+      "tests": 10,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "com.fooddelivery.reviews.web.ReviewsGlobalExceptionHandlerTest",
+      "seconds": "0.027",
+      "tests": 11,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  ],
+  "tests": 99,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "freshBootJars": [
+    {
+      "file": "reviews-service-1.0-SNAPSHOT.jar",
+      "bytes": 114403092,
+      "modifiedAt": "2026-10-03T18:10:06.880222+00:00"
+    }
+  ]
+}

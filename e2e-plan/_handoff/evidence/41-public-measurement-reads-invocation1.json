@@ -1,0 +1,8 @@
+{
+  "tests": "1",
+  "failures": "0",
+  "errors": "0",
+  "skipped": "0",
+  "time": "25.695",
+  "purpose": "30 successful public GETs each: organisations, brands, outlets; no mutations"
+}

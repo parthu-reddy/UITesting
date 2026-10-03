@@ -1,0 +1,22 @@
+{
+  "tests": 2,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "time": "26.821",
+  "proof": "deployed Oracle public URL",
+  "invocation": 4,
+  "orderId": "e82f8c51-6041-4987-88b9-c3f02ac781a8",
+  "methods": [
+    {
+      "name": "remainingDriverReviewRefreshesTheCachedAggregate",
+      "time": "14.309",
+      "outcome": "passed"
+    },
+    {
+      "name": "submittedDishReviewRemainsReadOnly",
+      "time": "12.127",
+      "outcome": "passed"
+    }
+  ]
+}

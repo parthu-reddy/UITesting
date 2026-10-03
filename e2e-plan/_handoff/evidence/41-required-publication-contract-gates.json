@@ -1,0 +1,30 @@
+[
+  {
+    "repository": "DeliveryExecutiveApplication",
+    "workflow": "publish-stubs",
+    "id": 37140397594,
+    "head": "ab493313f648f79d76f19e28b0938e9eb8e5a97e",
+    "conclusion": "success"
+  },
+  {
+    "repository": "RestaurentApplication",
+    "workflow": "publish-stubs",
+    "id": 37140681388,
+    "head": "3ab2a2cbccb65f529960bd493d1e94452ad7b013",
+    "conclusion": "success"
+  },
+  {
+    "repository": "RestaurentApplication",
+    "workflow": "contract-tests",
+    "id": 37140683165,
+    "head": "3ab2a2cbccb65f529960bd493d1e94452ad7b013",
+    "conclusion": "success"
+  },
+  {
+    "repository": "CommunicationService",
+    "workflow": "contract-tests",
+    "id": 37141292582,
+    "head": "52463c301641dd639b8637ba12d15560304d0999",
+    "conclusion": "success"
+  }
+]

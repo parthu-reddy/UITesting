@@ -1,0 +1,48 @@
+{
+  "intervalStart": "2026-10-03T18:29:40Z",
+  "intervalEnd": "2026-10-03T18:30:05Z",
+  "records": [
+    {
+      "@timestamp": "2026-10-03T18:29:47.155102152Z",
+      "level": "INFO",
+      "logger_name": "com.fooddelivery.common.security.SecurityContextFilter",
+      "message": "SecurityContextFilter [GET /api/v1/reviews/orders/e82f8c51-6041-4987-88b9-c3f02ac781a8/eligibility] - Headers: X-User-Id=ebc621a5-22bd-40f6-b62e-f62d85d75f7b, X-User-Roles=CUSTOMER"
+    },
+    {
+      "@timestamp": "2026-10-03T18:29:48.31414822Z",
+      "level": "INFO",
+      "logger_name": "com.fooddelivery.common.security.SecurityContextFilter",
+      "message": "SecurityContextFilter [GET /api/v1/reviews/orders/e82f8c51-6041-4987-88b9-c3f02ac781a8/eligibility] - Headers: X-User-Id=ebc621a5-22bd-40f6-b62e-f62d85d75f7b, X-User-Roles=CUSTOMER"
+    },
+    {
+      "@timestamp": "2026-10-03T18:29:48.804159951Z",
+      "level": "INFO",
+      "logger_name": "com.fooddelivery.reviews.web.ReviewController",
+      "message": "POST /api/v1/reviews - orderId=e82f8c51-6041-4987-88b9-c3f02ac781a8, entries=1, userId=ebc621a5-22bd-40f6-b62e-f62d85d75f7b"
+    },
+    {
+      "@timestamp": "2026-10-03T18:29:48.817915985Z",
+      "level": "INFO",
+      "logger_name": "com.fooddelivery.reviews.service.ReviewCommandService",
+      "message": "Creating 1 review(s) for order=e82f8c51-6041-4987-88b9-c3f02ac781a8 by user=ebc621a5-22bd-40f6-b62e-f62d85d75f7b"
+    },
+    {
+      "@timestamp": "2026-10-03T18:29:48.969835687Z",
+      "level": "INFO",
+      "logger_name": "com.fooddelivery.reviews.listener.RedisCacheUpdater",
+      "message": "Successfully evicted Redis cache for key: review_aggregate:PRODUCT:e006add2-f805-4bd0-a9fc-86b6c86e693d"
+    },
+    {
+      "@timestamp": "2026-10-03T18:29:48.97039041Z",
+      "level": "INFO",
+      "logger_name": "com.fooddelivery.reviews.service.ReviewCommandService",
+      "message": "Recorded 1 review(s) for order=e82f8c51-6041-4987-88b9-c3f02ac781a8"
+    },
+    {
+      "@timestamp": "2026-10-03T18:29:49.776909852Z",
+      "level": "INFO",
+      "logger_name": "com.fooddelivery.common.outbox.service.OutboxProcessor",
+      "message": "OUTBOX_EVENT_PUBLISHED eventId=70b38b86-5951-4d58-a218-56ad64ede61c eventType=REVIEW_CREATED aggregateType=REVIEW aggregateId=e006add2-f805-4bd0-a9fc-86b6c86e693d topic=review-events"
+    }
+  ]
+}

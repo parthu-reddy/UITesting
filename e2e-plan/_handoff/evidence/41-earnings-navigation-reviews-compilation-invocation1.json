@@ -1,0 +1,12 @@
+{
+  "observedAt": "2026-10-03T17:55:10.133021+00:00",
+  "invocation": 1,
+  "phase": "testCompile",
+  "exitCode": 1,
+  "executedTests": 0,
+  "productRequests": 0,
+  "problem": "Java wildcard capture in new retained-order response assertion",
+  "correction": "Keep filtered rows as List<?> and cast the single verified row for named rider assertion",
+  "orderId": "e82f8c51-6041-4987-88b9-c3f02ac781a8",
+  "dataPolicy": "retain"
+}

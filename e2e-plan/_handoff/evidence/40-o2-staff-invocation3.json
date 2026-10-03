@@ -1,0 +1,15 @@
+{
+  "invocation": 3,
+  "allocationId": "b60e36adce370ffa",
+  "tests": 1,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "proof": "live Oracle public Gateway and real browser",
+  "completed": true,
+  "sameRetainedFixture": true,
+  "membershipFinalStatus": "REMOVED",
+  "revocationObservedMs": 5298.113458,
+  "ownerAndManagerEarnings": "equal; fresh seed zero amounts, nonzero regression still pending",
+  "fixturePolicy": "retain; no cleanup"
+}

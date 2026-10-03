@@ -1,0 +1,6 @@
+==> syncing local Deployment repo
+fatal: unable to access 'https://github.com/parthu-reddy/Deployment.git/': Could not resolve host: github.com
+Warning: git pull failed, deploying current state
+==> config files: chat-service.yml
+==> readers to restart sequentially (1): chat-service
+ssh: connect to host 140.245.234.137 port 22: Operation not permitted

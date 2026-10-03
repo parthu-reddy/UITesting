@@ -1,0 +1,17 @@
+{
+  "tests": 1,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "time": "9.382",
+  "proof": "deployed Oracle public URL",
+  "invocation": 4,
+  "orderId": "e82f8c51-6041-4987-88b9-c3f02ac781a8",
+  "methods": [
+    {
+      "name": "earningsMatchTheLedger",
+      "time": "7.035",
+      "outcome": "passed"
+    }
+  ]
+}

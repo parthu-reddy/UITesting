@@ -1,0 +1,8 @@
+{
+  "tests": 9,
+  "failures": 0,
+  "errors": 9,
+  "skipped": 0,
+  "outcome": "Environment blocked before test assertions",
+  "reason": "Mockito ByteBuddy JVM self-attach blocked in sandbox; retry outside sandbox without source change"
+}

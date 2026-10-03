@@ -1,0 +1,24 @@
+{
+  "source": "Oracle public Gateway; final deployed Restaurant5b93a8d image",
+  "invocation": 5,
+  "class": "RestaurantNavigationUiTest",
+  "counts": {
+    "tests": 2,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "timeSeconds": 18.003,
+  "methods": [
+    {
+      "name": "restaurantReviewsShowPublicFeedbackAndAggregate",
+      "timeSeconds": 7.259,
+      "outcome": "passed"
+    },
+    {
+      "name": "restaurantSectionsRender",
+      "timeSeconds": 10.359,
+      "outcome": "passed"
+    }
+  ]
+}

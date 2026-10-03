@@ -1,0 +1,15 @@
+== O2 (13 checks)
+[PASS ] O2-BRAND-ORG             Brand and fresh schema use organisation_id, with one brand per organisation
+[PASS ] O2-NO-OWNER-API          no owner-based outlet lookups anywhere
+[PASS ] O2-NO-HELPER             RestaurantSecurityHelper replaced by RestaurantAccess
+[PASS ] O2-PERMISSIONS           every @restaurantAccess rule names an OrganisationPermission
+[PASS ] O2-STOCK                 separate stock endpoint requiring STOCK_TOGGLE
+[PASS ] O2-INTERNAL              outlet→organisation and user→outlets internal endpoints and client methods
+[PASS ] O2-MONEY-POLICY          money policy decides restaurant money by organisation membership
+[PASS ] O2-CHAT                  chat roster keyed by entity; nonexistent moderator role gone
+[PASS ] O2-SEEDS                 seeds write organisation_id; seed validator no longer checks brands.owner_id
+[PASS ] O2-CORE-VALIDATOR        validate_core_services.py Brand field list uses organisationId
+[PASS ] O2-E2E                   OrganisationRestaurantAccessTest
+[PASS ] O2-TIMEOUTS              PERF-1: restaurant access lookups have their own short timeouts
+[PASS ] O2-QUERY-COUNT           PERF-4: query-count test for accessible outlets
+== PASS 13  FAIL 0  STALE 0

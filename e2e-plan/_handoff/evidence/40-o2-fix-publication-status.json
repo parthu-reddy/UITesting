@@ -1,0 +1,35 @@
+{
+  "imagesPublished": true,
+  "registryPlatformDigestChecks": 3,
+  "nativeWorkflowExitCode": 1,
+  "failedStep": "post-publication retention tag-list network timeout",
+  "sourceWorkflowEdited": false,
+  "deployment": "started exact verified tags; no data reset",
+  "producerRuns": [
+    {
+      "id": 37138413376,
+      "conclusion": "success"
+    },
+    {
+      "id": 37138416052,
+      "conclusion": "success"
+    }
+  ],
+  "consumerRuns": [
+    {
+      "id": 37138634395,
+      "conclusion": "success"
+    },
+    {
+      "id": 37138636849,
+      "conclusion": "success"
+    }
+  ],
+  "retentionRetry": "blocked before execution by automatic approval review: broader irreversible image-digest deletion; no workaround/retry",
+  "retentionRequiredForApplicationDeployment": false,
+  "imageDeployment": {
+    "exitCode": 0,
+    "allThreeExactTags": true
+  },
+  "devConfigRefresh": "running;18 readers; Gateway last"
+}

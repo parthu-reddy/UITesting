@@ -1,0 +1,16 @@
+{
+  "runId": "b60e36adce370ffa",
+  "startedAt": "2026-10-03 17:05:06.610824+00",
+  "phone": "9999887458",
+  "organisationId": "6bda9207-420f-53f6-8643-30dc731bff77",
+  "dataPolicy": "retain",
+  "cleanupPerformed": false,
+  "resumedFromRetainedFixture": "member-9999887458.json",
+  "exitCode": 0,
+  "accounts": [
+    {
+      "id": "aa46c426-b124-4819-bec8-f2330de82a71",
+      "phone": "9999887458"
+    }
+  ]
+}

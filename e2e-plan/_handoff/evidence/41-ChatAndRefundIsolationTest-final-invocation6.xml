@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.fooddelivery.e2e.tests.features.exceptions.ChatAndRefundIsolationTest" time="32.953" tests="1" errors="0" skipped="0" failures="0">
+  <testcase name="outsidersAreRefused" classname="com.fooddelivery.e2e.tests.features.exceptions.ChatAndRefundIsolationTest" time="30.535">
+    <system-out>[E2E STARTUP] Creating Playwright driver
+[E2E STARTUP] Launching Chromium (headless=true)
+[E2E STARTUP] Chromium ready
+[BROWSER NETWORK ERROR] 403 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/chat/sessions/853d8fb0-fa5f-4bfa-836a-c977517a24a1/messages
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 403 ()
+[BROWSER NETWORK ERROR] 403 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/chat/sessions/853d8fb0-fa5f-4bfa-836a-c977517a24a1/messages
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 403 ()
+</system-out>
+  </testcase>
+</testsuite>

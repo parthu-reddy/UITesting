@@ -1,0 +1,20 @@
+{
+  "observedAt": "2026-10-03T17:52:34.337383+00:00",
+  "orderId": "e82f8c51-6041-4987-88b9-c3f02ac781a8",
+  "outletId": "4a187e63-659d-4ba6-925f-52cd278f8bf1",
+  "monthlyDelivered": {
+    "orders": 1,
+    "restaurantPayout": 19.11
+  },
+  "rider": {
+    "id": "d1db951e-0538-47a7-883e-f4d995a1d248",
+    "full_name": "Rider 1",
+    "status": "OFFLINE",
+    "verification_status": "APPROVED",
+    "is_active": true
+  },
+  "reviews": {
+    "count": 0,
+    "records": []
+  }
+}

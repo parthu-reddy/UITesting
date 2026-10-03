@@ -1,0 +1,28 @@
+{
+  "observedAt": "2026-10-03T19:03:13.727395+00:00",
+  "declared": 29,
+  "running": 29,
+  "imageDrift": [],
+  "configuredHealthFailures": [],
+  "restarts": 0,
+  "restaurant": {
+    "service": "restaurant-service",
+    "image": "hyd.ocir.io/axekmbadoczl/food-delivery/restaurant-service:5b93a8d-29997b7",
+    "declaredImage": "hyd.ocir.io/axekmbadoczl/food-delivery/restaurant-service:5b93a8d-29997b7",
+    "imageMatches": true,
+    "architecture": "arm64",
+    "os": "linux",
+    "repoDigests": [
+      "hyd.ocir.io/axekmbadoczl/food-delivery/restaurant-service@sha256:fa92146a3a09922e56079c8bb9e82a0ca07eb8c4e16ff1e9bf9aa823ce1f3c56"
+    ],
+    "running": true,
+    "health": "healthy",
+    "restartCount": 0,
+    "startedAt": "2026-10-03T19:01:16.950019559Z",
+    "recentWindowStartsAt": "2026-10-03T19:01:16.950019+00:00",
+    "startupErrorCount": 0,
+    "startupErrorExamples": [],
+    "recentErrorCount": 0,
+    "recentErrorExamples": []
+  }
+}

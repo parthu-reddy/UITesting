@@ -1,0 +1,14 @@
+{
+  "organisationId": "6bda9207-420f-53f6-8643-30dc731bff77",
+  "outletId": "54ba242d-c529-4772-bd8a-6cfdd5b3d7cc",
+  "itemId": "0109c0b8-a2f1-4a3a-a254-41b318268aed",
+  "phone": "9999887458",
+  "dataPolicy": "retain",
+  "cleanupPerformed": false,
+  "invitationId": "8c5d2b3d-3d5c-4e24-a417-fcb639c1055d",
+  "userId": "aa46c426-b124-4819-bec8-f2330de82a71",
+  "resumedFromRetainedFixture": true,
+  "finalMembershipStatus": "REMOVED",
+  "revocationObservedMs": 5298.113458,
+  "completed": true
+}

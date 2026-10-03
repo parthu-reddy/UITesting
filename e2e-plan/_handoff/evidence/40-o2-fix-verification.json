@@ -1,0 +1,64 @@
+{
+  "observedAt": "2026-10-03T16:56:10.715320+00:00",
+  "local": {
+    "restaurant": {
+      "tests": 94,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "customer": {
+      "tests": 476,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "ui": {
+      "files": 126,
+      "tests": 789,
+      "failures": 0,
+      "skipped": 0
+    },
+    "typecheck": "pass",
+    "lint": "pass",
+    "build": "pass",
+    "O2Static": 13,
+    "core": 56,
+    "timezone": 26
+  },
+  "mutations": {
+    "effectiveMenuCache": {
+      "tests": 2,
+      "failures": 2,
+      "sourceRestored": true
+    },
+    "refundQueueEarnings": {
+      "tests": 4,
+      "failures": 1,
+      "sourceRestored": true
+    },
+    "canonicalSeed": {
+      "failedAsExpected": true,
+      "sourceRestored": true
+    }
+  },
+  "committedSource": {
+    "restaurant": "4a37fba50be1ed0cbcb59743471af8b0d87d2441",
+    "customer": "c5001e8e07d1aa3cdd15b0faeaaf0eb8dd04b9d8",
+    "ui": "42f92fb"
+  },
+  "producerPublications": [
+    {
+      "id": 37138413376,
+      "conclusion": "success",
+      "service": "restaurant-service"
+    },
+    {
+      "id": 37138416052,
+      "conclusion": "success",
+      "service": "customer-service"
+    }
+  ],
+  "liveGate": "pending exact retained STAFF resume after final deployment",
+  "fullPlatform": "incomplete; O3 and later unstarted"
+}

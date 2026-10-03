@@ -1,0 +1,539 @@
+{
+  "observedAt": "2026-10-03T18:47:05.517111+00:00",
+  "tracesRetrieved": 100,
+  "outletTraces": 9,
+  "slowest": [
+    {
+      "traceID": "0c8beafcaa3a141403c51f4e458a6e3c",
+      "operation": "http get /api/v1/outlets",
+      "durationMs": 226.808,
+      "startTimeMicros": 1791052540820688,
+      "spans": [
+        {
+          "service": "restaurant-service",
+          "operation": "authorize request",
+          "durationMs": 0.385,
+          "startRelativeMs": 4.387
+        },
+        {
+          "service": "restaurant-service",
+          "operation": "security filterchain before",
+          "durationMs": 3.819,
+          "startRelativeMs": 1.067
+        },
+        {
+          "service": "restaurant-service",
+          "operation": "circuit-breaker",
+          "durationMs": 116.118,
+          "startRelativeMs": 72.99
+        },
+        {
+          "service": "restaurant-service",
+          "operation": "secured request",
+          "durationMs": 220.503,
+          "startRelativeMs": 4.91
+        },
+        {
+          "service": "restaurant-service",
+          "operation": "authorize method",
+          "durationMs": 0.686,
+          "startRelativeMs": 9.044
+        },
+        {
+          "service": "restaurant-service",
+          "operation": "security filterchain after",
+          "durationMs": 0.721,
+          "startRelativeMs": 225.485
+        },
+        {
+          "service": "restaurant-service",
+          "operation": "http get /api/v1/outlets",
+          "durationMs": 226.808,
+          "startRelativeMs": 0.0
+        },
+        {
+          "service": "api-gateway",
+          "operation": "HTTP GET",
+          "durationMs": 227.421,
+          "startRelativeMs": -2.718
+        },
+        {
+          "service": "api-gateway",
+          "operation": "http get",
+          "durationMs": 232.837,
+          "startRelativeMs": -5.575
+        }
+      ]
+    },
+    {
+      "traceID": "2a97175e1cdaee51fcc77d70cea04861",
+      "operation": "http get /api/v1/outlets",
+      "durationMs": 37.578,
+      "startTimeMicros": 1791053026156729,
+      "spans": [
+        {
+          "service": "restaurant-service",
+          "operation": "security filterchain before",
+          "durationMs": 0.851,
+          "startRelativeMs": 0.54
+        },
+        {
+          "service": "restaurant-service",
+          "operation": "authorize request",
+          "durationMs": 0.14,
+          "startRelativeMs": 1.181
+        },
+        {
+          "service": "restaurant-service",
+          "operation": "secured request",
+          "durationMs": 33.761,
+          "startRelativeMs": 1.405
+        },
+        {
+          "service": "restaurant-service",
+          "operation": "authorize method",
+          "durationMs": 0.203,
+          "startRelativeMs": 1.983
+        },
+        {
+          "service": "restaurant-service",
+          "operation": "security filterchain after",
+          "durationMs": 0.13,
+          "startRelativeMs": 35.218
+        },
+        {
+          "service": "restaurant-service",
+          "operation": "http get /api/v1/outlets",
+          "durationMs": 37.578,
+          "startRelativeMs": 0.0
+        },
+        {
+          "service": "api-gateway",
+          "operation": "HTTP GET",
+          "durationMs": 47.681,
+          "startRelativeMs": -10.026
+        },
+        {
+          "service": "api-gateway",
+          "operation": "http get",
+          "durationMs": 54.371,
+          "startRelativeMs": -16.158
+        }
+      ]
+    },
+    {
+      "traceID": "528899208f5f2a6c05c25e6f1ea1bea9",
+      "operation": "http get /api/v1/outlets/{outletId}/categories/{categoryId}/timings",
+      "durationMs": 29.05,
+      "startTimeMicros": 1791053052914626,
+      "spans": [
+        {
+          "service": "restaurant-service",
+          "operation": "authorize request",
+          "durationMs": 0.139,
+          "startRelativeMs": 9.118
+        },
+        {
+          "service": "restaurant-service",
+          "operation": "security filterchain before",
+          "durationMs": 8.282,
+          "startRelativeMs": 1.052
+        },
+        {
+          "service": "restaurant-service",
+          "operation": "authorize method",
+          "durationMs": 0.344,
+          "startRelativeMs": 16.447
+        },
+        {
+          "service": "restaurant-service",
+          "operation": "secured request",
+          "durationMs": 19.473,
+          "startRelativeMs": 9.35
+        },
+        {
+          "service": "restaurant-service",
+          "operation": "security filterchain after",
+          "durationMs": 0.093,
+          "startRelativeMs": 28.866
+        },
+        {
+          "service": "restaurant-service",
+          "operation": "http get /api/v1/outlets/{outletId}/categories/{categoryId}/timings",
+          "durationMs": 29.05,
+          "startRelativeMs": 0.0
+        },
+        {
+          "service": "api-gateway",
+          "operation": "http get",
+          "durationMs": 61.266,
+          "startRelativeMs": -30.843
+        },
+        {
+          "service": "api-gateway",
+          "operation": "HTTP GET",
+          "durationMs": 33.705,
+          "startRelativeMs": -3.874
+        }
+      ]
+    },
+    {
+      "traceID": "e43aad1c2da0998a0c52c1226be91559",
+      "operation": "http get /api/v1/outlets",
+      "durationMs": 22.521,
+      "startTimeMicros": 1791053039081061,
+      "spans": [
+        {
+          "service": "restaurant-service",
+          "operation": "authorize request",
+          "durationMs": 0.247,
+          "startRelativeMs": 1.51
+        },
+        {
+          "service": "restaurant-service",
+          "operation": "security filterchain before",
+          "durationMs": 1.406,
+          "startRelativeMs": 0.478
+        },
+        {
+          "service": "restaurant-service",
+          "operation": "authorize method",
+          "durationMs": 0.184,
+          "startRelativeMs": 2.494
+        },
+        {
+          "service": "restaurant-service",
+          "operation": "secured request",
+          "durationMs": 20.286,
+          "startRelativeMs": 1.901
+        },
+        {
+          "service": "restaurant-service",
+          "operation": "security filterchain after",
+          "durationMs": 0.156,
+          "startRelativeMs": 22.235
+        },
+        {
+          "service": "restaurant-service",
+          "operation": "http get /api/v1/outlets",
+          "durationMs": 22.521,
+          "startRelativeMs": 0.0
+        },
+        {
+          "service": "api-gateway",
+          "operation": "HTTP GET",
+          "durationMs": 27.265,
+          "startRelativeMs": -6.98
+        },
+        {
+          "service": "api-gateway",
+          "operation": "http get",
+          "durationMs": 36.354,
+          "startRelativeMs": -13.583
+        }
+      ]
+    },
+    {
+      "traceID": "68b6dffd1956c513f7e48bbd2d4e9843",
+      "operation": "http get /api/v1/outlets",
+      "durationMs": 15.272,
+      "startTimeMicros": 1791053030471479,
+      "spans": [
+        {
+          "service": "restaurant-service",
+          "operation": "security filterchain before",
+          "durationMs": 0.822,
+          "startRelativeMs": 0.419
+        },
+        {
+          "service": "restaurant-service",
+          "operation": "authorize request",
+          "durationMs": 0.14,
+          "startRelativeMs": 1.02
+        },
+        {
+          "service": "restaurant-service",
+          "operation": "authorize method",
+          "durationMs": 0.485,
+          "startRelativeMs": 5.481
+        },
+        {
+          "service": "restaurant-service",
+          "operation": "secured request",
+          "durationMs": 13.704,
+          "startRelativeMs": 1.255
+        },
+        {
+          "service": "restaurant-service",
+          "operation": "security filterchain after",
+          "durationMs": 0.126,
+          "startRelativeMs": 15.008
+        },
+        {
+          "service": "restaurant-service",
+          "operation": "http get /api/v1/outlets",
+          "durationMs": 15.272,
+          "startRelativeMs": 0.0
+        },
+        {
+          "service": "api-gateway",
+          "operation": "HTTP GET",
+          "durationMs": 16.103,
+          "startRelativeMs": -1.427
+        },
+        {
+          "service": "api-gateway",
+          "operation": "http get",
+          "durationMs": 20.031,
+          "startRelativeMs": -4.561
+        }
+      ]
+    },
+    {
+      "traceID": "afd28d5cb4ad3609f9c24fad1524b4ab",
+      "operation": "http get /api/v1/outlets/{outletId}/categories/{categoryId}/timings",
+      "durationMs": 14.142,
+      "startTimeMicros": 1791053052879845,
+      "spans": [
+        {
+          "service": "api-gateway",
+          "operation": "http get",
+          "durationMs": 24.572,
+          "startRelativeMs": -9.099
+        },
+        {
+          "service": "api-gateway",
+          "operation": "HTTP GET",
+          "durationMs": 14.86,
+          "startRelativeMs": -1.294
+        },
+        {
+          "service": "restaurant-service",
+          "operation": "authorize request",
+          "durationMs": 0.078,
+          "startRelativeMs": 2.201
+        },
+        {
+          "service": "restaurant-service",
+          "operation": "security filterchain before",
+          "durationMs": 2.103,
+          "startRelativeMs": 0.316
+        },
+        {
+          "service": "restaurant-service",
+          "operation": "authorize method",
+          "durationMs": 0.164,
+          "startRelativeMs": 4.507
+        },
+        {
+          "service": "restaurant-service",
+          "operation": "secured request",
+          "durationMs": 11.494,
+          "startRelativeMs": 2.441
+        },
+        {
+          "service": "restaurant-service",
+          "operation": "security filterchain after",
+          "durationMs": 0.091,
+          "startRelativeMs": 13.974
+        },
+        {
+          "service": "restaurant-service",
+          "operation": "http get /api/v1/outlets/{outletId}/categories/{categoryId}/timings",
+          "durationMs": 14.142,
+          "startRelativeMs": 0.0
+        }
+      ]
+    },
+    {
+      "traceID": "8f9a146252673478fcf56ddde81f4861",
+      "operation": "http get /api/v1/outlets",
+      "durationMs": 11.069,
+      "startTimeMicros": 1791053041262939,
+      "spans": [
+        {
+          "service": "restaurant-service",
+          "operation": "authorize request",
+          "durationMs": 0.151,
+          "startRelativeMs": 1.017
+        },
+        {
+          "service": "restaurant-service",
+          "operation": "security filterchain before",
+          "durationMs": 0.76,
+          "startRelativeMs": 0.526
+        },
+        {
+          "service": "restaurant-service",
+          "operation": "authorize method",
+          "durationMs": 0.38,
+          "startRelativeMs": 3.011
+        },
+        {
+          "service": "restaurant-service",
+          "operation": "secured request",
+          "durationMs": 9.395,
+          "startRelativeMs": 1.303
+        },
+        {
+          "service": "restaurant-service",
+          "operation": "security filterchain after",
+          "durationMs": 0.116,
+          "startRelativeMs": 10.744
+        },
+        {
+          "service": "restaurant-service",
+          "operation": "http get /api/v1/outlets",
+          "durationMs": 11.069,
+          "startRelativeMs": 0.0
+        },
+        {
+          "service": "api-gateway",
+          "operation": "HTTP GET",
+          "durationMs": 11.158,
+          "startRelativeMs": -1.134
+        },
+        {
+          "service": "api-gateway",
+          "operation": "http get",
+          "durationMs": 14.98,
+          "startRelativeMs": -3.382
+        }
+      ]
+    },
+    {
+      "traceID": "a6623dba09dac5e903fb173929a15aad",
+      "operation": "http get /api/v1/outlets",
+      "durationMs": 9.875,
+      "startTimeMicros": 1791053042719384,
+      "spans": [
+        {
+          "service": "api-gateway",
+          "operation": "HTTP GET",
+          "durationMs": 10.584,
+          "startRelativeMs": -0.908
+        },
+        {
+          "service": "api-gateway",
+          "operation": "http get",
+          "durationMs": 13.579,
+          "startRelativeMs": -2.96
+        },
+        {
+          "service": "restaurant-service",
+          "operation": "authorize request",
+          "durationMs": 0.139,
+          "startRelativeMs": 1.009
+        },
+        {
+          "service": "restaurant-service",
+          "operation": "security filterchain before",
+          "durationMs": 0.729,
+          "startRelativeMs": 0.491
+        },
+        {
+          "service": "restaurant-service",
+          "operation": "authorize method",
+          "durationMs": 0.216,
+          "startRelativeMs": 1.777
+        },
+        {
+          "service": "restaurant-service",
+          "operation": "secured request",
+          "durationMs": 8.284,
+          "startRelativeMs": 1.234
+        },
+        {
+          "service": "restaurant-service",
+          "operation": "security filterchain after",
+          "durationMs": 0.109,
+          "startRelativeMs": 9.561
+        },
+        {
+          "service": "restaurant-service",
+          "operation": "http get /api/v1/outlets",
+          "durationMs": 9.875,
+          "startRelativeMs": 0.0
+        }
+      ]
+    },
+    {
+      "traceID": "9fc37979d89c6f9902dbfd4e5f3d92f6",
+      "operation": "http get /api/v1/outlets",
+      "durationMs": 8.123,
+      "startTimeMicros": 1791053040439011,
+      "spans": [
+        {
+          "service": "restaurant-service",
+          "operation": "authorize request",
+          "durationMs": 0.17,
+          "startRelativeMs": 1.065
+        },
+        {
+          "service": "restaurant-service",
+          "operation": "security filterchain before",
+          "durationMs": 0.811,
+          "startRelativeMs": 0.503
+        },
+        {
+          "service": "restaurant-service",
+          "operation": "authorize method",
+          "durationMs": 0.234,
+          "startRelativeMs": 1.859
+        },
+        {
+          "service": "restaurant-service",
+          "operation": "secured request",
+          "durationMs": 6.431,
+          "startRelativeMs": 1.329
+        },
+        {
+          "service": "restaurant-service",
+          "operation": "security filterchain after",
+          "durationMs": 0.168,
+          "startRelativeMs": 7.79
+        },
+        {
+          "service": "restaurant-service",
+          "operation": "http get /api/v1/outlets",
+          "durationMs": 8.123,
+          "startRelativeMs": 0.0
+        },
+        {
+          "service": "api-gateway",
+          "operation": "http get",
+          "durationMs": 11.327,
+          "startRelativeMs": -2.963
+        },
+        {
+          "service": "api-gateway",
+          "operation": "HTTP GET",
+          "durationMs": 8.741,
+          "startRelativeMs": -1.025
+        }
+      ]
+    }
+  ],
+  "operations": [
+    "authorize method",
+    "authorize request",
+    "circuit-breaker",
+    "http get",
+    "http get /api/v1/brands",
+    "http get /api/v1/brands/{brandId}/master-menu",
+    "http get /api/v1/internal/restaurants/outlets/{outletId}/organisation",
+    "http get /api/v1/internal/restaurants/outlets/{outletId}/summary",
+    "http get /api/v1/outlets",
+    "http get /api/v1/outlets/{outletId}/categories/{categoryId}/timings",
+    "http get /api/v1/restaurants/nearby",
+    "http get /api/v1/restaurants/{restaurantId}/catalog/items",
+    "http get /api/v1/restaurants/{restaurantId}/fulfillment/orders/active",
+    "http head /actuator/health",
+    "http put",
+    "secured request",
+    "security filterchain after",
+    "security filterchain before",
+    "task outbox-backlog-metrics.refresh",
+    "task outbox-processor.process-outbox-events"
+  ]
+}

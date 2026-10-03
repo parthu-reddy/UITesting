@@ -1,0 +1,66 @@
+{
+  "observedAt": "2026-10-04T00:40:47+05:30",
+  "phase": "O2",
+  "outcome": "completed",
+  "proof": "published then deployed Oracle release; public Gateway E2E and protected server telemetry",
+  "performance": [
+    {
+      "service": "restaurant-service",
+      "uri": "/api/v1/brands",
+      "successfulSamples": 48,
+      "p95EstimateMs": 31.317468999999974,
+      "p95BucketUpperMs": 33.554431,
+      "meanMs": 15.429819125000002,
+      "baselineP95EstimateMs": 30.199,
+      "originalDeltaLimitMs": 50.199,
+      "absoluteLimitMs": 150,
+      "outcome": "passed"
+    },
+    {
+      "service": "restaurant-service",
+      "uri": "/api/v1/outlets",
+      "successfulSamples": 48,
+      "p95EstimateMs": 53.68708899999997,
+      "p95BucketUpperMs": 55.924051000000006,
+      "meanMs": 24.374104229166665,
+      "baselineP95EstimateMs": 63.753,
+      "originalDeltaLimitMs": 83.753,
+      "absoluteLimitMs": 150,
+      "outcome": "passed"
+    }
+  ],
+  "postRolloutReadOnlyBatch": {
+    "tests": 5,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "postRolloutChatBatch": {
+    "tests": 2,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "uniquePostRolloutMethods": 7,
+  "canonicalOrder": "e82f8c51-6041-4987-88b9-c3f02ac781a8",
+  "retainedReviewCount": 6,
+  "sourceHeads": {
+    "CommonLibrary": "37f68545a8293d42c9837c290d7bd62cfd673105",
+    "IdentityService": "296c9783ed19d16ff5103ddace0751bbc92aa669",
+    "RestaurantApplication": "5b93a8d524dca534da6b2bf4720abd8b327c99cf",
+    "CustomerApplication": "c5001e8e07d1aa3cdd15b0faeaaf0eb8dd04b9d8",
+    "DeliveryExecutiveApplication": "ab493313f648f79d76f19e28b0938e9eb8e5a97e",
+    "ReviewsService": "d035d2e7a90dfae75fec5ba1a7d66079c385cd62",
+    "CommunicationService": "52463c301641dd639b8637ba12d15560304d0999",
+    "Deployment": "263033dd04ba036b960e3b62a6682ab3d2a4746d",
+    "FoodDeliveryAppUI": "42f92fb0d10361103df9211765b414ad60527eca",
+    "UITesting": "9ca39ad9f3c776550cba156c62387884f15d07f2",
+    "RandomDocuments": "1b892269f522c62922c5813c19665888c3ee4d07"
+  },
+  "hardeningPasses": 15,
+  "reconcile": {
+    "declaredRunning": 29,
+    "drift": 0
+  },
+  "limits": "O3 and later phases are unimplemented; dish timeout remains an error, not promoted to a pass; immediate cache proof passed independently on the remaining driver review"
+}

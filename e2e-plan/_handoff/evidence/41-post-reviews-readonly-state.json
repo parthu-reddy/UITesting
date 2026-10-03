@@ -1,0 +1,49 @@
+{
+  "observedAt": "2026-10-03T17:57:36.905257+00:00",
+  "orderId": "e82f8c51-6041-4987-88b9-c3f02ac781a8",
+  "outletId": "4a187e63-659d-4ba6-925f-52cd278f8bf1",
+  "monthlyDelivered": {
+    "orders": 1,
+    "restaurantPayout": 19.11
+  },
+  "rider": {
+    "id": "d1db951e-0538-47a7-883e-f4d995a1d248",
+    "full_name": "Rider 1",
+    "status": "OFFLINE",
+    "verification_status": "APPROVED",
+    "is_active": true
+  },
+  "reviews": {
+    "count": 4,
+    "records": [
+      {
+        "id": "7fefab92-60a3-47d0-b89f-822a3d0bbe89",
+        "authorRole": "RESTAURANT",
+        "entityType": "CUSTOMER",
+        "rating": 5,
+        "comment": null
+      },
+      {
+        "id": "e30fea4a-1f55-4592-8744-9e0fdbc212d7",
+        "authorRole": "CUSTOMER",
+        "entityType": "DRIVER",
+        "rating": 5,
+        "comment": null
+      },
+      {
+        "id": "2aca4da2-391b-40ca-95a8-1bd6de3dea3e",
+        "authorRole": "CUSTOMER",
+        "entityType": "RESTAURANT",
+        "rating": 4,
+        "comment": "E2E review e82f8c51: hot and on time"
+      },
+      {
+        "id": "52f63fbc-f6ed-4330-b15f-401788b1bb19",
+        "authorRole": "DELIVERY",
+        "entityType": "RESTAURANT",
+        "rating": 4,
+        "comment": null
+      }
+    ]
+  }
+}

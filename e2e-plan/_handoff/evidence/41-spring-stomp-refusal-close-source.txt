@@ -1,0 +1,1 @@
+Inspected installed org.springframework:spring-websocket:6.1.8, StompSubProtocolHandler.sendErrorMessage bytecode: sends STOMP ERROR then closes CloseStatus.PROTOCOL_ERROR, also closes PROTOCOL_ERROR if sending ERROR fails. Oracle access-denied logs correlate with the authenticated1002 close. Other closures/timeouts are not allowed. No framework or service changes.

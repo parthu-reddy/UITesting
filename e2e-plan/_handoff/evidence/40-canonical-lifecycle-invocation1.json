@@ -1,0 +1,14 @@
+{
+  "tests": "1",
+  "failures": "0",
+  "errors": "0",
+  "skipped": "0",
+  "time": "268.807",
+  "orderId": "e82f8c51-6041-4987-88b9-c3f02ac781a8",
+  "actualOutlet": "Brand 1 Outlet 10",
+  "logNetworkResponses": [
+    "400 initial quote",
+    "503 first chat session request"
+  ],
+  "proof": "deployed public Oracle UI, same owned order retained; runtime server defects remain open"
+}

@@ -1,0 +1,25 @@
+{
+  "observedAt": "2026-10-03T17:58:20.903247+00:00",
+  "batchInvocation": 3,
+  "proof": "public Oracle browser E2E",
+  "tests": 2,
+  "failures": 1,
+  "errors": 0,
+  "skipped": 0,
+  "methods": [
+    {
+      "method": "restaurantReviewsShowPublicFeedbackAndAggregate",
+      "seconds": "13.696",
+      "failed": true,
+      "errored": false
+    },
+    {
+      "method": "restaurantSectionsRender",
+      "seconds": "12.837",
+      "failed": false,
+      "errored": false
+    }
+  ],
+  "orderId": "e82f8c51-6041-4987-88b9-c3f02ac781a8",
+  "dataPolicy": "retain"
+}

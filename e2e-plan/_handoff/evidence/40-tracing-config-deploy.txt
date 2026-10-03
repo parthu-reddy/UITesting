@@ -1,0 +1,82 @@
+==> syncing local Deployment repo
+Already up to date.
+==> config files: application.yml
+==> readers to restart sequentially (18): bidding-engine budget-pacing-service campaign-service chat-service communication-integration customer-service delivery-service event-tracking-service government-id-service identity-service ledger-service maps-integration payment-gateway restaurant-service wallet-service ondc-integration-service reviews-service api-gateway
+==> pushing 1 config(s) to VM
+    application.yml
+==> done
+    Config pushed, but no services were restarted.
+    Run: Deployment/deploy.sh --config <service>... to restart the readers.
+==> restarting config consumer: bidding-engine
+ Container bidding-engine Restarting 
+ Container bidding-engine Started 
+==> waiting for health (timeout 150s)
+==> restarting config consumer: budget-pacing-service
+ Container budget-pacing-service Restarting 
+ Container budget-pacing-service Started 
+==> waiting for health (timeout 150s)
+==> restarting config consumer: campaign-service
+ Container campaign-service Restarting 
+ Container campaign-service Started 
+==> waiting for health (timeout 150s)
+==> restarting config consumer: chat-service
+ Container chat-service Restarting 
+ Container chat-service Started 
+==> waiting for health (timeout 150s)
+==> restarting config consumer: communication-integration
+ Container communication-integration Restarting 
+ Container communication-integration Started 
+==> waiting for health (timeout 150s)
+==> restarting config consumer: customer-service
+ Container customer-service Restarting 
+ Container customer-service Started 
+==> waiting for health (timeout 150s)
+==> restarting config consumer: delivery-service
+ Container delivery-service Restarting 
+ Container delivery-service Started 
+==> waiting for health (timeout 150s)
+==> restarting config consumer: event-tracking-service
+ Container event-tracking-service Restarting 
+ Container event-tracking-service Started 
+==> waiting for health (timeout 150s)
+==> restarting config consumer: government-id-service
+ Container government-id-service Restarting 
+ Container government-id-service Started 
+==> waiting for health (timeout 150s)
+==> restarting config consumer: identity-service
+ Container identity-service Restarting 
+ Container identity-service Started 
+==> waiting for health (timeout 150s)
+==> restarting config consumer: ledger-service
+ Container ledger-service Restarting 
+ Container ledger-service Started 
+==> waiting for health (timeout 150s)
+==> restarting config consumer: maps-integration
+ Container maps-integration Restarting 
+ Container maps-integration Started 
+==> waiting for health (timeout 150s)
+==> restarting config consumer: payment-gateway
+ Container payment-gateway Restarting 
+ Container payment-gateway Started 
+==> waiting for health (timeout 150s)
+==> restarting config consumer: restaurant-service
+ Container restaurant-service Restarting 
+ Container restaurant-service Started 
+==> waiting for health (timeout 150s)
+==> restarting config consumer: wallet-service
+ Container wallet-service Restarting 
+ Container wallet-service Started 
+==> waiting for health (timeout 150s)
+==> restarting config consumer: ondc-integration-service
+ Container ondc-integration-service Restarting 
+ Container ondc-integration-service Started 
+==> waiting for health (timeout 150s)
+==> restarting config consumer: reviews-service
+ Container reviews-service Restarting 
+ Container reviews-service Started 
+==> waiting for health (timeout 150s)
+==> restarting config consumer: api-gateway
+ Container api-gateway Restarting 
+ Container api-gateway Started 
+==> waiting for health (timeout 150s)
+==> config publish and restart complete

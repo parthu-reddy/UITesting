@@ -1,0 +1,137 @@
+{
+  "observedAt": "2026-10-03T16:10:36.782499+00:00",
+  "checks": [
+    {
+      "service": "api-gateway",
+      "imageMatches": true,
+      "digestMatches": true,
+      "platformMatches": true
+    },
+    {
+      "service": "bidding-engine",
+      "imageMatches": true,
+      "digestMatches": true,
+      "platformMatches": true
+    },
+    {
+      "service": "budget-pacing-service",
+      "imageMatches": true,
+      "digestMatches": true,
+      "platformMatches": true
+    },
+    {
+      "service": "campaign-service",
+      "imageMatches": true,
+      "digestMatches": true,
+      "platformMatches": true
+    },
+    {
+      "service": "chat-service",
+      "imageMatches": true,
+      "digestMatches": true,
+      "platformMatches": true
+    },
+    {
+      "service": "communication-integration",
+      "imageMatches": true,
+      "digestMatches": true,
+      "platformMatches": true
+    },
+    {
+      "service": "config-service",
+      "imageMatches": true,
+      "digestMatches": true,
+      "platformMatches": true
+    },
+    {
+      "service": "customer-service",
+      "imageMatches": true,
+      "digestMatches": true,
+      "platformMatches": true
+    },
+    {
+      "service": "delivery-service",
+      "imageMatches": true,
+      "digestMatches": true,
+      "platformMatches": true
+    },
+    {
+      "service": "eureka-server-1",
+      "imageMatches": true,
+      "digestMatches": true,
+      "platformMatches": true
+    },
+    {
+      "service": "eureka-server-2",
+      "imageMatches": true,
+      "digestMatches": true,
+      "platformMatches": true
+    },
+    {
+      "service": "event-tracking-service",
+      "imageMatches": true,
+      "digestMatches": true,
+      "platformMatches": true
+    },
+    {
+      "service": "food-delivery-app-ui",
+      "imageMatches": true,
+      "digestMatches": true,
+      "platformMatches": true
+    },
+    {
+      "service": "government-id-service",
+      "imageMatches": true,
+      "digestMatches": true,
+      "platformMatches": true
+    },
+    {
+      "service": "identity-service",
+      "imageMatches": true,
+      "digestMatches": true,
+      "platformMatches": true
+    },
+    {
+      "service": "ledger-service",
+      "imageMatches": true,
+      "digestMatches": true,
+      "platformMatches": true
+    },
+    {
+      "service": "maps-integration",
+      "imageMatches": true,
+      "digestMatches": true,
+      "platformMatches": true
+    },
+    {
+      "service": "payment-gateway",
+      "imageMatches": true,
+      "digestMatches": true,
+      "platformMatches": true
+    },
+    {
+      "service": "restaurant-service",
+      "imageMatches": true,
+      "digestMatches": true,
+      "platformMatches": true
+    },
+    {
+      "service": "wallet-service",
+      "imageMatches": true,
+      "digestMatches": true,
+      "platformMatches": true
+    },
+    {
+      "service": "ondc-integration-service",
+      "imageMatches": true,
+      "digestMatches": true,
+      "platformMatches": true
+    },
+    {
+      "service": "reviews-service",
+      "imageMatches": true,
+      "digestMatches": true,
+      "platformMatches": true
+    }
+  ]
+}

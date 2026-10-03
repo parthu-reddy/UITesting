@@ -1,0 +1,12 @@
+{
+  "observedAt": "2026-10-03T18:07:55.333032+00:00",
+  "control": "review-commit",
+  "selected": "ReviewCacheCommitTest",
+  "exitCode": 1,
+  "tests": 3,
+  "failures": 0,
+  "errors": 1,
+  "skipped": 0,
+  "sourceRestored": true,
+  "restoredSourceSha256": "761a21654b7de6cfa54990e6581ca83bf5e62f9dc43d4bb3e3d40fd9312aa97c"
+}

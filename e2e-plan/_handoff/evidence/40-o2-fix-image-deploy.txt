@@ -1,0 +1,191 @@
+==> syncing local Deployment repo
+Already up to date.
+==> deploying 3 service(s) to ubuntu@140.245.234.137
+    restaurant-service -> hyd.ocir.io/axekmbadoczl/food-delivery/restaurant-service:4a37fba-fe7c9eb
+    customer-service -> hyd.ocir.io/axekmbadoczl/food-delivery/customer-service:c5001e8-712cd8c
+    food-delivery-app-ui -> hyd.ocir.io/axekmbadoczl/food-delivery/food-delivery-app-ui:42f92fb-3664d99
+ Image hyd.ocir.io/axekmbadoczl/food-delivery/food-delivery-app-ui:42f92fb-3664d99 Pulling 
+ Image hyd.ocir.io/axekmbadoczl/food-delivery/restaurant-service:4a37fba-fe7c9eb Pulling 
+ Image hyd.ocir.io/axekmbadoczl/food-delivery/customer-service:c5001e8-712cd8c Pulling 
+ 8d4d8d71a292 Pulling fs layer 0B
+ e182be1f8a07 Pulling fs layer 0B
+ a80ae080871c Pulling fs layer 0B
+ d1ce8bf6ebb7 Pulling fs layer 0B
+ 6159d7b5063a Pulling fs layer 0B
+ d9aab498ab10 Pulling fs layer 0B
+ a93350e51ea2 Pulling fs layer 0B
+ bebbf402eeaf Pulling fs layer 0B
+ 735d46dcd2b8 Pulling fs layer 0B
+ 658ded14444b Pulling fs layer 0B
+ 06f2b6110047 Pulling fs layer 0B
+ 8d5f51eaaaa3 Pulling fs layer 0B
+ 03b7f4f31e3e Pulling fs layer 0B
+ 55d9057ead1b Pulling fs layer 0B
+ 4e5fb8ffb280 Pulling fs layer 0B
+ 8d4d8d71a292 Download complete 0B
+ a80ae080871c Downloading 2.097MB
+ d9aab498ab10 Download complete 0B
+ bebbf402eeaf Downloading 734kB
+ 735d46dcd2b8 Download complete 0B
+ e182be1f8a07 Download complete 0B
+ 6159d7b5063a Download complete 0B
+ d9aab498ab10 Pull complete 0B
+ a93350e51ea2 Download complete 0B
+ bebbf402eeaf Download complete 0B
+ 658ded14444b Download complete 0B
+ 55d9057ead1b Download complete 0B
+ 06f2b6110047 Download complete 0B
+ 4e5fb8ffb280 Download complete 0B
+ 8d5f51eaaaa3 Download complete 0B
+ 03b7f4f31e3e Downloading 1.049MB
+ a80ae080871c Downloading 7.34MB
+ 658ded14444b Pull complete 0B
+ e182be1f8a07 Pull complete 0B
+ bebbf402eeaf Extracting 1B
+ a80ae080871c Downloading 12.58MB
+ 03b7f4f31e3e Downloading 9.437MB
+ 55d9057ead1b Pull complete 0B
+ bebbf402eeaf Pull complete 0B
+ 735d46dcd2b8 Pull complete 0B
+ a93350e51ea2 Pull complete 0B
+ Image hyd.ocir.io/axekmbadoczl/food-delivery/food-delivery-app-ui:42f92fb-3664d99 Pulled 
+ a80ae080871c Downloading 26.53MB
+ 03b7f4f31e3e Downloading 25.17MB
+ a80ae080871c Downloading 36.7MB
+ d1ce8bf6ebb7 Download complete 0B
+ 03b7f4f31e3e Downloading 35.65MB
+ a80ae080871c Downloading 54.53MB
+ 03b7f4f31e3e Downloading 52.43MB
+ a80ae080871c Downloading 69.21MB
+ 03b7f4f31e3e Downloading 67.11MB
+ a80ae080871c Downloading 84.93MB
+ 03b7f4f31e3e Downloading 80.74MB
+ a80ae080871c Downloading 99.61MB
+ 03b7f4f31e3e Downloading 95.42MB
+ a80ae080871c Downloading 109.2MB
+ 03b7f4f31e3e Downloading 107MB
+ a80ae080871c Downloading 124.8MB
+ 03b7f4f31e3e Downloading 118MB
+ a80ae080871c Downloading 126.3MB
+ 03b7f4f31e3e Downloading 118MB
+ a80ae080871c Downloading 126.3MB
+ 03b7f4f31e3e Downloading 118MB
+ a80ae080871c Downloading 126.3MB
+ 03b7f4f31e3e Downloading 118MB
+ a80ae080871c Downloading 126.3MB
+ 03b7f4f31e3e Downloading 118MB
+ a80ae080871c Downloading 126.3MB
+ 03b7f4f31e3e Downloading 118MB
+ a80ae080871c Downloading 126.3MB
+ 03b7f4f31e3e Downloading 118MB
+ a80ae080871c Downloading 126.3MB
+ 03b7f4f31e3e Downloading 118MB
+ a80ae080871c Downloading 126.3MB
+ a80ae080871c Downloading 126.3MB
+ 03b7f4f31e3e Download complete 0B
+ 03b7f4f31e3e Extracting 1B
+ a80ae080871c Downloading 126.3MB
+ 03b7f4f31e3e Extracting 1B
+ a80ae080871c Download complete 0B
+ a80ae080871c Extracting 1B
+ 03b7f4f31e3e Extracting 1B
+ a80ae080871c Extracting 1B
+ 03b7f4f31e3e Extracting 1B
+ 03b7f4f31e3e Extracting 1B
+ a80ae080871c Extracting 1B
+ a80ae080871c Extracting 1B
+ 03b7f4f31e3e Extracting 1B
+ a80ae080871c Extracting 1B
+ 03b7f4f31e3e Extracting 1B
+ a80ae080871c Extracting 1B
+ 03b7f4f31e3e Extracting 1B
+ 03b7f4f31e3e Extracting 1B
+ a80ae080871c Extracting 1B
+ a80ae080871c Extracting 1B
+ 03b7f4f31e3e Extracting 1B
+ a80ae080871c Extracting 1B
+ 03b7f4f31e3e Extracting 2B
+ a80ae080871c Extracting 1B
+ 03b7f4f31e3e Extracting 2B
+ a80ae080871c Extracting 1B
+ 03b7f4f31e3e Extracting 2B
+ a80ae080871c Extracting 2B
+ 03b7f4f31e3e Pull complete 0B
+ 06f2b6110047 Pull complete 0B
+ 4e5fb8ffb280 Pull complete 0B
+ 8d5f51eaaaa3 Extracting 1B
+ a80ae080871c Extracting 2B
+ 8d5f51eaaaa3 Pull complete 0B
+ 6159d7b5063a Pull complete 0B
+ Image hyd.ocir.io/axekmbadoczl/food-delivery/customer-service:c5001e8-712cd8c Pulled 
+ d1ce8bf6ebb7 Pull complete 0B
+ a80ae080871c Pull complete 0B
+ 8d4d8d71a292 Pull complete 0B
+ Image hyd.ocir.io/axekmbadoczl/food-delivery/restaurant-service:4a37fba-fe7c9eb Pulled 
+==> starting independent services: food-delivery-app-ui
+ Container api-gateway Running 
+ Container shared_redis Running 
+ Container eureka-server-1 Running 
+ Container config-service Running 
+ Container food-delivery-app-ui Recreate 
+ Container food-delivery-app-ui Recreated 
+ Container shared_redis Waiting 
+ Container config-service Waiting 
+ Container eureka-server-1 Waiting 
+ Container eureka-server-1 Healthy 
+ Container shared_redis Healthy 
+ Container config-service Healthy 
+ Container food-delivery-app-ui Starting 
+ Container food-delivery-app-ui Started 
+==> waiting for health (timeout 150s)
+==> starting contract service: customer-service
+ Container shared_zookeeper Running 
+ Container eureka-server-1 Running 
+ Container shared_kafka Running 
+ Container config-service Running 
+ Container shared_postgres Running 
+ Container shared_redis Running 
+ Container customer-service Recreate 
+ Container customer-service Recreated 
+ Container eureka-server-1 Waiting 
+ Container shared_postgres Waiting 
+ Container shared_kafka Waiting 
+ Container shared_redis Waiting 
+ Container config-service Waiting 
+ Container shared_redis Healthy 
+ Container config-service Healthy 
+ Container eureka-server-1 Healthy 
+ Container shared_kafka Healthy 
+ Container shared_postgres Healthy 
+ Container customer-service Starting 
+ Container customer-service Started 
+==> waiting for health (timeout 150s)
+==> starting contract service: restaurant-service
+ Container shared_postgres Running 
+ Container config-service Running 
+ Container shared_redis Running 
+ Container shared_zookeeper Running 
+ Container shared_kafka Running 
+ Container eureka-server-1 Running 
+ Container restaurant-service Recreate 
+ Container restaurant-service Recreated 
+ Container shared_kafka Waiting 
+ Container shared_redis Waiting 
+ Container config-service Waiting 
+ Container eureka-server-1 Waiting 
+ Container shared_postgres Waiting 
+ Container shared_redis Healthy 
+ Container eureka-server-1 Healthy 
+ Container shared_kafka Healthy 
+ Container config-service Healthy 
+ Container shared_postgres Healthy 
+ Container restaurant-service Starting 
+ Container restaurant-service Started 
+==> waiting for health (timeout 150s)
+    OK  restaurant-service -> hyd.ocir.io/axekmbadoczl/food-delivery/restaurant-service:4a37fba-fe7c9eb
+    OK  customer-service -> hyd.ocir.io/axekmbadoczl/food-delivery/customer-service:c5001e8-712cd8c
+    OK  food-delivery-app-ui -> hyd.ocir.io/axekmbadoczl/food-delivery/food-delivery-app-ui:42f92fb-3664d99
+    VM .env now pins REGISTRY and 22 image tags
+    pruned superseded images on the VM: Total reclaimed space: 527.9MB
+NOTE: hard-refresh the browser (Cmd+Shift+R) -- Vite bundles are cached client-side.
+==> done

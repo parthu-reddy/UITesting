@@ -1,0 +1,26 @@
+{
+  "observedAt": "2026-10-03T17:40:09.280101+00:00",
+  "method": "Existing native build/push steps only; no registry retention/deletion or protected script changes",
+  "images": [
+    {
+      "service": "restaurant-service",
+      "sourceHead": "3ab2a2cbccb65f529960bd493d1e94452ad7b013",
+      "tag": "3ab2a2c-d32f146",
+      "image": "hyd.ocir.io/axekmbadoczl/food-delivery/restaurant-service:3ab2a2c-d32f146",
+      "digest": "sha256:4294ec3c400aee56faa2ee97fdde621d7fbf40feb12284ed2615233d7c3d4fff",
+      "architecture": "arm64",
+      "os": "linux",
+      "artifactContentSha256": "d32f14650f24f36791196fce6cdf60c57abf497f3afacf0b8c0fc29712898b26"
+    },
+    {
+      "service": "chat-service",
+      "sourceHead": "52463c301641dd639b8637ba12d15560304d0999",
+      "tag": "52463c3-b74099e",
+      "image": "hyd.ocir.io/axekmbadoczl/food-delivery/chat-service:52463c3-b74099e",
+      "digest": "sha256:7d8c0bdf98025bacc71d4c17c04effc52678c792a2ff03ee9698744b0cee07fb",
+      "architecture": "arm64",
+      "os": "linux",
+      "artifactContentSha256": "b74099e56faae19b4c91380d7711555a602cb13a210eb667aa0b9777d3965fc0"
+    }
+  ]
+}

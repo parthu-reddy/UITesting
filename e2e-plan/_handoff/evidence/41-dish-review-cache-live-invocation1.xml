@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.fooddelivery.e2e.tests.flows.OrderReviewsFlowTest" time="85.646" tests="1" errors="1" skipped="0" failures="0">
+  <testcase name="remainingDishReviewRefreshesTheCachedAggregate" classname="com.fooddelivery.e2e.tests.flows.OrderReviewsFlowTest" time="83.145">
+    <error message="Timeout 60000ms exceeded" type="com.microsoft.playwright.TimeoutError">com.microsoft.playwright.TimeoutError: Timeout 60000ms exceeded
+	at com.microsoft.playwright.impl.WaitableTimeout.get(WaitableTimeout.java:41)
+	at com.microsoft.playwright.impl.WaitableRace.get(WaitableRace.java:46)
+	at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:147)
+	at com.microsoft.playwright.impl.PageImpl.waitForEventWithTimeout(PageImpl.java:563)
+	at com.microsoft.playwright.impl.PageImpl.waitForResponseImpl(PageImpl.java:1621)
+	at com.microsoft.playwright.impl.PageImpl.lambda$waitForResponse$21(PageImpl.java:1613)
+	at com.microsoft.playwright.impl.WaitForEventLogger.get(WaitForEventLogger.java:50)
+	at com.microsoft.playwright.impl.ChannelOwner.withWaitLogging(ChannelOwner.java:84)
+	at com.microsoft.playwright.impl.PageImpl.waitForResponse(PageImpl.java:1607)
+	at com.microsoft.playwright.impl.PageImpl.waitForResponse(PageImpl.java:1603)
+	at com.microsoft.playwright.Page.waitForResponse(Page.java:8626)
+	at com.fooddelivery.e2e.tests.flows.OrderReviewsFlowTest.remainingDishReviewRefreshesTheCachedAggregate(OrderReviewsFlowTest.java:146)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+</error>
+    <system-out>[E2E STARTUP] Creating Playwright driver
+[E2E STARTUP] Launching Chromium (headless=true)
+[E2E STARTUP] Chromium ready
+</system-out>
+  </testcase>
+</testsuite>

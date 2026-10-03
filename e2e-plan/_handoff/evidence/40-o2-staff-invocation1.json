@@ -1,0 +1,24 @@
+{
+  "observedAt": "2026-10-03T22:00:27+05:30",
+  "invocation": 1,
+  "method": "OrganisationRestaurantAccessTest#organisationRestaurantAccess",
+  "tests": 1,
+  "failures": 1,
+  "errors": 0,
+  "skipped": 0,
+  "classification": "invalid E2E request: price override omitted required isAvailable; 400 validation response precedes method security",
+  "fixturePhone": "9999887458",
+  "completedChecks": [
+    "owner organisation/brand/outlet",
+    "normal Dev signup",
+    "STAFF invitation and acceptance",
+    "stock off/on UI and API readback"
+  ],
+  "remaining": [
+    "valid price 403",
+    "earnings STAFF denial and MANAGER figures",
+    "removal within six seconds",
+    "outsider/internal route denial"
+  ],
+  "cleanupPerformed": false
+}

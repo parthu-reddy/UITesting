@@ -1,0 +1,6 @@
+{
+  "mutation": "remove canonical all-day Food seed window",
+  "exitCode": 1,
+  "expectedFailure": "Canonical Dev Food category must be orderable overnight",
+  "sourceRestored": true
+}

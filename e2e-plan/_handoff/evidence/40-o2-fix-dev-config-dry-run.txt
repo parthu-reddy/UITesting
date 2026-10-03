@@ -1,0 +1,10 @@
+==> syncing local Deployment repo
+Already up to date.
+==> config files: application-dev.yml api-gateway.yml api-gateway-dev.yml identity-service-dev.yml
+==> readers to restart sequentially (18): bidding-engine budget-pacing-service campaign-service chat-service communication-integration customer-service delivery-service event-tracking-service government-id-service identity-service ledger-service maps-integration payment-gateway restaurant-service wallet-service ondc-integration-service reviews-service api-gateway
+==> dry-run: would push 4 config(s) to ubuntu@140.245.234.137
+    application-dev.yml
+    api-gateway.yml
+    api-gateway-dev.yml
+    identity-service-dev.yml
+==> dry-run complete; no files were published and no services restarted

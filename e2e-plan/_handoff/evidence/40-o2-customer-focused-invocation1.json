@@ -1,0 +1,26 @@
+{
+  "RestaurantRefundPermissionTest": {
+    "tests": 4,
+    "failures": 0,
+    "errors": 1,
+    "skipped": 0
+  },
+  "RestaurantMoneyControllerTest": {
+    "tests": 12,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "RestaurantRefundControllerTest": {
+    "tests": 3,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "OrderSecurityHelperTest": {
+    "tests": 4,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  }
+}
