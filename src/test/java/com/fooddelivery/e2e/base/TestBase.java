@@ -170,7 +170,8 @@ public abstract class TestBase {
     }
 
     private static String redactAuthValues(String message) {
-        return message.replaceAll("(?i)([?&](?:token|otp)=)[^&#\\s'\"]+", "$1[redacted]");
+        return message.replaceAll("(?i)(https?://[^?\\s'\"]+)\\?[^\\s'\"]+", "$1?[redacted]")
+                .replaceAll("(?i)([?&](?:token|otp)=)[^&#\\s'\"]+", "$1[redacted]");
     }
 
     private void closeQuietly(BrowserContext ctx) {

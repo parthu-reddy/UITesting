@@ -1,43 +1,27 @@
 package com.fooddelivery.e2e.pages.common;
 
-import com.microsoft.playwright.Page;
+import com.microsoft.playwright.*;
+import com.microsoft.playwright.options.AriaRole;
+import java.nio.file.Paths;
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
-/**
- * Page Object for the KYC document and image upload fields.
- * Maps to: {@code DocumentUploadField.tsx}, {@code ImageUploadField.tsx}
- * <p>
- * Used in rider onboarding and restaurant registration flows.
- * </p>
- */
+/** Real private upload completion, bound to the rendered accessible input and response. */
 public class KycUploadPage {
-
     private final Page page;
-
-    public KycUploadPage(Page page) {
-        this.page = page;
+    private String lastLabel;
+    public KycUploadPage(Page page) {this.page=page;}
+    public void uploadDocument(String label,String path) {
+        lastLabel=label;
+        var completed=page.waitForResponse(response -> java.net.URI.create(response.url()).getPath().matches("/api/v1/verification/documents/[^/]+/complete")
+                && response.request().method().equals("POST"),
+                () -> page.getByLabel(label+" file",new Page.GetByLabelOptions().setExact(true)).setInputFiles(Paths.get(path)));
+        org.assertj.core.api.Assertions.assertThat(completed.status()).as("Server must confirm the private upload").isEqualTo(200);
+        assertThat(page.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("Replace "+label).setExact(true))).containsText(label+" uploaded");
     }
-
-    /**
-     * Uploads a file using the file chooser dialog.
-     * @param fieldLabel label near the upload field
-     * @param filePath absolute path to the file to upload
-     */
-    public void uploadDocument(String fieldLabel, String filePath) {
-        page.locator("text=" + fieldLabel).locator("xpath=..").locator("input[type='file']")
-                .setInputFiles(java.nio.file.Paths.get(filePath));
-        page.waitForTimeout(1000);
+    public void uploadFirstAvailable(String path) {
+        String accessible=page.locator("input[type=file][aria-label]").first().getAttribute("aria-label");
+        org.assertj.core.api.Assertions.assertThat(accessible).endsWith(" file");
+        uploadDocument(accessible.substring(0,accessible.length()-5),path);
     }
-
-    /**
-     * Generic file upload via the first visible input[type=file].
-     */
-    public void uploadFirstAvailable(String filePath) {
-        page.locator("input[type='file']").first()
-                .setInputFiles(java.nio.file.Paths.get(filePath));
-        page.waitForTimeout(1000);
-    }
-
-    public boolean isUploadSuccess() {
-        return page.locator("text=uploaded, text=Uploaded, svg.lucide-check").first().isVisible();
-    }
+    public boolean isUploadSuccess() {return lastLabel!=null && page.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("Replace "+lastLabel).setExact(true)).isVisible();}
 }

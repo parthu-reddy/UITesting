@@ -1,53 +1,16 @@
 package com.fooddelivery.e2e.pages.restaurant;
 
-import com.microsoft.playwright.Locator;
-import com.microsoft.playwright.Page;
-/**
- * Page Object for outlet registration.
- * Maps to: {@code OutletRegistration.tsx}
- */
+import com.microsoft.playwright.*;
+import com.microsoft.playwright.options.AriaRole;
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
+
+/** ApplicationOutletForm inside the restaurant's current draft. */
 public class OutletRegistrationPage {
-
     private final Page page;
-
-    public OutletRegistrationPage(Page page) {
-        this.page = page;
-    }
-
-    public boolean isRegistrationVisible() {
-        try {
-            Locator btn = page.locator("button:has-text('Register New Outlet')").first();
-            if (btn.isVisible()) {
-                btn.click();
-            }
-        } catch (Exception ignored) { }
-
-        Locator loc = page.locator("text=New Outlet Registration").first();
-        try {
-            loc.waitFor(new com.microsoft.playwright.Locator.WaitForOptions().setState(com.microsoft.playwright.options.WaitForSelectorState.VISIBLE).setTimeout(15000));
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    public void fillOutletName(String name) {
-        page.locator("input[placeholder*='Bella']").first().fill(name);
-    }
-
-    public void searchAndSelectLocation(String query) {
-        page.locator("input[aria-label='Search for a place']").first().fill(query);
-        page.locator(".absolute.z-50 button").first().waitFor();
-        page.locator(".absolute.z-50 button").first().click();
-        page.waitForTimeout(1000);
-    }
-    
-    public void fillFssai(String fssai) {
-        page.locator("input[placeholder*='FSSAI']").first().fill(fssai);
-    }
-
-    public void submit() {
-        page.locator("button:has-text('Register Outlet')").first().click();
-        page.waitForTimeout(2000);
-    }
+    public OutletRegistrationPage(Page page) {this.page=page;}
+    public boolean isRegistrationVisible() {assertThat(page.getByRole(AriaRole.FORM,new Page.GetByRoleOptions().setName("Application outlet"))).isVisible();return true;}
+    public void fillOutletName(String name) {page.getByLabel("Outlet name",new Page.GetByLabelOptions().setExact(true)).fill(name);}
+    public void fillCoordinates(double lat,double lng) {page.getByLabel("Latitude",new Page.GetByLabelOptions().setExact(true)).fill(String.valueOf(lat));page.getByLabel("Longitude",new Page.GetByLabelOptions().setExact(true)).fill(String.valueOf(lng));}
+    public void fillFssai(String fssai) {page.getByLabel("FSSAI licence number",new Page.GetByLabelOptions().setExact(true)).fill(fssai);}
+    public void submit() {page.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("Save outlet and continue").setExact(true)).click();assertThat(page.getByLabel("GST registration file",new Page.GetByLabelOptions().setExact(true))).isAttached();}
 }
