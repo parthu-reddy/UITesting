@@ -1,0 +1,56 @@
+{
+  "recordedAt": "2026-10-04T12:32:27.679817+05:30",
+  "proof": "Cloudflare dashboard saved configuration; Oracle operator preparation, not UI E2E",
+  "privateBucket": "labouffe-documents-dev",
+  "publicDevelopmentUrl": "disabled",
+  "customDomains": [],
+  "corsSaved": true,
+  "corsRules": [
+    {
+      "AllowedOrigins": [
+        "https://gulf-strike-dark-extras.trycloudflare.com"
+      ],
+      "AllowedMethods": [
+        "GET",
+        "PUT",
+        "HEAD"
+      ],
+      "AllowedHeaders": [
+        "Content-Type"
+      ],
+      "ExposeHeaders": [
+        "ETag"
+      ],
+      "MaxAgeSeconds": 300
+    }
+  ],
+  "tokenPermission": "Object Read & Write",
+  "persistedTokenBucketsAfterReload": [
+    "labouffe"
+  ],
+  "preparedTokenBuckets": [
+    "labouffe",
+    "labouffe-documents-dev"
+  ],
+  "tokenScopeSaved": false,
+  "configurationPublished": "government-id-validation-service.yml",
+  "defaultsAndVaultHelperSynced": true,
+  "composeSynced": true,
+  "governmentImageDeployed": false,
+  "e2eExecuted": false,
+  "next": "Save the prepared token scope after action-time confirmation; verify exact loaded-key private access, refresh Vault environment and deploy published Government ID image before four UI journeys",
+  "reviewImages": [
+    "64-o3-unsaved-token-scope-review.jpg",
+    "64-o3-saved-private-cors.jpg"
+  ],
+  "nonsecretDocumentBucketEnvironmentPrepared": true,
+  "environmentMode": "600",
+  "allOtherEnvironmentValuesPreserved": true,
+  "vaultSecretsRefreshed": false,
+  "privateBucketAccess": {
+    "status": 403,
+    "code": "AccessDenied",
+    "proof": "Exact existing key loaded in government-id-service; read-only ListObjectsV2; no object write"
+  },
+  "observedAt": "2026-10-04T12:35:43.156298+05:30"
+}

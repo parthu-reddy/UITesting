@@ -1,0 +1,54 @@
+{
+  "recordedAt": "2026-10-04T13:41:18.639481+05:30",
+  "proof": "Actual saved Cloudflare UI and read-only Oracle loaded-key check; not UI E2E",
+  "token": "labouffe-app",
+  "permission": "Object Read & Write",
+  "persistedBuckets": [
+    "labouffe",
+    "labouffe-documents-dev"
+  ],
+  "active": true,
+  "publicDocumentAccess": false,
+  "privateAccessHttpStatus": 200,
+  "credentialsCreatedOrRotated": false,
+  "corsPreviouslySaved": true,
+  "imagePublished": true,
+  "deploymentInProgress": false,
+  "uiE2eExecuted": false,
+  "next": "Collect actual four UI results then final server/browser measurements; keep final release acceptance open",
+  "governmentDeployedTag": "965262537c2621c30ead73ccb6cb10e76e843338",
+  "governmentDeployedDigest": "sha256:32934472731c3a1ecd76cefb2f8d53661881576ba08c1756f1b6168e009fd1ad",
+  "digestMatchesPublished": true,
+  "devProfile": true,
+  "privateBucketLoaded": true,
+  "governmentStartupErrors": 0,
+  "runningServices": 29,
+  "healthyChecks": 26,
+  "withoutHealthChecks": 3,
+  "imageDrift": 0,
+  "automaticRestarts": 0,
+  "recentErrors": 0,
+  "restartedServices": [
+    "government-id-service"
+  ],
+  "hardening": {
+    "passed": 15,
+    "failed": 0
+  },
+  "reconcile": {
+    "running": 29,
+    "drifting": 0
+  },
+  "e2e": {
+    "status": "running",
+    "invocation": 7,
+    "selectedCases": [
+      "restaurant",
+      "delivery",
+      "admin",
+      "hidden"
+    ],
+    "allocationId": "b04508ee017a3ade",
+    "dataPolicy": "retain"
+  }
+}

@@ -1,0 +1,7 @@
+# O3 saved Cloudflare state — 2026-10-04T12:32:27.679817+05:30
+
+CORS for the exact Dev HTTPS origin is saved on private labouffe-documents-dev; no public URL/custom domains. Token edit reload still shows only labouffe. Private-bucket Object Read & Write scope is prepared, awaiting final confirmation/save. No new credential or admin permission. Government ID9652625 image and Common e0a7ada are published; Government ID configuration and Oracle defaults/helper are synchronized, no service restarted yet. Compose/env refresh, private-access verification, targeted deployment, four UI gate and final measurements remain pending. Latest actual full gate1/4 remains history, not a current pass. Retain all fixtures; no local Docker or direct API/DB/Redis/state injection in E2E.
+
+[Canonical evidence](../../../../RandomDocuments/BusinessPlatform_2026-10-03/01_Organisations/Phase3_PartnerApplications/evidence/64-o3-cloudflare-saved-state.json). Existing runner: `python3 scripts/run_partner_applications_o3_e2e.py --app-url https://gulf-strike-dark-extras.trycloudflare.com` from UITesting after exact release/health verification.
+
+Update 2026-10-04T12:35:43.156298+05:30: compose synchronization and scoped nonsecret .env property are complete, mode600/all other values preserved. No Vault secret refresh (Vault ID environment unavailable), no service restart. Existing key private ListObjectsV2 remains403. Protected telemetry baseline saved separately; restaurant-status target remains failed at n6. Only final scope save/verification blocks the targeted release.

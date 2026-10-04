@@ -86,10 +86,10 @@ perform API-driven E2E.
 
 | Scenario | UI-only journey to implement | Planned browser class | Current status |
 |---|---|---|---|
-| BP-O3-REST-UI | Sign up as Restaurant Partner with normal Dev Autofill, complete the restaurant wizard including visible document controls, observe the submitted/review status, let an admin reject with a visible reason, edit/resubmit through the wizard, approve through Partner approvals, then search from the customer UI for the resulting approved outlet. | `RestaurantApplicationApiTest` (legacy filename) | UI-only source rewritten and locally compiled; unpublished, undeployed, not run. |
-| BP-O3-DELIVERY-UI | Sign up as Delivery Executive, complete the rider wizard and visible document controls, observe the review status, attempt the rendered duty control, approve from Partner approvals, then confirm the rendered rider state/duty control. | `DeliveryApplicationApiTest` (legacy filename) | UI-only source rewritten and locally compiled; unpublished, undeployed, not run. |
-| BP-O3-ADMIN-UI | Create fresh restaurant and rider applicants through their visible wizards; in the admin UI inspect each rendered application, require a rejection reason, reject/approve through real buttons, and observe each applicant's visible result. | `AdminPartnerApprovalsUiTest` | UI-only source rewritten and locally compiled; unpublished, undeployed, not run. |
-| BP-O3-HIDDEN-UI | Log into the read-only pending/rejected seeded applicants to observe their rendered status, then use customer discovery/search UI to confirm their brands are absent. | `UnapprovedOutletHiddenTest` | UI-only source rewritten and locally compiled; unpublished, undeployed, not run. |
+| BP-O3-REST-UI | Sign up as Restaurant Partner with normal Dev Autofill, complete the restaurant wizard including visible document controls, observe the submitted/review status, let an admin reject with a visible reason, edit/resubmit through the wizard, approve through Partner approvals, then search from the customer UI for the resulting approved outlet. | `RestaurantApplicationApiTest` (legacy filename) | Deployed UI invocation7; see current result table below. |
+| BP-O3-DELIVERY-UI | Sign up as Delivery Executive, complete the rider wizard and visible document controls, observe the review status, attempt the rendered duty control, approve from Partner approvals, then confirm the rendered rider state/duty control. | `DeliveryApplicationApiTest` (legacy filename) | Deployed UI invocation7; see current result table below. |
+| BP-O3-ADMIN-UI | Create fresh restaurant and rider applicants through their visible wizards; in the admin UI inspect each rendered application, require a rejection reason, reject/approve through real buttons, and observe each applicant's visible result. | `AdminPartnerApprovalsUiTest` | Deployed UI invocation7; see current result table below. |
+| BP-O3-HIDDEN-UI | Log into the read-only pending/rejected seeded applicants to observe their rendered status, then use customer discovery/search UI to confirm their brands are absent. | `UnapprovedOutletHiddenTest` | Deployed UI invocation7; see current result table below. |
 
 Current-session local source evidence is
 [checkpoint46](../../_handoff/checkpoints/46-o3-current-local-gates.md) and its
@@ -113,3 +113,12 @@ The four current O3 methods executed through the public Oracle UI and all failed
 ## 2026-10-04T10:14:06.424177+05:30 — Read-only queue/navigation supplement
 
 BP-O3-QUEUE-UI: AdminPartnerApprovalsUiTest#reviewQueuesNavigation logs in through normal Dev Autofill, opens/refreshed both queues, confirms retained pending seed rows, and passively measures resulting browser GETs. First version passed1/1 on d306599 (four queue requests). Extended current source also changes the status filter to Changes requested then Awaiting admin review, checks seeded rejected/pending rows and collapsed picker. Extended version compiled; not yet run. Runner --only queues selects it; default remains the original four lifecycle methods. No application decision or fixture mutation.
+
+## 2026-10-04T13:56:10.198172+05:30 — Current O3 outcomes
+
+| Method | Actual invocation7 result | Remaining |
+|---|---|---|
+| restaurantApplicationLifecycle | Error after admin approval; stale customer feed | Browser reload/single-outlet repair compiled, pending rerun |
+| deliveryApplicationLifecycle | Error after approval; duty disabled by stale profile flag | Current O3 handoff repair local25/25, pending publication/deployment/rerun |
+| privateReviewAndDecisions | Passed | Private upload/completion and admin image view actually observed |
+| pendingAndRejectedOutletsAreNotDiscoverableThroughTheCustomerUI | Passed | Retained seeded fixtures unchanged |

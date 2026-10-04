@@ -7,7 +7,6 @@ import com.fooddelivery.e2e.pages.admin.AdminPortalPage;
 import com.fooddelivery.e2e.pages.common.LoginPage;
 import com.fooddelivery.e2e.pages.customer.CustomerDashboardPage;
 import com.fooddelivery.e2e.pages.customer.CustomerHomePage;
-import com.fooddelivery.e2e.pages.customer.NearbyOutletPage;
 import com.fooddelivery.e2e.pages.restaurant.RestaurantBrandRegistrationPage;
 import com.fooddelivery.e2e.pages.restaurant.RestaurantDashboardPage;
 import org.junit.jupiter.api.Tag;
@@ -68,10 +67,21 @@ public class RestaurantApplicationApiTest extends PartnerApplicationsUiTestBase 
         approvals.assertLeftQueue(correctedName);
         application.refreshAndAssertStatus("Approved");
 
+        // Customer search filters the loaded feed. Reload through the browser to observe a fresh
+        // public listing after another session approves the application.
+        customerPage.reload();
+        new CustomerDashboardPage(customerPage).waitForDashboard();
         customerHome.searchRestaurant(correctedName);
         customerPage.waitForCondition(() -> customerHome.isRestaurantVisible(correctedName),
                 new com.microsoft.playwright.Page.WaitForConditionOptions().setTimeout(20_000));
-        new NearbyOutletPage(customerPage).openBrandAndSelectNearby(correctedName);
+        customerHome.openRestaurant(correctedName);
+        // This applicant owns one outlet, so the multi-outlet chooser is not part of its UI.
+        customerPage.getByRole(com.microsoft.playwright.options.AriaRole.HEADING,
+                new com.microsoft.playwright.Page.GetByRoleOptions().setName(correctedName).setExact(true)).waitFor();
+        assertThat(customerPage.getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
+                new com.microsoft.playwright.Page.GetByRoleOptions().setName("Back to restaurants").setExact(true)).isVisible())
+                .as("The approved restaurant opens its customer storefront through the visible card")
+                .isTrue();
     }
 
     private void loginAsAdminThroughVisibleControls() {

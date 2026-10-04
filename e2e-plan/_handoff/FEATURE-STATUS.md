@@ -1,5 +1,9 @@
 # Feature audit status
 
+## 2026-10-04T13:56:10.198172+05:30 — Private UI proof; current handoff repairs
+
+Four-method public UI invocation7 finished: 4 tests / 2 passed / 0 failures / 2 errors / 0 skipped. Private uploads, completion, provider checks and admin image viewing work; private review/decisions and pending/rejected visibility passed. Rider approval reached a stale initial profile refusal; restaurant customer search reused an old feed. Current O3-only repairs are local: complete-profile handoff, surrounding brand-summary refresh on successful status refresh, and normal customer reload/single-outlet navigation. Red/green local regressions finish25/25; 180 E2E sources compile. UI1caf57c/Government ID9652625 remain deployed. Publish the corrected UI through GitHub, deploy only UI through the existing Oracle path, then run the four-method gate and final metrics. Retain every applicant; no wipe/reseed or test infrastructure/state bypass. Earlier dated entries are history.
+
 ## 2026-10-04T10:22:03.950439+05:30 — Current O3 UI deployed and queue/filter verified
 
 Latest UI1caf57c is published/deployed:845/845 CI tests; exact Oracle image digest healthy;29running/26healthy/zero drift, automatic restarts or recent errors. Required Dev profiles/hardening/reconcile pass. E2E071e368 extended read-only admin queue/filter test1/1 passed on this image, separate from the four lifecycle gate. The latest full lifecycle gate remains1/4; private uploads are blocked by R2 CORS and app-key GetBucketCors403. Cloudflare user sign-in is pending. Storage public-access/privacy and restaurant status latency447.392ms>150ms (n6) also remain unresolved. Continue from [checkpoint60](checkpoints/60-o3-current-ui-verified-r2-access-needed.md). No skipped/blocked case is a pass. Older entries below are history.

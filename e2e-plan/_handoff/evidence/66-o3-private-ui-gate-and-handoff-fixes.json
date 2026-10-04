@@ -1,0 +1,170 @@
+{
+  "observedAt": "2026-10-04T13:56:10.198172+05:30",
+  "invocation": 7,
+  "proof": "four actual public Oracle UI methods; no product API/DB/Redis/SSH/browser state bypass",
+  "deployedUiCommit": "1caf57cefbb4645381791fc5e904ce4657a6f3f6",
+  "deployedGovernmentIdCommit": "965262537c2621c30ead73ccb6cb10e76e843338",
+  "counts": {
+    "tests": 4,
+    "passed": 2,
+    "failures": 0,
+    "errors": 2,
+    "skipped": 0
+  },
+  "suites": [
+    {
+      "class": "RestaurantApplicationApiTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 1,
+      "skipped": 0,
+      "cases": [
+        {
+          "method": "restaurantApplicationLifecycle",
+          "seconds": 66.88,
+          "status": "error",
+          "error": "Timeout 20000ms exceeded"
+        }
+      ]
+    },
+    {
+      "class": "DeliveryApplicationApiTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 1,
+      "skipped": 0,
+      "cases": [
+        {
+          "method": "deliveryApplicationLifecycle",
+          "seconds": 92.664,
+          "status": "error",
+          "error": "Error {"
+        }
+      ]
+    },
+    {
+      "class": "AdminPartnerApprovalsUiTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "method": "privateReviewAndDecisions",
+          "seconds": 53.191,
+          "status": "passed",
+          "error": null
+        }
+      ]
+    },
+    {
+      "class": "UnapprovedOutletHiddenTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "method": "pendingAndRejectedOutletsAreNotDiscoverableThroughTheCustomerUI",
+          "seconds": 13.371,
+          "status": "passed",
+          "error": null
+        }
+      ]
+    }
+  ],
+  "privateBrowserBoundary": "actual upload, completion, checks, private admin image view and decisions succeeded; admin journey passed",
+  "currentGaps": [
+    "Rider saved complete profile retained initial missing-profile flags; no duty request was sent",
+    "Restaurant customer session filtered an old loaded feed; normal browser reload required before fresh discovery assertion",
+    "Restaurant status refresh did not refresh surrounding brand summary"
+  ],
+  "workingFixes": "current O3 rider callback clears flags only after complete server profile; current wizard refresh invokes surrounding reload only on success; restaurant E2E refreshes UI feed and opens its single-outlet storefront",
+  "localUnitProof": [
+    {
+      "invocation": "o3-profile-handoff-before",
+      "proof": "local jsdom/network mocks; no deployed proof",
+      "numTotalTests": 5,
+      "numPassedTests": 4,
+      "numFailedTests": 1,
+      "numPendingTests": 0,
+      "failures": [
+        {
+          "name": "clears the initial missing-profile refusal after the saved server profile is complete",
+          "message": "Error: expect(element).toBeEnabled()"
+        }
+      ]
+    },
+    {
+      "invocation": "o3-profile-handoff-after",
+      "proof": "local jsdom/network mocks; no deployed proof",
+      "numTotalTests": 15,
+      "numPassedTests": 15,
+      "numFailedTests": 0,
+      "numPendingTests": 0,
+      "failures": []
+    },
+    {
+      "invocation": "o3-restaurant-summary-before",
+      "proof": "local jsdom/network mocks; no deployed proof",
+      "numTotalTests": 10,
+      "numPassedTests": 9,
+      "numFailedTests": 1,
+      "numPendingTests": 0,
+      "failures": [
+        {
+          "name": "refreshes the surrounding brand summary after observing an admin decision",
+          "message": "AssertionError: expected \"vi.fn()\" to be called 1 times, but got 0 times"
+        }
+      ]
+    },
+    {
+      "invocation": "o3-handoff-summary-after",
+      "proof": "local jsdom/network mocks; no deployed proof",
+      "numTotalTests": 25,
+      "numPassedTests": 25,
+      "numFailedTests": 0,
+      "numPendingTests": 0,
+      "failures": []
+    }
+  ],
+  "localCompile": "mvn -B -o test-compile succeeds; 180 sources",
+  "browserTimings": [
+    {
+      "family": "onboarding-status",
+      "successfulSamples": 30,
+      "p95Ms": 246.982,
+      "method": "nearest rank; observed UI network requests only; includes public tunnel; excludes render"
+    },
+    {
+      "family": "admin-review-queue",
+      "successfulSamples": 14,
+      "p95Ms": 339.282,
+      "method": "nearest rank; observed UI network requests only; includes public tunnel; excludes render"
+    }
+  ],
+  "timingFiles": [
+    "AdminPartnerApprovalsUiTest-5168ddc6-7b7b-4e63-85ac-48a7d2d37a39.csv",
+    "DeliveryApplicationApiTest-a8aa341c-dc63-41da-a466-539a9ce2be04.csv",
+    "RestaurantApplicationApiTest-0c28eb18-1e3d-404e-8df2-2aa0cd888e5f.csv",
+    "UnapprovedOutletHiddenTest-a2cd0c65-2b2a-4bc2-8f3e-edbcc2f2613d.csv"
+  ],
+  "artifacts": "RandomDocuments/BusinessPlatform_2026-10-03/01_Organisations/Phase3_PartnerApplications/evidence/66-o3-private-ui-gate-invocation7",
+  "retainedFixture": "UITesting/e2e-plan/_handoff/fixtures/o3-invocation7-allocation.json",
+  "cleanupPerformed": false,
+  "migrationPerformed": false,
+  "remaining": "publish corrected UI through GitHub, then targeted Oracle UI deployment, four-method UI rerun and final protected measurements",
+  "localChecks": {
+    "lint": "pass",
+    "typecheck": "pass after removing unsupported testing-library exact option",
+    "build": "pass; SDK generated before final checks",
+    "businessPlatformO3": "19 PASS / 0 FAIL / 0 STALE",
+    "embeddedOrExternalDatabaseAccess": "none in this UI batch"
+  },
+  "workingUiPublication": {
+    "commit": "b5ab30e4499bc546e45b8159210877fb8b224d69",
+    "runId": 37188980191,
+    "state": "running",
+    "deployed": false
+  }
+}

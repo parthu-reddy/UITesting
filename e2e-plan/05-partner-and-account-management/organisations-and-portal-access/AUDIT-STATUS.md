@@ -1,5 +1,19 @@
 # Organisation and portal access audit status
 
+## 2026-10-04T13:56:10.198172+05:30 — Private UI proof; current handoff repairs
+
+Four-method public UI invocation7 finished: 4 tests / 2 passed / 0 failures / 2 errors / 0 skipped. Private uploads, completion, provider checks and admin image viewing work; private review/decisions and pending/rejected visibility passed. Rider approval reached a stale initial profile refusal; restaurant customer search reused an old feed. Current O3-only repairs are local: complete-profile handoff, surrounding brand-summary refresh on successful status refresh, and normal customer reload/single-outlet navigation. Red/green local regressions finish25/25; 180 E2E sources compile. UI1caf57c/Government ID9652625 remain deployed. Publish the corrected UI through GitHub, deploy only UI through the existing Oracle path, then run the four-method gate and final metrics. Retain every applicant; no wipe/reseed or test infrastructure/state bypass. Earlier dated entries are history. Continue from [checkpoint66](../../_handoff/checkpoints/66-o3-private-ui-gate-and-handoff-fixes.md).
+
+## 2026-10-04T13:41:18.639481+05:30 — Private storage deployed; four UI journeys running
+
+Existing object-only token scope and exact private CORS are saved; loaded-key private access200. Published Government ID9652625 is now deployed with matching digest32934472731c3a1ecd76cefb2f8d53661881576ba08c1756f1b6168e009fd1ad, dev/private-bucket wiring and zero startup errors. Only Government ID restarted;29running/26healthy/3without checks, zero drift/restarts/recent errors. Hardening15/15 and reconcile29/0 pass. Four UI gate invocation7 is running; no result yet. Retain all applicants; no wipe/reseed or E2E infrastructure/state bypass. Final measurement/private-browser/release acceptance stays open. Earlier pending-scope entries below are history.
+
+
+## 2026-10-04T12:32:27.679817+05:30 — CORS saved; private-key scope still pending
+
+The exact private document CORS rule is saved and public access remains disabled. The labouffe-app token reload still shows only labouffe; the private-bucket Object Read & Write grant is prepared, awaiting final confirmation/save. Published Common e0a7ada/Government ID9652625 are ready; Government ID YAML and Oracle defaults/helper are synchronized without a restart. Four UI lifecycle gates and final measurements remain open. Continue from [checkpoint64](../../_handoff/checkpoints/64-o3-cors-saved-token-scope-pending.md). Earlier dated entries below are history.
+
+
 ## 2026-10-04T10:22:03.950439+05:30 — Current O3 UI deployed and queue/filter verified
 
 Latest UI1caf57c is published/deployed:845/845 CI tests; exact Oracle image digest healthy;29running/26healthy/zero drift, automatic restarts or recent errors. Required Dev profiles/hardening/reconcile pass. E2E071e368 extended read-only admin queue/filter test1/1 passed on this image, separate from the four lifecycle gate. The latest full lifecycle gate remains1/4; private uploads are blocked by R2 CORS and app-key GetBucketCors403. Cloudflare user sign-in is pending. Storage public-access/privacy and restaurant status latency447.392ms>150ms (n6) also remain unresolved. Continue from [checkpoint60](../../_handoff/checkpoints/60-o3-current-ui-verified-r2-access-needed.md). No skipped/blocked case is a pass. Older entries below are history.
