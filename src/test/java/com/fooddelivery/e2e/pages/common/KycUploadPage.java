@@ -12,6 +12,14 @@ public class KycUploadPage {
     public KycUploadPage(Page page) {this.page=page;}
     public void uploadDocument(String label,String path) {
         lastLabel=label;
+        var entitlementChallenges = new java.util.concurrent.atomic.AtomicInteger();
+        java.util.function.Consumer<Response> observer = response -> {
+            if (java.net.URI.create(response.url()).getPath().matches("/api/v1/verification/documents/[^/]+/complete")
+                    && response.request().method().equals("POST") && response.status() == 401
+                    && "ENTITLEMENTS_CHANGED".equals(response.headerValue("X-Auth-Reason"))) entitlementChallenges.incrementAndGet();
+        };
+        page.onResponse(observer);
+        try {
         var completed=page.waitForResponse(response -> java.net.URI.create(response.url()).getPath().matches("/api/v1/verification/documents/[^/]+/complete")
                 && response.request().method().equals("POST") && response.status() == 200,
                 () -> page.waitForFileChooser(() -> page.getByRole(AriaRole.BUTTON,
@@ -19,6 +27,8 @@ public class KycUploadPage {
                         .setFiles(Paths.get(path)));
         org.assertj.core.api.Assertions.assertThat(completed.status()).as("Server must confirm the private upload").isEqualTo(200);
         assertThat(page.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("Replace "+label).setExact(true))).containsText(label+" uploaded");
+        System.out.printf("[UPLOAD] %s confirmed 200 and Uploaded; %d observed entitlement challenges%n", label, entitlementChallenges.get());
+        } finally { page.offResponse(observer); }
     }
     public void uploadFirstAvailable(String path) {
         String accessible=page.locator("input[type=file][aria-label]").first().getAttribute("aria-label");

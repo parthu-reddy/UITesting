@@ -15,7 +15,7 @@ public class DeliveryOnboardingUiTest extends TestBase {
         BusinessPlatformFixture.fresh(riderPage, phone, name).openOnboarding(Portal.DELIVERY);
         DeliveryOnboardingPage onboarding = new DeliveryOnboardingPage(riderPage); onboarding.submit(name, phone);
         BusinessPlatformFixture.approve(adminPage, testAdminPhone, name, true); onboarding.refresh("Approved");
-        PortalLauncherPage launcher = new PortalLauncherPage(riderPage); launcher.open(); launcher.state(Portal.DELIVERY, "Available"); launcher.choose(Portal.DELIVERY);
+        PortalLauncherPage launcher = new PortalLauncherPage(riderPage); launcher.open(); launcher.awaitChangedState(Portal.DELIVERY, "Available"); launcher.choose(Portal.DELIVERY);
         new DeliveryDashboardPage(riderPage).waitForDashboard();
         assertThat(riderPage.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Offline").setExact(true))).isVisible();
     }
