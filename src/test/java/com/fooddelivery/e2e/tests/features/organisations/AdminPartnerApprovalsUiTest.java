@@ -19,6 +19,43 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 /** Admin review is driven entirely by the rendered partner-approvals interface. */
 @Tag("business-platform") @Tag("bp-o3")
 public class AdminPartnerApprovalsUiTest extends PartnerApplicationsUiTestBase {
+    /** Read-only queue navigation remains testable while private storage setup is unavailable. */
+    @Test
+    void reviewQueuesNavigation() {
+        loginAsAdminThroughVisibleControls();
+        AdminPartnerApprovalsPage approvals = new AdminPartnerApprovalsPage(adminPage);
+        observeQueue("restaurant", approvals::open);
+        assertThat(approvals.row("E2E pending-brand")).hasCount(1);
+        observeQueue("restaurant", approvals::refreshApplications);
+        assertThat(approvals.row("E2E pending-brand")).hasCount(1);
+        var status = adminPage.getByRole(com.microsoft.playwright.options.AriaRole.COMBOBOX,
+                new com.microsoft.playwright.Page.GetByRoleOptions().setName("Application status").setExact(true));
+        status.click();
+        observeQueue("restaurant", () -> adminPage.getByRole(com.microsoft.playwright.options.AriaRole.OPTION,
+                new com.microsoft.playwright.Page.GetByRoleOptions().setName("Changes requested").setExact(true)).click());
+        assertThat(status).hasAttribute("aria-expanded", "false");
+        assertThat(approvals.row("E2E rejected-brand")).hasCount(1);
+        assertThat(approvals.row("E2E pending-brand")).hasCount(0);
+        status.click();
+        observeQueue("restaurant", () -> adminPage.getByRole(com.microsoft.playwright.options.AriaRole.OPTION,
+                new com.microsoft.playwright.Page.GetByRoleOptions().setName("Awaiting admin review").setExact(true)).click());
+        assertThat(status).hasAttribute("aria-expanded", "false");
+        assertThat(approvals.row("E2E pending-brand")).hasCount(1);
+        observeQueue("delivery", approvals::deliveryPartners);
+        assertThat(approvals.row("E2E pending-kyc")).hasCount(1);
+        observeQueue("delivery", approvals::refreshApplications);
+        assertThat(approvals.row("E2E pending-kyc")).hasCount(1);
+    }
+
+    private void observeQueue(String type, Runnable action) {
+        var response = adminPage.waitForResponse(candidate ->
+                java.net.URI.create(candidate.url()).getPath().equals(
+                        "/api/v1/internal/admin/" + type + "-applications")
+                        && candidate.request().method().equals("GET"), action);
+        org.assertj.core.api.Assertions.assertThat(response.status())
+                .as("Queue response caused by the visible admin control").isEqualTo(200);
+    }
+
     @Test
     void privateReviewAndDecisions() {
         String restaurantPhone = phone("restaurant.admin", "9999");

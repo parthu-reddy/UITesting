@@ -22,12 +22,14 @@ CASES = {
     "delivery": "DeliveryApplicationApiTest#deliveryApplicationLifecycle",
     "admin": "AdminPartnerApprovalsUiTest#privateReviewAndDecisions",
     "hidden": "UnapprovedOutletHiddenTest#pendingAndRejectedOutletsAreNotDiscoverableThroughTheCustomerUI",
+    "queues": "AdminPartnerApprovalsUiTest#reviewQueuesNavigation",
 }
 PHONE_NEEDS = {
     "restaurant": (("restaurant.lifecycle", "9999"),),
     "delivery": (("delivery.lifecycle", "7999"),),
     "admin": (("restaurant.admin", "9999"), ("delivery.admin", "7999")),
     "hidden": (),
+    "queues": (),
 }
 
 
@@ -49,7 +51,7 @@ def main() -> int:
     if url.scheme != "https" or not url.hostname or not url.hostname.endswith(".trycloudflare.com"):
         raise ValueError("Use the current public Oracle HTTPS tunnel")
 
-    selected = [args.only] if args.only else list(CASES)
+    selected = [args.only] if args.only else ["restaurant", "delivery", "admin", "hidden"]
     folder = ROOT / "target" / "business-platform" / "o3"
     locks = ROOT / "target" / "registration"
     folder.mkdir(parents=True, exist_ok=True)
