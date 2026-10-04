@@ -14,7 +14,9 @@ public class KycUploadPage {
         lastLabel=label;
         var completed=page.waitForResponse(response -> java.net.URI.create(response.url()).getPath().matches("/api/v1/verification/documents/[^/]+/complete")
                 && response.request().method().equals("POST"),
-                () -> page.getByLabel(label+" file",new Page.GetByLabelOptions().setExact(true)).setInputFiles(Paths.get(path)));
+                () -> page.waitForFileChooser(() -> page.getByRole(AriaRole.BUTTON,
+                        new Page.GetByRoleOptions().setName(java.util.regex.Pattern.compile("^(Upload|Replace) " + label + "$"))).click())
+                        .setFiles(Paths.get(path)));
         org.assertj.core.api.Assertions.assertThat(completed.status()).as("Server must confirm the private upload").isEqualTo(200);
         assertThat(page.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("Replace "+label).setExact(true))).containsText(label+" uploaded");
     }

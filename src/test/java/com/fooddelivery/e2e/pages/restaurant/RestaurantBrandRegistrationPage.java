@@ -104,7 +104,8 @@ public class RestaurantBrandRegistrationPage {
         field("City code").fill("BLR");
         page.getByRole(AriaRole.BUTTON,
                 new Page.GetByRoleOptions().setName("Save outlet and continue").setExact(true)).click();
-        assertThat(page.getByLabel("GST registration file", new Page.GetByLabelOptions().setExact(true))).isVisible();
+        assertThat(page.getByRole(AriaRole.BUTTON,
+                new Page.GetByRoleOptions().setName("Upload GST registration").setExact(true))).isVisible();
     }
 
     private void uploadRequiredDocuments() {

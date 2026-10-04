@@ -25,6 +25,7 @@ public class DeliveryApplicationApiTest extends PartnerApplicationsUiTestBase {
 
         riderPage.navigate(TestConfig.APP_URL);
         new LoginPage(riderPage).registerAs("Delivery Executive", phone, name, "bp3_" + phone + "@test.com");
+        riderPage.setViewportSize(390, 844);
         new RiderOnboardingWizardPage(riderPage).completeDevModeOnboarding(name, "KA" + phone);
 
         loginAsAdminThroughVisibleControls();

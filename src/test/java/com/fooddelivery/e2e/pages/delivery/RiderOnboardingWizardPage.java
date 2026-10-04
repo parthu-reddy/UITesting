@@ -44,7 +44,9 @@ public class RiderOnboardingWizardPage {
     public int getCurrentStep() {String text=page.locator("[role=tab][aria-selected=true]").innerText();return Integer.parseInt(text.substring(0,1));}
     public void fillVehicleNumber(String number) {field("Vehicle registration").fill(number);}
     public void selectVehicleType(String type) {String label=switch(type){case "Motorcycle / Scooter" -> "Motorcycle";case "EV Two-Wheeler" -> "Electric two-wheeler";case "Car / LMV" -> "Car / light vehicle";default -> type;};
-        page.getByRole(AriaRole.FORM,new Page.GetByRoleOptions().setName("Delivery application details").setExact(true)).getByRole(AriaRole.COMBOBOX).click();page.getByRole(AriaRole.OPTION,new Page.GetByRoleOptions().setName(label).setExact(true)).click();}
+        Locator picker=page.getByRole(AriaRole.FORM,new Page.GetByRoleOptions().setName("Delivery application details").setExact(true)).getByRole(AriaRole.COMBOBOX);
+        picker.click();page.getByRole(AriaRole.OPTION,new Page.GetByRoleOptions().setName(label).setExact(true)).click();
+        assertThat(picker).hasAttribute("aria-expanded","false");}
     public void clickNext() {button("Save details and continue").click();assertThat(field("Driving licence number")).isVisible();}
     public void clickSubmit() {button("Submit for review").click();Locator dialog=page.getByRole(AriaRole.DIALOG);assertThat(dialog).isVisible();
         var response=page.waitForResponse(r -> java.net.URI.create(r.url()).getPath().equals("/api/v1/delivery-onboarding/application/submit") && r.request().method().equals("POST"),
