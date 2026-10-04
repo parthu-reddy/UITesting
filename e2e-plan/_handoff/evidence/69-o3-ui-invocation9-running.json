@@ -1,0 +1,12 @@
+{
+  "observedAt": "2026-10-04T08:47:44.622557+00:00",
+  "invocation": 9,
+  "status": "running",
+  "uiCommit": "b5ab30e4499bc546e45b8159210877fb8b224d69",
+  "e2eCommit": "2bf92e2",
+  "selected": "RestaurantApplicationApiTest#restaurantApplicationLifecycle",
+  "otherCurrentImagePasses": "invocation8 delivery/admin/hidden",
+  "fixture": "UITesting/e2e-plan/_handoff/fixtures/o3-invocation9-allocation.json",
+  "legacyUxDeferral": "O3-UI-006",
+  "cleanupPerformed": false
+}

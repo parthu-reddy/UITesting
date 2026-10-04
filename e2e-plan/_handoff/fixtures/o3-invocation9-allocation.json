@@ -1,0 +1,15 @@
+{
+  "runId": "691a1ac944883a96",
+  "appUrl": "https://gulf-strike-dark-extras.trycloudflare.com",
+  "selectedCases": [
+    "restaurant"
+  ],
+  "phoneCandidates": {
+    "restaurant.lifecycle": "9999255249"
+  },
+  "allocationPolicy": "local-random-candidates-only; no server lookup",
+  "dataPolicy": "retain",
+  "cleanupPerformed": false,
+  "externalDatabaseOrRedisAccess": false,
+  "exitCode": 0
+}

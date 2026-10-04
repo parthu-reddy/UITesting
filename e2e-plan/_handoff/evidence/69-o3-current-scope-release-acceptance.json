@@ -1,0 +1,160 @@
+{
+  "observedAt": "2026-10-04T14:26:25.838614+05:30",
+  "scope": "O3 Partner Applications Dev release within owner scope, with explicit deferrals; not completion of the whole Business Platform plan or production-provider/load validation",
+  "uiCommit": "b5ab30e4499bc546e45b8159210877fb8b224d69",
+  "governmentIdCommit": "965262537c2621c30ead73ccb6cb10e76e843338",
+  "requiredMethods": [
+    {
+      "class": "DeliveryApplicationApiTest",
+      "method": "deliveryApplicationLifecycle",
+      "invocation": 8,
+      "status": "passed"
+    },
+    {
+      "class": "AdminPartnerApprovalsUiTest",
+      "method": "privateReviewAndDecisions",
+      "invocation": 8,
+      "status": "passed"
+    },
+    {
+      "class": "UnapprovedOutletHiddenTest",
+      "method": "pendingAndRejectedOutletsAreNotDiscoverableThroughTheCustomerUI",
+      "invocation": 8,
+      "status": "passed"
+    },
+    {
+      "class": "RestaurantApplicationApiTest",
+      "method": "restaurantApplicationLifecycle",
+      "invocation": 9,
+      "status": "passed"
+    }
+  ],
+  "uniqueRequiredMethodsPassed": 4,
+  "invocations": [
+    {
+      "invocation": 8,
+      "counts": {
+        "tests": 4,
+        "failures": 0,
+        "errors": 1,
+        "skipped": 0,
+        "passed": 3
+      }
+    },
+    {
+      "invocation": 9,
+      "counts": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "passed": 1
+      }
+    }
+  ],
+  "executionPolicy": "targeted restaurant rerun only; three other unchanged current-image passes retained, no full-green rerun claim",
+  "ciTests": {
+    "tests": 852,
+    "passed": 852,
+    "failed": 0,
+    "skipped": 0
+  },
+  "privateStorage": "actual visible browser upload/HEAD-backed completion/admin private image viewing/decisions passed; private bucket access and CORS verified",
+  "serverMeasurements": [
+    {
+      "service": "restaurant-service",
+      "uri": "/api/v1/internal/admin/restaurant-applications",
+      "successfulSamples": 26,
+      "p95EstimateMs": 13.561580699999999,
+      "p95BucketUpperMs": 13.981011,
+      "meanMs": 7.002485576923077,
+      "targetMs": 300,
+      "accepted": true
+    },
+    {
+      "service": "restaurant-service",
+      "uri": "/api/v1/restaurant-onboarding/organisations/{organisationId}/application",
+      "successfulSamples": 41,
+      "p95EstimateMs": 88.3600039499999,
+      "p95BucketUpperMs": 89.47848499999999,
+      "meanMs": 34.733279512195125,
+      "targetMs": 150,
+      "accepted": true
+    },
+    {
+      "service": "delivery-service",
+      "uri": "/api/v1/internal/admin/delivery-applications",
+      "successfulSamples": 14,
+      "p95EstimateMs": 118.55899229999999,
+      "p95BucketUpperMs": 134.217727,
+      "meanMs": 17.456322928571428,
+      "targetMs": 300,
+      "accepted": true
+    },
+    {
+      "service": "delivery-service",
+      "uri": "/api/v1/delivery-onboarding/application",
+      "successfulSamples": 41,
+      "p95EstimateMs": 65.6408569,
+      "p95BucketUpperMs": 67.10886400000001,
+      "meanMs": 38.90103104878049,
+      "targetMs": 150,
+      "accepted": true
+    }
+  ],
+  "measurementAcceptanceBasis": "separately labelled protected operator histograms after real journeys, per checklist; small cumulative sample, no load claim",
+  "supplementalBrowserMeasurements": [
+    {
+      "family": "onboarding-status",
+      "successfulSamples": 36,
+      "p95Ms": 270.216,
+      "proof": "supplemental observed UI network time; includes tunnel and grouped verification calls; excludes render"
+    },
+    {
+      "family": "admin-review-queue",
+      "successfulSamples": 16,
+      "p95Ms": 275.114,
+      "proof": "supplemental observed UI network time; includes tunnel and grouped verification calls; excludes render"
+    }
+  ],
+  "retainedInitialMetricFailures": "evidence59/64 small-sample restaurant status failure preserved; no endpoint warmup loops",
+  "postJourneyOperations": {
+    "running": 29,
+    "healthy": 26,
+    "healthNotConfigured": 3,
+    "drift": 0,
+    "automaticRestarts": 0,
+    "lifetimeErrorRecords": 4,
+    "newErrorRecordsSincePreGate": 0,
+    "recentErrors": 0
+  },
+  "historicInfrastructureLogs": "Four unchanged resolved initial-bootstrap records already present in operator baseline67 and the earlier clean-release evidence50: postgres 3, eureka-server-2 one. The inspect tool labels all since-start records startupErrorCount; no new records appeared during the journeys.",
+  "hardening": "15 PASS / 0 FAIL before gate, no runtime configuration changed thereafter",
+  "reconcile": "29 checked / 0 drift before gate; post-gate metadata confirms same exact tags/start times",
+  "deferred": [
+    "O3-UI-006 known legacy brand-name search mismatch; failed/deferred, not counted as a pass",
+    "O3-UI-001\u2013005 non-UI/legacy assertions, wait/rate-limit and withdrawn O1/O2 direct paths remain as documented",
+    "Eleven legacy UI files above 300 lines remain owner-deferred; global Phase 4 is not green",
+    "Production providers and load validation are not proven by Dev mocks/small samples"
+  ],
+  "ownedAllocations": [
+    "o3-invocation7-allocation.json",
+    "o3-invocation8-allocation.json",
+    "o3-invocation9-allocation.json"
+  ],
+  "fixtureState": "all applicants/profiles/documents/outlets and sessions retained; lifecycle riders returned Offline through the scenario UI; no backend cleanup",
+  "cleanupPerformed": false,
+  "migrationPerformed": false,
+  "laterPlanPhases": "O4/O5, W1\u2013W3 and A1\u2013A4 remain unstarted",
+  "sourceValidator": {
+    "counts": {
+      "passed": 19,
+      "failed": 0,
+      "stale": 0
+    },
+    "exitCode": 0,
+    "evidence": "69-o3-final-source-validator.json",
+    "proof": "fresh local committed-source validator only; deployed UI and operator evidence remain separate"
+  },
+  "e2eCommit": "2bf92e287e64c97765f7c85d562d3eb2bc7dc263"
+}

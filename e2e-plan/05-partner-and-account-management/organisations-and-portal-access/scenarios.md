@@ -126,3 +126,14 @@ BP-O3-QUEUE-UI: AdminPartnerApprovalsUiTest#reviewQueuesNavigation logs in throu
 ## 2026-10-04T14:16:06.678712+05:30 — Current image invocation8
 
 Delivery lifecycle, private admin review/decisions and hidden-listing methods passed. Restaurant lifecycle failed only after actual approval/summary refresh, on a brand-name query that the older outlet-name filter cannot match. Brand-alias search is [O3-UI-006 deferred](DEFERRED-LEGACY-UI-TESTS.md), not passed. The corrected O3 scenario will search its saved outlet, assert the exact renamed card and open its owned outlet through visible UI. The current image is unchanged; only this method needs rerun.
+
+## 2026-10-04T14:26:25.838614+05:30 — Current required O3 methods accepted
+
+| Method | Passing invocation on b5ab30e | Scope |
+|---|---|---|
+| deliveryApplicationLifecycle | 8 | Private onboarding, admin approval, actual UI Online/Offline |
+| privateReviewAndDecisions | 8 | Private uploads/checks/admin image viewing and real decisions |
+| pendingAndRejectedOutletsAreNotDiscoverableThroughTheCustomerUI | 8 | Seeded pending/rejected statuses and absent discovery cards |
+| restaurantApplicationLifecycle | 9 | Rejection/reason/edit/resubmit/approval, consistent summary, exact renamed-brand card via saved-outlet search and owned storefront |
+
+Invocation8 remains3passed/1error/0skips; targeted9 is1passed/0errors/0skips. Legacy brand-name search is O3-UI-006 failed/deferred, not passed. No order/menu placement claim.

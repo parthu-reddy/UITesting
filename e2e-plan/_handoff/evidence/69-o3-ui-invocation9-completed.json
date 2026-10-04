@@ -1,0 +1,53 @@
+{
+  "observedAt": "2026-10-04T08:49:47.596262+00:00",
+  "invocation": 9,
+  "proof": "actual visible public Oracle UI controls only; no direct product/DB/Redis/SSH/browser state setup",
+  "uiCommit": "b5ab30e4499bc546e45b8159210877fb8b224d69",
+  "e2eCommit": "2bf92e287e64c97765f7c85d562d3eb2bc7dc263",
+  "appUrl": "https://gulf-strike-dark-extras.trycloudflare.com",
+  "exitCode": 0,
+  "counts": {
+    "tests": 1,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "passed": 1
+  },
+  "suites": [
+    {
+      "class": "RestaurantApplicationApiTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "method": "restaurantApplicationLifecycle",
+          "seconds": 47.058,
+          "status": "passed",
+          "error": null
+        }
+      ]
+    }
+  ],
+  "cleanupPerformed": false,
+  "fixture": "UITesting/e2e-plan/_handoff/fixtures/o3-invocation9-allocation.json",
+  "artifactDirectory": "RandomDocuments/BusinessPlatform_2026-10-03/01_Organisations/Phase3_PartnerApplications/evidence/69-o3-ui-invocation9-artifacts",
+  "timingFiles": [
+    "RestaurantApplicationApiTest-18f8e099-9834-4cdc-bb1b-0a05b2622104.csv"
+  ],
+  "browserTimings": [
+    {
+      "family": "onboarding-status",
+      "successfulSamples": 6,
+      "p95Ms": 114.224,
+      "method": "nearest rank; UI-generated network requests; public tunnel included, rendering excluded"
+    },
+    {
+      "family": "admin-review-queue",
+      "successfulSamples": 4,
+      "p95Ms": 275.114,
+      "method": "nearest rank; UI-generated network requests; public tunnel included, rendering excluded"
+    }
+  ]
+}
