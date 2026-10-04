@@ -1,5 +1,10 @@
 # User instructions and joint decisions register
 
+## 2026-10-04T10:15:43.962704+05:30 — Initial O3 timing evidence
+
+Admin queue navigation1/1 passed. Both server queue buckets are under300ms, but browser queue p95 is353.948ms (n4) and Restaurant status bucket447.392ms exceeds150ms (n6). Delivery status n1 is111.848ms. Small samples, no load claim. Evidence59-o3-initial-measurements.json; final measurements stay open. Collect after completed normal journeys; no API warm-up loop. Uploads await user Cloudflare sign-in, application CORS admin403.
+
+
 Updated 2026-10-02T17:28:25+05:30. USER-INSTRUCTIONS.md contains the full standing rules; this register preserves decision rationale and reversals. Every continuing agent must append/update decisions here and record results in this plan, as required by ../AGENTS.md. Dates below identify the conversation period; older exact turn timestamps are not inferred.
 
 | Decision / period | Reason and scope | Current consequence |
@@ -397,3 +402,146 @@ O2 remains incomplete: publish the clean image after both exact-head gates, comm
 ## 2026-10-04T00:40:47+05:30 — Close O2 against its original deployed gates
 
 Choice: mark O2 PERF-3, measurement and final publication/deployment/E2E rows complete only after the final necessary read-only-query image is published/deployed and the unchanged original server budgets pass, including their enclosing buckets. Final brands31.317ms/outlets53.687ms (buckets33.554/55.924) meet50.199/83.753 and150ms. Actual final5+2 cases passed; no failure is erased or promoted, no extra warming/reset/budget waiver. Read-only query hints eliminate dirty-check snapshots for the one bulk list read; actual Hibernate guard and removed-hint negative control prove that behavior, with one/20 query limits unchanged. O1/O2 complete, choose O3 Partner Applications next. O3+ and whole-platform production readiness remain incomplete. See checkpoint41 and41-final-o2-gate.json.
+
+## 2026-10-04T00:43:48+05:30 — O3 source audit started; O1/O2 complete
+
+O2 final deployed gate is green with recorded original latency budgets; no remaining O2 rollout is pending. Begin O3 Partner Applications in checkpoint42. D4 automated checks then admin approval was already confirmed by the owner. Baseline O3 validator0PASS/19FAIL/0STALE,140 verification-status call sites and81 old endpoint/component references are saved before code edits. Source currently auto-approves riders; restaurant public lists lack an application-status gate and the old document paths expose unsafe ownership checks. No O3 source change, new fixture, publication, deployment or reset yet.
+
+Choice: use complete fresh initial schemas and deterministic new seed data under the standing all-Dev/disposable policy. Consolidate existing required Delivery/GovernmentID DDL only after inspecting and proving the resulting schema, retaining required constraints/indexes/functions; never add legacy upgrades or blindly delete SQL. Extend the existing hash-bound reviewed schema recreation mechanism only after exact SQL tests. Preserve checkpoint41 failures and all six canonical immutable reviews until a necessary schema rollout; no wipe to hide evidence. Planned O3 E2E records are in the owning feature scenarios, with new applicant allocation only after actual rollout. Next: implement/prove shared36-pair lifecycle and typed events, then restaurant/delivery/document security from actual source. Full platform remains incomplete.
+
+## 2026-10-04T00:54:18+05:30 — Verify actual R2 and keep ordering approval fresh
+
+Choice: use Oracle's already configured R2 for Dev document uploads; remove the unusable localhost mock URL when the owned document API is replaced. Before accepting any reference, always HEAD the server-registered object and verify its exact declared length/type/ETag; do not infer R2 enforcement from SDK unit tests. Run a tiny synthetic storage compatibility probe using secrets/signatures only on Oracle, retain the exact key and redacted HTTP codes, and never create/modify an applicant or seed during this probe. Check whether the configured public image URL exposes this document; if so, require private KYC storage rather than putting private documents in a public image bucket. No registry deletion, database wipe or fixture replacement.
+
+Source also shows Customer RestaurantClient caches by-id/menu results: public Restaurant approval filters alone cannot revoke a previously cached outlet for a new quote/order. Use an uncached approval read for ordering and typed status-event invalidation for cached browsing; prove suspended refusal without weakening accepted-order processing. Keep the removed public executive-id summary replaced by principal-derived /status/me, plus a distinct SERVICE/ADMIN-only internal summary for legitimate background verification. Existing provider callbacks retain their shape. Common lifecycle/event full clean install292/0/0/0 and the auto-approval bypass negative control37/1/0/0 are local proof, not an O3 deployment.
+
+## 2026-10-04T01:11:14+05:30 — O3 document ownership and signing proof
+
+Local shared lifecycle/event clean build292/0/0/0 remains proof of its earlier source snapshot. Actual S3Presigner/HEAD document guard4/0/0/0 passed; removing signed content length caused1/1/0/0, then source was restored. These are unit/negative-control results, not an O3 deployment. Oracle-to-R2 synthetic compatibility probe42-r2-signed-storage-probe-invocation1.json: valid PUT200, changed size403, changed MIME403, HEAD200/application-pdf/15bytes, anonymous configured public origin403. Retained only the synthetic key documents/storage-compatibility/40de4e1c-a427-426a-89e9-8d0552a3b4dc/synthetic.pdf; no applicant/seed mutation, secrets or signed URLs in evidence.
+
+Choice: register each server-generated document key with its authenticated owner, purpose, type, declared size and application before signing. Complete only after exact R2 HEAD; all verification references and own downloads must match the registered owner/type and exact documents/<caller>/ prefix. Restaurant uploads additionally require fresh BUSINESS_APPLY and DRAFT/REJECTED. Admin document downloads use5minute URLs and a transactional KYC_DOCUMENT_VIEWED audit, with IDs only in details. Replace public /status/{executiveId} with /status/me and retain a distinct SERVICE/ADMIN-only internal summary for real background jobs. Remove caller-selected identities from GovernmentID MCP tools and remove its provider-webhook mutation tool. Current working edits are not yet compiled or deployed.
+
+Additional source finding: a presigned PUT can be replayed until expiry, so HEAD alone does not make a reviewed file immutable. Finalize each accepted upload by a conditional, matching-ETag copy to a server-only key that is never issued a PUT capability. Prove actual R2 conditional copy before using it, then return/use that finalized reference. Also keep document edits frozen during review; delivery daily selfie remains a separate own document operation. Cloudflare's official S3 compatibility documentation lists CopyObject with x-amz-copy-source-if-match; that listing is not yet runtime proof.
+
+O1/O2 complete; O3 still incomplete, local only. No O3 publication, deployment, database wipe or new applicant yet. Next: finish document API/client/schema wiring and meaningful security/audit tests, then application services and UI before required clean release/live E2E.
+
+## 2026-10-04T01:23:07+05:30 — Document security and fresh schema verified locally
+
+Common clean invocation2:297/0/0/0. GovernmentID security invocation1:26/0/1/0 (Mockito restubbing setup error retained); corrected test setup invocation2:26/0/0/0, with all original assertions. Three negative controls each1/1/0/0 caught foreign-prefix ownership, restored caller-selected summary path and missing admin-view audit; exact source restored before the full GovernmentID clean build, currently running. Actual audit tests use JPA commits and rollbacks; these results are local proof, not an O3 rollout. Evidence42-gov-security-invocation{1,2}.json, individual stripped XML and42-gov-document-negative-controls.json.
+
+Isolated PostgreSQL17 initial-schema proof preserved all73 original columns/types and all original indexes, retained append-only audit, and proved valid document acceptance plus six invalid-row constraints. Only after that comparison, removed V20260822100000__add_missing_columns.sql and V20260925110000__timestamps_tz.sql; their final TIMESTAMPTZ/verification-data columns remain in V1, original files preserved as evidence. The hash-bound Dev recreation manifest is not yet extended: do not deploy this schema incrementally onto the existing Oracle database. Actual R2 conditional copy200, wrong-ETag412 and finalized HEAD200/15bytes/application-pdf; synthetic source and finalized object retained, no applicant/seed changes. Registered browser uploads now finalize under a server-only accepted key; no PUT credential is ever issued for that accepted object.
+
+Next from source: replace the old BRAND_CREATED consumer that carries financial PII with the typed SUBMITTED application event and a SERVICE-only read of its current verification request. Correlate automated callbacks with the submitted application revision while retaining the existing callback URL/body fields, and persist failed callback delivery for retry. This prevents stale callbacks and the old24-hour penny-drop lock from approving a resubmission incorrectly or leaving it stuck. Implement/prove this together with the single Restaurant/Delivery transition owners before claiming O3 completion. O1/O2 completed; O3 incomplete/local, no O3 publish/deploy/wipe/new applicant.
+
+## 2026-10-04T01:45:31+05:30 — Verification delivery and non-Dev safety
+
+Choice: retain existing brand-check HTTP request/response contracts as SERVICE-only compatibility entry points, but derive every checked field from the current submitted Restaurant application; caller-supplied brand/GSTIN/bank values never authorize or overwrite another application. Remove the corresponding public GovernmentID MCP tools. Typed SUBMITTED events start the same idempotent checks. Store callback results and retry state in the GovernmentID database, correlated to the submitted revision; a delivery outage cannot silently drop a result. Keep intentional Dev/test provider shortcuts. Production must refuse verification when no actual configured provider exists; never simulate successful financial/biometric approval in production. UI/application lifecycle work and production provider configuration are still pending. All Dev recreation remains authorized only through the unchanged reviewed clean workflow, after publication and schema proof.
+
+## 2026-10-04T02:09:40+05:30 — O3 provider safety and explicit resource binding
+
+Choice: remove successful non-Dev banking/selfie simulations; wire explicit production adapter interfaces with unavailable defaults that return503 and never create verification history. Preserve the existing deliberate Dev/test shortcuts and all real lockout behavior; lockout tests inject controlled provider results rather than choosing success/failure by a URL substring. Real provider choice/configuration is unresolved; owner question asks which provider, with continuing Dev mocks as the stated default. This does not block independent Dev feature implementation or authorize a production-readiness claim.
+
+Choice: bind application outlet edits to both IDs in the URL through the current outlet→organisation projection, then fresh BUSINESS_APPLY. Keep service-level brand binding too; add no scanner exemption. A controlled removal of each ownership/revision guard fails an actual assertion. Complete the original fresh-schema manifest review only after final schemas AND their seeds pass; current Gov hash alone is insufficient for rollout.
+
+## 2026-10-04T02:22:43+05:30 — Fresh approval reads and provider expiry
+
+Choice: keep the existing customer browsing caches, evict them on typed application transitions, and use a separate uncached call to the authoritative Restaurant public by-id endpoint for every quote and checkout. Preserve definitive4xx refusals and return503 for outages; never infer application approval from passed provider flags or a cached browsing row. Cache eviction errors roll back the persisted retry claim. Exact public SQL is proved across all six states before release.
+
+Choice: production DL/RC checks refuse missing/mock provider configuration and do not log document numbers, dates of birth, names, provider payloads or exception bodies. Preserve deliberate Dev/test provider result values. Parse their ISO expiry and the configured provider's dd-MM-yyyy format strictly; refuse malformed returned dates before persistence instead of storing an approved result with no expiry. Real-provider choice/configuration remains pending; no production integration/readiness claim. These choices do not authorize schema manifest exemptions without final seed proof.
+
+## 2026-10-04T02:46:52+05:30 — Rider identity, frozen review documents, suspension and fresh schema
+
+Use only the signed identity phone claim for first rider draft; missing claim requires a fresh sign-in. Application write DTOs contain no user-selected phone or identity. Daily selfies are a distinct owned DELIVERY_DUTY document purpose (SELFIE only, approved/suspended riders), while application documents and bank details freeze outside DRAFT/REJECTED. Every document operation uses fresh SERVICE-only application context; foreign/missing/unavailable context refuses the action. Suspension sets inactive and removes future availability after commit, preserving ON_DELIVERY assignment and liveness so the current delivery can finish; rollback emits no Redis/duty side effect.
+
+Under the owner's Dev-only policy, consolidate eight Delivery incremental DDL definitions into complete V1 only after exact isolated old-versus-new schema proof; retain originals in evidence. Preserve all93 original column definitions except explicitly retired executive verification_status, all other constraints/indexes, city type, telemetry geometry, durable assignments, prepaid-only check and mandatory version. GovernmentID complete initial schema also preserves all73 original columns/indexes and adds constrained separate duty-selfie purpose. Proofs42-delivery-fresh-initial-schema-proof-invocation1.json and42-government-fresh-initial-schema-proof-invocation4.json; current seeds are still untested, so the hash-bound recreation manifest is not yet extended. Publish clean current artifacts before the authorised unchanged full Dev wipe/deploy/fresh seed. These choices are locally implemented with focused proof, not yet an Oracle release or production-provider integration.
+
+## 2026-10-04T03:02:46+05:30 — Fresh verification, current contract stubs and deterministic Dev fixtures
+
+Provider approval must match the latest owned immutable application document, with unexpired results; replacement, foreign ownership and operational selfies cannot inherit application approval. Preserve only the deliberately configured legacy Dev/test seed shortcut; unconfigured or production profiles do not fabricate checks. Durable stored callback intent prevents repeat verification when general idempotency keys expire. Application contracts use an actual ISO timestamp example so generated consumer stubs exercise valid Instant binding, with no financial fields in transition events. Current producer stubs must be installed locally before consumer proof; local installation is not external publication.
+
+Add vehicle-registration uniqueness to complete Delivery initial SQL, matching the existing entity and existing duplicate-vehicle assertion; prove it on PostgreSQL and refresh the final schema hash before publication. Baseline Dev riders seed OFFLINE rather than imply live WebSocket/duty readiness. Preserve all baseline/scenario UUIDs; scenario statuses follow the O3 mapping with explicit reasons, passed provider fixtures for IN_REVIEW and genuine approval-filter discrimination from active nearby pending/rejected outlets. Approved brands have synthetic FSSAI. Private reviewed upload proof comes from the run's actual new applicant uploads, never public dummy images. Static validation passed; actual final schemas/seeds, UI and Oracle rollout remain pending. No Oracle seed/wipe ran in this batch.
+
+## 2026-10-04T03:14:06+05:30 — O3 reviewed fresh schemas and SDK generation
+
+Choice: retain required complete initial schemas and common audit/idempotency DDL. Consolidate only the10 inspected GovernmentID/Delivery incremental files whose exact previous definitions are proven in42 schema comparisons. Bind all seven initial files by SHA256 in DEV-SCHEMA-RECREATION.json only after all three changed schemas accept actual fresh seeds and idempotent replay. Keep prior Identity/chat/notification proof for unchanged bytes. Six isolated seed mutations must fail. No legacy conversion or Flyway repair; publish required clean consumers before unchanged clean-deploy --wipe/fresh seed. This permission expires on an owner production declaration.
+
+Choice: generate scoped OpenAPI explicitly and serially before SDK generation; ordinary Maven clean suites exclude it, and concurrent clean removes target specs. Assert new own application/document endpoints exist and old paths are absent. Test-only controller configurations use TestConfiguration and are excluded from production-controller scans; existing authorization assertions remain. UI consumes generated authenticated clients and registers completed immutable private uploads.
+
+## 2026-10-04T03:33:50+05:30 — O3 applicant/admin UI and SDK wire contract
+
+Choice: reuse Surface/Input/Button/Select/Tabs/StatusPill and the existing organisation selector, place search, coordinates and shifts. Applicant details remain editable only for DRAFT/REJECTED with server permission; submitted data is read-only and polled every10seconds until its status changes. Preserve a failed first application's form and already-created organisation in component memory; never create duplicate organisations on retry. Approved delivery details also remain locked in settings; suspension preserves an active delivery screen and server duty restrictions.
+
+Choice: use generated authenticated SDK aliases for draft and outlet PUTs. Zodios injectAliasEndpoints overwrites the generic put method when the OpenAPI operation alias is put. A generic three-argument call would silently send the URL as its body. Use the actual two-argument generated draft alias and updateOutlet alias; verify the real factory/transport/auth plugin, not only a vi.fn mock. Normal public image uploads remain distinct from registered immutable private KYC files. Accept a document reference only after real PUT and server completion; no mock URL bypass, manual localStorage auth or signed URL logging.
+
+Choice: admin approvals use paged queues, current versions, completed private uploads and fresh checks. Rejection/suspension reasons require10–500characters. Confirm the concrete decision, refresh detail/queue on409 and never optimistically grant approval. Admin document links are audited and expire in five minutes. Every source choice is local, not Oracle verification.
+
+## 2026-10-04T03:39:41+05:30 — O3 approval, frozen edits and daily duty UX
+
+Require completed private review documents on server approval/reinstatement as well as in the admin UI; frozen applications cannot be changed through legacy outlet operations. Recheck slow provider results against current application state/revision before persisting them and refuse obsolete document results. Bind admin history to its selected application. Offer an approved rider the existing private DELIVERY_DUTY selfie operation when the server reports a daily selfie is due; a selfie result does not itself mark the rider ONLINE. Existing active deliveries survive suspension. Read-only seeded legacy document shortcuts are not proof of private browser upload or review. These choices are being implemented and require final local and Oracle validation.
+
+## 2026-10-04T03:54:40+05:30 — Current private-file checks and fresh-schema validator
+
+Require admin approvals in both services to read completed private review files. Current application selfie liveness binds to its exact immutable file; verified operational duty selfies affect readiness, while unverified replacement application files remain unapproved. Initial-only Dev schemas must be validated for the final delivery_executives definition (application_status present, verification_status absent) rather than requiring a legacy ALTER/DROP migration. Test those guards with isolated negative controls before release. Keep hostile-timezone architecture checks and normal approval permissions unchanged.
+
+## 2026-10-04T05:54:23+05:30 — Historical pre-UI-only O3 E2E draft
+
+Use real Oracle public HTTPS and normal Dev Autofill for applicant/admin E2E. Retain owned accounts, applications, organisations, outlets and immutable upload IDs on every failure; no silent reset, seed, approval or SQL write. Versioned review follows explicit provider checks and completed private files. This former allowance to reconstruct a retained cart through browser storage is superseded by the 07:03 UI-only decision: do not inject browser state. Signed private URLs must not appear in evidence or browser error logs.
+
+Preserve current delivery access during suspension. Await the authoritative active-order request before deciding a non-approved rider is idle, show actionable loading/failure/retry states, refresh application status on suspension events and render an owned active job before the offline screen. Verify the real hook and rendered dashboard locally, then verify against Oracle after publication/deployment. These choices are not an O3 deployed completion claim.
+
+## 2026-10-04T05:58:10+05:30 — Owner requires GitHub-only image builds
+
+Direct user instruction: "never use docker, only use github workflows to build images for deployment". Effective immediately, never start or use local Docker and never build/publish deployment images through local or ad-hoc Docker commands. Build deployment images only through the affected repositories GitHub Actions build-and-push workflows, using the existing CI publication path. Required commits/pushes remain authorised. Publication must finish successfully and exact image tags must be recorded before the existing authorised Oracle deployment path runs. Do not choose the local Docker fast path even where an older workflow recommends it. No Docker was started in response to this instruction; the current process check found only the pre-existing network helper.
+
+O3 is incomplete. Keep release/live-E2E/measurements boxes unchecked until the exact proof passes; mark implementation-only items only after current source and local evidence are reviewed. Do not equate prepared/compiled E2E with executed Oracle proof.
+
+## 2026-10-04T06:22:54+05:30 — Owner requires embedded H2 and UI-only E2E
+
+Direct owner instructions: "No never do that 'disposable databases on Oracle' tests should never depend on DBs directly, why no use H2?" and "All E2E tests should only go through UI, no direct backend db or redis connections should be made for now."
+
+Choice: no Docker test fixtures, no external database test fixtures, and no direct DB/Redis access from E2E, including read-only allocation/audit queries. Use embedded H2 for service persistence/rollback/concurrency assertions and documented mocked infrastructure for minimal unit/contract/startup/OpenAPI contexts. E2E business setup/actions/assertions go through real UI controls; observe only the requests/responses those controls produce. Do not use browser fetch/API clients to bypass the UI. Keep PostgreSQL/PostGIS runtime behavior separately unverified until the deployed UI exercises it. This temporary UI-only policy remains in force until the owner changes it.
+
+The earlier Oracle disposable-database choice and unpublished native-PostGIS CI proposal are superseded. The owned SSH database tunnel was closed. Both external database helpers were removed; the same five Delivery concurrency/rollback/suspension cases now pass on embedded H2. Restaurant embedded H2 visibility/concurrency plus compiled-query structural guards pass15/0/0/0. The failed first Restaurant H2 compilation is retained (zero executed tests; wrong DTO package corrected). Prior Oracle/PostGIS results remain historical evidence, not current test setup authority. O3 browser fixture/runner rewrites are in progress and have not run; do not mark deployed E2E complete. Image builds remain GitHub-only and publish must succeed before deployment.
+
+## 2026-10-04T07:03:09+05:30 — O3 UI-only E2E scope clarification
+
+The owner clarified that an E2E test is a real browser user journey: all setup, business actions and
+assertions use visible UI controls. Observing a click-generated request/response is allowed. Direct
+API clients/URLs, browser `fetch`, DB/Redis/SSH reads, local-storage injection and fixture-side state
+changes are not E2E. Docker and external database fixtures are prohibited; embedded H2 is limited to
+local service persistence tests. The feature's direct-IDOR, stale-cart, direct-measurement and
+outbox/audit cases are deferred in `organisations-and-portal-access/DEFERRED-UI-ONLY-TESTS.md` and
+are not passes. This supersedes the earlier limited allowance to reconstruct a retained cart through
+browser storage.
+
+## 2026-10-04T07:29:00+05:30 — Fresh Dev V1 baseline cross-link
+
+The authoritative decision is maintained beside the Business Platform plan in
+[BusinessPlatform DECISIONS.md](../../../RandomDocuments/BusinessPlatform_2026-10-03/DECISIONS.md).
+It keeps the reviewed Delivery V1-only fresh-Dev baseline and treats the authorised clean Dev wipe,
+Flyway bootstrap and dummy seed as a future rollout sequence after publication. It does not restore
+old migration scripts, authorize a direct-database E2E fixture, or record any completed publication,
+deployment, wipe, seed, or live-E2E gate in this handoff.
+
+## 2026-10-04T08:32:47+05:30 — Current O3 scope leaves legacy Phase 4 files untouched
+
+The owner-limited O3 scope does not authorize edits to the eleven pre-existing >300-line legacy UI
+files reported by the Phase 4 static check. Keep that aggregate result at 11/12; it is neither a
+pass nor an exception. The authoritative plan decision is
+[BusinessPlatform DECISIONS.md](../../../RandomDocuments/BusinessPlatform_2026-10-03/DECISIONS.md).
+
+## 2026-10-04T08:36:01+05:30 — O3 existing GitHub release path
+
+The eight affected image workflows intentionally delete registry history; that behavior is
+task-authorized and does not require a workflow change. Use the existing direct GitHub path, with
+UI dispatch `-f deploy_dev=true` only after publication. IdentityService has no O3 diff and is not
+an O3 commit/image/stub/contract target; it remains a UI checkout dependency only. No release action
+has been taken.
+
+## 2026-10-04T09:37:14.676791+05:30 — Correct current O3 UI integration and preserve failed proof
+
+Use `organisation.list`, because the generated `get` alias selects the by-ID route. Preserve pagination and regression-check the actual generated transport. Match required form labels precisely and isolate seeded UI logins with empty browser contexts, retaining server sessions/data. Rebuild/publish the fixed UI in GitHub, deploy it to Oracle, then rerun real UI journeys. Owner takes legacy 300-line cleanup later; it is deferred rather than passed.
+
+### 2026-10-04T10:23:56.486302+05:30 — Current release access dependency
+
+Choice: keep all four O3 release/private-upload/measurement checks open. The latest UI is published/deployed as1caf57c,845CI tests and exact Oracle digest verified; read-only queue/filter UI method1/1 passes separately. GetBucketCors403 prevents bucket administration with the deployed app key. The user must sign in to the retained Cloudflare dashboard session; no credentials/tokens are created, exposed or broadened. Preserve existing rules and inspect actual public access before applying the prepared exact Dev-origin CORS rule or claiming private KYC. R2 documentation confirms virtual-hosted presigned URLs are supported, so do not change old SDK routing to guess away this CORS failure. Preserve the restaurant-status target failure in evidence59; final performance is unresolved.

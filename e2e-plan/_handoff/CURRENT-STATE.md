@@ -1,5 +1,309 @@
 # Current checkpoint
 
+## 2026-10-04T10:22:03.950439+05:30 — Current O3 UI deployed and queue/filter verified
+
+Latest UI1caf57c is published/deployed:845/845 CI tests; exact Oracle image digest healthy;29running/26healthy/zero drift, automatic restarts or recent errors. Required Dev profiles/hardening/reconcile pass. E2E071e368 extended read-only admin queue/filter test1/1 passed on this image, separate from the four lifecycle gate. The latest full lifecycle gate remains1/4; private uploads are blocked by R2 CORS and app-key GetBucketCors403. Cloudflare user sign-in is pending. Storage public-access/privacy and restaurant status latency447.392ms>150ms (n6) also remain unresolved. Continue from [checkpoint60](checkpoints/60-o3-current-ui-verified-r2-access-needed.md). No skipped/blocked case is a pass. Older entries below are history.
+
+
+## 2026-10-04T10:15:43.962704+05:30 — Initial O3 timing evidence
+
+Admin queue navigation1/1 passed. Both server queue buckets are under300ms, but browser queue p95 is353.948ms (n4) and Restaurant status bucket447.392ms exceeds150ms (n6). Delivery status n1 is111.848ms. Small samples, no load claim. Evidence59-o3-initial-measurements.json; final measurements stay open. Collect after completed normal journeys; no API warm-up loop. Uploads await user Cloudflare sign-in, application CORS admin403.
+
+
+## 2026-10-04T10:14:06.424177+05:30 — Current O3 wizard deployed; R2 access needed
+
+UI d306599 is published/deployed with 844/844 CI tests; exact Oracle digest and 29-service health/drift checks, Dev overlays and hardening pass. Read-only admin queue navigation passed1/1; the four lifecycle gate remains incomplete. Real browser uploads fail bucket CORS and the application key receives GetBucketCors403. Cloudflare browser sign-in is pending. Also verify the configured assets bucket's public-access setting before claiming KYC privacy. New admin status-picker fix (local7/7) is pushed as1caf57c and building in37177772081. Continue from [checkpoint57](checkpoints/57-o3-published-wizard-and-r2-blocker.md). Earlier entries below are history.
+
+
+## 2026-10-04T10:05:55.610972+05:30 — Current O3 publication and R2 upload blocker
+
+UI `d306599` and UI-only E2E `4402ba6` are pushed. GitHub UI image workflow `37177308291` is running; Oracle still serves `770a732`. Local rider wizard 7/7, typecheck/lint/build and 180-source E2E compilation pass. The targeted restaurant probe (invocation4, 1 test / 0 failures / 1 error / 0 skips) reached the real Upload button/file chooser and failed because R2 preflight rejects the exact public Dev origin. Private upload and final four-class gate are still unverified. Retain all owned fixtures. Repair bucket CORS as separately labelled operator configuration, preserving existing rules and using one exact HTTPS Dev origin; no public-bucket change. Then deploy the published rider image and run the final gate. Evidence: `56-o3-restaurant-r2-cors-failure.json`. Legacy 300-line cleanup stays owner-deferred.
+
+Earlier dated entries below are historical.
+
+
+## 2026-10-04T09:56:18.654776+05:30 — Latest public O3 UI gate and current UX repair
+
+The corrected organisation-list image `770a732` is published/deployed; CI 843/843, Oracle 29/29 running, zero image drift/restarts/current errors, hardening/reconcile passed. Delivery timing configuration applied; Dev overlays match Oracle. The sandboxed launch attempt produced four startup errors and zero UI journeys. The next actual public UI gate was 4 tests / 1 passed / 2 failures / 1 error / 0 skips. Pending/rejected visibility passes. Brand/outlet saves succeed, but a stale hidden-file-input visibility assertion stops restaurant/admin setup. Rider's wrapping label reactivates the custom dropdown after selection and it covers Save.
+
+Current local repair stays inside new O3 files: separate vehicle fieldset/legend and explicit name, fluid-width scrollable rider wizard with compact mobile steps, visible Upload/Replace buttons and real file chooser, plus a real browser collapsed-picker assertion. Rider lifecycle will use a 390 x 844 viewport after normal UI signup. Unit regression before fix fails the accessible name (6 pass / 1 fail); jsdom does not reproduce the browser label reactivation. Latest positive local unit result is 7/7; final current-source checks and new UI publication/Oracle deployment precede rerun. Legacy 300-line cleanup is owner-deferred.
+
+Retained proof: `52-o3-ui-correction-publication-rollout.json`, `53-o3-browser-launch-failure.json`, `54-o3-second-deployed-ui-run.json` in handoff evidence and the canonical Business Platform phase evidence. Private upload, final E2E and measurements are still open; no user input is needed. Earlier dated entries below are history.
+
+
+## 2026-10-04T09:37:14.676791+05:30 — Current O3 release gate
+
+Publication and clean Oracle Dev wipe/deployment, fresh dummy seed and hardening completed. Operational audit: 29/29 running; zero image drift/restarts/current errors; 26 healthy checks plus three without healthchecks. Four resolved infrastructure startup events are retained in the deployment proof.
+
+First public UI gate: 4 tests, 2 failures, 2 errors, 0 skips; 0 passed. Local fixes now use the generated Identity organisation-list alias, required-field-aware O3 locators and separate empty browser sessions for seeded applicants. Focused UI tests pass 19/19 and 180 E2E sources compile. These fixes are not yet published/deployed. Private-upload completion, final four-class E2E and measurements remain unverified. Legacy 300-line cleanup is owner-deferred.
+
+Continue from [checkpoint52](checkpoints/52-o3-first-ui-gate-and-repair.md). Earlier dated entries below are historical.
+
+
+## 2026-10-04T08:36:01+05:30 — checkpoint46 current-session local gates; release remains open
+
+The current O3 local boundary is [checkpoint46](checkpoints/46-o3-current-local-gates.md) and its
+[evidence record](evidence/46-o3-current-local-gates.json). These locally rerun active-task results
+are selected/scoped validation, not fresh full-suite claims: Core 56/56 plus selftest 28/28;
+CommonLibrary fresh skipped-test install plus selected 57/0/0/0; Customer 25/0/0/0; Restaurant
+56/0/0/0; Delivery 64/0/0/0; Gateway 21/0/0/0; and template substitution 4/0/0/0. Government ID
+remains split into current 2/0/0/0 consumer, 1/0/0/0 Restaurant and 1/0/0/0 OpenAPI contracts,
+plus a retained prior selected 90-test local suite; never call that a fresh 94-test suite.
+
+UI lint/typecheck/build pass, full Vitest is 842/842, targeted O3 UX is 30/30, and `UITesting`
+freshly compiles 179 sources. `ApplicationReviewStep.tsx` is the verified shared wizard review step.
+The four O3 UI classes and runner have zero prohibited direct-client, browser-state or infrastructure
+bypass matches; that completed source audit is not browser execution. Current O3 static source
+checks are Phase 1 18/18, Phase 2 15/15, Phase 3 13/13 and Phase 5 14/14; Phase 4 remains open at
+11/12 because eleven legacy >300-line files are outside the owner-limited O3 scope. The
+post-documentation O3 validator is 19 PASS / 0 FAIL / 0 STALE.
+
+No O3 artifact is published or deployed. No Dev wipe/seed, Flyway/PostGIS bootstrap, Oracle health,
+public UI E2E or measurement occurred. Publication through GitHub workflows must precede the
+authorised clean Dev deployment and fresh seed path.
+
+
+## 2026-10-04T07:40:23+05:30 — checkpoint44 current Delivery baseline proof boundary
+
+The current Delivery V1 SHA-256
+`400326430433bdf520302274651f6c76870eb1e4faf3095faca613f1b2689b14` now matches the active
+recreation manifest. The current static baseline report is 2/0/0/0, the embedded-H2 concurrency
+report is 5/0/0/0, and the committed dummy-seed source validator passes. See
+[45-o3-delivery-current-baseline-static-h2-seed-proof.json](evidence/45-o3-delivery-current-baseline-static-h2-seed-proof.json).
+
+The current scoped O3 service results are Restaurant 10/0/0/0, Delivery 5/0/0/0 and Customer
+8/0/0/0. Repository-wide Mockito MockMaker resources are removed; only these target Maven
+invocations use a matching Byte Buddy javaagent, preserving legacy/default test behavior. The
+current UI-only O3 runner uses normal Dev Autofill via visible controls, and `UITesting`
+test-compiles 179 sources. This is not a deployed browser result.
+
+Those checks do not execute PostGIS or Flyway, load/replay a seed database, publish, deploy, or
+run the public UI. Current Delivery runtime bootstrap remains unproven until current artifacts are
+published, then the authorised clean Dev `--wipe`, deployment and fresh dummy-data reseed complete.
+The `42-*` Delivery runtime evidence is preserved as historical because it binds the former
+`2e18ec...` V1 SHA. O3 remains uncommitted, unpublished, undeployed and unrun against public UI.
+The owner has limited this batch to current Business Platform work; do not change legacy/unrelated
+application code.
+
+## 2026-10-04T07:24:40+05:30 — historical 178-source snapshot and embedded-H2 supplement
+
+The 07:24 no-recompile `UITesting` snapshot reported 178 sources. It is historical; the later
+fresh 179-source compilation is the current source result. `GatewayApi.java` is deleted, and the former direct O1/O2 paths are
+[deferred, not executed, and not passed](../05-partner-and-account-management/organisations-and-portal-access/DEFERRED-O1-O2-UI-ONLY-TESTS.md).
+The authoritative [fresh-Dev V1 baseline decision](../../../RandomDocuments/BusinessPlatform_2026-10-03/DECISIONS.md)
+applies only to a future authorised clean Dev wipe after publication; it records no deployment here
+and does not change the UI-only E2E boundary.
+
+Critical source audit: current Delivery `V1__init_schema.sql` SHA-256 is `400326430433bdf520302274651f6c76870eb1e4faf3095faca613f1b2689b14`, which differs from the
+fresh-schema manifest/prior-evidence SHA `2e18ec0771eb6966075fd3542ce30c8d294fd19c2dc7d7e2556d550c9df833b3`
+and the Git HEAD content SHA `9ead10291d30fba19c414b14a1719826224a28de39365b2c69868348b1590e3c`.
+Restaurant's current V1 continues to match its manifest. All prior fresh Delivery schema/seed proof
+is stale for the current baseline. The H2 and focused Customer results remain local source/service
+evidence only. Rebuild and reprove the current Delivery baseline and seeds before publication or
+the authorised Dev wipe.
+
+Sequential embedded-H2 service checks pass in Restaurant (10/0/0/0) and Delivery (5/0/0/0).
+Customer's focused local service check passes 8/0/0/0; its initial run had zero product assertion
+results because Mockito's inline agent could not attach on JDK 26. The initial WireMock dynamic
+HTTPS-port harness failure is resolved by
+`wiremock.server.https-port=-1` in the H2 test classes. The JDK 26 inline-MockMaker attachment
+failure is resolved by test-only `mock-maker-subclass` resources in all three application repositories.
+These are local service checks only: no Docker, external database, deployed UI, publication or
+deployment was used.
+
+O3 remains uncommitted, unpublished and undeployed. No O3 browser journey, health check,
+measurement, clean Dev wipe/seed or release gate has run. Continue from
+[checkpoint44](checkpoints/44-o3-ui-only-local-source-proof.md) and its evidence JSON.
+
+## 2026-10-04T07:17:12+05:30 — historical checkpoint44 local UI-only source snapshot
+
+O3 browser-only source now compiles locally: `UITesting` test-compile succeeds for 179 sources;
+`SeededRiderDutyTest` is 4/0/0/0; the O3 validator is 19 PASS / 0 FAIL / 0 STALE; and the runner
+passes `py_compile`. The four O3 classes/runner have a zero-match focused scan for direct API,
+browser-state, DB/Redis/SSH, Docker and external-fixture patterns. This is not a public browser run.
+
+O3 is still uncommitted, unpublished and undeployed. No O3 live E2E, deployment, wipe/seed, health
+or measurement occurred. Deferred cases remain deferred and not passed. Continue from
+[checkpoint44](checkpoints/44-o3-ui-only-local-source-proof.md).
+
+## 2026-10-04T07:03:09+05:30 — checkpoint43 UI-only O3 E2E boundary
+
+O3 is still local, uncommitted, unpublished and undeployed. This checkpoint changes the plan and
+handoff record only; it adds no test result, application data, publication, deployment, seed or
+wipe. All O3 browser work must now be a real visible UI journey. It cannot use direct APIs/URLs,
+browser `fetch`, DB/Redis/SSH, local-storage injection, Docker or external database fixtures.
+
+The four named O3 browser classes are unimplemented as compliant UI-only tests and have not run.
+Direct endpoint/IDOR, stale-cart injected state, direct measurement-loop, and outbox/audit/allocation
+checks are deferred rather than green; see the owning feature's three deferred records. Embedded H2
+remains local service-only evidence. Continue from
+[checkpoint43](checkpoints/43-o3-ui-only-e2e-boundary.md).
+
+## 2026-10-04T06:22:54+05:30 — O3 embedded H2 and UI-only owner policy
+
+O3 is local, uncommitted, unpublished and undeployed. The owner now prohibits Docker tests and all external DB fixtures, including Oracle disposable databases. E2E is UI-only: no direct API setup, DB or Redis connections, including read-only allocation/audits. Embedded H2 is the service persistence fixture. The owned Oracle DB tunnel is closed and both external test helpers removed. Delivery H2 invocation1 passes5/0/0/0; Restaurant H2 invocation2 passes15/0/0/0. Restaurant H2 invocation1 failed compilation with0executed tests; the actual DTO package was corrected and all assertions retained. Prior PostGIS proofs are historical, not current setup authority.
+
+Current prior UI snapshot full842/842passes, typecheck10/lint1/build3 pass; explicit current Restaurant/Delivery/Gov OpenAPI3 each1/0/0/0. Gateway clean1 31/0/0/0 and Notification clean1 43/0/0/0. UITesting compile4 passes179sources before the latest UI-only rewrite. O3 static3 is19/19; the earlier wrong-root static0-case run remains separately retained. The mistaken root Maven compile3 built the aggregator, not E2E, and is retained as such.
+
+Both H2 fixtures preserve real transactions, optimistic conflicts, state/audit/outbox/notification/after-commit assertions and active assignment safety. Restaurant spatial SQL now has a separately labelled compiled-annotation guard; H2 does not prove PostGIS execution. Unused external-database AbstractIntegrationTest scaffolds in the two affected services were removed after confirming no subclasses. Current O3 browser helpers/runner are being rewritten to drive actual applicant/admin UI controls, observe those controls' requests/responses, and retain local allocations without SQL or direct fetch. No rewritten O3 browser gate has run.
+
+Pending workflow approval remains only for removing optional deletion of all prior registry images from the eight affected GitHub image workflows; external DB setup is withdrawn. Actual workflows are unchanged. No O3 publication, deployment, reset or live application E2E was performed. Finish H2 clean suites, UI-only E2E compilation, current source gates and break controls; publish before the authorised clean Dev deploy/seed, then run UI gates/health/measurements. O1/O2 are complete; O3 and later phases remain incomplete.
+
+
+## 2026-10-04T05:54:23+05:30 — O3 final HTTP proof and prepared Oracle E2E
+
+O3 remains local, uncommitted, unpublished and undeployed. Restaurant HTTP invocation4 passes43/0/0/0 and Delivery HTTP invocation4 passes29/0/0/0, including the actual DAILY_SELFIE_REQUIRED controller/advice response, foreign-driver refusal and frozen/missing private-document guards. Invocation3 sandbox agent attachment failures are retained43/0/43/0 and29/0/29/0; use the required default hostile-timezone argLine and approved unrestricted test invocation, without weakening assertions. Gov clean7 remains109/0/0/0. UI daily-selfie final3 passes7/0/0; malformed confidence and unmount abort/late result are covered.
+
+Historical pre-UI-only E2E draft (superseded by checkpoint43): the former classes/runner used direct-request, infrastructure or browser-state techniques that the owner now prohibits. Do not treat its prepared accounts, direct hidden-outlet/cart assertions, read-only measurements, runner preflight, or compile result as a compliant browser-E2E contract. The current UI-only scope and deferred cases are recorded in checkpoint43 and the owning feature's deferred files.
+
+Source validator shared rate/audit/metric call paths now match actual ApplicationRateLimits/ApplicationEvents helpers and after-commit metrics; validator selftest invocation2 passes31positive/13negative controls. Core manifest regression selftest passes24checks; eight actual current-manifest negative controls prove changed initial bytes, failed schema/constraint proof, restored retired SQL and expired/production policy refuse exemptions. Initial static invocation1 retained16PASS/3FAIL from obsolete helper patterns. Static invocation2 used the wrong working directory and ran0cases; preserve this invocation and rerun from the workspace root. No SQL or Oracle state was changed by these negative controls.
+
+Final source review identified a suspended active-delivery rendering gap: the dashboard may show application onboarding before active-order loading settles, and an OFFLINE screen precedes an existing active job. Suspension duty events also need a fresh authoritative application status. Fix with loading/error/retry and owner-scoped assignment proof, then run final current clean suites/contracts/SDK/UI/validators. Publish all required artifacts before the unchanged authorised clean Dev wipe/deploy/seed and deployed E2E. O1/O2 are complete; later phases remain incomplete. Missing real production provider adapters remain unverified and fail closed.
+
+
+## 2026-10-04T03:59:40+05:30 — O3 final HTTP wiring and fresh-schema guard
+
+Gov full clean/install invocation7 passes109/0/0/0 with the required hostile Pacific/Chatham timezone restored. UI typecheck invocation8 passes. Restaurant HTTP invocation2 retained43/0/6/0 and Delivery48/0/9/0: plain Spring processes the mocked AuditReader PersistenceContext; the fixture needed a mocked EntityManagerFactory, added without weakening permissions. Invocation3 is pending. Actual daily-selfie controller catches had swallowed the typed prompt exception; it now reaches the ordered handler and a real controller/readiness HTTP test asserts the code, suspended refusal and foreign-driver refusal. Delivery approval/reinstatement negative cases now cover missing and uncompleted private documents. Fresh schema O3-RIDER-STATUS validator checks actual initial CREATE definitions instead of requiring a dummy DROP migration: all28 positive controls and seven ownership/lifecycle negative controls pass. No O3 publication/deployment/Oracle writes yet. Continue focused HTTP reruns, compile O3 E2E and final clean release gates, then publish before authorized clean Dev deploy and live proof.
+
+
+## 2026-10-04T03:54:41+05:30 — O3 HTTP boundaries and retained fixture failures
+
+O3 remains local/uncommitted/unpublished/undeployed. Final approval guards require completed private uploads for both restaurant and delivery approval/reinstatement. Legacy outlet status/settings/timing writes require an APPROVED brand. Slow bank/license/registration/biometric checks recheck current application state and revision/file before persistence. Current registered application selfie liveness must match its immutable file; operational duty selfies refresh readiness without approving a replacement application selfie. Dev seed shortcuts remain only for legacy empty registered-upload state, never invented biometric timestamps. Admin history is selection-bound/aborted. Rider daily-selfie prompt uses private DELIVERY_DUTY upload plus real check and readiness sync, then requires the ordinary duty switch; no automatic ONLINE state.
+
+Focused local results: restaurant final guards invocation1 compile failure0tests (unqualified Instant in new fixture), corrected invocation2 44/0/0/0. Gov provider-freeze invocation1 41/0/0/0, invocation2 59/0/0/0, including seven blocked-provider/file-change cases and existing lockout assertions. UI final guards invocation1 24pass/0fail/0pending. Gateway invocation1 18/0/0/0: actual route predicates, existing route rate limiters and signed JWT authorization tested with both Deployment config and packaged fallback. Internal SERVICE paths remain absent from all RBAC lists and are rejected externally. Former restaurant transaction test renamed to ConcurrentApplicationDecisionTest with both real concurrency/rollback assertions retained.
+
+New HTTP fixture invocation1 failures are retained: Restaurant43/0/6/0 and Delivery48/0/9/0, because a plain Spring fixture did not install Boot's Duration conversion for mocked RateLimitingService @Value fields. Add fixture conversion service; no product permission is relaxed. UI typecheck7 failed one newly deferred test Promise type; corrected to explicit unknown. Gov full clean6:109/1/0/0; its architecture guard correctly rejected the command-line argLine override that dropped the mandatory Pacific/Chatham timezone. Restore the hostile timezone in the command, not the assertion/source. Full clean7 and HTTP2 follow. Evidence42-restaurant-http-invocation1.json,42-delivery-http-invocation1.json,42-government-clean-invocation6.json,42-gateway-invocation1.json,42-provider-freeze-invocation{1,2}.json,42-ui-final-guards-invocation1.json,42-restaurant-final-guards-invocation{1,2}.json.
+
+No O3 Oracle write/wipe/live E2E/private browser CORS or measurements. O1/O2complete; later phases incomplete. Remaining: final local source gates and negative controls, new/ported O3 E2E compile, publish Common/producer stubs/current consumer images and UI before unchanged authorised full Dev wipe/deploy/seed, then Oracle E2E/health/metrics. Real production providers remain unspecified/unconfigured and fail closed. Source-safe initial schema guard must replace the obsolete DROP-column requirement, bound to actual fresh baseline proofs; no dummy incremental migration should be restored to make a static gate pass.
+
+
+## 2026-10-04T03:39:41+05:30 — O3 full UI gates and remaining source safeguards
+
+O3 remains local/uncommitted/unpublished/undeployed. Current UI typecheck6 passes. Full UI invocation1:821/821 passes, zero failures or pending; notification templates invocation1:11/0/0/0. Reports retained in42-ui-clean-tests-invocation1.json,42-notification-templates-invocation1.json and42-ui-and-notification-final-local-gates.json. Earlier failures remain separately retained. These results prove the local snapshot, not Oracle browser uploads or E2E.
+
+Source inspection found remaining concrete safeguards: restaurant admin approval currently checks provider booleans without rechecking required private uploads; legacy outlet status/settings/timing writes permit frozen application states; provider verification checks editability before a slow call but does not recheck the application revision before persistence. Admin history requests can resolve after changing the selected application. Approved riders have no actionable daily-selfie UI despite the authoritative duty refusal. Finish these guards and their meaningful checks before final source gates/publication. Keep ongoing active deliveries when suspended; never manufacture readiness or approve a seeded read-only scenario. Missing real production provider adapters still refuse checks. O1/O2 are complete; later phases remain incomplete. No Oracle O3 write or wipe occurred.
+
+
+## 2026-10-04T03:33:50+05:30 — O3 applicant UI and actual SDK request proof
+
+O3 remains local/uncommitted/unpublished/undeployed. Current complete Delivery clean2 has193tests,0failures,0errors,1parked ONDCskip (192executed passes); Gov clean5 99/0/0/0, Common clean4 304/0/0/0 and Customer clean1 485/0/0/0. Gov explicit OpenAPI1 failed duplicate handler from a scanned controller-test configuration (1/0/1/0); same assertions and current endpoint-presence/retirement guards OpenAPI2+SelfAccess pass8/0/0/0 after TestConfiguration isolation. Delivery explicit OpenAPI2 passes1/0/0/0. SDK regeneration2 completes serially from all current specs; old root fallback/racing clean result1 is not current API proof.
+
+Fresh seeds/schema replay and six isolated negative controls pass. Reviewed manifest now binds7initial hashes/30retired paths to sixschema/36constraint rows; unchanged core guard accepts37paths with0errors. Original failed FSSAI-column seed1 remains retained. No Oracle reset/write.
+
+Both new applicant wizards/admin approvals are mounted. Old brand/rider onboarding and SSE UI source removed after enumerating all references; former3organisation-create/reuse/retry assertions retained in the replacement wizard tests and SSE proof replaced by actual10second submission-poll/state/unmount tests. Reviewed rider settings now respect frozen application status; Dashboard uses server application status instead of manufactured verification. Completed private upload reference only after actual PUT/server confirmation, exactMIME/size, no manual token/signed URL leak. Admin pages display checks/documents, require reason/confirmation, refresh on409 and offer audited five-minute private links.
+
+Local applicant/upload/poll UI invocation1:29total,28pass,1failed form-retention assertion; repaired invocation2:29pass/0fail/0pending. Admin/actualSDK invocation1:8pass/0fail/0pending (5rendered admin cases+3actual generated SDK/transport/auth header cases). Typecheck1/2 caught retired callers/imports;3caught3fixture type errors;4passed;5caught8unsupported testing-library exact options in the new admin fixture, corrected without changing name assertions. Lint1 caught UTC date slicing; shared todayIn replaces it, lint2 passes. Current typecheck6, complete UI Vitest1 and notification-template1 running. UI/source release gates, backend/gateway authorization, private browser CORS, actual E2E, publication/deployment/Oracle measurements still pending. All BP-O3 live rows unexecuted; O1/O2complete, later phases incomplete. Optional real-provider choice unanswered; missing production adapters refuse checks.
+
+Evidence42-ui-applicant-invocation{1,2}.json,42-ui-admin-sdk-invocation1.json,42-government-openapi-invocation{1,2}.json,42-delivery-openapi-invocation{1,2}.json,42-seed-negative-controls-invocation1.json,42-reviewed-schema-manifest-guard.json and actualstripped reports. SDK alias lesson/dated choices are in plan-root DECISIONS.md and handoff/lessons. Next collect full UI/template/typecheck, guard/gateway proofs and all unchanged gates; publish clean artifacts before unchanged authorised fullDev wipe/deploy/fresh seed and Oracle O3 E2E/metrics.
+
+
+## 2026-10-04T03:11:59+05:30 — O3 current service contracts and fresh seed proof
+
+O3 remains local/uncommitted/unpublished/undeployed. Delivery full clean invocation2 has 193 tests,0 failures,0 errors,1 pre-existing parked ONDC skip (192 executed passes); current typed self-consumer and five real PostgreSQL transaction/uniqueness cases pass. Gov full clean/install invocation5 has99/0/0/0. Restaurant selected producer invocation1 has9/0/0/0 after SSE removal/current ISO contract, while full clean4 is137/0/0/0 before those final changes. Common clean4 304/0/0/0 and Customer clean1 485/0/0/0 remain current. Exact stripped reports retain all earlier failures.
+
+Delivery selected producer install invocations2/3 stopped at Maven validation because contract source was newer than generated output: zero executed tests. Invocation2 initially counted stale target XML; that erroneous count is preserved as discarded-stale-target-counts and corrected to zero. Clean selected install invocation4 ran17/0/0/0; no external publication.
+
+All three complete fresh PostgreSQL17/PostGIS schemas with actual committed baseline/scenario seeds pass in final seed invocation2; every seed replays without changed counts. Restaurant13brands/104outlets/504items, Delivery34idleOFFLINEriders, Gov98executive documents/34banks/36brand docs/3brand banks. Exact original definitions/constraints remain preserved. Invocation1's mistaken fssai_number column failed before restaurant seeds; corrected to actual unique fssai_license_number and unique synthetic14digits, original failure retained. Static guard now also rejects duplicate FSSAI/vehicle values and passes. Recreation manifest update follows negative controls; no Oracle write or wipe.
+
+SDK generation invocation1 succeeded but used stale Delivery/Gov root specs: normal full test runs exclude OpenAPI, and a concurrent Delivery clean deleted its target spec. Explicit current OpenAPI tests are now running before regenerating SDK serially. This is not a UI completion claim. Next negative seed controls/hash-bound manifest, current SDK, applicant/admin UI with10second SUBMITTED polling, gateway/alerts/notification/authorization guards and full unchanged gates. Publish before authorised unchanged full Dev wipe/deploy/fresh seed, then Oracle O3 E2E and measurements. O1/O2 complete and boxes checked; later phases incomplete. Optional real-provider choice still unanswered; Dev mocks deliberate, production missing adapters refuse checks.
+
+Evidence:42-delivery-clean-invocation2.json,42-government-clean-invocation5.json,42-delivery-producer-install-invocation{2,3,4}.json,42-final-schema-and-seeds-invocation{1,2}.json,42-delivery-fresh-initial-schema-proof-invocation2.json.
+
+
+## 2026-10-04T03:02:46+05:30 — O3 contract consumer guard and seed source
+
+O3 remains local/uncommitted/unpublished/undeployed. Latest completed results: Restaurant full clean invocation4 137/0/0/0 before subsequent SSE removal and contract timestamp correction; Delivery selected producer/local-stub install invocation1 16/0/0/0 (5 actual PostgreSQL transaction/uniqueness cases, existing duplicate-vehicle integration and current HTTP/messaging producer contracts). This local Maven install is not external publication. Common clean4 304/0/0/0 and Customer clean1 485/0/0/0 remain their current source snapshots.
+
+Delivery full clean invocation1 191/1/1/1 retained. Its failures were an old installed GovernmentID summary stub and a full-context test missing the deliberately disabled contract-test rate limiter; added only the fixture mock, preserved its duplicate-vehicle assertion. One pre-existing ignored ONDC getDeliveryStatus contract remains explicitly parked, not a passed case. Fresh actual SQL lacked vehicle-number uniqueness despite the entity declaring it: added UNIQUE and proved duplicate refusal in real PostgreSQL; final Delivery schema hash/seed proof must be refreshed.
+
+GovernmentID freshness invocation1 36/0/0/0: approval follows the latest owned immutable application file, expired/replaced/foreign/duty files cannot inherit approval, deliberate legacy Dev fixtures remain; persisted callbacks prevent repeated checks after general idempotency retention expires. Full Gov clean invocation4 99/0/1/0 retained: new actual Kafka consumer rejected the generated Restaurant contract's arbitrary changedAt string. Production serializer was correct; producer wildcard stub generation was not an ISO Instant. Both application contracts now use the real fixed ISO timestamp and production serializer, with exact typed consumers. Current producer stubs are being refreshed locally before rerunning consumers and complete clean gates.
+
+Gateway source now routes applicant and admin application/document surfaces with existing rate limiters; only applicant paths enter authenticated RBAC. SERVICE-only context endpoints stay unrouted/unlisted. New 24-hour real review-age alert plus committed runbook passes alert validation (12 rules/3 files). Seed source preserves baseline/scenario UUIDs, explicitly APPROVED baseline brands/riders, idle OFFLINE baseline riders, IN_REVIEW/REJECTED/SUSPENDED scenario states with reasons and completed Dev checks. Every approved brand has synthetic FSSAI; pending/rejected outlets are active/near Home so approval filtering is meaningful. Static seed validator passes all counts/status/reason/mapping/FSSAI checks; no Oracle seed or wipe occurred. Fresh schema-plus-seed execution and hash-bound recreation-manifest update remain pending. No synthetic public seed image is represented as a private reviewed upload.
+
+Next: finish current producer/consumer dependency-cycle proof, exact final PostgreSQL schemas with fresh seeds and negative controls, generated SDK/applicant/admin UI with 10-second SUBMITTED polling, gateway/rule guards, all unchanged gates. Publish before the unchanged authorised full Dev wipe/deploy/fresh seed, then Oracle O3 E2E and measurements. All BP-O3 Oracle scenarios remain unexecuted; O1/O2 complete, later phases incomplete. Optional real-provider choice unanswered; missing production adapters refuse checks.
+
+
+## 2026-10-04T02:50:38+05:30 — O3 real rider transaction proof
+
+Delivery actual PostgreSQL/PostGIS transaction invocation2:11/0/0/0 (4 new real transaction cases and7 original RiderGoOnline checks). Concurrent admins read the same persisted version: exactly one decision, audit, typed event and recipient notification commit; loser sees current status/version1. Outer approval rollback restores IN_REVIEW/version0 with no audit/outbox/metric. Suspension preserves the durable ON_DELIVERY assignment, OTPs, progress/version and liveness, blocks future duty, removes availability and notifies only after commit. Suspension rollback preserves active status/version/assignment and causes no availability/duty/audit/outbox/metric change. Initial invocation1 was a test-compilation failure (nonexistent fixture enum PICKED_UP corrected to real OUT_FOR_DELIVERY), zero tests, original log retained.
+
+Delivery lifecycle/OpenAPI/permission invocation3:29/0/0/0. This rerun includes15 lifecycle,4 activation,6 readiness,3 original summary-permission and1 OpenAPI checks; an incorrectly named RiderGoOnlineReadinessTest selection did not run. The7 actual RiderGoOnlineTest checks passed in transaction invocation2, recorded separately rather than inflating invocation3. Original33/0/1 OpenAPI scan failure remains retained; test-only configuration isolation preserves the permission assertions. Evidence42-delivery-lifecycle-invocation3.json and42-delivery-transactions-invocation{1,2}.json plus stripped XML.
+
+Other current local snapshots: Common clean4 304/0/0/0, Customer clean1 485/0/0/0, Restaurant clean3 137/0/0/0, Gov clean3 82/0/0/0 before later document freeze; Gov document freeze2 45/0/0/0. Schema-only proofs preserve exact old definitions/constraints; seeds and recreation-manifest update remain pending. All O3 Oracle E2E/measurements are unexecuted. O1/O2 complete; O3 uncommitted/unpublished/undeployed, later phases incomplete. Next current producer/consumer application/context contracts, document revision freshness, UI, seeds/gateway/alerts and full gates; publish before the unchanged authorised full Dev wipe/deploy/fresh seed and Oracle E2E. No O3 wipe or fresh live applicant; optional real-provider selection unanswered, continue Dev with missing production adapters refusing checks.
+
+
+## 2026-10-04T02:46:52+05:30 — O3 rider lifecycle and review document freeze
+
+Latest local results (tests/failures/errors/skips): Common clean invocation4 304/0/0/0; Customer clean invocation1 485/0/0/0; Restaurant clean invocation3 137/0/0/0. Restaurant actual annotated PostGIS listing tests invocation1 7/0/0/0; removing both approval predicates produced the required negative-control 1/1/0/0, exact source restored before clean. GovernmentID clean invocation3 82/0/0/0 describes the earlier provider-adapter snapshot; later document-freeze invocation2 45/0/0/0 passed. Its invocation1 failed compilation (URL fixture mistakenly supplied URI), zero executed tests, retained separately.
+
+Delivery lifecycle invocation1 32/0/0/0. Invocation2 33/0/1/0: all32 lifecycle cases passed, existing OpenAPI startup failed because the controller scan loaded another test's configuration and registered duplicate summary handlers. Marked the permission fixture TestConfiguration and excluded TestComponent from the scoped OpenAPI scan; same checks plus original permission tests are rerunning. No production route or assertion was exempted. Real Delivery database concurrent-admin, outer-rollback and active-assignment suspension proofs remain next.
+
+Rider application uses signed authentication phone claims, never caller-supplied identity/phone. Passed checks prepare IN_REVIEW; only fresh admin approval grants duty. Review-state application documents and bank writes freeze. Daily own selfies use separate DELIVERY_DUTY purpose (SELFIE only, APPROVED/SUSPENDED), preserving the reviewed application metadata. Suspension removes future availability only after commit; an ON_DELIVERY rider retains active assignment/liveness and can finish the current delivery.
+
+Fresh isolated schema proofs preserve all73 original GovernmentID columns/indexes and all93 Delivery columns/types/defaults/constraints except the deliberately retired executive verification_status field/index. Delivery city varchar(255), geometry(Point,4326), prepaid-only assignment constraint and mandatory assignment version are retained and exercised. Only after proof, retired eight Delivery incremental SQL files; originals retained in evidence. Final initial hashes: GovernmentID14de76a5a9fc29b3a6ea9b5798c5e5ba14ef7829a4dd5784da1dafb7f2c616d7; Delivery56af3ea2c8a36e2314a608f96938f4fe96dc597143dfc58e31a0fa96185ee56c. Seeds not yet exercised; reviewed recreation manifest unchanged.
+
+Evidence:42-common-clean-invocation4.json,42-customer-clean-invocation1.json,42-restaurant-clean-invocation3.json,42-approved-listing-negative-invocation1.json,42-government-clean-invocation3.json,42-gov-document-freeze-invocation{1,2}.json,42-delivery-lifecycle-invocation{1,2}.json,42-government-fresh-initial-schema-proof-invocation4.json,42-delivery-fresh-initial-schema-proof-invocation1.json and stripped per-class XML. All are local proof, not Oracle completion. O1/O2 remain complete with their final release evidence; O3 is uncommitted/unpublished/undeployed and later phases incomplete. No O3 wipe or fresh applicant. Next actual Delivery transactions, current full gates/contracts, UI, seeds/gateway, publication before unchanged authorised full Dev wipe/deploy/seed, then Oracle E2E and measurements. Optional real-provider choice remains unanswered; continue Dev with production checks refusing missing adapters.
+
+
+## 2026-10-04T02:22:43+05:30 — O3 approval freshness and listing proof
+
+Restaurant full clean invocation2:136/0/0/0, including actual concurrent-admin/outer rollback and fixed resource guards. Fresh PostGIS proof preserves all159 original column definitions, indexes and constraints; both actual repository listing queries exercise all six application states with successful provider flags and expose APPROVED alone. Exact initial SQL hash93ac35ea9831837be4bbd5524d9e88db490800c32899a603f70366a62fc67af6; seeds still untested, recreation manifest unchanged.
+
+Customer focused invocation1:17/0/1/0 (a redundant Mockito stub, preserved); same assertions invocation2:17/0/0/0. Actual Spring cache advice retains a warm browsing result while uncached approval calls refuse it; real quote/order controllers propagate404 before quote save, claim, saga or payment. A real JPA cache failure rolls back its idempotency claim, and retry commits once. Typed application events evict the four real browsing caches. Full Customer clean is running. GovernmentID full clean invocation3 is running after missing DL/RC provider configuration now refuses checks, document/name payloads were removed from logs, and strict ISO/Indian-format expiry parsing prevents malformed dates from being stored as approved with null expiry. Deliberate Dev/test mock results remain.
+
+Evidence:42-restaurant-clean-invocation2.json,42-restaurant-public-schema-proof-invocation1.json,42-customer-approval-invocation{1,2}.json and per-class stripped XML. These are local proofs; O3 is uncommitted/unpublished/undeployed. O1/O2 complete, later phases incomplete. Next collect the two full clean results, then rider application/state/fresh schema and document freeze, UI, seeds/gateway, complete gates, publication before the necessary authorised unchanged full Dev wipe/deploy/seed and Oracle E2E. Optional real-provider selection remains unanswered; it does not block Dev work.
+
+
+## 2026-10-04T02:09:40+05:30 — O3 transaction and correlated-delivery proof
+
+Common latest clean304/0/0/0. GovernmentID full clean invocation2:68/0/0/0 (before subsequent provider-adapter edits); new production-provider safety plus all original biometric lockout guards:11/0/0/0. Missing real providers refuse checks; Dev/test shortcuts remain. Provider selection question is pending; continue Dev implementation under the owner-confirmed all-Dev policy. No production integration/readiness claim yet.
+
+Restaurant real concurrent-admin/outer rollback invocation3:2/0/0/0; full clean128/1/0/0 retained. The one structural authorization failure named updateOutlet's omitted outletId. Fixed the actual route policy to bind organisationId and outletId in the projection before BUSINESS_APPLY; focused resource guards13/0/0/0. No authorization exemption. Removing that relationship and removing callback revision checking each caused1/1/0/0; source restored exactly. Gov persisted callback/self-access9/0/0/0. Fresh PostgreSQL proof invocation3 preserves all73 original columns/indexes, checks new document/callback constraints, duplicate callback refusal and locked due SQL; hashbd4c238962bf05ab71b8cd3967c211edb7c666dae4dfe7db67dde0915f01343a. Invocation2 was a temporary PostgreSQL init-server readiness failure before schema assertions; retained separately and corrected with TCP readiness.
+
+Evidence:42-restaurant-clean-invocation1.json,42-government-clean-invocation2.json,42-restaurant-resource-guard-invocation1.json,42-restaurant-lifecycle-negative-controls.json,42-gov-delivery-transactions-invocation1.json,42-production-provider-safety-invocation1.json,42-government-fresh-initial-schema-proof-invocation3.json. Successful focused concurrency XML was not retained before clean removed target; its actual log is retained, and later full-clean concurrency XML is separate passing proof. Earlier2/0/2 and2/0/1 errors are unchanged history.
+
+Next implement approved-only public Restaurant listing/catalog and fresh quote/order approval reads plus status-event browsing cache invalidation. Rider application/fresh schema/document freeze, UI, seeds, gateway, complete local gates, publication before required unchanged full Dev wipe/deploy/seed and Oracle E2E remain open. Do not extend schema manifest until exact final schema and seed proof. O1/O2 complete; O3+ incomplete/local only, no O3 deployment or new applicant.
+
+## 2026-10-04T01:57:37+05:30 — O3 lifecycle/pipeline focused proof; real transaction tests running
+
+Latest Common full clean install304/0/0/0;42-common-clean-invocation3.json. Restaurant focused lifecycle/outlet/permission/privacy invocation1:34/0/0/0; GovernmentID submission/retry/JSON/self-access invocation1:21/0/0/0. Stripped per-class XML and dated JSON retained. Tests cover the replacement draft success and invalid/nonmatching PAN submission guards, editable-state freeze, principal ownership, stale callback revision and duplicate-result no-op, IN_REVIEW rather than automatic approval, separate approve/reinstate source states, required rejection reasons, missing real-provider refusal and retry intent. These focused results are local, not publication or deployed completion.
+
+Actual concurrent-admin/outer-rollback invocation1:2/0/2/0, test-context startup failure because DataJpaTest omits application audit/outbox auto-configuration. Preserved original XML. Corrected only the test slice to import the production auto-configuration; invocation2 running. Added actual persisted callback due-query/outage/rollback tests and private compatibility-API/forged-webhook guards, currently running. PostgreSQL fresh-initial proof invocation2 now compares every original73 column definition and every original index, permits only explicit document/revision/callback additions, checks callback uniqueness/constraints and executes the PostgreSQL locked due query. Original schema proof remains separately retained; final hash not yet confirmed or added to recreation manifests.
+
+Working source stores revision-correlated callback delivery, removes the PII-carrying BRAND_CREATED listener and unsigned webhook mutation, and makes old brand-check compatibility APIs SERVICE-only with authoritative submitted input. Deliberate Dev/test provider results remain; no real production provider is configured. Broader rider application, public visibility/order checks, UI, seeds/config and Oracle E2E remain pending. No O3 publication/deployment/wipe/new applicant; O1/O2 complete and O3+ incomplete.
+
+## 2026-10-04T01:45:06+05:30 — O3 transactional events verified; lifecycle wiring underway
+
+GovernmentID full clean invocation1 completed52/0/0/0, including the real full Spring context, generated producer contracts and OpenAPI. Earlier26/0/1 Mockito-restubbing invocation remains retained. Shared application events focused invocation1:7/0/0/0, with real JPA commit/outer rollback/failed unique-outbox insert and independent production-limit buckets; evidence42-common-application-focus-invocation1.json plus stripped XML. Its database-free context remains free of application/audit persistence beans. New shared helpers are being clean-built/installed;297/0/0/0 describes the earlier library snapshot, not the new helpers.
+
+Restaurant draft/outlet/submit/admin/correlated callback source is local and untested. Equivalent success and invalid-PAN coverage for the retired automatic-brand API must be implemented on the new submit lifecycle before acceptance; no assertion scope is dropped. Admin approval remains a separate IN_REVIEW decision. Next finish authoritative submission input, attempt-aware checks and a persisted callback delivery queue in GovernmentID, then compile/prove both sides together. Current source also contains production-only simulated financial/biometric successes: remove these unsafe approvals; deliberate Dev/test provider shortcuts remain. No O3 publish/deploy/wipe or new applicant. O1/O2 complete; O3 and later phases incomplete.
+
+## 2026-10-04T01:23:07+05:30 — Document security and fresh schema verified locally
+
+Common clean invocation2:297/0/0/0. GovernmentID security invocation1:26/0/1/0 (Mockito restubbing setup error retained); corrected test setup invocation2:26/0/0/0, with all original assertions. Three negative controls each1/1/0/0 caught foreign-prefix ownership, restored caller-selected summary path and missing admin-view audit; exact source restored before the full GovernmentID clean build, currently running. Actual audit tests use JPA commits and rollbacks; these results are local proof, not an O3 rollout. Evidence42-gov-security-invocation{1,2}.json, individual stripped XML and42-gov-document-negative-controls.json.
+
+Isolated PostgreSQL17 initial-schema proof preserved all73 original columns/types and all original indexes, retained append-only audit, and proved valid document acceptance plus six invalid-row constraints. Only after that comparison, removed V20260822100000__add_missing_columns.sql and V20260925110000__timestamps_tz.sql; their final TIMESTAMPTZ/verification-data columns remain in V1, original files preserved as evidence. The hash-bound Dev recreation manifest is not yet extended: do not deploy this schema incrementally onto the existing Oracle database. Actual R2 conditional copy200, wrong-ETag412 and finalized HEAD200/15bytes/application-pdf; synthetic source and finalized object retained, no applicant/seed changes. Registered browser uploads now finalize under a server-only accepted key; no PUT credential is ever issued for that accepted object.
+
+Next from source: replace the old BRAND_CREATED consumer that carries financial PII with the typed SUBMITTED application event and a SERVICE-only read of its current verification request. Correlate automated callbacks with the submitted application revision while retaining the existing callback URL/body fields, and persist failed callback delivery for retry. This prevents stale callbacks and the old24-hour penny-drop lock from approving a resubmission incorrectly or leaving it stuck. Implement/prove this together with the single Restaurant/Delivery transition owners before claiming O3 completion. O1/O2 completed; O3 incomplete/local, no O3 publish/deploy/wipe/new applicant.
+
+
+## 2026-10-04T01:11:14+05:30 — O3 document ownership and signing proof
+
+Local shared lifecycle/event clean build292/0/0/0 remains proof of its earlier source snapshot. Actual S3Presigner/HEAD document guard4/0/0/0 passed; removing signed content length caused1/1/0/0, then source was restored. These are unit/negative-control results, not an O3 deployment. Oracle-to-R2 synthetic compatibility probe42-r2-signed-storage-probe-invocation1.json: valid PUT200, changed size403, changed MIME403, HEAD200/application-pdf/15bytes, anonymous configured public origin403. Retained only the synthetic key documents/storage-compatibility/40de4e1c-a427-426a-89e9-8d0552a3b4dc/synthetic.pdf; no applicant/seed mutation, secrets or signed URLs in evidence.
+
+Choice: register each server-generated document key with its authenticated owner, purpose, type, declared size and application before signing. Complete only after exact R2 HEAD; all verification references and own downloads must match the registered owner/type and exact documents/<caller>/ prefix. Restaurant uploads additionally require fresh BUSINESS_APPLY and DRAFT/REJECTED. Admin document downloads use5minute URLs and a transactional KYC_DOCUMENT_VIEWED audit, with IDs only in details. Replace public /status/{executiveId} with /status/me and retain a distinct SERVICE/ADMIN-only internal summary for real background jobs. Remove caller-selected identities from GovernmentID MCP tools and remove its provider-webhook mutation tool. Current working edits are not yet compiled or deployed.
+
+Additional source finding: a presigned PUT can be replayed until expiry, so HEAD alone does not make a reviewed file immutable. Finalize each accepted upload by a conditional, matching-ETag copy to a server-only key that is never issued a PUT capability. Prove actual R2 conditional copy before using it, then return/use that finalized reference. Also keep document edits frozen during review; delivery daily selfie remains a separate own document operation. Cloudflare's official S3 compatibility documentation lists CopyObject with x-amz-copy-source-if-match; that listing is not yet runtime proof.
+
+O1/O2 complete; O3 still incomplete, local only. No O3 publication, deployment, database wipe or new applicant yet. Next: finish document API/client/schema wiring and meaningful security/audit tests, then application services and UI before required clean release/live E2E.
+
+
+## 2026-10-04T00:43:48+05:30 — O3 source audit started; O1/O2 complete
+
+O2 final deployed gate is green with recorded original latency budgets; no remaining O2 rollout is pending. Begin O3 Partner Applications in checkpoint42. D4 automated checks then admin approval was already confirmed by the owner. Baseline O3 validator0PASS/19FAIL/0STALE,140 verification-status call sites and81 old endpoint/component references are saved before code edits. Source currently auto-approves riders; restaurant public lists lack an application-status gate and the old document paths expose unsafe ownership checks. No O3 source change, new fixture, publication, deployment or reset yet.
+
+Choice: use complete fresh initial schemas and deterministic new seed data under the standing all-Dev/disposable policy. Consolidate existing required Delivery/GovernmentID DDL only after inspecting and proving the resulting schema, retaining required constraints/indexes/functions; never add legacy upgrades or blindly delete SQL. Extend the existing hash-bound reviewed schema recreation mechanism only after exact SQL tests. Preserve checkpoint41 failures and all six canonical immutable reviews until a necessary schema rollout; no wipe to hide evidence. Planned O3 E2E records are in the owning feature scenarios, with new applicant allocation only after actual rollout. Next: implement/prove shared36-pair lifecycle and typed events, then restaurant/delivery/document security from actual source. Full platform remains incomplete.
+
 ## 2026-10-04T00:40:47+05:30 — O2 completed on Oracle; O3 is next
 
 O1 and O2 are complete. Restaurant 5b93a8d-29997b7 was published as linux/arm64 (digest fa92146a3a09922e56079c8bb9e82a0ca07eb8c4e16ff1e9bf9aa823ce1f3c56) after clean104/0/0/0 and exact-head producer37146029352/consumer37146133845 SUCCESS, then deployed by unchanged deploy.sh. Deployment263033d is pushed. Read-only Oracle verification:29 intended/running, zero image drift or automatic restarts, every configured healthcheck healthy, Restaurant startup/recent errors0. Hardening15PASS and report-only reconcile29/0drift passed. No new reset/seed/schema/config change during these corrections; the authorised full wipe and fresh seed completed in checkpoint40.

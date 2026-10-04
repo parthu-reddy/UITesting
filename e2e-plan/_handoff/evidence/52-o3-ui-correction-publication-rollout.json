@@ -1,0 +1,43 @@
+{
+  "recordedAt": "2026-10-04T09:49:35.955181+05:30",
+  "proofType": "GitHub publication and authorised Oracle rollout; separate from E2E",
+  "publication": {
+    "runId": 37176162221,
+    "status": "success",
+    "sourceCommit": "770a7329b854b64cf0e92413f9d74cb866b5470b",
+    "testFiles": 133,
+    "uiTests": 843,
+    "imageDigest": "sha256:db6c7674329bf630db978ec6c038cb36486771545076462fafed0f7a2caa5254",
+    "architecture": "linux/arm64"
+  },
+  "rollout": {
+    "deploymentCommit": "102d4d393ccf8036fd0f550c477d3d099b7221f9",
+    "uiOnlyDeployExitCode": 0,
+    "deliveryTimingConfigCommit": "317b94d",
+    "deliveryTimingConfigApplied": true,
+    "deliveryConfigSha256": "37c62062e72f320779cea36b1c7c02f1ab67918c02924fe85016632e652be518",
+    "devProfilesVerifiedIdentical": true,
+    "hardeningPassed": 15,
+    "reconcileImageChecks": 29,
+    "drift": 0
+  },
+  "audit": {
+    "observedAt": "2026-10-04T04:18:12.612888+00:00",
+    "running": 29,
+    "containers": 29,
+    "healthy": 26,
+    "withoutHealthcheck": 3,
+    "automaticRestarts": 0,
+    "recentErrors": 0,
+    "uiImage": "hyd.ocir.io/axekmbadoczl/food-delivery/food-delivery-app-ui:770a7329b854b64cf0e92413f9d74cb866b5470b",
+    "uiDigests": [
+      "hyd.ocir.io/axekmbadoczl/food-delivery/food-delivery-app-ui@sha256:db6c7674329bf630db978ec6c038cb36486771545076462fafed0f7a2caa5254"
+    ]
+  },
+  "e2e": {
+    "status": "running",
+    "sourceCommit": "09c213f6f3f5ca855481147e942586804aa816df",
+    "publicUi": "https://gulf-strike-dark-extras.trycloudflare.com",
+    "sandboxLaunchFailureRetained": "53-o3-browser-launch-failure.json"
+  }
+}

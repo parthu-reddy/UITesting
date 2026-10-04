@@ -1,0 +1,18 @@
+{
+  "recordedAt": "2026-10-04T10:12:14.056896+05:30",
+  "invocation": 5,
+  "method": "AdminPartnerApprovalsUiTest#reviewQueuesNavigation",
+  "deployedUiCommit": "d306599e0410d0f72292a44604dd179d8dc31a24",
+  "source": "4402ba6 plus current 24-line queue method and runner queues option",
+  "proofType": "Read-only visible admin navigation and refresh; no upload or decision",
+  "totals": {
+    "tests": 1,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "passed": 1,
+  "reportSha256": "169fc6c04133dfb8b539d087abe29bf2ceceafbe577e1156ce1b41fe3717bfb2",
+  "retainedArtifacts": "UITesting/target/business-platform/o3/admin-queue-readonly-first",
+  "releaseGate": "Four lifecycle journeys remain incomplete; this supplements queue navigation only"
+}

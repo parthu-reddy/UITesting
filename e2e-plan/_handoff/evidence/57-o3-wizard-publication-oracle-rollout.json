@@ -1,0 +1,51 @@
+{
+  "recordedAt": "2026-10-04T10:14:06.424177+05:30",
+  "uiCommit": "d306599e0410d0f72292a44604dd179d8dc31a24",
+  "imagePublication": {
+    "runId": 37177308291,
+    "conclusion": "success",
+    "tests": 844,
+    "testFiles": 133,
+    "digest": "sha256:e504fc3c1472cb0b51d8fa8af27d41e15c790d9ecdd0af882e331943faa78c0e"
+  },
+  "deploymentCommit": "9e121ca0664899de863931f79f3d0dca6580e88c",
+  "oracleUi": {
+    "service": "food-delivery-app-ui",
+    "image": "hyd.ocir.io/axekmbadoczl/food-delivery/food-delivery-app-ui:d306599e0410d0f72292a44604dd179d8dc31a24",
+    "declaredImage": "hyd.ocir.io/axekmbadoczl/food-delivery/food-delivery-app-ui:d306599e0410d0f72292a44604dd179d8dc31a24",
+    "imageMatches": true,
+    "architecture": "arm64",
+    "os": "linux",
+    "repoDigests": [
+      "hyd.ocir.io/axekmbadoczl/food-delivery/food-delivery-app-ui@sha256:e504fc3c1472cb0b51d8fa8af27d41e15c790d9ecdd0af882e331943faa78c0e"
+    ],
+    "running": true,
+    "health": "healthy",
+    "restartCount": 0,
+    "startedAt": "2026-10-04T04:38:02.84722577Z",
+    "recentWindowStartsAt": "2026-10-04T04:38:02.847225+00:00",
+    "startupErrorCount": 0,
+    "startupErrorExamples": [],
+    "recentErrorCount": 0,
+    "recentErrorExamples": []
+  },
+  "operationalTotals": {
+    "declared": 29,
+    "running": 29,
+    "healthy": 26,
+    "imageDrift": 0,
+    "automaticRestarts": 0,
+    "recentErrors": 0
+  },
+  "devConfiguration": "Required four overlays already identical; apply skipped publication/restarts",
+  "hardening": "15 PASS",
+  "reconcile": "29 checked / zero drift",
+  "r2Administration": {
+    "proof": "R2 operator configuration",
+    "status": "failed",
+    "operation": "GetBucketCors",
+    "code": "AccessDenied",
+    "httpStatus": 403
+  },
+  "releaseGate": "Not complete; UI uploads blocked by bucket CORS and application key cannot manage bucket settings"
+}

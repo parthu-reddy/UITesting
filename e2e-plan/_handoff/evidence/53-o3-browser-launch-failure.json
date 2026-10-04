@@ -1,0 +1,49 @@
+{
+  "recordedAt": "2026-10-04T09:48:35.019860+05:30",
+  "proofType": "Browser launch failure; no product journey or fixture mutation executed",
+  "uiCommit": "770a7329b854b64cf0e92413f9d74cb866b5470b",
+  "e2eCommit": "09c213f6f3f5ca855481147e942586804aa816df",
+  "totals": {
+    "tests": 4,
+    "failures": 0,
+    "errors": 4,
+    "skipped": 0,
+    "uiJourneysExecuted": 0
+  },
+  "reason": "Chromium launch denied by local sandbox (EPERM/SIGTRAP); repeat the authorised public UI run with browser-launch permissions.",
+  "cases": [
+    {
+      "class": "UnapprovedOutletHiddenTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 1,
+      "skipped": 0,
+      "sha256": "75669b52f8bfcb4f63efcc3a9f91f589adb2c3217e5f29f5e08c2d28fd1a3c85"
+    },
+    {
+      "class": "AdminPartnerApprovalsUiTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 1,
+      "skipped": 0,
+      "sha256": "2536534482ddd70da56603c0fb1d3811bef43189a90bc0f0c796df45af0f6fc1"
+    },
+    {
+      "class": "RestaurantApplicationApiTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 1,
+      "skipped": 0,
+      "sha256": "cba9cf8e3d37ad9cbffe33d7d6e4176b68787bcce37c2223e4af4fea2ef62058"
+    },
+    {
+      "class": "DeliveryApplicationApiTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 1,
+      "skipped": 0,
+      "sha256": "b7db5bdb55532bcbbe6c7ec580570cf56a7822b0f18197e8b2ca93ca3d33efb6"
+    }
+  ],
+  "retainedReports": "UITesting/target/business-platform/o3/sandbox-launch-failure"
+}

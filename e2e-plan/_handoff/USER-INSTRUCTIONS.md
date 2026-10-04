@@ -1,5 +1,21 @@
 # Primary user instructions and accepted decisions
 
+## 2026-10-04T06:22:54+05:30 — Owner requires embedded H2 and UI-only E2E
+
+Direct owner instructions: "No never do that 'disposable databases on Oracle' tests should never depend on DBs directly, why no use H2?" and "All E2E tests should only go through UI, no direct backend db or redis connections should be made for now."
+
+Choice: no Docker test fixtures, no external database test fixtures, and no direct DB/Redis access from E2E, including read-only allocation/audit queries. Use embedded H2 for service persistence/rollback/concurrency assertions and documented mocked infrastructure for minimal unit/contract/startup/OpenAPI contexts. E2E business setup/actions/assertions go through real UI controls; observe only the requests/responses those controls produce. Do not use browser fetch/API clients to bypass the UI. Keep PostgreSQL/PostGIS runtime behavior separately unverified until the deployed UI exercises it. This temporary UI-only policy remains in force until the owner changes it.
+
+The earlier Oracle disposable-database choice and unpublished native-PostGIS CI proposal are superseded. The owned SSH database tunnel was closed. Both external database helpers were removed; the same five Delivery concurrency/rollback/suspension cases now pass on embedded H2. Restaurant embedded H2 visibility/concurrency plus compiled-query structural guards pass15/0/0/0. The failed first Restaurant H2 compilation is retained (zero executed tests; wrong DTO package corrected). Prior Oracle/PostGIS results remain historical evidence, not current test setup authority. O3 browser fixture/runner rewrites are in progress and have not run; do not mark deployed E2E complete. Image builds remain GitHub-only and publish must succeed before deployment.
+
+
+## 2026-10-04T05:58:10+05:30 — Owner requires GitHub-only image builds
+
+Direct user instruction: "never use docker, only use github workflows to build images for deployment". Effective immediately, never start or use local Docker and never build/publish deployment images through local or ad-hoc Docker commands. Build deployment images only through the affected repositories GitHub Actions build-and-push workflows, using the existing CI publication path. Required commits/pushes remain authorised. Publication must finish successfully and exact image tags must be recorded before the existing authorised Oracle deployment path runs. Do not choose the local Docker fast path even where an older workflow recommends it. No Docker was started in response to this instruction; the current process check found only the pre-existing network helper.
+
+O3 is incomplete. Keep release/live-E2E/measurements boxes unchecked until the exact proof passes; mark implementation-only items only after current source and local evidence are reviewed. Do not equate prepared/compiled E2E with executed Oracle proof.
+
+
 ## Scope, ordering and efficiency
 
 - Audit every currently added E2E test and referenced backend failure against UITesting/e2e-plan; fix missing/wrong test, product or plan implementation when source evidence supports it. The user explicitly authorized missing coverage during this audit. Earlier generic advice against new E2E tests does not override this request.
@@ -143,3 +159,21 @@ Direct owner request: remove migration code, taking appropriate decisions rather
 ### 2026-10-03T19:50:18+05:30 — Publishing precedes deployment
 
 Owner reiterates that publishing must happen before deployment. Required order: validate source and clean outputs; publish CommonLibrary and the current producer stubs; clean-build/publish the dependent service and UI images; verify registry tags and record them in Deployment; execute the appropriate existing deployment workflow (full authorised wipe for consolidated baseline changes); seed fresh Dev data; inspect every service log and run live regressions. Configuration goes through the existing Config Server bundle workflow before application consumers start. Do not deploy stale/unpublished images or treat successful local tests as publication. No cleanup changes have been published or deployed yet.
+
+## 2026-10-04T07:03:09+05:30 — UI-only means no browser-state injection
+
+For the active O3 work, do not use `localStorage`, cookies, indexed storage, a handcrafted request,
+or a direct page URL to create or assert product state. Login through the normal rendered Dev
+Autofill control, then perform every business step through visible controls. A click-generated
+network response may be observed only to synchronize/assert that same rendered user action. Keep
+all direct endpoint/IDOR, stale-state, direct measurement and infrastructure reads in the feature's
+deferred inventory. This adds detail to the 06:22 UI-only instruction and remains effective until
+the owner changes it.
+
+## 2026-10-04T09:37:14.676791+05:30 — Current task authorisation and 300-line owner deferral
+
+The owner's current Business Platform task permits required commits/pushes, GitHub image publication and Oracle Dev deployment, with authorised clean wipe/fresh dummy seed. This supersedes earlier expired audit-only deployment limits for this task. Images use GitHub Actions only, and E2E uses visible deployed UI controls only. Latest instruction: finish current work; owner will complete the 300-line rule later. Leave unchanged legacy refactors deferred.
+
+## 2026-10-04T10:23:56.486302+05:30 — Current continuation and required sign-in
+
+Owner says continue and finish the current work. Standing task-specific commits/pushes, GitHub publication and Oracle Dev deployment authorisation remains active; do not re-request those permissions. No local Docker, direct API/DB/Redis or state injection in E2E; old-code/300-line cleanup stays deferred. The live bucket-administration attempt returned403; the browser is at Cloudflare sign-in and a user sign-in question is pending. No bucket policy changed and no replacement credentials were created. Continue after actual access is available; do not treat elapsed time as an answer or invent an E2E pass.

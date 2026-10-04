@@ -1,0 +1,21 @@
+{
+  "recordedAt": "2026-10-04T10:05:55.610972+05:30",
+  "invocation": 4,
+  "selected": "RestaurantApplicationApiTest#restaurantApplicationLifecycle",
+  "deployedUiCommit": "770a7329b854b64cf0e92413f9d74cb866b5470b",
+  "e2eCommit": "4402ba602718eba0324761933afa9c1639d54eca",
+  "totals": {
+    "tests": 1,
+    "passed": 0,
+    "failures": 0,
+    "errors": 1,
+    "skipped": 0
+  },
+  "proofType": "Visible public Oracle UI upload probe, not final latest-image gate",
+  "diagnosis": "Real Upload button/file chooser/presign reached. R2 preflight denied current public Dev origin; no private upload completed.",
+  "dataPolicy": "Retain; no cleanup or reseed",
+  "retainedArtifacts": "UITesting/target/business-platform/o3/restaurant-upload-cors-failure",
+  "reportHashes": {
+    "TEST-com.fooddelivery.e2e.tests.features.organisations.RestaurantApplicationApiTest.xml": "6c2267e05657a952a8aae3cd39839c9ff959b39f5a816ec232afd2988b2204bf"
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "recordedAt": "2026-10-04T10:15:43.962704+05:30",
+  "status": "measured_with_unresolved_target",
+  "serverTelemetry": {
+    "observedAt": "2026-10-04T04:43:26.037817+00:00",
+    "method": "deployed cumulative server histograms; interpolated p95 and enclosing bucket",
+    "proof": "protected telemetry only; public Gateway E2E recorded separately",
+    "results": [
+      {
+        "service": "restaurant-service",
+        "uri": "/api/v1/internal/admin/restaurant-applications",
+        "successfulSamples": 2,
+        "p95EstimateMs": 27.4027855,
+        "p95BucketUpperMs": 27.962026,
+        "meanMs": 14.673939,
+        "targetMs": 300,
+        "withinEnclosingBucketTarget": true
+      },
+      {
+        "service": "restaurant-service",
+        "uri": "/api/v1/restaurant-onboarding/organisations/{organisationId}/application",
+        "successfulSamples": 6,
+        "p95EstimateMs": 420.54888049999994,
+        "p95BucketUpperMs": 447.392426,
+        "meanMs": 103.985974,
+        "targetMs": 150,
+        "withinEnclosingBucketTarget": false
+      },
+      {
+        "service": "delivery-service",
+        "uri": "/api/v1/internal/admin/delivery-applications",
+        "successfulSamples": 2,
+        "p95EstimateMs": 131.9807649,
+        "p95BucketUpperMs": 134.217727,
+        "meanMs": 60.391745500000006,
+        "targetMs": 300,
+        "withinEnclosingBucketTarget": true
+      },
+      {
+        "service": "delivery-service",
+        "uri": "/api/v1/delivery-onboarding/application",
+        "successfulSamples": 1,
+        "p95EstimateMs": 110.72962494999999,
+        "p95BucketUpperMs": 111.848106,
+        "meanMs": 102.810354,
+        "targetMs": 150,
+        "withinEnclosingBucketTarget": true
+      }
+    ],
+    "circuitBreakers": {
+      "restaurant-service": [
+        {
+          "name": "OrganisationServiceClientgetMembershipUUIDUUID",
+          "kind": "failed",
+          "calls": 0
+        },
+        {
+          "name": "OrganisationServiceClientgetMembershipUUIDUUID",
+          "kind": "ignored",
+          "calls": 0
+        },
+        {
+          "name": "OrganisationServiceClientgetMembershipUUIDUUID",
+          "kind": "successful",
+          "calls": 18
+        },
+        {
+          "name": "OrganisationServiceClientgetUserOrganisationsUUID",
+          "kind": "failed",
+          "calls": 0
+        },
+        {
+          "name": "OrganisationServiceClientgetUserOrganisationsUUID",
+          "kind": "ignored",
+          "calls": 0
+        },
+        {
+          "name": "OrganisationServiceClientgetUserOrganisationsUUID",
+          "kind": "successful",
+          "calls": 8
+        }
+      ],
+      "delivery-service": []
+    }
+  },
+  "browserQueue": {
+    "samples": 4,
+    "method": "Completed browser requests caused only by real admin navigation/refresh, includes tunnel latency and excludes rendering",
+    "valuesMs": [
+      77.508,
+      78.036,
+      263.75,
+      353.948
+    ],
+    "p95NearestRankMs": 353.948,
+    "targetMs": 300
+  },
+  "limits": "Only two server queue samples per service, six restaurant status samples and one delivery status sample. These describe this Dev invocation, not representative load or final lifecycle proof. Restaurant cumulative status exceeds150ms. No synthetic warm-up or direct API loop."
+}

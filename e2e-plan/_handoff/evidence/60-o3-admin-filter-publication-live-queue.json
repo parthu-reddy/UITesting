@@ -1,0 +1,69 @@
+{
+  "recordedAt": "2026-10-04T10:22:03.950439+05:30",
+  "imagePublication": {
+    "runId": 37177772081,
+    "commit": "1caf57cefbb4645381791fc5e904ce4657a6f3f6",
+    "conclusion": "success",
+    "tests": 845,
+    "testFiles": 133,
+    "digest": "sha256:1549712db3e5b043e477e0098649510f86932659cc2d8989a8882e116c1e6958"
+  },
+  "deploymentCommit": "cb61bd93811f02e7f685cc8bffef964192c35376",
+  "oracleUi": {
+    "service": "food-delivery-app-ui",
+    "image": "hyd.ocir.io/axekmbadoczl/food-delivery/food-delivery-app-ui:1caf57cefbb4645381791fc5e904ce4657a6f3f6",
+    "declaredImage": "hyd.ocir.io/axekmbadoczl/food-delivery/food-delivery-app-ui:1caf57cefbb4645381791fc5e904ce4657a6f3f6",
+    "imageMatches": true,
+    "architecture": "arm64",
+    "os": "linux",
+    "repoDigests": [
+      "hyd.ocir.io/axekmbadoczl/food-delivery/food-delivery-app-ui@sha256:1549712db3e5b043e477e0098649510f86932659cc2d8989a8882e116c1e6958"
+    ],
+    "running": true,
+    "health": "healthy",
+    "restartCount": 0,
+    "startedAt": "2026-10-04T04:49:04.023415499Z",
+    "recentWindowStartsAt": "2026-10-04T04:49:13.243968+00:00",
+    "startupErrorCount": 0,
+    "startupErrorExamples": [],
+    "recentErrorCount": 0,
+    "recentErrorExamples": []
+  },
+  "operationalTotals": {
+    "declared": 29,
+    "running": 29,
+    "healthy": 26,
+    "noHealthcheck": 3,
+    "imageDrift": 0,
+    "automaticRestarts": 0,
+    "recentErrors": 0,
+    "healthStates": {
+      "not_configured": 3,
+      "healthy": 26
+    }
+  },
+  "devConfiguration": "Four required overlays identical; no config publish/restarts",
+  "hardening": "15 PASS",
+  "reconcile": "29 checked, zero drift",
+  "uiInvocation": {
+    "invocation": 6,
+    "sourceCommit": "071e36878a974e7af4787911745aaf92332f33e9",
+    "method": "AdminPartnerApprovalsUiTest#reviewQueuesNavigation",
+    "totals": {
+      "tests": 1,
+      "passed": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "scope": "Both visible admin queues/refesh controls, required seed rows, rejected/pending status filtering and collapsed accessible picker; no decisions, uploads or state bypass",
+    "reportSha256": "6978b919d54b712d55117f2d23afe01ffb93bf06f3efd9a05393efa16b9a9be6",
+    "retainedArtifacts": "UITesting/target/business-platform/o3/admin-filter-queue-live"
+  },
+  "remaining": [
+    "R2 administration access / CORS and actual storage privacy",
+    "Private browser upload completion / audited admin viewing / full lifecycle approval and duty",
+    "Final four-class E2E",
+    "Restaurant status latency above target in initial small sample; final measurements"
+  ]
+}

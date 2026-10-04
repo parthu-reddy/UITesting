@@ -1,0 +1,55 @@
+{
+  "recordedAt": "2026-10-04T09:52:01.689600+05:30",
+  "invocation": 3,
+  "deployedUiCommit": "770a7329b854b64cf0e92413f9d74cb866b5470b",
+  "e2eCommit": "09c213f6f3f5ca855481147e942586804aa816df",
+  "proofType": "Public Oracle visible UI journeys; no API/infrastructure/state bypass",
+  "totals": {
+    "tests": 4,
+    "passed": 1,
+    "failures": 2,
+    "errors": 1,
+    "skipped": 0
+  },
+  "cases": [
+    {
+      "class": "UnapprovedOutletHiddenTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "sha256": "346b93ac12c6a8b08256d4d76ba86282dda25e7459317a04d1a8ce5e542ebede"
+    },
+    {
+      "class": "AdminPartnerApprovalsUiTest",
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "sha256": "5310768954ef8ae6ff3f70e1f5570fd42e5358d475833ec4ba019a2db0c0602f"
+    },
+    {
+      "class": "RestaurantApplicationApiTest",
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "sha256": "704136458237ee6e16ec7c756cce5e82177a156bdae8c513ebc08bc1dda804d0"
+    },
+    {
+      "class": "DeliveryApplicationApiTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 1,
+      "skipped": 0,
+      "sha256": "debaf86105fd79b2d44f2c21fee1fbd99f6da12899ac6c7d5de6c61116164cc6"
+    }
+  ],
+  "diagnosis": {
+    "delivery": "Vehicle option selected, but wrapping label reactivated the combobox; open option list intercepted Save. Real wizard UX bug.",
+    "restaurantAndAdmin": "Brand and outlet saves succeeded; stale test asserted that the intentionally hidden file input is visible.",
+    "hidden": "Pending and rejected seeded statuses plus absence in customer discovery passed."
+  },
+  "dataPolicy": "Retain every account/application; no reseed or cleanup",
+  "retainedArtifacts": "UITesting/target/business-platform/o3/second-deployed-ui-run"
+}

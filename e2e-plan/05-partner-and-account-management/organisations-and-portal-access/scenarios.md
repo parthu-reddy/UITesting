@@ -43,3 +43,73 @@ Additional existing OrderReviewsFlowTest method remainingDishReviewRefreshesTheC
 The published Oracle Restaurant5b93a8d-29997b7 release passed final5-case regression batch and2-case same-order chat batch, zero failures/errors/skips. Original brand/outlet budgets pass: p95estimate31.317/53.687ms, enclosingbucket33.554/55.924ms (limits50.199/83.753ms and150ms). Oracle29intended/running, no image drift or automatic restarts; all configured healthchecks healthy; hardening15PASS and report-only reconcile29/0drift. Required full Dev wipe/fresh seed is checkpoint40 history, not rerun during corrections.
 
 Latest checkpoint:41-business-platform-o2-regressions.md, final completion entry; durable41-final-o2-gate.json and individual reports. Six immutable reviews and canonical ordere82f8c51 remain; riderOFFLINE, restaurantnet19.11. Never repeat review writers or replace retained failures. O2 checklist is now fully marked with evidence. O3+ unimplemented; full platform incomplete. Next implement O3 Partner Applications from source/plan, recording scenarios first. Earlier dated entries are historical.
+
+## O3 planned scenarios — 2026-10-04T00:43:48+05:30 (historical pre-UI-only draft)
+
+These are planned, not executed. This table preserves the original pre-UI-only draft, including its
+API-oriented assertions; it is superseded for browser work by the 2026-10-04T07:03:09+05:30 scope
+below. Do not restore direct calls, infrastructure reads or browser-state injection from it.
+
+| Scenario | Assertion | Planned method/class |
+|---|---|---|
+| BP-O3-REST | Own draft→submit→provider checks→IN_REVIEW; customer cannot list/order; admin reject reason; edit/resubmit→approve; public visibility; unrelated organisation refused | RestaurantApplicationApiTest |
+| BP-O3-DELIVERY | Own draft/document uploads→IN_REVIEW; cannot go on duty; principal-derived summary and old IDOR path404; admin approval permits online, then confirmed idle OFFLINE | DeliveryApplicationApiTest |
+| BP-O3-ADMIN | Actual documents/check results; required reject reason; owned restaurant reject/rider approve leave queues; seeded pending brand is observed only | AdminPartnerApprovalsUiTest |
+| BP-O3-HIDDEN | Seeded IN_REVIEW/REJECTED outlets absent public nearby/by-id/catalog; quote/add-to-cart clear4xx and UI message | UnapprovedOutletHiddenTest |
+| BP-O3-SUSPEND | Real transactional guard: active ON_DELIVERY assignment survives suspension; future duty blocked | DeliveryApplicationServiceTest |
+| BP-O3-CONCURRENT | Two real transactions/admins compete; one status+outbox+audit commits, loser409 current status | ConcurrentApplicationDecisionTest in both services |
+| BP-O3-UPLOAD | MIME/declared-size allow-list; signed length and object HEAD; server key/purpose ownership; exact self prefix; audited admin document download | VerificationSelfAccessTest and R2 guards |
+
+After rollout record each invocation separately, outbox publication versions and p95 of admin queues≤300ms/onboarding reads≤150ms. Preserve all old failure evidence; never claim planned/local proof as deployed completion.
+
+### 2026-10-04T02:46:52+05:30 — Local O3 proof boundary
+
+BP-O3-SUSPEND has32-case lifecycle batch proof, but actual persisted assignment/rollback proof remains pending. BP-O3-UPLOAD adds frozen review writes and separate daily-selfie assertions (45-case focused batch). BP-O3-HIDDEN includes actual annotated PostGIS queries across all six states plus restored negative control; its Oracle UI/API scenario remains unexecuted. All BP-O3 E2E rows remain pending publication/deployment.
+
+## 2026-10-04T03:54:40+05:30 — Additional O3 scenarios
+
+| Scenario | Assertion | Proof owner |
+|---|---|---|
+| BP-O3-LATE-CHECK | A blocked bank/DL/RC/selfie provider cannot write after submit, changed revision or file replacement | VerificationInFlightGuardTest, local7cases |
+| BP-O3-PRIVATE-APPROVAL | Provider booleans alone cannot approve without completed required private review files | Restaurant/DeliveryApplicationServiceTest |
+| BP-O3-DUTY-SELFIE | An explicit DAILY_SELFIE_REQUIRED refusal offers own operational private upload; success syncs readiness and remains OFFLINE until a normal duty request | DailySelfiePrompt/useRiderDuty tests, Oracle pending |
+| BP-O3-HISTORY-SELECTION | Late history from a different selected application never appears in current detail | PartnerApprovalsPage.test |
+
+## 2026-10-04T07:03:09+05:30 — O3 UI-only E2E scope
+
+The owner supersedes the earlier API-driven O3 E2E wording. Every O3 browser journey must use real
+visible UI controls on the deployed public application. It may observe the request or response
+caused by a click, but it must not use `GatewayApi`, browser `fetch`, direct URLs/API clients,
+database/Redis/SSH access, local-storage injection, or a Docker/external-database fixture. The
+legacy `*ApiTest` filenames stay only because the validator names them; they are not permission to
+perform API-driven E2E.
+
+| Scenario | UI-only journey to implement | Planned browser class | Current status |
+|---|---|---|---|
+| BP-O3-REST-UI | Sign up as Restaurant Partner with normal Dev Autofill, complete the restaurant wizard including visible document controls, observe the submitted/review status, let an admin reject with a visible reason, edit/resubmit through the wizard, approve through Partner approvals, then search from the customer UI for the resulting approved outlet. | `RestaurantApplicationApiTest` (legacy filename) | UI-only source rewritten and locally compiled; unpublished, undeployed, not run. |
+| BP-O3-DELIVERY-UI | Sign up as Delivery Executive, complete the rider wizard and visible document controls, observe the review status, attempt the rendered duty control, approve from Partner approvals, then confirm the rendered rider state/duty control. | `DeliveryApplicationApiTest` (legacy filename) | UI-only source rewritten and locally compiled; unpublished, undeployed, not run. |
+| BP-O3-ADMIN-UI | Create fresh restaurant and rider applicants through their visible wizards; in the admin UI inspect each rendered application, require a rejection reason, reject/approve through real buttons, and observe each applicant's visible result. | `AdminPartnerApprovalsUiTest` | UI-only source rewritten and locally compiled; unpublished, undeployed, not run. |
+| BP-O3-HIDDEN-UI | Log into the read-only pending/rejected seeded applicants to observe their rendered status, then use customer discovery/search UI to confirm their brands are absent. | `UnapprovedOutletHiddenTest` | UI-only source rewritten and locally compiled; unpublished, undeployed, not run. |
+
+Current-session local source evidence is
+[checkpoint46](../../_handoff/checkpoints/46-o3-current-local-gates.md) and its
+[evidence record](../../_handoff/evidence/46-o3-current-local-gates.json): fresh 179-source test
+compilation, a zero-match prohibited-pattern source audit, and current selected/local service and
+UI validation. The dated 178-source no-recompile snapshot remains historical only. These are not
+browser evidence. The O1/O2 direct paths are
+[deferred, not executed, and not passed](DEFERRED-O1-O2-UI-ONLY-TESTS.md). None of this replaces a
+deployed UI execution.
+
+The direct endpoint/IDOR, stale-cart hidden-outlet, direct measurement loop, and outbox/audit
+infrastructure assertions are explicitly deferred in [DEFERRED-UI-ONLY-TESTS.md](DEFERRED-UI-ONLY-TESTS.md).
+The elapsed-time and Dev-rate-limit cases are separately deferred in
+[DEFERRED-WAIT-TESTS.md](DEFERRED-WAIT-TESTS.md) and
+[DEFERRED-RATE-LIMIT-TESTS.md](DEFERRED-RATE-LIMIT-TESTS.md). Deferred is not a pass.
+
+## 2026-10-04T09:37:14.676791+05:30 — First O3 public UI invocation
+
+The four current O3 methods executed through the public Oracle UI and all failed: restaurant wizard setup, rider required-label selector, admin restaurant setup, and second seeded-applicant login. Totals: 4 tests / 2 failures / 2 errors / 0 skips. Retain each failure and its data; no scenario is passed. See checkpoint52. Local 19-test UI repair and 180-source compilation are distinct from live proof.
+
+## 2026-10-04T10:14:06.424177+05:30 — Read-only queue/navigation supplement
+
+BP-O3-QUEUE-UI: AdminPartnerApprovalsUiTest#reviewQueuesNavigation logs in through normal Dev Autofill, opens/refreshed both queues, confirms retained pending seed rows, and passively measures resulting browser GETs. First version passed1/1 on d306599 (four queue requests). Extended current source also changes the status filter to Changes requested then Awaiting admin review, checks seeded rejected/pending rows and collapsed picker. Extended version compiled; not yet run. Runner --only queues selects it; default remains the original four lifecycle methods. No application decision or fixture mutation.
