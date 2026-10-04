@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import java.util.Locale;
+import java.util.regex.Pattern;
 
 import static com.fooddelivery.e2e.util.BrowserTestData.applicantName;
 import static com.fooddelivery.e2e.util.BrowserTestData.phone;
@@ -29,7 +30,12 @@ public class ApprovedRestaurantBrandSearchUiTest extends PartnerApplicationsUiTe
         new CustomerDashboardPage(customerPage).waitForDashboard();
         var search = customerPage.getByRole(AriaRole.TEXTBOX,
                 new Page.GetByRoleOptions().setName("Search restaurants or cuisines").setExact(true));
+        // Prove a loaded, diverse feed first, then the filtered count. A heading that was
+        // already visible before the 300 ms debounce cannot prove the query matched.
+        var nearbyCount = customerPage.getByText(Pattern.compile("^[0-9]+ nearby$"));
+        assertThat(nearbyCount).hasText(Pattern.compile("^(?:[2-9]|[1-9][0-9]+) nearby$"));
         search.fill("  " + brand.toUpperCase(Locale.ROOT) + "  ");
+        assertThat(nearbyCount).hasText("1 nearby");
         var brandHeading = customerPage.getByRole(AriaRole.HEADING,
                 new Page.GetByRoleOptions().setName(brand).setExact(true));
         assertThat(brandHeading).isVisible();
@@ -39,7 +45,9 @@ public class ApprovedRestaurantBrandSearchUiTest extends PartnerApplicationsUiTe
 
         customerPage.getByRole(AriaRole.BUTTON,
                 new Page.GetByRoleOptions().setName("Back to restaurants").setExact(true)).click();
+        assertThat(nearbyCount).hasText(Pattern.compile("^(?:[2-9]|[1-9][0-9]+) nearby$"));
         search.fill(outlet);
+        assertThat(nearbyCount).hasText("1 nearby");
         assertThat(brandHeading).isVisible();
     }
 }
