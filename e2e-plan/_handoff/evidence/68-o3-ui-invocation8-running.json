@@ -1,0 +1,12 @@
+{
+  "observedAt": "2026-10-04T08:36:37.387934+00:00",
+  "invocation": 8,
+  "status": "running",
+  "appUrl": "https://gulf-strike-dark-extras.trycloudflare.com",
+  "uiCommit": "b5ab30e4499bc546e45b8159210877fb8b224d69",
+  "e2eCommit": "00cd656",
+  "allocation": "UITesting/e2e-plan/_handoff/fixtures/o3-invocation8-allocation.json",
+  "testsSelected": 4,
+  "proof": "real visible public UI; no direct product/DB/Redis/infrastructure/state setup",
+  "cleanupPerformed": false
+}

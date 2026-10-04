@@ -1,0 +1,25 @@
+{
+  "observedAt": "2026-10-04T08:31:52.199977+00:00",
+  "proof": "successful existing GitHub UI build-and-push workflow",
+  "runId": 37188980191,
+  "url": "https://github.com/parthu-reddy/FoodDeliveryAppUI/actions/runs/37188980191",
+  "commit": "b5ab30e4499bc546e45b8159210877fb8b224d69",
+  "conclusion": "success",
+  "checks": {
+    "typecheck": "pass",
+    "lint": "pass",
+    "testAndBuild": "pass"
+  },
+  "unitTestSummary": {
+    "files": 134,
+    "tests": 852,
+    "passed": 852,
+    "failed": 0,
+    "skipped": 0,
+    "proof": "GitHub final Vitest summary852 passed(852),134 passed(134)"
+  },
+  "publishedDigest": "sha256:2e49ad6240d27ba70ca64572294c71fa3c1bd200293c6a733a3ce657f46977a7",
+  "platform": "linux/arm64",
+  "localDockerUsed": false,
+  "deployed": false
+}

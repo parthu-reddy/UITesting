@@ -1,0 +1,32 @@
+{
+  "observedAt": "2026-10-04T14:05:48.665461+05:30",
+  "publishedUiCommit": "b5ab30e4499bc546e45b8159210877fb8b224d69",
+  "publishedUiRun": 37188980191,
+  "ciTests": 852,
+  "e2eSource": "00cd656",
+  "summary": {
+    "running": 29,
+    "healthy": 26,
+    "unconfiguredHealth": 3,
+    "imageDrift": 0,
+    "automaticRestarts": 0,
+    "recentErrors": 0,
+    "uiStartupErrors": 0,
+    "changedContainerStarts": [
+      "food-delivery-app-ui"
+    ],
+    "digest": "sha256:2e49ad6240d27ba70ca64572294c71fa3c1bd200293c6a733a3ce657f46977a7"
+  },
+  "devOverlayApply": "successful exact checksum match; skipped publication and restarts",
+  "hardening": {
+    "passed": 15,
+    "failed": 0
+  },
+  "reconcile": {
+    "checked": 29,
+    "drift": 0
+  },
+  "onlyUiRestarted": true,
+  "cleanupPerformed": false,
+  "next": "four-method public UI invocation8 then final metrics/post-journey logs"
+}

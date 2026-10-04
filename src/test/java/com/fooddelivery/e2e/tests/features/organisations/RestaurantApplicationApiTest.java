@@ -27,6 +27,7 @@ public class RestaurantApplicationApiTest extends PartnerApplicationsUiTestBase 
         String phone = phone("restaurant.lifecycle", "9999");
         String submittedName = applicantName("restaurant-lifecycle", phone);
         String correctedName = submittedName + " corrected";
+        String outletName = submittedName + " Outlet";
 
         restaurantPage.navigate(TestConfig.APP_URL);
         new LoginPage(restaurantPage).registerAs("Restaurant Partner", phone, submittedName, "bp3_" + phone + "@test.com");
@@ -40,7 +41,7 @@ public class RestaurantApplicationApiTest extends PartnerApplicationsUiTestBase 
         new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
         new CustomerDashboardPage(customerPage).waitForDashboard();
         CustomerHomePage customerHome = new CustomerHomePage(customerPage);
-        customerHome.searchRestaurant(submittedName);
+        customerHome.searchRestaurant(outletName);
         assertThat(customerHome.isRestaurantVisible(submittedName))
                 .as("An application awaiting review is absent from the customer discovery UI")
                 .isFalse();
@@ -76,13 +77,15 @@ public class RestaurantApplicationApiTest extends PartnerApplicationsUiTestBase 
         // public listing after another session approves the application.
         customerPage.reload();
         new CustomerDashboardPage(customerPage).waitForDashboard();
-        customerHome.searchRestaurant(correctedName);
+        // The current discovery filter searches saved outlet names; the visible card displays
+        // the independently renamed brand. Brand-name aliases are owner-deferred legacy UX.
+        customerHome.searchRestaurant(outletName);
         customerPage.waitForCondition(() -> customerHome.isRestaurantVisible(correctedName),
                 new com.microsoft.playwright.Page.WaitForConditionOptions().setTimeout(20_000));
         customerHome.openRestaurant(correctedName);
         // This applicant owns one outlet, so the multi-outlet chooser is not part of its UI.
         customerPage.getByRole(com.microsoft.playwright.options.AriaRole.HEADING,
-                new com.microsoft.playwright.Page.GetByRoleOptions().setName(correctedName).setExact(true)).waitFor();
+                new com.microsoft.playwright.Page.GetByRoleOptions().setName(outletName).setExact(true)).waitFor();
         assertThat(customerPage.getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
                 new com.microsoft.playwright.Page.GetByRoleOptions().setName("Back to restaurants").setExact(true)).isVisible())
                 .as("The approved restaurant opens its customer storefront through the visible card")

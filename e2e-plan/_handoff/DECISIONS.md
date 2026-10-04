@@ -549,3 +549,15 @@ Choice: keep all four O3 release/private-upload/measurement checks open. The lat
 ### 2026-10-04T13:56:10.198172+05:30 — Preserve private proof and fix current handoffs
 
 Choice: retain real failing invocation7 and all owned applicants. Correct only the current O3 saved-profile callback and wizard refresh integration; leave old profile hooks, customer feed code and multi-outlet helper unchanged. A successful complete server profile clears initial required flags; missing fields/failure stay blocked, and no automatic duty request occurs. Successful manual application refresh also refreshes surrounding brand summary. Customer discovery after cross-session admin approval reloads through the normal browser before a strict card/storefront assertion; the fresh one-outlet brand does not render the multi-outlet chooser. These are local repairs pending GitHub publishing, Oracle deployment and real UI rerun. Private storage boundary is proven by actual visible UI upload/complete/admin view in the passing review journey. No migrations, wipe/reseed or E2E direct-state setup.
+
+### 2026-10-04T14:04:33.403014+05:30 — Published handoff fix and required Dev configuration
+
+Choice: publish only the reviewed current O3 UI integration and regressions with the existing GitHub workflow before selected Oracle UI deployment. Existing repository visibility is already public; no visibility change or local Docker. Follow the explicitly required deploy-ui-only runbook Dev overlay application after the UI image, including controlled sequential restarts of its18 readers. Preserve exact existing image tags, all data, private-bucket configuration and the deployment log. Finish runtime verification before E2E. No wipe, reseed or legacy code change.
+
+### 2026-10-04T14:05:48.665461+05:30 — Verified overlay no-op and isolated UI rollout
+
+Choice: accept the existing deploy workflow exact-checksum no-op for the required Dev overlays. They already match Oracle, so the helper correctly skips publishing and all18 planned reader restarts. Metadata independently proves only UI restarted; preserve unchanged private Government ID9652625 and other images/data. Complete public UI invocation8 on the exact published/deployed b5ab30e image and collect final operator metrics separately.
+
+### 2026-10-04T14:16:06.678712+05:30 — Preserve outlet identity and defer legacy search
+
+Choice: preserve the actual3/4 failure and unchanged owned approved applicant. Source and visible UI prove a legacy mismatch: discovery filters outlet name, while card label is brand name. Renaming a brand must not silently rename its outlet to hide the issue. Leave old search/card/menu code unchanged per the owner, record O3-UI-006 as a known failed/deferred UX assertion, and keep it out of passing counts. Current O3 approval/discovery proof uses normal saved-outlet search, exact renamed-brand card and owned-outlet heading. Fresh dummy applicant opening hours are set explicitly00:00–23:59 with visible controls; no approval/SQL/hours bypass. Rerun only the corrected restaurant method on the unchanged verified b5ab30e image; retain the three current-image passes from invocation8.

@@ -122,3 +122,7 @@ BP-O3-QUEUE-UI: AdminPartnerApprovalsUiTest#reviewQueuesNavigation logs in throu
 | deliveryApplicationLifecycle | Error after approval; duty disabled by stale profile flag | Current O3 handoff repair local25/25, pending publication/deployment/rerun |
 | privateReviewAndDecisions | Passed | Private upload/completion and admin image view actually observed |
 | pendingAndRejectedOutletsAreNotDiscoverableThroughTheCustomerUI | Passed | Retained seeded fixtures unchanged |
+
+## 2026-10-04T14:16:06.678712+05:30 — Current image invocation8
+
+Delivery lifecycle, private admin review/decisions and hidden-listing methods passed. Restaurant lifecycle failed only after actual approval/summary refresh, on a brand-name query that the older outlet-name filter cannot match. Brand-alias search is [O3-UI-006 deferred](DEFERRED-LEGACY-UI-TESTS.md), not passed. The corrected O3 scenario will search its saved outlet, assert the exact renamed card and open its owned outlet through visible UI. The current image is unchanged; only this method needs rerun.

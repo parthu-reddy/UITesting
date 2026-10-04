@@ -1,0 +1,101 @@
+{
+  "observedAt": "2026-10-04T08:43:31.224721+00:00",
+  "invocation": 8,
+  "proof": "actual visible public Oracle UI controls only; no direct product/DB/Redis/SSH/browser state setup",
+  "uiCommit": "b5ab30e4499bc546e45b8159210877fb8b224d69",
+  "e2eCommit": "00cd6567a56bbca5d2b259468928b30f5349b697",
+  "appUrl": "https://gulf-strike-dark-extras.trycloudflare.com",
+  "exitCode": 1,
+  "counts": {
+    "tests": 4,
+    "failures": 0,
+    "errors": 1,
+    "skipped": 0,
+    "passed": 3
+  },
+  "suites": [
+    {
+      "class": "RestaurantApplicationApiTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 1,
+      "skipped": 0,
+      "cases": [
+        {
+          "method": "restaurantApplicationLifecycle",
+          "seconds": 71.163,
+          "status": "error",
+          "error": "Timeout 20000ms exceeded"
+        }
+      ]
+    },
+    {
+      "class": "DeliveryApplicationApiTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "method": "deliveryApplicationLifecycle",
+          "seconds": 31.758,
+          "status": "passed",
+          "error": null
+        }
+      ]
+    },
+    {
+      "class": "AdminPartnerApprovalsUiTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "method": "privateReviewAndDecisions",
+          "seconds": 48.278,
+          "status": "passed",
+          "error": null
+        }
+      ]
+    },
+    {
+      "class": "UnapprovedOutletHiddenTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "cases": [
+        {
+          "method": "pendingAndRejectedOutletsAreNotDiscoverableThroughTheCustomerUI",
+          "seconds": 16.082,
+          "status": "passed",
+          "error": null
+        }
+      ]
+    }
+  ],
+  "cleanupPerformed": false,
+  "fixture": "UITesting/e2e-plan/_handoff/fixtures/o3-invocation8-allocation.json",
+  "artifactDirectory": "RandomDocuments/BusinessPlatform_2026-10-03/01_Organisations/Phase3_PartnerApplications/evidence/68-o3-ui-invocation8-artifacts",
+  "timingFiles": [
+    "AdminPartnerApprovalsUiTest-b41f322d-65ab-4dac-8e13-1d8f22844524.csv",
+    "DeliveryApplicationApiTest-8353106b-b478-49a8-99ed-a6349ff23c17.csv",
+    "RestaurantApplicationApiTest-6a354b54-af49-4c53-83e3-8e0a68a7bdca.csv",
+    "UnapprovedOutletHiddenTest-d68a2674-d513-46c3-9d9a-4e63bf6ba489.csv"
+  ],
+  "browserTimings": [
+    {
+      "family": "onboarding-status",
+      "successfulSamples": 30,
+      "p95Ms": 270.216,
+      "method": "nearest rank; UI-generated network requests; public tunnel included, rendering excluded"
+    },
+    {
+      "family": "admin-review-queue",
+      "successfulSamples": 12,
+      "p95Ms": 265.374,
+      "method": "nearest rank; UI-generated network requests; public tunnel included, rendering excluded"
+    }
+  ]
+}

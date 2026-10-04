@@ -102,6 +102,9 @@ public class RestaurantBrandRegistrationPage {
         field("Latitude").fill("12.9808");
         field("Longitude").fill("77.6467");
         field("City code").fill("BLR");
+        // These fresh O3 fixtures need an explicit opening window for discovery at test time.
+        field("Opens").fill("00:00");
+        field("Closes").fill("23:59");
         page.getByRole(AriaRole.BUTTON,
                 new Page.GetByRoleOptions().setName("Save outlet and continue").setExact(true)).click();
         assertThat(page.getByRole(AriaRole.BUTTON,
