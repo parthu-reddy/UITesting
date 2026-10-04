@@ -19,6 +19,7 @@ public class CspSmokeUiTest extends TestBase {
     @Test void securityHeadersAndConsoleHoldAcrossEveryCurrentPortal() throws Exception {
         Set<String> origins = new TreeSet<>(); List<String> violations = new ArrayList<>(); List<String> mainHeaders = new ArrayList<>();
         List<String> headerFailures = new ArrayList<>();
+        List<String> networkFailures = new ArrayList<>();
         for (Page page : List.of(customerPage, restaurantPage, riderPage, adminPage)) {
             page.onConsoleMessage(message -> {
                 String text = message.text(); if (text.toLowerCase().contains("content security policy") || text.toLowerCase().contains("content-security-policy")) violations.add("CSP violation on " + URI.create(page.url()).getPath());
@@ -26,6 +27,11 @@ public class CspSmokeUiTest extends TestBase {
             page.onRequest(request -> recordOrigin(origins, request.url()));
             page.onWebSocket(socket -> recordOrigin(origins, socket.url()));
             page.onResponse(response -> {
+                URI responseUri = URI.create(response.url());
+                if (response.status() >= 400 && responseUri.getHost() != null
+                        && responseUri.getHost().equals(URI.create(TestConfig.APP_URL).getHost()))
+                    networkFailures.add(response.request().method() + " " + responseUri.getPath()
+                            .replaceAll("[a-fA-F0-9-]{36}", ":id") + " " + response.status());
                 if (!response.request().isNavigationRequest() || !URI.create(response.url()).getHost().equals(URI.create(TestConfig.APP_URL).getHost())) return;
                 String csp = response.headerValue("content-security-policy");
                 if (csp == null || !csp.contains("default-src 'self'") || !csp.contains("frame-ancestors 'none'") || csp.contains("unsafe-eval"))
@@ -55,10 +61,13 @@ public class CspSmokeUiTest extends TestBase {
         Files.createDirectories(evidence.getParent());
         Files.writeString(evidence, "Observed public UI origins (no paths or credentials)\n" + String.join("\n", origins)
                 + "\nCSP violations: " + violations.size() + "\nHeader failures: " + headerFailures.size() + "\n");
+        Files.writeString(evidence, "Network 4xx/5xx: " + networkFailures.size() + "\n"
+                + String.join("\n", networkFailures) + "\n", java.nio.file.StandardOpenOption.APPEND);
         }
         assertThat(mainHeaders).hasSizeGreaterThanOrEqualTo(4);
         assertThat(headerFailures).as("required browser security headers").isEmpty();
         assertThat(violations).as("CSP violations during normal portal UI navigation").isEmpty();
+        assertThat(networkFailures).as("4xx/5xx during normal permitted portal UI navigation").isEmpty();
     }
     private static void recordOrigin(Set<String> origins, String url) {
         URI uri = URI.create(url); if (uri.getHost() != null && Set.of("http", "https", "ws", "wss").contains(uri.getScheme())) origins.add(uri.getScheme() + "://" + uri.getHost());
