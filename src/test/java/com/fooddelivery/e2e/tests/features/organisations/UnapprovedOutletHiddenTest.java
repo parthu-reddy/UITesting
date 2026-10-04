@@ -7,6 +7,7 @@ import com.fooddelivery.e2e.pages.customer.CustomerDashboardPage;
 import com.fooddelivery.e2e.pages.customer.CustomerHomePage;
 import com.fooddelivery.e2e.pages.restaurant.RestaurantBrandRegistrationPage;
 import com.fooddelivery.e2e.pages.restaurant.RestaurantDashboardPage;
+import com.microsoft.playwright.Browser;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
@@ -33,6 +34,13 @@ public class UnapprovedOutletHiddenTest extends PartnerApplicationsUiTestBase {
     }
 
     private void assertSeededRestaurantStatus(String phone, String expectedStatus) {
+        // Each account signs in through the UI in an empty session; retain server sessions/data.
+        restaurantContext.close();
+        restaurantContext = browser.newContext(new Browser.NewContextOptions()
+                .setGeolocation(TestConfig.GEO_LAT, TestConfig.GEO_LNG)
+                .setPermissions(java.util.List.of("geolocation")));
+        restaurantPage = restaurantContext.newPage();
+        restaurantPage.setDefaultTimeout(TestConfig.DEFAULT_TIMEOUT);
         restaurantPage.navigate(TestConfig.APP_URL);
         new LoginPage(restaurantPage).loginAs("Restaurant Partner", phone);
         RestaurantDashboardPage dashboard = new RestaurantDashboardPage(restaurantPage);

@@ -18,6 +18,9 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
  */
 public class RestaurantBrandRegistrationPage {
     private final Page page;
+    private Locator field(String name) {
+        return page.getByLabel(java.util.regex.Pattern.compile("^" + name + "\\s*\\*?$"));
+    }
 
     public RestaurantBrandRegistrationPage(Page page) {
         this.page = page;
@@ -70,15 +73,15 @@ public class RestaurantBrandRegistrationPage {
     }
 
     public void fillBrandName(String name) {
-        page.getByLabel("Brand name", new Page.GetByLabelOptions().setExact(true)).fill(name);
+        field("Brand name").fill(name);
     }
 
     private void fillBusinessDetails(String brandName) {
         fillBrandName(brandName);
-        page.getByLabel("GSTIN", new Page.GetByLabelOptions().setExact(true)).fill("29ABCDE1234F1Z5");
-        page.getByLabel("PAN", new Page.GetByLabelOptions().setExact(true)).fill("ABCDE1234F");
-        page.getByLabel("Bank account number", new Page.GetByLabelOptions().setExact(true)).fill("1234567890");
-        page.getByLabel("IFSC code", new Page.GetByLabelOptions().setExact(true)).fill("HDFC0001234");
+        field("GSTIN").fill("29ABCDE1234F1Z5");
+        field("PAN").fill("ABCDE1234F");
+        field("Bank account number").fill("1234567890");
+        field("IFSC code").fill("HDFC0001234");
     }
 
     private void saveBusinessDetails() {
@@ -89,11 +92,11 @@ public class RestaurantBrandRegistrationPage {
     }
 
     private void fillOutletDetails(String brandName, String phone) {
-        page.getByLabel("Outlet name", new Page.GetByLabelOptions().setExact(true)).fill(brandName + " Outlet");
-        page.getByLabel("FSSAI licence number", new Page.GetByLabelOptions().setExact(true)).fill("9999" + phone);
-        page.getByLabel("Latitude", new Page.GetByLabelOptions().setExact(true)).fill("12.9808");
-        page.getByLabel("Longitude", new Page.GetByLabelOptions().setExact(true)).fill("77.6467");
-        page.getByLabel("City code", new Page.GetByLabelOptions().setExact(true)).fill("BLR");
+        field("Outlet name").fill(brandName + " Outlet");
+        field("FSSAI licence number").fill("9999" + phone);
+        field("Latitude").fill("12.9808");
+        field("Longitude").fill("77.6467");
+        field("City code").fill("BLR");
         page.getByRole(AriaRole.BUTTON,
                 new Page.GetByRoleOptions().setName("Save outlet and continue").setExact(true)).click();
         assertThat(page.getByLabel("GST registration file", new Page.GetByLabelOptions().setExact(true))).isVisible();
