@@ -4,8 +4,8 @@ import com.fooddelivery.e2e.base.TestBase;
 import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.admin.AdminOrderMoneyPage;
 import com.fooddelivery.e2e.util.OrderMoneyChecks;
-import com.fooddelivery.e2e.util.RefundRecoveryChecks;
 import com.microsoft.playwright.Locator;
+import com.microsoft.playwright.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -45,13 +45,17 @@ public class AdminOrderMoneyOutcomesTest extends TestBase {
         org.assertj.core.api.Assertions.assertThat(Files.readString(Path.of("target/lifecycle", orderId + ".json")))
                 .contains("\"" + orderId + "\"").contains(testCustomerPhone);
         loginAsAdmin();
-        Map<?, ?> money = (Map<?, ?>) RefundRecoveryChecks.read(adminPage, "/api/v1/internal/admin/orders/" + orderId + "/money").get("body");
+        String path = "/api/v1/internal/admin/orders/" + orderId + "/money";
+        Response response = adminPage.waitForResponse(r -> r.request().method().equals("GET")
+                && java.net.URI.create(r.url()).getPath().equals(path), () -> adminPage.navigate(
+                TestConfig.APP_URL + "/admin/orders/" + orderId + "/money"));
+        org.assertj.core.api.Assertions.assertThat(response.status()).isEqualTo(200);
+        Map<?, ?> money = (Map<?, ?>) adminPage.evaluate("text => JSON.parse(text)", response.text());
         BigDecimal total = OrderMoneyChecks.amount(money, "totalAmount");
         BigDecimal restaurantQuoted = OrderMoneyChecks.amount(money, "restaurantPayout");
         BigDecimal riderQuoted = OrderMoneyChecks.amount(money, "driverNetPayout");
         List<?> refunds = (List<?>) money.get("refunds");
 
-        adminPage.navigate(TestConfig.APP_URL.replaceAll("/$", "") + "/admin/orders/" + orderId + "/money");
         new AdminOrderMoneyPage(adminPage).waitForOrderMoney();
         Locator payment = adminPage.getByTestId("order-payment");
         Locator restaurantPosted = adminPage.getByTestId("restaurant-posted");

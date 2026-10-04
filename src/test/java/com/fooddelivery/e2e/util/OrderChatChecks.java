@@ -27,11 +27,6 @@ public final class OrderChatChecks implements AutoCloseable {
     private final ChatTelemetry customerTelemetry;
     private final ChatTelemetry restaurantTelemetry;
     private final ChatTelemetry riderTelemetry;
-    private final AtomicReference<WebSocketRoute> customerSocket = new AtomicReference<>();
-    private final AtomicInteger customerSocketConnections = new AtomicInteger();
-    private final AtomicBoolean rejectFirstSession = new AtomicBoolean(true);
-    private final Consumer<Route> retryFixture;
-    private ChatWindowAttempt reliability;
     private ChatAttempt restaurantConversation;
     private ChatAttempt riderConversation;
     private ChatAttempt deliveredConversation;
@@ -41,34 +36,11 @@ public final class OrderChatChecks implements AutoCloseable {
         customerTelemetry=observeChatTraffic(customer);
         restaurantTelemetry=observeChatTraffic(restaurant);
         riderTelemetry=observeChatTraffic(rider);
-        retryFixture=route -> {
-            if (route.request().method().equals("POST") && rejectFirstSession.getAndSet(false)) {
-                route.fulfill(new Route.FulfillOptions().setStatus(503).setContentType("application/json")
-                        .setBody("{\"success\":false,\"message\":\"E2E session retry fixture\"}"));
-            } else route.resume();
-        };
-        customer.route("**/api/v1/chat/sessions",retryFixture);
-        // Observe the proxied server frames as well as native sockets. Playwright-routed
-        // sockets may not emit Page.onWebSocket events. Forward every frame unchanged.
-        customer.routeWebSocket(url -> url.contains("/ws/chat"), socket -> {
-            WebSocketRoute server=socket.connectToServer();
-            customerSocket.set(server); customerSocketConnections.incrementAndGet();
-            server.onMessage(frame -> {
-                if(frame.text()!=null) {
-                    observeStompFrame(customerTelemetry,frame.text()); socket.send(frame.text());
-                } else socket.send(frame.binary());
-            });
-        });
     }
 
     /** The dispatch is accepted first, so chat checks cannot exhaust an offer's countdown. */
     public void afterDispatch(String orderId,String outlet) {
         var order=new CompletedDeliveryFixture.Result(orderId,outlet);
-        try {
-            reliability=tryChatWindowInteractions(customer,restaurant,order,
-                    customerTelemetry,restaurantTelemetry,customerSocket,
-                    customerSocketConnections,retryFixture);
-        } finally { customer.unroute("**/api/v1/chat/sessions",retryFixture); }
         restaurantConversation=tryRestaurantRoundTrip(customer,restaurant,order,
                 customerTelemetry,restaurantTelemetry);
         riderConversation=tryRiderRoundTrip(customer,rider,order,customerTelemetry,riderTelemetry);
@@ -82,7 +54,6 @@ public final class OrderChatChecks implements AutoCloseable {
     /** Assert captured failures after delivering the package; a failed chat check stays failed. */
     public void assertPassed() {
         org.junit.jupiter.api.Assertions.assertAll("Order chat",
-                () -> assertSuccessfulChatWindowInteraction(reliability),
                 () -> {
                     assertSuccessfulRoundTrip(restaurantConversation,"with the restaurant");
                     assertThat(restaurantConversation.emptyMessageBlocked()).isTrue();
@@ -94,7 +65,7 @@ public final class OrderChatChecks implements AutoCloseable {
 
     public java.util.Map<String,Object> evidence() {
         var data=new java.util.LinkedHashMap<String,Object>();
-        data.put("reliability",String.valueOf(reliability));
+        data.put("reliability","DEFERRED O4-INT-002: synthetic retry/socket-close fixtures excluded from deployed UI journey");
         data.put("restaurant",String.valueOf(restaurantConversation));
         data.put("rider",String.valueOf(riderConversation));
         data.put("delivered",String.valueOf(deliveredConversation));
@@ -102,7 +73,7 @@ public final class OrderChatChecks implements AutoCloseable {
         return data;
     }
 
-    @Override public void close() { customer.unroute("**/api/v1/chat/sessions",retryFixture); }
+    @Override public void close() { /* Only browser contexts close; no server data cleanup. */ }
 
     private static void observeStompFrame(ChatTelemetry telemetry,String text) {
         if(text.stripLeading().startsWith("CONNECTED")) {
