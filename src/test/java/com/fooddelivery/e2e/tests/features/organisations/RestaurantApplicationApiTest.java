@@ -66,6 +66,11 @@ public class RestaurantApplicationApiTest extends PartnerApplicationsUiTestBase 
         approvals.decide("Approve", null);
         approvals.assertLeftQueue(correctedName);
         application.refreshAndAssertStatus("Approved");
+        com.microsoft.playwright.Locator brandsSummary = restaurantPage.getByRole(
+                com.microsoft.playwright.options.AriaRole.HEADING,
+                new com.microsoft.playwright.Page.GetByRoleOptions().setName("Your Brands").setExact(true)).locator("..");
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(brandsSummary.getByText(
+                "Approved", new com.microsoft.playwright.Locator.GetByTextOptions().setExact(true))).isVisible();
 
         // Customer search filters the loaded feed. Reload through the browser to observe a fresh
         // public listing after another session approves the application.
