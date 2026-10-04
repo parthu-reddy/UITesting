@@ -77,9 +77,9 @@ public class RestaurantApplicationApiTest extends PartnerApplicationsUiTestBase 
         // public listing after another session approves the application.
         customerPage.reload();
         new CustomerDashboardPage(customerPage).waitForDashboard();
-        // The current discovery filter searches saved outlet names; the visible card displays
-        // the independently renamed brand. Brand-name aliases are owner-deferred legacy UX.
-        customerHome.searchRestaurant(outletName);
+        // Discovery now matches the displayed renamed brand independently of the saved outlet.
+        // The retained-fixture search regression also checks the settled count and outlet alias.
+        customerHome.searchRestaurant(correctedName);
         customerPage.waitForCondition(() -> customerHome.isRestaurantVisible(correctedName),
                 new com.microsoft.playwright.Page.WaitForConditionOptions().setTimeout(20_000));
         customerHome.openRestaurant(correctedName);
