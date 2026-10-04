@@ -1,5 +1,6 @@
 package com.fooddelivery.e2e.tests.features.fulfillment;
 
+import com.fooddelivery.e2e.pages.common.Portal;
 import com.fooddelivery.e2e.base.TestBase;
 import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.common.LoginPage;
@@ -56,7 +57,7 @@ public class CustomerOrderPlacementTest extends TestBase {
         });
         try (SeededRiderDuty duty = SeededRiderDuty.ensureOnline(riderPage, testRiderPhone)) {
             customerPage.navigate(TestConfig.APP_URL);
-            new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
+            new LoginPage(customerPage).login(testCustomerPhone).openPortal(Portal.CUSTOMER);
             new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();
             String outletName = new NearbyOutletPage(customerPage).openBrand1AndSelectNearby();
             String customerId = (String) customerPage.evaluate(

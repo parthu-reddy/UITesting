@@ -1,5 +1,6 @@
 package com.fooddelivery.e2e.util;
 
+import com.fooddelivery.e2e.pages.common.Portal;
 import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.common.ChatWidgetPage;
 import com.fooddelivery.e2e.pages.common.LoginPage;
@@ -44,7 +45,7 @@ public final class SupportRefundSteps {
 
     public void openDeliveredOrder(String id) {
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", customerPhone);
+        new LoginPage(customerPage).login(customerPhone).openPortal(Portal.CUSTOMER);
         new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();
         CustomerDashboardPage.openProfileSettings(customerPage);
         customerPage.getByRole(AriaRole.TAB, new Page.GetByRoleOptions().setName("History").setExact(true)).click();

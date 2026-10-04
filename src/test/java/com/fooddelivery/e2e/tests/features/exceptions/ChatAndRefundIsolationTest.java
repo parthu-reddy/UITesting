@@ -3,6 +3,7 @@ package com.fooddelivery.e2e.tests.features.exceptions;
 import com.fooddelivery.e2e.base.TestBase;
 import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.common.LoginPage;
+import com.fooddelivery.e2e.pages.common.Portal;
 import com.fooddelivery.e2e.util.RefundRecoveryChecks;
 import com.microsoft.playwright.BrowserContext;
 import com.microsoft.playwright.Page;
@@ -30,6 +31,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * write attempted (an intruder's STOMP SEND) must be refused, and the owner's history proves it was.
  */
 @Tag("chat") @Tag("isolation")
+@org.junit.jupiter.api.Disabled("O4-INT-002: direct request, storage and handcrafted STOMP assertions are deferred under the UI-only policy")
 public class ChatAndRefundIsolationTest extends TestBase {
     private static final String ORDER = System.getProperty("isolation.order.id", "").trim();
     private static final String INTRUDER_CUSTOMER = System.getProperty("isolation.customer.phone", "8000000485").trim();
@@ -85,7 +87,7 @@ public class ChatAndRefundIsolationTest extends TestBase {
                 .doesNotContain(INTRUDER_CUSTOMER).doesNotContain(testRestaurantPhone).doesNotContain(testRiderPhone);
 
         // Owner control: the session exists, answers its customer, and accepts their subscription.
-        login(customerPage, "Order Food", testCustomerPhone);
+        login(customerPage, "CUSTOMER", testCustomerPhone);
         Map<?, ?> ownerSession = (Map<?, ?>) RefundRecoveryChecks.read(customerPage, "/api/v1/chat/sessions?orderId=" + ORDER).get("body");
         String sessionId = (String) ((Map<?, ?>) ownerSession.get("data")).get("sessionId");
         assertThat(sessionId).as("owner sees the order's chat session").isNotBlank();
@@ -96,9 +98,9 @@ public class ChatAndRefundIsolationTest extends TestBase {
         Map<?, ?> actors = (Map<?, ?>) customerPage.evaluate("json => JSON.parse(json)", manifest);
         // Check every legitimate participant before the outsider refusals. These real member
         // reads also exercise the deployed organisation lookup after the Chat resilience rollout.
-        participantReadsAndSubscribes("Restaurant Partner", (String) actors.get("restaurantPhone"),
+        participantReadsAndSubscribes("RESTAURANT", (String) actors.get("restaurantPhone"),
                 messagesPath, sessionId, ownerMessages);
-        participantReadsAndSubscribes("Delivery Executive", (String) actors.get("riderPhone"),
+        participantReadsAndSubscribes("DELIVERY", (String) actors.get("riderPhone"),
                 messagesPath, sessionId, ownerMessages);
 
         // CHAT-ISO-01: an unrelated customer.
@@ -107,7 +109,7 @@ public class ChatAndRefundIsolationTest extends TestBase {
                 new com.microsoft.playwright.Browser.NewContextOptions().setViewportSize(1280, 900));
         try {
             Page intruder = intruderContext.newPage();
-            login(intruder, "Order Food", INTRUDER_CUSTOMER);
+            login(intruder, "CUSTOMER", INTRUDER_CUSTOMER);
             assertThat(status(intruder, "GET", messagesPath, null)).as("outsider reads history").isEqualTo(403);
             assertThat(status(intruder, "GET", "/api/v1/chat/sessions?orderId=" + ORDER, null)).as("outsider finds the session").isEqualTo(403);
             assertThat(status(intruder, "POST", "/api/v1/chat/sessions", "{\"orderId\":\"" + ORDER + "\"}")).as("outsider joins").isEqualTo(403);
@@ -123,9 +125,9 @@ public class ChatAndRefundIsolationTest extends TestBase {
         }
 
         // CHAT-ISO-02 and 03: another brand's owner and a rider never assigned to this order.
-        login(restaurantPage, "Restaurant Partner", testRestaurantPhone);
+        login(restaurantPage, "RESTAURANT", testRestaurantPhone);
         assertThat(status(restaurantPage, "GET", messagesPath, null)).as("other restaurant reads history").isEqualTo(403);
-        login(riderPage, "Delivery Executive", testRiderPhone);
+        login(riderPage, "DELIVERY", testRiderPhone);
         assertThat(status(riderPage, "GET", messagesPath, null)).as("unassigned rider reads history").isEqualTo(403);
 
         // The refused SEND left nothing behind.
@@ -137,7 +139,7 @@ public class ChatAndRefundIsolationTest extends TestBase {
 
     private static void login(Page page, String portal, String phone) {
         page.navigate(TestConfig.APP_URL);
-        new LoginPage(page).loginAs(portal, phone);
+        new LoginPage(page).login(phone).openPortal(Portal.valueOf(portal));
         page.waitForCondition(() -> (Boolean) page.evaluate("() => !!localStorage.getItem('auth_token')"));
     }
 

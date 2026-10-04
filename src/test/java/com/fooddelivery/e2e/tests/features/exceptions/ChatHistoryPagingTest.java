@@ -1,5 +1,6 @@
 package com.fooddelivery.e2e.tests.features.exceptions;
 
+import com.fooddelivery.e2e.pages.common.Portal;
 import com.fooddelivery.e2e.base.TestBase;
 import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.common.LoginPage;
@@ -71,7 +72,7 @@ public class ChatHistoryPagingTest extends TestBase {
         org.assertj.core.api.Assertions.assertThat(Files.readString(Path.of("target/lifecycle", ORDER + ".json")))
                 .contains("\"" + ORDER + "\"").contains(testCustomerPhone);
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
+        new LoginPage(customerPage).login(testCustomerPhone).openPortal(Portal.CUSTOMER);
         new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();
         Instant updated = Instant.parse((String) RefundRecoveryChecks.order(customerPage, ORDER).get("updatedAt"));
         org.assertj.core.api.Assertions.assertThat(Duration.between(updated, Instant.now()))

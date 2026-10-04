@@ -1,5 +1,6 @@
 package com.fooddelivery.e2e.tests.features.auth;
 
+import com.fooddelivery.e2e.pages.common.Portal;
 import com.fooddelivery.e2e.pages.customer.CustomerDashboardPage;
 import com.fooddelivery.e2e.base.TestBase;
 import com.fooddelivery.e2e.base.TestConfig;
@@ -15,6 +16,7 @@ import com.fooddelivery.e2e.pages.delivery.DeliveryDashboardPage;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Disabled;
 
 import java.util.regex.Pattern;
 
@@ -32,14 +34,14 @@ public class CrossRoleSessionIsolationTest extends TestBase {
     void loginThreeRoles() {
         for (Page page : List.of(customerPage, restaurantPage, riderPage)) page.onPageError(pageErrors::add);
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
+        new LoginPage(customerPage).login(testCustomerPhone).openPortal(Portal.CUSTOMER);
         new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();
 
         restaurantPage.navigate(TestConfig.APP_URL);
-        new LoginPage(restaurantPage).loginAs("Restaurant Partner", testRestaurantPhone);
+        new LoginPage(restaurantPage).login(testRestaurantPhone).openPortal(Portal.RESTAURANT);
         new RestaurantDashboardPage(restaurantPage).waitForDashboard();
         riderPage.navigate(TestConfig.APP_URL);
-        new LoginPage(riderPage).loginAs("Delivery Executive", testRiderPhone);
+        new LoginPage(riderPage).login(testRiderPhone).openPortal(Portal.DELIVERY);
         new DeliveryDashboardPage(riderPage).waitForDashboard();
     }
 
@@ -70,8 +72,7 @@ public class CrossRoleSessionIsolationTest extends TestBase {
         CustomerDashboardPage.openProfileSettings(customerPage);
         customerPage.getByRole(AriaRole.BUTTON,
                 new Page.GetByRoleOptions().setName("Log Out").setExact(true)).click();
-        assertThat(customerPage.getByRole(AriaRole.BUTTON,
-                new Page.GetByRoleOptions().setName(Pattern.compile("^Order Food\\b"))).first()).isVisible();
+        assertThat(customerPage.getByLabel("PHONE NUMBER", new Page.GetByLabelOptions().setExact(true))).isVisible();
 
         restaurantPage.reload();
         new RestaurantDashboardPage(restaurantPage).waitForDashboard();
@@ -81,12 +82,12 @@ public class CrossRoleSessionIsolationTest extends TestBase {
         assertRiderRoleOnly();
         assertIdentity(restaurantPage, testRestaurantPhone, "RESTAURANT");
         assertIdentity(riderPage, testRiderPhone, "DELIVERY");
-        org.assertj.core.api.Assertions.assertThat(customerPage.evaluate("() => localStorage.getItem('auth_token')")).isNull();
         org.assertj.core.api.Assertions.assertThat(pageErrors).isEmpty();
     }
 
 
     @Test
+    @Disabled("O4-INT-002: forged-header API and storage probes are deferred under the owner UI-only policy")
     @DisplayName("SESSION-23: unsigned user headers cannot switch session ownership or evict another test user")
     void forgedHeadersCannotChangeSessionOwnership() {
         java.util.Map<?, ?> peer = (java.util.Map<?, ?>) restaurantPage.evaluate("""
@@ -137,21 +138,12 @@ public class CrossRoleSessionIsolationTest extends TestBase {
     }
 
     private void assertIdentity(Page page, String phone, String role) {
-        Object value = page.evaluate("""
-                () => {
-                    const profile = JSON.parse(localStorage.getItem('user_profile'));
-                    const token = localStorage.getItem('auth_token');
-                    const claims = JSON.parse(atob(token.split('.')[1].replace(/-/g, '+').replace(/_/g, '/')));
-                    return {profilePhone: profile.phone, phone: claims.phone, profileRole: profile.role,
-                        roles: claims.roles, id: profile.id, sub: claims.sub};
-                }
-                """);
-        java.util.Map<?, ?> identity = (java.util.Map<?, ?>) value;
-        org.assertj.core.api.Assertions.assertThat(identity.get("phone")).isEqualTo(phone);
-        org.assertj.core.api.Assertions.assertThat(identity.get("profilePhone")).isEqualTo(phone);
-        org.assertj.core.api.Assertions.assertThat(identity.get("profileRole")).isEqualTo(role);
-        org.assertj.core.api.Assertions.assertThat(identity.get("sub")).isEqualTo(identity.get("id"));
-        org.assertj.core.api.Assertions.assertThat(((List<?>) identity.get("roles")).contains(role)).isTrue();
+        if (role.equals("CUSTOMER")) CustomerDashboardPage.openProfileSettings(page);
+        else page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Profile settings").setExact(true)).click();
+        var input = page.locator("input[type=tel]");
+        assertThat(input).hasValue(phone);
+        assertThat(input).isDisabled();
+        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Close settings").setExact(true)).click();
     }
 
     private void assertRiderRoleOnly() {

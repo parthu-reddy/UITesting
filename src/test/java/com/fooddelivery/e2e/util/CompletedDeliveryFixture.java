@@ -1,5 +1,6 @@
 package com.fooddelivery.e2e.util;
 
+import com.fooddelivery.e2e.pages.common.Portal;
 import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.common.LoginPage;
 import com.fooddelivery.e2e.pages.customer.CustomerCartDrawerPage;
@@ -66,11 +67,11 @@ public final class CompletedDeliveryFixture {
                                        Consumer<Result> afterRestaurantAccept,
                                        Consumer<Result> afterRiderAccept) {
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", customerPhone);
+        new LoginPage(customerPage).login(customerPhone).openPortal(Portal.CUSTOMER);
         new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();
 
         restaurantPage.navigate(TestConfig.APP_URL);
-        new LoginPage(restaurantPage).loginAs("Restaurant Partner", restaurantPhone);
+        new LoginPage(restaurantPage).login(restaurantPhone).openPortal(Portal.RESTAURANT);
         RestaurantDashboardPage restaurant = new RestaurantDashboardPage(restaurantPage);
         restaurant.waitForDashboard();
 

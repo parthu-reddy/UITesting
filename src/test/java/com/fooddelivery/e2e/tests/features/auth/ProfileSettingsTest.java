@@ -1,5 +1,6 @@
 package com.fooddelivery.e2e.tests.features.auth;
 
+import com.fooddelivery.e2e.pages.common.Portal;
 import com.fooddelivery.e2e.base.TestBase;
 import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.common.LoginPage;
@@ -25,7 +26,6 @@ public class ProfileSettingsTest extends TestBase {
         assertThat(testCustomerPhone).isEqualTo("8000000501");
         customerPage.navigate(TestConfig.APP_URL);
         LoginPage login = new LoginPage(customerPage);
-        login.selectRole("Order Food");
         login.fillPhoneNumber(testCustomerPhone);
         login.clickSendOtp();
         login.waitForOtpInput();
@@ -90,7 +90,7 @@ public class ProfileSettingsTest extends TestBase {
     @DisplayName("SETTINGS-01: SharedSettings Address tab")
     void sharedSettingsAddressTab() {
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
+        new LoginPage(customerPage).login(testCustomerPhone).openPortal(Portal.CUSTOMER);
         CustomerDashboardPage dashboard = new CustomerDashboardPage(customerPage);
         dashboard.waitForDashboard();
         dashboard.openSettingsTab();
@@ -110,7 +110,7 @@ public class ProfileSettingsTest extends TestBase {
     @DisplayName("SETTINGS-03: SharedSettings Wallet tab")
     void sharedSettingsWalletTab() {
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
+        new LoginPage(customerPage).login(testCustomerPhone).openPortal(Portal.CUSTOMER);
         CustomerDashboardPage dashboard = new CustomerDashboardPage(customerPage);
         dashboard.waitForDashboard();
         dashboard.openSettingsTab();
@@ -128,7 +128,7 @@ public class ProfileSettingsTest extends TestBase {
     @DisplayName("SETTINGS-05: SharedSettings History tab")
     void sharedSettingsHistoryTab() {
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
+        new LoginPage(customerPage).login(testCustomerPhone).openPortal(Portal.CUSTOMER);
         CustomerDashboardPage dashboard = new CustomerDashboardPage(customerPage);
         dashboard.waitForDashboard();
         dashboard.openSettingsTab();

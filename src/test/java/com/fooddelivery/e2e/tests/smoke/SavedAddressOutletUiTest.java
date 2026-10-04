@@ -1,5 +1,6 @@
 package com.fooddelivery.e2e.tests.smoke;
 
+import com.fooddelivery.e2e.pages.common.Portal;
 import com.fooddelivery.e2e.base.TestBase;
 import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.common.LoginPage;
@@ -34,7 +35,7 @@ public class SavedAddressOutletUiTest extends TestBase {
 
     private SavedDeliveryAddressPage selectInitialHome() {
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
+        new LoginPage(customerPage).login(testCustomerPhone).openPortal(Portal.CUSTOMER);
         SavedDeliveryAddressPage address = new SavedDeliveryAddressPage(customerPage);
         address.selectHomeFromOpenDialog();
         return address;

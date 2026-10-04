@@ -1,5 +1,6 @@
 package com.fooddelivery.e2e.util;
 
+import com.fooddelivery.e2e.pages.common.Portal;
 import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.common.LoginPage;
 import com.fooddelivery.e2e.pages.customer.CustomerCartDrawerPage;
@@ -9,7 +10,6 @@ import com.fooddelivery.e2e.pages.customer.CustomerOrderTrackerPage;
 import com.fooddelivery.e2e.pages.restaurant.RestaurantOrderActionsPage;
 import com.fooddelivery.e2e.pages.restaurant.RestaurantOrderQueuePage;
 import com.microsoft.playwright.Page;
-import java.util.Arrays;
 
 /**
  * Utility to seed backend state by rapidly executing UI flows in a hidden context.
@@ -35,7 +35,7 @@ public class StateSetupHelper {
         
         try {
             page.navigate(TestConfig.APP_URL);
-            new LoginPage(page).loginAs("Order Food", customerPhone);
+            new LoginPage(page).login(customerPhone).openPortal(Portal.CUSTOMER);
             
             CustomerHomePage customerHome = new CustomerHomePage(page);
             customerHome.selectAddress("Home");
@@ -65,7 +65,7 @@ public class StateSetupHelper {
     public static void acceptOrder(Page page, String restaurantPhone, String shortOrderId, String outletName) {
         try {
             page.navigate(TestConfig.APP_URL);
-            new LoginPage(page).loginAs("Restaurant Partner", restaurantPhone);
+            new LoginPage(page).login(restaurantPhone).openPortal(Portal.RESTAURANT);
             
             RestaurantOrderQueuePage orderQueue = new RestaurantOrderQueuePage(page);
             orderQueue.waitForQueueLoad();
@@ -118,7 +118,7 @@ public class StateSetupHelper {
             try {
                 roleButton.waitFor(new com.microsoft.playwright.Locator.WaitForOptions().setTimeout(3000).setState(com.microsoft.playwright.options.WaitForSelectorState.VISIBLE));
                 // Login screen is showing — need to log in
-                new LoginPage(page).loginAs("Order Food", customerPhone);
+                new LoginPage(page).login(customerPhone).openPortal(Portal.CUSTOMER);
             } catch (Exception ignored) {
                 // Already logged in — proceed
             }
@@ -139,34 +139,11 @@ public class StateSetupHelper {
     }
 
     /**
-     * Rapidly logs in as a Rider and toggles their status to Online to ensure the system allows orders.
+     * Logs in through the rider portal and enables its visible Online Duty control before an order flow.
      */
     public static void ensureRiderIsOnline(Page page, String riderPhone) {
-        try {
-            page.navigate(TestConfig.APP_URL);
-            new LoginPage(page).loginAs("Delivery Executive", riderPhone);
-            
-            try {
-                page.waitForTimeout(3000); // Wait for dashboard
-            } catch (Exception ignored) {}
-            
-            com.fooddelivery.e2e.pages.delivery.RiderOnboardingWizardPage onboarding = new com.fooddelivery.e2e.pages.delivery.RiderOnboardingWizardPage(page);
-            if (onboarding.isWizardVisible()) {
-                onboarding.completeOnboarding();
-            }
-
-            com.fooddelivery.e2e.pages.delivery.DeliveryOnlineTogglePage toggle = new com.fooddelivery.e2e.pages.delivery.DeliveryOnlineTogglePage(page);
-            if (toggle.isOnline()) {
-                toggle.goOffline();
-                page.waitForTimeout(1000); 
-            }
-            toggle.goOnline();
-            page.waitForTimeout(1000);
-            if (!toggle.isOnline()) {
-                throw new IllegalStateException("Seeded rider did not reach Online state: " + riderPhone);
-            }
-        } finally {
-            // Context stays open for reuse
-        }
+        // The dashboard and Online Duty control are the rider-visible approval/readiness contract.
+        // Do not add a backend shortcut to this browser-only preflight.
+        SeededRiderDuty.ensureOnline(page, riderPhone).assertReadyForCheckout();
     }
 }

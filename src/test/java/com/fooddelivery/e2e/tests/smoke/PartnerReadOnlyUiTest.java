@@ -1,6 +1,7 @@
 package com.fooddelivery.e2e.tests.smoke;
 import com.fooddelivery.e2e.base.*;
 import com.fooddelivery.e2e.pages.common.LoginPage;
+import com.fooddelivery.e2e.pages.common.Portal;
 import com.fooddelivery.e2e.util.CompletedDeliveryFixture;
 import com.microsoft.playwright.*;
 import com.microsoft.playwright.options.AriaRole;
@@ -10,11 +11,11 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 
 @Tag("partner-ui")
 public class PartnerReadOnlyUiTest extends TestBase {
-    private void login(Page page, String role, String phone) {
-        page.navigate(TestConfig.APP_URL); new LoginPage(page).loginAs(role, phone);
+    private void login(Page page, Portal role, String phone) {
+        page.navigate(TestConfig.APP_URL); new LoginPage(page).login(phone).openPortal(role);
     }
     @Test void riderHistoryDateCanBeCleared() {
-        login(riderPage,"Delivery Executive",testRiderPhone);
+        login(riderPage,Portal.DELIVERY,testRiderPhone);
         riderPage.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName(Pattern.compile("Trips Completed"))).click();
         assertThat(riderPage.getByRole(AriaRole.HEADING,new Page.GetByRoleOptions().setName("Completed Deliveries"))).isVisible();
         Locator date=riderPage.getByLabel("Filter completed deliveries by date");
@@ -23,7 +24,7 @@ public class PartnerReadOnlyUiTest extends TestBase {
         assertThat(date).hasValue("");
     }
     @Test void riderHistoryShowsEmptyStateForOldDate() {
-        login(riderPage,"Delivery Executive",testRiderPhone);
+        login(riderPage,Portal.DELIVERY,testRiderPhone);
         riderPage.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName(Pattern.compile("Trips Completed"))).click();
         Locator date=riderPage.getByLabel("Filter completed deliveries by date");
         date.fill("2000-01-01");
@@ -60,29 +61,29 @@ public class PartnerReadOnlyUiTest extends TestBase {
                 .as("completed trip date").isNotEmpty();
     }
     @Test void riderTodayEarningsIsNonNegativeCurrency() {
-        login(riderPage,"Delivery Executive",testRiderPhone);
-        Locator earnings = riderPage.getByText("Today’s Earnings",
-                new Page.GetByTextOptions().setExact(true)).locator("..").locator("span").last();
-        assertThat(earnings).hasText(Pattern.compile("^₹[0-9]+(?:\\.[0-9]{2})?$"));
+        login(riderPage,Portal.DELIVERY,testRiderPhone);
+        Locator earnings = riderPage.getByText(Pattern.compile("^(Today’s earnings|Paid today)$"))
+                .locator("..").locator("span").nth(1);
+        assertThat(earnings).hasText(Pattern.compile("^₹[0-9,]+(?:\\.[0-9]{2})?$"));
         String amount = earnings.innerText().trim().substring(1).replace(",", "");
         org.assertj.core.api.Assertions.assertThat(Double.parseDouble(amount)).isGreaterThanOrEqualTo(0);
     }
     @Test void riderSettingsCanCloseWithoutChanges() {
-        login(riderPage,"Delivery Executive",testRiderPhone);
+        login(riderPage,Portal.DELIVERY,testRiderPhone);
         riderPage.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("Profile settings").setExact(true)).click();
         assertThat(riderPage.getByRole(AriaRole.HEADING,new Page.GetByRoleOptions().setName("Rider Settings"))).isVisible();
         riderPage.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("Close settings").setExact(true)).click();
-        assertThat(riderPage.getByText("Today’s Earnings",new Page.GetByTextOptions().setExact(true))).isVisible();
+        assertThat(riderPage.getByText(Pattern.compile("^(Today’s earnings|Paid today)$"))).isVisible();
     }
     @Test void restaurantEarningsPanel() {
-        login(restaurantPage,"Restaurant Partner",testRestaurantPhone);
+        login(restaurantPage,Portal.RESTAURANT,testRestaurantPhone);
         restaurantPage.getByText("Earnings",new Page.GetByTextOptions().setExact(true)).first().click();
         assertThat(restaurantPage.getByText("Net Earnings",new Page.GetByTextOptions().setExact(true))).isVisible();
         assertThat(restaurantPage.getByText("Pending Balance",new Page.GetByTextOptions().setExact(true))).isVisible();
         assertThat(restaurantPage.getByText("Clawbacks",new Page.GetByTextOptions().setExact(true))).isVisible();
     }
     @Test void restaurantProfileCanCloseWithoutChanges() {
-        login(restaurantPage,"Restaurant Partner",testRestaurantPhone);
+        login(restaurantPage,Portal.RESTAURANT,testRestaurantPhone);
         restaurantPage.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("Profile settings").setExact(true)).click();
         assertThat(restaurantPage.getByRole(AriaRole.HEADING,new Page.GetByRoleOptions().setName("Account Settings"))).isVisible();
         restaurantPage.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("Close settings").setExact(true)).click();
@@ -90,7 +91,7 @@ public class PartnerReadOnlyUiTest extends TestBase {
     }
 
     @Test void restaurantStockControlsRenderWithoutToggling() {
-        login(restaurantPage,"Restaurant Partner",testRestaurantPhone);
+        login(restaurantPage,Portal.RESTAURANT,testRestaurantPhone);
         restaurantPage.getByRole(AriaRole.TAB,new Page.GetByRoleOptions().setName("Menu").setExact(true)).click();
         assertThat(restaurantPage.getByRole(AriaRole.HEADING,new Page.GetByRoleOptions().setName(java.util.regex.Pattern.compile("Today.s menu")))).isVisible();
         assertThat(restaurantPage.getByRole(AriaRole.SWITCH).first()).isVisible();
@@ -99,7 +100,7 @@ public class PartnerReadOnlyUiTest extends TestBase {
     // The unsaved-draft check moved to RestaurantCampaignsLiveTest.draftIsDiscardedOnCancel: the
     // New Campaign button exists only once the owner has an advertiser, which this smoke cannot know.
     @Test void riderVerificationAndWalletSectionsRender() {
-        login(riderPage,"Delivery Executive",testRiderPhone);
+        login(riderPage,Portal.DELIVERY,testRiderPhone);
         riderPage.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("Profile settings").setExact(true)).click();
         assertThat(riderPage.getByRole(AriaRole.HEADING,new Page.GetByRoleOptions().setName("Document Verification"))).isVisible();
         Locator verification = riderPage.getByText("Verification Status",
@@ -119,7 +120,7 @@ public class PartnerReadOnlyUiTest extends TestBase {
         assertThat(riderPage.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("Sign Out").setExact(true))).isVisible();
     }
     @Test void riderProfileValuesArePopulatedWithoutEditing() {
-        login(riderPage,"Delivery Executive",testRiderPhone);
+        login(riderPage,Portal.DELIVERY,testRiderPhone);
         riderPage.getByRole(AriaRole.BUTTON,
                 new Page.GetByRoleOptions().setName("Profile settings").setExact(true)).click();
         assertThat(riderPage.locator("input[type=text]").first()).not().hasValue("");

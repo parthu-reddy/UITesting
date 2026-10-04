@@ -1,5 +1,6 @@
 package com.fooddelivery.e2e.tests.features.customer;
 
+import com.fooddelivery.e2e.pages.common.Portal;
 import com.fooddelivery.e2e.base.TestBase;
 import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.common.LoginPage;
@@ -28,13 +29,13 @@ public class CustomerHomeAddressTest extends TestBase {
             var addresses = customerPage.waitForResponse(
                     r -> r.url().contains("/customers/db45c5f8-71b5-57ff-94fb-4af8f99930c7/addresses")
                             && r.request().method().equals("GET"),
-                    () -> new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone));
+                    () -> new LoginPage(customerPage).login(testCustomerPhone).openPortal(Portal.CUSTOMER));
             assertThat(addresses.status()).isEqualTo(200);
             assertThat(customerPage.evaluate("body => JSON.parse(body).success", addresses.text())).isEqualTo(true);
             assertThat(customerPage.evaluate("body => JSON.parse(body).data", addresses.text()))
                     .isEqualTo(java.util.List.of());
         } else {
-            new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
+            new LoginPage(customerPage).login(testCustomerPhone).openPortal(Portal.CUSTOMER);
         }
         dashboard = new CustomerDashboardPage(customerPage);
         if ("8000000502".equals(testCustomerPhone)) {

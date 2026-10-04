@@ -1,5 +1,6 @@
 package com.fooddelivery.e2e.tests.features.fulfillment;
 
+import com.fooddelivery.e2e.pages.common.Portal;
 import com.fooddelivery.e2e.base.TestBase;
 import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.common.LoginPage;
@@ -22,8 +23,7 @@ public class RiderAvailabilityUiTest extends TestBase {
     @DisplayName("DISPATCH-01-04/16/18: Rider duty persists and dashboard history renders")
     void riderDutyAndDashboardState() {
         riderPage.navigate(TestConfig.APP_URL);
-        new LoginPage(riderPage).loginAs("Delivery Executive",
-                testRiderPhone);
+        new LoginPage(riderPage).login(testRiderPhone).openPortal(Portal.DELIVERY);
 
         DeliveryDashboardPage dashboard = new DeliveryDashboardPage(riderPage);
         dashboard.waitForDashboard();

@@ -1,5 +1,6 @@
 package com.fooddelivery.e2e.tests.smoke;
 
+import com.fooddelivery.e2e.pages.common.Portal;
 import com.fooddelivery.e2e.base.TestBase;
 import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.common.LoginPage;
@@ -19,7 +20,7 @@ public class RestaurantDiscoveryUiTest extends TestBase {
     private Locator cards() { return customerPage.locator("button:has(h5)"); }
     private void signInHome() {
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
+        new LoginPage(customerPage).login(testCustomerPhone).openPortal(Portal.CUSTOMER);
         new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();
     }
     private Locator openCustomerHome() {

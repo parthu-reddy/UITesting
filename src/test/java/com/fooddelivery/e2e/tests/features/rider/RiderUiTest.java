@@ -1,5 +1,6 @@
 package com.fooddelivery.e2e.tests.features.rider;
 
+import com.fooddelivery.e2e.pages.common.Portal;
 import com.fooddelivery.e2e.base.TestBase;
 import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.common.LoginPage;
@@ -18,7 +19,7 @@ public class RiderUiTest extends TestBase {
     @DisplayName("RIDER-01: Verify Rider Dashboard and Go Online functionality")
     void verifyRiderDashboardAndOnlineStatus() {
         riderPage.navigate(TestConfig.APP_URL);
-        new LoginPage(riderPage).loginAs("Delivery Executive", testRiderPhone);
+        new LoginPage(riderPage).login(testRiderPhone).openPortal(Portal.DELIVERY);
         
         DeliveryDashboardPage dashboard = new DeliveryDashboardPage(riderPage);
         dashboard.waitForDashboard();
@@ -34,7 +35,7 @@ public class RiderUiTest extends TestBase {
     void verifyRiderRoutingPersistence() {
 
         riderPage.navigate(TestConfig.APP_URL);
-        new LoginPage(riderPage).loginAs("Delivery Executive", testRiderPhone, "Test Rider", "rider@example.com");
+        new LoginPage(riderPage).login(testRiderPhone, "Test Rider", "rider@example.com").openPortal(Portal.DELIVERY);
         
         DeliveryDashboardPage dashboard = new DeliveryDashboardPage(riderPage);
         dashboard.waitForDashboard();

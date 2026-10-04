@@ -1,5 +1,6 @@
 package com.fooddelivery.e2e.tests.features.restaurant;
 
+import com.fooddelivery.e2e.pages.common.Portal;
 import com.fooddelivery.e2e.base.TestBase;
 import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.common.LoginPage;
@@ -23,13 +24,13 @@ public class RestaurantUiTest extends TestBase {
             var brands = restaurantPage.waitForResponse(
                     r -> java.net.URI.create(r.url()).getPath().equals("/api/v1/brands")
                             && r.request().method().equals("GET"),
-                    () -> new LoginPage(restaurantPage).loginAs("Restaurant Partner", testRestaurantPhone));
+                    () -> new LoginPage(restaurantPage).login(testRestaurantPhone).openPortal(Portal.RESTAURANT));
             assertThat(brands.status()).isEqualTo(200);
             assertThat(restaurantPage.evaluate("body => JSON.parse(body).success", brands.text())).isEqualTo(true);
             assertThat(((Number) restaurantPage.evaluate("body => JSON.parse(body).data.length", brands.text())).intValue())
                     .isEqualTo(testRestaurantPhone.endsWith("11") ? 0 : 1);
         } else {
-            new LoginPage(restaurantPage).loginAs("Restaurant Partner", testRestaurantPhone);
+            new LoginPage(restaurantPage).login(testRestaurantPhone).openPortal(Portal.RESTAURANT);
         }
         
         RestaurantDashboardPage dashboard = new RestaurantDashboardPage(restaurantPage);
@@ -86,7 +87,7 @@ public class RestaurantUiTest extends TestBase {
     @DisplayName("REST-02: Verify Restaurant Routing persists on page reload")
     void verifyRestaurantRoutingPersistence() {
         restaurantPage.navigate(TestConfig.APP_URL);
-        new LoginPage(restaurantPage).loginAs("Restaurant Partner", testRestaurantPhone, "Test Restaurant", "restaurant@example.com");
+        new LoginPage(restaurantPage).login(testRestaurantPhone, "Test Restaurant", "restaurant@example.com").openPortal(Portal.RESTAURANT);
         
         RestaurantDashboardPage dashboard = new RestaurantDashboardPage(restaurantPage);
         dashboard.waitForDashboard();

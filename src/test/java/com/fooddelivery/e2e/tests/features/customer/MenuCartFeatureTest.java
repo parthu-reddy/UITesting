@@ -1,5 +1,6 @@
 package com.fooddelivery.e2e.tests.features.customer;
 
+import com.fooddelivery.e2e.pages.common.Portal;
 import com.fooddelivery.e2e.base.TestBase;
 import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.common.LoginPage;
@@ -19,7 +20,7 @@ public class MenuCartFeatureTest extends TestBase {
     @DisplayName("MENU-01: Menu displays items with prices and without restaurant controls")
     void menuDisplaysItemsWithoutRestaurantEditingControls() {
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
+        new LoginPage(customerPage).login(testCustomerPhone).openPortal(Portal.CUSTOMER);
         
         new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();
         CustomerDashboardPage dashboard = new CustomerDashboardPage(customerPage);
@@ -52,7 +53,7 @@ public class MenuCartFeatureTest extends TestBase {
     @DisplayName("CART-01: Add, increment, decrement, and empty cart")
     void addIncrementDecrementAndEmptyCart() {
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
+        new LoginPage(customerPage).login(testCustomerPhone).openPortal(Portal.CUSTOMER);
         
         CustomerDashboardPage dashboard = new CustomerDashboardPage(customerPage);
         dashboard.waitForDashboard();

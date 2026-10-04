@@ -1,5 +1,6 @@
 package com.fooddelivery.e2e.tests.features.fulfillment;
 
+import com.fooddelivery.e2e.pages.common.Portal;
 import com.fooddelivery.e2e.base.TestBase;
 import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.common.LoginPage;
@@ -28,8 +29,7 @@ public class RestaurantNavigationUiTest extends TestBase {
     @DisplayName("REST-NAV-01-05/07: Restaurant sections render without state bleed")
     void restaurantSectionsRender() {
         restaurantPage.navigate(TestConfig.APP_URL);
-        new LoginPage(restaurantPage).loginAs("Restaurant Partner",
-                testRestaurantPhone);
+        new LoginPage(restaurantPage).login(testRestaurantPhone).openPortal(Portal.RESTAURANT);
         new RestaurantDashboardPage(restaurantPage).waitForDashboard();
 
         RestaurantDashboardPage dashboard=new RestaurantDashboardPage(restaurantPage);
@@ -91,7 +91,7 @@ public class RestaurantNavigationUiTest extends TestBase {
     @DisplayName("REVIEW-AGG-01: Restaurant sees its review aggregate or the defined empty state")
     void restaurantReviewsShowPublicFeedbackAndAggregate() {
         restaurantPage.navigate(TestConfig.APP_URL);
-        new LoginPage(restaurantPage).loginAs("Restaurant Partner", testRestaurantPhone);
+        new LoginPage(restaurantPage).login(testRestaurantPhone).openPortal(Portal.RESTAURANT);
         RestaurantDashboardPage dashboard = new RestaurantDashboardPage(restaurantPage);
         dashboard.waitForDashboard();
         String outletName = System.getProperty("review.outlet.name", "Brand 1 Outlet 6");

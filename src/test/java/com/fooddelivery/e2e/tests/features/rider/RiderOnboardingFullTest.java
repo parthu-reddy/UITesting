@@ -1,87 +1,39 @@
 package com.fooddelivery.e2e.tests.features.rider;
 
+import com.fooddelivery.e2e.pages.common.Portal;
 import com.fooddelivery.e2e.base.TestBase;
 import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.common.LoginPage;
 import com.fooddelivery.e2e.pages.delivery.DeliveryDashboardPage;
-import com.fooddelivery.e2e.pages.delivery.RiderOnboardingWizardPage;
-import com.fooddelivery.e2e.pages.delivery.RiderSettingsPage;
-import org.junit.jupiter.api.*;
+import com.microsoft.playwright.Page;
+import com.microsoft.playwright.options.AriaRole;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
-/**
- * Tests for the full Rider Onboarding Wizard flow.
- * Covers: ONBOARD-01..08
- */
+/** Approved seed stays operational with reviewed settings visibly locked in the rider portal. */
 @Tag("rider-onboarding")
+@Tag("ui-only")
 public class RiderOnboardingFullTest extends TestBase {
 
-    @BeforeEach
-    void loginRider() {
+    @Test
+    @DisplayName("Approved rider has the duty dashboard and locked reviewed settings")
+    void approvedRiderHasOperationalDashboardAndFrozenDetails() {
         riderPage.navigate(TestConfig.APP_URL);
-        // Login as rider
-        new LoginPage(riderPage).loginAs("Delivery Executive", testRiderPhone);
+        new LoginPage(riderPage).login(testRiderPhone).openPortal(Portal.DELIVERY);
+
         DeliveryDashboardPage dashboard = new DeliveryDashboardPage(riderPage);
         dashboard.waitForDashboard();
-    }
+        assertThat(riderPage.getByTestId("delivery-application")).isHidden();
 
-    @Test
-    @DisplayName("ONBOARD-01: Rider onboarding wizard visible")
-    void onboardingWizardVisible() {
-        DeliveryDashboardPage dashboard = new DeliveryDashboardPage(riderPage);
         dashboard.openSettingsTab();
-        
-        RiderSettingsPage settings = new RiderSettingsPage(riderPage);
-        if (settings.isOnboardingWizardVisible()) {
-            RiderOnboardingWizardPage wizard = new RiderOnboardingWizardPage(riderPage);
-            assertThat(wizard.isWizardVisible()).isTrue();
-        }
-    }
-
-    @Test
-    @DisplayName("ONBOARD-03: Fill vehicle number in wizard")
-    void fillVehicleNumberInWizard() {
-        DeliveryDashboardPage dashboard = new DeliveryDashboardPage(riderPage);
-        dashboard.openSettingsTab();
-        
-        RiderSettingsPage settings = new RiderSettingsPage(riderPage);
-        if (settings.isOnboardingWizardVisible()) {
-            RiderOnboardingWizardPage wizard = new RiderOnboardingWizardPage(riderPage);
-            wizard.fillVehicleNumber("KA01AB1234");
-        }
-    }
-
-    @Test
-    @DisplayName("ONBOARD-04: Select vehicle type in wizard")
-    void selectVehicleTypeInWizard() {
-        DeliveryDashboardPage dashboard = new DeliveryDashboardPage(riderPage);
-        dashboard.openSettingsTab();
-        
-        RiderSettingsPage settings = new RiderSettingsPage(riderPage);
-        if (settings.isOnboardingWizardVisible()) {
-            RiderOnboardingWizardPage wizard = new RiderOnboardingWizardPage(riderPage);
-            wizard.selectVehicleType("Motorcycle / Scooter");
-        }
-    }
-
-    @Test
-    @DisplayName("ONBOARD-06: Navigate wizard steps")
-    void navigateWizardSteps() {
-        DeliveryDashboardPage dashboard = new DeliveryDashboardPage(riderPage);
-        dashboard.openSettingsTab();
-        
-        RiderSettingsPage settings = new RiderSettingsPage(riderPage);
-        if (settings.isOnboardingWizardVisible()) {
-            RiderOnboardingWizardPage wizard = new RiderOnboardingWizardPage(riderPage);
-            int initialStep = wizard.getCurrentStep();
-            wizard.fillVehicleNumber("KA01AB1234");
-            wizard.selectVehicleType("Motorcycle / Scooter");
-            wizard.clickNext();
-            
-            riderPage.waitForTimeout(500);
-            int nextStep = wizard.getCurrentStep();
-            assertThat(nextStep).isNotEqualTo(initialStep);
-        }
+        assertThat(riderPage.getByText(
+                "Reviewed delivery details are locked. Contact support if they need to change.",
+                new Page.GetByTextOptions().setExact(true))).isVisible();
+        assertThat(riderPage.locator("fieldset")).isDisabled();
+        assertThat(riderPage.getByRole(AriaRole.BUTTON,
+                new Page.GetByRoleOptions().setName("Save Profile Changes").setExact(true))).isDisabled();
     }
 }

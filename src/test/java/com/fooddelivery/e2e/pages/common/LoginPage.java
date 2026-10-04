@@ -4,152 +4,95 @@ import com.fooddelivery.e2e.base.TestConfig;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
-import com.microsoft.playwright.options.WaitForSelectorState;
+import java.util.regex.Pattern;
+import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
-/**
- * Page Object for the Login screen.
- * <p>
- * Covers login for existing accounts with completed profiles.
- * Maps to: {@code LoginScreen.tsx → RoleSelector.tsx → AuthForm.tsx → CompleteProfileModal.tsx}
- * </p>
- * <p>
- * Also covers sub-components: {@code LoginHeader.tsx}, {@code LoginFooter.tsx},
- * {@code RoleCard.tsx}, {@code PersonRow.tsx}, and {@code OtpNotification.tsx}.
- * </p>
- */
+/** One person login, then an explicit rendered portal choice; no API or browser-state setup. */
 public class LoginPage {
-
     private final Page page;
+    private String freshOrganisationName;
+    public LoginPage(Page page) { this.page = page; }
 
-    public LoginPage(Page page) {
-        this.page = page;
+    public LoginPage login(String phone) { return login(phone, null, null); }
+    /** Profile completion is explicit for a retained new test person. */
+    public LoginPage login(String phone, String profileName, String profileEmail) {
+        return loginPerson(phone, profileName, profileEmail, false);
     }
-
-    // ── Compound login action ────────────────────────────────────────────
-
-    /**
-     * Performs a complete login as the given role.
-     *
-     * @param roleLabel the button text for the role card (e.g., "Order Food", "Restaurant Partner")
-     * @param phone     the test user phone number
-     */
-    public void loginAs(String roleLabel, String phone) {
-        loginAs(roleLabel, phone, null, null);
+    public LoginPage loginNewPerson(String phone, String profileName, String profileEmail) {
+        freshOrganisationName = profileName + " Team " + phone;
+        return loginPerson(phone, profileName, profileEmail, true);
     }
-
-    /** Explicit opt-in for an account whose first-login profile setup is authorized. */
-    public void loginAs(String roleLabel, String phone, String profileName, String profileEmail) {
-        selectRole(roleLabel);
-        fillPhoneNumber(phone);
-        clickSendOtp();
-        waitForOtpInput();
-        clickAutofillCode();
-        clickVerifyAndLogin();
-        waitForLoginComplete(profileName, profileEmail);
+    private LoginPage loginPerson(String phone, String profileName, String profileEmail, boolean requireFresh) {
+        page.navigate(TestConfig.APP_URL.replaceAll("/$", "") + "/login");
+        fillPhoneNumber(phone); clickSendOtp(); waitForOtpInput(); clickAutofillCode();
+        clickVerifyAndLogin(); waitForLoginComplete(profileName, profileEmail, requireFresh); return this;
     }
-
-    /** Signup is explicit; ordinary partner login never enrolls a new role. */
-    public void registerAs(String roleLabel, String phone, String profileName, String profileEmail) {
-        selectRole(roleLabel);
-        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Create account").setExact(true)).click();
-        fillPhoneNumber(phone);
-        clickSendOtp();
-        waitForOtpInput();
-        clickAutofillCode();
-        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Verify & Create Account").setExact(true)).click();
-        waitForLoginComplete(profileName, profileEmail);
-    }
-
-    // ── Role selection ───────────────────────────────────────────────────
-
-    public void selectRole(String roleLabel) {
-        Locator btn = page.locator("button:has-text('" + roleLabel + "'):visible").first();
-        btn.waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
-        btn.click();
-    }
-
-    // ── Phone input ──────────────────────────────────────────────────────
-
     public void fillPhoneNumber(String phone) {
-        Locator input = page.getByPlaceholder("9876543210");
-        input.waitFor(new Locator.WaitForOptions()
-                .setState(WaitForSelectorState.VISIBLE)
-                .setTimeout(5000));
-        input.fill(phone);
+        page.getByLabel("PHONE NUMBER", new Page.GetByLabelOptions().setExact(true)).fill(phone);
     }
-
-    // ── OTP flow ─────────────────────────────────────────────────────────
-
-    public void clickSendOtp() {
-        page.getByRole(AriaRole.BUTTON,
-                new Page.GetByRoleOptions().setName("Send One-Time OTP")).click();
-    }
-
-    public void waitForOtpInput() {
-        page.getByPlaceholder("- - - - - -").waitFor(
-                new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
-    }
-
-    public void fillOtp(String otp) {
-        page.getByPlaceholder("- - - - - -").fill(otp);
-    }
-
-    /** Uses the same Dev autofill control as a developer signing in manually. */
+    public void clickSendOtp() { button("Send One-Time OTP").click(); }
+    public void waitForOtpInput() { page.getByLabel("ENTER SECURE CODE").waitFor(); }
+    public void fillOtp(String otp) { page.getByLabel("ENTER SECURE CODE").fill(otp); }
+    /** Uses the exact Dev Autofill control a person clicks manually. */
     public void clickAutofillCode() {
         page.getByTestId("dev-otp-autofill").click();
-        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(
-                page.getByPlaceholder("- - - - - -"))
-                .hasValue(java.util.regex.Pattern.compile("[0-9]{6}"));
+        assertThat(page.getByLabel("ENTER SECURE CODE")).hasValue(Pattern.compile("[0-9]{6}"));
     }
+    public void clickResendSmsCode() { button("Resend SMS Code").click(); }
+    public void clickVerifyAndLogin() { button("Verify & Secure Log In").click(); }
 
-    public void clickResendSmsCode() {
-        page.locator("button:has-text('Resend SMS Code')").click();
+    public LoginPage openPortal(Portal portal) {
+        page.navigate(TestConfig.APP_URL.replaceAll("/$", "") + "/portals");
+        button(portal.label).click();
+        page.waitForURL(Pattern.compile(".*/" + portal.path.substring(1) + "(?:[/?#].*)?$"));
+        if (portal == Portal.ADMIN) stepUpAdmin();
+        return this;
     }
-
-    public void clickVerifyAndLogin() {
-        page.getByRole(AriaRole.BUTTON,
-                new Page.GetByRoleOptions().setName("Verify & Secure Log In")).click();
-    }
-
-    // ── Post-login ───────────────────────────────────────────────────────
-
-    private void waitForLoginComplete(String profileName, String profileEmail) {
-        try {
-            page.waitForCondition(() ->
-                !page.url().contains("/login") || page.getByPlaceholder("Enter your full name").isVisible(),
-                new Page.WaitForConditionOptions().setTimeout(10000));
-        } catch (com.microsoft.playwright.TimeoutError e) {
-            // proceed to standard state checks which will throw appropriate errors
+    /** Partner setup uses an authenticated application page, before operational approval. */
+    public LoginPage openOnboarding(Portal portal) {
+        if (portal == Portal.CUSTOMER) return openPortal(portal);
+        page.navigate(TestConfig.APP_URL.replaceAll("/$", "") + "/portals");
+        String label = portal == Portal.DELIVERY ? "Get started with deliveries" : "Get started with a restaurant";
+        button(label).click();
+        if (portal == Portal.RESTAURANT) {
+            page.waitForURL(Pattern.compile(".*/business(?:[/?#].*)?$"));
+            if (freshOrganisationName == null) throw new AssertionError("Choose or create an explicitly owned organisation through BusinessHubPage.");
+            new com.fooddelivery.e2e.pages.business.BusinessHubPage(page).create(freshOrganisationName);
         }
-
+        assertThat(page.getByTestId(portal == Portal.DELIVERY ? "delivery-application" : "restaurant-application")).isVisible();
+        return this;
+    }
+    public void stepUpAdmin() {
+        Locator dialog = page.getByRole(AriaRole.DIALOG, new Page.GetByRoleOptions().setName("Administrator verification").setExact(true));
+        Locator heading = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Admin").setExact(true));
+        page.waitForCondition(() -> dialog.isVisible() || heading.isVisible());
+        if (dialog.isVisible()) {
+            dialog.getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Send administrator code").setExact(true)).click();
+            page.getByTestId("dev-admin-otp-autofill").click();
+            assertThat(page.getByLabel("Administrator code")).hasValue(Pattern.compile("[0-9]{6}"));
+            dialog.getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Verify administrator access").setExact(true)).click();
+        }
+        assertThat(heading).isVisible();
+    }
+    private void waitForLoginComplete(String name, String email, boolean requireFresh) {
+        page.waitForCondition(() -> !page.url().contains("/login")
+                || page.getByPlaceholder("Enter your full name").isVisible()
+                || page.getByRole(AriaRole.ALERT).isVisible()
+                || page.getByText("Session Limit Reached", new Page.GetByTextOptions().setExact(true)).isVisible(),
+                new Page.WaitForConditionOptions().setTimeout(TestConfig.DEFAULT_TIMEOUT));
+        if (requireFresh && !page.getByPlaceholder("Enter your full name").isVisible())
+            throw new AssertionError("Candidate is not a fresh person; fresh profile completion was not shown. Retain this candidate manifest.");
         if (page.getByPlaceholder("Enter your full name").isVisible()) {
-            if (profileName != null && profileEmail != null) {
-                CompleteProfileModalPage profile = new CompleteProfileModalPage(page);
-                profile.fillName(profileName);
-                profile.fillEmail(profileEmail);
-                profile.submit();
-            } else {
-                throw new AssertionError("Account requires profile completion; no profile setup was configured.");
-            }
+            if (name == null || email == null) throw new AssertionError("Profile completion requires an explicitly allocated person and profile.");
+            var profile = new CompleteProfileModalPage(page); profile.fillName(name); profile.fillEmail(email); profile.submit();
         }
-
-        page.waitForCondition(() -> {
-            if (page.getByText("Session Limit Reached", new Page.GetByTextOptions().setExact(true)).isVisible()) {
-                throw new AssertionError("Account session limit reached. Configure a dedicated test account.");
-            }
-            Locator error = page.locator("div:has(> svg.lucide-circle-alert) > span");
-            if (error.isVisible()) throw new AssertionError("Login rejected: " + error.innerText());
-            return !page.getByPlaceholder("- - - - - -").isVisible() && !page.getByPlaceholder("Enter your full name").isVisible();
-        }, new Page.WaitForConditionOptions().setTimeout(TestConfig.DEFAULT_TIMEOUT));
+        if (page.getByText("Session Limit Reached", new Page.GetByTextOptions().setExact(true)).isVisible())
+            throw new AssertionError("Session limit reached; use an owned session fixture and its visible replacement control.");
+        if (page.url().contains("/login") && page.getByRole(AriaRole.ALERT).isVisible())
+            throw new AssertionError("Login rejected: " + page.getByRole(AriaRole.ALERT).innerText());
+        page.waitForCondition(() -> !page.url().contains("/login"), new Page.WaitForConditionOptions().setTimeout(TestConfig.DEFAULT_TIMEOUT));
     }
-
-    // ── Navigation helpers ───────────────────────────────────────────────
-
-    public void clickBackButton() {
-        page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Back").setExact(true)).click();
-    }
-
-    public void clickToggleTheme() {
-        page.locator("button:has(svg.lucide-moon), button:has(svg.lucide-sun)").first().click();
-    }
+    private Locator button(String label) { return page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName(label).setExact(true)); }
+    public void clickBackButton() { button("Back").click(); }
+    public void clickToggleTheme() { page.locator("button:has(svg.lucide-moon), button:has(svg.lucide-sun)").first().click(); }
 }

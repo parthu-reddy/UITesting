@@ -1,5 +1,6 @@
 package com.fooddelivery.e2e.tests.flows;
 
+import com.fooddelivery.e2e.pages.common.Portal;
 import com.fooddelivery.e2e.base.TestBase;
 import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.common.LoginPage;
@@ -371,7 +372,7 @@ public class HappyDeliveryFlowTest extends TestBase {
             assertThat(new CustomerOrderTrackerPage(customerPage,id).tracker()).isVisible();
             if(!Boolean.getBoolean("resume.delivered.quote.only")) {
                 riderPage.navigate(TestConfig.APP_URL);
-                new LoginPage(riderPage).loginAs("Delivery Executive",testRiderPhone);
+                new LoginPage(riderPage).login(testRiderPhone).openPortal(Portal.DELIVERY);
                 new DeliveryDashboardPage(riderPage).waitForDashboard();
                 riderPage.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName(Pattern.compile("Trips Completed"))).click();
                 Locator trip=riderPage.getByRole(AriaRole.BUTTON)
@@ -402,7 +403,7 @@ public class HappyDeliveryFlowTest extends TestBase {
                 testCustomerPhone, testRestaurantPhone, testRiderPhone);
 
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
+        new LoginPage(customerPage).login(testCustomerPhone).openPortal(Portal.CUSTOMER);
         new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();
 
         String retainedDelivered = System.getProperty("resume.delivered.order.id", "").trim();
@@ -414,7 +415,7 @@ public class HappyDeliveryFlowTest extends TestBase {
         chatChecks=new com.fooddelivery.e2e.util.OrderChatChecks(customerPage,restaurantPage,riderPage);
         restaurantPage.navigate(TestConfig.APP_URL);
         String restaurantPhone = testRestaurantPhone;
-        new LoginPage(restaurantPage).loginAs("Restaurant Partner", restaurantPhone);
+        new LoginPage(restaurantPage).login(restaurantPhone).openPortal(Portal.RESTAURANT);
         RestaurantDashboardPage restaurantDashboard = new RestaurantDashboardPage(restaurantPage);
         restaurantDashboard.waitForDashboard();
 
@@ -426,7 +427,7 @@ public class HappyDeliveryFlowTest extends TestBase {
             // An explicit resume keeps an assigned rider ON_DELIVERY; ordinary setup must
             // not abort that intentional recovery or attempt to toggle the duty state.
             riderPage.navigate(TestConfig.APP_URL);
-            new LoginPage(riderPage).loginAs("Delivery Executive", testRiderPhone);
+            new LoginPage(riderPage).login(testRiderPhone).openPortal(Portal.DELIVERY);
             new DeliveryDashboardPage(riderPage).waitForDashboard();
         }
 
@@ -776,10 +777,10 @@ public class HappyDeliveryFlowTest extends TestBase {
     void overlappingOrdersRemainIndependent() throws java.io.IOException {
         duty = SeededRiderDuty.ensureOnline(riderPage, testRiderPhone);
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
+        new LoginPage(customerPage).login(testCustomerPhone).openPortal(Portal.CUSTOMER);
         new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();
         restaurantPage.navigate(TestConfig.APP_URL);
-        new LoginPage(restaurantPage).loginAs("Restaurant Partner", testRestaurantPhone);
+        new LoginPage(restaurantPage).login(testRestaurantPhone).openPortal(Portal.RESTAURANT);
         new RestaurantDashboardPage(restaurantPage).waitForDashboard();
         Page originalCustomer = customerPage;
         Page originalRestaurant = restaurantPage;
@@ -793,10 +794,10 @@ public class HappyDeliveryFlowTest extends TestBase {
             // The same seeded customer has two separate cart/browser sessions: both server records
             // must remain visible independently, including when the other one completes.
             secondCustomer.navigate(TestConfig.APP_URL);
-            new LoginPage(secondCustomer).loginAs("Order Food", testCustomerPhone);
+            new LoginPage(secondCustomer).login(testCustomerPhone).openPortal(Portal.CUSTOMER);
             new SavedDeliveryAddressPage(secondCustomer).selectHomeFromOpenDialog();
             secondRestaurant.navigate(TestConfig.APP_URL);
-            new LoginPage(secondRestaurant).loginAs("Restaurant Partner", secondRestaurantPhone);
+            new LoginPage(secondRestaurant).login(secondRestaurantPhone).openPortal(Portal.RESTAURANT);
             new RestaurantDashboardPage(secondRestaurant).waitForDashboard();
             String resumePair = System.getProperty("concurrent.resume.pair", "").trim();
             com.fooddelivery.e2e.util.LiveOrderFixture.Created first;

@@ -9,13 +9,13 @@ class TestConfigTest {
     @Test
     void propertyUrlTakesPrecedenceOverEnvironment() {
         assertThat(TestConfig.resolveAppUrl("https://property.example/", "https://environment.example/"))
-                .isEqualTo("https://property.example/");
+                .isEqualTo("https://property.example");
     }
 
     @Test
     void environmentUrlIsUsedWhenPropertyIsAbsent() {
         assertThat(TestConfig.resolveAppUrl(null, "https://environment.example/"))
-                .isEqualTo("https://environment.example/");
+                .isEqualTo("https://environment.example");
     }
 
     @Test

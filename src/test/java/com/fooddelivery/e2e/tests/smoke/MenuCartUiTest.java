@@ -1,5 +1,6 @@
 package com.fooddelivery.e2e.tests.smoke;
 
+import com.fooddelivery.e2e.pages.common.Portal;
 import com.fooddelivery.e2e.pages.customer.CustomerDashboardPage;
 import com.fooddelivery.e2e.base.*;
 import com.fooddelivery.e2e.pages.common.LoginPage;
@@ -34,7 +35,7 @@ public class MenuCartUiTest extends TestBase {
     @BeforeEach
     void openMenu() {
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
+        new LoginPage(customerPage).login(testCustomerPhone).openPortal(Portal.CUSTOMER);
         new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();
         selectedOutlet = new NearbyOutletPage(customerPage).openBrand1AndSelectNearby();
         assertThat(customerPage.locator("[data-menu-item]").first()).isVisible();
@@ -161,7 +162,7 @@ public class MenuCartUiTest extends TestBase {
         String itemName = orderable.locator("h4").innerText().trim();
         // Establish one unavailable item only when no retained fixture exists. Never restore stock.
         restaurantPage.navigate(TestConfig.APP_URL);
-        new LoginPage(restaurantPage).loginAs("Restaurant Partner", "9000000001");
+        new LoginPage(restaurantPage).login("9000000001").openPortal(Portal.RESTAURANT);
         RestaurantDashboardPage restaurant = new RestaurantDashboardPage(restaurantPage);
         restaurant.waitForDashboard();
         restaurant.selectOutlet(selectedOutlet);

@@ -1,5 +1,6 @@
 package com.fooddelivery.e2e.tests.features.auth;
 
+import com.fooddelivery.e2e.pages.common.Portal;
 import com.fooddelivery.e2e.base.TestBase;
 import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.common.LoginPage;
@@ -19,7 +20,7 @@ public class SettingsTest extends TestBase {
     @DisplayName("Navigate to settings → check wallet, addresses, history tabs")
     void settingsTabs() {
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
+        new LoginPage(customerPage).login(testCustomerPhone).openPortal(Portal.CUSTOMER);
         CustomerDashboardPage dashboard = new CustomerDashboardPage(customerPage);
         dashboard.waitForDashboard();
 
@@ -53,7 +54,7 @@ public class SettingsTest extends TestBase {
     @DisplayName("Logout from settings")
     void logout() {
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
+        new LoginPage(customerPage).login(testCustomerPhone).openPortal(Portal.CUSTOMER);
         new CustomerDashboardPage(customerPage).waitForDashboard();
 
         CustomerDashboardPage dashboard = new CustomerDashboardPage(customerPage);

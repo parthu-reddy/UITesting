@@ -9,11 +9,12 @@ import org.junit.jupiter.api.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
+import com.fooddelivery.e2e.pages.common.Portal;
 @Tag("customer-settings-ui")
 public class CustomerSettingsUiTest extends TestBase {
     @BeforeEach void openSettings() {
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food",testCustomerPhone);
+        new LoginPage(customerPage).login(testCustomerPhone).openPortal(Portal.CUSTOMER);
         new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();
         CustomerDashboardPage.openProfileSettings(customerPage);
         assertThat(customerPage.getByRole(AriaRole.HEADING,new Page.GetByRoleOptions().setName("Account Settings"))).isVisible();

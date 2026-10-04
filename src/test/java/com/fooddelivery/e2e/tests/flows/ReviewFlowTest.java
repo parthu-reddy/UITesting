@@ -1,5 +1,6 @@
 package com.fooddelivery.e2e.tests.flows;
 
+import com.fooddelivery.e2e.pages.common.Portal;
 import com.fooddelivery.e2e.base.TestBase;
 import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.common.LoginPage;
@@ -128,7 +129,7 @@ public class ReviewFlowTest extends TestBase {
         });
         if (login) {
             restaurantPage.navigate(TestConfig.APP_URL);
-            new LoginPage(restaurantPage).loginAs("Restaurant Partner", testRestaurantPhone);
+            new LoginPage(restaurantPage).login(testRestaurantPhone).openPortal(Portal.RESTAURANT);
             dashboard.waitForDashboard();
         }
         dashboard.selectOutlet(deliveredOrder.outletName());
@@ -159,7 +160,7 @@ public class ReviewFlowTest extends TestBase {
                                          boolean allowSubmission) {
         if (login) {
             riderPage.navigate(TestConfig.APP_URL);
-            new LoginPage(riderPage).loginAs("Delivery Executive", testRiderPhone);
+            new LoginPage(riderPage).login(testRiderPhone).openPortal(Portal.DELIVERY);
             new DeliveryDashboardPage(riderPage).waitForDashboard();
         }
         if (Boolean.parseBoolean(System.getProperty("review.require-rider-offline", "false"))) {

@@ -10,15 +10,14 @@ import java.util.regex.Pattern;
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 @Tag("appearance-ui")
 public class LoginThemeUiTest extends TestBase {
-    @ParameterizedTest(name="{0}px: theme switch works through role-form navigation")
+    @ParameterizedTest(name="{0}px: theme switch works through phone and OTP navigation")
     @ValueSource(ints={390,1280})
-    void themeSwitchAndRoleNavigation(int width) {
+    void themeSwitchAndOtpNavigation(int width) {
         customerPage.setViewportSize(width,844);
         customerPage.navigate(TestConfig.APP_URL);
         customerPage.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("Switch to dark mode").setExact(true)).click();
         assertThat(customerPage.locator(".app-background")).hasClass(Pattern.compile(".*\\bdark\\b.*"));
-        if (width < 1024) customerPage.getByRole(AriaRole.TAB,new Page.GetByRoleOptions().setName("Order Food").setExact(true)).click();
-        LoginPage login=new LoginPage(customerPage); login.selectRole("Order Food");
+        LoginPage login=new LoginPage(customerPage);
         var phone = customerPage.getByPlaceholder("9876543210");
         assertThat(phone).isVisible();
         phone.fill("8000000001");
@@ -44,9 +43,13 @@ public class LoginThemeUiTest extends TestBase {
         org.assertj.core.api.Assertions.assertThat(contrast)
                 .as("dark-mode phone input text contrast")
                 .isGreaterThanOrEqualTo(4.5);
+        login.clickSendOtp();
+        login.waitForOtpInput();
+        assertThat(customerPage.locator(".app-background")).hasClass(Pattern.compile(".*\\bdark\\b.*"));
         customerPage.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("Switch to light mode").setExact(true)).click();
         assertThat(customerPage.locator(".app-background")).not().hasClass(Pattern.compile(".*\\bdark\\b.*"));
         login.clickBackButton();
+        assertThat(phone).isVisible();
         assertThat(customerPage.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("Switch to dark mode").setExact(true))).isVisible();
     }
 }

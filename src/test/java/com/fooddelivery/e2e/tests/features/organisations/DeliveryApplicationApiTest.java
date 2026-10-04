@@ -1,5 +1,6 @@
 package com.fooddelivery.e2e.tests.features.organisations;
 
+import com.fooddelivery.e2e.pages.common.Portal;
 import com.fooddelivery.e2e.base.PartnerApplicationsUiTestBase;
 import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.admin.AdminPartnerApprovalsPage;
@@ -24,7 +25,7 @@ public class DeliveryApplicationApiTest extends PartnerApplicationsUiTestBase {
         String name = applicantName("delivery-lifecycle", phone);
 
         riderPage.navigate(TestConfig.APP_URL);
-        new LoginPage(riderPage).registerAs("Delivery Executive", phone, name, "bp3_" + phone + "@test.com");
+        new LoginPage(riderPage).loginNewPerson(phone, name, "bp3_" + phone + "@test.com").openOnboarding(Portal.DELIVERY);
         riderPage.setViewportSize(390, 844);
         new RiderOnboardingWizardPage(riderPage).completeDevModeOnboarding(name, "KA" + phone);
 
@@ -40,6 +41,8 @@ public class DeliveryApplicationApiTest extends PartnerApplicationsUiTestBase {
 
         riderPage.getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
                 new com.microsoft.playwright.Page.GetByRoleOptions().setName("Refresh status").setExact(true)).click();
+        com.fooddelivery.e2e.pages.common.PortalLauncherPage launcher = new com.fooddelivery.e2e.pages.common.PortalLauncherPage(riderPage);
+        launcher.open(); launcher.state(Portal.DELIVERY, "Available"); launcher.choose(Portal.DELIVERY);
         DeliveryDashboardPage dashboard = new DeliveryDashboardPage(riderPage);
         dashboard.waitForDashboard();
         DeliveryOnlineTogglePage duty = new DeliveryOnlineTogglePage(riderPage);
@@ -53,8 +56,7 @@ public class DeliveryApplicationApiTest extends PartnerApplicationsUiTestBase {
 
     private void loginAsAdminThroughVisibleControls() {
         adminPage.navigate(TestConfig.APP_URL);
-        new LoginPage(adminPage).loginAs("System Admin", testAdminPhone,
-                TestConfig.ADMIN_PROFILE_NAME, TestConfig.ADMIN_PROFILE_EMAIL);
+        new LoginPage(adminPage).login(testAdminPhone, TestConfig.ADMIN_PROFILE_NAME, TestConfig.ADMIN_PROFILE_EMAIL).openPortal(Portal.ADMIN);
         new AdminPortalPage(adminPage).waitForPortal();
     }
 }

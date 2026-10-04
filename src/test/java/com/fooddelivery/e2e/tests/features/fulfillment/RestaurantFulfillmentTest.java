@@ -1,5 +1,6 @@
 package com.fooddelivery.e2e.tests.features.fulfillment;
 
+import com.fooddelivery.e2e.pages.common.Portal;
 import com.fooddelivery.e2e.base.*;
 import com.fooddelivery.e2e.pages.common.LoginPage;
 import com.fooddelivery.e2e.pages.restaurant.RestaurantDashboardPage;
@@ -14,7 +15,7 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 public class RestaurantFulfillmentTest extends TestBase {
     @BeforeEach void loginRestaurant() {
         restaurantPage.navigate(TestConfig.APP_URL);
-        new LoginPage(restaurantPage).loginAs("Restaurant Partner",testRestaurantPhone);
+        new LoginPage(restaurantPage).login(testRestaurantPhone).openPortal(Portal.RESTAURANT);
         new RestaurantDashboardPage(restaurantPage).waitForDashboard();
     }
     @Test @DisplayName("REST-ACCEPT-19: Six Kanban regions and counts without creating an order")

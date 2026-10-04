@@ -1,5 +1,6 @@
 package com.fooddelivery.e2e.tests.features.customer;
 
+import com.fooddelivery.e2e.pages.common.Portal;
 import com.fooddelivery.e2e.base.TestBase;
 import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.common.LoginPage;
@@ -17,7 +18,7 @@ public class CustomerRoutingUiTest extends TestBase {
     @DisplayName("NAV-02: Customer settings deep link opens directly and survives reload")
     void verifyCustomerRoutingPersistence() {
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone, "Test Customer", "customer@example.com");
+        new LoginPage(customerPage).login(testCustomerPhone, "Test Customer", "customer@example.com").openPortal(Portal.CUSTOMER);
 
         // Dismiss any dashboard overlays (like Location Required).
         customerPage.keyboard().press("Escape");

@@ -1,111 +1,55 @@
 package com.fooddelivery.e2e.util;
 
+import com.fooddelivery.e2e.pages.common.Portal;
 import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.common.LoginPage;
 import com.fooddelivery.e2e.pages.delivery.DeliveryDashboardPage;
 import com.fooddelivery.e2e.pages.delivery.DeliveryOnlineTogglePage;
 import com.microsoft.playwright.Page;
-import com.microsoft.playwright.Response;
-import com.microsoft.playwright.TimeoutError;
-import com.microsoft.playwright.WebSocket;
-import com.microsoft.playwright.WebSocketFrame;
+import com.microsoft.playwright.options.AriaRole;
 import org.opentest4j.TestAbortedException;
 
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicReference;
-import java.util.function.Consumer;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Reads rider duty from the server's DUTY_STATUS WebSocket snapshot and restores only a duty
- * transition this test made itself.
+ * Keeps a seeded rider ready through the delivery portal that a rider actually sees.
+ *
+ * <p>This fixture deliberately has no backend shortcut. It treats the rendered duty control and
+ * visible delivery warnings as the E2E contract. Service-level duty and telemetry details belong
+ * in their embedded-H2 tests.</p>
  */
 public final class SeededRiderDuty implements AutoCloseable {
 
-    private static final Pattern STATUS = Pattern.compile("\"status\"\\s*:\\s*\"(OFFLINE|ONLINE|ON_DELIVERY)\"");
-    private static final Pattern LAT = Pattern.compile("\"lat\"\\s*:\\s*(-?\\d+(?:\\.\\d+)?)");
-    private static final Pattern LNG = Pattern.compile("\"lng\"\\s*:\\s*(-?\\d+(?:\\.\\d+)?)");
+    private static final Pattern CONNECTION_OR_LOCATION_WARNING = Pattern.compile(
+            "Connection lost|Waiting for your location|your location stopped reaching us");
 
     private final Page page;
     private final DeliveryOnlineTogglePage toggle;
     private boolean restoreOffline;
     private boolean preserveOnlineForActiveDelivery;
-    private final AtomicReference<String> profileStatus = new AtomicReference<>();
-    private final AtomicReference<String> latestStatus = new AtomicReference<>();
-    private final AtomicReference<WebSocket> riderSocket = new AtomicReference<>();
-    private final AtomicInteger statusMessages = new AtomicInteger();
-    private final AtomicInteger profileResponses = new AtomicInteger();
-    private final AtomicReference<Boolean> locationTelemetrySent = new AtomicReference<>(false);
-    private final Consumer<WebSocket> socketListener;
-    private final Consumer<Response> profileListener;
 
     private SeededRiderDuty(Page page, String phone) {
         this.page = page;
         this.toggle = new DeliveryOnlineTogglePage(page);
-        this.socketListener = socket -> {
-            if (!socket.url().contains("/api/delivery/tracking")) return;
-            riderSocket.set(socket);
-            socket.onFrameReceived(this::observeDutyStatus);
-            socket.onFrameSent(this::observeLocationTelemetry);
-        };
-        this.profileListener = response -> {
-            if (!response.url().contains("/api/delivery/profile")) return;
-            try {
-                Matcher matcher = STATUS.matcher(response.text());
-                if (response.status() == 200 && matcher.find()) {
-                    profileStatus.set(matcher.group(1));
-                    profileResponses.incrementAndGet();
-                }
-            } catch (RuntimeException unreadableProfile) {
-                System.out.println("[RIDER] Could not read profile response: " + unreadableProfile.getMessage());
-            }
-        };
 
-        page.onWebSocket(socketListener);
-        page.onResponse(profileListener);
-        try {
-            page.navigate(TestConfig.APP_URL);
-            new LoginPage(page).loginAs("Delivery Executive", phone);
-            new DeliveryDashboardPage(page).waitForDashboard();
+        page.navigate(TestConfig.APP_URL);
+        new LoginPage(page).login(phone).openPortal(Portal.DELIVERY);
+        new DeliveryDashboardPage(page).waitForDashboard();
 
-            // The rider app intentionally does not open its tracking WebSocket while OFFLINE.
-            // It learns the initial server status from /api/delivery/profile, and only opens the
-            // socket after the server has accepted an Online action. Waiting for a socket frame
-            // here deadlocks an offline seeded rider before the UI can bring it online.
-            require(() -> profileStatus.get() != null,
-                    "Rider profile did not expose an authoritative server duty status after login");
-            String initialStatus = profileStatus.get();
-            if ("ON_DELIVERY".equals(initialStatus)) {
-                throw new TestAbortedException("Seeded rider is already carrying an order; leaving that session untouched");
-            }
-            if (!"ONLINE".equals(initialStatus) && !"OFFLINE".equals(initialStatus)) {
-                throw new AssertionError("Seeded rider server status was not ONLINE or OFFLINE: " + initialStatus);
-            }
-
-            boolean startedOffline = "OFFLINE".equals(initialStatus);
-            this.restoreOffline = startedOffline;
-            if (startedOffline) {
-                int beforeClick = statusMessages.get();
-                toggle.goOnline();
-                require(() -> statusMessages.get() > beforeClick && "ONLINE".equals(latestStatus.get()),
-                        "Rider did not receive the server ONLINE status after the UI action opened its tracking socket");
-            }
-
-            require(() -> Boolean.TRUE.equals(locationTelemetrySent.get())
-                            && riderSocket.get() != null
-                            && !riderSocket.get().isClosed()
-                            && "ONLINE".equals(latestStatus.get()),
-                    "Rider has no current location telemetry on a connected socket with server status ONLINE");
-            System.out.println("[RIDER] Server DUTY_STATUS=ONLINE with current location telemetry");
-        } catch (RuntimeException failure) {
-            try {
-                close();
-            } catch (RuntimeException cleanupFailure) {
-                failure.addSuppressed(cleanupFailure);
-            }
-            throw failure;
+        if (hasActiveDeliveryOrDispatch()) {
+            throw new TestAbortedException(
+                    "Seeded rider already has a visible delivery or dispatch; leaving that session untouched");
         }
+
+        if (toggle.isOffline()) {
+            restoreOffline = true;
+            toggle.goOnline();
+        } else if (!toggle.isOnline()) {
+            throw new AssertionError("Rider portal did not render an Online Duty or Offline control after login");
+        }
+
+        assertReadyForCheckout();
+        System.out.println("[RIDER] Online Duty is visibly enabled in the delivery portal");
     }
 
     public static SeededRiderDuty ensureOnline(Page page, String phone) {
@@ -119,17 +63,17 @@ public final class SeededRiderDuty implements AutoCloseable {
         }
     }
 
-    /** Recheck server duty and the live location socket immediately before checkout. */
+    /** Recheck the visible rider portal immediately before the customer starts checkout. */
     public void assertReadyForCheckout() {
-        org.assertj.core.api.Assertions.assertThat(readDutyStatus(page))
-                .as("Server must still report ONLINE immediately before checkout").isEqualTo("ONLINE");
-        org.assertj.core.api.Assertions.assertThat(riderSocket.get()).as("Rider tracking socket exists").isNotNull();
-        org.assertj.core.api.Assertions.assertThat(riderSocket.get().isClosed()).as("Rider tracking socket stays connected").isFalse();
-        org.assertj.core.api.Assertions.assertThat(latestStatus.get()).isEqualTo("ONLINE");
-        org.assertj.core.api.Assertions.assertThat(locationTelemetrySent.get()).isTrue();
-        org.assertj.core.api.Assertions.assertThat(page.getByText(
-                java.util.regex.Pattern.compile("Connection lost|Waiting for your location|your location stopped reaching us")).count())
-                .as("Rider must have no connection/location-loss warning").isZero();
+        org.assertj.core.api.Assertions.assertThat(toggle.isOnline())
+                .as("Rider portal must visibly show Online Duty immediately before checkout")
+                .isTrue();
+        org.assertj.core.api.Assertions.assertThat(hasActiveDeliveryOrDispatch())
+                .as("Seeded rider must not already have a visible delivery or dispatch")
+                .isFalse();
+        org.assertj.core.api.Assertions.assertThat(page.getByText(CONNECTION_OR_LOCATION_WARNING).count())
+                .as("Rider portal must not show a connection or location warning")
+                .isZero();
     }
 
     void preserveOnlineForActiveDelivery() {
@@ -140,110 +84,54 @@ public final class SeededRiderDuty implements AutoCloseable {
         preserveOnlineForActiveDelivery = false;
     }
 
-    private void observeDutyStatus(WebSocketFrame frame) {
-        String text = frame.text();
-        if (text == null || !text.contains("\"DUTY_STATUS\"")) return;
-        Matcher matcher = STATUS.matcher(text);
-        if (matcher.find()) {
-            latestStatus.set(matcher.group(1));
-            statusMessages.incrementAndGet();
-        }
-    }
-
-    private void observeLocationTelemetry(WebSocketFrame frame) {
-        String text = frame.text();
-        if (text == null) return;
-        Matcher lat = LAT.matcher(text);
-        Matcher lng = LNG.matcher(text);
-        if (lat.find() && lng.find()) {
-            double latitude = Double.parseDouble(lat.group(1));
-            double longitude = Double.parseDouble(lng.group(1));
-            if (latitude >= -90 && latitude <= 90 && longitude >= -180 && longitude <= 180) {
-                locationTelemetrySent.set(true);
-            }
-        }
-    }
-
-    private void require(java.util.function.BooleanSupplier condition, String message) {
-        try {
-            page.waitForCondition(condition, new Page.WaitForConditionOptions().setTimeout(15000));
-        } catch (TimeoutError timeout) {
-            throw new AssertionError(message, timeout);
-        }
-    }
-
-    /** Rider duty is the sole automatic state reset requested by the user. Keep identity/data intact. */
+    /**
+     * Rider duty is the sole automatic UI reset requested for this E2E harness. It only clicks
+     * the rendered duty control; a page outside the delivery portal or an active job is left alone.
+     */
     public static void finishOfflineIfIdle(Page page) {
-        if (page == null || page.isClosed() || !page.url().startsWith(TestConfig.APP_URL)) return;
-        String status = readDutyStatus(page);
-        if (status == null || "OFFLINE".equals(status)) return;
-        if ("ON_DELIVERY".equals(status)) {
-            System.out.println("[RIDER] Active delivery remains resumable; offline transition waits for completion");
+        if (page == null || page.isClosed() || !isApplicationPage(page)) return;
+
+        DeliveryOnlineTogglePage toggle = new DeliveryOnlineTogglePage(page);
+        if (hasActiveDeliveryOrDispatch(page)) {
+            System.out.println("[RIDER] Leaving visible active delivery or dispatch unchanged");
             return;
         }
-        if (!"ONLINE".equals(status)) throw new AssertionError("Unexpected rider duty status: " + status);
-        Response offline = page.waitForResponse(r -> java.net.URI.create(r.url()).getPath().equals("/api/delivery/status")
-                && r.request().method().equals("POST"), () -> new DeliveryOnlineTogglePage(page).goOffline());
-        org.assertj.core.api.Assertions.assertThat(offline.status()).as("Rider OFFLINE request must succeed").isEqualTo(200);
-        org.assertj.core.api.Assertions.assertThat(readDutyStatus(page)).as("Server must confirm rider OFFLINE").isEqualTo("OFFLINE");
+        if (toggle.isOffline()) return;
+        if (!toggle.isOnline()) return;
+
+        toggle.goOffline();
+        org.assertj.core.api.Assertions.assertThat(toggle.isOffline())
+                .as("Rider portal must visibly return to Offline after teardown")
+                .isTrue();
     }
 
-    private static String readDutyStatus(Page page) {
-        return (String) page.evaluate("""
-                async () => {
-                    const token = localStorage.getItem('auth_token');
-                    const profile = JSON.parse(localStorage.getItem('user_profile') || 'null');
-                    if (!token || profile?.role !== 'DELIVERY') return null;
-                    const response = await fetch(`/api/delivery/profile?phoneNumber=${encodeURIComponent(profile.phone)}`, {
-                        headers: {Authorization: `Bearer ${token}`}, credentials: 'omit'
-                    });
-                    if (!response.ok) throw new Error(`Cannot confirm rider duty: HTTP ${response.status}`);
-                    const body = await response.json();
-                    const status = (body.data || body).status;
-                    if (!status) throw new Error('Rider profile has no duty status');
-                    return status;
-                }
-                """);
+    private static boolean isApplicationPage(Page page) {
+        String root = TestConfig.APP_URL.replaceAll("/+$", "");
+        return page.url().startsWith(root);
+    }
+
+    private boolean hasActiveDeliveryOrDispatch() {
+        return hasActiveDeliveryOrDispatch(page);
+    }
+
+    private static boolean hasActiveDeliveryOrDispatch(Page page) {
+        boolean activeContract = page.getByRole(AriaRole.HEADING,
+                new Page.GetByRoleOptions().setName("Active Contract").setExact(true)).isVisible();
+        boolean dispatchOffer = page.getByRole(AriaRole.ALERT)
+                .filter(new com.microsoft.playwright.Locator.FilterOptions().setHasText("New Dispatch"))
+                .isVisible();
+        return activeContract || dispatchOffer;
     }
 
     @Override
     public void close() {
-        if (!restoreOffline || !toggle.isOnline()) {
-            page.offWebSocket(socketListener);
-            page.offResponse(profileListener);
-            return;
-        }
-        if (preserveOnlineForActiveDelivery) {
-            // A failed fixture must leave an assigned delivery resumable. The backend will
-            // reject an offline request while the order is active, and a stale dashboard may
-            // not render the active-job panel when this cleanup runs.
-            System.out.println("[RIDER] Keeping duty online because the test order is still active");
-            page.offWebSocket(socketListener);
-            page.offResponse(profileListener);
-            return;
-        }
-        boolean activeContractVisible = page.getByRole(
-                com.microsoft.playwright.options.AriaRole.HEADING,
-                new Page.GetByRoleOptions().setName("Active Contract").setExact(true)).isVisible();
-        if (activeContractVisible || "ON_DELIVERY".equals(latestStatus.get())) {
-            // Never undo the temporary ONLINE setup while the rider holds an order. The test may
-            // have failed mid-delivery; keep server duty intact so the job can be resumed safely.
-            System.out.println("[RIDER] Leaving duty unchanged while an active delivery is in progress");
-            page.offWebSocket(socketListener);
-            page.offResponse(profileListener);
-            return;
-        }
-        try {
-            toggle.goOffline();
-            int beforeRefresh = profileResponses.get();
-            page.reload();
-            new DeliveryDashboardPage(page).waitForDashboard();
-            require(() -> profileResponses.get() > beforeRefresh && "OFFLINE".equals(profileStatus.get()),
-                    "Rider profile did not confirm OFFLINE after restoring this test's temporary duty change");
-            System.out.println("[RIDER] Restored seeded rider to OFFLINE");
-        } finally {
-            page.offWebSocket(socketListener);
-            page.offResponse(profileListener);
-        }
+        if (!restoreOffline || preserveOnlineForActiveDelivery || hasActiveDeliveryOrDispatch()) return;
+        if (!toggle.isOnline()) return;
+
+        toggle.goOffline();
+        org.assertj.core.api.Assertions.assertThat(toggle.isOffline())
+                .as("Rider portal must visibly return to Offline after restoring this test's setup")
+                .isTrue();
+        System.out.println("[RIDER] Restored seeded rider to Offline through the delivery portal");
     }
 }

@@ -1,5 +1,6 @@
 package com.fooddelivery.e2e.tests.features.customer;
 
+import com.fooddelivery.e2e.pages.common.Portal;
 import com.fooddelivery.e2e.pages.customer.CustomerDashboardPage;
 import com.fooddelivery.e2e.base.TestBase;
 import com.fooddelivery.e2e.base.TestConfig;
@@ -25,7 +26,7 @@ public class CustomerAddressTest extends TestBase {
     @BeforeEach
     void loginWithHome() {
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
+        new LoginPage(customerPage).login(testCustomerPhone).openPortal(Portal.CUSTOMER);
         new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();
     }
 

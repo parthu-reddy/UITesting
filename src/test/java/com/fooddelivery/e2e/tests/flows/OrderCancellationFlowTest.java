@@ -1,5 +1,6 @@
 package com.fooddelivery.e2e.tests.flows;
 
+import com.fooddelivery.e2e.pages.common.Portal;
 import com.fooddelivery.e2e.base.*;
 import com.fooddelivery.e2e.pages.common.LoginPage;
 import com.fooddelivery.e2e.pages.customer.*;
@@ -18,15 +19,15 @@ public class OrderCancellationFlowTest extends TestBase {
     void customerCancelsBeforeAcceptance() throws java.io.IOException {
         String retained=System.getProperty("refund.resume.order.id", "").trim();
         if(!retained.isEmpty()) {
-            customerPage.navigate(TestConfig.APP_URL);new LoginPage(customerPage).loginAs("Order Food",testCustomerPhone);
+            customerPage.navigate(TestConfig.APP_URL);new LoginPage(customerPage).login(testCustomerPhone).openPortal(Portal.CUSTOMER);
             new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();loginAsAdmin();
             RefundRecoveryChecks.resume(customerPage,adminPage,retained,"CANCELLED",testCustomerPhone,testRestaurantPhone,testRiderPhone);
             return;
         }
         try(SeededRiderDuty duty=SeededRiderDuty.ensureOnline(riderPage,testRiderPhone)){
-            customerPage.navigate(TestConfig.APP_URL);new LoginPage(customerPage).loginAs("Order Food",testCustomerPhone);
+            customerPage.navigate(TestConfig.APP_URL);new LoginPage(customerPage).login(testCustomerPhone).openPortal(Portal.CUSTOMER);
             new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();
-            restaurantPage.navigate(TestConfig.APP_URL);new LoginPage(restaurantPage).loginAs("Restaurant Partner",testRestaurantPhone);
+            restaurantPage.navigate(TestConfig.APP_URL);new LoginPage(restaurantPage).login(testRestaurantPhone).openPortal(Portal.RESTAURANT);
             RestaurantDashboardPage dashboard=new RestaurantDashboardPage(restaurantPage);dashboard.waitForDashboard();
             LiveOrderFixture.Created created=LiveOrderFixture.place(customerPage,restaurantPage,testCustomerPhone,testRestaurantPhone,testRiderPhone,duty);
             String id=created.id();Map<?,?> original=RefundRecoveryChecks.order(customerPage,id);

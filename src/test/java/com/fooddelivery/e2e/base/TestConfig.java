@@ -11,11 +11,12 @@ public final class TestConfig {
     private TestConfig() {}
 
     /** Base URL of the application under test. */
-    static final String DEFAULT_APP_URL = "https://gulf-strike-dark-extras.trycloudflare.com/";
+    static final String DEFAULT_APP_URL = "https://gulf-strike-dark-extras.trycloudflare.com";
     public static final String APP_URL = resolveAppUrl(System.getProperty("app.url"), System.getenv("E2E_APP_URL"));
 
     static String resolveAppUrl(String property, String environment) {
-        return property != null ? property : environment != null ? environment : DEFAULT_APP_URL;
+        String selected = property != null ? property : environment != null ? environment : DEFAULT_APP_URL;
+        return selected.replaceAll("/+$", "");
     }
 
     public static String customerPhone() { return seededPhone("customer.phone", "8000000", 500); }

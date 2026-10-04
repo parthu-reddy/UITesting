@@ -1,5 +1,6 @@
 package com.fooddelivery.e2e.tests.flows;
 
+import com.fooddelivery.e2e.pages.common.Portal;
 import com.fooddelivery.e2e.base.TestBase;
 import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.common.LoginPage;
@@ -31,7 +32,7 @@ public class RiderReviewHistoryApiTest extends TestBase {
         }
 
         riderPage.navigate(TestConfig.APP_URL);
-        new LoginPage(riderPage).loginAs("Delivery Executive", testRiderPhone);
+        new LoginPage(riderPage).login(testRiderPhone).openPortal(Portal.DELIVERY);
         new DeliveryDashboardPage(riderPage).waitForDashboard();
         assertThat(new DeliveryOnlineTogglePage(riderPage).isOffline())
                 .as("this read-only check must leave the rider's existing duty state untouched")

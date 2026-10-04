@@ -1,5 +1,6 @@
 package com.fooddelivery.e2e.tests.features.organisations;
 
+import com.fooddelivery.e2e.pages.common.Portal;
 import com.fooddelivery.e2e.base.PartnerApplicationsUiTestBase;
 import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.common.LoginPage;
@@ -22,7 +23,7 @@ public class UnapprovedOutletHiddenTest extends PartnerApplicationsUiTestBase {
         assertSeededRestaurantStatus("9000000013", "Changes requested");
 
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
+        new LoginPage(customerPage).login(testCustomerPhone).openPortal(Portal.CUSTOMER);
         new CustomerDashboardPage(customerPage).waitForDashboard();
         CustomerHomePage customerHome = new CustomerHomePage(customerPage);
         for (String hiddenBrand : new String[]{"E2E pending-brand", "E2E rejected-brand"}) {
@@ -42,10 +43,10 @@ public class UnapprovedOutletHiddenTest extends PartnerApplicationsUiTestBase {
         restaurantPage = restaurantContext.newPage();
         restaurantPage.setDefaultTimeout(TestConfig.DEFAULT_TIMEOUT);
         restaurantPage.navigate(TestConfig.APP_URL);
-        new LoginPage(restaurantPage).loginAs("Restaurant Partner", phone);
-        RestaurantDashboardPage dashboard = new RestaurantDashboardPage(restaurantPage);
-        dashboard.waitForDashboard();
-        dashboard.openSettingsTab();
+        new LoginPage(restaurantPage).login(phone);
+        restaurantPage.navigate(TestConfig.APP_URL + "/portals");
+        restaurantPage.getByTestId("portal-restaurant").getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
+                new com.microsoft.playwright.Locator.GetByRoleOptions().setName("Restaurant").setExact(true)).click();
         new RestaurantBrandRegistrationPage(restaurantPage).assertStatus(expectedStatus);
     }
 }

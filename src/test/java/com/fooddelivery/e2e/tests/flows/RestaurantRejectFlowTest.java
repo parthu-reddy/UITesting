@@ -6,6 +6,7 @@ import com.fooddelivery.e2e.pages.restaurant.RestaurantDashboardPage;
 import com.fooddelivery.e2e.util.*;
 import org.junit.jupiter.api.*;
 
+import com.fooddelivery.e2e.pages.common.Portal;
 /** Existing rejection flow uses the same quote/payment/readiness and owned-reason checks. */
 @Tag("flow")
 public class RestaurantRejectFlowTest extends TestBase {
@@ -13,15 +14,15 @@ public class RestaurantRejectFlowTest extends TestBase {
     void restaurantCancelsOrder() throws java.io.IOException {
         String retained=System.getProperty("refund.resume.order.id", "").trim();
         if(!retained.isEmpty()) {
-            customerPage.navigate(TestConfig.APP_URL);new LoginPage(customerPage).loginAs("Order Food",testCustomerPhone);
+            customerPage.navigate(TestConfig.APP_URL);new LoginPage(customerPage).login(testCustomerPhone).openPortal(Portal.CUSTOMER);
             new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();loginAsAdmin();
             RefundRecoveryChecks.resume(customerPage,adminPage,retained,"CANCELLED_BY_RESTAURANT",testCustomerPhone,testRestaurantPhone,testRiderPhone);
             return;
         }
         try(SeededRiderDuty duty=SeededRiderDuty.ensureOnline(riderPage,testRiderPhone)){
-            customerPage.navigate(TestConfig.APP_URL);new LoginPage(customerPage).loginAs("Order Food",testCustomerPhone);
+            customerPage.navigate(TestConfig.APP_URL);new LoginPage(customerPage).login(testCustomerPhone).openPortal(Portal.CUSTOMER);
             new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();
-            restaurantPage.navigate(TestConfig.APP_URL);new LoginPage(restaurantPage).loginAs("Restaurant Partner",testRestaurantPhone);
+            restaurantPage.navigate(TestConfig.APP_URL);new LoginPage(restaurantPage).login(testRestaurantPhone).openPortal(Portal.RESTAURANT);
             new RestaurantDashboardPage(restaurantPage).waitForDashboard();
             String resume=System.getProperty("restaurant.resume.order.id", "").trim();
             LiveOrderFixture.Created order=resume.isEmpty()

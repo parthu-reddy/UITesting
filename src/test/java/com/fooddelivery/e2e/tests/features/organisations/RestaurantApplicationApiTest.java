@@ -1,5 +1,6 @@
 package com.fooddelivery.e2e.tests.features.organisations;
 
+import com.fooddelivery.e2e.pages.common.Portal;
 import com.fooddelivery.e2e.base.PartnerApplicationsUiTestBase;
 import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.admin.AdminPartnerApprovalsPage;
@@ -30,15 +31,12 @@ public class RestaurantApplicationApiTest extends PartnerApplicationsUiTestBase 
         String outletName = submittedName + " Outlet";
 
         restaurantPage.navigate(TestConfig.APP_URL);
-        new LoginPage(restaurantPage).registerAs("Restaurant Partner", phone, submittedName, "bp3_" + phone + "@test.com");
-        RestaurantDashboardPage restaurantDashboard = new RestaurantDashboardPage(restaurantPage);
-        restaurantDashboard.waitForDashboard();
-        restaurantDashboard.openSettingsTab();
+        new LoginPage(restaurantPage).loginNewPerson(phone, submittedName, "bp3_" + phone + "@test.com").openOnboarding(Portal.RESTAURANT);
         RestaurantBrandRegistrationPage application = new RestaurantBrandRegistrationPage(restaurantPage);
         application.submitNewApplication(submittedName, phone);
 
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
+        new LoginPage(customerPage).login(testCustomerPhone).openPortal(Portal.CUSTOMER);
         new CustomerDashboardPage(customerPage).waitForDashboard();
         CustomerHomePage customerHome = new CustomerHomePage(customerPage);
         customerHome.searchRestaurant(outletName);
@@ -67,11 +65,9 @@ public class RestaurantApplicationApiTest extends PartnerApplicationsUiTestBase 
         approvals.decide("Approve", null);
         approvals.assertLeftQueue(correctedName);
         application.refreshAndAssertStatus("Approved");
-        com.microsoft.playwright.Locator brandsSummary = restaurantPage.getByRole(
-                com.microsoft.playwright.options.AriaRole.HEADING,
-                new com.microsoft.playwright.Page.GetByRoleOptions().setName("Your Brands").setExact(true)).locator("..");
-        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(brandsSummary.getByText(
-                "Approved", new com.microsoft.playwright.Locator.GetByTextOptions().setExact(true))).isVisible();
+        restaurantPage.navigate(TestConfig.APP_URL + "/business");
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(restaurantPage.getByTestId("organisation-card")
+                .filter(new com.microsoft.playwright.Locator.FilterOptions().setHasText(submittedName + " Team " + phone))).containsText("APPROVED");
 
         // Customer search filters the loaded feed. Reload through the browser to observe a fresh
         // public listing after another session approves the application.
@@ -94,8 +90,7 @@ public class RestaurantApplicationApiTest extends PartnerApplicationsUiTestBase 
 
     private void loginAsAdminThroughVisibleControls() {
         adminPage.navigate(TestConfig.APP_URL);
-        new LoginPage(adminPage).loginAs("System Admin", testAdminPhone,
-                TestConfig.ADMIN_PROFILE_NAME, TestConfig.ADMIN_PROFILE_EMAIL);
+        new LoginPage(adminPage).login(testAdminPhone, TestConfig.ADMIN_PROFILE_NAME, TestConfig.ADMIN_PROFILE_EMAIL).openPortal(Portal.ADMIN);
         new AdminPortalPage(adminPage).waitForPortal();
     }
 }

@@ -1,5 +1,6 @@
 package com.fooddelivery.e2e.tests.features.resilience;
 
+import com.fooddelivery.e2e.pages.common.Portal;
 import com.fooddelivery.e2e.base.TestBase;
 import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.common.LoginPage;
@@ -49,7 +50,7 @@ public class ResponsiveAccessibilityTest extends TestBase {
     void mobileCustomerDashboardFitsViewport() {
         customerPage.setViewportSize(390, 844);
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
+        new LoginPage(customerPage).login(testCustomerPhone).openPortal(Portal.CUSTOMER);
         new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();
 
         assertThat(customerPage.getByRole(AriaRole.BUTTON,
@@ -63,7 +64,7 @@ public class ResponsiveAccessibilityTest extends TestBase {
     void tabletCustomerDashboardFitsViewport() {
         customerPage.setViewportSize(768, 1024);
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
+        new LoginPage(customerPage).login(testCustomerPhone).openPortal(Portal.CUSTOMER);
         new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();
 
         assertThat(customerPage.getByRole(AriaRole.BUTTON,
@@ -79,7 +80,7 @@ public class ResponsiveAccessibilityTest extends TestBase {
         restaurantPage.navigate(TestConfig.APP_URL);
         restaurantPage.getByRole(AriaRole.TAB,
                 new Page.GetByRoleOptions().setName("Restaurant Partner").setExact(true)).click();
-        new LoginPage(restaurantPage).loginAs("Restaurant Partner", testRestaurantPhone);
+        new LoginPage(restaurantPage).login(testRestaurantPhone).openPortal(Portal.RESTAURANT);
         new RestaurantDashboardPage(restaurantPage).waitForDashboard();
 
         assertThat(restaurantPage.getByText("Updates every 5 s",
@@ -94,7 +95,7 @@ public class ResponsiveAccessibilityTest extends TestBase {
         riderPage.navigate(TestConfig.APP_URL);
         riderPage.getByRole(AriaRole.TAB,
                 new Page.GetByRoleOptions().setName("Delivery Executive").setExact(true)).click();
-        new LoginPage(riderPage).loginAs("Delivery Executive", testRiderPhone);
+        new LoginPage(riderPage).login(testRiderPhone).openPortal(Portal.DELIVERY);
         new DeliveryDashboardPage(riderPage).waitForDashboard();
 
         assertThat(riderPage.getByRole(AriaRole.BUTTON,
@@ -107,7 +108,7 @@ public class ResponsiveAccessibilityTest extends TestBase {
     @DisplayName("ACCESS-04: Escape closes the delivery-location dialog")
     void escapeClosesAddressDialog() {
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
+        new LoginPage(customerPage).login(testCustomerPhone).openPortal(Portal.CUSTOMER);
         Locator dialog = customerPage.getByRole(AriaRole.DIALOG);
         assertThat(dialog).containsText("Select Delivery Location");
 
@@ -120,7 +121,7 @@ public class ResponsiveAccessibilityTest extends TestBase {
     @DisplayName("ACCESS-04/09: Cart quantity is announced and Escape closes the drawer")
     void cartQuantityIsLiveAndEscapeClosesDrawer() {
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
+        new LoginPage(customerPage).login(testCustomerPhone).openPortal(Portal.CUSTOMER);
         new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();
         new NearbyOutletPage(customerPage).openBrand1AndSelectNearby();
 
@@ -165,7 +166,7 @@ public class ResponsiveAccessibilityTest extends TestBase {
     @DisplayName("ACCESS-02: Tab key advances through customer dashboard controls")
     void tabKeyAdvancesThroughCustomerDashboardControls() {
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
+        new LoginPage(customerPage).login(testCustomerPhone).openPortal(Portal.CUSTOMER);
         new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();
         customerPage.locator("body").click(new Locator.ClickOptions().setPosition(1, 1));
 
@@ -190,7 +191,7 @@ public class ResponsiveAccessibilityTest extends TestBase {
     @DisplayName("ACCESS-06: Customer restaurant images expose alt attributes")
     void customerRestaurantImagesHaveAltAttributes() {
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
+        new LoginPage(customerPage).login(testCustomerPhone).openPortal(Portal.CUSTOMER);
         new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();
 
         Locator images = customerPage.locator("img");
@@ -206,7 +207,6 @@ public class ResponsiveAccessibilityTest extends TestBase {
     @DisplayName("ACCESS-08: Phone input has a programmatically associated label")
     void phoneInputHasAssociatedLabel() {
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).selectRole("Order Food");
         Locator phone = customerPage.getByPlaceholder("9876543210");
         assertThat(phone).isVisible();
 
@@ -227,7 +227,7 @@ public class ResponsiveAccessibilityTest extends TestBase {
     @DisplayName("NAV-03: Unknown route renders authenticated customer safely")
     void unknownRouteRendersAuthenticatedCustomerSafely() {
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
+        new LoginPage(customerPage).login(testCustomerPhone).openPortal(Portal.CUSTOMER);
         new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();
 
         customerPage.navigate(TestConfig.APP_URL.replaceAll("/$", "") + "/i-do-not-exist");

@@ -1,5 +1,6 @@
 package com.fooddelivery.e2e.tests.features.organisations;
 
+import com.fooddelivery.e2e.pages.common.Portal;
 import com.fooddelivery.e2e.base.PartnerApplicationsUiTestBase;
 import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.admin.AdminPartnerApprovalsPage;
@@ -64,17 +65,12 @@ public class AdminPartnerApprovalsUiTest extends PartnerApplicationsUiTestBase {
         String deliveryName = applicantName("delivery-admin", deliveryPhone);
 
         restaurantPage.navigate(TestConfig.APP_URL);
-        new LoginPage(restaurantPage).registerAs("Restaurant Partner", restaurantPhone, restaurantName,
-                "bp3_" + restaurantPhone + "@test.com");
-        RestaurantDashboardPage restaurantDashboard = new RestaurantDashboardPage(restaurantPage);
-        restaurantDashboard.waitForDashboard();
-        restaurantDashboard.openSettingsTab();
+        new LoginPage(restaurantPage).loginNewPerson(restaurantPhone, restaurantName, "bp3_" + restaurantPhone + "@test.com").openOnboarding(Portal.RESTAURANT);
         RestaurantBrandRegistrationPage restaurantApplication = new RestaurantBrandRegistrationPage(restaurantPage);
         restaurantApplication.submitNewApplication(restaurantName, restaurantPhone);
 
         riderPage.navigate(TestConfig.APP_URL);
-        new LoginPage(riderPage).registerAs("Delivery Executive", deliveryPhone, deliveryName,
-                "bp3_" + deliveryPhone + "@test.com");
+        new LoginPage(riderPage).loginNewPerson(deliveryPhone, deliveryName, "bp3_" + deliveryPhone + "@test.com").openOnboarding(Portal.DELIVERY);
         new RiderOnboardingWizardPage(riderPage).completeDevModeOnboarding(deliveryName, "KA" + deliveryPhone);
 
         loginAsAdminThroughVisibleControls();
@@ -101,13 +97,14 @@ public class AdminPartnerApprovalsUiTest extends PartnerApplicationsUiTestBase {
         approvals.assertLeftQueue(deliveryName);
         riderPage.getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
                 new com.microsoft.playwright.Page.GetByRoleOptions().setName("Refresh status").setExact(true)).click();
+        com.fooddelivery.e2e.pages.common.PortalLauncherPage launcher = new com.fooddelivery.e2e.pages.common.PortalLauncherPage(riderPage);
+        launcher.open(); launcher.state(Portal.DELIVERY, "Available"); launcher.choose(Portal.DELIVERY);
         new DeliveryDashboardPage(riderPage).waitForDashboard();
     }
 
     private void loginAsAdminThroughVisibleControls() {
         adminPage.navigate(TestConfig.APP_URL);
-        new LoginPage(adminPage).loginAs("System Admin", testAdminPhone,
-                TestConfig.ADMIN_PROFILE_NAME, TestConfig.ADMIN_PROFILE_EMAIL);
+        new LoginPage(adminPage).login(testAdminPhone, TestConfig.ADMIN_PROFILE_NAME, TestConfig.ADMIN_PROFILE_EMAIL).openPortal(Portal.ADMIN);
         new AdminPortalPage(adminPage).waitForPortal();
     }
 }

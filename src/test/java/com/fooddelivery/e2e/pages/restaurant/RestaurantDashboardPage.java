@@ -39,14 +39,18 @@ public class RestaurantDashboardPage {
     public void selectOutlet(String outletName) {
         Locator outlet = page.getByRole(com.microsoft.playwright.options.AriaRole.COMBOBOX,
                 new Page.GetByRoleOptions().setName("Outlet"));
-        if (!outlet.innerText().trim().equals(outletName)) {
-            outlet.click();
-            page.getByRole(com.microsoft.playwright.options.AriaRole.OPTION,
-                    new Page.GetByRoleOptions().setName(outletName).setExact(true)).click();
+        if (!matchesOutlet(outlet.innerText(), outletName)) {
+            outlet.click(); Locator options = page.getByRole(com.microsoft.playwright.options.AriaRole.OPTION); options.first().waitFor();
+            boolean selected = false;
+            for (int i = 0; i < options.count(); i++) {
+                if (matchesOutlet(options.nth(i).innerText(), outletName)) { options.nth(i).click(); selected = true; break; }
+            }
+            if (!selected) throw new AssertionError("Outlet not found in the rendered grouped selector: " + outletName);
         }
-        page.waitForCondition(() -> outlet.innerText().trim().equals(outletName),
-                new Page.WaitForConditionOptions().setTimeout(5000));
+        page.waitForCondition(() -> matchesOutlet(outlet.innerText(), outletName), new Page.WaitForConditionOptions().setTimeout(5000));
     }
+
+    private static boolean matchesOutlet(String value, String outletName) { return value.trim().equals(outletName) || value.trim().endsWith(" / " + outletName); }
 
     // ── Tab navigation ───────────────────────────────────────────────────
 
@@ -64,7 +68,7 @@ public class RestaurantDashboardPage {
     }
 
     public void openSettingsTab() {
-        page.locator("button[aria-label='Restaurant registration and menu settings']").first().click();
+        page.locator("button[aria-label='Restaurant management and menu settings']").first().click();
         page.waitForTimeout(300);
     }
 

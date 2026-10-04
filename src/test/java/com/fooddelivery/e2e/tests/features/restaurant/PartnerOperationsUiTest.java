@@ -1,5 +1,6 @@
 package com.fooddelivery.e2e.tests.features.restaurant;
 
+import com.fooddelivery.e2e.pages.common.Portal;
 import com.microsoft.playwright.Locator;
 import com.fooddelivery.e2e.base.TestBase;
 import com.fooddelivery.e2e.base.TestConfig;
@@ -20,7 +21,7 @@ public class PartnerOperationsUiTest extends TestBase {
     @DisplayName("CAMPAIGN-01: Restaurant reaches the Campaigns tab")
     void verifyCampaignManagement() {
         restaurantPage.navigate(TestConfig.APP_URL);
-        new LoginPage(restaurantPage).loginAs("Restaurant Partner", testRestaurantPhone);
+        new LoginPage(restaurantPage).login(testRestaurantPhone).openPortal(Portal.RESTAURANT);
         RestaurantDashboardPage dashboard = new RestaurantDashboardPage(restaurantPage);
         dashboard.waitForDashboard();
         // Which screen depends on whether this owner advertises yet; RestaurantCampaignsLiveTest checks
@@ -33,7 +34,7 @@ public class PartnerOperationsUiTest extends TestBase {
     @DisplayName("EARNINGS-01: Rider views wallet and earnings")
     void verifyRiderEarnings() {
         riderPage.navigate(TestConfig.APP_URL);
-        new LoginPage(riderPage).loginAs("Delivery Executive", testRiderPhone);
+        new LoginPage(riderPage).login(testRiderPhone).openPortal(Portal.DELIVERY);
         
         Locator earnings = riderPage.locator("text=Today’s Earnings").first();
         earnings.waitFor(new Locator.WaitForOptions().setTimeout(15000));

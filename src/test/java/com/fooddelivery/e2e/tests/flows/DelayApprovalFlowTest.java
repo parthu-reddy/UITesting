@@ -1,5 +1,6 @@
 package com.fooddelivery.e2e.tests.flows;
 
+import com.fooddelivery.e2e.pages.common.Portal;
 import com.fooddelivery.e2e.base.TestBase;
 import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.common.LoginPage;
@@ -35,7 +36,7 @@ public class DelayApprovalFlowTest extends TestBase {
         StateSetupHelper.ensureRiderIsOnline(riderPage, testRiderPhone);
 
         restaurantPage.navigate(TestConfig.APP_URL);
-        new LoginPage(restaurantPage).loginAs("Restaurant Partner", testRestaurantPhone);
+        new LoginPage(restaurantPage).login(testRestaurantPhone).openPortal(Portal.RESTAURANT);
         restaurantQueue = new RestaurantOrderQueuePage(restaurantPage);
         restaurantQueue.waitForQueueLoad();
 

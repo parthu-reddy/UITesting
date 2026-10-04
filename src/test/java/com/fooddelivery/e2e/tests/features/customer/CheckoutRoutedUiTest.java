@@ -1,5 +1,6 @@
 package com.fooddelivery.e2e.tests.features.customer;
 
+import com.fooddelivery.e2e.pages.common.Portal;
 import com.fooddelivery.e2e.base.TestBase;
 import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.common.LoginPage;
@@ -45,7 +46,7 @@ public class CheckoutRoutedUiTest extends TestBase {
     private PaymentModalPage openCheckout(boolean addSecondItem) {
         duty = SeededRiderDuty.ensureOnline(riderPage, testRiderPhone);
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
+        new LoginPage(customerPage).login(testCustomerPhone).openPortal(Portal.CUSTOMER);
         new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();
         new NearbyOutletPage(customerPage).openBrand1AndSelectNearby();
         CustomerMenuViewPage menu = new CustomerMenuViewPage(customerPage);

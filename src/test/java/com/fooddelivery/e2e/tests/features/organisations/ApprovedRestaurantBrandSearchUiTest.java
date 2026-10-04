@@ -1,5 +1,6 @@
 package com.fooddelivery.e2e.tests.features.organisations;
 
+import com.fooddelivery.e2e.pages.common.Portal;
 import com.fooddelivery.e2e.base.PartnerApplicationsUiTestBase;
 import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.common.LoginPage;
@@ -26,7 +27,7 @@ public class ApprovedRestaurantBrandSearchUiTest extends PartnerApplicationsUiTe
         String outlet = submittedName + " Outlet";
 
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
+        new LoginPage(customerPage).login(testCustomerPhone).openPortal(Portal.CUSTOMER);
         new CustomerDashboardPage(customerPage).waitForDashboard();
         var search = customerPage.getByRole(AriaRole.TEXTBOX,
                 new Page.GetByRoleOptions().setName("Search restaurants or cuisines").setExact(true));

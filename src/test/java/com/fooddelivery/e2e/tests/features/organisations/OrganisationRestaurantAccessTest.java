@@ -1,5 +1,6 @@
 package com.fooddelivery.e2e.tests.features.organisations;
 
+import com.fooddelivery.e2e.pages.common.Portal;
 import com.fooddelivery.e2e.base.TestBase;
 import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.common.LoginPage;
@@ -65,7 +66,7 @@ public class OrganisationRestaurantAccessTest extends TestBase {
 
         if(resume){login(customerPage,phone);}else{
             customerPage.navigate(TestConfig.APP_URL);
-            new LoginPage(customerPage).registerAs("Restaurant Partner",phone,"E2E O2 Staff","o2_"+phone+"@test.com");
+            new LoginPage(customerPage).login(phone, "E2E O2 Staff", "o2_"+phone+"@test.com").openOnboarding(Portal.RESTAURANT);
             var invited=GatewayApi.post(restaurantPage,orgPath+"/invitations",Map.of("phoneNumber",phone,"role","STAFF"));
             assertThat(invited.status()).isEqualTo(201);
             String invitation=(String)invited.object().get("id");manifest.put("invitationId",invitation);saveManifest(retained,manifest);
@@ -126,7 +127,7 @@ public class OrganisationRestaurantAccessTest extends TestBase {
         manifest.put("completed",true);saveManifest(retained,manifest);
         System.out.println("O2 staff permissions verified; retained membership fixture "+retained);
     }
-    private void login(Page page,String phone){page.navigate(TestConfig.APP_URL);new LoginPage(page).loginAs("Restaurant Partner",phone);}
+    private void login(Page page,String phone){page.navigate(TestConfig.APP_URL);new LoginPage(page).login(phone).openPortal(Portal.RESTAURANT);}
     private void assertStock(Page page,String outlet,String item,boolean available){
         page.waitForCondition(() -> listData(GatewayApi.get(page,"/api/v1/outlets/"+outlet+"/menu-overrides")).stream()
             .anyMatch(row -> item.equals(row.get("masterMenuItemId")) && Boolean.valueOf(available).equals(row.get("isAvailable"))),

@@ -1,5 +1,6 @@
 package com.fooddelivery.e2e.tests.flows;
 
+import com.fooddelivery.e2e.pages.common.Portal;
 import com.fooddelivery.e2e.base.TestBase;
 import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.common.LoginPage;
@@ -58,7 +59,7 @@ public class OrderReviewsFlowTest extends TestBase {
 
         // Customer: restaurant 4 with a comment, delivery partner 5, dishes left unrated (they stay open).
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
+        new LoginPage(customerPage).login(testCustomerPhone).openPortal(Portal.CUSTOMER);
         new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();
         CustomerDashboardPage.openProfileSettings(customerPage);
         customerPage.getByRole(AriaRole.TAB, new Page.GetByRoleOptions().setName("History").setExact(true)).click();
@@ -69,7 +70,7 @@ public class OrderReviewsFlowTest extends TestBase {
 
         // Restaurant: the customer 5, from the outlet's order history.
         restaurantPage.navigate(TestConfig.APP_URL);
-        new LoginPage(restaurantPage).loginAs("Restaurant Partner", testRestaurantPhone);
+        new LoginPage(restaurantPage).login(testRestaurantPhone).openPortal(Portal.RESTAURANT);
         RestaurantDashboardPage restaurant = new RestaurantDashboardPage(restaurantPage);
         restaurant.waitForDashboard();
         restaurant.selectOutlet(outlet);
@@ -82,7 +83,7 @@ public class OrderReviewsFlowTest extends TestBase {
 
         // Rider, off duty: the restaurant 4, from Completed Deliveries.
         riderPage.navigate(TestConfig.APP_URL);
-        new LoginPage(riderPage).loginAs("Delivery Executive", testRiderPhone);
+        new LoginPage(riderPage).login(testRiderPhone).openPortal(Portal.DELIVERY);
         new DeliveryDashboardPage(riderPage).waitForDashboard();
         org.assertj.core.api.Assertions.assertThat(new DeliveryOnlineTogglePage(riderPage).isOffline())
                 .as("the rider reviews from history while off duty; duty is not changed").isTrue();
@@ -112,7 +113,7 @@ public class OrderReviewsFlowTest extends TestBase {
                     .as("an ambiguous prior submission must be audited before another write").isNotEqualTo(true);
         }
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
+        new LoginPage(customerPage).login(testCustomerPhone).openPortal(Portal.CUSTOMER);
         new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();
         CustomerDashboardPage.openProfileSettings(customerPage);
         customerPage.getByRole(AriaRole.TAB, new Page.GetByRoleOptions().setName("History").setExact(true)).click();
@@ -226,7 +227,7 @@ public class OrderReviewsFlowTest extends TestBase {
         org.assertj.core.api.Assertions.assertThat(Files.exists(evidence))
                 .as("an attempted immutable review must be inspected, never repeated").isFalse();
         restaurantPage.navigate(TestConfig.APP_URL);
-        new LoginPage(restaurantPage).loginAs("Restaurant Partner", testRestaurantPhone);
+        new LoginPage(restaurantPage).login(testRestaurantPhone).openPortal(Portal.RESTAURANT);
         RestaurantDashboardPage restaurant = new RestaurantDashboardPage(restaurantPage);
         restaurant.waitForDashboard();
         restaurant.selectOutlet((String) actors.get("outlet"));
@@ -241,7 +242,7 @@ public class OrderReviewsFlowTest extends TestBase {
         Map<?, ?> driver = before.stream().filter(target -> "DRIVER".equals(target.get("entityType"))).findFirst().orElseThrow();
         org.assertj.core.api.Assertions.assertThat(driver.get("alreadyReviewed")).isEqualTo(false);
         riderPage.navigate(TestConfig.APP_URL);
-        new LoginPage(riderPage).loginAs("Delivery Executive", testRiderPhone);
+        new LoginPage(riderPage).login(testRiderPhone).openPortal(Portal.DELIVERY);
         new DeliveryDashboardPage(riderPage).waitForDashboard();
         org.assertj.core.api.Assertions.assertThat(new DeliveryOnlineTogglePage(riderPage).isOffline()).isTrue();
         String aggregatePath = "/api/v1/reviews/aggregate?entityType=DRIVER&entityId=" + driver.get("entityId");
@@ -277,7 +278,7 @@ public class OrderReviewsFlowTest extends TestBase {
 
     private Locator openCustomerHistoryTracker() {
         customerPage.navigate(TestConfig.APP_URL);
-        new LoginPage(customerPage).loginAs("Order Food", testCustomerPhone);
+        new LoginPage(customerPage).login(testCustomerPhone).openPortal(Portal.CUSTOMER);
         new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();
         CustomerDashboardPage.openProfileSettings(customerPage);
         customerPage.getByRole(AriaRole.TAB, new Page.GetByRoleOptions().setName("History").setExact(true)).click();
