@@ -36,8 +36,7 @@ public class OneLoginEntitlementsTest extends TestBase {
         BusinessPlatformFixture.fresh(customerPage, phone, "E2E O45 Customer");
         PortalLauncherPage launcher = new PortalLauncherPage(customerPage); launcher.open(); launcher.state(Portal.CUSTOMER, "Available");
         launcher.state(Portal.RESTAURANT, "Get started"); launcher.state(Portal.DELIVERY, "Get started");
-        launcher.state(Portal.ADMIN, "Unavailable");
-        assertThat(launcher.tile(Portal.ADMIN).getByRole(AriaRole.BUTTON)).hasCount(0); launcher.choose(Portal.CUSTOMER);
+        assertThat(launcher.tile(Portal.ADMIN)).hasCount(0); launcher.choose(Portal.CUSTOMER);
         assertThat(customerPage.getByRole(AriaRole.HEADING, new com.microsoft.playwright.Page.GetByRoleOptions().setName("Select Delivery Location").setExact(true))).isVisible();
     }
     @Test void pendingRiderSeesApplicationWithoutOperationalAccess() {
