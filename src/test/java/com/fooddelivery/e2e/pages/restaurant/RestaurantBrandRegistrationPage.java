@@ -34,7 +34,7 @@ public class RestaurantBrandRegistrationPage {
 
     public void submitNewApplication(String brandName, String phone) {
         waitForWizard();
-        fillBusinessDetails(brandName);
+        fillBusinessDetails(brandName, phone);
         saveBusinessDetails();
         fillOutletDetails(brandName, phone);
         uploadRequiredDocuments();
@@ -76,10 +76,15 @@ public class RestaurantBrandRegistrationPage {
         field("Brand name").fill(name);
     }
 
-    private void fillBusinessDetails(String brandName) {
+    private void fillBusinessDetails(String brandName, String phone) {
         fillBrandName(brandName);
-        field("GSTIN").fill("29ABCDE1234F1Z5");
-        field("PAN").fill("ABCDE1234F");
+        // Encode all phone digits injectively, without a DB lookup or reused seeded tax ID.
+        int prefix = Integer.parseInt(phone.substring(0, 6));
+        char[] letters = new char[5];
+        for (int i = 4; i >= 0; i--) { letters[i] = (char) ('A' + prefix % 26); prefix /= 26; }
+        String pan = new String(letters, 0, 3) + "C" + letters[3] + phone.substring(6) + letters[4];
+        field("GSTIN").fill("29" + pan + "1Z5");
+        field("PAN").fill(pan);
         field("Bank account number").fill("1234567890");
         field("IFSC code").fill("HDFC0001234");
     }
