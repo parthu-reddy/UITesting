@@ -1,0 +1,9 @@
+# Reopened O3 UI scope — 2026-10-04T16:11:29.048510+05:30
+
+## 2026-10-04T16:11:29.048510+05:30 — Reopened search/component cleanup; local gates in progress
+
+Owner explicitly includes legacy brand search and all eleven components above the existing 300-line rule. The local UI now searches brand/outlet/cuisine with trimmed case-insensitive input; all eleven component files are below the unchanged threshold through cohesive extraction. Existing confirmation handlers remain at their action owners. Brand regression reproduces the original gap (4 passed/1 failed), then passes 6/6 after correction. An initial full local run passed854/855; the one failing new clear-filters assertion awaited an already-visible brand before the debounce completed. That assertion now awaits the other restored card; both results are retained. Typecheck, lint, Vite build and181-source E2E compile pass. Full suite and full redesign validator are running. No new publication/deployment/E2E yet; Oracle still serves b5ab30e.
+
+New read-only ApprovedRestaurantBrandSearchUiTest and runner reuse the retained approved invocation8 applicant through normal customer login/Dev Autofill, visible brand query, card navigation and outlet query. No API/DB/Redis/SSH/browser-state fixture setup or cleanup. The original failed invocation8 and targeted9 acceptance remain historical proof. O4 foundation code is local/unpublished; O4/O5/W1–W3/A1–A4 are unfinished. Next: complete gates, publish UI through existing GitHub workflow, deploy only published UI and required config checks, then run the retained fixture search gate. No further Cloudflare action is required.
+
+Canonical source/extraction evidence: RandomDocuments/BusinessPlatform_2026-10-03/01_Organisations/Phase3_PartnerApplications/evidence/70-ui-scope-and-extractions.json. Previous accepted scope: [checkpoint69](69-o3-current-scope-accepted.md).

@@ -1,0 +1,62 @@
+{
+  "invocation": 12,
+  "sourceCommit": "95be22e",
+  "phase": "O3",
+  "classification": "sandbox-browser-startup-failure; no product journey executed",
+  "results": [
+    {
+      "name": "com.fooddelivery.e2e.tests.features.organisations.AdminPartnerApprovalsUiTest",
+      "tests": "1",
+      "failures": "0",
+      "errors": "1",
+      "skipped": "0",
+      "time": "0.764"
+    },
+    {
+      "name": "com.fooddelivery.e2e.tests.features.organisations.DeliveryApplicationApiTest",
+      "tests": "1",
+      "failures": "0",
+      "errors": "1",
+      "skipped": "0",
+      "time": "2.903"
+    },
+    {
+      "name": "com.fooddelivery.e2e.tests.features.organisations.RestaurantApplicationApiTest",
+      "tests": "1",
+      "failures": "0",
+      "errors": "1",
+      "skipped": "0",
+      "time": "0.746"
+    },
+    {
+      "name": "com.fooddelivery.e2e.tests.features.organisations.UnapprovedOutletHiddenTest",
+      "tests": "1",
+      "failures": "0",
+      "errors": "1",
+      "skipped": "0",
+      "time": "0.76"
+    }
+  ],
+  "manifest": {
+    "runId": "57ae506b1f8de74e",
+    "appUrl": "https://gulf-strike-dark-extras.trycloudflare.com",
+    "selectedCases": [
+      "restaurant",
+      "delivery",
+      "admin",
+      "hidden"
+    ],
+    "phoneCandidates": {
+      "restaurant.lifecycle": "9999535047",
+      "delivery.lifecycle": "7999893849",
+      "restaurant.admin": "9999326014",
+      "delivery.admin": "7999733370"
+    },
+    "allocationPolicy": "local-random-candidates-only; no server lookup",
+    "dataPolicy": "retain",
+    "cleanupPerformed": false,
+    "externalDatabaseOrRedisAccess": false,
+    "exitCode": 1
+  },
+  "publishedUiCommit": "d79c33ae644b2924112332a6bba48e0c143272da"
+}

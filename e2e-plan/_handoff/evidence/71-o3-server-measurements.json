@@ -1,0 +1,89 @@
+{
+  "observedAt": "2026-10-04T11:09:03.513268+00:00",
+  "method": "deployed cumulative server histograms; interpolated p95 and enclosing bucket",
+  "proof": "protected telemetry only; public Gateway E2E recorded separately",
+  "results": [
+    {
+      "service": "restaurant-service",
+      "uri": "/api/v1/internal/admin/restaurant-applications",
+      "successfulSamples": 33,
+      "p95EstimateMs": 13.072245349999996,
+      "p95BucketUpperMs": 13.981011,
+      "meanMs": 6.524583272727273
+    },
+    {
+      "service": "restaurant-service",
+      "uri": "/api/v1/restaurant-onboarding/organisations/{organisationId}/application",
+      "successfulSamples": 55,
+      "p95EstimateMs": 72.70126925000001,
+      "p95BucketUpperMs": 89.47848499999999,
+      "meanMs": 30.578091527272726
+    },
+    {
+      "service": "delivery-service",
+      "uri": "/api/v1/internal/admin/delivery-applications",
+      "successfulSamples": 18,
+      "p95EstimateMs": 114.08506809999994,
+      "p95BucketUpperMs": 134.217727,
+      "meanMs": 14.898831777777778
+    },
+    {
+      "service": "delivery-service",
+      "uri": "/api/v1/delivery-onboarding/application",
+      "successfulSamples": 61,
+      "p95EstimateMs": 64.2427549,
+      "p95BucketUpperMs": 67.10886400000001,
+      "meanMs": 33.2051598852459
+    }
+  ],
+  "circuitBreakers": {
+    "restaurant-service": [
+      {
+        "name": "OrganisationServiceClientgetMembersUUIDOrganisationPermission",
+        "kind": "failed",
+        "calls": 0
+      },
+      {
+        "name": "OrganisationServiceClientgetMembersUUIDOrganisationPermission",
+        "kind": "ignored",
+        "calls": 0
+      },
+      {
+        "name": "OrganisationServiceClientgetMembersUUIDOrganisationPermission",
+        "kind": "successful",
+        "calls": 11
+      },
+      {
+        "name": "OrganisationServiceClientgetMembershipUUIDUUID",
+        "kind": "failed",
+        "calls": 0
+      },
+      {
+        "name": "OrganisationServiceClientgetMembershipUUIDUUID",
+        "kind": "ignored",
+        "calls": 0
+      },
+      {
+        "name": "OrganisationServiceClientgetMembershipUUIDUUID",
+        "kind": "successful",
+        "calls": 91
+      },
+      {
+        "name": "OrganisationServiceClientgetUserOrganisationsUUID",
+        "kind": "failed",
+        "calls": 0
+      },
+      {
+        "name": "OrganisationServiceClientgetUserOrganisationsUUID",
+        "kind": "ignored",
+        "calls": 0
+      },
+      {
+        "name": "OrganisationServiceClientgetUserOrganisationsUUID",
+        "kind": "successful",
+        "calls": 36
+      }
+    ],
+    "delivery-service": []
+  }
+}

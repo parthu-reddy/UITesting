@@ -1,0 +1,16 @@
+{
+  "recordedAt": "2026-10-04T16:26:14.941308+05:30",
+  "invocation": 10,
+  "source": "29e9dff",
+  "deployedUi": "d79c33ae644b2924112332a6bba48e0c143272da",
+  "proofType": "visible deployed UI only; retained applicant; traversal proof before strengthened settled-count assertions",
+  "tests": 1,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "exitCode": 0,
+  "brandSearchAcceptance": "pending stronger debounce proof",
+  "expectedBackgroundResponse": "HTTP409 delivery-availability for retained empty catalog; no menu/order eligibility claim",
+  "dataPolicy": "retain",
+  "cleanupPerformed": false
+}

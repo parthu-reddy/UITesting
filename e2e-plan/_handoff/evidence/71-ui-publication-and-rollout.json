@@ -1,0 +1,25 @@
+{
+  "recordedAt": "2026-10-04T16:21:49.510369+05:30",
+  "workflowRun": 37196297954,
+  "uiCommit": "d79c33ae644b2924112332a6bba48e0c143272da",
+  "imageIndexDigest": "sha256:19dcafccf4d9c9b1b2e639d19cbde0d2f77696558d67f8ac544b5d75fc032f7c",
+  "ciResultLines": [
+    " Test Files  134 passed (134)",
+    "      Tests  856 passed (856)",
+    "\u2713 built in 7.99s",
+    "#10 exporting manifest list sha256:19dcafccf4d9c9b1b2e639d19cbde0d2f77696558d67f8ac544b5d75fc032f7c done"
+  ],
+  "deployExitCode": 0,
+  "configAndReleaseGates": {
+    "devOverlay": "exact-match no-op; no backend restarts",
+    "hardening": {
+      "pass": 15,
+      "fail": 0
+    },
+    "reconcile": {
+      "services": 29,
+      "drift": 0
+    },
+    "postJourneyAudit": "71-oracle-post-invocation13-summary.json"
+  }
+}

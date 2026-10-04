@@ -137,3 +137,16 @@ Delivery lifecycle, private admin review/decisions and hidden-listing methods pa
 | restaurantApplicationLifecycle | 9 | Rejection/reason/edit/resubmit/approval, consistent summary, exact renamed-brand card via saved-outlet search and owned storefront |
 
 Invocation8 remains3passed/1error/0skips; targeted9 is1passed/0errors/0skips. Legacy brand-name search is O3-UI-006 failed/deferred, not passed. No order/menu placement claim.
+
+## O3-UI-006 reopened
+
+Retained approved applicant: normal customer Dev login, a case-insensitive trimmed renamed-brand query, exact brand card, owned outlet heading, visible Back to restaurants, and saved-outlet query. Runner: scripts/run_approved_brand_search_ui.py with the original local invocation8 allocation. Read-only; no new applicant, cleanup, state injection or infrastructure access. Pending actual published Oracle proof.
+
+## 2026-10-04T16:42:23.916935+05:30 — Current O3 UI proof
+
+| Scenario | Current deployed proof |
+|---|---|
+| Four mandatory O3 journeys | Invocation13:4/4,0failures/errors/skips, UI d79c33a |
+| O3-UI-006 brand and outlet alias search | Invocation11:1/1; exact card, settled1nearby count, owned outlet |
+
+No new unique coverage is inferred from repeated invocation counts. Original invocation8 failure is retained; invocation12 is a sandbox browser-startup failure. Fixture manifests11 and13 are retained in _handoff/fixtures.

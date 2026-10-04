@@ -1,0 +1,23 @@
+{
+  "recordedAt": "2026-10-04T16:28:38.166127+05:30",
+  "invocation": 11,
+  "source": "8226e8ebeebf9a4380d594f5c0ac5ea012e9cc5b",
+  "deployedUi": "d79c33ae644b2924112332a6bba48e0c143272da",
+  "proofType": "visible deployed UI only; waits for diverse loaded feed then one filtered result for both queries",
+  "tests": 1,
+  "passed": 1,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "exitCode": 0,
+  "assertions": [
+    "loaded feed has multiple nearby restaurants",
+    "trimmed uppercase renamed-brand query yields exactly one result",
+    "exact renamed brand card opens exact retained outlet heading",
+    "visible Back to restaurants restores diverse feed",
+    "saved-outlet query again yields exactly one renamed-brand result"
+  ],
+  "dataPolicy": "retain",
+  "cleanupPerformed": false,
+  "expectedBackgroundResponse": "HTTP409 delivery-availability for retained empty catalog; no menu/order eligibility claim"
+}

@@ -1,0 +1,1 @@
+<testsuite name="com.fooddelivery.e2e.tests.features.organisations.RestaurantApplicationApiTest" tests="1" failures="0" errors="0" skipped="0" time="52.782"><testcase name="restaurantApplicationLifecycle" classname="com.fooddelivery.e2e.tests.features.organisations.RestaurantApplicationApiTest" time="52.247" /></testsuite>

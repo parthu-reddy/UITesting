@@ -1,5 +1,23 @@
 # Current checkpoint
 
+## 2026-10-04T16:42:23.916935+05:30 — O3 current-image UI gate passes; continue O4
+
+UI **d79c33ae644b2924112332a6bba48e0c143272da** was published through GitHub workflow37196297954, then deployed to Oracle with exact digest **19dcafccf4d9c9b1b2e639d19cbde0d2f77696558d67f8ac544b5d75fc032f7c**. Local and CI checks pass856/856 across134 files, lint/typecheck/build pass, and the unchanged full redesign gate passes13/13. All eleven previously flagged components now comply with the existing300-line rule; no exceptions were added. O3 source validator passes19/19.
+
+Current-image four-method UI invocation13 passed4/4, no failures/errors/skips: restaurant rejection/resubmission/approval/discovery, rider application/approval/online-offline, private admin review/decisions, and hidden pending/rejected outlets. The independent retained-fixture search invocation11 passed1/1 for both trimmed case-insensitive brand and saved-outlet queries, waiting for the visible feed to settle to one result before clicking the exact card and owned outlet. O3-UI-006 and the component-size deferral are resolved. Invocation10 is traversal-only; invocation12 failed Chromium startup before reaching the application. All original failures and fixtures remain retained.
+
+Post-journey operator verification:29running,26healthy checks,3without checks, zero image drift, automatic restarts or new/recent errors; the four historical infrastructure records are unchanged. Only UI restarted. Dev overlays were exact-match no-op; hardening15/15 and reconciliation29/0 pass. Updated protected server histograms remain separate from UI E2E and use small cumulative samples, not production load. Fresh-profile/empty-catalog/availability404/409 UI responses remain recorded; this is no menu/order-eligibility claim.
+
+O4 is in progress locally and unpublished: eight real H2 entitlement transaction tests and24 organisation tests pass. Authentication, gateway, UI/harness and seed work remain. O5, W1–W3 and A1–A4 are unfinished. UI-only/wait/rate/SSE deferrals and production-provider/load gaps remain explicit. No new wipe/reseed or further Cloudflare action. Earlier dated entries below are history.
+
+[Checkpoint71](checkpoints/71-current-ui-regression-closure.md).
+
+## 2026-10-04T16:11:29.048510+05:30 — Reopened search/component cleanup; local gates in progress
+
+Owner explicitly includes legacy brand search and all eleven components above the existing 300-line rule. The local UI now searches brand/outlet/cuisine with trimmed case-insensitive input; all eleven component files are below the unchanged threshold through cohesive extraction. Existing confirmation handlers remain at their action owners. Brand regression reproduces the original gap (4 passed/1 failed), then passes 6/6 after correction. An initial full local run passed854/855; the one failing new clear-filters assertion awaited an already-visible brand before the debounce completed. That assertion now awaits the other restored card; both results are retained. Typecheck, lint, Vite build and181-source E2E compile pass. Full suite and full redesign validator are running. No new publication/deployment/E2E yet; Oracle still serves b5ab30e.
+
+New read-only ApprovedRestaurantBrandSearchUiTest and runner reuse the retained approved invocation8 applicant through normal customer login/Dev Autofill, visible brand query, card navigation and outlet query. No API/DB/Redis/SSH/browser-state fixture setup or cleanup. The original failed invocation8 and targeted9 acceptance remain historical proof. O4 foundation code is local/unpublished; O4/O5/W1–W3/A1–A4 are unfinished. Next: complete gates, publish UI through existing GitHub workflow, deploy only published UI and required config checks, then run the retained fixture search gate. No further Cloudflare action is required.
+
 ## 2026-10-04T14:26:25.838614+05:30 — O3 current scope accepted with explicit deferrals
 
 O3 is complete within the current owner scope, with explicit deferrals. UI b5ab30e was published through GitHub and deployed to Oracle. Delivery, admin review and hidden-listing methods passed in invocation 8; the restaurant method passed its targeted invocation 9 (1 test, 1 passed, no failures/errors/skips). All four required methods therefore have passing proof on this same image. Invocation 8 remains 3 passed / 1 error; its original failure is retained. This is not a new full-green invocation. CI passed 852/852 tests; actual private browser upload, completion, admin viewing and decisions passed. Final source validator: 19 PASS / 0 FAIL / 0 STALE.

@@ -1,0 +1,218 @@
+{
+  "recordedAt": "2026-10-04T16:17:41.581786+05:30",
+  "proofType": "local source/refactoring and rendered Vitest only",
+  "componentRule": "existing ui_scan .tsx exclusions; newline count plus one; threshold 300 unchanged",
+  "originalComponents": [
+    {
+      "path": "src/features/admin-ops/components/AdminManualInterventions.tsx",
+      "beforeLines": 419,
+      "afterLines": 284
+    },
+    {
+      "path": "src/features/admin-ops/components/AdminSupportTickets.tsx",
+      "beforeLines": 335,
+      "afterLines": 262
+    },
+    {
+      "path": "src/features/admin-ops/components/AdminUserManagement.tsx",
+      "beforeLines": 304,
+      "afterLines": 262
+    },
+    {
+      "path": "src/features/campaigns-ads/components/CampaignManagement.tsx",
+      "beforeLines": 307,
+      "afterLines": 257
+    },
+    {
+      "path": "src/features/communication/components/ChatWidget.tsx",
+      "beforeLines": 329,
+      "afterLines": 251
+    },
+    {
+      "path": "src/features/maps-tracking/components/AdminFleetMap.tsx",
+      "beforeLines": 387,
+      "afterLines": 222
+    },
+    {
+      "path": "src/features/reviews/components/RateOrderModal.tsx",
+      "beforeLines": 351,
+      "afterLines": 295
+    },
+    {
+      "path": "src/pages/admin/money/OperationsPage.tsx",
+      "beforeLines": 372,
+      "afterLines": 298
+    },
+    {
+      "path": "src/pages/admin/money/PayoutDetail.tsx",
+      "beforeLines": 301,
+      "afterLines": 276
+    },
+    {
+      "path": "src/pages/customer/CustomerDashboard.tsx",
+      "beforeLines": 319,
+      "afterLines": 298
+    },
+    {
+      "path": "src/pages/delivery/DeliveryDashboard.tsx",
+      "beforeLines": 312,
+      "afterLines": 265
+    }
+  ],
+  "remainingOversizedComponents": [],
+  "newLineCountExceptions": 0,
+  "extractionRanges": [
+    {
+      "start": "const {\n    data: driversList,",
+      "end": "const hasCurrentDriverCandidates",
+      "lines": 36,
+      "sha256": "7dc08956f70ed4da3acf0dd089112e397704ca7af190618eaddac477974450f2"
+    },
+    {
+      "start": "<Surface\n        variant=\"sunken\"",
+      "end": "{/* Intervention Detail View */}",
+      "lines": 71,
+      "sha256": "4741b8dfff03cbf570b712ed519c59e0d8f5f43936ebf73e0c80c712b31acb5a"
+    },
+    {
+      "start": "<Surface\n            radius=\"lg\"",
+      "end": "{/* Detail View */}",
+      "lines": 78,
+      "sha256": "8b1ef0dc51c28e2165296da47e940b67b7d910769e8c075431f2f72a458ea50f"
+    },
+    {
+      "start": "<Surface elevation={2} radius=\"xl\"",
+      "end": "<AdminUserDetailPanel",
+      "lines": 70,
+      "sha256": "170b1e55335e27e2eebdd71e86b797b2f51a769991eac1dc2c73ac929e377166"
+    },
+    {
+      "start": "const paymentLeftContent = (",
+      "end": "return (\n    <div className=\"p-5",
+      "lines": 14,
+      "sha256": "b97d48343734bcb21ab3d960e52e04d79fd615528acf3383823af63887c8afba"
+    },
+    {
+      "start": "<Modal open={showAmountModal}",
+      "end": "</div>\n  );\n}",
+      "lines": 41,
+      "sha256": "e28b6ebc3c5a1b914b1ce827265b88045a626f3b334491108766c644b115da1b"
+    },
+    {
+      "start": "<form\n        data-testid=\"chat-composer\"",
+      "end": "{/* Refund Request Modal */}",
+      "lines": 88,
+      "sha256": "08b930c75c02a058ce79d27c42e7c3910774bb30fe3b96f4cc47b74e4f5d5743"
+    },
+    {
+      "start": "useEffect(() => {\n    if (!selectedInterventionId)",
+      "end": "// A force-assignment candidate",
+      "lines": 39,
+      "sha256": "9eed75b3b889d82a8a22d45e7fa2985e629fe4dfa1b7481b89072ffb40c35589"
+    },
+    {
+      "start": "type PendingManualAssignment = {",
+      "end": "const MANUAL_ASSIGNMENT_FAILURE_MESSAGES",
+      "lines": 5,
+      "sha256": "38010a214b64ca8c45c6edc42fea87e5bc81a905e2432459b7ee21d9fab12961"
+    },
+    {
+      "start": "import { z }",
+      "end": "export default function AdminFleetMap()",
+      "lines": 26,
+      "sha256": "612ca2e5b069b970abb916b5f16648249e5dd3d531c3718de553354baa9780a0"
+    },
+    {
+      "start": "// The markers are re-placed whenever",
+      "end": "return (\n <Surface radius=\"md\"",
+      "lines": 143,
+      "sha256": "d0d353e08c82075185e735c0bf7797c013d6ddfd2e82c77b97405c1c7582ad6c"
+    },
+    {
+      "start": "function targetKey(target:",
+      "end": "function TargetIdentity",
+      "lines": 10,
+      "sha256": "37a7ee47a5fa1fc37b1db1f07c52ac2169477d61cc4b1ce8d244350ebac66002"
+    },
+    {
+      "start": "function TargetIdentity",
+      "end": "/**\n * The rating sheet",
+      "lines": 26,
+      "sha256": "a0aa8f0857c0c74acd8009f5f27b3c9205eb0d128cedadd3e248b2f24c1344c3"
+    },
+    {
+      "start": "{submitted.length > 0 && (",
+      "end": "{pending.length === 0 ? (",
+      "lines": 24,
+      "sha256": "1de75cd3a1ae24dc68efb0c10185ce40829ff7255f0b040d5971383bb851981f"
+    },
+    {
+      "start": "{!loading && activeTab === 'reconciliation'",
+      "end": "{!loading && activeTab === 'failed_refunds'",
+      "lines": 21,
+      "sha256": "ec92edcbc7cbee968b8b098a8cda38cacff13d1404d4f0a1e17548b7b39a8f80"
+    },
+    {
+      "start": "{!loading && activeTab === 'payment_dlq'",
+      "end": "</div>\n  );\n}",
+      "lines": 57,
+      "sha256": "628b720df45b48e0fb1ddee2ec988e6e078b519ef03325d2579907244d9bb9f1"
+    },
+    {
+      "start": "{payout.beneficiary && (",
+      "end": "<PayoutLinesPanel",
+      "lines": 28,
+      "sha256": "a23610b7521ca2bd061e2a1526e3fa562fd2b3287663a38638b88ea654983a79"
+    },
+    {
+      "start": "<CompleteProfileModal",
+      "end": "<CustomerModalStack",
+      "lines": 26,
+      "sha256": "8e23ebe8f5603ce97f6bfeda0cf1467a7613297f8a02876ed9d8bad9ad634200"
+    },
+    {
+      "start": "{/* No mode=\"wait\"",
+      "end": "<AnimatePresence>\n            {pingJob",
+      "lines": 54,
+      "sha256": "26c32fb8ced0d5294c420a1176362493803fb4531a0fb7c9e2fd8fd335f1c204"
+    }
+  ],
+  "brandRed": {
+    "tests": 5,
+    "passed": 4,
+    "failed": 1
+  },
+  "brandGreen": {
+    "tests": 6,
+    "passed": 6,
+    "failed": 0
+  },
+  "toolchain": {
+    "typecheck": "pass",
+    "lint": "pass",
+    "viteBuild": "pass",
+    "fullTestSuite": {
+      "tests": 856,
+      "passed": 856,
+      "failures": 0,
+      "pending": 0,
+      "files": 134,
+      "exitCode": 0
+    },
+    "fullRedesignValidator": {
+      "pass": 13,
+      "fail": 0,
+      "exitCode": 0
+    },
+    "e2eTestCompile": "181 source files pass; no E2E executed"
+  },
+  "published": false,
+  "deployed": false,
+  "liveUiCommit": "b5ab30e4499bc546e45b8159210877fb8b224d69",
+  "committedUi": "d79c33ae644b2924112332a6bba48e0c143272da",
+  "publication": {
+    "status": "running",
+    "runId": 37196297954
+  },
+  "e2eSource": "29e9dff"
+}

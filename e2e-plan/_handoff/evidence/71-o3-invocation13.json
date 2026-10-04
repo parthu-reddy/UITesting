@@ -1,0 +1,95 @@
+{
+  "invocation": 13,
+  "proofType": "deployed public UI-only browser journeys",
+  "sourceCommit": "95be22e",
+  "publishedUiCommit": "d79c33ae644b2924112332a6bba48e0c143272da",
+  "oracleUiDigest": "sha256:19dcafccf4d9c9b1b2e639d19cbde0d2f77696558d67f8ac544b5d75fc032f7c",
+  "tests": 4,
+  "passed": 4,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "suites": [
+    {
+      "name": "com.fooddelivery.e2e.tests.features.organisations.RestaurantApplicationApiTest",
+      "tests": "1",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "52.782",
+      "methods": [
+        "restaurantApplicationLifecycle"
+      ]
+    },
+    {
+      "name": "com.fooddelivery.e2e.tests.features.organisations.DeliveryApplicationApiTest",
+      "tests": "1",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "34.077",
+      "methods": [
+        "deliveryApplicationLifecycle"
+      ]
+    },
+    {
+      "name": "com.fooddelivery.e2e.tests.features.organisations.AdminPartnerApprovalsUiTest",
+      "tests": "1",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "47.806",
+      "methods": [
+        "privateReviewAndDecisions"
+      ]
+    },
+    {
+      "name": "com.fooddelivery.e2e.tests.features.organisations.UnapprovedOutletHiddenTest",
+      "tests": "1",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "15.243",
+      "methods": [
+        "pendingAndRejectedOutletsAreNotDiscoverableThroughTheCustomerUI"
+      ]
+    }
+  ],
+  "fixtureManifest": {
+    "runId": "973e2926e2fab76d",
+    "appUrl": "https://gulf-strike-dark-extras.trycloudflare.com",
+    "selectedCases": [
+      "restaurant",
+      "delivery",
+      "admin",
+      "hidden"
+    ],
+    "phoneCandidates": {
+      "restaurant.lifecycle": "9999274442",
+      "delivery.lifecycle": "7999392895",
+      "restaurant.admin": "9999458420",
+      "delivery.admin": "7999680894"
+    },
+    "allocationPolicy": "local-random-candidates-only; no server lookup",
+    "dataPolicy": "retain",
+    "cleanupPerformed": false,
+    "externalDatabaseOrRedisAccess": false,
+    "exitCode": 0
+  },
+  "passiveUiNetworkObservations": [
+    "[BROWSER NETWORK ERROR] 404 GET https://gulf-strike-dark-extras.trycloudflare.com/api/delivery/verification/status",
+    "[BROWSER NETWORK ERROR] 404 GET https://gulf-strike-dark-extras.trycloudflare.com/api/delivery/profile?[redacted]",
+    "[BROWSER NETWORK ERROR] 404 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/restaurants/84b5e955-52d7-49ab-9668-a5e2fa37fd47/catalog/items",
+    "[BROWSER NETWORK ERROR] 404 GET https://gulf-strike-dark-extras.trycloudflare.com/api/delivery/verification/status",
+    "[BROWSER NETWORK ERROR] 404 GET https://gulf-strike-dark-extras.trycloudflare.com/api/delivery/profile?[redacted]",
+    "[BROWSER NETWORK ERROR] 404 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/restaurants/84b5e955-52d7-49ab-9668-a5e2fa37fd47/catalog/items",
+    "[BROWSER NETWORK ERROR] 404 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/restaurants/07108c76-dad7-4b91-bb6a-420344866336/catalog/items",
+    "[BROWSER NETWORK ERROR] 404 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/restaurants/07108c76-dad7-4b91-bb6a-420344866336/catalog/items",
+    "[BROWSER NETWORK ERROR] 404 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/restaurants/07108c76-dad7-4b91-bb6a-420344866336/catalog/items",
+    "[BROWSER NETWORK ERROR] 404 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/restaurants/07108c76-dad7-4b91-bb6a-420344866336/catalog/items",
+    "[BROWSER NETWORK ERROR] 409 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/restaurants/07108c76-dad7-4b91-bb6a-420344866336/delivery-availability"
+  ],
+  "observationLimits": "Fresh applicants initially return 404 for absent profile/verification; empty new restaurant catalogs return 404 and delivery availability 409. These are visible UI responses, not failed assertions or menu/order eligibility proof.",
+  "cleanupPerformed": false,
+  "externalDatabaseOrRedisAccess": false
+}

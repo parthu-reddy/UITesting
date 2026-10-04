@@ -177,3 +177,7 @@ The owner's current Business Platform task permits required commits/pushes, GitH
 ## 2026-10-04T10:23:56.486302+05:30 — Current continuation and required sign-in
 
 Owner says continue and finish the current work. Standing task-specific commits/pushes, GitHub publication and Oracle Dev deployment authorisation remains active; do not re-request those permissions. No local Docker, direct API/DB/Redis or state injection in E2E; old-code/300-line cleanup stays deferred. The live bucket-administration attempt returned403; the browser is at Cloudflare sign-in and a user sign-in question is pending. No bucket policy changed and no replacement credentials were created. Continue after actual access is available; do not treat elapsed time as an answer or invent an E2E pass.
+
+## 2026-10-04T16:11:29.048510+05:30 — Legacy scope explicitly reopened
+
+Direct owner answer: "Include legacy search and 300-line cleanup." This supersedes the earlier no-old-code and component cleanup exclusions for these two items. Existing task commits/pushes, GitHub publication before Oracle Dev deployment remain authorized. All E2E stays visible UI only; no local Docker or external database test fixtures. Other wait/rate/UI-only deferrals retain their recorded scope. Record dated decisions beside the Business Platform plan.

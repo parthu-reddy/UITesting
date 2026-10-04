@@ -1,0 +1,1 @@
+<testsuite name="com.fooddelivery.e2e.tests.features.organisations.UnapprovedOutletHiddenTest" tests="1" failures="0" errors="0" skipped="0" time="15.243"><testcase name="pendingAndRejectedOutletsAreNotDiscoverableThroughTheCustomerUI" classname="com.fooddelivery.e2e.tests.features.organisations.UnapprovedOutletHiddenTest" time="14.718" /></testsuite>

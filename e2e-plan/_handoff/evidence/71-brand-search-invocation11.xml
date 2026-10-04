@@ -1,0 +1,2 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite name="com.fooddelivery.e2e.tests.features.organisations.ApprovedRestaurantBrandSearchUiTest" time="11.528" tests="1" errors="0" skipped="0" failures="0"><testcase name="findsRenamedBrandAndKeepsOutletSearch" classname="com.fooddelivery.e2e.tests.features.organisations.ApprovedRestaurantBrandSearchUiTest" time="8.993" /></testsuite>

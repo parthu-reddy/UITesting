@@ -1,0 +1,17 @@
+{
+  "runId": "0a5851b32d6b9ca7",
+  "appUrl": "https://gulf-strike-dark-extras.trycloudflare.com",
+  "selectedCases": [
+    "brand-search"
+  ],
+  "selectedMethod": "ApprovedRestaurantBrandSearchUiTest#findsRenamedBrandAndKeepsOutletSearch",
+  "fixtureSource": "e2e-plan/_handoff/fixtures/o3-invocation8-allocation.json",
+  "phoneCandidates": {
+    "restaurant.search": "9999590109"
+  },
+  "dataPolicy": "retain",
+  "allocationPolicy": "reuse previously approved local owned fixture; no server lookup",
+  "cleanupPerformed": false,
+  "externalDatabaseOrRedisAccess": false,
+  "exitCode": 0
+}
