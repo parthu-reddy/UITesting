@@ -190,108 +190,28 @@ public class CustomerSettingsUiTest extends TestBase {
     @Test
     @DisplayName("REVIEW-01/06: Eligible targets render and an unrated review cannot be submitted")
     void deliveredOrderReviewRequiresAtLeastOneRating() {
-        String orderId = "d0000000-0000-4000-8000-000000000001";
+        String orderId = System.getProperty("settings.review.order.id", "").trim();
+        org.assertj.core.api.Assertions.assertThat(orderId).as("Reuse the owned canonical delivered order").matches("[a-f0-9-]{36}");
         AtomicInteger submissionAttempts = new AtomicInteger();
-
-        // Provide an isolated delivered-history row so this test is independent of mutable shared
-        // order fixtures. The real deployed UI and authentication still run; only fixture reads
-        // and the review-write endpoint are intercepted.
-        String historyResponse = """
-                {
-                  "success": true,
-                  "message": "ok",
-                  "data": {
-                    "content": [{
-                      "id": "%s",
-                      "customerId": "d0000000-0000-4000-8000-000000000002",
-                      "restaurantId": "d0000000-0000-4000-8000-000000000003",
-                      "restaurantName": "E2E Review Fixture Outlet",
-                      "status": "HANDED_OVER",
-                      "deliveryStatus": "DELIVERED",
-                      "totalAmount": 100.0,
-                      "itemTotal": 80.0,
-                      "customerPlatformFee": 5.0,
-                      "sgst": 1.0,
-                      "cgst": 1.0,
-                      "deliveryFee": 13.0,
-                      "deliveryAddress": "E2E Fixture Address",
-                      "items": [{
-                        "id": "d0000000-0000-4000-8000-000000000004",
-                        "menuItemId": "d0000000-0000-4000-8000-000000000005",
-                        "name": "E2E Review Fixture Dish",
-                        "quantity": 1,
-                        "price": 80.0
-                      }],
-                      "createdAt": "2026-09-28T10:00:00Z"
-                    }],
-                    "totalElements": 1,
-                    "totalPages": 1,
-                    "last": true,
-                    "size": 10,
-                    "number": 0,
-                    "first": true,
-                    "numberOfElements": 1,
-                    "empty": false
-                  },
-                  "timestamp": "2026-09-28T10:00:00Z"
-                }
-                """.formatted(orderId);
-        String eligibilityResponse = """
-                {
-                  "success": true,
-                  "message": "ok",
-                  "data": {
-                    "orderId": "%s",
-                    "reviewable": true,
-                    "windowClosesAt": "2026-10-12T10:00:00Z",
-                    "targets": [
-                      {"entityType":"RESTAURANT","entityId":"d0000000-0000-4000-8000-000000000003","displayName":"E2E Review Fixture Outlet","visibility":"PUBLIC","alreadyReviewed":false},
-                      {"entityType":"DRIVER","entityId":"d0000000-0000-4000-8000-000000000006","displayName":"Delivery partner","visibility":"PRIVATE","alreadyReviewed":false},
-                      {"entityType":"PRODUCT","entityId":"d0000000-0000-4000-8000-000000000005","displayName":"E2E Review Fixture Dish","visibility":"PUBLIC","alreadyReviewed":false}
-                    ]
-                  },
-                  "timestamp": "2026-09-28T10:00:00Z"
-                }
-                """.formatted(orderId);
-
-        customerPage.route("**/api/v1/orders/history**", route -> route.fulfill(
-                new Route.FulfillOptions().setStatus(200).setContentType("application/json")
-                        .setBody(historyResponse)));
-        customerPage.route("**/api/v1/reviews/orders/" + orderId + "/eligibility**", route -> route.fulfill(
-                new Route.FulfillOptions().setStatus(200).setContentType("application/json")
-                        .setBody(eligibilityResponse)));
-        customerPage.route(java.util.regex.Pattern.compile(".*/api/v1/reviews(?:\\?.*)?$"), route -> {
-            if ("POST".equals(route.request().method())) {
-                submissionAttempts.incrementAndGet();
-                route.fulfill(new Route.FulfillOptions().setStatus(409).setContentType("application/json")
-                        .setBody("{\"success\":false,\"message\":\"test write blocked\"}"));
-            } else {
-                route.resume();
-            }
+        customerPage.onRequest(request -> {
+            if (request.method().equals("POST") && java.net.URI.create(request.url()).getPath().equals("/api/v1/reviews")) submissionAttempts.incrementAndGet();
         });
-
         customerPage.getByRole(AriaRole.TAB,
                 new Page.GetByRoleOptions().setName("History").setExact(true)).click();
-        Locator orderCard = customerPage.getByTestId("customer-history-order")
-                .filter(new Locator.FilterOptions().setHasText("E2E Review Fixture Outlet"));
-        assertThat(orderCard).isVisible();
-        customerPage.getByTestId("rate-order-prompt").click();
-
+        Locator orderCard = customerPage.locator("[data-testid='customer-history-order'][data-order-id='" + orderId + "']");
+        assertThat(orderCard).isVisible(); orderCard.click();
+        new com.fooddelivery.e2e.pages.customer.CustomerOrderTrackerPage(customerPage, orderId)
+                .tracker().getByTestId("rate-order-prompt").click();
         Locator dialog = customerPage.getByRole(AriaRole.DIALOG,
                 new Page.GetByRoleOptions().setName("Rate your order").setExact(true));
-        assertThat(dialog.getByText("E2E Review Fixture Outlet",
-                new Locator.GetByTextOptions().setExact(true))).isVisible();
-        assertThat(dialog.getByText("Delivery partner",
-                new Locator.GetByTextOptions().setExact(true))).isVisible();
-        assertThat(dialog.getByText("E2E Review Fixture Dish",
-                new Locator.GetByTextOptions().setExact(true))).isVisible();
-
-        Locator submit = dialog.getByRole(AriaRole.BUTTON,
-                new Locator.GetByRoleOptions().setName("Pick a rating to continue").setExact(true));
-        assertThat(submit).isDisabled();
+        assertThat(dialog).isVisible();
+        dialog.getByRole(AriaRole.RADIOGROUP).first().waitFor();
+        org.assertj.core.api.Assertions.assertThat(dialog.getByRole(AriaRole.RADIOGROUP).count())
+                .as("Live delivered order has restaurant, rider and dish targets").isGreaterThanOrEqualTo(3);
+        assertThat(dialog.getByRole(AriaRole.BUTTON,
+                new Locator.GetByRoleOptions().setName("Pick a rating to continue").setExact(true))).isDisabled();
         org.assertj.core.api.Assertions.assertThat(submissionAttempts.get())
-                .as("opening an unrated dialog must not send a review write")
-                .isZero();
+                .as("Opening an unrated real review dialog sends no review write").isZero();
     }
 
     /**

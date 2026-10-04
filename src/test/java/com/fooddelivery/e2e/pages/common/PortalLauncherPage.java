@@ -11,6 +11,18 @@ public final class PortalLauncherPage {
     private final Page page;
     public PortalLauncherPage(Page page) { this.page = page; }
     public void open() {
+        // Customer entry may open its ordinary location prompt before the launcher is usable.
+        // Close that visible dialog rather than clicking through it or injecting an address.
+        Locator location = page.getByRole(AriaRole.DIALOG,
+                new Page.GetByRoleOptions().setName("Select Delivery Location").setExact(true));
+        if (java.net.URI.create(page.url()).getPath().startsWith("/customer")) {
+            try { location.waitFor(new Locator.WaitForOptions().setTimeout(3000)); }
+            catch (com.microsoft.playwright.TimeoutError ignored) { /* A selected address needs no prompt. */ }
+        }
+        if (location.isVisible()) {
+            location.getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Close dialog").setExact(true)).click();
+            assertThat(location).isHidden();
+        }
         page.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Switch portal").setExact(true)).click();
         assertThat(tile(Portal.CUSTOMER)).isVisible();
     }

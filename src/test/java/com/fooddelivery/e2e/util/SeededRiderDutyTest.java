@@ -68,6 +68,14 @@ class SeededRiderDutyTest {
                 case "isClosed" -> false;
                 case "locator" -> dutyLocator((String) args[0]);
                 case "getByRole" -> roleLocator(args);
+                case "waitForResponse" -> {
+                    ((Runnable) args[args.length - 1]).run();
+                    yield proxy(com.microsoft.playwright.Response.class, (name, values) -> switch (name) {
+                        case "status" -> 200;
+                        case "text" -> "{\"success\":true}";
+                        default -> throw new AssertionError("Unexpected response method: " + name);
+                    });
+                }
                 default -> throw new AssertionError("Unexpected Page method: " + method);
             });
         }

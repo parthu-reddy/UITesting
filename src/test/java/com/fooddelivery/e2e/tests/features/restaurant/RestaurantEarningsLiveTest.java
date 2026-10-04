@@ -20,7 +20,7 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 /**
  * EARNINGS-01..04, 09: the outlet's Earnings tab shows the money the platform actually owes it.
  *
- * <p>{@code -Dearnings.outlet}, plus the figures read from the databases for the current month:
+ * <p>{@code -Dearnings.outlet}, plus the figures retained from the canonical UI-created order and rendered admin money view:
  * {@code -Dearnings.expected.net} (quoted payouts of orders delivered this month),
  * {@code -Dearnings.expected.clawbacks} (restaurant-fault clawbacks booked this month) and
  * {@code -Dearnings.expected.pending} (the outlet's unsettled ledger balance). Read-only.
@@ -59,7 +59,7 @@ public class RestaurantEarningsLiveTest extends TestBase {
                 new Page.GetByRoleOptions().setName("Account statement")).locator("tbody tr")
                 .filter(new Locator.FilterOptions().setHasNotText("No transactions found."));
         // A freshly seeded deployment legitimately has no delivered-money lines. Only opt into
-        // this branch after a read-only DB check; a nonzero fixture still requires the full sum.
+        // this branch after a visible UI statement check; a nonzero fixture still requires the full sum.
         if (Boolean.getBoolean("earnings.expected.statement.empty")) {
             org.assertj.core.api.Assertions.assertThat(net).isEqualByComparingTo(BigDecimal.ZERO);
             org.assertj.core.api.Assertions.assertThat(clawbacks).isEqualByComparingTo(BigDecimal.ZERO);

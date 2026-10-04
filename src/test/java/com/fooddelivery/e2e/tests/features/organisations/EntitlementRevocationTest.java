@@ -40,17 +40,17 @@ public class EntitlementRevocationTest extends TestBase {
         String brand = BusinessPlatformFixture.approvedRestaurant(restaurantPage, adminPage, phone, testAdminPhone);
         new LoginPage(customerPage).login(testCustomerPhone).openPortal(Portal.CUSTOMER);
         CustomerDashboardPage dashboard = new CustomerDashboardPage(customerPage); dashboard.waitForDashboard();
-        CustomerHomePage home = new CustomerHomePage(customerPage); home.searchRestaurant(brand);
+        CustomerHomePage home = new CustomerHomePage(customerPage); home.waitForRestaurantFeed(); home.searchRestaurant(brand);
         customerPage.waitForCondition(() -> home.isRestaurantVisible(brand));
         AdminPartnerApprovalsPage admin = new AdminPartnerApprovalsPage(adminPage); admin.open(); admin.restaurants();
         status("Approved"); admin.select(brand); admin.decide("Suspend", "E2E O45 review of owned dummy brand");
         PortalLauncherPage launcher = new PortalLauncherPage(restaurantPage); launcher.open(); launcher.state(Portal.RESTAURANT, "Suspended");
         assertThat(launcher.tile(Portal.RESTAURANT).getByRole(AriaRole.BUTTON)).hasCount(0); launcher.close();
-        customerPage.reload(); dashboard.waitForDashboard(); home.searchRestaurant(brand);
+        customerPage.reload(); dashboard.waitForDashboard(); home.waitForRestaurantFeed(); home.searchRestaurant(brand);
         org.assertj.core.api.Assertions.assertThat(home.isRestaurantVisible(brand)).isFalse();
         status("Suspended"); admin.select(brand); admin.decide("Reinstate", null);
         launcher.open(); launcher.state(Portal.RESTAURANT, "Available"); launcher.choose(Portal.RESTAURANT);
-        customerPage.reload(); dashboard.waitForDashboard(); home.searchRestaurant(brand); customerPage.waitForCondition(() -> home.isRestaurantVisible(brand));
+        customerPage.reload(); dashboard.waitForDashboard(); home.waitForRestaurantFeed(); home.searchRestaurant(brand); customerPage.waitForCondition(() -> home.isRestaurantVisible(brand));
     }    private void status(String value) {
         adminPage.getByRole(AriaRole.COMBOBOX, new Page.GetByRoleOptions().setName("Application status").setExact(true)).click();
         adminPage.getByRole(AriaRole.OPTION, new Page.GetByRoleOptions().setName(value).setExact(true)).click();

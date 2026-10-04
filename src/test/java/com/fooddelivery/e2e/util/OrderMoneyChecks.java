@@ -14,10 +14,10 @@ public final class OrderMoneyChecks {
     public static Map<?,?> verify(Page admin,String id,Map<?,?> created,double completedTripPayout) {
         String path="/api/v1/internal/admin/orders/"+id+"/money";
         var writes=new java.util.concurrent.atomic.AtomicInteger();
-        admin.route("**"+path,route -> {
-            if(!route.request().method().equals("GET")) {writes.incrementAndGet();route.abort();}
-            else route.resume();
-        });
+        java.util.function.Consumer<Request> observeWrites = request -> {
+            if (java.net.URI.create(request.url()).getPath().equals(path) && !request.method().equals("GET")) writes.incrementAndGet();
+        };
+        admin.onRequest(observeWrites);
         try {
             Response response=admin.waitForResponse(r -> r.request().method().equals("GET")
                     && java.net.URI.create(r.url()).getPath().equals(path),
@@ -83,7 +83,7 @@ public final class OrderMoneyChecks {
             Files.writeString(evidence,(String)admin.evaluate("data=>JSON.stringify(data,null,2)",money));
             return money;
         } catch(java.io.IOException failure) {throw new AssertionError("Cannot retain order money evidence",failure);}
-        finally {admin.unroute("**"+path);}
+        finally {admin.offRequest(observeWrites);}
     }
     public static BigDecimal amount(Map<?,?> data,String field) {
         Object value=data.get(field);assertThat(value).as("authoritative money field %s",field).isNotNull();

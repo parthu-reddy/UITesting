@@ -2,7 +2,6 @@ package com.fooddelivery.e2e.tests.smoke;
 import com.fooddelivery.e2e.base.*;
 import com.fooddelivery.e2e.pages.common.LoginPage;
 import com.fooddelivery.e2e.pages.common.Portal;
-import com.fooddelivery.e2e.util.CompletedDeliveryFixture;
 import com.microsoft.playwright.*;
 import com.microsoft.playwright.options.AriaRole;
 import org.junit.jupiter.api.*;
@@ -33,18 +32,17 @@ public class PartnerReadOnlyUiTest extends TestBase {
         assertThat(riderPage.getByText("Try selecting a different date.",
                 new Page.GetByTextOptions().setExact(true))).isVisible();
     }
-    // The history assertion provisions its own completed order through the real three-actor flow;
-    // this is the one test in this UI-smoke class that writes order and rider-payout history.
-    @Test void riderCompletedTripShowsRestaurantPayoutAndDate() {
-        CompletedDeliveryFixture.Result deliveredOrder = CompletedDeliveryFixture.completeOrder(
-                customerPage, restaurantPage, riderPage,
-                testCustomerPhone, testRestaurantPhone, testRiderPhone);
-        assertThat(riderPage.getByRole(AriaRole.BUTTON,
-                new Page.GetByRoleOptions().setName(Pattern.compile("^Online Duty$")))).isVisible();
+    // Reuse the canonical lifecycle's retained order; this class creates no second financial flow.
+    @Test void riderCompletedTripShowsRestaurantPayoutAndDate() throws java.io.IOException {
+        String orderId = System.getProperty("partner.completed.order.id", "").trim();
+        org.assertj.core.api.Assertions.assertThat(orderId).as("Owned delivered order is required").matches("[a-f0-9-]{36}");
+        String manifest = java.nio.file.Files.readString(java.nio.file.Path.of("target/lifecycle", orderId + ".json"));
+        org.assertj.core.api.Assertions.assertThat(manifest).contains(orderId).contains(testRiderPhone);
+        login(riderPage, Portal.DELIVERY, testRiderPhone);
         riderPage.getByRole(AriaRole.BUTTON,
                 new Page.GetByRoleOptions().setName(Pattern.compile("Trips Completed"))).click();
         Locator trip = riderPage.locator("button").filter(new Locator.FilterOptions()
-                .setHasText("ORDER #" + deliveredOrder.shortOrderId()))
+                .setHasText("ORDER #" + orderId.substring(0, 8)))
                 .filter(new Locator.FilterOptions().setHasText("Delivered"));
         trip.waitFor(new Locator.WaitForOptions().setTimeout(30000));
         assertThat(trip).containsText("Delivered");

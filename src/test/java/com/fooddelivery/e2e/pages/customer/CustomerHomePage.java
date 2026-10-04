@@ -69,6 +69,10 @@ public class CustomerHomePage {
     public int getVisibleRestaurantCount() {
         return page.locator("h5").count(); // Restaurant cards use h5 for brand name
     }
+    /** Wait for a real loaded feed before a negative search can prove a hidden brand. */
+    public void waitForRestaurantFeed() {
+        page.locator("h5").first().waitFor(new Locator.WaitForOptions().setTimeout(30000));
+    }
 
     public boolean isRestaurantVisible(String brandName) {
         return page.locator("h5:has-text('" + brandName + "')").isVisible();

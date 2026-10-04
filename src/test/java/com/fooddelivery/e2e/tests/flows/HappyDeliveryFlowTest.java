@@ -148,13 +148,8 @@ public class HappyDeliveryFlowTest extends TestBase {
                     "status", response.status(), "requestStage", streamRequestStages.getOrDefault(response.request(), "unknown"),
                     "responseStage", streamStage, "classification", classification));
         });
-        riderPage.route("**/api/delivery/drivers/*/orders/*/accept", route -> {
-            if (expectedOrderId != null && route.request().url().endsWith("/orders/" + expectedOrderId + "/accept")) {
-                route.resume();return;
-            }
-            route.fulfill(new com.microsoft.playwright.Route.FulfillOptions().setStatus(409)
-                    .setContentType("application/json").setBody("{\"success\":false,\"message\":\"E2E blocked an unrelated order acceptance\"}"));
-        });
+        // Before accepting, the visible order contract and scoped Accept control must match the
+        // retained order ID. No synthetic response or request interception is used for setup.
     }
 
     @AfterEach
