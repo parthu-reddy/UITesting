@@ -1,5 +1,9 @@
 # Resume the Food Delivery E2E audit
 
+## 2026-10-04T11:00:14.666160+05:30 — Private document storage prepared
+
+Cloudflare sign-in is complete. Assets bucket labouffe is confirmed public; the new labouffe-documents-dev bucket is private/APAC. The existing object-only key and exact Dev-origin CORS changes are drafted, not saved, awaiting action-time confirmation. Local38/38 storage/document-call regressions and O3 static19/19 pass. Common e0a7ada package workflow37179879686 succeeded; Government ID9652625 image workflow37179996117 succeeded102/0/0/0; published arm64 digest32934472731c3a1ecd76cefb2f8d53661881576ba08c1756f1b6168e009fd1ad, not deployed. Oracle/UI and the last full four-class gate1/4 remain unchanged; private upload and final measurements are unverified. Continue from [checkpoint62](checkpoints/62-o3-private-storage-prepared.md). Earlier dated entries below are history.
+
 ## 2026-10-04T10:22:03.950439+05:30 — Current O3 UI deployed and queue/filter verified
 
 Latest UI1caf57c is published/deployed:845/845 CI tests; exact Oracle image digest healthy;29running/26healthy/zero drift, automatic restarts or recent errors. Required Dev profiles/hardening/reconcile pass. E2E071e368 extended read-only admin queue/filter test1/1 passed on this image, separate from the four lifecycle gate. The latest full lifecycle gate remains1/4; private uploads are blocked by R2 CORS and app-key GetBucketCors403. Cloudflare user sign-in is pending. Storage public-access/privacy and restaurant status latency447.392ms>150ms (n6) also remain unresolved. Continue from [checkpoint60](checkpoints/60-o3-current-ui-verified-r2-access-needed.md). No skipped/blocked case is a pass. Older entries below are history.
