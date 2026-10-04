@@ -13,7 +13,7 @@ public class KycUploadPage {
     public void uploadDocument(String label,String path) {
         lastLabel=label;
         var completed=page.waitForResponse(response -> java.net.URI.create(response.url()).getPath().matches("/api/v1/verification/documents/[^/]+/complete")
-                && response.request().method().equals("POST"),
+                && response.request().method().equals("POST") && response.status() == 200,
                 () -> page.waitForFileChooser(() -> page.getByRole(AriaRole.BUTTON,
                         new Page.GetByRoleOptions().setName(java.util.regex.Pattern.compile("^(Upload|Replace) " + label + "$"))).click())
                         .setFiles(Paths.get(path)));
