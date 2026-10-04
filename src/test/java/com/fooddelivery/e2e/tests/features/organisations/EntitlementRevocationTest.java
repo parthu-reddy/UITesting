@@ -27,6 +27,10 @@ public class EntitlementRevocationTest extends TestBase {
         PortalLauncherPage launcher = new PortalLauncherPage(customerPage); launcher.open(); launcher.state(Portal.RESTAURANT, "Available"); launcher.choose(Portal.RESTAURANT);
         new RestaurantDashboardPage(customerPage).waitForDashboard();
         assertThat(customerPage.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Restaurant management and menu settings").setExact(true))).isHidden();
+        // The colleague accepted in a separate browser. Reopen the rendered organisation
+        // so the owner reads its current members instead of the pre-acceptance snapshot.
+        owner.allOrganisations(); owner.open(name); owner.members();
+        assertThat(owner.member(phone)).isVisible();
         owner.remove(phone); AtomicInteger refreshes = new AtomicInteger(); customerPage.onRequest(request -> {
             if (request.method().equals("POST") && java.net.URI.create(request.url()).getPath().equals("/api/v1/auth/session/refresh")) refreshes.incrementAndGet();
         });
