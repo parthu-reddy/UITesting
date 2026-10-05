@@ -176,6 +176,8 @@ public class HappyDeliveryFlowTest extends TestBase {
                 finally {chatChecks.close();}
             }
             if(duty!=null) duty.close();
+            else if(expectedOrderId!=null && !System.getProperty("resume.order.id","").isBlank())
+                SeededRiderDuty.finishOfflineIfIdle(riderPage);
         }
     }
 
