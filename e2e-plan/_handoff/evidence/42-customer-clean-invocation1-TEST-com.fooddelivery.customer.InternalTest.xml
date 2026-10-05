@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.customer.InternalTest" time="0.413" tests="9" errors="0" skipped="0" failures="0">
+  <testcase name="validate_getOrderHistoryForDriver" classname="com.fooddelivery.customer.InternalTest" time="0.313">
+    </testcase>
+  <testcase name="validate_getRestaurantOrderMoney" classname="com.fooddelivery.customer.InternalTest" time="0.012">
+    </testcase>
+  <testcase name="validate_getUnassignedOrders" classname="com.fooddelivery.customer.InternalTest" time="0.008">
+    </testcase>
+  <testcase name="validate_getActiveOrdersForDriverWithConfirmedAssignments" classname="com.fooddelivery.customer.InternalTest" time="0.012">
+    </testcase>
+  <testcase name="validate_getAdminOrderMoney" classname="com.fooddelivery.customer.InternalTest" time="0.012">
+    </testcase>
+  <testcase name="validate_initiatePartialRefund" classname="com.fooddelivery.customer.InternalTest" time="0.014">
+    </testcase>
+  <testcase name="validate_getOrderReviewContext" classname="com.fooddelivery.customer.InternalTest" time="0.014">
+    </testcase>
+  <testcase name="validate_getActiveOrdersForDriver" classname="com.fooddelivery.customer.InternalTest" time="0.011">
+    </testcase>
+  <testcase name="validate_getDriverOrderMoney" classname="com.fooddelivery.customer.InternalTest" time="0.015">
+    </testcase>
+</testsuite>

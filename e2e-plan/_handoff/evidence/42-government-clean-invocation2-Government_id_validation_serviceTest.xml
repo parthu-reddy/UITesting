@@ -1,0 +1,8 @@
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.govvalidation.Government_id_validation_serviceTest" time="0.036" tests="1" errors="0" skipped="0" failures="0">
+  <testcase name="validate_get_verification_summary" classname="com.fooddelivery.govvalidation.Government_id_validation_serviceTest" time="0.035">
+    <system-out>10:15:06.498 [main] INFO org.springframework.mock.web.MockServletContext -- Initializing Spring TestDispatcherServlet ''
+10:15:06.498 [main] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Initializing Servlet ''
+10:15:06.499 [main] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Completed initialization in 1 ms
+</system-out>
+  </testcase>
+</testsuite>

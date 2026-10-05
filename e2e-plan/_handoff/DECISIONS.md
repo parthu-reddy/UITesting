@@ -1,5 +1,9 @@
 # User instructions and joint decisions register
 
+## 2026-10-05T14:05:00+05:30 — Review decisions D-R1..D-R4 (owner, all recommended)
+
+D-R1 access JWT 15 minutes (`Deployment/identity-service.yml jwt.expiration`) plus UI background renewal; chat/call/rider sockets key on person+session so renewal does not reconnect them. D-R2 invitation SMS (Identity outbox event + CommunicationIntegration template) plus in-app launcher/hub surface. D-R3 behaviour-neutral readability reformat of O1–O5 files across eight repos, last. D-R4 restaurant bank account masked to last four after save. The 15-minute live idle case is deferred (sessions-and-role-access/DEFERRED-WAIT-TESTS.md); real SMS delivery is a deferred production-provider check. Gate: `RandomDocuments/BusinessPlatformReview_2026-10-05/tools/validate_review.py` (baseline 0/20).
+
 ## 2026-10-05T12:02:56+05:30 — Final documentation publication and diagnostic retention
 
 Choice: commit the bounded O4/O5 plan, checkpoint, retained-fixture and count/state evidence files (.md/.json/.txt), together with the two selected shared lesson documents. Keep raw XML/SQL/log files and Python caches local and unstaged. Historical Maven text diagnostics are published as bounded assertion/build/count excerpts, with full originals retained locally as unstaged logs. The old presigner negative-control portable excerpt redacts test-only signing credential/signature values while preserving signed headers and the original failed assertion/count; the full original log is retained locally. Both final phase checklists are complete within the documented Dev/UI-only scope; explicit deferrals remain unverified. Stop after these documentation commits. No later phase, new test run, reset or deployment is part of this final handoff.

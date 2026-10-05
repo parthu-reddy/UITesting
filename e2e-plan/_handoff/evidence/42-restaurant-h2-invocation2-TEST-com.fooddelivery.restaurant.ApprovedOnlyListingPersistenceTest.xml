@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.restaurant.ApprovedOnlyListingPersistenceTest" time="1.361" tests="6" errors="0" skipped="0" failures="0">
+  <testcase name="storedApplicationStatusControlsByIdMenuAndBatchVisibility(ApplicationStatus)[1]" classname="com.fooddelivery.restaurant.ApprovedOnlyListingPersistenceTest" time="0.255">
+    </testcase>
+  <testcase name="storedApplicationStatusControlsByIdMenuAndBatchVisibility(ApplicationStatus)[2]" classname="com.fooddelivery.restaurant.ApprovedOnlyListingPersistenceTest" time="0.01">
+    </testcase>
+  <testcase name="storedApplicationStatusControlsByIdMenuAndBatchVisibility(ApplicationStatus)[3]" classname="com.fooddelivery.restaurant.ApprovedOnlyListingPersistenceTest" time="0.008">
+    </testcase>
+  <testcase name="storedApplicationStatusControlsByIdMenuAndBatchVisibility(ApplicationStatus)[4]" classname="com.fooddelivery.restaurant.ApprovedOnlyListingPersistenceTest" time="0.048">
+    </testcase>
+  <testcase name="storedApplicationStatusControlsByIdMenuAndBatchVisibility(ApplicationStatus)[5]" classname="com.fooddelivery.restaurant.ApprovedOnlyListingPersistenceTest" time="0.009">
+    </testcase>
+  <testcase name="storedApplicationStatusControlsByIdMenuAndBatchVisibility(ApplicationStatus)[6]" classname="com.fooddelivery.restaurant.ApprovedOnlyListingPersistenceTest" time="0.012">
+    </testcase>
+</testsuite>

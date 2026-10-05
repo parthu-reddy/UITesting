@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.common.time.IanaTimeZoneValidatorTest" time="0.012" tests="16" errors="0" skipped="0" failures="0">
+  <testcase name="nullIsLeftToNotBlank" classname="com.fooddelivery.common.time.IanaTimeZoneValidatorTest" time="0.0" />
+  <testcase name="acceptsRegionIds(String)[1]" classname="com.fooddelivery.common.time.IanaTimeZoneValidatorTest" time="0.001" />
+  <testcase name="acceptsRegionIds(String)[2]" classname="com.fooddelivery.common.time.IanaTimeZoneValidatorTest" time="0.001" />
+  <testcase name="acceptsRegionIds(String)[3]" classname="com.fooddelivery.common.time.IanaTimeZoneValidatorTest" time="0.0" />
+  <testcase name="acceptsRegionIds(String)[4]" classname="com.fooddelivery.common.time.IanaTimeZoneValidatorTest" time="0.0" />
+  <testcase name="acceptsRegionIds(String)[5]" classname="com.fooddelivery.common.time.IanaTimeZoneValidatorTest" time="0.0" />
+  <testcase name="acceptsRegionIds(String)[6]" classname="com.fooddelivery.common.time.IanaTimeZoneValidatorTest" time="0.0" />
+  <testcase name="rejectsOffsetsAbbreviationsAndTypos(String)[1]" classname="com.fooddelivery.common.time.IanaTimeZoneValidatorTest" time="0.0" />
+  <testcase name="rejectsOffsetsAbbreviationsAndTypos(String)[2]" classname="com.fooddelivery.common.time.IanaTimeZoneValidatorTest" time="0.001" />
+  <testcase name="rejectsOffsetsAbbreviationsAndTypos(String)[3]" classname="com.fooddelivery.common.time.IanaTimeZoneValidatorTest" time="0.0" />
+  <testcase name="rejectsOffsetsAbbreviationsAndTypos(String)[4]" classname="com.fooddelivery.common.time.IanaTimeZoneValidatorTest" time="0.001" />
+  <testcase name="rejectsOffsetsAbbreviationsAndTypos(String)[5]" classname="com.fooddelivery.common.time.IanaTimeZoneValidatorTest" time="0.0" />
+  <testcase name="rejectsOffsetsAbbreviationsAndTypos(String)[6]" classname="com.fooddelivery.common.time.IanaTimeZoneValidatorTest" time="0.0" />
+  <testcase name="rejectsOffsetsAbbreviationsAndTypos(String)[7]" classname="com.fooddelivery.common.time.IanaTimeZoneValidatorTest" time="0.0" />
+  <testcase name="rejectsOffsetsAbbreviationsAndTypos(String)[8]" classname="com.fooddelivery.common.time.IanaTimeZoneValidatorTest" time="0.0" />
+  <testcase name="rejectsOffsetsAbbreviationsAndTypos(String)[9]" classname="com.fooddelivery.common.time.IanaTimeZoneValidatorTest" time="0.0" />
+</testsuite>

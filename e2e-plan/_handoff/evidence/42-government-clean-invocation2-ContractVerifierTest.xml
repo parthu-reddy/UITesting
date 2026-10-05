@@ -1,0 +1,21 @@
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.govvalidation.ContractVerifierTest" time="2.891" tests="3" errors="0" skipped="0" failures="0">
+  <testcase name="validate_brandVerifyGstin" classname="com.fooddelivery.govvalidation.ContractVerifierTest" time="2.748">
+    <system-out>10:15:05.677 [main] INFO org.hibernate.validator.internal.util.Version -- HV000001: Hibernate Validator 8.0.1.Final
+10:15:06.022 [main] INFO org.springframework.mock.web.MockServletContext -- Initializing Spring TestDispatcherServlet ''
+10:15:06.022 [main] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Initializing Servlet ''
+10:15:06.025 [main] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Completed initialization in 2 ms
+</system-out>
+  </testcase>
+  <testcase name="validate_brandVerifyBankAccount" classname="com.fooddelivery.govvalidation.ContractVerifierTest" time="0.032">
+    <system-out>10:15:06.353 [main] INFO org.springframework.mock.web.MockServletContext -- Initializing Spring TestDispatcherServlet ''
+10:15:06.353 [main] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Initializing Servlet ''
+10:15:06.353 [main] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Completed initialization in 0 ms
+</system-out>
+  </testcase>
+  <testcase name="validate_getVerificationSummary" classname="com.fooddelivery.govvalidation.ContractVerifierTest" time="0.097">
+    <system-out>10:15:06.381 [main] INFO org.springframework.mock.web.MockServletContext -- Initializing Spring TestDispatcherServlet ''
+10:15:06.381 [main] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Initializing Servlet ''
+10:15:06.381 [main] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Completed initialization in 0 ms
+</system-out>
+  </testcase>
+</testsuite>

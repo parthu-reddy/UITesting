@@ -1,0 +1,14 @@
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.restaurant.controller.FulfillmentControllerTest" time="0.164" tests="2" errors="0" skipped="0" failures="0">
+  <testcase name="acceptOrder_ShouldReturnSuccess" classname="com.fooddelivery.restaurant.controller.FulfillmentControllerTest" time="0.146">
+    <system-out>{"@timestamp":"2026-10-03T20:30:10.390697Z","@version":"1","message":"Initializing Spring TestDispatcherServlet ''","logger_name":"org.springframework.mock.web.MockServletContext","thread_name":"main","level":"INFO","level_value":20000,"springAppName":"restaurant-service","app_name":"restaurant-service"}
+{"@timestamp":"2026-10-03T20:30:10.390916Z","@version":"1","message":"Initializing Servlet ''","logger_name":"org.springframework.test.web.servlet.TestDispatcherServlet","thread_name":"main","level":"INFO","level_value":20000,"springAppName":"restaurant-service","app_name":"restaurant-service"}
+{"@timestamp":"2026-10-03T20:30:10.391079Z","@version":"1","message":"Completed initialization in 1 ms","logger_name":"org.springframework.test.web.servlet.TestDispatcherServlet","thread_name":"main","level":"INFO","level_value":20000,"springAppName":"restaurant-service","app_name":"restaurant-service"}
+</system-out>
+  </testcase>
+  <testcase name="rejectOrder_ShouldReturnSuccess" classname="com.fooddelivery.restaurant.controller.FulfillmentControllerTest" time="0.016">
+    <system-out>{"@timestamp":"2026-10-03T20:30:10.446959Z","@version":"1","message":"Initializing Spring TestDispatcherServlet ''","logger_name":"org.springframework.mock.web.MockServletContext","thread_name":"main","level":"INFO","level_value":20000,"springAppName":"restaurant-service","app_name":"restaurant-service"}
+{"@timestamp":"2026-10-03T20:30:10.447142Z","@version":"1","message":"Initializing Servlet ''","logger_name":"org.springframework.test.web.servlet.TestDispatcherServlet","thread_name":"main","level":"INFO","level_value":20000,"springAppName":"restaurant-service","app_name":"restaurant-service"}
+{"@timestamp":"2026-10-03T20:30:10.447299Z","@version":"1","message":"Completed initialization in 0 ms","logger_name":"org.springframework.test.web.servlet.TestDispatcherServlet","thread_name":"main","level":"INFO","level_value":20000,"springAppName":"restaurant-service","app_name":"restaurant-service"}
+</system-out>
+  </testcase>
+</testsuite>

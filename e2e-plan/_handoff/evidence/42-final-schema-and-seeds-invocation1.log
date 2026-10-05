@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/private/tmp/bp-o3-final-schema-seed-proof.py", line 30, in <module>
+    for file in guard.FILES[db]:sql(db,(seeds/file).read_text())
+                                ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/private/tmp/bp-o3-final-schema-seed-proof.py", line 18, in sql
+    return run(['docker','exec','-i',container,'psql','-X','-U','postgres','-d',db,'-qAt','-v','ON_ERROR_STOP=1'],text,check)
+  File "/private/tmp/bp-o3-final-schema-seed-proof.py", line 15, in run
+    if check and result.returncode:raise RuntimeError(result.stderr[-1500:])
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: ERROR:  column "fssai_number" of relation "outlets" does not exist
+LINE 1: ...g, reviews_count, banner_url, time_zone, city_id, fssai_numb...
+                                                             ^
+

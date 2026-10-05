@@ -21,8 +21,8 @@ public class BusinessHubOrganisationUiTest extends TestBase {
         assertThat(customerPage.getByRole(AriaRole.FORM, new Page.GetByRoleOptions().setName("Invite a colleague").setExact(true))).hasCount(0);
         restaurantPage.reload(); hub.members(); hub.changeRole(member, "STAFF"); customerPage.reload(); colleague.members();
         assertThat(customerPage.getByTestId("organisation-role")).containsText("STAFF");
+        // Returning to the hub revalidates the cached list; no manual refresh control exists.
         hub.remove(member); colleague.allOrganisations();
-        customerPage.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Refresh organisations").setExact(true)).click();
         assertThat(colleague.organisation(name)).hasCount(0);
     }
 }

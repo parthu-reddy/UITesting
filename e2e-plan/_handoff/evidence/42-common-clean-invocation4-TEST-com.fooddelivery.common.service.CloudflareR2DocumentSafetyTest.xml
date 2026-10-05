@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.common.service.CloudflareR2DocumentSafetyTest" time="1.023" tests="5" errors="0" skipped="0" failures="0">
+  <testcase name="actualPresignerSignsTypeLengthAndTenMinuteExpiry" classname="com.fooddelivery.common.service.CloudflareR2DocumentSafetyTest" time="0.944">
+    </testcase>
+  <testcase name="invalidDeclaredLengthsCannotProduceAnUploadCredential" classname="com.fooddelivery.common.service.CloudflareR2DocumentSafetyTest" time="0.028" />
+  <testcase name="referenceRequiresMatchingActualStorageSizeAndType" classname="com.fooddelivery.common.service.CloudflareR2DocumentSafetyTest" time="0.024" />
+  <testcase name="finalizationCopiesOnlyTheConfirmedVersionAndReportsRacesAsRefusals" classname="com.fooddelivery.common.service.CloudflareR2DocumentSafetyTest" time="0.012" />
+  <testcase name="missingObjectAndStorageOutageNeverBecomeVerifiedReferences" classname="com.fooddelivery.common.service.CloudflareR2DocumentSafetyTest" time="0.002" />
+</testsuite>

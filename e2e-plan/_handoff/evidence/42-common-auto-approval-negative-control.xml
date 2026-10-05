@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.common.enums.ApplicationStatusTest" time="0.106" tests="37" errors="0" skipped="0" failures="1">
+  <testcase name="missingStatusesCannotBypassTheLifecycle" classname="com.fooddelivery.common.enums.ApplicationStatusTest" time="0.015" />
+  <testcase name="everyAllowedAndForbiddenPair(ApplicationStatus, ApplicationStatus, boolean)[1]" classname="com.fooddelivery.common.enums.ApplicationStatusTest" time="0.012" />
+  <testcase name="everyAllowedAndForbiddenPair(ApplicationStatus, ApplicationStatus, boolean)[2]" classname="com.fooddelivery.common.enums.ApplicationStatusTest" time="0.002" />
+  <testcase name="everyAllowedAndForbiddenPair(ApplicationStatus, ApplicationStatus, boolean)[3]" classname="com.fooddelivery.common.enums.ApplicationStatusTest" time="0.001" />
+  <testcase name="everyAllowedAndForbiddenPair(ApplicationStatus, ApplicationStatus, boolean)[4]" classname="com.fooddelivery.common.enums.ApplicationStatusTest" time="0.001" />
+  <testcase name="everyAllowedAndForbiddenPair(ApplicationStatus, ApplicationStatus, boolean)[5]" classname="com.fooddelivery.common.enums.ApplicationStatusTest" time="0.001" />
+  <testcase name="everyAllowedAndForbiddenPair(ApplicationStatus, ApplicationStatus, boolean)[6]" classname="com.fooddelivery.common.enums.ApplicationStatusTest" time="0.0" />
+  <testcase name="everyAllowedAndForbiddenPair(ApplicationStatus, ApplicationStatus, boolean)[7]" classname="com.fooddelivery.common.enums.ApplicationStatusTest" time="0.001" />
+  <testcase name="everyAllowedAndForbiddenPair(ApplicationStatus, ApplicationStatus, boolean)[8]" classname="com.fooddelivery.common.enums.ApplicationStatusTest" time="0.0" />
+  <testcase name="everyAllowedAndForbiddenPair(ApplicationStatus, ApplicationStatus, boolean)[9]" classname="com.fooddelivery.common.enums.ApplicationStatusTest" time="0.001" />
+  <testcase name="everyAllowedAndForbiddenPair(ApplicationStatus, ApplicationStatus, boolean)[10]" classname="com.fooddelivery.common.enums.ApplicationStatusTest" time="0.004">
+    <failure message="Expected com.fooddelivery.common.exception.IllegalStateTransitionException to be thrown, but nothing was thrown." type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: Expected com.fooddelivery.common.exception.IllegalStateTransitionException to be thrown, but nothing was thrown.
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:152)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:73)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3115)
+	at com.fooddelivery.common.enums.ApplicationStatusTest.everyAllowedAndForbiddenPair(ApplicationStatusTest.java:30)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:186)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:214)
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:197)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:214)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:186)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:214)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:214)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:214)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:186)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:214)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:186)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:186)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:214)
+	at java.base/java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:1024)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:570)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:560)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:153)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:176)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:265)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:632)
+	at java.base/java.util.stream.ReferencePipeline$7$1FlatMap.accept(ReferencePipeline.java:293)
+	at java.base/java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:1024)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:570)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:560)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:153)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:176)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:265)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:632)
+	at java.base/java.util.stream.ReferencePipeline$7$1FlatMap.accept(ReferencePipeline.java:293)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:214)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:214)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:214)
+	at java.base/java.util.Spliterators$ArraySpliterator.forEachRemaining(Spliterators.java:1024)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:570)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:560)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:153)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:176)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:265)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:632)
+	at java.base/java.util.stream.ReferencePipeline$7$1FlatMap.accept(ReferencePipeline.java:293)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:214)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:214)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:214)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1724)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:570)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:560)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:153)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:176)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:265)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:632)
+	at java.base/java.util.stream.ReferencePipeline$7$1FlatMap.accept(ReferencePipeline.java:293)
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1724)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:570)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:560)
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:153)
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:176)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:265)
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:632)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+</failure>
+  </testcase>
+  <testcase name="everyAllowedAndForbiddenPair(ApplicationStatus, ApplicationStatus, boolean)[11]" classname="com.fooddelivery.common.enums.ApplicationStatusTest" time="0.001" />
+  <testcase name="everyAllowedAndForbiddenPair(ApplicationStatus, ApplicationStatus, boolean)[12]" classname="com.fooddelivery.common.enums.ApplicationStatusTest" time="0.0" />
+  <testcase name="everyAllowedAndForbiddenPair(ApplicationStatus, ApplicationStatus, boolean)[13]" classname="com.fooddelivery.common.enums.ApplicationStatusTest" time="0.001" />
+  <testcase name="everyAllowedAndForbiddenPair(ApplicationStatus, ApplicationStatus, boolean)[14]" classname="com.fooddelivery.common.enums.ApplicationStatusTest" time="0.001" />
+  <testcase name="everyAllowedAndForbiddenPair(ApplicationStatus, ApplicationStatus, boolean)[15]" classname="com.fooddelivery.common.enums.ApplicationStatusTest" time="0.001" />
+  <testcase name="everyAllowedAndForbiddenPair(ApplicationStatus, ApplicationStatus, boolean)[16]" classname="com.fooddelivery.common.enums.ApplicationStatusTest" time="0.0" />
+  <testcase name="everyAllowedAndForbiddenPair(ApplicationStatus, ApplicationStatus, boolean)[17]" classname="com.fooddelivery.common.enums.ApplicationStatusTest" time="0.0" />
+  <testcase name="everyAllowedAndForbiddenPair(ApplicationStatus, ApplicationStatus, boolean)[18]" classname="com.fooddelivery.common.enums.ApplicationStatusTest" time="0.0" />
+  <testcase name="everyAllowedAndForbiddenPair(ApplicationStatus, ApplicationStatus, boolean)[19]" classname="com.fooddelivery.common.enums.ApplicationStatusTest" time="0.0" />
+  <testcase name="everyAllowedAndForbiddenPair(ApplicationStatus, ApplicationStatus, boolean)[20]" classname="com.fooddelivery.common.enums.ApplicationStatusTest" time="0.001" />
+  <testcase name="everyAllowedAndForbiddenPair(ApplicationStatus, ApplicationStatus, boolean)[21]" classname="com.fooddelivery.common.enums.ApplicationStatusTest" time="0.001" />
+  <testcase name="everyAllowedAndForbiddenPair(ApplicationStatus, ApplicationStatus, boolean)[22]" classname="com.fooddelivery.common.enums.ApplicationStatusTest" time="0.001" />
+  <testcase name="everyAllowedAndForbiddenPair(ApplicationStatus, ApplicationStatus, boolean)[23]" classname="com.fooddelivery.common.enums.ApplicationStatusTest" time="0.001" />
+  <testcase name="everyAllowedAndForbiddenPair(ApplicationStatus, ApplicationStatus, boolean)[24]" classname="com.fooddelivery.common.enums.ApplicationStatusTest" time="0.0" />
+  <testcase name="everyAllowedAndForbiddenPair(ApplicationStatus, ApplicationStatus, boolean)[25]" classname="com.fooddelivery.common.enums.ApplicationStatusTest" time="0.0" />
+  <testcase name="everyAllowedAndForbiddenPair(ApplicationStatus, ApplicationStatus, boolean)[26]" classname="com.fooddelivery.common.enums.ApplicationStatusTest" time="0.0" />
+  <testcase name="everyAllowedAndForbiddenPair(ApplicationStatus, ApplicationStatus, boolean)[27]" classname="com.fooddelivery.common.enums.ApplicationStatusTest" time="0.0" />
+  <testcase name="everyAllowedAndForbiddenPair(ApplicationStatus, ApplicationStatus, boolean)[28]" classname="com.fooddelivery.common.enums.ApplicationStatusTest" time="0.0" />
+  <testcase name="everyAllowedAndForbiddenPair(ApplicationStatus, ApplicationStatus, boolean)[29]" classname="com.fooddelivery.common.enums.ApplicationStatusTest" time="0.0" />
+  <testcase name="everyAllowedAndForbiddenPair(ApplicationStatus, ApplicationStatus, boolean)[30]" classname="com.fooddelivery.common.enums.ApplicationStatusTest" time="0.0" />
+  <testcase name="everyAllowedAndForbiddenPair(ApplicationStatus, ApplicationStatus, boolean)[31]" classname="com.fooddelivery.common.enums.ApplicationStatusTest" time="0.0" />
+  <testcase name="everyAllowedAndForbiddenPair(ApplicationStatus, ApplicationStatus, boolean)[32]" classname="com.fooddelivery.common.enums.ApplicationStatusTest" time="0.001" />
+  <testcase name="everyAllowedAndForbiddenPair(ApplicationStatus, ApplicationStatus, boolean)[33]" classname="com.fooddelivery.common.enums.ApplicationStatusTest" time="0.001" />
+  <testcase name="everyAllowedAndForbiddenPair(ApplicationStatus, ApplicationStatus, boolean)[34]" classname="com.fooddelivery.common.enums.ApplicationStatusTest" time="0.001" />
+  <testcase name="everyAllowedAndForbiddenPair(ApplicationStatus, ApplicationStatus, boolean)[35]" classname="com.fooddelivery.common.enums.ApplicationStatusTest" time="0.0" />
+  <testcase name="everyAllowedAndForbiddenPair(ApplicationStatus, ApplicationStatus, boolean)[36]" classname="com.fooddelivery.common.enums.ApplicationStatusTest" time="0.0" />
+</testsuite>

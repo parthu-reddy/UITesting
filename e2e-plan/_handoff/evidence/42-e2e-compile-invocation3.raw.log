@@ -1,0 +1,996 @@
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] Food Delivery Parent                                               [pom]
+[INFO] identity-signing                                                   [jar]
+[INFO] common-library                                                     [pom]
+[INFO] common-core                                                        [jar]
+[INFO] common-test                                                        [jar]
+[INFO] common-persistence                                                 [jar]
+[INFO] common-messaging                                                   [jar]
+[INFO] common-web                                                         [jar]
+[INFO] common-storage                                                     [jar]
+[INFO] eureka-server                                                      [jar]
+[INFO] config-service                                                     [jar]
+[INFO] api-gateway                                                        [jar]
+[INFO] identity-service                                                   [jar]
+[INFO] notification-service                                               [jar]
+[INFO] food-delivery-backend                                              [jar]
+[INFO] delivery-executive-application                                     [jar]
+[INFO] mapsintegration                                                    [jar]
+[INFO] payment-service                                                    [jar]
+[INFO] restaurant-application                                             [jar]
+[INFO] government-id-validation-service                                   [jar]
+[INFO] ledger-service                                                     [jar]
+[INFO] chat-service                                                       [jar]
+[INFO] ondc-integration-service                                           [jar]
+[INFO] wallet-service                                                     [jar]
+[INFO] budget-pacing-service                                              [jar]
+[INFO] bidding-engine                                                     [jar]
+[INFO] campaign-service                                                   [jar]
+[INFO] event-tracking-service                                             [jar]
+[INFO] reviews-service                                                    [jar]
+[INFO] Food Delivery Aggregator                                           [pom]
+[INFO] 
+[INFO] ---------------< com.fooddelivery:food-delivery-parent >----------------
+[INFO] Building Food Delivery Parent 1.0-SNAPSHOT                        [1/30]
+[INFO]   from FoodDeliveryParent/pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- exec:3.1.0:exec (check-stale-contracts) @ food-delivery-parent ---
+[INFO] 
+[INFO] -----------------< com.fooddelivery:identity-signing >------------------
+[INFO] Building identity-signing 1.0-SNAPSHOT                            [2/30]
+[INFO]   from IdentitySigning/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ identity-signing ---
+[INFO] skip non existing resourceDirectory /Users/parthureddy/Documents/Food Delivery.nosync/IdentitySigning/src/main/resources
+[INFO] skip non existing resourceDirectory /Users/parthureddy/Documents/Food Delivery.nosync/IdentitySigning/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ identity-signing ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- exec:3.1.0:exec (check-stale-contracts) @ identity-signing ---
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ identity-signing ---
+[INFO] skip non existing resourceDirectory /Users/parthureddy/Documents/Food Delivery.nosync/IdentitySigning/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ identity-signing ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] ------------------< com.fooddelivery:common-library >-------------------
+[INFO] Building common-library 1.0-SNAPSHOT                              [3/30]
+[INFO]   from CommonLibrary/pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- exec:3.1.0:exec (check-stale-contracts) @ common-library ---
+[INFO] 
+[INFO] --------------------< com.fooddelivery:common-core >--------------------
+[INFO] Building common-core 1.0-SNAPSHOT                                 [4/30]
+[INFO]   from CommonLibrary/common-core/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ common-core ---
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO] Copying 3 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ common-core ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- typescript-generator:3.2.1263:generate (generate) @ common-core ---
+Running TypeScriptGenerator version 3.2.1263
+Scanning classpath
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::invokeCleaner has been called by nonapi.io.github.classgraph.utils.FileUtils (file:/Users/parthureddy/.m2/repository/io/github/classgraph/classgraph/4.8.157/classgraph-4.8.157.jar)
+WARNING: Please consider reporting this to the maintainers of class nonapi.io.github.classgraph.utils.FileUtils
+WARNING: sun.misc.Unsafe::invokeCleaner will be removed in a future release
+Scanning finished in 2.36 seconds. Total number of classes: 19037.
+Found 29 classes matching pattern.
+Parsing 'com.fooddelivery.common.enums.ApplicationStatus'
+Parsing 'com.fooddelivery.common.enums.AuditAction'
+Parsing 'com.fooddelivery.common.enums.BusinessType'
+Parsing 'com.fooddelivery.common.enums.ChannelType'
+Parsing 'com.fooddelivery.common.enums.ChargeCategory'
+Parsing 'com.fooddelivery.common.enums.DeliveryStatus'
+Parsing 'com.fooddelivery.common.enums.FaultType'
+Parsing 'com.fooddelivery.common.enums.LedgerAccountType'
+Parsing 'com.fooddelivery.common.enums.LedgerAccountType$Kind'
+Parsing 'com.fooddelivery.common.enums.MembershipStatus'
+Parsing 'com.fooddelivery.common.enums.OrderStatus'
+Parsing 'com.fooddelivery.common.enums.OrganisationPermission'
+Parsing 'com.fooddelivery.common.enums.OrganisationRole'
+Parsing 'com.fooddelivery.common.enums.OrganisationStatus'
+Parsing 'com.fooddelivery.common.enums.OutboxStatus'
+Parsing 'com.fooddelivery.common.enums.PaymentGateway'
+Parsing 'com.fooddelivery.common.enums.PaymentMethod'
+Parsing 'com.fooddelivery.common.enums.RefundDestination'
+Parsing 'com.fooddelivery.common.enums.RefundStatus'
+Parsing 'com.fooddelivery.common.enums.ReviewEntityType'
+Parsing 'com.fooddelivery.common.enums.RoleName'
+Parsing 'com.fooddelivery.common.enums.TransactionDirection'
+Parsing 'com.fooddelivery.common.enums.TransactionStatus'
+Parsing 'com.fooddelivery.common.enums.UserRole'
+Parsing 'com.fooddelivery.common.enums.VehicleClass'
+Parsing 'com.fooddelivery.common.enums.VerificationStatus'
+Parsing 'com.fooddelivery.common.enums.VerificationType'
+Parsing 'com.fooddelivery.common.enums.WalletEntityType'
+Writing declarations to: /Users/parthureddy/Documents/Food Delivery.nosync/FoodDeliveryAppUI/src/types/backend-enums.ts
+[INFO] 
+[INFO] --- exec:3.1.0:exec (check-stale-contracts) @ common-core ---
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ common-core ---
+[INFO] Copying 2 resources from src/test/resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ common-core ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --------------------< com.fooddelivery:common-test >--------------------
+[INFO] Building common-test 1.0-SNAPSHOT                                 [5/30]
+[INFO]   from CommonLibrary/common-test/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ common-test ---
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ common-test ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- exec:3.1.0:exec (check-stale-contracts) @ common-test ---
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ common-test ---
+[INFO] Copying 2 resources from src/test/resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ common-test ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] ----------------< com.fooddelivery:common-persistence >-----------------
+[INFO] Building common-persistence 1.0-SNAPSHOT                          [6/30]
+[INFO]   from CommonLibrary/common-persistence/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ common-persistence ---
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ common-persistence ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- exec:3.1.0:exec (check-stale-contracts) @ common-persistence ---
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ common-persistence ---
+[INFO] Copying 2 resources from src/test/resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ common-persistence ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] -----------------< com.fooddelivery:common-messaging >------------------
+[INFO] Building common-messaging 1.0-SNAPSHOT                            [7/30]
+[INFO]   from CommonLibrary/common-messaging/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ common-messaging ---
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ common-messaging ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- exec:3.1.0:exec (check-stale-contracts) @ common-messaging ---
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ common-messaging ---
+[INFO] Copying 2 resources from src/test/resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ common-messaging ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --------------------< com.fooddelivery:common-web >---------------------
+[INFO] Building common-web 1.0-SNAPSHOT                                  [8/30]
+[INFO]   from CommonLibrary/common-web/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ common-web ---
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ common-web ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- exec:3.1.0:exec (check-stale-contracts) @ common-web ---
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ common-web ---
+[INFO] Copying 3 resources from src/test/resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ common-web ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] ------------------< com.fooddelivery:common-storage >-------------------
+[INFO] Building common-storage 1.0-SNAPSHOT                              [9/30]
+[INFO]   from CommonLibrary/common-storage/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ common-storage ---
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO] Copying 0 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ common-storage ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- exec:3.1.0:exec (check-stale-contracts) @ common-storage ---
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ common-storage ---
+[INFO] skip non existing resourceDirectory /Users/parthureddy/Documents/Food Delivery.nosync/CommonLibrary/common-storage/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ common-storage ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] -------------------< com.fooddelivery:eureka-server >-------------------
+[INFO] Building eureka-server 1.0-SNAPSHOT                              [10/30]
+[INFO]   from EurekaServer/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ eureka-server ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ eureka-server ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- exec:3.1.0:exec (check-stale-contracts) @ eureka-server ---
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ eureka-server ---
+[INFO] Copying 1 resource from src/test/resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ eureka-server ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] ------------------< com.fooddelivery:config-service >-------------------
+[INFO] Building config-service 1.0-SNAPSHOT                             [11/30]
+[INFO]   from ConfigService/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ config-service ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ config-service ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- exec:3.1.0:exec (check-stale-contracts) @ config-service ---
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ config-service ---
+[INFO] Copying 1 resource from src/test/resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ config-service ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --------------------< com.fooddelivery:api-gateway >--------------------
+[INFO] Building api-gateway 0.0.1-SNAPSHOT                              [12/30]
+[INFO]   from ApiGateway/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ api-gateway ---
+[INFO] Copying 2 resources from src/main/resources to target/classes
+[INFO] Copying 3 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ api-gateway ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- exec:3.1.0:exec (check-stale-contracts) @ api-gateway ---
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ api-gateway ---
+[INFO] Copying 1 resource from src/test/resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ api-gateway ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] -----------------< com.fooddelivery:identity-service >------------------
+[INFO] Building identity-service 0.0.1-SNAPSHOT                         [13/30]
+[INFO]   from IdentityService/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ identity-service ---
+[INFO] Copying 2 resources from src/main/resources to target/classes
+[INFO] Copying 4 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ identity-service ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- spring-cloud-contract:4.1.2:generateTests (default-generateTests) @ identity-service ---
+[INFO] Generating server tests source code for Spring Cloud Contract Verifier contract verification
+[INFO] Will use contracts provided in the folder [/Users/parthureddy/Documents/Food Delivery.nosync/IdentityService/src/test/resources/contracts]
+[INFO] Directory with contract is present at [/Users/parthureddy/Documents/Food Delivery.nosync/IdentityService/src/test/resources/contracts]
+[INFO] Test Source directory: /Users/parthureddy/Documents/Food Delivery.nosync/IdentityService/target/generated-test-sources/contracts added.
+[INFO] Using [com.fooddelivery.identity.ContractTestBase] as base class for test classes, [null] as base package for tests, [null] as package with base classes, base class mappings [BaseClassMapping{contractPackageRegex='.*messaging.*', baseClassFQN='com.fooddelivery.identity.contract.OrganisationMessagingBase'}, BaseClassMapping{contractPackageRegex='.*http.*', baseClassFQN='com.fooddelivery.identity.contract.OrganisationHttpBase'}]
+[INFO] Creating new class file [/Users/parthureddy/Documents/Food Delivery.nosync/IdentityService/target/generated-test-sources/contracts/com/fooddelivery/identity/HttpTest.java]
+[INFO] Creating new class file [/Users/parthureddy/Documents/Food Delivery.nosync/IdentityService/target/generated-test-sources/contracts/com/fooddelivery/identity/Identity_serviceTest.java]
+[INFO] Creating new class file [/Users/parthureddy/Documents/Food Delivery.nosync/IdentityService/target/generated-test-sources/contracts/com/fooddelivery/identity/MessagingTest.java]
+[INFO] Generated 3 test classes.
+[INFO] 
+[INFO] --- exec:3.1.0:exec (check-stale-contracts) @ identity-service ---
+[INFO] 
+[INFO] --- spring-cloud-contract:4.1.2:convert (default-convert) @ identity-service ---
+[INFO] Will use contracts provided in the folder [/Users/parthureddy/Documents/Food Delivery.nosync/IdentityService/src/test/resources/contracts]
+[INFO] Copying Spring Cloud Contract Verifier contracts to [/Users/parthureddy/Documents/Food Delivery.nosync/IdentityService/target/stubs/META-INF/com.fooddelivery/identity-service/0.0.1-SNAPSHOT/contracts]. Only files matching [.*] pattern will end up in the final JAR with stubs.
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 4 resources
+[INFO] Converting from Spring Cloud Contract Verifier contracts to WireMock stubs mappings
+[INFO]      Spring Cloud Contract Verifier contracts directory: /Users/parthureddy/Documents/Food Delivery.nosync/IdentityService/src/test/resources/contracts
+[INFO] Stub Server stubs mappings directory: /Users/parthureddy/Documents/Food Delivery.nosync/IdentityService/target/stubs/META-INF/com.fooddelivery/identity-service/0.0.1-SNAPSHOT/mappings
+[INFO] Creating new stub [/Users/parthureddy/Documents/Food Delivery.nosync/IdentityService/target/stubs/META-INF/com.fooddelivery/identity-service/0.0.1-SNAPSHOT/mappings/http/internal_organisation_membership_member.json]
+[INFO] Creating new stub [/Users/parthureddy/Documents/Food Delivery.nosync/IdentityService/target/stubs/META-INF/com.fooddelivery/identity-service/0.0.1-SNAPSHOT/mappings/http/internal_organisation_membership_nonmember.json]
+[INFO] Creating new stub [/Users/parthureddy/Documents/Food Delivery.nosync/IdentityService/target/stubs/META-INF/com.fooddelivery/identity-service/0.0.1-SNAPSHOT/mappings/identity-service/initiate-login.json]
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ identity-service ---
+[INFO] Copying 5 resources from src/test/resources to target/test-classes
+[INFO] Copying 2 resources from target/generated-test-resources/contracts to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ identity-service ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 31 source files with javac [forked debug parameters release 17] to target/test-classes
+[INFO] 
+[INFO] ---------------< com.fooddelivery:notification-service >----------------
+[INFO] Building notification-service 0.0.1-SNAPSHOT                     [14/30]
+[INFO]   from CommunicationIntegration/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ notification-service ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 5 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ notification-service ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- exec:3.1.0:exec (check-stale-contracts) @ notification-service ---
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ notification-service ---
+[INFO] Copying 1 resource from src/test/resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ notification-service ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] ---------------< com.fooddelivery:food-delivery-backend >---------------
+[INFO] Building food-delivery-backend 1.0-SNAPSHOT                      [15/30]
+[INFO]   from CustomerApplication/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ food-delivery-backend ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 14 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ food-delivery-backend ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- spring-cloud-contract:4.1.2:generateTests (default-generateTests) @ food-delivery-backend ---
+[INFO] Generating server tests source code for Spring Cloud Contract Verifier contract verification
+[INFO] Will use contracts provided in the folder [/Users/parthureddy/Documents/Food Delivery.nosync/CustomerApplication/src/test/resources/contracts]
+[INFO] Directory with contract is present at [/Users/parthureddy/Documents/Food Delivery.nosync/CustomerApplication/src/test/resources/contracts]
+[INFO] Test Source directory: /Users/parthureddy/Documents/Food Delivery.nosync/CustomerApplication/target/generated-test-sources/contracts added.
+[INFO] Using [com.fooddelivery.customer.ContractTestBase] as base class for test classes, [null] as base package for tests, [null] as package with base classes, base class mappings [BaseClassMapping{contractPackageRegex='.*messaging.*', baseClassFQN='com.fooddelivery.customer.contract.BaseMessagingClass'}]
+[INFO] Creating new class file [/Users/parthureddy/Documents/Food Delivery.nosync/CustomerApplication/target/generated-test-sources/contracts/com/fooddelivery/customer/ContractVerifierTest.java]
+[INFO] Creating new class file [/Users/parthureddy/Documents/Food Delivery.nosync/CustomerApplication/target/generated-test-sources/contracts/com/fooddelivery/customer/InternalTest.java]
+[INFO] Creating new class file [/Users/parthureddy/Documents/Food Delivery.nosync/CustomerApplication/target/generated-test-sources/contracts/com/fooddelivery/customer/MessagingTest.java]
+[INFO] Generated 3 test classes.
+[INFO] 
+[INFO] --- exec:3.1.0:exec (check-stale-contracts) @ food-delivery-backend ---
+[INFO] 
+[INFO] --- spring-cloud-contract:4.1.2:convert (default-convert) @ food-delivery-backend ---
+[INFO] Will use contracts provided in the folder [/Users/parthureddy/Documents/Food Delivery.nosync/CustomerApplication/src/test/resources/contracts]
+[INFO] Copying Spring Cloud Contract Verifier contracts to [/Users/parthureddy/Documents/Food Delivery.nosync/CustomerApplication/target/stubs/META-INF/com.fooddelivery/food-delivery-backend/1.0-SNAPSHOT/contracts]. Only files matching [.*] pattern will end up in the final JAR with stubs.
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 20 resources
+[INFO] Converting from Spring Cloud Contract Verifier contracts to WireMock stubs mappings
+[INFO]      Spring Cloud Contract Verifier contracts directory: /Users/parthureddy/Documents/Food Delivery.nosync/CustomerApplication/src/test/resources/contracts
+[INFO] Stub Server stubs mappings directory: /Users/parthureddy/Documents/Food Delivery.nosync/CustomerApplication/target/stubs/META-INF/com.fooddelivery/food-delivery-backend/1.0-SNAPSHOT/mappings
+[INFO] Creating new stub [/Users/parthureddy/Documents/Food Delivery.nosync/CustomerApplication/target/stubs/META-INF/com.fooddelivery/food-delivery-backend/1.0-SNAPSHOT/mappings/getActiveOrders.json]
+[INFO] Creating new stub [/Users/parthureddy/Documents/Food Delivery.nosync/CustomerApplication/target/stubs/META-INF/com.fooddelivery/food-delivery-backend/1.0-SNAPSHOT/mappings/getOrderHistory.json]
+[INFO] Creating new stub [/Users/parthureddy/Documents/Food Delivery.nosync/CustomerApplication/target/stubs/META-INF/com.fooddelivery/food-delivery-backend/1.0-SNAPSHOT/mappings/getOrderParticipants.json]
+[INFO] Creating new stub [/Users/parthureddy/Documents/Food Delivery.nosync/CustomerApplication/target/stubs/META-INF/com.fooddelivery/food-delivery-backend/1.0-SNAPSHOT/mappings/internal/getActiveOrdersForDriver.json]
+[INFO] Creating new stub [/Users/parthureddy/Documents/Food Delivery.nosync/CustomerApplication/target/stubs/META-INF/com.fooddelivery/food-delivery-backend/1.0-SNAPSHOT/mappings/internal/getActiveOrdersForDriverWithConfirmedAssignments.json]
+[INFO] Creating new stub [/Users/parthureddy/Documents/Food Delivery.nosync/CustomerApplication/target/stubs/META-INF/com.fooddelivery/food-delivery-backend/1.0-SNAPSHOT/mappings/internal/getAdminOrderMoney.json]
+[INFO] Creating new stub [/Users/parthureddy/Documents/Food Delivery.nosync/CustomerApplication/target/stubs/META-INF/com.fooddelivery/food-delivery-backend/1.0-SNAPSHOT/mappings/internal/getDriverOrderMoney.json]
+[INFO] Creating new stub [/Users/parthureddy/Documents/Food Delivery.nosync/CustomerApplication/target/stubs/META-INF/com.fooddelivery/food-delivery-backend/1.0-SNAPSHOT/mappings/internal/getOrderHistoryForDriver.json]
+[INFO] Creating new stub [/Users/parthureddy/Documents/Food Delivery.nosync/CustomerApplication/target/stubs/META-INF/com.fooddelivery/food-delivery-backend/1.0-SNAPSHOT/mappings/internal/getOrderReviewContext.json]
+[INFO] Creating new stub [/Users/parthureddy/Documents/Food Delivery.nosync/CustomerApplication/target/stubs/META-INF/com.fooddelivery/food-delivery-backend/1.0-SNAPSHOT/mappings/internal/getRestaurantOrderMoney.json]
+[INFO] Creating new stub [/Users/parthureddy/Documents/Food Delivery.nosync/CustomerApplication/target/stubs/META-INF/com.fooddelivery/food-delivery-backend/1.0-SNAPSHOT/mappings/internal/getUnassignedOrders.json]
+[INFO] Creating new stub [/Users/parthureddy/Documents/Food Delivery.nosync/CustomerApplication/target/stubs/META-INF/com.fooddelivery/food-delivery-backend/1.0-SNAPSHOT/mappings/internal/initiatePartialRefund.json]
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ food-delivery-backend ---
+[INFO] Copying 23 resources from src/test/resources to target/test-classes
+[INFO] Copying 8 resources from target/generated-test-resources/contracts to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ food-delivery-backend ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 101 source files with javac [forked debug parameters release 17] to target/test-classes
+[INFO] 
+[INFO] ----------< com.fooddelivery:delivery-executive-application >-----------
+[INFO] Building delivery-executive-application 1.0-SNAPSHOT             [16/30]
+[INFO]   from DeliveryExecutiveApplication/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ delivery-executive-application ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 2 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ delivery-executive-application ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- spring-cloud-contract:4.1.2:generateTests (default-generateTests) @ delivery-executive-application ---
+[INFO] Generating server tests source code for Spring Cloud Contract Verifier contract verification
+[INFO] Will use contracts provided in the folder [/Users/parthureddy/Documents/Food Delivery.nosync/DeliveryExecutiveApplication/src/test/resources/contracts]
+[INFO] Directory with contract is present at [/Users/parthureddy/Documents/Food Delivery.nosync/DeliveryExecutiveApplication/src/test/resources/contracts]
+[INFO] Nothing to generate - all classes are up to date
+[INFO] 
+[INFO] --- exec:3.1.0:exec (check-stale-contracts) @ delivery-executive-application ---
+[INFO] 
+[INFO] --- spring-cloud-contract:4.1.2:convert (default-convert) @ delivery-executive-application ---
+[INFO] Will use contracts provided in the folder [/Users/parthureddy/Documents/Food Delivery.nosync/DeliveryExecutiveApplication/src/test/resources/contracts]
+[INFO] Nothing to generate - all stubs are up to date
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ delivery-executive-application ---
+[INFO] Copying 14 resources from src/test/resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ delivery-executive-application ---
+[INFO] Recompiling the module because of added or removed source files.
+[INFO] Compiling 54 source files with javac [forked debug parameters release 17] to target/test-classes
+[INFO] 
+[INFO] ------------------< com.fooddelivery:mapsintegration >------------------
+[INFO] Building mapsintegration 0.0.1-SNAPSHOT                          [17/30]
+[INFO]   from MapsIntegration/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ mapsintegration ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 4 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ mapsintegration ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- spring-cloud-contract:4.1.2:generateTests (default-generateTests) @ mapsintegration ---
+[INFO] Generating server tests source code for Spring Cloud Contract Verifier contract verification
+[INFO] Will use contracts provided in the folder [/Users/parthureddy/Documents/Food Delivery.nosync/MapsIntegration/src/test/resources/contracts]
+[INFO] Directory with contract is present at [/Users/parthureddy/Documents/Food Delivery.nosync/MapsIntegration/src/test/resources/contracts]
+[INFO] Test Source directory: /Users/parthureddy/Documents/Food Delivery.nosync/MapsIntegration/target/generated-test-sources/contracts added.
+[INFO] Using [com.fooddelivery.mapsintegration.ContractTestBase] as base class for test classes, [null] as base package for tests, [null] as package with base classes, base class mappings [BaseClassMapping{contractPackageRegex='.*messaging.*', baseClassFQN='com.fooddelivery.maps.contract.BaseMessagingClass'}]
+[INFO] Creating new class file [/Users/parthureddy/Documents/Food Delivery.nosync/MapsIntegration/target/generated-test-sources/contracts/com/fooddelivery/mapsintegration/MapsintegrationTest.java]
+[INFO] Creating new class file [/Users/parthureddy/Documents/Food Delivery.nosync/MapsIntegration/target/generated-test-sources/contracts/com/fooddelivery/mapsintegration/MessagingTest.java]
+[INFO] Generated 2 test classes.
+[INFO] 
+[INFO] --- exec:3.1.0:exec (check-stale-contracts) @ mapsintegration ---
+[INFO] 
+[INFO] --- spring-cloud-contract:4.1.2:convert (default-convert) @ mapsintegration ---
+[INFO] Will use contracts provided in the folder [/Users/parthureddy/Documents/Food Delivery.nosync/MapsIntegration/src/test/resources/contracts]
+[INFO] Copying Spring Cloud Contract Verifier contracts to [/Users/parthureddy/Documents/Food Delivery.nosync/MapsIntegration/target/stubs/META-INF/com.fooddelivery/mapsintegration/0.0.1-SNAPSHOT/contracts]. Only files matching [.*] pattern will end up in the final JAR with stubs.
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 4 resources
+[INFO] Converting from Spring Cloud Contract Verifier contracts to WireMock stubs mappings
+[INFO]      Spring Cloud Contract Verifier contracts directory: /Users/parthureddy/Documents/Food Delivery.nosync/MapsIntegration/src/test/resources/contracts
+[INFO] Stub Server stubs mappings directory: /Users/parthureddy/Documents/Food Delivery.nosync/MapsIntegration/target/stubs/META-INF/com.fooddelivery/mapsintegration/0.0.1-SNAPSHOT/mappings
+[INFO] Creating new stub [/Users/parthureddy/Documents/Food Delivery.nosync/MapsIntegration/target/stubs/META-INF/com.fooddelivery/mapsintegration/0.0.1-SNAPSHOT/mappings/mapsintegration/fleet-release.json]
+[INFO] Creating new stub [/Users/parthureddy/Documents/Food Delivery.nosync/MapsIntegration/target/stubs/META-INF/com.fooddelivery/mapsintegration/0.0.1-SNAPSHOT/mappings/mapsintegration/fleet-set-availability.json]
+[INFO] Creating new stub [/Users/parthureddy/Documents/Food Delivery.nosync/MapsIntegration/target/stubs/META-INF/com.fooddelivery/mapsintegration/0.0.1-SNAPSHOT/mappings/mapsintegration/reverse-geocode.json]
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ mapsintegration ---
+[INFO] Copying 6 resources from src/test/resources to target/test-classes
+[INFO] Copying 1 resource from target/generated-test-resources/contracts to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ mapsintegration ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 16 source files with javac [forked debug parameters release 17] to target/test-classes
+[INFO] 
+[INFO] ------------------< com.fooddelivery:payment-service >------------------
+[INFO] Building payment-service 0.0.1-SNAPSHOT                          [18/30]
+[INFO]   from PaymentGatewayIntegration/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ payment-service ---
+[INFO] Copying 2 resources from src/main/resources to target/classes
+[INFO] Copying 4 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ payment-service ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- spring-cloud-contract:4.1.2:generateTests (default-generateTests) @ payment-service ---
+[INFO] Generating server tests source code for Spring Cloud Contract Verifier contract verification
+[INFO] Will use contracts provided in the folder [/Users/parthureddy/Documents/Food Delivery.nosync/PaymentGatewayIntegration/src/test/resources/contracts]
+[INFO] Directory with contract is present at [/Users/parthureddy/Documents/Food Delivery.nosync/PaymentGatewayIntegration/src/test/resources/contracts]
+[INFO] Test Source directory: /Users/parthureddy/Documents/Food Delivery.nosync/PaymentGatewayIntegration/target/generated-test-sources/contracts added.
+[INFO] Using [com.fooddelivery.payments.ContractTestBase] as base class for test classes, [null] as base package for tests, [null] as package with base classes, base class mappings [BaseClassMapping{contractPackageRegex='.*messaging.*', baseClassFQN='com.fooddelivery.payment.contract.BaseMessagingClass'}]
+[INFO] Creating new class file [/Users/parthureddy/Documents/Food Delivery.nosync/PaymentGatewayIntegration/target/generated-test-sources/contracts/com/fooddelivery/payments/MessagingTest.java]
+[INFO] Creating new class file [/Users/parthureddy/Documents/Food Delivery.nosync/PaymentGatewayIntegration/target/generated-test-sources/contracts/com/fooddelivery/payments/PaymentTest.java]
+[INFO] Generated 2 test classes.
+[INFO] 
+[INFO] --- exec:3.1.0:exec (check-stale-contracts) @ payment-service ---
+[INFO] 
+[INFO] --- spring-cloud-contract:4.1.2:convert (default-convert) @ payment-service ---
+[INFO] Will use contracts provided in the folder [/Users/parthureddy/Documents/Food Delivery.nosync/PaymentGatewayIntegration/src/test/resources/contracts]
+[INFO] Copying Spring Cloud Contract Verifier contracts to [/Users/parthureddy/Documents/Food Delivery.nosync/PaymentGatewayIntegration/target/stubs/META-INF/com.fooddelivery/payment-service/0.0.1-SNAPSHOT/contracts]. Only files matching [.*] pattern will end up in the final JAR with stubs.
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 5 resources
+[INFO] Converting from Spring Cloud Contract Verifier contracts to WireMock stubs mappings
+[INFO]      Spring Cloud Contract Verifier contracts directory: /Users/parthureddy/Documents/Food Delivery.nosync/PaymentGatewayIntegration/src/test/resources/contracts
+[INFO] Stub Server stubs mappings directory: /Users/parthureddy/Documents/Food Delivery.nosync/PaymentGatewayIntegration/target/stubs/META-INF/com.fooddelivery/payment-service/0.0.1-SNAPSHOT/mappings
+[INFO] Creating new stub [/Users/parthureddy/Documents/Food Delivery.nosync/PaymentGatewayIntegration/target/stubs/META-INF/com.fooddelivery/payment-service/0.0.1-SNAPSHOT/mappings/payment/create-order.json]
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ payment-service ---
+[INFO] Copying 8 resources from src/test/resources to target/test-classes
+[INFO] Copying 4 resources from target/generated-test-resources/contracts to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ payment-service ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 32 source files with javac [debug parameters release 17] to target/test-classes
+[INFO] /Users/parthureddy/Documents/Food Delivery.nosync/PaymentGatewayIntegration/src/test/java/com/fooddelivery/payments/PaymentIntentIdempotencyTest.java: /Users/parthureddy/Documents/Food Delivery.nosync/PaymentGatewayIntegration/src/test/java/com/fooddelivery/payments/PaymentIntentIdempotencyTest.java uses or overrides a deprecated API.
+[INFO] /Users/parthureddy/Documents/Food Delivery.nosync/PaymentGatewayIntegration/src/test/java/com/fooddelivery/payments/PaymentIntentIdempotencyTest.java: Recompile with -Xlint:deprecation for details.
+[INFO] /Users/parthureddy/Documents/Food Delivery.nosync/PaymentGatewayIntegration/src/test/java/com/fooddelivery/payments/service/gateway/CashfreeStrategyTest.java: Some input files use unchecked or unsafe operations.
+[INFO] /Users/parthureddy/Documents/Food Delivery.nosync/PaymentGatewayIntegration/src/test/java/com/fooddelivery/payments/service/gateway/CashfreeStrategyTest.java: Recompile with -Xlint:unchecked for details.
+[INFO] 
+[INFO] --------------< com.fooddelivery:restaurant-application >---------------
+[INFO] Building restaurant-application 1.0-SNAPSHOT                     [19/30]
+[INFO]   from RestaurantApplication/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ restaurant-application ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 2 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ restaurant-application ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- spring-cloud-contract:4.1.2:generateTests (default-generateTests) @ restaurant-application ---
+[INFO] Generating server tests source code for Spring Cloud Contract Verifier contract verification
+[INFO] Will use contracts provided in the folder [/Users/parthureddy/Documents/Food Delivery.nosync/RestaurantApplication/src/test/resources/contracts]
+[INFO] Directory with contract is present at [/Users/parthureddy/Documents/Food Delivery.nosync/RestaurantApplication/src/test/resources/contracts]
+[INFO] Nothing to generate - all classes are up to date
+[INFO] 
+[INFO] --- exec:3.1.0:exec (check-stale-contracts) @ restaurant-application ---
+[INFO] 
+[INFO] --- spring-cloud-contract:4.1.2:convert (default-convert) @ restaurant-application ---
+[INFO] Will use contracts provided in the folder [/Users/parthureddy/Documents/Food Delivery.nosync/RestaurantApplication/src/test/resources/contracts]
+[INFO] Nothing to generate - all stubs are up to date
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ restaurant-application ---
+[INFO] Copying 13 resources from src/test/resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ restaurant-application ---
+[INFO] Recompiling the module because of added or removed source files.
+[INFO] Compiling 37 source files with javac [forked debug parameters release 17] to target/test-classes
+[INFO] 
+[INFO] ---------< com.fooddelivery:government-id-validation-service >----------
+[INFO] Building government-id-validation-service 0.0.1-SNAPSHOT         [20/30]
+[INFO]   from GovernmentIDValidationService/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ government-id-validation-service ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 2 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ government-id-validation-service ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- spring-cloud-contract:4.1.2:generateTests (default-generateTests) @ government-id-validation-service ---
+[INFO] Generating server tests source code for Spring Cloud Contract Verifier contract verification
+[INFO] Will use contracts provided in the folder [/Users/parthureddy/Documents/Food Delivery.nosync/GovernmentIDValidationService/src/test/resources/contracts]
+[INFO] Directory with contract is present at [/Users/parthureddy/Documents/Food Delivery.nosync/GovernmentIDValidationService/src/test/resources/contracts]
+[INFO] Nothing to generate - all classes are up to date
+[INFO] 
+[INFO] --- exec:3.1.0:exec (check-stale-contracts) @ government-id-validation-service ---
+[INFO] 
+[INFO] --- spring-cloud-contract:4.1.2:convert (default-convert) @ government-id-validation-service ---
+[INFO] Will use contracts provided in the folder [/Users/parthureddy/Documents/Food Delivery.nosync/GovernmentIDValidationService/src/test/resources/contracts]
+[INFO] Copying Spring Cloud Contract Verifier contracts to [/Users/parthureddy/Documents/Food Delivery.nosync/GovernmentIDValidationService/target/stubs/META-INF/com.fooddelivery/government-id-validation-service/0.0.1-SNAPSHOT/contracts]. Only files matching [.*] pattern will end up in the final JAR with stubs.
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 4 resources
+[INFO] Converting from Spring Cloud Contract Verifier contracts to WireMock stubs mappings
+[INFO]      Spring Cloud Contract Verifier contracts directory: /Users/parthureddy/Documents/Food Delivery.nosync/GovernmentIDValidationService/src/test/resources/contracts
+[INFO] Stub Server stubs mappings directory: /Users/parthureddy/Documents/Food Delivery.nosync/GovernmentIDValidationService/target/stubs/META-INF/com.fooddelivery/government-id-validation-service/0.0.1-SNAPSHOT/mappings
+[INFO] Creating new stub [/Users/parthureddy/Documents/Food Delivery.nosync/GovernmentIDValidationService/target/stubs/META-INF/com.fooddelivery/government-id-validation-service/0.0.1-SNAPSHOT/mappings/brandVerifyBankAccount.json]
+[INFO] Creating new stub [/Users/parthureddy/Documents/Food Delivery.nosync/GovernmentIDValidationService/target/stubs/META-INF/com.fooddelivery/government-id-validation-service/0.0.1-SNAPSHOT/mappings/brandVerifyGstin.json]
+[INFO] Creating new stub [/Users/parthureddy/Documents/Food Delivery.nosync/GovernmentIDValidationService/target/stubs/META-INF/com.fooddelivery/government-id-validation-service/0.0.1-SNAPSHOT/mappings/getVerificationSummary.json]
+[INFO] Creating new stub [/Users/parthureddy/Documents/Food Delivery.nosync/GovernmentIDValidationService/target/stubs/META-INF/com.fooddelivery/government-id-validation-service/0.0.1-SNAPSHOT/mappings/government-id-validation-service/get-verification-summary.json]
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ government-id-validation-service ---
+[INFO] Copying 6 resources from src/test/resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ government-id-validation-service ---
+[INFO] Recompiling the module because of added or removed source files.
+[INFO] Compiling 23 source files with javac [forked debug parameters release 17] to target/test-classes
+[INFO] 
+[INFO] ------------------< com.fooddelivery:ledger-service >-------------------
+[INFO] Building ledger-service 1.0-SNAPSHOT                             [21/30]
+[INFO]   from LedgerService/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ ledger-service ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 6 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ ledger-service ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- spring-cloud-contract:4.1.2:generateTests (default-generateTests) @ ledger-service ---
+[INFO] Generating server tests source code for Spring Cloud Contract Verifier contract verification
+[INFO] Will use contracts provided in the folder [/Users/parthureddy/Documents/Food Delivery.nosync/LedgerService/src/test/resources/contracts]
+[INFO] Directory with contract is present at [/Users/parthureddy/Documents/Food Delivery.nosync/LedgerService/src/test/resources/contracts]
+[INFO] Test Source directory: /Users/parthureddy/Documents/Food Delivery.nosync/LedgerService/target/generated-test-sources/contracts added.
+[INFO] Using [com.fooddelivery.ledger.ContractTestBase] as base class for test classes, [null] as base package for tests, [null] as package with base classes, base class mappings []
+[INFO] Creating new class file [/Users/parthureddy/Documents/Food Delivery.nosync/LedgerService/target/generated-test-sources/contracts/com/fooddelivery/ledger/ContractVerifierTest.java]
+[INFO] Generated 1 test classes.
+[INFO] 
+[INFO] --- exec:3.1.0:exec (check-stale-contracts) @ ledger-service ---
+[INFO] 
+[INFO] --- spring-cloud-contract:4.1.2:convert (default-convert) @ ledger-service ---
+[INFO] Will use contracts provided in the folder [/Users/parthureddy/Documents/Food Delivery.nosync/LedgerService/src/test/resources/contracts]
+[INFO] Copying Spring Cloud Contract Verifier contracts to [/Users/parthureddy/Documents/Food Delivery.nosync/LedgerService/target/stubs/META-INF/com.fooddelivery/ledger-service/1.0-SNAPSHOT/contracts]. Only files matching [.*] pattern will end up in the final JAR with stubs.
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 2 resources
+[INFO] Converting from Spring Cloud Contract Verifier contracts to WireMock stubs mappings
+[INFO]      Spring Cloud Contract Verifier contracts directory: /Users/parthureddy/Documents/Food Delivery.nosync/LedgerService/src/test/resources/contracts
+[INFO] Stub Server stubs mappings directory: /Users/parthureddy/Documents/Food Delivery.nosync/LedgerService/target/stubs/META-INF/com.fooddelivery/ledger-service/1.0-SNAPSHOT/mappings
+[INFO] Creating new stub [/Users/parthureddy/Documents/Food Delivery.nosync/LedgerService/target/stubs/META-INF/com.fooddelivery/ledger-service/1.0-SNAPSHOT/mappings/getCategoryTotal.json]
+[INFO] Creating new stub [/Users/parthureddy/Documents/Food Delivery.nosync/LedgerService/target/stubs/META-INF/com.fooddelivery/ledger-service/1.0-SNAPSHOT/mappings/getOrderLedgerAmount.json]
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ ledger-service ---
+[INFO] Copying 5 resources from src/test/resources to target/test-classes
+[INFO] skip non existing resourceDirectory /Users/parthureddy/Documents/Food Delivery.nosync/LedgerService/target/generated-test-resources/contracts
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ ledger-service ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 45 source files with javac [forked debug parameters release 17] to target/test-classes
+[INFO] 
+[INFO] -------------------< com.fooddelivery:chat-service >--------------------
+[INFO] Building chat-service 1.0-SNAPSHOT                               [22/30]
+[INFO]   from CommunicationService/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ chat-service ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 2 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ chat-service ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- spring-cloud-contract:4.1.2:generateTests (default-generateTests) @ chat-service ---
+[INFO] Skipping Spring Cloud Contract Verifier execution: spring.cloud.contract.verifier.skip=true
+[INFO] 
+[INFO] --- exec:3.1.0:exec (check-stale-contracts) @ chat-service ---
+[INFO] 
+[INFO] --- spring-cloud-contract:4.1.2:convert (default-convert) @ chat-service ---
+[INFO] Skipping Spring Cloud Contract Verifier execution: spring.cloud.contract.verifier.skip=true
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ chat-service ---
+[INFO] Copying 2 resources from src/test/resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ chat-service ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] -------------< com.fooddelivery:ondc-integration-service >--------------
+[INFO] Building ondc-integration-service 1.0-SNAPSHOT                   [23/30]
+[INFO]   from ONDCIntegrationService/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ ondc-integration-service ---
+[INFO] Copying 2 resources from src/main/resources to target/classes
+[INFO] Copying 4 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ ondc-integration-service ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- spring-cloud-contract:4.1.2:generateTests (default-generateTests) @ ondc-integration-service ---
+[INFO] Generating server tests source code for Spring Cloud Contract Verifier contract verification
+[INFO] Will use contracts provided in the folder [/Users/parthureddy/Documents/Food Delivery.nosync/ONDCIntegrationService/src/test/resources/contracts]
+[INFO] Directory with contract is present at [/Users/parthureddy/Documents/Food Delivery.nosync/ONDCIntegrationService/src/test/resources/contracts]
+[INFO] Test Source directory: /Users/parthureddy/Documents/Food Delivery.nosync/ONDCIntegrationService/target/generated-test-sources/contracts added.
+[INFO] Using [null] as base class for test classes, [null] as base package for tests, [null] as package with base classes, base class mappings [BaseClassMapping{contractPackageRegex='.*messaging.*', baseClassFQN='com.fooddelivery.ondc.contract.BaseMessagingClass'}]
+[INFO] Creating new class file [/Users/parthureddy/Documents/Food Delivery.nosync/ONDCIntegrationService/target/generated-test-sources/contracts/org/springframework/cloud/contract/verifier/tests/MessagingTest.java]
+[INFO] Generated 1 test classes.
+[INFO] 
+[INFO] --- exec:3.1.0:exec (check-stale-contracts) @ ondc-integration-service ---
+[INFO] 
+[INFO] --- spring-cloud-contract:4.1.2:convert (default-convert) @ ondc-integration-service ---
+[INFO] Will use contracts provided in the folder [/Users/parthureddy/Documents/Food Delivery.nosync/ONDCIntegrationService/src/test/resources/contracts]
+[INFO] Copying Spring Cloud Contract Verifier contracts to [/Users/parthureddy/Documents/Food Delivery.nosync/ONDCIntegrationService/target/stubs/META-INF/com.fooddelivery/ondc-integration-service/1.0-SNAPSHOT/contracts]. Only files matching [.*] pattern will end up in the final JAR with stubs.
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 3 resources
+[INFO] Converting from Spring Cloud Contract Verifier contracts to WireMock stubs mappings
+[INFO]      Spring Cloud Contract Verifier contracts directory: /Users/parthureddy/Documents/Food Delivery.nosync/ONDCIntegrationService/src/test/resources/contracts
+[INFO] Stub Server stubs mappings directory: /Users/parthureddy/Documents/Food Delivery.nosync/ONDCIntegrationService/target/stubs/META-INF/com.fooddelivery/ondc-integration-service/1.0-SNAPSHOT/mappings
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ ondc-integration-service ---
+[INFO] Copying 5 resources from src/test/resources to target/test-classes
+[INFO] Copying 3 resources from target/generated-test-resources/contracts to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ ondc-integration-service ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 15 source files with javac [forked debug parameters release 17] to target/test-classes
+[INFO] 
+[INFO] ------------------< com.fooddelivery:wallet-service >-------------------
+[INFO] Building wallet-service 1.0-SNAPSHOT                             [24/30]
+[INFO]   from WalletService/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ wallet-service ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 5 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ wallet-service ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- spring-cloud-contract:4.1.2:generateTests (default-generateTests) @ wallet-service ---
+[INFO] Generating server tests source code for Spring Cloud Contract Verifier contract verification
+[INFO] Will use contracts provided in the folder [/Users/parthureddy/Documents/Food Delivery.nosync/WalletService/src/test/resources/contracts]
+[INFO] Directory with contract is present at [/Users/parthureddy/Documents/Food Delivery.nosync/WalletService/src/test/resources/contracts]
+[INFO] Test Source directory: /Users/parthureddy/Documents/Food Delivery.nosync/WalletService/target/generated-test-sources/contracts added.
+[INFO] Using [com.fooddelivery.wallet.ContractTestBase] as base class for test classes, [null] as base package for tests, [null] as package with base classes, base class mappings [BaseClassMapping{contractPackageRegex='.*messaging.*', baseClassFQN='com.fooddelivery.wallet.contract.BaseMessagingClass'}]
+[INFO] Creating new class file [/Users/parthureddy/Documents/Food Delivery.nosync/WalletService/target/generated-test-sources/contracts/com/fooddelivery/wallet/ContractVerifierTest.java]
+[INFO] Creating new class file [/Users/parthureddy/Documents/Food Delivery.nosync/WalletService/target/generated-test-sources/contracts/com/fooddelivery/wallet/MessagingTest.java]
+[INFO] Generated 2 test classes.
+[INFO] 
+[INFO] --- exec:3.1.0:exec (check-stale-contracts) @ wallet-service ---
+[INFO] 
+[INFO] --- spring-cloud-contract:4.1.2:convert (default-convert) @ wallet-service ---
+[INFO] Will use contracts provided in the folder [/Users/parthureddy/Documents/Food Delivery.nosync/WalletService/src/test/resources/contracts]
+[INFO] Copying Spring Cloud Contract Verifier contracts to [/Users/parthureddy/Documents/Food Delivery.nosync/WalletService/target/stubs/META-INF/com.fooddelivery/wallet-service/1.0-SNAPSHOT/contracts]. Only files matching [.*] pattern will end up in the final JAR with stubs.
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 3 resources
+[INFO] Converting from Spring Cloud Contract Verifier contracts to WireMock stubs mappings
+[INFO]      Spring Cloud Contract Verifier contracts directory: /Users/parthureddy/Documents/Food Delivery.nosync/WalletService/src/test/resources/contracts
+[INFO] Stub Server stubs mappings directory: /Users/parthureddy/Documents/Food Delivery.nosync/WalletService/target/stubs/META-INF/com.fooddelivery/wallet-service/1.0-SNAPSHOT/mappings
+[INFO] Creating new stub [/Users/parthureddy/Documents/Food Delivery.nosync/WalletService/target/stubs/META-INF/com.fooddelivery/wallet-service/1.0-SNAPSHOT/mappings/get-wallet.json]
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ wallet-service ---
+[INFO] Copying 5 resources from src/test/resources to target/test-classes
+[INFO] Copying 2 resources from target/generated-test-resources/contracts to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ wallet-service ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 22 source files with javac [debug parameters release 17] to target/test-classes
+[INFO] 
+[INFO] ---------------< com.fooddelivery:budget-pacing-service >---------------
+[INFO] Building budget-pacing-service 1.0-SNAPSHOT                      [25/30]
+[INFO]   from BudgetLimitingService/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ budget-pacing-service ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ budget-pacing-service ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- spring-cloud-contract:4.1.2:generateTests (default-generateTests) @ budget-pacing-service ---
+[INFO] Generating server tests source code for Spring Cloud Contract Verifier contract verification
+[INFO] Will use contracts provided in the folder [/Users/parthureddy/Documents/Food Delivery.nosync/BudgetLimitingService/src/test/resources/contracts]
+[INFO] Directory with contract is present at [/Users/parthureddy/Documents/Food Delivery.nosync/BudgetLimitingService/src/test/resources/contracts]
+[INFO] Test Source directory: /Users/parthureddy/Documents/Food Delivery.nosync/BudgetLimitingService/target/generated-test-sources/contracts added.
+[INFO] Using [com.fooddelivery.advertisement.pacing.contract.BaseMessagingClass] as base class for test classes, [null] as base package for tests, [null] as package with base classes, base class mappings []
+[INFO] Creating new class file [/Users/parthureddy/Documents/Food Delivery.nosync/BudgetLimitingService/target/generated-test-sources/contracts/com/fooddelivery/advertisement/pacing/contract/MessagingTest.java]
+[INFO] Generated 1 test classes.
+[INFO] 
+[INFO] --- exec:3.1.0:exec (check-stale-contracts) @ budget-pacing-service ---
+[INFO] 
+[INFO] --- spring-cloud-contract:4.1.2:convert (default-convert) @ budget-pacing-service ---
+[INFO] Will use contracts provided in the folder [/Users/parthureddy/Documents/Food Delivery.nosync/BudgetLimitingService/src/test/resources/contracts]
+[INFO] Copying Spring Cloud Contract Verifier contracts to [/Users/parthureddy/Documents/Food Delivery.nosync/BudgetLimitingService/target/stubs/META-INF/com.fooddelivery/budget-pacing-service/1.0-SNAPSHOT/contracts]. Only files matching [.*] pattern will end up in the final JAR with stubs.
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 2 resources
+[INFO] Converting from Spring Cloud Contract Verifier contracts to WireMock stubs mappings
+[INFO]      Spring Cloud Contract Verifier contracts directory: /Users/parthureddy/Documents/Food Delivery.nosync/BudgetLimitingService/src/test/resources/contracts
+[INFO] Stub Server stubs mappings directory: /Users/parthureddy/Documents/Food Delivery.nosync/BudgetLimitingService/target/stubs/META-INF/com.fooddelivery/budget-pacing-service/1.0-SNAPSHOT/mappings
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ budget-pacing-service ---
+[INFO] Copying 4 resources from src/test/resources to target/test-classes
+[INFO] Copying 2 resources from target/generated-test-resources/contracts to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ budget-pacing-service ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 11 source files with javac [forked debug parameters release 17] to target/test-classes
+[INFO] 
+[INFO] ------------------< com.fooddelivery:bidding-engine >-------------------
+[INFO] Building bidding-engine 1.0-SNAPSHOT                             [26/30]
+[INFO]   from BiddingEngine/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ bidding-engine ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ bidding-engine ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- spring-cloud-contract:4.1.2:generateTests (default-generateTests) @ bidding-engine ---
+[INFO] Generating server tests source code for Spring Cloud Contract Verifier contract verification
+[INFO] Will use contracts provided in the folder [/Users/parthureddy/Documents/Food Delivery.nosync/BiddingEngine/src/test/resources/contracts]
+[INFO] Directory with contract is present at [/Users/parthureddy/Documents/Food Delivery.nosync/BiddingEngine/src/test/resources/contracts]
+[INFO] Test Source directory: /Users/parthureddy/Documents/Food Delivery.nosync/BiddingEngine/target/generated-test-sources/contracts added.
+[INFO] Using [com.fooddelivery.advertisement.bidding.contract.BaseContractTest] as base class for test classes, [null] as base package for tests, [null] as package with base classes, base class mappings []
+[INFO] Creating new class file [/Users/parthureddy/Documents/Food Delivery.nosync/BiddingEngine/target/generated-test-sources/contracts/com/fooddelivery/advertisement/bidding/contract/ContractVerifierTest.java]
+[INFO] Generated 1 test classes.
+[INFO] 
+[INFO] --- exec:3.1.0:exec (check-stale-contracts) @ bidding-engine ---
+[INFO] 
+[INFO] --- spring-cloud-contract:4.1.2:convert (default-convert) @ bidding-engine ---
+[INFO] Will use contracts provided in the folder [/Users/parthureddy/Documents/Food Delivery.nosync/BiddingEngine/src/test/resources/contracts]
+[INFO] Copying Spring Cloud Contract Verifier contracts to [/Users/parthureddy/Documents/Food Delivery.nosync/BiddingEngine/target/stubs/META-INF/com.fooddelivery/bidding-engine/1.0-SNAPSHOT/contracts]. Only files matching [.*] pattern will end up in the final JAR with stubs.
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 1 resource
+[INFO] Converting from Spring Cloud Contract Verifier contracts to WireMock stubs mappings
+[INFO]      Spring Cloud Contract Verifier contracts directory: /Users/parthureddy/Documents/Food Delivery.nosync/BiddingEngine/src/test/resources/contracts
+[INFO] Stub Server stubs mappings directory: /Users/parthureddy/Documents/Food Delivery.nosync/BiddingEngine/target/stubs/META-INF/com.fooddelivery/bidding-engine/1.0-SNAPSHOT/mappings
+[INFO] Creating new stub [/Users/parthureddy/Documents/Food Delivery.nosync/BiddingEngine/target/stubs/META-INF/com.fooddelivery/bidding-engine/1.0-SNAPSHOT/mappings/fetchAds.json]
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ bidding-engine ---
+[INFO] Copying 3 resources from src/test/resources to target/test-classes
+[INFO] skip non existing resourceDirectory /Users/parthureddy/Documents/Food Delivery.nosync/BiddingEngine/target/generated-test-resources/contracts
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ bidding-engine ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 10 source files with javac [forked debug parameters release 17] to target/test-classes
+[INFO] 
+[INFO] -----------------< com.fooddelivery:campaign-service >------------------
+[INFO] Building campaign-service 1.0-SNAPSHOT                           [27/30]
+[INFO]   from CampaignService/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ campaign-service ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 3 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ campaign-service ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- spring-cloud-contract:4.1.2:generateTests (default-generateTests) @ campaign-service ---
+[INFO] Generating server tests source code for Spring Cloud Contract Verifier contract verification
+[INFO] Will use contracts provided in the folder [/Users/parthureddy/Documents/Food Delivery.nosync/CampaignService/src/test/resources/contracts]
+[INFO] Directory with contract is present at [/Users/parthureddy/Documents/Food Delivery.nosync/CampaignService/src/test/resources/contracts]
+[INFO] Test Source directory: /Users/parthureddy/Documents/Food Delivery.nosync/CampaignService/target/generated-test-sources/contracts added.
+[INFO] Using [com.fooddelivery.contract.ContractTestBase] as base class for test classes, [null] as base package for tests, [null] as package with base classes, base class mappings [BaseClassMapping{contractPackageRegex='.*messaging.*', baseClassFQN='com.fooddelivery.ad.campaign.contract.BaseMessagingClass'}]
+[INFO] Creating new class file [/Users/parthureddy/Documents/Food Delivery.nosync/CampaignService/target/generated-test-sources/contracts/com/fooddelivery/contract/HttpTest.java]
+[INFO] Creating new class file [/Users/parthureddy/Documents/Food Delivery.nosync/CampaignService/target/generated-test-sources/contracts/com/fooddelivery/contract/MessagingTest.java]
+[INFO] Generated 2 test classes.
+[INFO] 
+[INFO] --- exec:3.1.0:exec (check-stale-contracts) @ campaign-service ---
+[INFO] 
+[INFO] --- spring-cloud-contract:4.1.2:convert (default-convert) @ campaign-service ---
+[INFO] Will use contracts provided in the folder [/Users/parthureddy/Documents/Food Delivery.nosync/CampaignService/src/test/resources/contracts]
+[INFO] Copying Spring Cloud Contract Verifier contracts to [/Users/parthureddy/Documents/Food Delivery.nosync/CampaignService/target/stubs/META-INF/com.fooddelivery/campaign-service/1.0-SNAPSHOT/contracts]. Only files matching [.*] pattern will end up in the final JAR with stubs.
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 11 resources
+[INFO] Converting from Spring Cloud Contract Verifier contracts to WireMock stubs mappings
+[INFO]      Spring Cloud Contract Verifier contracts directory: /Users/parthureddy/Documents/Food Delivery.nosync/CampaignService/src/test/resources/contracts
+[INFO] Stub Server stubs mappings directory: /Users/parthureddy/Documents/Food Delivery.nosync/CampaignService/target/stubs/META-INF/com.fooddelivery/campaign-service/1.0-SNAPSHOT/mappings
+[INFO] Creating new stub [/Users/parthureddy/Documents/Food Delivery.nosync/CampaignService/target/stubs/META-INF/com.fooddelivery/campaign-service/1.0-SNAPSHOT/mappings/http/getAdvertiserUserId.json]
+[INFO] Creating new stub [/Users/parthureddy/Documents/Food Delivery.nosync/CampaignService/target/stubs/META-INF/com.fooddelivery/campaign-service/1.0-SNAPSHOT/mappings/http/internal_batch_budgets.json]
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ campaign-service ---
+[INFO] Copying 15 resources from src/test/resources to target/test-classes
+[INFO] Copying 9 resources from target/generated-test-resources/contracts to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ campaign-service ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 16 source files with javac [forked debug parameters release 17] to target/test-classes
+[INFO] 
+[INFO] --------------< com.fooddelivery:event-tracking-service >---------------
+[INFO] Building event-tracking-service 1.0-SNAPSHOT                     [28/30]
+[INFO]   from UserTrackingService/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ event-tracking-service ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ event-tracking-service ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- spring-cloud-contract:4.1.2:generateTests (default-generateTests) @ event-tracking-service ---
+[INFO] Generating server tests source code for Spring Cloud Contract Verifier contract verification
+[INFO] Will use contracts provided in the folder [/Users/parthureddy/Documents/Food Delivery.nosync/UserTrackingService/src/test/resources/contracts]
+[INFO] Directory with contract is present at [/Users/parthureddy/Documents/Food Delivery.nosync/UserTrackingService/src/test/resources/contracts]
+[INFO] Test Source directory: /Users/parthureddy/Documents/Food Delivery.nosync/UserTrackingService/target/generated-test-sources/contracts added.
+[INFO] Using [null] as base class for test classes, [com.fooddelivery.tracking] as base package for tests, [null] as package with base classes, base class mappings [BaseClassMapping{contractPackageRegex='.*messaging.*', baseClassFQN='com.fooddelivery.tracking.contract.BaseMessagingClass'}]
+[INFO] Creating new class file [/Users/parthureddy/Documents/Food Delivery.nosync/UserTrackingService/target/generated-test-sources/contracts/com/fooddelivery/tracking/MessagingTest.java]
+[INFO] Generated 1 test classes.
+[INFO] 
+[INFO] --- exec:3.1.0:exec (check-stale-contracts) @ event-tracking-service ---
+[INFO] 
+[INFO] --- spring-cloud-contract:4.1.2:convert (default-convert) @ event-tracking-service ---
+[INFO] Will use contracts provided in the folder [/Users/parthureddy/Documents/Food Delivery.nosync/UserTrackingService/src/test/resources/contracts]
+[INFO] Copying Spring Cloud Contract Verifier contracts to [/Users/parthureddy/Documents/Food Delivery.nosync/UserTrackingService/target/stubs/META-INF/com.fooddelivery/event-tracking-service/1.0-SNAPSHOT/contracts]. Only files matching [.*] pattern will end up in the final JAR with stubs.
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 2 resources
+[INFO] Converting from Spring Cloud Contract Verifier contracts to WireMock stubs mappings
+[INFO]      Spring Cloud Contract Verifier contracts directory: /Users/parthureddy/Documents/Food Delivery.nosync/UserTrackingService/src/test/resources/contracts
+[INFO] Stub Server stubs mappings directory: /Users/parthureddy/Documents/Food Delivery.nosync/UserTrackingService/target/stubs/META-INF/com.fooddelivery/event-tracking-service/1.0-SNAPSHOT/mappings
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ event-tracking-service ---
+[INFO] Copying 4 resources from src/test/resources to target/test-classes
+[INFO] Copying 2 resources from target/generated-test-resources/contracts to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ event-tracking-service ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 10 source files with javac [forked debug parameters release 17] to target/test-classes
+[INFO] 
+[INFO] ------------------< com.fooddelivery:reviews-service >------------------
+[INFO] Building reviews-service 1.0-SNAPSHOT                            [29/30]
+[INFO]   from ReviewsService/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ reviews-service ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 4 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ reviews-service ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- spring-cloud-contract:4.1.2:generateTests (default-generateTests) @ reviews-service ---
+[INFO] Generating server tests source code for Spring Cloud Contract Verifier contract verification
+[INFO] Will use contracts provided in the folder [/Users/parthureddy/Documents/Food Delivery.nosync/ReviewsService/src/test/resources/contracts]
+[INFO] Directory with contract is present at [/Users/parthureddy/Documents/Food Delivery.nosync/ReviewsService/src/test/resources/contracts]
+[INFO] Test Source directory: /Users/parthureddy/Documents/Food Delivery.nosync/ReviewsService/target/generated-test-sources/contracts added.
+[INFO] Using [com.fooddelivery.reviews.contract.BaseMessagingClass] as base class for test classes, [null] as base package for tests, [null] as package with base classes, base class mappings [BaseClassMapping{contractPackageRegex='.*messaging.*', baseClassFQN='com.fooddelivery.reviews.contract.BaseMessagingClass'}]
+[INFO] Creating new class file [/Users/parthureddy/Documents/Food Delivery.nosync/ReviewsService/target/generated-test-sources/contracts/com/fooddelivery/reviews/contract/MessagingTest.java]
+[INFO] Generated 1 test classes.
+[INFO] 
+[INFO] --- exec:3.1.0:exec (check-stale-contracts) @ reviews-service ---
+[INFO] 
+[INFO] --- spring-cloud-contract:4.1.2:convert (default-convert) @ reviews-service ---
+[INFO] Will use contracts provided in the folder [/Users/parthureddy/Documents/Food Delivery.nosync/ReviewsService/src/test/resources/contracts]
+[INFO] Copying Spring Cloud Contract Verifier contracts to [/Users/parthureddy/Documents/Food Delivery.nosync/ReviewsService/target/stubs/META-INF/com.fooddelivery/reviews-service/1.0-SNAPSHOT/contracts]. Only files matching [.*] pattern will end up in the final JAR with stubs.
+[INFO] Using 'UTF-8' encoding to copy filtered resources.
+[INFO] Copying 1 resource
+[INFO] Converting from Spring Cloud Contract Verifier contracts to WireMock stubs mappings
+[INFO]      Spring Cloud Contract Verifier contracts directory: /Users/parthureddy/Documents/Food Delivery.nosync/ReviewsService/src/test/resources/contracts
+[INFO] Stub Server stubs mappings directory: /Users/parthureddy/Documents/Food Delivery.nosync/ReviewsService/target/stubs/META-INF/com.fooddelivery/reviews-service/1.0-SNAPSHOT/mappings
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ reviews-service ---
+[INFO] Copying 3 resources from src/test/resources to target/test-classes
+[INFO] Copying 1 resource from target/generated-test-resources/contracts to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ reviews-service ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 16 source files with javac [forked debug parameters release 17] to target/test-classes
+[INFO] 
+[INFO] -------------< com.fooddelivery:food-delivery-aggregator >--------------
+[INFO] Building Food Delivery Aggregator 1.0-SNAPSHOT                   [30/30]
+[INFO]   from pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary:
+[INFO] 
+[INFO] Food Delivery Parent 1.0-SNAPSHOT .................. SUCCESS [  0.883 s]
+[INFO] identity-signing 1.0-SNAPSHOT ...................... SUCCESS [  0.908 s]
+[INFO] common-library 1.0-SNAPSHOT ........................ SUCCESS [  0.148 s]
+[INFO] common-core 1.0-SNAPSHOT ........................... SUCCESS [  5.763 s]
+[INFO] common-test 1.0-SNAPSHOT ........................... SUCCESS [  1.117 s]
+[INFO] common-persistence 1.0-SNAPSHOT .................... SUCCESS [  0.768 s]
+[INFO] common-messaging 1.0-SNAPSHOT ...................... SUCCESS [  0.461 s]
+[INFO] common-web 1.0-SNAPSHOT ............................ SUCCESS [  1.066 s]
+[INFO] common-storage 1.0-SNAPSHOT ........................ SUCCESS [  0.955 s]
+[INFO] eureka-server 1.0-SNAPSHOT ......................... SUCCESS [  0.986 s]
+[INFO] config-service 1.0-SNAPSHOT ........................ SUCCESS [  0.711 s]
+[INFO] api-gateway 0.0.1-SNAPSHOT ......................... SUCCESS [  0.762 s]
+[INFO] identity-service 0.0.1-SNAPSHOT .................... SUCCESS [ 31.374 s]
+[INFO] notification-service 0.0.1-SNAPSHOT ................ SUCCESS [  5.446 s]
+[INFO] food-delivery-backend 1.0-SNAPSHOT ................. SUCCESS [ 24.168 s]
+[INFO] delivery-executive-application 1.0-SNAPSHOT ........ SUCCESS [ 10.470 s]
+[INFO] mapsintegration 0.0.1-SNAPSHOT ..................... SUCCESS [  6.422 s]
+[INFO] payment-service 0.0.1-SNAPSHOT ..................... SUCCESS [  8.687 s]
+[INFO] restaurant-application 1.0-SNAPSHOT ................ SUCCESS [ 10.673 s]
+[INFO] government-id-validation-service 0.0.1-SNAPSHOT .... SUCCESS [  8.554 s]
+[INFO] ledger-service 1.0-SNAPSHOT ........................ SUCCESS [  9.240 s]
+[INFO] chat-service 1.0-SNAPSHOT .......................... SUCCESS [  0.566 s]
+[INFO] ondc-integration-service 1.0-SNAPSHOT .............. SUCCESS [  7.248 s]
+[INFO] wallet-service 1.0-SNAPSHOT ........................ SUCCESS [  3.044 s]
+[INFO] budget-pacing-service 1.0-SNAPSHOT ................. SUCCESS [  3.776 s]
+[INFO] bidding-engine 1.0-SNAPSHOT ........................ SUCCESS [  3.013 s]
+[INFO] campaign-service 1.0-SNAPSHOT ...................... SUCCESS [  3.273 s]
+[INFO] event-tracking-service 1.0-SNAPSHOT ................ SUCCESS [  2.285 s]
+[INFO] reviews-service 1.0-SNAPSHOT ....................... SUCCESS [  2.952 s]
+[INFO] Food Delivery Aggregator 1.0-SNAPSHOT .............. SUCCESS [  0.001 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  02:42 min
+[INFO] Finished at: 2026-10-04T06:13:55+05:30
+[INFO] ------------------------------------------------------------------------

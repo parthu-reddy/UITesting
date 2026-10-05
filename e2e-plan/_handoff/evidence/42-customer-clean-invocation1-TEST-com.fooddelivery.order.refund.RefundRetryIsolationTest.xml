@@ -1,0 +1,22 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.order.refund.RefundRetryIsolationTest" time="0.218" tests="16" errors="0" skipped="0" failures="0">
+  <testcase name="paymentWithoutAvailableConfirmedBalanceCannotBeRetried(PaymentIntentStatus)[1]" classname="com.fooddelivery.order.refund.RefundRetryIsolationTest" time="0.001" />
+  <testcase name="paymentWithoutAvailableConfirmedBalanceCannotBeRetried(PaymentIntentStatus)[2]" classname="com.fooddelivery.order.refund.RefundRetryIsolationTest" time="0.0" />
+  <testcase name="paymentWithoutAvailableConfirmedBalanceCannotBeRetried(PaymentIntentStatus)[3]" classname="com.fooddelivery.order.refund.RefundRetryIsolationTest" time="0.0" />
+  <testcase name="incompleteGatewayIdentityCannotBeQueued" classname="com.fooddelivery.order.refund.RefundRetryIsolationTest" time="0.001" />
+  <testcase name="selectedFailedAmountCannotConsumeBalanceAlreadyReservedElsewhere" classname="com.fooddelivery.order.refund.RefundRetryIsolationTest" time="0.0" />
+  <testcase name="enqueueFailureDoesNotTurnFailedRefundIntoProcessing" classname="com.fooddelivery.order.refund.RefundRetryIsolationTest" time="0.002" />
+  <testcase name="selectedRefundKeepsIdentityDestinationAndAttemptHistory(RefundDestination)[1]" classname="com.fooddelivery.order.refund.RefundRetryIsolationTest" time="0.002">
+    </testcase>
+  <testcase name="selectedRefundKeepsIdentityDestinationAndAttemptHistory(RefundDestination)[2]" classname="com.fooddelivery.order.refund.RefundRetryIsolationTest" time="0.001">
+    </testcase>
+  <testcase name="noChargeDestinationCannotProduceAProviderRetry" classname="com.fooddelivery.order.refund.RefundRetryIsolationTest" time="0.001" />
+  <testcase name="adminRetryStartsAFreshSweeperBudget" classname="com.fooddelivery.order.refund.RefundRetryIsolationTest" time="0.001">
+    </testcase>
+  <testcase name="wrongIntentIsRejectedWithoutEnqueue" classname="com.fooddelivery.order.refund.RefundRetryIsolationTest" time="0.001" />
+  <testcase name="adminDelegatesToExactRetryWithoutGlobalSweepOrRepositoryMutation" classname="com.fooddelivery.order.refund.RefundRetryIsolationTest" time="0.201" />
+  <testcase name="duplicateOrTerminalSelectionDoesNotQueueAnotherAction(RefundStatus)[1]" classname="com.fooddelivery.order.refund.RefundRetryIsolationTest" time="0.001" />
+  <testcase name="duplicateOrTerminalSelectionDoesNotQueueAnotherAction(RefundStatus)[2]" classname="com.fooddelivery.order.refund.RefundRetryIsolationTest" time="0.001" />
+  <testcase name="duplicateOrTerminalSelectionDoesNotQueueAnotherAction(RefundStatus)[3]" classname="com.fooddelivery.order.refund.RefundRetryIsolationTest" time="0.0" />
+  <testcase name="duplicateOrTerminalSelectionDoesNotQueueAnotherAction(RefundStatus)[4]" classname="com.fooddelivery.order.refund.RefundRetryIsolationTest" time="0.0" />
+</testsuite>

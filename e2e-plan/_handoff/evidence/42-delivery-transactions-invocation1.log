@@ -1,0 +1,30 @@
+[ERROR] COMPILATION ERROR : 
+[ERROR] WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe:objectFieldOffset has been called by lombok.permit.Permit
+WARNING: Please consider reporting this to the maintainers of class lombok.permit.Permit
+WARNING: sun.misc.Unsafe:objectFieldOffset will be removed in a future release
+WARNING: Final field fileManager in class com.sun.tools.javac.jvm.ClassWriter has been mutated reflectively by class lombok.permit.Permit in unnamed module @79735611
+WARNING: Use --enable-final-field-mutation=ALL-UNNAMED to avoid a warning
+WARNING: Mutating final fields will be blocked in a future release unless final field mutation is enabled
+/Users/parthureddy/Documents/Food Delivery.nosync/DeliveryExecutiveApplication/src/test/java/com/fooddelivery/delivery/service/ConcurrentApplicationDecisionTest.java:[193,121] error: cannot find symbol
+  symbol:   variable PICKED_UP
+  location: class DeliveryStatus
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.13.0:testCompile (default-testCompile) on project delivery-executive-application: Compilation failure
+[ERROR] WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+[ERROR] WARNING: sun.misc.Unsafe:objectFieldOffset has been called by lombok.permit.Permit
+[ERROR] WARNING: Please consider reporting this to the maintainers of class lombok.permit.Permit
+[ERROR] WARNING: sun.misc.Unsafe:objectFieldOffset will be removed in a future release
+[ERROR] WARNING: Final field fileManager in class com.sun.tools.javac.jvm.ClassWriter has been mutated reflectively by class lombok.permit.Permit in unnamed module @79735611
+[ERROR] WARNING: Use --enable-final-field-mutation=ALL-UNNAMED to avoid a warning
+[ERROR] WARNING: Mutating final fields will be blocked in a future release unless final field mutation is enabled
+[ERROR] /Users/parthureddy/Documents/Food Delivery.nosync/DeliveryExecutiveApplication/src/test/java/com/fooddelivery/delivery/service/ConcurrentApplicationDecisionTest.java:[193,121] error: cannot find symbol
+[ERROR]   symbol:   variable PICKED_UP
+[ERROR]   location: class DeliveryStatus
+[ERROR] 
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

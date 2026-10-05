@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.common.dto.maps.RouteResponseDtoTest" time="0.176" tests="4" errors="0" skipped="0" failures="0">
+  <testcase name="nullWhenThereIsNothingToRead" classname="com.fooddelivery.common.dto.maps.RouteResponseDtoTest" time="0.016" />
+  <testcase name="decodesTheWrappedBodyTheMapsServiceSends" classname="com.fooddelivery.common.dto.maps.RouteResponseDtoTest" time="0.145" />
+  <testcase name="fallsBackToTheReadableDuration" classname="com.fooddelivery.common.dto.maps.RouteResponseDtoTest" time="0.001" />
+  <testcase name="theOldBareDecodeLostEverything" classname="com.fooddelivery.common.dto.maps.RouteResponseDtoTest" time="0.002" />
+</testsuite>

@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.delivery.InternalTest" time="0.23" tests="6" errors="0" skipped="0" failures="0">
+  <testcase name="validate_getDriversByIds" classname="com.fooddelivery.delivery.InternalTest" time="0.195">
+    </testcase>
+  <testcase name="validate_getDriverById" classname="com.fooddelivery.delivery.InternalTest" time="0.007">
+    </testcase>
+  <testcase name="validate_getDriverSummaries" classname="com.fooddelivery.delivery.InternalTest" time="0.006">
+    </testcase>
+  <testcase name="validate_getDriverSummary" classname="com.fooddelivery.delivery.InternalTest" time="0.006">
+    </testcase>
+  <testcase name="validate_suspendDriver" classname="com.fooddelivery.delivery.InternalTest" time="0.006">
+    </testcase>
+  <testcase name="validate_getDeliveryApplicationContext" classname="com.fooddelivery.delivery.InternalTest" time="0.007">
+    </testcase>
+</testsuite>

@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.customer.service.RestaurantSummaryServiceTest" time="0.019" tests="20" errors="0" skipped="0" failures="0">
+  <testcase name="platformBonusIsSummedFromTheDeliveredOrders" classname="com.fooddelivery.customer.service.RestaurantSummaryServiceTest" time="0.001" />
+  <testcase name="noOutletSummaryAtAllIsA503" classname="com.fooddelivery.customer.service.RestaurantSummaryServiceTest" time="0.001">
+    </testcase>
+  <testcase name="anUnreachablePayeeSummaryDoesNotBlankTheClawbacks" classname="com.fooddelivery.customer.service.RestaurantSummaryServiceTest" time="0.001">
+    </testcase>
+  <testcase name="testGetSummaryWithOrders" classname="com.fooddelivery.customer.service.RestaurantSummaryServiceTest" time="0.001" />
+  <testcase name="anUnreachableRestaurantServiceIsA503AndNothingIsSummed" classname="com.fooddelivery.customer.service.RestaurantSummaryServiceTest" time="0.002">
+    </testcase>
+  <testcase name="clawbacksTheLedgerCannotReportAreAbsentNotZero" classname="com.fooddelivery.customer.service.RestaurantSummaryServiceTest" time="0.001">
+    </testcase>
+  <testcase name="anOutletWithoutAZoneIsA503" classname="com.fooddelivery.customer.service.RestaurantSummaryServiceTest" time="0.001">
+    </testcase>
+  <testcase name="monthIsTheOutletsCalendarMonthAcrossTheSpringForward" classname="com.fooddelivery.customer.service.RestaurantSummaryServiceTest" time="0.001">
+    </testcase>
+  <testcase name="anOutletZoneThatIsNotAnIanaRegionIsA503(String)[1]" classname="com.fooddelivery.customer.service.RestaurantSummaryServiceTest" time="0.001">
+    </testcase>
+  <testcase name="anOutletZoneThatIsNotAnIanaRegionIsA503(String)[2]" classname="com.fooddelivery.customer.service.RestaurantSummaryServiceTest" time="0.001">
+    </testcase>
+  <testcase name="anOutletZoneThatIsNotAnIanaRegionIsA503(String)[3]" classname="com.fooddelivery.customer.service.RestaurantSummaryServiceTest" time="0.0">
+    </testcase>
+  <testcase name="anOutletZoneThatIsNotAnIanaRegionIsA503(String)[4]" classname="com.fooddelivery.customer.service.RestaurantSummaryServiceTest" time="0.001">
+    </testcase>
+  <testcase name="anOutletZoneThatIsNotAnIanaRegionIsA503(String)[5]" classname="com.fooddelivery.customer.service.RestaurantSummaryServiceTest" time="0.0">
+    </testcase>
+  <testcase name="clawbacksAreTheLedgersForTheOutletsOwnWindow" classname="com.fooddelivery.customer.service.RestaurantSummaryServiceTest" time="0.001" />
+  <testcase name="weekIsTheOutletsMondayToMondayAcrossTheFallBack" classname="com.fooddelivery.customer.service.RestaurantSummaryServiceTest" time="0.001">
+    </testcase>
+  <testcase name="testGetSummaryLedgerClientFails" classname="com.fooddelivery.customer.service.RestaurantSummaryServiceTest" time="0.0">
+    </testcase>
+  <testcase name="twoOutletsInDifferentZonesGetTheirOwnDay" classname="com.fooddelivery.customer.service.RestaurantSummaryServiceTest" time="0.001">
+    </testcase>
+  <testcase name="pendingBalanceAndLastPayoutComeFromTheLedger" classname="com.fooddelivery.customer.service.RestaurantSummaryServiceTest" time="0.001" />
+  <testcase name="unverifiedBeneficiaryIsReportedAsSuch" classname="com.fooddelivery.customer.service.RestaurantSummaryServiceTest" time="0.001" />
+  <testcase name="todayIsTheOutletsDayAcrossTheFallBack" classname="com.fooddelivery.customer.service.RestaurantSummaryServiceTest" time="0.0">
+    </testcase>
+</testsuite>

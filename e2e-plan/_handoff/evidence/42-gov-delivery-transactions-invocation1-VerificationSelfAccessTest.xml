@@ -1,0 +1,24 @@
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.governmentid.controller.VerificationSelfAccessTest" time="1.779" tests="7" errors="0" skipped="0" failures="0">
+  <testcase name="applicantWithoutDeliveryRoleReadsOnlyTheAuthenticatedSummaryAndTheOldIdPathIsGone" classname="com.fooddelivery.governmentid.controller.VerificationSelfAccessTest" time="0.573">
+    <system-out>10:12:09.774 [main] INFO org.hibernate.validator.internal.util.Version -- HV000001: Hibernate Validator 8.0.1.Final
+10:12:10.070 [main] INFO org.springframework.mock.web.MockServletContext -- Initializing Spring TestDispatcherServlet ''
+10:12:10.070 [main] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Initializing Servlet ''
+10:12:10.073 [main] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Completed initialization in 2 ms
+10:12:10.223 [main] WARN org.springframework.web.servlet.PageNotFound -- No mapping for GET /api/v1/verification/status/f6f98884-fdcd-4838-a32c-39fc6eccae15
+10:12:10.224 [main] WARN org.springframework.web.servlet.PageNotFound -- No endpoint GET /api/v1/verification/status/f6f98884-fdcd-4838-a32c-39fc6eccae15.
+</system-out>
+  </testcase>
+  <testcase name="aVerifiedServiceUsesOnlyTheCurrentSubmittedBrandId" classname="com.fooddelivery.governmentid.controller.VerificationSelfAccessTest" time="0.013" />
+  <testcase name="missingAuthenticationCannotReachSummaryOrMcpTools" classname="com.fooddelivery.governmentid.controller.VerificationSelfAccessTest" time="0.007" />
+  <testcase name="applicantsCannotUseTheServiceSummaryOrAdminDocumentEndpoint" classname="com.fooddelivery.governmentid.controller.VerificationSelfAccessTest" time="0.014" />
+  <testcase name="serviceSummaryRemainsAvailableOnlyToItsVerifiedServiceRole" classname="com.fooddelivery.governmentid.controller.VerificationSelfAccessTest" time="0.004" />
+  <testcase name="mcpSummaryUsesAuthenticatedIdentityWithoutACallerSelectedId" classname="com.fooddelivery.governmentid.controller.VerificationSelfAccessTest" time="0.008" />
+  <testcase name="applicantsCannotInvokeBrandChecksOrForgeAProviderWebhook" classname="com.fooddelivery.governmentid.controller.VerificationSelfAccessTest" time="0.014">
+    <system-out>10:12:10.309 [main] INFO org.springframework.mock.web.MockServletContext -- Initializing Spring TestDispatcherServlet ''
+10:12:10.309 [main] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Initializing Servlet ''
+10:12:10.309 [main] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Completed initialization in 0 ms
+10:12:10.310 [main] WARN org.springframework.web.servlet.PageNotFound -- No mapping for POST /api/v1/verification/brands/webhooks/penny-drop
+10:12:10.311 [main] WARN org.springframework.web.servlet.PageNotFound -- No endpoint POST /api/v1/verification/brands/webhooks/penny-drop.
+</system-out>
+  </testcase>
+</testsuite>

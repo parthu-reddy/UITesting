@@ -1,0 +1,14 @@
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.restaurant.RestaurantEndpointPermissionTest" time="1.288" tests="1" errors="0" skipped="0" failures="1">
+  <testcase name="anOwnerCannotEditAnOutletUnderAnotherOrganisationPath" classname="com.fooddelivery.restaurant.RestaurantEndpointPermissionTest" time="0.083">
+    <failure message="Expected org.springframework.security.access.AccessDeniedException to be thrown, but nothing was thrown." type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: Expected org.springframework.security.access.AccessDeniedException to be thrown, but nothing was thrown.
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:152)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:73)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3115)
+	at com.fooddelivery.restaurant.RestaurantEndpointPermissionTest.anOwnerCannotEditAnOutletUnderAnotherOrganisationPath(RestaurantEndpointPermissionTest.java:98)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+</failure>
+  </testcase>
+</testsuite>

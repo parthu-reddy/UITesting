@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.common.config.KafkaConfigDeadLetterTest" time="0.182" tests="3" errors="0" skipped="0" failures="0">
+  <testcase name="aRecordFromAnyPartition_reachesTheOnePartitionDlt_withKafkaChoosingThePartition" classname="com.fooddelivery.common.config.KafkaConfigDeadLetterTest" time="0.069">
+    </testcase>
+  <testcase name="aWriteKafkaRejects_isNeverLoggedAsWritten" classname="com.fooddelivery.common.config.KafkaConfigDeadLetterTest" time="0.012">
+    </testcase>
+  <testcase name="whereTheRecordWasWritten_isLoggedAsTheReplayBody" classname="com.fooddelivery.common.config.KafkaConfigDeadLetterTest" time="0.033">
+    </testcase>
+</testsuite>

@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.common.security.AuctionTokenServiceTest" time="0.044" tests="7" errors="0" skipped="0" failures="0">
+  <testcase name="testExpiredToken" classname="com.fooddelivery.common.security.AuctionTokenServiceTest" time="0.037" />
+  <testcase name="testValidToken" classname="com.fooddelivery.common.security.AuctionTokenServiceTest" time="0.002" />
+  <testcase name="prodRefusesTheDeployedFallbackSecret" classname="com.fooddelivery.common.security.AuctionTokenServiceTest" time="0.001" />
+  <testcase name="prodAcceptsARealSecret" classname="com.fooddelivery.common.security.AuctionTokenServiceTest" time="0.001" />
+  <testcase name="prodRefusesTheDevSecretConstant" classname="com.fooddelivery.common.security.AuctionTokenServiceTest" time="0.001" />
+  <testcase name="prodRefusesABlankSecret" classname="com.fooddelivery.common.security.AuctionTokenServiceTest" time="0.0" />
+  <testcase name="testTamperedCiphertext" classname="com.fooddelivery.common.security.AuctionTokenServiceTest" time="0.001" />
+</testsuite>

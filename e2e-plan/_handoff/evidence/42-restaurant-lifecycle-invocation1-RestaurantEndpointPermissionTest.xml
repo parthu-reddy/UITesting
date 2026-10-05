@@ -1,0 +1,17 @@
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.restaurant.RestaurantEndpointPermissionTest" time="0.654" tests="5" errors="0" skipped="0" failures="0">
+  <testcase name="managerCannotApplyForABrand" classname="com.fooddelivery.restaurant.RestaurantEndpointPermissionTest" time="0.052" />
+  <testcase name="staffCanAcceptAnOrderButCannotManageOutletSettings" classname="com.fooddelivery.restaurant.RestaurantEndpointPermissionTest" time="0.012">
+    <system-out>10:08:02.014 [main] INFO com.fooddelivery.restaurant.security.RestaurantAccess -- Restaurant access refused outletId=5c3c8a71-d418-45a7-994f-1a7baebaf48d organisationId=44d8dc14-9350-4e28-adf8-a7944bfc6a90 userId=4f9449cd-0254-4819-bc9f-b9906861a7ff
+</system-out>
+  </testcase>
+  <testcase name="staffCanToggleStockButCannotUseThePriceOverrideEndpoint" classname="com.fooddelivery.restaurant.RestaurantEndpointPermissionTest" time="0.009">
+    <system-out>10:08:02.024 [main] INFO com.fooddelivery.restaurant.security.RestaurantAccess -- Restaurant access refused outletId=85371faf-44df-4ecb-a85c-de4dd154e73c organisationId=51a3bec6-fe2a-40ec-8386-0fd9d0b71884 userId=bcd9a188-d963-40fc-b8b9-f9c3844fd3dd
+</system-out>
+  </testcase>
+  <testcase name="removedOrUnrelatedMembersCannotReadOrWrite" classname="com.fooddelivery.restaurant.RestaurantEndpointPermissionTest" time="0.005">
+    <system-out>10:08:02.030 [main] INFO com.fooddelivery.restaurant.security.RestaurantAccess -- Restaurant access refused outletId=c5243230-481b-4bb0-a40b-64624b84139e organisationId=21feac56-b1b1-4639-9c01-a554ab34c487 userId=aca4898d-8b7d-4910-a3c2-7ac16d5268b7
+10:08:02.031 [main] INFO com.fooddelivery.restaurant.security.RestaurantAccess -- Restaurant access refused outletId=c5243230-481b-4bb0-a40b-64624b84139e organisationId=21feac56-b1b1-4639-9c01-a554ab34c487 userId=aca4898d-8b7d-4910-a3c2-7ac16d5268b7
+</system-out>
+  </testcase>
+  <testcase name="managerCanManagePricesAndStaffCanReadOverrides" classname="com.fooddelivery.restaurant.RestaurantEndpointPermissionTest" time="0.004" />
+</testsuite>

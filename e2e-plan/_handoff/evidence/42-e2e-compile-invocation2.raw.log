@@ -1,0 +1,30 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------------< com.fooddelivery:e2e-tests >---------------------
+[INFO] Building e2e-tests 1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.4.0:resources (default-resources) @ e2e-tests ---
+[INFO] skip non existing resourceDirectory /Users/parthureddy/Documents/Food Delivery.nosync/UITesting/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ e2e-tests ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- resources:3.4.0:testResources (default-testResources) @ e2e-tests ---
+[INFO] Copying 3 resources from src/test/resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ e2e-tests ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 179 source files with javac [debug target 17] to target/test-classes
+[WARNING] location of system modules is not set in conjunction with -source 17
+  not setting the location of system modules may lead to class files that cannot run on JDK 17
+    --release 17 is recommended instead of -source 17 -target 17 because it sets the location of system modules automatically
+[INFO] /Users/parthureddy/Documents/Food Delivery.nosync/UITesting/src/test/java/com/fooddelivery/e2e/tests/smoke/SavedAddressOutletUiTest.java: /Users/parthureddy/Documents/Food Delivery.nosync/UITesting/src/test/java/com/fooddelivery/e2e/tests/smoke/SavedAddressOutletUiTest.java uses unchecked or unsafe operations.
+[INFO] /Users/parthureddy/Documents/Food Delivery.nosync/UITesting/src/test/java/com/fooddelivery/e2e/tests/smoke/SavedAddressOutletUiTest.java: Recompile with -Xlint:unchecked for details.
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  9.584 s
+[INFO] Finished at: 2026-10-04T05:50:33+05:30
+[INFO] ------------------------------------------------------------------------

@@ -1,0 +1,17 @@
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.restaurant.RestaurantEndpointPermissionTest" time="0.2" tests="5" errors="0" skipped="0" failures="0">
+  <testcase name="managerCannotApplyForABrand" classname="com.fooddelivery.restaurant.RestaurantEndpointPermissionTest" time="0.008" />
+  <testcase name="staffCanAcceptAnOrderButCannotManageOutletSettings" classname="com.fooddelivery.restaurant.RestaurantEndpointPermissionTest" time="0.005">
+    <system-out>{"@timestamp":"2026-10-03T20:30:25.963449Z","@version":"1","message":"Restaurant access refused outletId=7d980aac-9631-43df-b5e5-8a7112c0e7df organisationId=57a4ad8d-37c0-442a-a16f-56fa4732006c userId=1194863e-c512-499d-ab5f-c5c80d8723cf","logger_name":"com.fooddelivery.restaurant.security.RestaurantAccess","thread_name":"main","level":"INFO","level_value":20000,"springAppName":"restaurant-service","app_name":"restaurant-service"}
+</system-out>
+  </testcase>
+  <testcase name="staffCanToggleStockButCannotUseThePriceOverrideEndpoint" classname="com.fooddelivery.restaurant.RestaurantEndpointPermissionTest" time="0.007">
+    <system-out>{"@timestamp":"2026-10-03T20:30:25.970841Z","@version":"1","message":"Restaurant access refused outletId=a6ee178b-ceab-4bbe-984c-128164c9809f organisationId=a672d1ab-e778-4c95-842b-dee291fb04ef userId=ba623f71-6033-4ed8-b4dd-cd2176b2e667","logger_name":"com.fooddelivery.restaurant.security.RestaurantAccess","thread_name":"main","level":"INFO","level_value":20000,"springAppName":"restaurant-service","app_name":"restaurant-service"}
+</system-out>
+  </testcase>
+  <testcase name="removedOrUnrelatedMembersCannotReadOrWrite" classname="com.fooddelivery.restaurant.RestaurantEndpointPermissionTest" time="0.003">
+    <system-out>{"@timestamp":"2026-10-03T20:30:25.973884Z","@version":"1","message":"Restaurant access refused outletId=8610ff12-fa93-4a03-8dab-b4a2c817a8f6 organisationId=775b355b-53d8-4e94-bd20-9589974e95e3 userId=7d5b443f-809b-46a3-b829-e24eedf0c6f1","logger_name":"com.fooddelivery.restaurant.security.RestaurantAccess","thread_name":"main","level":"INFO","level_value":20000,"springAppName":"restaurant-service","app_name":"restaurant-service"}
+{"@timestamp":"2026-10-03T20:30:25.974512Z","@version":"1","message":"Restaurant access refused outletId=8610ff12-fa93-4a03-8dab-b4a2c817a8f6 organisationId=775b355b-53d8-4e94-bd20-9589974e95e3 userId=7d5b443f-809b-46a3-b829-e24eedf0c6f1","logger_name":"com.fooddelivery.restaurant.security.RestaurantAccess","thread_name":"main","level":"INFO","level_value":20000,"springAppName":"restaurant-service","app_name":"restaurant-service"}
+</system-out>
+  </testcase>
+  <testcase name="managerCanManagePricesAndStaffCanReadOverrides" classname="com.fooddelivery.restaurant.RestaurantEndpointPermissionTest" time="0.002" />
+</testsuite>

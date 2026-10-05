@@ -1,5 +1,12 @@
 # Ordered continuation
 
+## 2026-10-05T15:05:00+05:30 — After the owner deploys review Phases 1–2
+
+1. Owner builds/deploys in order: CommonLibrary publish → IdentityService (incl. Deployment/identity-service.yml jwt.expiration 900000) + CommunicationIntegration → FoodDeliveryAppUI.
+2. Then, UI-only on the current tunnel: `python3 scripts/run_business_platform_o45_e2e.py --app-url <tunnel> --only login`, `--only launcher`, `--only membership`, `--only revocation`; plus LoginSmokeTest and SessionUiTest with normal exclusions. Record counts in the owning AUDIT-STATUS files.
+3. Continue review Phase 3 (launcher/hub UX labels, one header, OTP inputs) per RandomDocuments/BusinessPlatformReview_2026-10-05/Phase3_LauncherAndBusinessHubUX.
+Deferred (not run): 15-minute idle renewal; real SMS delivery.
+
 ## 2026-10-05T11:57:12+05:30 — checkpoint113: O4/O5 complete; stop boundary reached
 
 Phase4 and Phase5 are published, deployed and complete within the documented Dev/UI-only scope. Final O4 gate8/8 and O5 gate8/8 have0failures/errors/skips. The required existing settings/partner/navigation/earnings/admin-money/delivery/chat/refund-quote/immutable-review regressions pass using the same retained delivered order. No new checkout repeated successful work. Restaurant5408c6e is now published/deployed; existing pending-queue check1/1 proves the exact outlet VERIFIED at₹34.67 and0payout writes.

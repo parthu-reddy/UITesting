@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.governmentid.controller.VerificationExpiryPersistenceTest" time="0.098" tests="6" errors="0" skipped="0" failures="0">
+  <testcase name="malformedVehicleExpiryCannotBeStoredAsApprovedWithNoExpiry" classname="com.fooddelivery.governmentid.controller.VerificationExpiryPersistenceTest" time="0.068" />
+  <testcase name="validLicenseExpiryIsStoredForBothDevAndProviderFormats(String)[1]" classname="com.fooddelivery.governmentid.controller.VerificationExpiryPersistenceTest" time="0.008" />
+  <testcase name="validLicenseExpiryIsStoredForBothDevAndProviderFormats(String)[2]" classname="com.fooddelivery.governmentid.controller.VerificationExpiryPersistenceTest" time="0.002" />
+  <testcase name="malformedLicenseExpiryCannotBeStoredAsApprovedWithNoExpiry" classname="com.fooddelivery.governmentid.controller.VerificationExpiryPersistenceTest" time="0.0" />
+  <testcase name="validVehicleExpiryIsStoredForBothDevAndProviderFormats(String)[1]" classname="com.fooddelivery.governmentid.controller.VerificationExpiryPersistenceTest" time="0.002" />
+  <testcase name="validVehicleExpiryIsStoredForBothDevAndProviderFormats(String)[2]" classname="com.fooddelivery.governmentid.controller.VerificationExpiryPersistenceTest" time="0.002" />
+</testsuite>

@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.common.time.BusinessCalendarTest" time="0.009" tests="9" errors="0" skipped="0" failures="0">
+  <testcase name="consecutiveDaysTileWithoutGapOrOverlap" classname="com.fooddelivery.common.time.BusinessCalendarTest" time="0.001" />
+  <testcase name="daytimeWindowIncludesBothEnds" classname="com.fooddelivery.common.time.BusinessCalendarTest" time="0.0" />
+  <testcase name="windowClosingBeforeItOpensCrossesMidnight" classname="com.fooddelivery.common.time.BusinessCalendarTest" time="0.0" />
+  <testcase name="todayIsTheDateInTheGivenZoneNotTheJvmZone" classname="com.fooddelivery.common.time.BusinessCalendarTest" time="0.001" />
+  <testcase name="aWindowMustEndAfterItStarts" classname="com.fooddelivery.common.time.BusinessCalendarTest" time="0.001" />
+  <testcase name="localTimeAndDateReadTheWallClockOfTheZone" classname="com.fooddelivery.common.time.BusinessCalendarTest" time="0.0" />
+  <testcase name="aDayIsHalfOpenAndStartsAtLocalMidnight" classname="com.fooddelivery.common.time.BusinessCalendarTest" time="0.001" />
+  <testcase name="daysFollowDaylightSaving" classname="com.fooddelivery.common.time.BusinessCalendarTest" time="0.0" />
+  <testcase name="fractionOfDayUsesTheRealLengthOfThatDay" classname="com.fooddelivery.common.time.BusinessCalendarTest" time="0.002" />
+</testsuite>

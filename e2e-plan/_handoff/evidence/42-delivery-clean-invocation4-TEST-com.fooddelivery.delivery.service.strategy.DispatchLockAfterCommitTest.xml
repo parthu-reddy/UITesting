@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.delivery.service.strategy.DispatchLockAfterCommitTest" time="0.01" tests="3" errors="0" skipped="0" failures="0">
+  <testcase name="aSecondDeliveryOfTheSameEventIsIgnored" classname="com.fooddelivery.delivery.service.strategy.DispatchLockAfterCommitTest" time="0.004">
+    </testcase>
+  <testcase name="noRedisLockIsTakenWhileTheTransactionIsStillOpen" classname="com.fooddelivery.delivery.service.strategy.DispatchLockAfterCommitTest" time="0.002">
+    </testcase>
+  <testcase name="theLockAndTheDispatchHappenOnceTheTransactionCommits" classname="com.fooddelivery.delivery.service.strategy.DispatchLockAfterCommitTest" time="0.003">
+    </testcase>
+</testsuite>

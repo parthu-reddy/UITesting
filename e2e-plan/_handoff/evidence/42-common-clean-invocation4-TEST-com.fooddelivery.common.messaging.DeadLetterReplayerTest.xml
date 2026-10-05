@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.common.messaging.DeadLetterReplayerTest" time="0.393" tests="7" errors="0" skipped="0" failures="0">
+  <testcase name="aRecordThatIsNotADeadLetter_isRefused_andNothingIsSent" classname="com.fooddelivery.common.messaging.DeadLetterReplayerTest" time="0.006" />
+  <testcase name="theErrorHandlerHeaderNameIsTheOneSpringKafkaWrites" classname="com.fooddelivery.common.messaging.DeadLetterReplayerTest" time="0.001" />
+  <testcase name="aReplayKafkaNeverAcknowledges_fails" classname="com.fooddelivery.common.messaging.DeadLetterReplayerTest" time="0.313" />
+  <testcase name="anOffsetWithNoRecord_isNotFound_ratherThanReplayingTheNextOne" classname="com.fooddelivery.common.messaging.DeadLetterReplayerTest" time="0.004" />
+  <testcase name="retryTopicDeadLetter_isRepublishedToItsOriginalTopic_asTheProducerPublishedIt" classname="com.fooddelivery.common.messaging.DeadLetterReplayerTest" time="0.005">
+    </testcase>
+  <testcase name="errorHandlerDeadLetter_isRepublishedToItsOriginalTopic" classname="com.fooddelivery.common.messaging.DeadLetterReplayerTest" time="0.002">
+    </testcase>
+  <testcase name="readingTheDeadLetter_commitsNothing_failsOnADeletedOffset_andClosesTheConsumer" classname="com.fooddelivery.common.messaging.DeadLetterReplayerTest" time="0.003">
+    </testcase>
+</testsuite>

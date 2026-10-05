@@ -1,0 +1,26 @@
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.restaurant.service.ReviewEventConsumerTest" time="0.293" tests="7" errors="0" skipped="0" failures="0">
+  <testcase name="anUnknownOutletIsDroppedRatherThanRetried" classname="com.fooddelivery.restaurant.service.ReviewEventConsumerTest" time="0.233">
+    <system-out>{"@timestamp":"2026-10-03T20:30:24.155264Z","@version":"1","message":"REVIEW_CREATED for unknown outlet 11111111-1111-1111-1111-111111111111; ignoring.","logger_name":"com.fooddelivery.restaurant.service.ReviewEventConsumer","thread_name":"main","level":"WARN","level_value":30000,"springAppName":"restaurant-service","app_name":"restaurant-service"}
+</system-out>
+  </testcase>
+  <testcase name="aMissingEventIdHeaderIsDeadLettered" classname="com.fooddelivery.restaurant.service.ReviewEventConsumerTest" time="0.006">
+    <system-out>{"@timestamp":"2026-10-03T20:30:24.161877Z","@version":"1","message":"Missing eventId header in ReviewEventConsumer, sending to DLT.","logger_name":"com.fooddelivery.restaurant.service.ReviewEventConsumer","thread_name":"main","level":"ERROR","level_value":40000,"springAppName":"restaurant-service","app_name":"restaurant-service"}
+</system-out>
+  </testcase>
+  <testcase name="aProductReviewNeverTouchesAnOutlet" classname="com.fooddelivery.restaurant.service.ReviewEventConsumerTest" time="0.011" />
+  <testcase name="reprocessingAfterTheDeduplicationKeyIsSweptStillLandsOnTheSameValue" classname="com.fooddelivery.restaurant.service.ReviewEventConsumerTest" time="0.008">
+    <system-out>{"@timestamp":"2026-10-03T20:30:24.179672Z","@version":"1","message":"Outlet 11111111-1111-1111-1111-111111111111 rating updated to 4.29 over 7 review(s)","logger_name":"com.fooddelivery.restaurant.service.ReviewEventConsumer","thread_name":"main","level":"INFO","level_value":20000,"springAppName":"restaurant-service","app_name":"restaurant-service"}
+{"@timestamp":"2026-10-03T20:30:24.180497Z","@version":"1","message":"Outlet 11111111-1111-1111-1111-111111111111 rating updated to 4.29 over 7 review(s)","logger_name":"com.fooddelivery.restaurant.service.ReviewEventConsumer","thread_name":"main","level":"INFO","level_value":20000,"springAppName":"restaurant-service","app_name":"restaurant-service"}
+</system-out>
+  </testcase>
+  <testcase name="aDriverReviewNeverTouchesAnOutlet" classname="com.fooddelivery.restaurant.service.ReviewEventConsumerTest" time="0.008" />
+  <testcase name="writesTheAggregateOntoTheOutlet" classname="com.fooddelivery.restaurant.service.ReviewEventConsumerTest" time="0.007">
+    <system-out>{"@timestamp":"2026-10-03T20:30:24.197098Z","@version":"1","message":"Outlet 11111111-1111-1111-1111-111111111111 rating updated to 4.29 over 7 review(s)","logger_name":"com.fooddelivery.restaurant.service.ReviewEventConsumer","thread_name":"main","level":"INFO","level_value":20000,"springAppName":"restaurant-service","app_name":"restaurant-service"}
+</system-out>
+  </testcase>
+  <testcase name="aRedeliveredEventDoesNotMoveTheRating" classname="com.fooddelivery.restaurant.service.ReviewEventConsumerTest" time="0.016">
+    <system-out>{"@timestamp":"2026-10-03T20:30:24.213072Z","@version":"1","message":"Outlet 11111111-1111-1111-1111-111111111111 rating updated to 4.29 over 7 review(s)","logger_name":"com.fooddelivery.restaurant.service.ReviewEventConsumer","thread_name":"main","level":"INFO","level_value":20000,"springAppName":"restaurant-service","app_name":"restaurant-service"}
+{"@timestamp":"2026-10-03T20:30:24.213718Z","@version":"1","message":"Duplicate review event (key=processed_event:restaurant:evt-1), ignoring.","logger_name":"com.fooddelivery.restaurant.service.ReviewEventConsumer","thread_name":"main","level":"INFO","level_value":20000,"springAppName":"restaurant-service","app_name":"restaurant-service"}
+</system-out>
+  </testcase>
+</testsuite>

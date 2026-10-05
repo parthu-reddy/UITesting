@@ -1,5 +1,11 @@
 # Primary user instructions and accepted decisions
 
+## 2026-10-05T14:05:00+05:30 — O1–O5 production-readiness review; nothing runs locally
+
+Direct owner instructions (2026-10-05): review everything completed so far (O1–O5) and make it production ready with the best UI/UX. "The trycloudflare address is for dev purpose, don't worry about using it. When you make changes and want to deploy any service let me know, I'll build and deploy them. Don't do anything locally as nothing is running locally." Learn flows from these E2E tests rather than re-reading all UI source; respect this folder's deferred-test categories.
+
+Choice: no local servers/mocks (a scratch mocked UI on localhost was started once, then stopped and removed at the owner's request). Unit/contract suites still run locally. Product and harness edits stay local and uncommitted; the owner builds and deploys, then the O4/O5 runner verifies on the Dev tunnel. Signing in on the tunnel needs an OTP, which the agent will not type into a non-local site; the existing harness Dev-autofill flow or an owner sign-in in the browser pane is used instead. Plan: `RandomDocuments/BusinessPlatformReview_2026-10-05/README.md`.
+
 ## 2026-10-05T12:05:12+05:30 — Current scope fulfilled; stop after O4/O5
 
 The owner's final scope is to complete Phase4 and Phase5, then stop. Both are now published, deployed and accepted within the documented Dev/UI-only scope; the remaining documentation publication completes this handoff. Existing task authorization covered the required commits, pushes, GitHub publication and Oracle Dev rollout. Preserve the UI-only/H2/GitHub-only rules, retained fixtures and explicit unverified deferrals. Wallet/Ads and the broader E2E audit require a later user instruction; no new tests, deployment, wipe or seed is needed for this final documentation commit. Earlier status statements below describe historical checkpoints.

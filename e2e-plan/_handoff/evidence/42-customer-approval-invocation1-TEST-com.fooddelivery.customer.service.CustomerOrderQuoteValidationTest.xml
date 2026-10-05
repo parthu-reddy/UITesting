@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.customer.service.CustomerOrderQuoteValidationTest" time="0.487" tests="9" errors="0" skipped="0" failures="0">
+  <testcase name="changingQuotedQuantityCannotStartPayment" classname="com.fooddelivery.customer.service.CustomerOrderQuoteValidationTest" time="0.385">
+    </testcase>
+  <testcase name="quoteForAnotherRestaurantCannotStartPayment" classname="com.fooddelivery.customer.service.CustomerOrderQuoteValidationTest" time="0.012">
+    </testcase>
+  <testcase name="unknownQuoteCannotStartPayment" classname="com.fooddelivery.customer.service.CustomerOrderQuoteValidationTest" time="0.014">
+    </testcase>
+  <testcase name="anotherCustomersQuoteCannotStartPayment" classname="com.fooddelivery.customer.service.CustomerOrderQuoteValidationTest" time="0.012">
+    </testcase>
+  <testcase name="missingQuoteCannotStartPayment" classname="com.fooddelivery.customer.service.CustomerOrderQuoteValidationTest" time="0.008">
+    </testcase>
+  <testcase name="changingQuotedItemCannotStartPayment" classname="com.fooddelivery.customer.service.CustomerOrderQuoteValidationTest" time="0.009">
+    </testcase>
+  <testcase name="alreadyExpiredFixtureCannotStartPaymentWithoutWaiting" classname="com.fooddelivery.customer.service.CustomerOrderQuoteValidationTest" time="0.01">
+    </testcase>
+  <testcase name="consumedQuoteCannotStartAnotherPayment" classname="com.fooddelivery.customer.service.CustomerOrderQuoteValidationTest" time="0.005">
+    </testcase>
+  <testcase name="quoteForAnotherAddressCannotStartPayment" classname="com.fooddelivery.customer.service.CustomerOrderQuoteValidationTest" time="0.01">
+    </testcase>
+</testsuite>

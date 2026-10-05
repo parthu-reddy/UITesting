@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.governmentid.contract.RestaurantApplicationConsumerContractTest" time="17.875" tests="1" errors="1" skipped="0" failures="0">
+  <testcase name="submittedProducerEventStartsChecksForItsExactApplicationRevision" classname="com.fooddelivery.governmentid.contract.RestaurantApplicationConsumerContractTest" time="15.491">
+    <error message="Assertion condition defined as a Lambda expression in com.fooddelivery.governmentid.contract.RestaurantApplicationConsumerContractTest &#10;Wanted but not invoked:&#10;com.fooddelivery.governmentid.service.BrandVerificationService#0 bean.processSubmission(&#10;    9c8b7a65-1e2d-4f30-b5a6-7c8d9e0f1a23,&#10;    3L&#10;);&#10;-&gt; at com.fooddelivery.governmentid.service.BrandVerificationService.processSubmission(BrandVerificationService.java:32)&#10;Actually, there were zero interactions with this mock.&#10; within 15 seconds." type="org.awaitility.core.ConditionTimeoutException">org.awaitility.core.ConditionTimeoutException: 
+Assertion condition defined as a Lambda expression in com.fooddelivery.governmentid.contract.RestaurantApplicationConsumerContractTest 
+Wanted but not invoked:
+com.fooddelivery.governmentid.service.BrandVerificationService#0 bean.processSubmission(
+    9c8b7a65-1e2d-4f30-b5a6-7c8d9e0f1a23,
+    3L
+);
+-&gt; at com.fooddelivery.governmentid.service.BrandVerificationService.processSubmission(BrandVerificationService.java:32)
+Actually, there were zero interactions with this mock.
+ within 15 seconds.
+	at org.awaitility.core.ConditionAwaiter.await(ConditionAwaiter.java:167)
+	at org.awaitility.core.AssertionCondition.await(AssertionCondition.java:119)
+	at org.awaitility.core.AssertionCondition.await(AssertionCondition.java:31)
+	at org.awaitility.core.ConditionFactory.until(ConditionFactory.java:1006)
+	at org.awaitility.core.ConditionFactory.untilAsserted(ConditionFactory.java:790)
+	at com.fooddelivery.governmentid.contract.RestaurantApplicationConsumerContractTest.submittedProducerEventStartsChecksForItsExactApplicationRevision(RestaurantApplicationConsumerContractTest.java:48)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+Caused by: Wanted but not invoked:
+com.fooddelivery.governmentid.service.BrandVerificationService#0 bean.processSubmission(
+    9c8b7a65-1e2d-4f30-b5a6-7c8d9e0f1a23,
+    3L
+);
+-&gt; at com.fooddelivery.governmentid.service.BrandVerificationService.processSubmission(BrandVerificationService.java:32)
+Actually, there were zero interactions with this mock.
+
+	at com.fooddelivery.governmentid.service.BrandVerificationService.processSubmission(BrandVerificationService.java:32)
+	at com.fooddelivery.governmentid.contract.RestaurantApplicationConsumerContractTest.lambda$submittedProducerEventStartsChecksForItsExactApplicationRevision$0(RestaurantApplicationConsumerContractTest.java:49)
+	at org.awaitility.core.AssertionCondition.lambda$new$0(AssertionCondition.java:53)
+	at org.awaitility.core.ConditionAwaiter$ConditionPoller.call(ConditionAwaiter.java:248)
+	at org.awaitility.core.ConditionAwaiter$ConditionPoller.call(ConditionAwaiter.java:235)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:330)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1090)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:614)
+	at java.base/java.lang.Thread.run(Thread.java:1516)
+</error>
+    </testcase>
+</testsuite>

@@ -1,0 +1,7 @@
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.restaurant.service.CatalogAvailabilityBoundaryTest" time="0.528" tests="2" errors="0" skipped="0" failures="0">
+  <testcase name="aPreviouslyReadMenuClosesAndReopensOnTheOutletClockWithoutAWrite" classname="com.fooddelivery.restaurant.service.CatalogAvailabilityBoundaryTest" time="0.008">
+    <system-out>Hibernate: select oee1_0.id,oee1_0.aggregate_id,oee1_0.aggregate_type,oee1_0.created_at,oee1_0.error_message,oee1_0.type,oee1_0.idempotency_key,oee1_0.payload,oee1_0.processed_at,oee1_0.retry_count,oee1_0.status from outbox_events oee1_0 where oee1_0.status in (?,?) order by oee1_0.created_at fetch first ? rows only for update
+</system-out>
+  </testcase>
+  <testcase name="aPreviouslyReadMenuReflectsCommittedStockAndPriceOnTheNextRead" classname="com.fooddelivery.restaurant.service.CatalogAvailabilityBoundaryTest" time="0.004" />
+</testsuite>

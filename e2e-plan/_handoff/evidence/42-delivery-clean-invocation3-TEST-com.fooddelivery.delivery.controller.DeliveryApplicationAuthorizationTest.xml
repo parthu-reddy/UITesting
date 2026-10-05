@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.delivery.controller.DeliveryApplicationAuthorizationTest" time="1.299" tests="9" errors="0" skipped="0" failures="0">
+  <testcase name="anonymousAndServiceCredentialsCannotCreateAnApplicantsProfile" classname="com.fooddelivery.delivery.controller.DeliveryApplicationAuthorizationTest" time="0.067">
+    </testcase>
+  <testcase name="applicantWithoutDeliveryRoleReadsOnlyTheirOwnApplication" classname="com.fooddelivery.delivery.controller.DeliveryApplicationAuthorizationTest" time="0.039">
+    </testcase>
+  <testcase name="approvingAdminComesFromThePrincipal" classname="com.fooddelivery.delivery.controller.DeliveryApplicationAuthorizationTest" time="0.054">
+    </testcase>
+  <testcase name="internalDocumentContextRemainsServiceOnly" classname="com.fooddelivery.delivery.controller.DeliveryApplicationAuthorizationTest" time="0.015">
+    </testcase>
+  <testcase name="adminApplicationEndpointsAreAdminOnly(String)[1]" classname="com.fooddelivery.delivery.controller.DeliveryApplicationAuthorizationTest" time="0.035">
+    </testcase>
+  <testcase name="adminApplicationEndpointsAreAdminOnly(String)[2]" classname="com.fooddelivery.delivery.controller.DeliveryApplicationAuthorizationTest" time="0.044">
+    </testcase>
+  <testcase name="adminApplicationEndpointsAreAdminOnly(String)[3]" classname="com.fooddelivery.delivery.controller.DeliveryApplicationAuthorizationTest" time="0.027">
+    </testcase>
+  <testcase name="adminApplicationEndpointsAreAdminOnly(String)[4]" classname="com.fooddelivery.delivery.controller.DeliveryApplicationAuthorizationTest" time="0.028">
+    </testcase>
+  <testcase name="draftIgnoresCallerChosenIdentityAndPhoneAndUsesTheSignedPrincipal" classname="com.fooddelivery.delivery.controller.DeliveryApplicationAuthorizationTest" time="0.027">
+    </testcase>
+</testsuite>

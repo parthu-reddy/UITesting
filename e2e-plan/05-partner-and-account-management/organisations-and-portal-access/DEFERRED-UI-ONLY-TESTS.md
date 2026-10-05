@@ -24,3 +24,7 @@ The old wording remains historical; it is not authority to reintroduce a bypass.
 The four O3 class names are retained for the validator, including legacy `*ApiTest` names, but their
 future browser implementation must be UI-only. They must not be marked complete merely because a
 local service test, a static check, or a previous direct-request run passes.
+
+## 2026-10-05 — Invitation SMS delivery (review D-R2)
+
+Deferred, not executed, not a pass: a real handset receiving the role-only invitation SMS. Dev uses the safe notification providers; production SMS is a production-provider check. Proof in scope: Identity H2 outbox test (one row per invitation, no organisation name), CommunicationIntegration routing test, emitted-codes scan, and the visible in-app invitation banner after deploy.

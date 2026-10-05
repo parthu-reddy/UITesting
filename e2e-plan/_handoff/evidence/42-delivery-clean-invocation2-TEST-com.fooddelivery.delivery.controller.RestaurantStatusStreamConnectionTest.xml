@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.delivery.controller.RestaurantStatusStreamConnectionTest" time="2.51" tests="6" errors="0" skipped="0" failures="0">
+  <testcase name="aReleasedAssignmentCannotOpenTheStream(boolean)[1]" classname="com.fooddelivery.delivery.controller.RestaurantStatusStreamConnectionTest" time="1.797">
+    </testcase>
+  <testcase name="aReleasedAssignmentCannotOpenTheStream(boolean)[2]" classname="com.fooddelivery.delivery.controller.RestaurantStatusStreamConnectionTest" time="0.156">
+    </testcase>
+  <testcase name="openStreamLeavesTheDatabaseAvailableForArrivalAndOrderReads(boolean)[1]" classname="com.fooddelivery.delivery.controller.RestaurantStatusStreamConnectionTest" time="0.157">
+    </testcase>
+  <testcase name="openStreamLeavesTheDatabaseAvailableForArrivalAndOrderReads(boolean)[2]" classname="com.fooddelivery.delivery.controller.RestaurantStatusStreamConnectionTest" time="0.127">
+    </testcase>
+  <testcase name="anotherRiderCannotOpenTheOrdersStream(boolean)[1]" classname="com.fooddelivery.delivery.controller.RestaurantStatusStreamConnectionTest" time="0.121">
+    </testcase>
+  <testcase name="anotherRiderCannotOpenTheOrdersStream(boolean)[2]" classname="com.fooddelivery.delivery.controller.RestaurantStatusStreamConnectionTest" time="0.134">
+    </testcase>
+</testsuite>

@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.customer.service.FreshRestaurantApprovalTest" time="0.222" tests="4" errors="1" skipped="0" failures="0">
+  <testcase name="alreadyQuotedOrderRefusesSuspensionBeforeClaimSagaOrPayment" classname="com.fooddelivery.customer.service.FreshRestaurantApprovalTest" time="0.101">
+    </testcase>
+  <testcase name="fallbackPreservesDefinitiveRefusalAndRefusesMissingOrFailedServerAs503" classname="com.fooddelivery.customer.service.FreshRestaurantApprovalTest" time="0.01" />
+  <testcase name="quoteRefusesSuspendedRestaurantAs404WithoutSavingAPrice" classname="com.fooddelivery.customer.service.FreshRestaurantApprovalTest" time="0.006" />
+  <testcase name="freshEndpointBypassesActualSpringCacheWhenBrowsingHasAnOlderApproval" classname="com.fooddelivery.customer.service.FreshRestaurantApprovalTest" time="0.094">
+    <error message="&#10;Unnecessary stubbings detected.&#10;Clean &amp; maintainable test code requires zero unnecessary code.&#10;Following stubbings are unnecessary (click to navigate to relevant line of code):&#10;  1. -&gt; at com.fooddelivery.customer.service.FreshRestaurantApprovalTest.freshEndpointBypassesActualSpringCacheWhenBrowsingHasAnOlderApproval(FreshRestaurantApprovalTest.java:85)&#10;Please remove unnecessary stubbings or use 'lenient' strictness. More info: javadoc for UnnecessaryStubbingException class." type="org.mockito.exceptions.misusing.UnnecessaryStubbingException">org.mockito.exceptions.misusing.UnnecessaryStubbingException: 
+
+Unnecessary stubbings detected.
+Clean &amp; maintainable test code requires zero unnecessary code.
+Following stubbings are unnecessary (click to navigate to relevant line of code):
+  1. -&gt; at com.fooddelivery.customer.service.FreshRestaurantApprovalTest.freshEndpointBypassesActualSpringCacheWhenBrowsingHasAnOlderApproval(FreshRestaurantApprovalTest.java:85)
+Please remove unnecessary stubbings or use 'lenient' strictness. More info: javadoc for UnnecessaryStubbingException class.
+	at org.mockito.junit.jupiter.MockitoExtension.afterEach(MockitoExtension.java:197)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+</error>
+  </testcase>
+</testsuite>

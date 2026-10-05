@@ -1,0 +1,15 @@
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.restaurant.service.RestaurantOnboardingServiceTest" time="0.265" tests="4" errors="0" skipped="0" failures="0">
+  <testcase name="testOnboardOutlet_RefusesAnOffsetForATimeZone" classname="com.fooddelivery.restaurant.service.RestaurantOnboardingServiceTest" time="0.246">
+    <system-out>{"@timestamp":"2026-10-03T20:30:25.404008Z","@version":"1","message":"Starting Outlet onboarding brandId=16de7f44-ca80-4173-9168-2715d12c8272","logger_name":"com.fooddelivery.restaurant.service.RestaurantOnboardingService","thread_name":"main","level":"INFO","level_value":20000,"springAppName":"restaurant-service","app_name":"restaurant-service"}
+</system-out>
+  </testcase>
+  <testcase name="testOnboardOutlet_Success" classname="com.fooddelivery.restaurant.service.RestaurantOnboardingServiceTest" time="0.005">
+    <system-out>{"@timestamp":"2026-10-03T20:30:25.408216Z","@version":"1","message":"Starting Outlet onboarding brandId=dd486e8e-378c-4062-b6db-0c966e188563","logger_name":"com.fooddelivery.restaurant.service.RestaurantOnboardingService","thread_name":"main","level":"INFO","level_value":20000,"springAppName":"restaurant-service","app_name":"restaurant-service"}
+</system-out>
+  </testcase>
+  <testcase name="testOnboardOutlet_InvalidFssai" classname="com.fooddelivery.restaurant.service.RestaurantOnboardingServiceTest" time="0.002">
+    <system-out>{"@timestamp":"2026-10-03T20:30:25.411893Z","@version":"1","message":"Starting Outlet onboarding brandId=8b9a2cda-7f2c-43d6-ad94-fb4c4a034053","logger_name":"com.fooddelivery.restaurant.service.RestaurantOnboardingService","thread_name":"main","level":"INFO","level_value":20000,"springAppName":"restaurant-service","app_name":"restaurant-service"}
+</system-out>
+  </testcase>
+  <testcase name="updateOutletSettings_tellsCustomerAppToDropItsCachedOutlet" classname="com.fooddelivery.restaurant.service.RestaurantOnboardingServiceTest" time="0.009" />
+</testsuite>

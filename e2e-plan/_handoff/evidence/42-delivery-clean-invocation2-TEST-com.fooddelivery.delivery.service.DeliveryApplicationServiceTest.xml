@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.delivery.service.DeliveryApplicationServiceTest" time="0.028" tests="15" errors="0" skipped="0" failures="0">
+  <testcase name="draftUsesPrincipalAndSignedPhoneRatherThanCallerSelectedIdentity" classname="com.fooddelivery.delivery.service.DeliveryApplicationServiceTest" time="0.012">
+    </testcase>
+  <testcase name="approvedInactiveRefreshStaysInactiveAndMissingChecksSuspendThroughLifecycle" classname="com.fooddelivery.delivery.service.DeliveryApplicationServiceTest" time="0.001">
+    </testcase>
+  <testcase name="rejectedEditPreservesRejectionUntilResubmit" classname="com.fooddelivery.delivery.service.DeliveryApplicationServiceTest" time="0.002">
+    </testcase>
+  <testcase name="noneditableApplicationsCannotBeRewritten(ApplicationStatus)[1]" classname="com.fooddelivery.delivery.service.DeliveryApplicationServiceTest" time="0.001">
+    </testcase>
+  <testcase name="noneditableApplicationsCannotBeRewritten(ApplicationStatus)[2]" classname="com.fooddelivery.delivery.service.DeliveryApplicationServiceTest" time="0.001">
+    </testcase>
+  <testcase name="noneditableApplicationsCannotBeRewritten(ApplicationStatus)[3]" classname="com.fooddelivery.delivery.service.DeliveryApplicationServiceTest" time="0.001">
+    </testcase>
+  <testcase name="noneditableApplicationsCannotBeRewritten(ApplicationStatus)[4]" classname="com.fooddelivery.delivery.service.DeliveryApplicationServiceTest" time="0.001">
+    </testcase>
+  <testcase name="onlyAdminDecisionAfterReviewCanApproveAndActivate" classname="com.fooddelivery.delivery.service.DeliveryApplicationServiceTest" time="0.001">
+    </testcase>
+  <testcase name="submittingStartsChecksAndPassedChecksReachReviewWithoutActivating" classname="com.fooddelivery.delivery.service.DeliveryApplicationServiceTest" time="0.001">
+    </testcase>
+  <testcase name="submittedOrChangedDecisionCannotBeApproved" classname="com.fooddelivery.delivery.service.DeliveryApplicationServiceTest" time="0.001">
+    </testcase>
+  <testcase name="missingSignedPhoneCannotCreateProfile" classname="com.fooddelivery.delivery.service.DeliveryApplicationServiceTest" time="0.001">
+    </testcase>
+  <testcase name="missingCompletedDocumentsCannotSubmit" classname="com.fooddelivery.delivery.service.DeliveryApplicationServiceTest" time="0.0">
+    </testcase>
+  <testcase name="rejectNeedsReasonAndCannotBeUsedToReinstate" classname="com.fooddelivery.delivery.service.DeliveryApplicationServiceTest" time="0.0">
+    </testcase>
+  <testcase name="onDeliverySuspensionPreservesDutyAndTrackingUntilDeliveryFinishes" classname="com.fooddelivery.delivery.service.DeliveryApplicationServiceTest" time="0.001">
+    </testcase>
+  <testcase name="failedChecksRejectWithAReasonAndStaleSubmissionDoesNoWork" classname="com.fooddelivery.delivery.service.DeliveryApplicationServiceTest" time="0.0">
+    </testcase>
+</testsuite>

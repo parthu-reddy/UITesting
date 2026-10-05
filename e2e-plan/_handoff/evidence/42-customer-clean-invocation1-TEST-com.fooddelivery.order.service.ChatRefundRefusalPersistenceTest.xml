@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.order.service.ChatRefundRefusalPersistenceTest" time="0.785" tests="3" errors="0" skipped="0" failures="0">
+  <testcase name="quoteForAnUntouchedItemCommitsTheQuote" classname="com.fooddelivery.order.service.ChatRefundRefusalPersistenceTest" time="0.091">
+    </testcase>
+  <testcase name="refundRequestForAnAlreadyRefundedItemCommitsAnErrorReplyAndNoTicket" classname="com.fooddelivery.order.service.ChatRefundRefusalPersistenceTest" time="0.025">
+    </testcase>
+  <testcase name="quoteForAnAlreadyRefundedItemCommitsAnErrorReply" classname="com.fooddelivery.order.service.ChatRefundRefusalPersistenceTest" time="0.027">
+    </testcase>
+</testsuite>

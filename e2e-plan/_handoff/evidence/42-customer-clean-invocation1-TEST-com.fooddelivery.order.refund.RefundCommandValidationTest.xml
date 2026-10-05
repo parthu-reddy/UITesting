@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.order.refund.RefundCommandValidationTest" time="0.006" tests="6" errors="0" skipped="0" failures="0">
+  <testcase name="quoteRejectsForeignDuplicateAndNonpositiveItems" classname="com.fooddelivery.order.refund.RefundCommandValidationTest" time="0.001" />
+  <testcase name="losslesslyNormalizableMoneyIsAcceptedAndSubcentMoneyIsRejected" classname="com.fooddelivery.order.refund.RefundCommandValidationTest" time="0.001" />
+  <testcase name="requiredCommandMetadataIsControlledBeforePersistence" classname="com.fooddelivery.order.refund.RefundCommandValidationTest" time="0.001" />
+  <testcase name="malformedAmountsAreRejectedBeforeAnyLookupOrPersistence" classname="com.fooddelivery.order.refund.RefundCommandValidationTest" time="0.001" />
+  <testcase name="itemRefundMustMatchTheServerQuote" classname="com.fooddelivery.order.refund.RefundCommandValidationTest" time="0.001" />
+  <testcase name="emptyItemQuoteMeansTheWholeOrderAndNeverZero" classname="com.fooddelivery.order.refund.RefundCommandValidationTest" time="0.001" />
+</testsuite>

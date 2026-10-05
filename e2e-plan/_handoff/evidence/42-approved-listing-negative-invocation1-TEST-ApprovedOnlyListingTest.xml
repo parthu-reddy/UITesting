@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.restaurant.service.ApprovedOnlyListingTest" time="12.882" tests="1" errors="0" skipped="0" failures="1">
+  <testcase name="actualPostgisNearbyAndBrandQueriesExposeOnlyApprovedApplications" classname="com.fooddelivery.restaurant.service.ApprovedOnlyListingTest" time="11.95">
+    <failure message="[brand visibility for DRAFT] &#10;expected: &quot;0&quot;&#10; but was: &quot;1&quot;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: 
+[brand visibility for DRAFT] 
+expected: "0"
+ but was: "1"
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at com.fooddelivery.restaurant.service.ApprovedOnlyListingTest.actualPostgisNearbyAndBrandQueriesExposeOnlyApprovedApplications(ApprovedOnlyListingTest.java:91)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+</failure>
+  </testcase>
+</testsuite>

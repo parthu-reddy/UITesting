@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.order.service.RefundServiceTest" time="0.034" tests="8" errors="0" skipped="0" failures="0">
+  <testcase name="retryStuck_redispatchesStoreCreditToTheWallet" classname="com.fooddelivery.order.service.RefundServiceTest" time="0.007" />
+  <testcase name="retryStuck_givesUpAfterThreeAttempts" classname="com.fooddelivery.order.service.RefundServiceTest" time="0.006" />
+  <testcase name="complete_shouldProcessRefundSuccessfully(int, PaymentIntentStatus)[1]" classname="com.fooddelivery.order.service.RefundServiceTest" time="0.006" />
+  <testcase name="complete_shouldProcessRefundSuccessfully(int, PaymentIntentStatus)[2]" classname="com.fooddelivery.order.service.RefundServiceTest" time="0.003" />
+  <testcase name="retryStuck_reEnqueuesAndCountsTheAttempt" classname="com.fooddelivery.order.service.RefundServiceTest" time="0.003" />
+  <testcase name="complete_isIdempotent" classname="com.fooddelivery.order.service.RefundServiceTest" time="0.001" />
+  <testcase name="fail_isIdempotent" classname="com.fooddelivery.order.service.RefundServiceTest" time="0.001" />
+  <testcase name="fail_recordsTheReasonAndStopsThere" classname="com.fooddelivery.order.service.RefundServiceTest" time="0.004" />
+</testsuite>

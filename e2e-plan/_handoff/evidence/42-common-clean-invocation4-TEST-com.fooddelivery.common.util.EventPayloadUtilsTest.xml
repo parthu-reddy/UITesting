@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.common.util.EventPayloadUtilsTest" time="0.014" tests="14" errors="0" skipped="0" failures="0">
+  <testcase name="campaignId_findsCanonicalKey" classname="com.fooddelivery.common.util.EventPayloadUtilsTest" time="0.003" />
+  <testcase name="returnsRootWhenPayloadIsFlat" classname="com.fooddelivery.common.util.EventPayloadUtilsTest" time="0.0" />
+  <testcase name="campaignId_prefersCanonicalOverLegacy" classname="com.fooddelivery.common.util.EventPayloadUtilsTest" time="0.0" />
+  <testcase name="resolvesEventTypeFromBody" classname="com.fooddelivery.common.util.EventPayloadUtilsTest" time="0.0" />
+  <testcase name="parsesADoubleEncodedPayloadString" classname="com.fooddelivery.common.util.EventPayloadUtilsTest" time="0.0" />
+  <testcase name="handlesNullRoot" classname="com.fooddelivery.common.util.EventPayloadUtilsTest" time="0.001" />
+  <testcase name="returnsNullWhenNeitherSourceHasIt" classname="com.fooddelivery.common.util.EventPayloadUtilsTest" time="0.001" />
+  <testcase name="bodyWinsWhenBodyAndHeaderDisagree" classname="com.fooddelivery.common.util.EventPayloadUtilsTest" time="0.001" />
+  <testcase name="unwrapsAnEnvelope" classname="com.fooddelivery.common.util.EventPayloadUtilsTest" time="0.0" />
+  <testcase name="campaignId_fallsBackToLegacyKey" classname="com.fooddelivery.common.util.EventPayloadUtilsTest" time="0.0" />
+  <testcase name="campaignId_returnsNullIfNeitherPresent" classname="com.fooddelivery.common.util.EventPayloadUtilsTest" time="0.001" />
+  <testcase name="fallsBackToHeaderWhenBodyHasNone" classname="com.fooddelivery.common.util.EventPayloadUtilsTest" time="0.001" />
+  <testcase name="treatsNullPayloadAsFlat" classname="com.fooddelivery.common.util.EventPayloadUtilsTest" time="0.0" />
+  <testcase name="decodesByteArrayHeaders" classname="com.fooddelivery.common.util.EventPayloadUtilsTest" time="0.0" />
+</testsuite>

@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.order.repository.EarningsWindowQueriesTest" time="4.862" tests="7" errors="0" skipped="0" failures="0">
+  <testcase name="anotherOutletsAndAnotherRidersOrdersAreNotCounted" classname="com.fooddelivery.order.repository.EarningsWindowQueriesTest" time="0.543">
+    </testcase>
+  <testcase name="theWindowIncludesItsFirstInstantAndExcludesItsLast" classname="com.fooddelivery.order.repository.EarningsWindowQueriesTest" time="0.036">
+    </testcase>
+  <testcase name="adminMoneyCanReadTheItemsAfterThePersistenceContextIsCleared" classname="com.fooddelivery.order.repository.EarningsWindowQueriesTest" time="0.272">
+    </testcase>
+  <testcase name="anOrderCountsOnTheDayItWasDeliveredNotTheDayItWasPlaced" classname="com.fooddelivery.order.repository.EarningsWindowQueriesTest" time="0.015">
+    </testcase>
+  <testcase name="theOutletsItemsArriveWithTheOrders" classname="com.fooddelivery.order.repository.EarningsWindowQueriesTest" time="0.01">
+    </testcase>
+  <testcase name="restaurantOrderEarningsLoadItemsWithTheOrder" classname="com.fooddelivery.order.repository.EarningsWindowQueriesTest" time="0.01">
+    </testcase>
+  <testcase name="anOrderThatWasNeverDeliveredEarnsNothing" classname="com.fooddelivery.order.repository.EarningsWindowQueriesTest" time="0.019">
+    </testcase>
+</testsuite>

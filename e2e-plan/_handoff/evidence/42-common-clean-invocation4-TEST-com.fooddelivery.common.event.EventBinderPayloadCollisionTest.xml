@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.common.event.EventBinderPayloadCollisionTest" time="0.023" tests="5" errors="0" skipped="0" failures="0">
+  <testcase name="orderUuidHandlesAMissingOrBlankOrderId" classname="com.fooddelivery.common.event.EventBinderPayloadCollisionTest" time="0.001" />
+  <testcase name="orderUuidIsNotSerialisedOntoTheWire" classname="com.fooddelivery.common.event.EventBinderPayloadCollisionTest" time="0.001" />
+  <testcase name="bindsUnderAStrictObjectMapperToo" classname="com.fooddelivery.common.event.EventBinderPayloadCollisionTest" time="0.005" />
+  <testcase name="bindsAnEventClassThatHasItsOwnPayloadField" classname="com.fooddelivery.common.event.EventBinderPayloadCollisionTest" time="0.012" />
+  <testcase name="aNullPayloadFailsWithAMessageAboutTheEventNotHibernate" classname="com.fooddelivery.common.event.EventBinderPayloadCollisionTest" time="0.003" />
+</testsuite>

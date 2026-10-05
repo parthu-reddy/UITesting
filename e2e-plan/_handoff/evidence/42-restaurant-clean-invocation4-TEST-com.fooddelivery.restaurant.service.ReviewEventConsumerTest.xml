@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.restaurant.service.ReviewEventConsumerTest" time="0.331" tests="7" errors="0" skipped="0" failures="0">
+  <testcase name="anUnknownOutletIsDroppedRatherThanRetried" classname="com.fooddelivery.restaurant.service.ReviewEventConsumerTest" time="0.278">
+    </testcase>
+  <testcase name="aMissingEventIdHeaderIsDeadLettered" classname="com.fooddelivery.restaurant.service.ReviewEventConsumerTest" time="0.014">
+    </testcase>
+  <testcase name="aProductReviewNeverTouchesAnOutlet" classname="com.fooddelivery.restaurant.service.ReviewEventConsumerTest" time="0.007" />
+  <testcase name="reprocessingAfterTheDeduplicationKeyIsSweptStillLandsOnTheSameValue" classname="com.fooddelivery.restaurant.service.ReviewEventConsumerTest" time="0.009">
+    </testcase>
+  <testcase name="aDriverReviewNeverTouchesAnOutlet" classname="com.fooddelivery.restaurant.service.ReviewEventConsumerTest" time="0.007" />
+  <testcase name="writesTheAggregateOntoTheOutlet" classname="com.fooddelivery.restaurant.service.ReviewEventConsumerTest" time="0.008">
+    </testcase>
+  <testcase name="aRedeliveredEventDoesNotMoveTheRating" classname="com.fooddelivery.restaurant.service.ReviewEventConsumerTest" time="0.007">
+    </testcase>
+</testsuite>

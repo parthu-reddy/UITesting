@@ -1,0 +1,17 @@
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.restaurant.service.RestaurantApplicationServiceTest" time="0.848" tests="1" errors="0" skipped="0" failures="1">
+  <testcase name="staleCallbackCannotTouchTheCurrentSubmissionOrAnApprovedApplication" classname="com.fooddelivery.restaurant.service.RestaurantApplicationServiceTest" time="0.833">
+    <failure message="&#10;brands.saveAndFlush(&lt;any&gt;);&#10;Never wanted here:&#10;-&gt; at com.fooddelivery.restaurant.service.RestaurantApplicationServiceTest.staleCallbackCannotTouchTheCurrentSubmissionOrAnApprovedApplication(RestaurantApplicationServiceTest.java:144)&#10;But invoked here:&#10;-&gt; at com.fooddelivery.restaurant.service.RestaurantApplicationService.saveBrand(RestaurantApplicationService.java:238) with arguments: [com.fooddelivery.restaurant.entity.Brand@3e0fbeb5]&#10;" type="org.mockito.exceptions.verification.NeverWantedButInvoked">org.mockito.exceptions.verification.NeverWantedButInvoked: 
+
+brands.saveAndFlush(&lt;any&gt;);
+Never wanted here:
+-&gt; at com.fooddelivery.restaurant.service.RestaurantApplicationServiceTest.staleCallbackCannotTouchTheCurrentSubmissionOrAnApprovedApplication(RestaurantApplicationServiceTest.java:144)
+But invoked here:
+-&gt; at com.fooddelivery.restaurant.service.RestaurantApplicationService.saveBrand(RestaurantApplicationService.java:238) with arguments: [com.fooddelivery.restaurant.entity.Brand@3e0fbeb5]
+
+	at com.fooddelivery.restaurant.service.RestaurantApplicationServiceTest.staleCallbackCannotTouchTheCurrentSubmissionOrAnApprovedApplication(RestaurantApplicationServiceTest.java:144)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+</failure>
+  </testcase>
+</testsuite>

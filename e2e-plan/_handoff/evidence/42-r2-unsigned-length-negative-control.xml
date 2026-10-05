@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.common.service.CloudflareR2DocumentSafetyTest" time="0.971" tests="1" errors="0" skipped="0" failures="1">
+  <testcase name="actualPresignerSignsTypeLengthAndTenMinuteExpiry" classname="com.fooddelivery.common.service.CloudflareR2DocumentSafetyTest" time="0.959">
+    <failure message="X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Date=20261003T193645Z&amp;X-Amz-SignedHeaders=content-type;host&amp;X-Amz-Expires=600&amp;X-Amz-Credential=EXAMPLE/20261003/auto/s3/aws4_request&amp;X-Amz-Signature=58ebf6b44c16b744380f1a76c714ccf59658037578e154bbbf638209541c3c6b ==&gt; expected: &lt;true&gt; but was: &lt;false&gt;" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Date=20261003T193645Z&amp;X-Amz-SignedHeaders=content-type;host&amp;X-Amz-Expires=600&amp;X-Amz-Credential=EXAMPLE/20261003/auto/s3/aws4_request&amp;X-Amz-Signature=58ebf6b44c16b744380f1a76c714ccf59658037578e154bbbf638209541c3c6b ==&gt; expected: &lt;true&gt; but was: &lt;false&gt;
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:214)
+	at com.fooddelivery.common.service.CloudflareR2DocumentSafetyTest.actualPresignerSignsTypeLengthAndTenMinuteExpiry(CloudflareR2DocumentSafetyTest.java:40)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+</failure>
+    <system-err>WARNING: A Java agent has been loaded dynamically (/Users/parthureddy/.m2/repository/net/bytebuddy/byte-buddy-agent/1.14.17/byte-buddy-agent-1.14.17.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+</system-err>
+  </testcase>
+</testsuite>

@@ -1,0 +1,11 @@
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.governmentid.service.BrandVerificationPipelineTest" time="0.312" tests="9" errors="0" skipped="0" failures="0">
+  <testcase name="resubmissionResetsPreviouslyFinishedChecksAndUsesItsNewRevision" classname="com.fooddelivery.governmentid.service.BrandVerificationPipelineTest" time="0.264" />
+  <testcase name="aDifferentReturnedBrandOrRevisionCannotBeVerified" classname="com.fooddelivery.governmentid.service.BrandVerificationPipelineTest" time="0.004" />
+  <testcase name="staleOrAlreadyReviewedSubmissionDoesNotRunChecks" classname="com.fooddelivery.governmentid.service.BrandVerificationPipelineTest" time="0.003" />
+  <testcase name="submittedRevisionStoresBothChecksAndTwoCorrelatedCallbacksWithoutImmediateDelivery" classname="com.fooddelivery.governmentid.service.BrandVerificationPipelineTest" time="0.011" />
+  <testcase name="absentRealProviderAndMixedProductionProfileNeverCreateApprovals(String)[1]" classname="com.fooddelivery.governmentid.service.BrandVerificationPipelineTest" time="0.008" />
+  <testcase name="absentRealProviderAndMixedProductionProfileNeverCreateApprovals(String)[2]" classname="com.fooddelivery.governmentid.service.BrandVerificationPipelineTest" time="0.003" />
+  <testcase name="absentRealProviderAndMixedProductionProfileNeverCreateApprovals(String)[3]" classname="com.fooddelivery.governmentid.service.BrandVerificationPipelineTest" time="0.001" />
+  <testcase name="absentRealProviderAndMixedProductionProfileNeverCreateApprovals(String)[4]" classname="com.fooddelivery.governmentid.service.BrandVerificationPipelineTest" time="0.002" />
+  <testcase name="duplicateClaimDoesNoProviderOrCallbackWrite" classname="com.fooddelivery.governmentid.service.BrandVerificationPipelineTest" time="0.002" />
+</testsuite>

@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.customer.service.money.SummaryPeriodTest" time="0.021" tests="22" errors="0" skipped="0" failures="0">
+  <testcase name="periodsTileAcrossEveryTransitionAndContainNow(SummaryPeriod)[1]" classname="com.fooddelivery.customer.service.money.SummaryPeriodTest" time="0.003" />
+  <testcase name="periodsTileAcrossEveryTransitionAndContainNow(SummaryPeriod)[2]" classname="com.fooddelivery.customer.service.money.SummaryPeriodTest" time="0.003" />
+  <testcase name="periodsTileAcrossEveryTransitionAndContainNow(SummaryPeriod)[3]" classname="com.fooddelivery.customer.service.money.SummaryPeriodTest" time="0.003" />
+  <testcase name="theWeekOverTheSpringForwardIs167Hours" classname="com.fooddelivery.customer.service.money.SummaryPeriodTest" time="0.0" />
+  <testcase name="todayIsTheOutletsDateNotTheServers" classname="com.fooddelivery.customer.service.money.SummaryPeriodTest" time="0.001" />
+  <testcase name="theWeekOverTheFallBackRunsMondayToMondayAnd169Hours" classname="com.fooddelivery.customer.service.money.SummaryPeriodTest" time="0.0" />
+  <testcase name="todayStartsAtTheFirstInstantThatExistsWhenMidnightDoesNot" classname="com.fooddelivery.customer.service.money.SummaryPeriodTest" time="0.0" />
+  <testcase name="aMonthWithTheFallBackIs31DaysAndAnHour" classname="com.fooddelivery.customer.service.money.SummaryPeriodTest" time="0.0" />
+  <testcase name="todayOnTheFallBackDayIs25Hours" classname="com.fooddelivery.customer.service.money.SummaryPeriodTest" time="0.001" />
+  <testcase name="sundayNightIsStillThisWeekAndMondayMidnightStartsTheNext" classname="com.fooddelivery.customer.service.money.SummaryPeriodTest" time="0.0" />
+  <testcase name="theAcceptedValuesAreTodayWeekAndMonth" classname="com.fooddelivery.customer.service.money.SummaryPeriodTest" time="0.0" />
+  <testcase name="anythingElseIsNotAPeriod(String)[1]" classname="com.fooddelivery.customer.service.money.SummaryPeriodTest" time="0.0" />
+  <testcase name="anythingElseIsNotAPeriod(String)[2]" classname="com.fooddelivery.customer.service.money.SummaryPeriodTest" time="0.0" />
+  <testcase name="anythingElseIsNotAPeriod(String)[3]" classname="com.fooddelivery.customer.service.money.SummaryPeriodTest" time="0.0" />
+  <testcase name="anythingElseIsNotAPeriod(String)[4]" classname="com.fooddelivery.customer.service.money.SummaryPeriodTest" time="0.0" />
+  <testcase name="anythingElseIsNotAPeriod(String)[5]" classname="com.fooddelivery.customer.service.money.SummaryPeriodTest" time="0.0" />
+  <testcase name="anythingElseIsNotAPeriod(String)[6]" classname="com.fooddelivery.customer.service.money.SummaryPeriodTest" time="0.001" />
+  <testcase name="anythingElseIsNotAPeriod(String)[7]" classname="com.fooddelivery.customer.service.money.SummaryPeriodTest" time="0.0" />
+  <testcase name="anythingElseIsNotAPeriod(String)[8]" classname="com.fooddelivery.customer.service.money.SummaryPeriodTest" time="0.001" />
+  <testcase name="aMonthWithTheSpringForwardIs31DaysLessAnHour" classname="com.fooddelivery.customer.service.money.SummaryPeriodTest" time="0.0" />
+  <testcase name="todayOnTheSpringForwardDayIs23Hours" classname="com.fooddelivery.customer.service.money.SummaryPeriodTest" time="0.0" />
+  <testcase name="theMonthTurnsOnTheOutletsCalendar" classname="com.fooddelivery.customer.service.money.SummaryPeriodTest" time="0.0" />
+</testsuite>

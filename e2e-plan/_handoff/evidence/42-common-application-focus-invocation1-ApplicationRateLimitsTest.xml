@@ -1,0 +1,10 @@
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.common.service.ApplicationRateLimitsTest" time="0.68" tests="2" errors="0" skipped="0" failures="0">
+  <testcase name="organisationWritesShareOneBucketAndOtherOrganisationsDoNotExhaustIt" classname="com.fooddelivery.common.service.ApplicationRateLimitsTest" time="0.662">
+    <system-err>WARNING: A Java agent has been loaded dynamically (/Users/parthureddy/.m2/repository/net/bytebuddy/byte-buddy-agent/1.14.17/byte-buddy-agent-1.14.17.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+</system-err>
+  </testcase>
+  <testcase name="deliveryAndRestaurantWritesUseDistinctKeysForTheSameUuid" classname="com.fooddelivery.common.service.ApplicationRateLimitsTest" time="0.005" />
+</testsuite>

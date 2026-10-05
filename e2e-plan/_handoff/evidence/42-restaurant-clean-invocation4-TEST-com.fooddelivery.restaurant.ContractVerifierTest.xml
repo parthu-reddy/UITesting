@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.restaurant.ContractVerifierTest" time="0.76" tests="8" errors="0" skipped="0" failures="0">
+  <testcase name="validate_getUserOutlets" classname="com.fooddelivery.restaurant.ContractVerifierTest" time="0.519">
+    </testcase>
+  <testcase name="validate_getMenuItemsBatch" classname="com.fooddelivery.restaurant.ContractVerifierTest" time="0.036">
+    </testcase>
+  <testcase name="validate_getBrandOutlets" classname="com.fooddelivery.restaurant.ContractVerifierTest" time="0.101">
+    </testcase>
+  <testcase name="validate_getNearbyRestaurants" classname="com.fooddelivery.restaurant.ContractVerifierTest" time="0.028">
+    </testcase>
+  <testcase name="validate_getRestaurantById" classname="com.fooddelivery.restaurant.ContractVerifierTest" time="0.018">
+    </testcase>
+  <testcase name="validate_getOutletSummary" classname="com.fooddelivery.restaurant.ContractVerifierTest" time="0.014">
+    </testcase>
+  <testcase name="validate_getOutletOrganisation" classname="com.fooddelivery.restaurant.ContractVerifierTest" time="0.02">
+    </testcase>
+  <testcase name="validate_getInternalOrderStatus" classname="com.fooddelivery.restaurant.ContractVerifierTest" time="0.019">
+    </testcase>
+</testsuite>

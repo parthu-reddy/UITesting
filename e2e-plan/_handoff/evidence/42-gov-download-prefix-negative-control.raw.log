@@ -1,0 +1,90 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------< com.fooddelivery:government-id-validation-service >----------
+[INFO] Building government-id-validation-service 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ government-id-validation-service ---
+[INFO] Copying 1 resource from src/main/resources to target/classes
+[INFO] Copying 2 resources from src/main/resources to target/classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ government-id-validation-service ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 40 source files with javac [forked debug parameters release 17] to target/classes
+[INFO] 
+[INFO] --- spring-cloud-contract:4.1.2:generateTests (default-generateTests) @ government-id-validation-service ---
+[INFO] Generating server tests source code for Spring Cloud Contract Verifier contract verification
+[INFO] Will use contracts provided in the folder [/Users/parthureddy/Documents/Food Delivery.nosync/GovernmentIDValidationService/src/test/resources/contracts]
+[INFO] Directory with contract is present at [/Users/parthureddy/Documents/Food Delivery.nosync/GovernmentIDValidationService/src/test/resources/contracts]
+[INFO] Nothing to generate - all classes are up to date
+[INFO] 
+[INFO] --- exec:3.1.0:exec (check-stale-contracts) @ government-id-validation-service ---
+[INFO] 
+[INFO] --- spring-cloud-contract:4.1.2:convert (default-convert) @ government-id-validation-service ---
+[INFO] Will use contracts provided in the folder [/Users/parthureddy/Documents/Food Delivery.nosync/GovernmentIDValidationService/src/test/resources/contracts]
+[INFO] Nothing to generate - all stubs are up to date
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ government-id-validation-service ---
+[INFO] Copying 6 resources from src/test/resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ government-id-validation-service ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 15 source files with javac [forked debug parameters release 17] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-test) @ government-id-validation-service ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[WARNING] The system property net.bytebuddy.experimental is configured twice! The property appears in <argLine/> and any of <systemPropertyVariables/>, <systemProperties/> or user property.
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.fooddelivery.governmentid.service.ApplicationDocumentSecurityTest
+[ERROR] Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.812 s <<< FAILURE! -- in com.fooddelivery.governmentid.service.ApplicationDocumentSecurityTest
+[ERROR] com.fooddelivery.governmentid.service.ApplicationDocumentSecurityTest.containingTheCallerIdUnderAnotherPrefixIsNeverOwnership -- Time elapsed: 0.784 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <org.springframework.security.access.AccessDeniedException> but was: <org.springframework.web.server.ResponseStatusException>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3115)
+	at com.fooddelivery.governmentid.service.ApplicationDocumentSecurityTest.containingTheCallerIdUnderAnotherPrefixIsNeverOwnership(ApplicationDocumentSecurityTest.java:129)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+Caused by: org.springframework.web.server.ResponseStatusException: 404 NOT_FOUND "Document not found"
+	at com.fooddelivery.governmentid.service.ApplicationDocumentService.notFound(ApplicationDocumentService.java:189)
+	at java.base/java.util.Optional.orElseThrow(Optional.java:407)
+	at com.fooddelivery.governmentid.service.ApplicationDocumentService.ownDownload(ApplicationDocumentService.java:120)
+	at com.fooddelivery.governmentid.service.ApplicationDocumentSecurityTest.lambda$containingTheCallerIdUnderAnotherPrefixIsNeverOwnership$0(ApplicationDocumentSecurityTest.java:129)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)
+	... 6 more
+
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Failures: 
+[ERROR]   ApplicationDocumentSecurityTest.containingTheCallerIdUnderAnotherPrefixIsNeverOwnership:129 Unexpected exception type thrown, expected: <org.springframework.security.access.AccessDeniedException> but was: <org.springframework.web.server.ResponseStatusException>
+[INFO] 
+[ERROR] Tests run: 1, Failures: 1, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  8.597 s
+[INFO] Finished at: 2026-10-04T01:19:57+05:30
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.2.5:test (default-test) on project government-id-validation-service: There are test failures.
+[ERROR] 
+[ERROR] Please refer to /Users/parthureddy/Documents/Food Delivery.nosync/GovernmentIDValidationService/target/surefire-reports for the individual test results.
+[ERROR] Please refer to dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+WARNING: A terminally deprecated method in sun.misc.Unsafe has been called
+WARNING: sun.misc.Unsafe::objectFieldOffset has been called by net.bytebuddy.dynamic.loading.ClassInjector$UsingUnsafe$Dispatcher$CreationAction (file:/Users/parthureddy/.m2/repository/net/bytebuddy/byte-buddy/1.14.17/byte-buddy-1.14.17.jar)
+WARNING: Please consider reporting this to the maintainers of class net.bytebuddy.dynamic.loading.ClassInjector$UsingUnsafe$Dispatcher$CreationAction
+WARNING: sun.misc.Unsafe::objectFieldOffset will be removed in a future release

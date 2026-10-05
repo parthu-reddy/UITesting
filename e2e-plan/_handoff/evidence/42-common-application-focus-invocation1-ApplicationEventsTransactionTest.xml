@@ -1,0 +1,71 @@
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.common.application.ApplicationEventsTransactionTest" time="4.039" tests="5" errors="0" skipped="0" failures="0">
+  <testcase name="aDatabaseFreeConsumerDoesNotInstantiateTheApplicationWriter" classname="com.fooddelivery.common.application.ApplicationEventsTransactionTest" time="0.203" />
+  <testcase name="outerRollbackLeavesStateAuditOutboxAndCounterUnchanged" classname="com.fooddelivery.common.application.ApplicationEventsTransactionTest" time="3.228">
+    <system-out>09:57:55.651 [main] INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate -- Multiple Spring Data modules found, entering strict repository configuration mode
+09:57:55.654 [main] INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate -- Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+09:57:55.770 [main] INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate -- Finished Spring Data repository scanning in 110 ms. Found 1 JPA repository interface.
+09:57:55.974 [main] INFO org.hibernate.jpa.internal.util.LogHelper -- HHH000204: Processing PersistenceUnitInfo [name: default]
+09:57:56.018 [main] INFO org.hibernate.Version -- HHH000412: Hibernate ORM core version 6.5.2.Final
+09:57:56.046 [main] INFO org.hibernate.cache.internal.RegionFactoryInitiator -- HHH000026: Second-level cache disabled
+09:57:56.291 [main] INFO org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo -- No LoadTimeWeaver setup: ignoring JPA class transformer
+09:57:56.312 [main] INFO com.zaxxer.hikari.HikariDataSource -- HikariPool-1 - Starting...
+09:57:56.463 [main] INFO com.zaxxer.hikari.pool.HikariPool -- HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:application_events_fc5a0045-20a0-413c-bfdd-781cc75eb29d user=SA
+09:57:56.464 [main] INFO com.zaxxer.hikari.HikariDataSource -- HikariPool-1 - Start completed.
+09:57:57.041 [main] INFO org.hibernate.validator.internal.util.Version -- HV000001: Hibernate Validator 8.0.1.Final
+09:57:57.508 [main] INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator -- HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+09:57:57.531 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Initialized JPA EntityManagerFactory for persistence unit 'default'
+09:57:58.269 [main] INFO org.springframework.data.jpa.repository.query.QueryEnhancerFactory -- Hibernate is in classpath; If applicable, HQL parser will be used.
+09:57:58.675 [main] INFO com.fooddelivery.common.service.NotificationRouterService -- Successfully persisted NotificationRequestEvent outbox event for aggregate: 5ea02f11-d84d-4d74-bf21-282d138879bd
+09:57:58.745 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Closing JPA EntityManagerFactory for persistence unit 'default'
+09:57:58.749 [main] INFO com.zaxxer.hikari.HikariDataSource -- HikariPool-1 - Shutdown initiated...
+09:57:58.750 [main] INFO com.zaxxer.hikari.HikariDataSource -- HikariPool-1 - Shutdown completed.
+</system-out>
+    <system-err>WARNING: A Java agent has been loaded dynamically (/Users/parthureddy/.m2/repository/net/bytebuddy/byte-buddy-agent/1.14.17/byte-buddy-agent-1.14.17.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+</system-err>
+  </testcase>
+  <testcase name="aDirectCallerWithoutTransactionCannotWriteAnything" classname="com.fooddelivery.common.application.ApplicationEventsTransactionTest" time="0.12" />
+  <testcase name="failedOutboxInsertRollsBackTheStateAndAudit" classname="com.fooddelivery.common.application.ApplicationEventsTransactionTest" time="0.262">
+    <system-out>09:57:58.903 [main] INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate -- Multiple Spring Data modules found, entering strict repository configuration mode
+09:57:58.903 [main] INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate -- Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+09:57:58.907 [main] INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate -- Finished Spring Data repository scanning in 4 ms. Found 1 JPA repository interface.
+09:57:58.955 [main] INFO org.hibernate.jpa.internal.util.LogHelper -- HHH000204: Processing PersistenceUnitInfo [name: default]
+09:57:58.958 [main] INFO org.hibernate.cache.internal.RegionFactoryInitiator -- HHH000026: Second-level cache disabled
+09:57:58.964 [main] INFO org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo -- No LoadTimeWeaver setup: ignoring JPA class transformer
+09:57:58.965 [main] INFO com.zaxxer.hikari.HikariDataSource -- HikariPool-2 - Starting...
+09:57:58.967 [main] INFO com.zaxxer.hikari.pool.HikariPool -- HikariPool-2 - Added connection conn10: url=jdbc:h2:mem:application_events_e37daf3e-576e-4228-9979-faf6b2e37d0a user=SA
+09:57:58.967 [main] INFO com.zaxxer.hikari.HikariDataSource -- HikariPool-2 - Start completed.
+09:57:59.023 [main] INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator -- HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+09:57:59.029 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Initialized JPA EntityManagerFactory for persistence unit 'default'
+09:57:59.087 [main] INFO com.fooddelivery.common.service.NotificationRouterService -- Successfully persisted NotificationRequestEvent outbox event for aggregate: fc92b878-2d85-4da5-a03d-3c9d60278a3e
+09:57:59.088 [main] INFO com.fooddelivery.common.service.NotificationRouterService -- Successfully persisted NotificationRequestEvent outbox event for aggregate: fc92b878-2d85-4da5-a03d-3c9d60278a3e
+09:57:59.093 [main] WARN org.hibernate.engine.jdbc.spi.SqlExceptionHelper -- SQL Error: 23505, SQLState: 23505
+09:57:59.093 [main] ERROR org.hibernate.engine.jdbc.spi.SqlExceptionHelper -- Unique index or primary key violation: "PUBLIC.CONSTRAINT_INDEX_9 ON PUBLIC.OUTBOX_EVENTS(IDEMPOTENCY_KEY NULLS FIRST) VALUES ( /* 1 */ 'delivery-application:fc92b878-2d85-4da5-a03d-3c9d60278a3e:5' )"; SQL statement:
+insert into outbox_events (aggregate_id,aggregate_type,created_at,error_message,type,idempotency_key,payload,processed_at,retry_count,status,id) values (?,?,?,?,?,?,? format json,?,?,?,?) [23505-224]
+09:57:59.102 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Closing JPA EntityManagerFactory for persistence unit 'default'
+09:57:59.104 [main] INFO com.zaxxer.hikari.HikariDataSource -- HikariPool-2 - Shutdown initiated...
+09:57:59.134 [main] INFO com.zaxxer.hikari.HikariDataSource -- HikariPool-2 - Shutdown completed.
+</system-out>
+  </testcase>
+  <testcase name="commitsStateAuditTypedEventAndDeduplicatedNotificationsTogether" classname="com.fooddelivery.common.application.ApplicationEventsTransactionTest" time="0.211">
+    <system-out>09:57:59.160 [main] INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate -- Multiple Spring Data modules found, entering strict repository configuration mode
+09:57:59.160 [main] INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate -- Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+09:57:59.164 [main] INFO org.springframework.data.repository.config.RepositoryConfigurationDelegate -- Finished Spring Data repository scanning in 3 ms. Found 1 JPA repository interface.
+09:57:59.191 [main] INFO org.hibernate.jpa.internal.util.LogHelper -- HHH000204: Processing PersistenceUnitInfo [name: default]
+09:57:59.193 [main] INFO org.hibernate.cache.internal.RegionFactoryInitiator -- HHH000026: Second-level cache disabled
+09:57:59.199 [main] INFO org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo -- No LoadTimeWeaver setup: ignoring JPA class transformer
+09:57:59.199 [main] INFO com.zaxxer.hikari.HikariDataSource -- HikariPool-3 - Starting...
+09:57:59.201 [main] INFO com.zaxxer.hikari.pool.HikariPool -- HikariPool-3 - Added connection conn13: url=jdbc:h2:mem:application_events_3d62c0ca-b9f3-41b8-bd15-498f211d246a user=SA
+09:57:59.202 [main] INFO com.zaxxer.hikari.HikariDataSource -- HikariPool-3 - Start completed.
+09:57:59.256 [main] INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator -- HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+09:57:59.261 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Initialized JPA EntityManagerFactory for persistence unit 'default'
+09:57:59.311 [main] INFO com.fooddelivery.common.service.NotificationRouterService -- Successfully persisted NotificationRequestEvent outbox event for aggregate: 264825b8-793e-4dc7-be44-283e6239e2fa
+09:57:59.311 [main] INFO com.fooddelivery.common.service.NotificationRouterService -- Successfully persisted NotificationRequestEvent outbox event for aggregate: 9c268246-3528-4879-b3ac-d824f4cb64d5
+09:57:59.343 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Closing JPA EntityManagerFactory for persistence unit 'default'
+09:57:59.345 [main] INFO com.zaxxer.hikari.HikariDataSource -- HikariPool-3 - Shutdown initiated...
+09:57:59.345 [main] INFO com.zaxxer.hikari.HikariDataSource -- HikariPool-3 - Shutdown completed.
+</system-out>
+  </testcase>
+</testsuite>

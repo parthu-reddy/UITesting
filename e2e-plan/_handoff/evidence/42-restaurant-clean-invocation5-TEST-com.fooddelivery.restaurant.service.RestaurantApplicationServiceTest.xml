@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.restaurant.service.RestaurantApplicationServiceTest" time="0.187" tests="26" errors="0" skipped="0" failures="0">
+  <testcase name="serviceCredentialsCannotActAsAnApplicant" classname="com.fooddelivery.restaurant.service.RestaurantApplicationServiceTest" time="0.01" />
+  <testcase name="staleDraftOrAdminVersionCannotWrite" classname="com.fooddelivery.restaurant.service.RestaurantApplicationServiceTest" time="0.003" />
+  <testcase name="bothChecksLeadToReviewAndADuplicateCheckDoesNoWrite" classname="com.fooddelivery.restaurant.service.RestaurantApplicationServiceTest" time="0.003" />
+  <testcase name="editingRejectedDetailsKeepsTheDecisionUntilResubmission" classname="com.fooddelivery.restaurant.service.RestaurantApplicationServiceTest" time="0.002" />
+  <testcase name="submitRefusesMissingInvalidOrNonmatchingPan(String)[1]" classname="com.fooddelivery.restaurant.service.RestaurantApplicationServiceTest" time="0.007" />
+  <testcase name="submitRefusesMissingInvalidOrNonmatchingPan(String)[2]" classname="com.fooddelivery.restaurant.service.RestaurantApplicationServiceTest" time="0.002" />
+  <testcase name="submitRefusesMissingInvalidOrNonmatchingPan(String)[3]" classname="com.fooddelivery.restaurant.service.RestaurantApplicationServiceTest" time="0.003" />
+  <testcase name="firstDraftBelongsToTheAuthorisedOrganisationAndDoesNotStartChecks" classname="com.fooddelivery.restaurant.service.RestaurantApplicationServiceTest" time="0.006" />
+  <testcase name="verificationInputsAreOnlyReturnedForTheCurrentSubmittedRevision" classname="com.fooddelivery.restaurant.service.RestaurantApplicationServiceTest" time="0.003" />
+  <testcase name="aFailedCheckRejectsWithAClearReasonAndCannotBeApprovedDirectly" classname="com.fooddelivery.restaurant.service.RestaurantApplicationServiceTest" time="0.004" />
+  <testcase name="approvalCannotBypassMissingOrUnconfirmedPrivateDocuments(ApplicationStatus)[1]" classname="com.fooddelivery.restaurant.service.RestaurantApplicationServiceTest" time="0.005" />
+  <testcase name="approvalCannotBypassMissingOrUnconfirmedPrivateDocuments(ApplicationStatus)[2]" classname="com.fooddelivery.restaurant.service.RestaurantApplicationServiceTest" time="0.031" />
+  <testcase name="approvedDecisionRequiresBothChecksAndTheActingAdminIsThePrincipal" classname="com.fooddelivery.restaurant.service.RestaurantApplicationServiceTest" time="0.004" />
+  <testcase name="applicationsUnderReviewOrApprovedCannotEditDetailsOrOutlets(ApplicationStatus)[1]" classname="com.fooddelivery.restaurant.service.RestaurantApplicationServiceTest" time="0.017" />
+  <testcase name="applicationsUnderReviewOrApprovedCannotEditDetailsOrOutlets(ApplicationStatus)[2]" classname="com.fooddelivery.restaurant.service.RestaurantApplicationServiceTest" time="0.007" />
+  <testcase name="applicationsUnderReviewOrApprovedCannotEditDetailsOrOutlets(ApplicationStatus)[3]" classname="com.fooddelivery.restaurant.service.RestaurantApplicationServiceTest" time="0.007" />
+  <testcase name="applicationsUnderReviewOrApprovedCannotEditDetailsOrOutlets(ApplicationStatus)[4]" classname="com.fooddelivery.restaurant.service.RestaurantApplicationServiceTest" time="0.009" />
+  <testcase name="staleCallbackCannotTouchTheCurrentSubmissionOrAnApprovedApplication" classname="com.fooddelivery.restaurant.service.RestaurantApplicationServiceTest" time="0.005" />
+  <testcase name="suspensionAndReinstatementAreSeparateActionsWithTheirOwnSourceState" classname="com.fooddelivery.restaurant.service.RestaurantApplicationServiceTest" time="0.003" />
+  <testcase name="missingOutletOrUncompletedDocumentCannotSubmit" classname="com.fooddelivery.restaurant.service.RestaurantApplicationServiceTest" time="0.004" />
+  <testcase name="completeApplicationSubmitsOnceWithoutApprovingIt" classname="com.fooddelivery.restaurant.service.RestaurantApplicationServiceTest" time="0.001" />
+  <testcase name="anOutletOfAnotherBrandCannotBeEdited" classname="com.fooddelivery.restaurant.service.RestaurantApplicationServiceTest" time="0.012" />
+  <testcase name="adminRejectionRequiresAnExplanatoryReason(String)[1]" classname="com.fooddelivery.restaurant.service.RestaurantApplicationServiceTest" time="0.005" />
+  <testcase name="adminRejectionRequiresAnExplanatoryReason(String)[2]" classname="com.fooddelivery.restaurant.service.RestaurantApplicationServiceTest" time="0.002" />
+  <testcase name="adminRejectionRequiresAnExplanatoryReason(String)[3]" classname="com.fooddelivery.restaurant.service.RestaurantApplicationServiceTest" time="0.001" />
+  <testcase name="successfulChecksAloneDoNotAllowAnAdminToSkipReview" classname="com.fooddelivery.restaurant.service.RestaurantApplicationServiceTest" time="0.001" />
+</testsuite>

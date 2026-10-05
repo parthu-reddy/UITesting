@@ -1,0 +1,15 @@
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.restaurant.service.RestaurantOnboardingServiceTest" time="0.284" tests="4" errors="0" skipped="0" failures="0">
+  <testcase name="testOnboardOutlet_RefusesAnOffsetForATimeZone" classname="com.fooddelivery.restaurant.service.RestaurantOnboardingServiceTest" time="0.249">
+    <system-out>10:08:01.353 [main] INFO com.fooddelivery.restaurant.service.RestaurantOnboardingService -- Starting Outlet onboarding brandId=2783e75e-cb8e-48e9-8078-be181a83f4b7
+</system-out>
+  </testcase>
+  <testcase name="testOnboardOutlet_Success" classname="com.fooddelivery.restaurant.service.RestaurantOnboardingServiceTest" time="0.012">
+    <system-out>10:08:01.357 [main] INFO com.fooddelivery.restaurant.service.RestaurantOnboardingService -- Starting Outlet onboarding brandId=b7f157b5-ceed-495a-b091-4f08d026f2b4
+</system-out>
+  </testcase>
+  <testcase name="testOnboardOutlet_InvalidFssai" classname="com.fooddelivery.restaurant.service.RestaurantOnboardingServiceTest" time="0.002">
+    <system-out>10:08:01.369 [main] INFO com.fooddelivery.restaurant.service.RestaurantOnboardingService -- Starting Outlet onboarding brandId=de582801-abe6-47cb-830e-1b3133e19002
+</system-out>
+  </testcase>
+  <testcase name="updateOutletSettings_tellsCustomerAppToDropItsCachedOutlet" classname="com.fooddelivery.restaurant.service.RestaurantOnboardingServiceTest" time="0.018" />
+</testsuite>

@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.common.lock.LockedWorkTimerTest" time="0.087" tests="4" errors="0" skipped="0" failures="0">
+  <testcase name="aQuickRunRecordsATimingAndNoPressure" classname="com.fooddelivery.common.lock.LockedWorkTimerTest" time="0.019" />
+  <testcase name="aRunThatEatsIntoItsTtlRaisesPressure" classname="com.fooddelivery.common.lock.LockedWorkTimerTest" time="0.058">
+    </testcase>
+  <testcase name="aFailingRunStillRecordsAndStillThrows" classname="com.fooddelivery.common.lock.LockedWorkTimerTest" time="0.001" />
+  <testcase name="aNullRegistryIsTolerated" classname="com.fooddelivery.common.lock.LockedWorkTimerTest" time="0.008">
+    </testcase>
+</testsuite>

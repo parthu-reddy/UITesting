@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.order.lifecycle.SweeperScopeTest" time="0.702" tests="14" errors="0" skipped="0" failures="0">
+  <testcase name="anOrderTouchedAfterTheCutoffIsNotSwept" classname="com.fooddelivery.order.lifecycle.SweeperScopeTest" time="0.018">
+    </testcase>
+  <testcase name="aTerminalOrderIsNeverSwept" classname="com.fooddelivery.order.lifecycle.SweeperScopeTest" time="0.011">
+    </testcase>
+  <testcase name="aCancelledDeliveryIsNotSwept" classname="com.fooddelivery.order.lifecycle.SweeperScopeTest" time="0.01">
+    </testcase>
+  <testcase name="aDeliveredOrderIsNotSwept" classname="com.fooddelivery.order.lifecycle.SweeperScopeTest" time="0.008">
+    </testcase>
+  <testcase name="readyForPickupIsOutOfScopeEntirely" classname="com.fooddelivery.order.lifecycle.SweeperScopeTest" time="0.009">
+    </testcase>
+  <testcase name="anOrderWhoseDispatchAlreadyFailedIsNotSweptAgain" classname="com.fooddelivery.order.lifecycle.SweeperScopeTest" time="0.011">
+    </testcase>
+  <testcase name="anOrderStillOutForDeliveryIsNotSwept" classname="com.fooddelivery.order.lifecycle.SweeperScopeTest" time="0.01">
+    </testcase>
+  <testcase name="deliveryTimestampProtectsTheOutcomeEvenWhenStatusProjectionIsStale" classname="com.fooddelivery.order.lifecycle.SweeperScopeTest" time="0.025">
+    </testcase>
+  <testcase name="abandonmentQueryExcludesCompletedOutcomes(DeliveryStatus)[1]" classname="com.fooddelivery.order.lifecycle.SweeperScopeTest" time="0.015">
+    </testcase>
+  <testcase name="abandonmentQueryExcludesCompletedOutcomes(DeliveryStatus)[2]" classname="com.fooddelivery.order.lifecycle.SweeperScopeTest" time="0.01">
+    </testcase>
+  <testcase name="abandonmentQueryExcludesCompletedOutcomes(DeliveryStatus)[3]" classname="com.fooddelivery.order.lifecycle.SweeperScopeTest" time="0.009">
+    </testcase>
+  <testcase name="abandonmentQueryExcludesCompletedOutcomes(DeliveryStatus)[4]" classname="com.fooddelivery.order.lifecycle.SweeperScopeTest" time="0.011">
+    </testcase>
+  <testcase name="abandonmentQueryExcludesCompletedOutcomes(DeliveryStatus)[5]" classname="com.fooddelivery.order.lifecycle.SweeperScopeTest" time="0.009">
+    </testcase>
+  <testcase name="aGenuinelyStuckOrderIsSwept" classname="com.fooddelivery.order.lifecycle.SweeperScopeTest" time="0.014">
+    </testcase>
+</testsuite>

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.apigateway.OrganisationGatewayRoutesTest" time="1.317" tests="4" errors="0" skipped="0" failures="0">
+  <testcase name="partnerRoutesBindToTheCorrectServiceWithRateLimitersAndOnlyOwnPathsAreAuthenticated(String)[1]" classname="com.fooddelivery.apigateway.OrganisationGatewayRoutesTest" time="0.945" />
+  <testcase name="partnerRoutesBindToTheCorrectServiceWithRateLimitersAndOnlyOwnPathsAreAuthenticated(String)[2]" classname="com.fooddelivery.apigateway.OrganisationGatewayRoutesTest" time="0.17" />
+  <testcase name="deploymentRoutesPublicOrganisationPathsAndNeverAddsInternalMembershipToRbac" classname="com.fooddelivery.apigateway.OrganisationGatewayRoutesTest" time="0.065" />
+  <testcase name="deployedCorsAllowsOrganisationPatchAndKeepsOriginRestrictions" classname="com.fooddelivery.apigateway.OrganisationGatewayRoutesTest" time="0.062" />
+</testsuite>

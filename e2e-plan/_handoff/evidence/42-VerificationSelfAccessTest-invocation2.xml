@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.governmentid.controller.VerificationSelfAccessTest" time="1.517" tests="5" errors="0" skipped="0" failures="0">
+  <testcase name="applicantWithoutDeliveryRoleReadsOnlyTheAuthenticatedSummaryAndTheOldIdPathIsGone" classname="com.fooddelivery.governmentid.controller.VerificationSelfAccessTest" time="0.377">
+    <system-out>09:32:55.139 [main] INFO org.hibernate.validator.internal.util.Version -- HV000001: Hibernate Validator 8.0.1.Final
+09:32:55.331 [main] INFO org.springframework.mock.web.MockServletContext -- Initializing Spring TestDispatcherServlet ''
+09:32:55.331 [main] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Initializing Servlet ''
+09:32:55.332 [main] INFO org.springframework.test.web.servlet.TestDispatcherServlet -- Completed initialization in 1 ms
+09:32:55.413 [main] WARN org.springframework.web.servlet.PageNotFound -- No mapping for GET /api/v1/verification/status/9b3e4158-94c0-400b-a2e1-75d9d2740d43
+09:32:55.414 [main] WARN org.springframework.web.servlet.PageNotFound -- No endpoint GET /api/v1/verification/status/9b3e4158-94c0-400b-a2e1-75d9d2740d43.
+</system-out>
+  </testcase>
+  <testcase name="missingAuthenticationCannotReachSummaryOrMcpTools" classname="com.fooddelivery.governmentid.controller.VerificationSelfAccessTest" time="0.006" />
+  <testcase name="applicantsCannotUseTheServiceSummaryOrAdminDocumentEndpoint" classname="com.fooddelivery.governmentid.controller.VerificationSelfAccessTest" time="0.007" />
+  <testcase name="serviceSummaryRemainsAvailableOnlyToItsVerifiedServiceRole" classname="com.fooddelivery.governmentid.controller.VerificationSelfAccessTest" time="0.003" />
+  <testcase name="mcpSummaryUsesAuthenticatedIdentityWithoutACallerSelectedId" classname="com.fooddelivery.governmentid.controller.VerificationSelfAccessTest" time="0.006" />
+</testsuite>

@@ -1,0 +1,17 @@
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.restaurant.EndpointAuthorizationCoverageTest" time="0.152" tests="6" errors="0" skipped="0" failures="1">
+  <testcase name="theBindingScanActuallyFindsMultiResourceEndpoints" classname="com.fooddelivery.restaurant.EndpointAuthorizationCoverageTest" time="0.109" />
+  <testcase name="everyEndpointCarriesAnAuthorizationRule" classname="com.fooddelivery.restaurant.EndpointAuthorizationCoverageTest" time="0.01" />
+  <testcase name="everyMultiResourceEndpointBindsItsResource" classname="com.fooddelivery.restaurant.EndpointAuthorizationCoverageTest" time="0.014">
+    <failure message="[Endpoints taking two or more resource ids whose authorization rule constrains only some of them. Bind the resource -- preferably in the query, so it cannot be forgotten on the next method -- or add it to RESOURCE_BINDING_VERIFIED_ELSEWHERE with the place the binding lives.] &#10;Expecting empty but was: [RestaurantApplicationController#updateOutlet does not bind [outletId] (rule: @restaurantAccess.onOrganisation(#organisationId, authentication, T(com.fooddelivery.common.enums.OrganisationPermission).BUSINESS_APPLY))]" type="java.lang.AssertionError">java.lang.AssertionError: 
+[Endpoints taking two or more resource ids whose authorization rule constrains only some of them. Bind the resource -- preferably in the query, so it cannot be forgotten on the next method -- or add it to RESOURCE_BINDING_VERIFIED_ELSEWHERE with the place the binding lives.] 
+Expecting empty but was: [RestaurantApplicationController#updateOutlet does not bind [outletId] (rule: @restaurantAccess.onOrganisation(#organisationId, authentication, T(com.fooddelivery.common.enums.OrganisationPermission).BUSINESS_APPLY))]
+	at com.fooddelivery.restaurant.EndpointAuthorizationCoverageTest.everyMultiResourceEndpointBindsItsResource(EndpointAuthorizationCoverageTest.java:116)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+</failure>
+  </testcase>
+  <testcase name="theAllowlistHasNoStaleEntries" classname="com.fooddelivery.restaurant.EndpointAuthorizationCoverageTest" time="0.004" />
+  <testcase name="theScanActuallyFindsEndpoints" classname="com.fooddelivery.restaurant.EndpointAuthorizationCoverageTest" time="0.003" />
+  <testcase name="theBindingAllowlistHasNoStaleEntries" classname="com.fooddelivery.restaurant.EndpointAuthorizationCoverageTest" time="0.004" />
+</testsuite>

@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.common.security.money.MoneyAccessPolicyTest" time="0.055" tests="12" errors="0" skipped="0" failures="0">
+  <testcase name="missingInputsAndUnauthenticatedCallersDeny" classname="com.fooddelivery.common.security.money.MoneyAccessPolicyTest" time="0.002" />
+  <testcase name="outletCacheDoesNotCachePermissionOrMembership" classname="com.fooddelivery.common.security.money.MoneyAccessPolicyTest" time="0.003" />
+  <testcase name="restaurantMoneyUsesExactEarningsAndPayoutPermissions(OrganisationRole)[1]" classname="com.fooddelivery.common.security.money.MoneyAccessPolicyTest" time="0.001" />
+  <testcase name="restaurantMoneyUsesExactEarningsAndPayoutPermissions(OrganisationRole)[2]" classname="com.fooddelivery.common.security.money.MoneyAccessPolicyTest" time="0.002" />
+  <testcase name="restaurantMoneyUsesExactEarningsAndPayoutPermissions(OrganisationRole)[3]" classname="com.fooddelivery.common.security.money.MoneyAccessPolicyTest" time="0.001" />
+  <testcase name="restaurantMoneyUsesExactEarningsAndPayoutPermissions(OrganisationRole)[4]" classname="com.fooddelivery.common.security.money.MoneyAccessPolicyTest" time="0.001" />
+  <testcase name="malformedOutletResponseCannotAuthorizeAnotherOrganisation" classname="com.fooddelivery.common.security.money.MoneyAccessPolicyTest" time="0.001" />
+  <testcase name="platformAdminReadsDoNotGrantOrganisationPayoutWrites" classname="com.fooddelivery.common.security.money.MoneyAccessPolicyTest" time="0.0" />
+  <testcase name="nonmemberAndUnrelatedOutletAreDenied" classname="com.fooddelivery.common.security.money.MoneyAccessPolicyTest" time="0.001" />
+  <testcase name="advertiserOwnershipRemainsSeparateFromRestaurantMembership" classname="com.fooddelivery.common.security.money.MoneyAccessPolicyTest" time="0.002" />
+  <testcase name="unavailableIdentityOrRestaurantFailsClosed" classname="com.fooddelivery.common.security.money.MoneyAccessPolicyTest" time="0.003" />
+  <testcase name="customerAndDriverCanReadTheirOwnMoneyOnly" classname="com.fooddelivery.common.security.money.MoneyAccessPolicyTest" time="0.001" />
+</testsuite>

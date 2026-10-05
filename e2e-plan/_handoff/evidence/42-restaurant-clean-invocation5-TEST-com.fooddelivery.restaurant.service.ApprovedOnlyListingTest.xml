@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.restaurant.service.ApprovedOnlyListingTest" time="0.694" tests="7" errors="0" skipped="0" failures="1">
+  <testcase name="anApprovedBrandRemainsVisibleAndAnUnknownBrandIsHidden" classname="com.fooddelivery.restaurant.service.ApprovedOnlyListingTest" time="0.005" />
+  <testcase name="everyUnapprovedStateIsHiddenFromByIdCatalogAndBatchEvenWithPassedChecks(ApplicationStatus)[1]" classname="com.fooddelivery.restaurant.service.ApprovedOnlyListingTest" time="0.009" />
+  <testcase name="everyUnapprovedStateIsHiddenFromByIdCatalogAndBatchEvenWithPassedChecks(ApplicationStatus)[2]" classname="com.fooddelivery.restaurant.service.ApprovedOnlyListingTest" time="0.001" />
+  <testcase name="everyUnapprovedStateIsHiddenFromByIdCatalogAndBatchEvenWithPassedChecks(ApplicationStatus)[3]" classname="com.fooddelivery.restaurant.service.ApprovedOnlyListingTest" time="0.001" />
+  <testcase name="everyUnapprovedStateIsHiddenFromByIdCatalogAndBatchEvenWithPassedChecks(ApplicationStatus)[4]" classname="com.fooddelivery.restaurant.service.ApprovedOnlyListingTest" time="0.001" />
+  <testcase name="everyUnapprovedStateIsHiddenFromByIdCatalogAndBatchEvenWithPassedChecks(ApplicationStatus)[5]" classname="com.fooddelivery.restaurant.service.ApprovedOnlyListingTest" time="0.001" />
+  <testcase name="actualPostgisNearbyAndBrandQueriesExposeOnlyApprovedApplications" classname="com.fooddelivery.restaurant.service.ApprovedOnlyListingTest" time="0.533">
+    <failure message="[isolated SQL command: failed to connect to the docker API at unix:///Users/parthureddy/.docker/run/docker.sock; check if the path is correct and if the daemon is running: dial unix /Users/parthureddy/.docker/run/docker.sock: connect: no such file or directory&#10;] &#10;expected: 0&#10; but was: 1" type="org.opentest4j.AssertionFailedError">org.opentest4j.AssertionFailedError: 
+[isolated SQL command: failed to connect to the docker API at unix:///Users/parthureddy/.docker/run/docker.sock; check if the path is correct and if the daemon is running: dial unix /Users/parthureddy/.docker/run/docker.sock: connect: no such file or directory
+] 
+expected: 0
+ but was: 1
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:62)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at com.fooddelivery.restaurant.service.ApprovedOnlyListingTest.command(ApprovedOnlyListingTest.java:105)
+	at com.fooddelivery.restaurant.service.ApprovedOnlyListingTest.actualPostgisNearbyAndBrandQueriesExposeOnlyApprovedApplications(ApprovedOnlyListingTest.java:55)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+</failure>
+  </testcase>
+</testsuite>

@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.governmentid.service.DocumentAdminAuditTransactionTest" time="1.09" tests="3" errors="0" skipped="0" failures="0">
+  <testcase name="failedStorageNeverReportsAViewOrPersistsItsAudit" classname="com.fooddelivery.governmentid.service.DocumentAdminAuditTransactionTest" time="0.047">
+    <system-out>09:32:55.786 [main] INFO org.hibernate.jpa.internal.util.LogHelper -- HHH000204: Processing PersistenceUnitInfo [name: default]
+09:32:55.814 [main] INFO org.hibernate.Version -- HHH000412: Hibernate ORM core version 6.5.2.Final
+09:32:55.831 [main] INFO org.hibernate.cache.internal.RegionFactoryInitiator -- HHH000026: Second-level cache disabled
+09:32:55.918 [main] INFO org.springframework.orm.jpa.persistenceunit.SpringPersistenceUnitInfo -- No LoadTimeWeaver setup: ignoring JPA class transformer
+09:32:56.649 [main] INFO org.hibernate.engine.transaction.jta.platform.internal.JtaPlatformInitiator -- HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+09:32:56.668 [main] INFO org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean -- Initialized JPA EntityManagerFactory for persistence unit 'default'
+</system-out>
+  </testcase>
+  <testcase name="outerRollbackNeverLeavesAnIndependentlyCommittedAdminViewAudit" classname="com.fooddelivery.governmentid.service.DocumentAdminAuditTransactionTest" time="0.036" />
+  <testcase name="everySuccessfulAdminDownloadCommitsItsAuditInTheSameTransaction" classname="com.fooddelivery.governmentid.service.DocumentAdminAuditTransactionTest" time="0.025" />
+</testsuite>

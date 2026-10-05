@@ -1,5 +1,9 @@
 # Current checkpoint
 
+## 2026-10-05T15:05:00+05:30 — Review remediation Phases 1–2 local; awaiting owner deploy
+
+Deployed Dev is still the checkpoint113 release (UI f73ffe9 etc.). Local, uncommitted changes from RandomDocuments/BusinessPlatformReview_2026-10-05 (gate 8/20: P1 4/4, P2 4/4): UI token keep-alive + stable socket owner + /portals landing; Identity 15-minute access JWT (Deployment/identity-service.yml); automatic portal/organisation revalidation; launcher invitation banner; role-only invitation SMS (CommonLibrary enum, Identity outbox, CommunicationIntegration template/routing). Harness: PortalLauncherPage.awaitChangedState and BusinessHubOrganisationUiTest updated, compile OK. Local proof: UI 960/960, Identity 160, Comms 44, Common 311; break tests red→green. No E2E run since checkpoint113; no fixtures created.
+
 ## 2026-10-05T11:57:12+05:30 — checkpoint113: O4/O5 complete; stop boundary reached
 
 Phase4 and Phase5 are published, deployed and complete within the documented Dev/UI-only scope. Final O4 gate8/8 and O5 gate8/8 have0failures/errors/skips. The required existing settings/partner/navigation/earnings/admin-money/delivery/chat/refund-quote/immutable-review regressions pass using the same retained delivered order. No new checkout repeated successful work. Restaurant5408c6e is now published/deployed; existing pending-queue check1/1 proves the exact outlet VERIFIED at₹34.67 and0payout writes.

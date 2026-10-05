@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.apigateway.filter.GlobalJwtAuthFilterRevocationTest" time="13.561" tests="14" errors="0" skipped="0" failures="0">
+  <testcase name="removedDevOtpEndpointIsRejectedBeforeItReachesIdentityService" classname="com.fooddelivery.apigateway.filter.GlobalJwtAuthFilterRevocationTest" time="1.332">
+    </testcase>
+  <testcase name="runnerSecretHeaderIsNotForwardedOutsideTheValidatedE2eRoute" classname="com.fooddelivery.apigateway.filter.GlobalJwtAuthFilterRevocationTest" time="0.231" />
+  <testcase name="explicitRegistrationCanReachIdentityWithoutAnExistingSession" classname="com.fooddelivery.apigateway.filter.GlobalJwtAuthFilterRevocationTest" time="0.362" />
+  <testcase name="deployedAndFallbackPoliciesAllowAnAuthenticatedApplicantButDenyAdminAndServiceOnlyReads(String)[1]" classname="com.fooddelivery.apigateway.filter.GlobalJwtAuthFilterRevocationTest" time="1.806">
+    </testcase>
+  <testcase name="deployedAndFallbackPoliciesAllowAnAuthenticatedApplicantButDenyAdminAndServiceOnlyReads(String)[2]" classname="com.fooddelivery.apigateway.filter.GlobalJwtAuthFilterRevocationTest" time="1.322">
+    </testcase>
+  <testcase name="validatedE2eRunnerRequestCanReachTheIdentityRoute" classname="com.fooddelivery.apigateway.filter.GlobalJwtAuthFilterRevocationTest" time="0.735" />
+  <testcase name="organisationInternalRoutesRejectExternalTrafficEvenWithValidCustomerToken(String)[1]" classname="com.fooddelivery.apigateway.filter.GlobalJwtAuthFilterRevocationTest" time="0.258">
+    </testcase>
+  <testcase name="organisationInternalRoutesRejectExternalTrafficEvenWithValidCustomerToken(String)[2]" classname="com.fooddelivery.apigateway.filter.GlobalJwtAuthFilterRevocationTest" time="1.267">
+    </testcase>
+  <testcase name="organisationInternalRoutesRejectExternalTrafficEvenWithValidCustomerToken(String)[3]" classname="com.fooddelivery.apigateway.filter.GlobalJwtAuthFilterRevocationTest" time="0.227">
+    </testcase>
+  <testcase name="organisationInternalRoutesRejectExternalTrafficEvenWithValidCustomerToken(String)[4]" classname="com.fooddelivery.apigateway.filter.GlobalJwtAuthFilterRevocationTest" time="0.837">
+    </testcase>
+  <testcase name="organisationInternalRoutesRejectExternalTrafficEvenWithValidCustomerToken(String)[5]" classname="com.fooddelivery.apigateway.filter.GlobalJwtAuthFilterRevocationTest" time="0.85">
+    </testcase>
+  <testcase name="registrationDoesNotExposeOtherInternalRoutes" classname="com.fooddelivery.apigateway.filter.GlobalJwtAuthFilterRevocationTest" time="0.484">
+    </testcase>
+  <testcase name="gatewayDoesNotCacheNegativeRevocationLookups" classname="com.fooddelivery.apigateway.filter.GlobalJwtAuthFilterRevocationTest" time="0.644">
+    </testcase>
+  <testcase name="serviceAuthenticatedE2eOtpEndpointIsAlsoRejectedForExternalTraffic" classname="com.fooddelivery.apigateway.filter.GlobalJwtAuthFilterRevocationTest" time="1.748" />
+</testsuite>

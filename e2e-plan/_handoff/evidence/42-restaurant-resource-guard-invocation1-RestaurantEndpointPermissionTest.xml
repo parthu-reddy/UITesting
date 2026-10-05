@@ -1,0 +1,19 @@
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.fooddelivery.restaurant.RestaurantEndpointPermissionTest" time="1.421" tests="7" errors="0" skipped="0" failures="0">
+  <testcase name="anOwnerCannotEditAnOutletUnderAnotherOrganisationPath" classname="com.fooddelivery.restaurant.RestaurantEndpointPermissionTest" time="0.053" />
+  <testcase name="managerCannotApplyForABrand" classname="com.fooddelivery.restaurant.RestaurantEndpointPermissionTest" time="0.012" />
+  <testcase name="staffCanAcceptAnOrderButCannotManageOutletSettings" classname="com.fooddelivery.restaurant.RestaurantEndpointPermissionTest" time="0.031">
+    <system-out>10:17:43.230 [main] INFO com.fooddelivery.restaurant.security.RestaurantAccess -- Restaurant access refused outletId=f5720bf7-2eb6-4cae-9c53-50592421eea5 organisationId=d6445005-ffdb-4d24-92ed-36fe4f16d7e0 userId=ea69a84f-702e-4a63-820c-d09a0a55275b
+</system-out>
+  </testcase>
+  <testcase name="staffCanToggleStockButCannotUseThePriceOverrideEndpoint" classname="com.fooddelivery.restaurant.RestaurantEndpointPermissionTest" time="0.012">
+    <system-out>10:17:43.245 [main] INFO com.fooddelivery.restaurant.security.RestaurantAccess -- Restaurant access refused outletId=52f85948-3ced-44c9-ab12-db6973cd2402 organisationId=1b65a939-8ec3-47a9-9f74-61142640db61 userId=6b6c7e43-e2e3-4182-aeba-88ad93c5a30f
+</system-out>
+  </testcase>
+  <testcase name="removedOrUnrelatedMembersCannotReadOrWrite" classname="com.fooddelivery.restaurant.RestaurantEndpointPermissionTest" time="0.005">
+    <system-out>10:17:43.251 [main] INFO com.fooddelivery.restaurant.security.RestaurantAccess -- Restaurant access refused outletId=aff1a0b8-a402-45e3-b2fc-989481d0f55c organisationId=5bfdb4e5-30f7-4745-8028-4e412eaa9eff userId=7f00e596-9bd5-4648-8b9c-fe08a3e47bc2
+10:17:43.252 [main] INFO com.fooddelivery.restaurant.security.RestaurantAccess -- Restaurant access refused outletId=aff1a0b8-a402-45e3-b2fc-989481d0f55c organisationId=5bfdb4e5-30f7-4745-8028-4e412eaa9eff userId=7f00e596-9bd5-4648-8b9c-fe08a3e47bc2
+</system-out>
+  </testcase>
+  <testcase name="anOwnerCanReachOnlyTheirOwnApplicationOutletEdit" classname="com.fooddelivery.restaurant.RestaurantEndpointPermissionTest" time="0.005" />
+  <testcase name="managerCanManagePricesAndStaffCanReadOverrides" classname="com.fooddelivery.restaurant.RestaurantEndpointPermissionTest" time="0.005" />
+</testsuite>
