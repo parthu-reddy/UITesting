@@ -12,6 +12,11 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 public final class RefundQuoteChecks {
     private RefundQuoteChecks() {}
     public static void verify(Page customer,String id,Map<?,?> money) {
+        verify(customer,id,OrderMoneyChecks.amount(money,"foodCost")
+                .add(OrderMoneyChecks.amount(money,"sgst")).add(OrderMoneyChecks.amount(money,"cgst")));
+    }
+    /** The customer receipt shows combined GST, so a retained UI check need not invent its split. */
+    public static void verify(Page customer,String id,BigDecimal expected) {
         ChatWidgetPage refund=new ChatWidgetPage(customer);
         refund.openRefundRequest(id);
         Locator modal=refund.refundModal();
@@ -33,8 +38,6 @@ public final class RefundQuoteChecks {
         assertThat(quotes).hasCount(before+1,new com.microsoft.playwright.assertions.LocatorAssertions.HasCountOptions().setTimeout(20000));
         Locator quote=quotes.last();
         assertThat(quote).containsText("Type: PARTIAL");
-        BigDecimal expected=OrderMoneyChecks.amount(money,"foodCost").add(OrderMoneyChecks.amount(money,"sgst"))
-                .add(OrderMoneyChecks.amount(money,"cgst"));
         org.assertj.core.api.Assertions.assertThat(expected).isPositive();
         org.assertj.core.api.Assertions.assertThat(OrderMoneyChecks.parseInr(quote.innerText())).isEqualByComparingTo(expected);
         // The old deployed quote loses its selected items. Keep this assertion strict until

@@ -51,6 +51,11 @@ public final class OrderChatChecks implements AutoCloseable {
                 "E2E delivery-window check "+orderId.substring(0,8),customerTelemetry);
     }
 
+    /** An assigned-order resume retains the earlier participant round-trip proof separately. */
+    public void assertDeliveredPassed() {
+        assertSuccessfulChatAttempt(deliveredConversation,"after delivery",false);
+    }
+
     /** Assert captured failures after delivering the package; a failed chat check stays failed. */
     public void assertPassed() {
         org.junit.jupiter.api.Assertions.assertAll("Order chat",

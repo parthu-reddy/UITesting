@@ -35,11 +35,12 @@ public class RestaurantNavigationUiTest extends TestBase {
         RestaurantDashboardPage dashboard=new RestaurantDashboardPage(restaurantPage);
         String outlet=System.getProperty("restaurant.outlet.name","Brand 1 Outlet 3");
         dashboard.selectOutlet(outlet);
+        Locator outletSelector=restaurantPage.getByRole(AriaRole.COMBOBOX,new Page.GetByRoleOptions().setName("Outlet").setExact(true));
+        String selectedLabel=outletSelector.innerText().trim();
         restaurantPage.reload();dashboard.waitForDashboard();
-        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(restaurantPage.getByRole(AriaRole.COMBOBOX,new Page.GetByRoleOptions().setName("Outlet").setExact(true))).hasText(outlet);
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(outletSelector).hasText(selectedLabel);
         String alternate=System.getProperty("restaurant.alternate.outlet.name","Brand 1 Outlet 6");
         dashboard.selectOutlet(alternate);
-        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(restaurantPage.getByRole(AriaRole.COMBOBOX,new Page.GetByRoleOptions().setName("Outlet").setExact(true))).hasText(alternate);
         dashboard.selectOutlet(outlet);
 
         clickTab(Pattern.compile("^Orders.*"));

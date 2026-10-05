@@ -330,6 +330,8 @@ public class HappyDeliveryFlowTest extends TestBase {
         receipt.getByRole(AriaRole.HEADING, new Locator.GetByRoleOptions().setName("Order delivered").setExact(true))
                 .waitFor(new Locator.WaitForOptions().setTimeout(90000));
         assertThat(receipt).containsText("Delivered from " + outletName);
+        chatChecks.afterDelivery(orderId,outletName);
+        chatChecks.assertDeliveredPassed();
         if (SSE_ENABLED) {
         java.util.List<Map<String, Object>> ownedStreams = streamResponses.stream()
                 .filter(event -> ((String) event.get("path")).endsWith("/orders/" + orderId + "/restaurant-status-stream"))
@@ -342,6 +344,12 @@ public class HappyDeliveryFlowTest extends TestBase {
 
     /** Continue financial/quote checks on this audit's delivered manifest without an order POST. */
     private void verifyRetainedDeliveredOrder(String id) {
+        var orderWrites=new java.util.concurrent.atomic.AtomicInteger();
+        java.util.function.Consumer<com.microsoft.playwright.Request> observeWrites=request->{
+            if(request.method().equals("POST") && java.net.URI.create(request.url()).getPath().equals("/api/v1/orders"))
+                orderWrites.incrementAndGet();
+        };
+        customerPage.onRequest(observeWrites);
         try {
             Map<?,?> manifest=(Map<?,?>)customerPage.evaluate("text=>JSON.parse(text)",
                     Files.readString(Path.of("target/lifecycle",id+".json")));
@@ -349,24 +357,21 @@ public class HappyDeliveryFlowTest extends TestBase {
             org.assertj.core.api.Assertions.assertThat(manifest.get("customerPhone")).isEqualTo(testCustomerPhone);
             org.assertj.core.api.Assertions.assertThat(manifest.get("riderPhone")).isEqualTo(testRiderPhone);
             org.assertj.core.api.Assertions.assertThat(manifest.get("restaurantPhone")).isEqualTo(testRestaurantPhone);
-            customerPage.route("**/api/v1/orders",route->{
-                if(route.request().method().equals("POST"))throw new AssertionError("Retained validation must not create an order");
-                route.resume();
-            });
-            Response history=customerPage.waitForResponse(r->r.request().method().equals("GET")
-                    && java.net.URI.create(r.url()).getPath().equals("/api/v1/orders/history"),()->{
-                CustomerDashboardPage.openProfileSettings(customerPage);
-                customerPage.getByRole(AriaRole.TAB,new Page.GetByRoleOptions().setName("History").setExact(true)).click();
-            });
-            org.assertj.core.api.Assertions.assertThat(history.status()).isEqualTo(200);
-            Map<?,?> envelope=(Map<?,?>)customerPage.evaluate("text=>JSON.parse(text)",history.text());
-            java.util.List<?> rows=(java.util.List<?>)((Map<?,?>)envelope.get("data")).get("content");
-            Map<?,?> order=rows.stream().map(x->(Map<?,?>)x).filter(x->id.equals(x.get("id"))).findFirst()
-                    .orElseThrow(()->new AssertionError("Owned retained delivered order missing from this customer history"));
-            org.assertj.core.api.Assertions.assertThat(order.get("deliveryStatus")).isEqualTo("DELIVERED");
-            org.assertj.core.api.Assertions.assertThat(order.get("paymentMethod")).isEqualTo("CARD");
-            customerPage.locator("[data-testid='customer-history-order'][data-order-id='"+id+"']").click();
-            assertThat(new CustomerOrderTrackerPage(customerPage,id).tracker()).isVisible();
+            CustomerDashboardPage.openProfileSettings(customerPage);
+            customerPage.getByRole(AriaRole.TAB,new Page.GetByRoleOptions().setName("History").setExact(true)).click();
+            Locator historyCard=customerPage.locator("[data-testid='customer-history-order'][data-order-id='"+id+"']");
+            assertThat(historyCard).isVisible(new com.microsoft.playwright.assertions.LocatorAssertions.IsVisibleOptions().setTimeout(30000));
+            assertThat(historyCard).containsText(Pattern.compile("Delivered",Pattern.CASE_INSENSITIVE));
+            historyCard.click();
+            var tracker=new CustomerOrderTrackerPage(customerPage,id);
+            assertThat(tracker.tracker()).isVisible();
+            assertThat(tracker.tracker().getByRole(AriaRole.HEADING,new Locator.GetByRoleOptions().setName("Order delivered").setExact(true))).isVisible();
+            org.assertj.core.api.Assertions.assertThat(tracker.getPaymentMethod()).isEqualTo("Paid via CARD");
+            var total=com.fooddelivery.e2e.util.OrderMoneyChecks.parseInr(tracker.getTotalPaid());
+            var items=receiptAmount(tracker.tracker(),"Items",false);
+            var gst=receiptAmount(tracker.tracker(),"GST",true);
+            var tip=receiptAmount(tracker.tracker(),"Rider tip",true);
+            Map<?,?> order=Map.of("totalAmount",total.toPlainString(),"tipAmount",tip.toPlainString());
             if(!Boolean.getBoolean("resume.delivered.quote.only")) {
                 riderPage.navigate(TestConfig.APP_URL);
                 new LoginPage(riderPage).login(testRiderPhone).openPortal(Portal.DELIVERY);
@@ -380,14 +385,20 @@ public class HappyDeliveryFlowTest extends TestBase {
                 loginAsAdmin();
                 com.fooddelivery.e2e.util.OrderMoneyChecks.verify(adminPage,id,order,payout);
             }
-            com.fooddelivery.e2e.util.RefundQuoteChecks.verify(customerPage,id,Map.of(
-                    "foodCost",com.fooddelivery.e2e.util.OrderMoneyChecks.amount(order,"itemTotal"),
-                    "sgst",com.fooddelivery.e2e.util.OrderMoneyChecks.amount(order,"sgst"),
-                    "cgst",com.fooddelivery.e2e.util.OrderMoneyChecks.amount(order,"cgst")));
+            com.fooddelivery.e2e.util.RefundQuoteChecks.verify(customerPage,id,items.add(gst));
+            org.assertj.core.api.Assertions.assertThat(orderWrites.get()).as("retained checks create no order").isZero();
             Files.writeString(Path.of("target/lifecycle",id+"-retained-checks.json"),
                     "{\"orderId\":\""+id+"\",\"newOrderCreated\":false,\"quotePassed\":true,\"moneyChecked\":"
                     +!Boolean.getBoolean("resume.delivered.quote.only")+"}");
         } catch(java.io.IOException failure){throw new AssertionError("Cannot validate owned retained manifest",failure);}
+        finally {customerPage.offRequest(observeWrites);}
+    }
+
+    private static java.math.BigDecimal receiptAmount(Locator receipt,String label,boolean optional) {
+        Locator value=receipt.getByText(label,new Locator.GetByTextOptions().setExact(true));
+        if(optional && value.count()==0)return java.math.BigDecimal.ZERO;
+        assertThat(value).hasCount(1);
+        return com.fooddelivery.e2e.util.OrderMoneyChecks.parseInr(value.locator("..").locator("..").innerText());
     }
 
     @Test

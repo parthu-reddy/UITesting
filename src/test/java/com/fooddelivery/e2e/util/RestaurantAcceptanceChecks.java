@@ -56,10 +56,14 @@ public final class RestaurantAcceptanceChecks {
         assertThat(card).hasAttribute("data-status","CREATED");
     }
     public static void afterAcceptReload(Page page,String id,String outlet) {
+        Locator selection=page.getByRole(AriaRole.COMBOBOX,new Page.GetByRoleOptions().setName("Outlet").setExact(true));
+        String selectedLabel=selection.innerText().trim();
+        org.assertj.core.api.Assertions.assertThat(selectedLabel.equals(outlet) || selectedLabel.endsWith(" / "+outlet))
+                .as("the grouped selector names the owned outlet before reload").isTrue();
         page.reload();new RestaurantDashboardPage(page).waitForDashboard();
         Locator card=new RestaurantOrderActionsPage(page).orderCard(id);
         assertThat(card).hasAttribute("data-status","ACCEPTED");assertThat(card).hasCount(1);
-        assertThat(page.getByRole(AriaRole.COMBOBOX,new Page.GetByRoleOptions().setName("Outlet").setExact(true))).hasText(outlet);
+        assertThat(selection).hasText(selectedLabel);
         assertThat(card).containsText("ready by");
     }
 }
