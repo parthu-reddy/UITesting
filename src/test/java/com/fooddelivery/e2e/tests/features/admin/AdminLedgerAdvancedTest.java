@@ -237,6 +237,12 @@ public class AdminLedgerAdvancedTest extends TestBase {
     @Test
     @DisplayName("PAYOUT-05/07: Pending queue has an explicit empty state or positive unsettled balances")
     void pendingPayoutsHavePositiveBalances() {
+        AtomicInteger payoutWrites = new AtomicInteger();
+        adminPage.onRequest(request -> {
+            if (!"GET".equals(request.method()) && request.url().contains("/api/v1/internal/admin/payouts")) {
+                payoutWrites.incrementAndGet();
+            }
+        });
         Response response = adminPage.waitForResponse(r ->
                         r.url().contains("/api/v1/internal/admin/payouts/pending")
                                 && "GET".equals(r.request().method()),
@@ -249,10 +255,21 @@ public class AdminLedgerAdvancedTest extends TestBase {
                         .setTimeout(30000));
 
         Locator cards = adminPage.locator("div.cursor-pointer:has-text('Unsettled Balance')");
+        String expectedPayee = System.getProperty("payout.expected.restaurant", "").trim();
+        if (!expectedPayee.isEmpty()) {
+            Locator owned = cards.filter(new Locator.FilterOptions().setHasText(expectedPayee));
+            com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(owned).hasCount(1);
+            com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(owned.getByText("VERIFIED",
+                    new Locator.GetByTextOptions().setExact(true))).isVisible();
+            java.math.BigDecimal expected = new java.math.BigDecimal(System.getProperty("payout.expected.balance"));
+            com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(owned.locator("div.text-4xl"))
+                    .hasText("₹" + expected.setScale(2).toPlainString());
+        }
         if (cards.count() == 0) {
             assertThat(adminPage.getByRole(AriaRole.HEADING,
                     new com.microsoft.playwright.Page.GetByRoleOptions().setName("All Caught Up!").setExact(true)).isVisible())
                     .isTrue();
+            assertThat(payoutWrites.get()).isZero();
             return;
         }
 
@@ -264,6 +281,7 @@ public class AdminLedgerAdvancedTest extends TestBase {
             double amount = Double.parseDouble(displayedBalance.substring(1).replace(",", ""));
             assertThat(amount).isPositive();
         }
+        assertThat(payoutWrites.get()).as("reading the queue never creates or transitions a payout").isZero();
     }
 
     @Test
