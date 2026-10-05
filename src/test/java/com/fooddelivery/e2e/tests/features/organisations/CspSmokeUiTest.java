@@ -28,9 +28,8 @@ public class CspSmokeUiTest extends TestBase {
             page.onWebSocket(socket -> recordOrigin(origins, socket.url()));
             page.onResponse(response -> {
                 URI responseUri = URI.create(response.url());
-                if (response.status() >= 400 && responseUri.getHost() != null
-                        && responseUri.getHost().equals(URI.create(TestConfig.APP_URL).getHost()))
-                    networkFailures.add(response.request().method() + " " + responseUri.getPath()
+                if (response.status() >= 400 && responseUri.getHost() != null)
+                    networkFailures.add(response.request().method() + " " + responseUri.getHost() + responseUri.getPath()
                             .replaceAll("[a-fA-F0-9-]{36}", ":id") + " " + response.status());
                 if (!response.request().isNavigationRequest() || !URI.create(response.url()).getHost().equals(URI.create(TestConfig.APP_URL).getHost())) return;
                 String csp = response.headerValue("content-security-policy");
@@ -56,7 +55,7 @@ public class CspSmokeUiTest extends TestBase {
         new LoginPage(adminPage).login(testAdminPhone).openPortal(Portal.ADMIN);
         new AdminPortalPage(adminPage).waitForPortal();
         for (Page page : List.of(customerPage, restaurantPage, riderPage, adminPage))
-            page.waitForFunction("document.fonts.status === 'loaded' && Array.from(document.images).every(image => image.complete)");
+            page.waitForFunction("document.fonts.status === 'loaded' && Array.from(document.images).every(image => image.complete && image.naturalWidth > 0)");
         } finally {
         Files.createDirectories(evidence.getParent());
         Files.writeString(evidence, "Observed public UI origins (no paths or credentials)\n" + String.join("\n", origins)
