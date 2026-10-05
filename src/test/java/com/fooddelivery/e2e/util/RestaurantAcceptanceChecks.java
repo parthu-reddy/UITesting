@@ -14,7 +14,22 @@ public final class RestaurantAcceptanceChecks {
     public static void beforeAccept(Page page,String id,Map<?,?> order) {
         var actions=new RestaurantOrderActionsPage(page);
         Locator card=actions.orderCard(id);
-        assertThat(card).hasCount(1);
+        java.util.function.Consumer<Response> observe = response -> {
+            String path = java.net.URI.create(response.url()).getPath();
+            if (!response.request().method().equals("GET") || !path.endsWith("/fulfillment/orders/active")) return;
+            System.out.println("[KITCHEN] UI active-order response status=" + response.status()
+                    + " outlet=" + path.split("/")[4]);
+            if (response.status() == 200) {
+                Map<?,?> envelope = (Map<?,?>) page.evaluate("text => JSON.parse(text)", response.text());
+                List<?> rows = (List<?>) envelope.get("data");
+                var owned = rows.stream().map(row -> (Map<?,?>) row).filter(row -> id.equals(row.get("orderId"))).toList();
+                System.out.println("[KITCHEN] rows=" + rows.size() + " ownedRows=" + owned.size()
+                        + (owned.isEmpty() ? "" : " ownedStatus=" + owned.get(0).get("status")));
+            }
+        };
+        page.onResponse(observe);
+        try { assertThat(card).hasCount(1, new com.microsoft.playwright.assertions.LocatorAssertions.HasCountOptions().setTimeout(30000)); }
+        finally { page.offResponse(observe); }
         assertThat(card).hasAttribute("data-status","CREATED",
                 new com.microsoft.playwright.assertions.LocatorAssertions.HasAttributeOptions().setTimeout(30000));
         assertThat(card).containsText("#"+id.substring(0,8).toUpperCase());

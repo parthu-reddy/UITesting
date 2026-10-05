@@ -130,6 +130,7 @@ public class PaymentModalPage {
     public void placeOrder(String method) {
         waitForFinalQuote();
         selectPaymentMethod(method);
+        assertPaymentMethodSelected(method);
         if (!isPayEnabled()) {
             throw new IllegalStateException("Place order stayed disabled -- quote never arrived or no method is selectable");
         }

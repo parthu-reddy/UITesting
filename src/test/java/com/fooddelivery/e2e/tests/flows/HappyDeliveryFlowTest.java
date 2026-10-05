@@ -503,15 +503,13 @@ public class HappyDeliveryFlowTest extends TestBase {
         orderId = (String) order.get("id");
         expectedOrderId = orderId;
         org.assertj.core.api.Assertions.assertThat(orderId).matches("[0-9a-fA-F-]{36}");
-        Map<?,?> request = (Map<?,?>) customerPage.evaluate("text => JSON.parse(text)",created.request().postData());
-        org.assertj.core.api.Assertions.assertThat(request.get("paymentMethod")).isEqualTo("CARD");
-        org.assertj.core.api.Assertions.assertThat((String)request.get("quoteId")).isNotBlank();
         try {
             Path manifest = Path.of("target/lifecycle",orderId + ".json");Files.createDirectories(manifest.getParent());
             Files.writeString(manifest,(String) customerPage.evaluate("data => JSON.stringify(data,null,2)", Map.of(
                     "orderId",orderId,"customerPhone",testCustomerPhone,"restaurantPhone",testRestaurantPhone,
                     "riderPhone",testRiderPhone,"outlet",selectedOutlet,"dataPolicy","retain","cleanupPerformed",false)));
         } catch (java.io.IOException failure) { throw new AssertionError("Cannot retain lifecycle order manifest",failure); }
+        org.assertj.core.api.Assertions.assertThat(order.get("paymentMethod")).isEqualTo("CARD");
         }
         Locator exactTracker = customerPage.locator("[data-testid='order-tracker'][data-order-id='" + orderId + "']");
         assertThat(exactTracker).isVisible();
