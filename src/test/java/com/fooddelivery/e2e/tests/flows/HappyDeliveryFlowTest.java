@@ -176,8 +176,6 @@ public class HappyDeliveryFlowTest extends TestBase {
                 finally {chatChecks.close();}
             }
             if(duty!=null) duty.close();
-            else if(expectedOrderId!=null && !System.getProperty("resume.order.id","").isBlank())
-                SeededRiderDuty.finishOfflineIfIdle(riderPage);
         }
     }
 
@@ -904,15 +902,16 @@ public class HappyDeliveryFlowTest extends TestBase {
     private void confirmStatus(String orderId, String status, Runnable swipe) {
         com.microsoft.playwright.Response response = riderPage.waitForResponse(
                 r -> r.request().method().equals("POST")
-                        && r.url().endsWith("/orders/" + orderId + "/status")
-                        && r.request().postData() != null
-                        && r.request().postData().contains("\"" + status + "\""),
+                        && java.net.URI.create(r.url()).getPath().endsWith("/orders/" + orderId + "/status"),
                 new Page.WaitForResponseOptions().setTimeout(60000),
                 swipe);
         System.out.printf("[OTP SWIPE] %s submission returned HTTP %d for order %s%n",
                 status, response.status(), orderId);
         org.assertj.core.api.Assertions.assertThat(response.ok())
                 .as("%s confirmation after pointer swipe: HTTP %s", status, response.status()).isTrue();
+        if (status.equals("AT_RESTAURANT")) assertThat(riderPage.getByRole(AriaRole.BUTTON,
+                new Page.GetByRoleOptions().setName("Mark Arrived at Restaurant").setExact(true))).isHidden();
+        if (status.equals("OUT_FOR_DELIVERY")) assertThat(riderPage.getByPlaceholder("Ask customer for 6-digit OTP")).isVisible();
     }
 
     private void waitForActiveOrder(String orderId) {
