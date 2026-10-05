@@ -39,7 +39,7 @@ public class RiderOnboardingWizardPage {
     }
     private Locator button(String name) {return page.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName(name).setExact(true));}
     private void upload(String label) {new KycUploadPage(page).uploadDocument(label,Paths.get("src/test/resources/dummy.png").toAbsolutePath().toString());}
-    private void verify(String label,String path) {var response=page.waitForResponse(r -> java.net.URI.create(r.url()).getPath().equals(path) && r.request().method().equals("POST"),() -> button(label).click());
+    private void verify(String label,String path) {var response=page.waitForResponse(r -> java.net.URI.create(r.url()).getPath().equals(path) && r.request().method().equals("POST") && r.status() == 200,() -> button(label).click());
         org.assertj.core.api.Assertions.assertThat(response.status()).as("Provider check response").isEqualTo(200);}
     public int getCurrentStep() {String text=page.locator("[role=tab][aria-selected=true]").innerText();return Integer.parseInt(text.substring(0,1));}
     public void fillVehicleNumber(String number) {field("Vehicle registration").fill(number);}
@@ -49,7 +49,7 @@ public class RiderOnboardingWizardPage {
         assertThat(picker).hasAttribute("aria-expanded","false");}
     public void clickNext() {button("Save details and continue").click();assertThat(field("Driving licence number")).isVisible();}
     public void clickSubmit() {button("Submit for review").click();Locator dialog=page.getByRole(AriaRole.DIALOG);assertThat(dialog).isVisible();
-        var response=page.waitForResponse(r -> java.net.URI.create(r.url()).getPath().equals("/api/v1/delivery-onboarding/application/submit") && r.request().method().equals("POST"),
+        var response=page.waitForResponse(r -> java.net.URI.create(r.url()).getPath().equals("/api/v1/delivery-onboarding/application/submit") && r.request().method().equals("POST") && r.status() == 200,
                 () -> dialog.getByRole(AriaRole.BUTTON,new Locator.GetByRoleOptions().setName("Submit for review").setExact(true)).click());
         org.assertj.core.api.Assertions.assertThat(response.status()).isEqualTo(200);assertThat(dialog).isHidden();}
 }
