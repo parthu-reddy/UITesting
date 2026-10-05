@@ -120,7 +120,8 @@ public class LoginValidationTest extends TestBase {
         Response rejected = page.waitForResponse(
                 r -> r.url().contains("/api/v1/auth/session") && r.request().method().equals("POST"),
                 login::clickVerifyAndLogin);
-        assertThat(rejected.status()).isEqualTo(400);
+        // Since O4 (IdentityService c1a4856) a wrong, replaced or expired code is an authentication failure.
+        assertThat(rejected.status()).isEqualTo(401);
         assertThat(page.getByRole(com.microsoft.playwright.options.AriaRole.ALERT)).containsText("expired");
         assertThat(page.getByPlaceholder("- - - - - -")).isVisible();
 
@@ -153,7 +154,8 @@ public class LoginValidationTest extends TestBase {
         Response rejected = page.waitForResponse(
                 r -> r.url().contains("/api/v1/auth/session") && r.request().method().equals("POST"),
                 login::clickVerifyAndLogin);
-        assertThat(rejected.status()).isEqualTo(400);
+        // Since O4 (IdentityService c1a4856) a wrong, replaced or expired code is an authentication failure.
+        assertThat(rejected.status()).isEqualTo(401);
         assertThat(page.getByRole(com.microsoft.playwright.options.AriaRole.ALERT)).isVisible();
         login.fillOtp(latest);
         Response accepted = page.waitForResponse(

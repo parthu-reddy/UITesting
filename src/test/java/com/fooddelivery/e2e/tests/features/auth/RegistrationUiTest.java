@@ -43,7 +43,7 @@ public class RegistrationUiTest extends TestBase {
 
         RiderOnboardingWizardPage wizard = new RiderOnboardingWizardPage(riderPage);
         assertThat(wizard.isWizardVisible()).isTrue();
-        wizard.completeDevModeOnboarding("KA" + newRiderPhone);
+        wizard.completeDevModeOnboarding(RiderOnboardingWizardPage.plateFor(newRiderPhone));
 
         com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(riderPage.getByText("Awaiting admin review",
                 new Page.GetByTextOptions().setExact(true))).isVisible();

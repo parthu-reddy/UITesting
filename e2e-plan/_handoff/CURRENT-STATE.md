@@ -1,5 +1,9 @@
 # Current checkpoint
 
+## 2026-10-05T17:45:00+05:30 — Review Phases 1–3 deployed and checked live
+
+Deployed: UI db3a322 (Phase 1–3), Identity/Comms/Common from the 14:45 publish, Deployment jwt 15 min. Live UI-only results: O4 7/8 then revocation 1/1 after a test-race fix; O5 8/8; LoginSmoke 9/9; Session 15/15; LoginValidation: resend expectation fixed (4/4 rerun), `otpValidationAndBack` x4 is a Phase 3 regression fixed in source, awaiting UI redeploy. Evidence: _handoff/evidence/review-2026-10-05-phase1-3-live-e2e.json. Local uncommitted: UI OTP fix; UITesting harness updates (Phase 2–3 page objects, revocation race, 401 expectations).
+
 ## 2026-10-05T15:05:00+05:30 — Review remediation Phases 1–2 local; awaiting owner deploy
 
 Deployed Dev is still the checkpoint113 release (UI f73ffe9 etc.). Local, uncommitted changes from RandomDocuments/BusinessPlatformReview_2026-10-05 (gate 8/20: P1 4/4, P2 4/4): UI token keep-alive + stable socket owner + /portals landing; Identity 15-minute access JWT (Deployment/identity-service.yml); automatic portal/organisation revalidation; launcher invitation banner; role-only invitation SMS (CommonLibrary enum, Identity outbox, CommunicationIntegration template/routing). Harness: PortalLauncherPage.awaitChangedState and BusinessHubOrganisationUiTest updated, compile OK. Local proof: UI 960/960, Identity 160, Comms 44, Common 311; break tests red→green. No E2E run since checkpoint113; no fixtures created.

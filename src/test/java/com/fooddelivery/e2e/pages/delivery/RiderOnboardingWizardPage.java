@@ -14,14 +14,28 @@ public class RiderOnboardingWizardPage {
     }
     public RiderOnboardingWizardPage(Page page) {this.page=page;}
     public boolean isWizardVisible() {try {page.getByTestId("delivery-application").waitFor(new Locator.WaitForOptions().setTimeout(15000));return true;}catch(TimeoutError absent){return false;}}
-    public void completeOnboarding() {completeDevModeOnboarding("E2E Test Rider", "KA"+String.format("%010d",System.currentTimeMillis()%10000000000L));}
+    public void completeOnboarding() {completeDevModeOnboarding("E2E Test Rider", plateFor(String.format("%010d",System.currentTimeMillis()%10000000000L)));}
+
+    /**
+     * A valid-format Indian registration (KA 79 ABC 1234) that is unique per ten-digit number: the
+     * middle four digits become three letters (10^4 fits in 26^3), so different phones never collide.
+     */
+    public static String plateFor(String tenDigits) {
+        if (!tenDigits.matches("\\d{10}")) throw new IllegalArgumentException("ten digits required");
+        int middle = Integer.parseInt(tenDigits.substring(2, 6));
+        char[] letters = new char[3];
+        for (int i = 2; i >= 0; i--) { letters[i] = (char) ('A' + middle % 26); middle /= 26; }
+        return "KA" + tenDigits.substring(0, 2) + new String(letters) + tenDigits.substring(6);
+    }
     public void completeDevModeOnboarding() {completeOnboarding();}
     public void completeDevModeOnboarding(String vehicle) {
         completeDevModeOnboarding("E2E Test Rider", vehicle);
     }
     public void completeDevModeOnboarding(String fullName, String vehicle) {
         assertThat(page.getByTestId("delivery-application")).isVisible();field("Full name").fill(fullName);
-        fillVehicleNumber(vehicle);selectVehicleType("Motorcycle");field("City code").fill("BLR");
+        fillVehicleNumber(vehicle);selectVehicleType("Motorcycle");
+        // One fleet city on Dev: the form shows it as a fact instead of a free-text code.
+        assertThat(page.getByTestId("fleet-city")).isVisible();
         clickNext();
         field("Driving licence number").fill("KA"+vehicle.substring(2));
         field("Date of birth").fill("1990-01-01");

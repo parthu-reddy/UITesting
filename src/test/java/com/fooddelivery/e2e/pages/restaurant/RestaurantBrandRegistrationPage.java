@@ -86,6 +86,7 @@ public class RestaurantBrandRegistrationPage {
         field("GSTIN").fill("29" + pan + "1Z5");
         field("PAN").fill(pan);
         field("Bank account number").fill("1234567890");
+        field("Confirm account number").fill("1234567890");
         field("IFSC code").fill("HDFC0001234");
     }
 
@@ -101,7 +102,7 @@ public class RestaurantBrandRegistrationPage {
         field("FSSAI licence number").fill("9999" + phone);
         field("Latitude").fill("12.9808");
         field("Longitude").fill("77.6467");
-        field("City code").fill("BLR");
+        assertThat(page.getByTestId("fleet-city")).isVisible();
         // These fresh O3 fixtures need an explicit opening window for discovery at test time.
         field("Opens").fill("00:00");
         field("Closes").fill("23:59");

@@ -13,3 +13,7 @@ Every continuing agent must update this feature's results and the central handof
 ## 2026-10-05T14:20:00+05:30 — Review Phase 1 (session continuity), local only
 
 Source change, not yet deployed: UI background token renewal (`FoodDeliveryAppUI/src/lib/sessionKeepAlive.ts`), stable person+session key for chat/call/rider sockets, `/portals` first landing for multi-role people; Identity access JWT 15 minutes (`Deployment/identity-service.yml`, owner decision D-R1). Proof so far is local only: UI unit 955/955, typecheck/lint clean, two break tests red→green. No E2E run yet. After the owner deploys UI + Identity config: run `scripts/run_business_platform_o45_e2e.py --only login`, LoginSmokeTest and SessionUiTest. The 15-minute idle renewal case is deferred (DEFERRED-WAIT-TESTS.md). Plan: RandomDocuments/BusinessPlatformReview_2026-10-05.
+
+## 2026-10-05T17:40:00+05:30 — Review Phases 1–3 live check (UI db3a322)
+
+SessionUiTest 15/15 and O4 login/admin cases pass on the deployed release with 15-minute tokens and the launcher in each portal header. Evidence: _handoff/evidence/review-2026-10-05-phase1-3-live-e2e.json.

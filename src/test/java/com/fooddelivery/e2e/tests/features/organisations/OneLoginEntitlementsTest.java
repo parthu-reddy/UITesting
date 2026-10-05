@@ -20,7 +20,7 @@ public class OneLoginEntitlementsTest extends TestBase {
         PortalLauncherPage launcher = new PortalLauncherPage(customerPage); launcher.open(); launcher.state(Portal.CUSTOMER, "Available");
         launcher.state(Portal.RESTAURANT, "Available"); launcher.state(Portal.BUSINESS, "Available"); launcher.choose(Portal.RESTAURANT);
         new RestaurantDashboardPage(customerPage).waitForDashboard(); launcher.open(); launcher.choose(Portal.BUSINESS);
-        assertThat(customerPage.getByTestId("organisation-role")).containsText("OWNER");
+        assertThat(customerPage.getByTestId("organisation-role")).containsText("Owner");
         org.assertj.core.api.Assertions.assertThat(sessions.get()).isEqualTo(1);
     }
     @Test void approvedRiderUsesCustomerAndDeliveryButCannotOpenRestaurantOperations() {

@@ -34,8 +34,14 @@ public class EntitlementRevocationTest extends TestBase {
         owner.remove(phone); AtomicInteger refreshes = new AtomicInteger(); customerPage.onRequest(request -> {
             if (request.method().equals("POST") && java.net.URI.create(request.url()).getPath().equals("/api/v1/auth/session/refresh")) refreshes.incrementAndGet();
         });
-        launcher.open();
-        customerPage.waitForCondition(() -> customerPage.getByTestId("portal-restaurant").filter(new com.microsoft.playwright.Locator.FilterOptions().setHasText("Get started")).count() > 0);
+        // The removed person's next ordinary request (here: opening the launcher) renews the token
+        // without RESTAURANT, and the app moves them off the Restaurant dashboard to the portal
+        // chooser at once. That navigation replaces the launcher dialog, so assert on the chooser page.
+        if (!customerPage.url().contains("/portals")) {
+            customerPage.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Switch portal").setExact(true)).click();
+        }
+        customerPage.waitForURL(java.util.regex.Pattern.compile(".*/portals(?:[?#].*)?$"));
+        assertThat(customerPage.getByTestId("portal-restaurant")).containsText("Get started");
         org.assertj.core.api.Assertions.assertThat(refreshes.get()).isLessThanOrEqualTo(1);
         customerPage.navigate(TestConfig.APP_URL + "/restaurant"); assertThat(customerPage.getByTestId("portal-choices")).isVisible();
     }

@@ -17,10 +17,10 @@ public class BusinessHubOrganisationUiTest extends TestBase {
         BusinessHubPage hub = new BusinessHubPage(restaurantPage); hub.create(name); hub.members(); hub.invite(member, "MANAGER");
         BusinessPlatformFixture.fresh(customerPage, member, "E2E O45 Invitee").openPortal(Portal.BUSINESS);
         BusinessHubPage colleague = new BusinessHubPage(customerPage); colleague.accept(name); colleague.open(name); colleague.members();
-        assertThat(customerPage.getByTestId("organisation-role")).containsText("MANAGER");
+        assertThat(customerPage.getByTestId("organisation-role")).containsText("Manager");
         assertThat(customerPage.getByRole(AriaRole.FORM, new Page.GetByRoleOptions().setName("Invite a colleague").setExact(true))).hasCount(0);
         restaurantPage.reload(); hub.members(); hub.changeRole(member, "STAFF"); customerPage.reload(); colleague.members();
-        assertThat(customerPage.getByTestId("organisation-role")).containsText("STAFF");
+        assertThat(customerPage.getByTestId("organisation-role")).containsText("Staff");
         // Returning to the hub revalidates the cached list; no manual refresh control exists.
         hub.remove(member); colleague.allOrganisations();
         assertThat(colleague.organisation(name)).hasCount(0);

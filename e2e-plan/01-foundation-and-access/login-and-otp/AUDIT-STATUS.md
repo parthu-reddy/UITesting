@@ -78,3 +78,7 @@ Owning portable checkpoint(s): 02-login-and-otp.md.
 Next: follow [../../_handoff/NEXT-STEPS.md](../../_handoff/NEXT-STEPS.md) and the local scenarios/PENDING mapping. Slow/rate/SSE work is excluded as indexed in [../../_handoff/DEFERRED.md](../../_handoff/DEFERRED.md). Never count skipped/no-op/blocked cases as passes. Do not rerun successful lifecycle coverage merely because it is referenced here.
 
 Every continuing agent must update this feature's results and the central handoff inside this plan folder; see [mandatory agent update instructions](../../AGENTS.md).
+
+## 2026-10-05T17:40:00+05:30 — Review Phases 1–3 live check (UI db3a322)
+
+LoginSmokeTest 9/9; LoginValidationTest 8 passed, 4 failed, 4 errors. `resendRejectsThePreviousCode` expected 400 but the server has returned 401 for wrong/expired codes since O4 (IdentityService c1a4856); expectation updated in both the resend and the deferred expiry test; resend rerun 4/4 PASS. `otpValidationAndBack` x4 timed out: review Phase 3 added `pattern` to the OTP input, so native validation blocked submit and the app alert never rendered — a real regression, fixed in UI source (pattern removed; AuthForm unit guard), awaiting UI redeploy, then rerun `LoginValidationTest#otpValidationAndBack`. Evidence: _handoff/evidence/review-2026-10-05-phase1-3-live-e2e.json.

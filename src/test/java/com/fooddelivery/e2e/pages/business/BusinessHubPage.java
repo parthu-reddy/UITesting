@@ -10,6 +10,16 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 public final class BusinessHubPage {
     private final Page page;
     public BusinessHubPage(Page page) { this.page = page; }
+
+    /** The UI shows "+91 98765 43210"; tests keep the plain ten-digit number. */
+    public static String displayPhone(String phone) {
+        return phone.matches("\\d{10}") ? "+91 " + phone.substring(0, 5) + " " + phone.substring(5) : phone;
+    }
+
+    /** The UI shows roles as words ("Manager"); tests keep the wire code ("MANAGER"). */
+    public static String roleLabel(String role) {
+        return role.charAt(0) + role.substring(1).toLowerCase(java.util.Locale.ROOT);
+    }
     public void create(String name) {
         Locator form = page.getByRole(AriaRole.FORM, new Page.GetByRoleOptions().setName("Create organisation").setExact(true));
         form.getByLabel("Organisation name").fill(name);
@@ -19,7 +29,7 @@ public final class BusinessHubPage {
     public Locator organisation(String name) { return page.getByTestId("organisation-card").filter(new Locator.FilterOptions().setHasText(name)); }
     public void open(String name) { organisation(name).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Open organisation").setExact(true)).click(); }
     public String openFirstApproved() {
-        Locator card = page.getByTestId("organisation-card").filter(new Locator.FilterOptions().setHasText("APPROVED")).first();
+        Locator card = page.getByTestId("organisation-card").filter(new Locator.FilterOptions().setHasText("Approved")).first();
         card.waitFor(); String name = card.getByRole(AriaRole.HEADING).innerText();
         card.getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Open organisation").setExact(true)).click(); return name;
     }
@@ -27,19 +37,22 @@ public final class BusinessHubPage {
     public void members() { page.getByRole(AriaRole.TAB, new Page.GetByRoleOptions().setName("Members").setExact(true)).click(); }
     public void invite(String phone, String role) {
         Locator form = page.getByRole(AriaRole.FORM, new Page.GetByRoleOptions().setName("Invite a colleague").setExact(true));
-        form.getByLabel("Phone number").fill(phone); chooseRole("Invitation role", role); button("Invite colleague").click();
-        assertThat(page.getByTestId("organisation-invitation").filter(new Locator.FilterOptions().setHasText(phone))).containsText("PENDING");
+        form.getByLabel("Phone number").fill(phone); chooseRole("Invitation role", roleLabel(role)); button("Invite colleague").click();
+        assertThat(page.getByTestId("organisation-invitation").filter(new Locator.FilterOptions().setHasText(displayPhone(phone)))).containsText("Pending");
     }
     public void accept(String organisationName) {
         Locator invite = page.getByTestId("my-invitation").filter(new Locator.FilterOptions().setHasText("Invitation to " + organisationName));
         invite.getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Accept invitation").setExact(true)).click();
         assertThat(invite).hasCount(0); assertThat(organisation(organisationName)).isVisible();
     }
-    public Locator member(String phone) { return page.getByTestId("organisation-member").filter(new Locator.FilterOptions().setHasText(phone)); }
+    public Locator member(String phone) { return page.getByTestId("organisation-member").filter(new Locator.FilterOptions().setHasText(displayPhone(phone))); }
     public void changeRole(String phone, String role) {
-        member(phone).getByRole(AriaRole.COMBOBOX).click(); option(role).click();
-        assertThat(member(phone).getByRole(AriaRole.COMBOBOX)).containsText(role);
-        assertThat(member(phone)).containsText(role);
+        String label = roleLabel(role);
+        member(phone).getByRole(AriaRole.COMBOBOX).click(); option(label).click();
+        Locator dialog = page.getByRole(AriaRole.DIALOG, new Page.GetByRoleOptions().setName("Change role?").setExact(true));
+        dialog.getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Change role").setExact(true)).click();
+        assertThat(member(phone).getByRole(AriaRole.COMBOBOX)).containsText(label);
+        assertThat(member(phone)).containsText(label);
     }
     public void remove(String phone) {
         member(phone).getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Remove member").setExact(true)).click();

@@ -71,7 +71,7 @@ public class AdminPartnerApprovalsUiTest extends PartnerApplicationsUiTestBase {
 
         riderPage.navigate(TestConfig.APP_URL);
         new LoginPage(riderPage).loginNewPerson(deliveryPhone, deliveryName, "bp3_" + deliveryPhone + "@test.com").openOnboarding(Portal.DELIVERY);
-        new RiderOnboardingWizardPage(riderPage).completeDevModeOnboarding(deliveryName, "KA" + deliveryPhone);
+        new RiderOnboardingWizardPage(riderPage).completeDevModeOnboarding(deliveryName, RiderOnboardingWizardPage.plateFor(deliveryPhone));
 
         loginAsAdminThroughVisibleControls();
         AdminPartnerApprovalsPage approvals = new AdminPartnerApprovalsPage(adminPage);
@@ -79,8 +79,8 @@ public class AdminPartnerApprovalsUiTest extends PartnerApplicationsUiTestBase {
         approvals.restaurants();
         assertThat(approvals.row("E2E pending-brand")).hasCount(1);
         approvals.select(restaurantName);
-        approvals.assertChecks("GST check", "APPROVED");
-        approvals.assertChecks("Bank check", "APPROVED");
+        approvals.assertChecks("GST check", "Passed");
+        approvals.assertChecks("Bank check", "Passed");
         approvals.requestPrivateView("gstin");
         approvals.rejectWithoutReason();
         String reason = "E2E review requires a clearer document";

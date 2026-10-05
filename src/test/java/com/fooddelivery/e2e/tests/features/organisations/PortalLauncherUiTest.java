@@ -13,7 +13,7 @@ public class PortalLauncherUiTest extends TestBase {
         new LoginPage(restaurantPage).login("9000000001"); PortalLauncherPage launcher = new PortalLauncherPage(restaurantPage);
         launcher.open(); launcher.state(Portal.CUSTOMER, "Available"); launcher.state(Portal.RESTAURANT, "Available");
         launcher.state(Portal.BUSINESS, "Available"); launcher.state(Portal.DELIVERY, "Get started"); launcher.choose(Portal.RESTAURANT);
-        launcher.open(); launcher.choose(Portal.BUSINESS); assertThat(restaurantPage.getByTestId("organisation-role")).containsText("OWNER");
+        launcher.open(); launcher.choose(Portal.BUSINESS); assertThat(restaurantPage.getByTestId("organisation-role")).containsText("Owner");
         launcher.open(); launcher.choose(Portal.CUSTOMER);
     }
     @Test void pendingRestaurantOpensItsApplicationStatus() {

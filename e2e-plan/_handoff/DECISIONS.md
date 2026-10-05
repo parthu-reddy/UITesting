@@ -1,5 +1,9 @@
 # User instructions and joint decisions register
 
+## 2026-10-05T17:30:00+05:30 — Review D-R5: no OTP resend cooldown (owner)
+
+Owner chose no 30-second resend cooldown on login/admin code screens: the server already limits each phone to 10 codes per 10 minutes, and LoginValidationTest#resendRejectsThePreviousCode / #resendOtp stay in normal runs instead of moving to deferred duration tests. The code screen instead shows the destination number with "Change number".
+
 ## 2026-10-05T14:05:00+05:30 — Review decisions D-R1..D-R4 (owner, all recommended)
 
 D-R1 access JWT 15 minutes (`Deployment/identity-service.yml jwt.expiration`) plus UI background renewal; chat/call/rider sockets key on person+session so renewal does not reconnect them. D-R2 invitation SMS (Identity outbox event + CommunicationIntegration template) plus in-app launcher/hub surface. D-R3 behaviour-neutral readability reformat of O1–O5 files across eight repos, last. D-R4 restaurant bank account masked to last four after save. The 15-minute live idle case is deferred (sessions-and-role-access/DEFERRED-WAIT-TESTS.md); real SMS delivery is a deferred production-provider check. Gate: `RandomDocuments/BusinessPlatformReview_2026-10-05/tools/validate_review.py` (baseline 0/20).

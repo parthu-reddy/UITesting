@@ -1,0 +1,56 @@
+{
+  "recordedAt": "2026-10-05T17:40:00+05:30",
+  "appUrl": "https://gulf-strike-dark-extras.trycloudflare.com",
+  "deployedUi": "db3a322f60817d9f0e4055b797cf93bb3ba48e3d",
+  "proofType": "deployed UI-only E2E (Playwright, Dev autofill), fixtures retained",
+  "runs": [
+    {
+      "manifest": "target/business-platform/o45/allocation-1b21392a20fa4d55.json",
+      "cases": "o4",
+      "tests": 8,
+      "passed": 7,
+      "failed": 1,
+      "failure": "EntitlementRevocationTest#acceptedStaffApprovalAndRemovalRefreshOnNormalUiRequests: launcher dialog replaced by the app's automatic redirect of the removed staff member from /restaurant to /portals (screenshot shows Restaurant 'Not started'); test race, not a product defect"
+    },
+    {
+      "manifest": "target/business-platform/o45/allocation-46e95b8f2dc333df.json",
+      "cases": "revocation (after test fix)",
+      "tests": 1,
+      "passed": 1
+    },
+    {
+      "manifest": "target/business-platform/o45/allocation-80f48fbce9770a5a.json",
+      "cases": "o5",
+      "tests": 8,
+      "passed": 8,
+      "note": "PortalLauncherPage log: DELIVERY Available confirmed by automatic revalidation in 10370 ms (no refresh click)"
+    },
+    {
+      "classes": "LoginSmokeTest",
+      "tests": 9,
+      "passed": 9
+    },
+    {
+      "classes": "SessionUiTest",
+      "tests": 15,
+      "passed": 15
+    },
+    {
+      "classes": "LoginValidationTest",
+      "tests": 16,
+      "passed": 8,
+      "failed": 4,
+      "errors": 4,
+      "failures": {
+        "otpValidationAndBack x4": "review Phase 3 regression: OTP input pattern attribute made native validation block submit, so the app alert never rendered; fixed in UI source (pattern removed, unit guard added), needs UI redeploy",
+        "resendRejectsThePreviousCode x4": "stale expectation 400; server returns 401 since O4 IdentityService c1a4856; test updated, rerun 4/4 PASS"
+      }
+    }
+  ],
+  "deferredNotRun": [
+    "slow-auth",
+    "auth-rate-limit",
+    "15-minute idle renewal",
+    "real SMS delivery"
+  ]
+}

@@ -49,8 +49,8 @@ public class RestaurantApplicationApiTest extends PartnerApplicationsUiTestBase 
         approvals.open();
         approvals.restaurants();
         approvals.select(submittedName);
-        approvals.assertChecks("GST check", "APPROVED");
-        approvals.assertChecks("Bank check", "APPROVED");
+        approvals.assertChecks("GST check", "Passed");
+        approvals.assertChecks("Bank check", "Passed");
         approvals.rejectWithoutReason();
         String reason = "E2E review requires a clearer document";
         approvals.decide("Reject", reason);
@@ -67,7 +67,7 @@ public class RestaurantApplicationApiTest extends PartnerApplicationsUiTestBase 
         application.refreshAndAssertStatus("Approved");
         restaurantPage.navigate(TestConfig.APP_URL + "/business");
         com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(restaurantPage.getByTestId("organisation-card")
-                .filter(new com.microsoft.playwright.Locator.FilterOptions().setHasText(submittedName + " Team " + phone))).containsText("APPROVED");
+                .filter(new com.microsoft.playwright.Locator.FilterOptions().setHasText(submittedName + " Team " + phone))).containsText("Approved");
 
         // Customer search filters the loaded feed. Reload through the browser to observe a fresh
         // public listing after another session approves the application.

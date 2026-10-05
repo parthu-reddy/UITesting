@@ -1,5 +1,19 @@
 # Ordered continuation
 
+## 2026-10-05T19:10:00+05:30 — Review Phase 4 ready; deploy Restaurant, Delivery, UI
+
+Owner builds/deploys RestaurantApplication, DeliveryExecutiveApplication and FoodDeliveryAppUI (UI also includes the OTP `pattern` fix). Then UI-only on the tunnel: `run_business_platform_o45_e2e.py --only restaurant`, `--only delivery`; `mvn -q -Dtest='AdminPartnerApprovalsUiTest,RestaurantApplicationApiTest,DeliveryApplicationApiTest,LoginValidationTest#otpValidationAndBack' -Dapp.url=<tunnel> -Dadmin.phone=1000000002 -Dheadless=true -Dslow.mo=0 -Drecord.video=false -De2e.otp.enabled=false -DexcludedGroups=slow-auth,auth-rate-limit test` (check each class's own preflight properties first). Next: review Phase 5 (readable code + organisation envelope).
+
+## 2026-10-05T17:45:00+05:30 — Redeploy UI for the OTP fix, then rerun one test
+
+1. Owner redeploys FoodDeliveryAppUI (removes `pattern` from both OTP inputs).
+2. `mvn -q -Dtest='LoginValidationTest#otpValidationAndBack' -Dapp.url=<tunnel> -Dadmin.phone=1000000002 -Dheadless=true -Dslow.mo=0 -Drecord.video=false -De2e.otp.enabled=false -DexcludedGroups=slow-auth,auth-rate-limit test` (expect 4/4).
+3. Continue review Phase 4 (application forms, city picker, admin approvals, bank masking).
+
+## 2026-10-05T17:30:00+05:30 — Review Phase 3 ready; deploy FoodDeliveryAppUI
+
+Phases 1–2 were published by the owner's 14:45 run (all repos, incl. Deployment jwt 15 min). Phase 3 is UI-only and local: owner builds/deploys FoodDeliveryAppUI. Then run, UI-only on the current tunnel: `python3 scripts/run_business_platform_o45_e2e.py --app-url <tunnel> --only o4` and `--only o5`, plus LoginSmokeTest, SessionUiTest, LoginValidationTest (normal exclusions). Next review phase: Phase 4 (application forms + admin approvals) per RandomDocuments/BusinessPlatformReview_2026-10-05.
+
 ## 2026-10-05T15:05:00+05:30 — After the owner deploys review Phases 1–2
 
 1. Owner builds/deploys in order: CommonLibrary publish → IdentityService (incl. Deployment/identity-service.yml jwt.expiration 900000) + CommunicationIntegration → FoodDeliveryAppUI.
