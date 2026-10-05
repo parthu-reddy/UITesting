@@ -66,9 +66,13 @@ public class CustomerSettingsUiTest extends TestBase {
         Locator sessions = customerPage.getByRole(AriaRole.HEADING,
                 new Page.GetByRoleOptions().setName("Logged-in Devices")).locator("..").locator("..");
         assertThat(sessions).isVisible();
-        assertThat(sessions.getByRole(AriaRole.BUTTON,
-                new Locator.GetByRoleOptions().setName("Remove").setExact(true)).first()).isVisible();
-        assertThat(sessions).containsText("Last Active:");
+        Locator current=sessions.getByTestId("active-session")
+                .filter(new Locator.FilterOptions().setHasText("This device"));
+        assertThat(current).hasCount(1);
+        assertThat(current.getByRole(AriaRole.BUTTON,
+                new Locator.GetByRoleOptions().setName("Remove").setExact(true))).isVisible();
+        assertThat(current).containsText("Everyday account");
+        assertThat(current).containsText("Last active:");
     }
     @Test void savedHomeAddressIsVisibleWithoutEditingIt() {
         customerPage.getByRole(AriaRole.TAB,
@@ -261,10 +265,17 @@ public class CustomerSettingsUiTest extends TestBase {
         Locator toggle = themeToggle();
         if (java.util.regex.Pattern.compile("(?:^|\\s)dark(?:\\s|$)")
                 .matcher(app.getAttribute("class")).find()) toggle.click();
+        customerPage.waitForCondition(() -> "rgb(255, 252, 248)".equals(
+                app.evaluate("element => getComputedStyle(element).backgroundColor")),
+                new Page.WaitForConditionOptions().setTimeout(5000));
         String lightBackground = (String) app.evaluate("element => getComputedStyle(element).backgroundColor");
 
         themeToggle().click();
         assertThat(app).hasClass(java.util.regex.Pattern.compile(".*\\bdark\\b.*"));
+        // The real design animates background-color for380ms; read its painted endpoint.
+        customerPage.waitForCondition(() -> "rgb(18, 22, 28)".equals(
+                app.evaluate("element => getComputedStyle(element).backgroundColor")),
+                new Page.WaitForConditionOptions().setTimeout(5000));
         String darkBackground = (String) app.evaluate("element => getComputedStyle(element).backgroundColor");
         org.assertj.core.api.Assertions.assertThat(darkBackground)
                 .as("Dark mode must visibly change the application background")
