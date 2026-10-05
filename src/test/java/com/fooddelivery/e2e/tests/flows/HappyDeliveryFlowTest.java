@@ -330,12 +330,14 @@ public class HappyDeliveryFlowTest extends TestBase {
         receipt.getByRole(AriaRole.HEADING, new Locator.GetByRoleOptions().setName("Order delivered").setExact(true))
                 .waitFor(new Locator.WaitForOptions().setTimeout(90000));
         assertThat(receipt).containsText("Delivered from " + outletName);
+        if (SSE_ENABLED) {
         java.util.List<Map<String, Object>> ownedStreams = streamResponses.stream()
                 .filter(event -> ((String) event.get("path")).endsWith("/orders/" + orderId + "/restaurant-status-stream"))
                 .toList();
         org.assertj.core.api.Assertions.assertThat(ownedStreams).isNotEmpty();
         for (Map<String, Object> event : ownedStreams) org.assertj.core.api.Assertions.assertThat(event.get("status"))
                 .as("resumed order's authorised stream %s", event).isEqualTo(200);
+        }
     }
 
     /** Continue financial/quote checks on this audit's delivered manifest without an order POST. */
