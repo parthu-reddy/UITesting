@@ -1,5 +1,60 @@
 # Executable test checklist
 
+## Current scoped acceptance — 2026-10-05T11:58:13+05:30
+
+48 distinct selected methods pass:16 final phase methods plus32 required existing regression methods. Separate retained Happy money/quote branches and focused reruns are not extra unique methods. No full-suite/all-features green claim. Original failures and explicit deferrals remain in the release.
+
+- [x] `AdminLedgerAdvancedTest#pendingPayoutsHavePositiveBalances` — deployed UI; 73-retained-beneficiary-queue-invocation1-pass.json
+- [x] `AdminOrderMoneyOutcomesTest#panelShowsTheOutcome` — deployed UI; 62-retained-four-regressions-invocation1-original.json
+- [x] `AdminStepUpTest#administratorVerifiesSeparatelyAndKeepsEverydayAccess` — deployed UI; 66-final-ui-gate-invocation6.json
+- [x] `AdminStepUpTest#nonStaffCannotStartAdministratorVerification` — deployed UI; 66-final-ui-gate-invocation6.json
+- [x] `BusinessHubOrganisationUiTest#invitationRoleChangesAndRemovalAreVisibleToBothPeople` — deployed UI; 17-final-ui-gate-invocation4.json
+- [x] `CspSmokeUiTest#securityHeadersAndConsoleHoldAcrossEveryCurrentPortal` — deployed UI; 17-final-ui-gate-invocation4.json
+- [x] `CustomerSettingsUiTest#blankNewAddressFormIsBlockedAndCanBeClosed` — deployed UI; 59-settings-partner-invocation1-original.json
+- [x] `CustomerSettingsUiTest#currentLoggedInDeviceIsListedWithoutRemovingIt` — deployed UI; 64-final-session-release-and-three-reruns.json
+- [x] `CustomerSettingsUiTest#deliveredOrderReviewRequiresAtLeastOneRating` — deployed UI; 57-delivered-read-only-invocation1.json
+- [x] `CustomerSettingsUiTest#everyCustomerSettingsTabCanBeSelectedWithoutLosingSettings` — deployed UI; 59-settings-partner-invocation1-original.json
+- [x] `CustomerSettingsUiTest#everyVisibleNewAddressFieldHasAProgrammaticLabel` — deployed UI; 59-settings-partner-invocation1-original.json
+- [x] `CustomerSettingsUiTest#everyVisibleProfileFieldHasAProgrammaticLabel` — deployed UI; 59-settings-partner-invocation1-original.json
+- [x] `CustomerSettingsUiTest#everyVisibleSettingsButtonHasAnAccessibleName` — deployed UI; 59-settings-partner-invocation1-original.json
+- [x] `CustomerSettingsUiTest#keyboardTabsReachHistoryAndWallet` — deployed UI; 59-settings-partner-invocation1-original.json
+- [x] `CustomerSettingsUiTest#myReviewsTabShowsReviewsOrDefinedEmptyState` — deployed UI; 59-settings-partner-invocation1-original.json
+- [x] `CustomerSettingsUiTest#profileDarkThemeChangesRenderedBackground` — deployed UI; 64-final-session-release-and-three-reruns.json
+- [x] `CustomerSettingsUiTest#profileDarkThemePersistsAcrossReload` — deployed UI; 59-settings-partner-invocation1-original.json
+- [x] `CustomerSettingsUiTest#profileIdentityAndStoreCreditBalanceRender` — deployed UI; 59-settings-partner-invocation1-original.json
+- [x] `CustomerSettingsUiTest#profilePhoneIsReadOnlyAndCloseReturnsHome` — deployed UI; 59-settings-partner-invocation1-original.json
+- [x] `CustomerSettingsUiTest#profileThemeClassTogglesAndRestoresLight` — deployed UI; 59-settings-partner-invocation1-original.json
+- [x] `CustomerSettingsUiTest#savedHomeAddressIsVisibleWithoutEditingIt` — deployed UI; 59-settings-partner-invocation1-original.json
+- [x] `DeliveryOnboardingUiTest#approvedRiderEntersDeliveryOfflineWithoutAnotherPersonLogin` — deployed UI; 17-final-ui-gate-invocation4.json
+- [x] `EntitlementRevocationTest#acceptedStaffApprovalAndRemovalRefreshOnNormalUiRequests` — deployed UI; 66-final-ui-gate-invocation6.json
+- [x] `EntitlementRevocationTest#ownBrandSuspensionAndReinstatementChangeAccessAndDiscovery` — deployed UI; 66-final-ui-gate-invocation6.json
+- [x] `HappyDeliveryFlowTest#completeOrderLifecycle` — deployed UI; 55-happy-owned-delivery-invocation9-pass.json; retained earlier-step/failure evidence;56-money-quote branch
+- [x] `OneLoginEntitlementsTest#approvedRiderUsesCustomerAndDeliveryButCannotOpenRestaurantOperations` — deployed UI; 66-final-ui-gate-invocation6.json
+- [x] `OneLoginEntitlementsTest#freshPersonHasCustomerAndApplicationEntryPoints` — deployed UI; 66-final-ui-gate-invocation6.json
+- [x] `OneLoginEntitlementsTest#ownerUsesCustomerRestaurantAndBusinessAfterOneOtp` — deployed UI; 66-final-ui-gate-invocation6.json
+- [x] `OneLoginEntitlementsTest#pendingRiderSeesApplicationWithoutOperationalAccess` — deployed UI; 66-final-ui-gate-invocation6.json
+- [x] `OrderReviewsFlowTest#participantsReviewEachOther` — deployed UI; 58-participant-reviews-invocation1-pass.json
+- [x] `PartnerReadOnlyUiTest#restaurantEarningsPanel` — deployed UI; 59-settings-partner-invocation1-original.json
+- [x] `PartnerReadOnlyUiTest#restaurantProfileCanCloseWithoutChanges` — deployed UI; 59-settings-partner-invocation1-original.json
+- [x] `PartnerReadOnlyUiTest#restaurantStockControlsRenderWithoutToggling` — deployed UI; 59-settings-partner-invocation1-original.json
+- [x] `PartnerReadOnlyUiTest#riderCompletedTripShowsRestaurantPayoutAndDate` — deployed UI; 57-delivered-read-only-invocation1.json
+- [x] `PartnerReadOnlyUiTest#riderHistoryDateCanBeCleared` — deployed UI; 59-settings-partner-invocation1-original.json
+- [x] `PartnerReadOnlyUiTest#riderHistoryShowsEmptyStateForOldDate` — deployed UI; 59-settings-partner-invocation1-original.json
+- [x] `PartnerReadOnlyUiTest#riderProfileValuesArePopulatedWithoutEditing` — deployed UI; 59-settings-partner-invocation1-original.json
+- [x] `PartnerReadOnlyUiTest#riderSettingsCanCloseWithoutChanges` — deployed UI; 59-settings-partner-invocation1-original.json
+- [x] `PartnerReadOnlyUiTest#riderTodayEarningsIsNonNegativeCurrency` — deployed UI; 59-settings-partner-invocation1-original.json
+- [x] `PartnerReadOnlyUiTest#riderVerificationAndWalletSectionsRender` — deployed UI; 59-settings-partner-invocation1-original.json
+- [x] `PortalLauncherUiTest#ownerSwitchesApprovedPortalsAndSeesDeliveryStart` — deployed UI; 17-final-ui-gate-invocation4.json
+- [x] `PortalLauncherUiTest#pendingRestaurantOpensItsApplicationStatus` — deployed UI; 17-final-ui-gate-invocation4.json
+- [x] `PortalLauncherUiTest#rejectedRiderSeesActionAndReason` — deployed UI; 17-final-ui-gate-invocation4.json
+- [x] `PortalLauncherUiTest#staffPortalRequestsAdministratorVerification` — deployed UI; 17-final-ui-gate-invocation4.json
+- [x] `RestaurantApplicationWizardUiTest#approvedApplicationOpensItsOutletWithoutAnotherPersonLogin` — deployed UI; 17-final-ui-gate-invocation4.json
+- [x] `RestaurantEarningsLiveTest#earningsMatchTheLedger` — deployed UI; 62-retained-four-regressions-invocation1-original.json
+- [x] `RestaurantNavigationUiTest#restaurantReviewsShowPublicFeedbackAndAggregate` — deployed UI; 62-retained-four-regressions-invocation1-original.json
+- [x] `RestaurantNavigationUiTest#restaurantSectionsRender` — deployed UI; 64-final-session-release-and-three-reruns.json
+
+Earlier inventory sections below are historical except the rows explicitly updated at checkpoint113.
+
 Checked means current reviewed source and passing execution; previous evidence and pending/deferred checks remain separate.
 
 ## TestConfigTest
@@ -36,7 +91,7 @@ Checked means current reviewed source and passing execution; previous evidence a
 - [ ] `AdminLedgerAdvancedTest#clearFiltersResetsAll` — not-reviewed; not-run
 - [ ] `AdminLedgerAdvancedTest#ledgerPagination` — not-reviewed; not-run
 - [ ] `AdminLedgerAdvancedTest#openPayoutHistoryTab` — not-reviewed; not-run
-- [ ] `AdminLedgerAdvancedTest#pendingPayoutsHavePositiveBalances` — not-reviewed; not-run
+- [x] `AdminLedgerAdvancedTest#pendingPayoutsHavePositiveBalances` — current O4/O5 deployed UI pass; original failures retained; checkpoint113; 73-retained-beneficiary-queue-invocation1-pass.json
 - [ ] `AdminLedgerAdvancedTest#payoutHistoryRequiresPayeeAndShowsUnknownAsEmpty` — not-reviewed; not-run
 - [ ] `AdminLedgerAdvancedTest#payoutOrderMoneyRouteUsesTheSelectedOrderAndSendsNoWrite` — not-reviewed; not-run
 ## AdminLedgerMoneyReadOnlyRoutedUiTest
@@ -272,8 +327,8 @@ Checked means current reviewed source and passing execution; previous evidence a
 - [ ] `RestaurantFulfillmentTest#restaurantQueueTabStates` — not-reviewed; not-run
 ## RestaurantNavigationUiTest
 
-- [ ] `RestaurantNavigationUiTest#restaurantSectionsRender` — not-reviewed; not-run
-- [ ] `RestaurantNavigationUiTest#restaurantReviewsShowPublicFeedbackAndAggregate` — not-reviewed; not-run
+- [x] `RestaurantNavigationUiTest#restaurantSectionsRender` — current O4/O5 deployed UI pass; original failures retained; checkpoint113; 64-final-session-release-and-three-reruns.json
+- [x] `RestaurantNavigationUiTest#restaurantReviewsShowPublicFeedbackAndAggregate` — current O4/O5 deployed UI pass; original failures retained; checkpoint113; 62-retained-four-regressions-invocation1-original.json
 ## RiderAvailabilityUiTest
 
 - [ ] `RiderAvailabilityUiTest#riderDutyAndDashboardState` — not-reviewed; not-run
@@ -328,7 +383,7 @@ Checked means current reviewed source and passing execution; previous evidence a
 - [ ] `DelayApprovalFlowTest#customerRejectsRestaurantDelay` — not-reviewed; not-run
 ## HappyDeliveryFlowTest
 
-- [ ] `HappyDeliveryFlowTest#completeOrderLifecycle` — reviewed current source and owning scenarios; prior full lifecycle passed; strengthened Oracle-origin map resume passed44.067s; public SSE user-deferred; 08-core-HappyDeliveryFlowTest.xml, 08-history-HappyDeliveryFlowTest.xml, 08-history-postcondition.json, 08-history-stream.json, 08-stream-deployed-HappyDeliveryFlowTest.xml, 08-stream-deployed-postcondition.json, 08-initial-stream-deployed-HappyDeliveryFlowTest.xml, 08-initial-stream-deployed-stream.json, 08-arrival-failure-db.json, 08-stream-pool-RestaurantStatusStreamConnectionTest.xml, 08-automatic-progress-corrected-HappyDeliveryFlowTest.xml, 09-map-origin-final-HappyDeliveryFlowTest.xml, 09-map-origin-postconditions.json
+- [x] `HappyDeliveryFlowTest#completeOrderLifecycle` — current O4/O5 deployed UI pass; original failures retained; checkpoint113; 55-happy-owned-delivery-invocation9-pass.json; retained earlier-step/failure evidence;56-money-quote branch
 - [x] `HappyDeliveryFlowTest#overlappingOrdersRemainIndependent` — reviewed current source and owning scenarios; passed strengthened carousel and two deliveries135.077s; 08-concurrent-corrected-HappyDeliveryFlowTest.xml, 09-carousel-final-HappyDeliveryFlowTest.xml, 09-carousel-first-postcondition.json, 09-carousel-second-postcondition.json
 ## OrderCancellationFlowTest
 
@@ -369,21 +424,21 @@ Checked means current reviewed source and passing execution; previous evidence a
 - [ ] `AdminReadOnlyUiTest#payoutHistorySearchForm` — not-reviewed; not-run
 ## CustomerSettingsUiTest
 
-- [ ] `CustomerSettingsUiTest#profilePhoneIsReadOnlyAndCloseReturnsHome` — not-reviewed; not-run
-- [ ] `CustomerSettingsUiTest#keyboardTabsReachHistoryAndWallet` — not-reviewed; not-run
-- [ ] `CustomerSettingsUiTest#everyCustomerSettingsTabCanBeSelectedWithoutLosingSettings` — not-reviewed; not-run
-- [ ] `CustomerSettingsUiTest#profileIdentityAndStoreCreditBalanceRender` — not-reviewed; not-run
-- [ ] `CustomerSettingsUiTest#currentLoggedInDeviceIsListedWithoutRemovingIt` — not-reviewed; not-run
-- [ ] `CustomerSettingsUiTest#savedHomeAddressIsVisibleWithoutEditingIt` — not-reviewed; not-run
-- [ ] `CustomerSettingsUiTest#everyVisibleSettingsButtonHasAnAccessibleName` — not-reviewed; not-run
-- [ ] `CustomerSettingsUiTest#everyVisibleProfileFieldHasAProgrammaticLabel` — not-reviewed; not-run
-- [ ] `CustomerSettingsUiTest#everyVisibleNewAddressFieldHasAProgrammaticLabel` — not-reviewed; not-run
-- [ ] `CustomerSettingsUiTest#blankNewAddressFormIsBlockedAndCanBeClosed` — not-reviewed; not-run
-- [ ] `CustomerSettingsUiTest#myReviewsTabShowsReviewsOrDefinedEmptyState` — not-reviewed; not-run
-- [ ] `CustomerSettingsUiTest#deliveredOrderReviewRequiresAtLeastOneRating` — not-reviewed; not-run
-- [ ] `CustomerSettingsUiTest#profileThemeClassTogglesAndRestoresLight` — not-reviewed; not-run
-- [ ] `CustomerSettingsUiTest#profileDarkThemePersistsAcrossReload` — not-reviewed; not-run
-- [ ] `CustomerSettingsUiTest#profileDarkThemeChangesRenderedBackground` — not-reviewed; not-run
+- [x] `CustomerSettingsUiTest#profilePhoneIsReadOnlyAndCloseReturnsHome` — current O4/O5 deployed UI pass; original failures retained; checkpoint113; 59-settings-partner-invocation1-original.json
+- [x] `CustomerSettingsUiTest#keyboardTabsReachHistoryAndWallet` — current O4/O5 deployed UI pass; original failures retained; checkpoint113; 59-settings-partner-invocation1-original.json
+- [x] `CustomerSettingsUiTest#everyCustomerSettingsTabCanBeSelectedWithoutLosingSettings` — current O4/O5 deployed UI pass; original failures retained; checkpoint113; 59-settings-partner-invocation1-original.json
+- [x] `CustomerSettingsUiTest#profileIdentityAndStoreCreditBalanceRender` — current O4/O5 deployed UI pass; original failures retained; checkpoint113; 59-settings-partner-invocation1-original.json
+- [x] `CustomerSettingsUiTest#currentLoggedInDeviceIsListedWithoutRemovingIt` — current O4/O5 deployed UI pass; original failures retained; checkpoint113; 64-final-session-release-and-three-reruns.json
+- [x] `CustomerSettingsUiTest#savedHomeAddressIsVisibleWithoutEditingIt` — current O4/O5 deployed UI pass; original failures retained; checkpoint113; 59-settings-partner-invocation1-original.json
+- [x] `CustomerSettingsUiTest#everyVisibleSettingsButtonHasAnAccessibleName` — current O4/O5 deployed UI pass; original failures retained; checkpoint113; 59-settings-partner-invocation1-original.json
+- [x] `CustomerSettingsUiTest#everyVisibleProfileFieldHasAProgrammaticLabel` — current O4/O5 deployed UI pass; original failures retained; checkpoint113; 59-settings-partner-invocation1-original.json
+- [x] `CustomerSettingsUiTest#everyVisibleNewAddressFieldHasAProgrammaticLabel` — current O4/O5 deployed UI pass; original failures retained; checkpoint113; 59-settings-partner-invocation1-original.json
+- [x] `CustomerSettingsUiTest#blankNewAddressFormIsBlockedAndCanBeClosed` — current O4/O5 deployed UI pass; original failures retained; checkpoint113; 59-settings-partner-invocation1-original.json
+- [x] `CustomerSettingsUiTest#myReviewsTabShowsReviewsOrDefinedEmptyState` — current O4/O5 deployed UI pass; original failures retained; checkpoint113; 59-settings-partner-invocation1-original.json
+- [x] `CustomerSettingsUiTest#deliveredOrderReviewRequiresAtLeastOneRating` — current O4/O5 deployed UI pass; original failures retained; checkpoint113; 57-delivered-read-only-invocation1.json
+- [x] `CustomerSettingsUiTest#profileThemeClassTogglesAndRestoresLight` — current O4/O5 deployed UI pass; original failures retained; checkpoint113; 59-settings-partner-invocation1-original.json
+- [x] `CustomerSettingsUiTest#profileDarkThemePersistsAcrossReload` — current O4/O5 deployed UI pass; original failures retained; checkpoint113; 59-settings-partner-invocation1-original.json
+- [x] `CustomerSettingsUiTest#profileDarkThemeChangesRenderedBackground` — current O4/O5 deployed UI pass; original failures retained; checkpoint113; 64-final-session-release-and-three-reruns.json
 ## LoginSmokeTest
 
 - [x] `LoginSmokeTest#isolatedContextsStartWithoutAuthentication` — reviewed; passed; 0, 2, -, i, n, d, e, p, e, n, d, e, n, t, -, L, o, g, i, n, S, m, o, k, e, T, e, s, t, ., x, m, l
@@ -431,17 +486,17 @@ Checked means current reviewed source and passing execution; previous evidence a
 - [ ] `NavigationSmokeTest#adminTabs` — not-reviewed; not-run
 ## PartnerReadOnlyUiTest
 
-- [ ] `PartnerReadOnlyUiTest#riderHistoryDateCanBeCleared` — not-reviewed; not-run
-- [ ] `PartnerReadOnlyUiTest#riderHistoryShowsEmptyStateForOldDate` — not-reviewed; not-run
-- [ ] `PartnerReadOnlyUiTest#riderCompletedTripShowsRestaurantPayoutAndDate` — not-reviewed; not-run
-- [ ] `PartnerReadOnlyUiTest#riderTodayEarningsIsNonNegativeCurrency` — not-reviewed; not-run
-- [ ] `PartnerReadOnlyUiTest#riderSettingsCanCloseWithoutChanges` — not-reviewed; not-run
-- [ ] `PartnerReadOnlyUiTest#restaurantEarningsPanel` — not-reviewed; not-run
-- [ ] `PartnerReadOnlyUiTest#restaurantProfileCanCloseWithoutChanges` — not-reviewed; not-run
-- [ ] `PartnerReadOnlyUiTest#restaurantStockControlsRenderWithoutToggling` — not-reviewed; not-run
+- [x] `PartnerReadOnlyUiTest#riderHistoryDateCanBeCleared` — current O4/O5 deployed UI pass; original failures retained; checkpoint113; 59-settings-partner-invocation1-original.json
+- [x] `PartnerReadOnlyUiTest#riderHistoryShowsEmptyStateForOldDate` — current O4/O5 deployed UI pass; original failures retained; checkpoint113; 59-settings-partner-invocation1-original.json
+- [x] `PartnerReadOnlyUiTest#riderCompletedTripShowsRestaurantPayoutAndDate` — current O4/O5 deployed UI pass; original failures retained; checkpoint113; 57-delivered-read-only-invocation1.json
+- [x] `PartnerReadOnlyUiTest#riderTodayEarningsIsNonNegativeCurrency` — current O4/O5 deployed UI pass; original failures retained; checkpoint113; 59-settings-partner-invocation1-original.json
+- [x] `PartnerReadOnlyUiTest#riderSettingsCanCloseWithoutChanges` — current O4/O5 deployed UI pass; original failures retained; checkpoint113; 59-settings-partner-invocation1-original.json
+- [x] `PartnerReadOnlyUiTest#restaurantEarningsPanel` — current O4/O5 deployed UI pass; original failures retained; checkpoint113; 59-settings-partner-invocation1-original.json
+- [x] `PartnerReadOnlyUiTest#restaurantProfileCanCloseWithoutChanges` — current O4/O5 deployed UI pass; original failures retained; checkpoint113; 59-settings-partner-invocation1-original.json
+- [x] `PartnerReadOnlyUiTest#restaurantStockControlsRenderWithoutToggling` — current O4/O5 deployed UI pass; original failures retained; checkpoint113; 59-settings-partner-invocation1-original.json
 - ~~`PartnerReadOnlyUiTest#campaignDraftCanBeCancelled`~~ — moved to `RestaurantCampaignsLiveTest#draftIsDiscardedOnCancel` (checkpoint34)
-- [ ] `PartnerReadOnlyUiTest#riderVerificationAndWalletSectionsRender` — not-reviewed; not-run
-- [ ] `PartnerReadOnlyUiTest#riderProfileValuesArePopulatedWithoutEditing` — not-reviewed; not-run
+- [x] `PartnerReadOnlyUiTest#riderVerificationAndWalletSectionsRender` — current O4/O5 deployed UI pass; original failures retained; checkpoint113; 59-settings-partner-invocation1-original.json
+- [x] `PartnerReadOnlyUiTest#riderProfileValuesArePopulatedWithoutEditing` — current O4/O5 deployed UI pass; original failures retained; checkpoint113; 59-settings-partner-invocation1-original.json
 ## RestaurantDiscoveryUiTest
 
 - [x] `RestaurantDiscoveryUiTest#multipleRestaurantBrandsAndDisplayedDistancesAreValid` — reviewed; passed; 0, 4, -, f, i, n, a, l, -, R, e, s, t, a, u, r, a, n, t, D, i, s, c, o, v, e, r, y, U, i, T, e, s, t, ., x, m, l
@@ -506,14 +561,14 @@ Checkpoint25: all three passed together on d3acfc93 (3/3, 73.4s). Precondition: 
 - [x] `ChatAndRefundIsolationTest#outsidersAreRefused` — CHAT-ISO-01..03; passed live at checkpoint29 on d3acfc93 (order read now 404)
 - [x] `ChatHistoryPagingTest#earlierMessagesCanBeLoaded` — CHAT-22; red on UI 41578ee, passed live on UI 766b214 (cf608115)
 - [x] `AdminRefundRetryFlowTest#declinedRefundIsRetriedAndCompletes` — REFUND-RETRY-01; passed live at checkpoint29 (cf608115, refund 67562478)
-- [x] `AdminOrderMoneyOutcomesTest#panelShowsTheOutcome` — MONEY-05, 5 outcome cases; red on UI 766b214, passed 5/5 on UI 6eb1743
+- [x] `AdminOrderMoneyOutcomesTest#panelShowsTheOutcome` — current O4/O5 deployed UI pass; original failures retained; checkpoint113; 62-retained-four-regressions-invocation1-original.json
 - [x] `OrderCancellationFlowTest#customerCancelsBeforeAcceptance` — passed live at checkpoint30 (19359711)
 - [x] `RestaurantRejectFlowTest#restaurantCancelsOrder` — passed live at checkpoint30 (bf109947)
-- [x] `OrderReviewsFlowTest#participantsReviewEachOther` — REVIEW-01..06; passed live at checkpoint32 (bb43e2a4)
-- [x] `RestaurantNavigationUiTest#restaurantReviewsShowPublicFeedbackAndAggregate` — REVIEW-AGG-01 with outlet+comment; passed checkpoint32
-- [x] `CustomerSettingsUiTest#myReviewsTabShowsReviewsOrDefinedEmptyState` — REVIEW-13, now requires `-Dreview.customer.comment` when set; passed checkpoint32
+- [x] `OrderReviewsFlowTest#participantsReviewEachOther` — current O4/O5 deployed UI pass; original failures retained; checkpoint113; 58-participant-reviews-invocation1-pass.json
+- [x] `RestaurantNavigationUiTest#restaurantReviewsShowPublicFeedbackAndAggregate` — current O4/O5 deployed UI pass; original failures retained; checkpoint113; 62-retained-four-regressions-invocation1-original.json
+- [x] `CustomerSettingsUiTest#myReviewsTabShowsReviewsOrDefinedEmptyState` — current O4/O5 deployed UI pass; original failures retained; checkpoint113; 59-settings-partner-invocation1-original.json
 - [x] `RiderReviewHistoryApiTest` — REVIEW-05 history read; passed checkpoint32
-- [ ] `RestaurantEarningsLiveTest#earningsMatchTheLedger` — EARNINGS-01..04/09; red on UI 6eb1743 ("—"), awaits checkpoint34 deploy
+- [x] `RestaurantEarningsLiveTest#earningsMatchTheLedger` — current O4/O5 deployed UI pass; original failures retained; checkpoint113; 62-retained-four-regressions-invocation1-original.json
 - [ ] `RestaurantCampaignsLiveTest#tabMatchesTheOwnersAdvertiser` — CAMPAIGN-01/02/03, ONBOARD-01/02, WALLET-01; written checkpoint34, awaits deploy
 - [ ] `RestaurantCampaignsLiveTest#draftIsDiscardedOnCancel` — CAMPAIGN-05..07; needs an advertiser; awaits deploy
 - [ ] `RestaurantCampaignsLiveTest#launchedCampaignIsStoredInRupees` — CAMPAIGN-14; `-Dcampaign.create=true`; awaits deploy

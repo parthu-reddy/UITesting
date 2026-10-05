@@ -1,0 +1,9 @@
+{
+  "configured": {
+    "R2_ACCESS_KEY_ID": true,
+    "R2_SECRET_ACCESS_KEY": true,
+    "R2_ENDPOINT": true,
+    "R2_BUCKET_NAME": true
+  },
+  "endpointHost": "80708a753745ca23eabc20b4b3dee5fa.r2.cloudflarestorage.com"
+}

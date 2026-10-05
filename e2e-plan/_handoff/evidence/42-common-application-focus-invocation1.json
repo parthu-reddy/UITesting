@@ -1,0 +1,33 @@
+{
+  "date": "2026-10-04T01:43:37.172061+05:30",
+  "proof": "local actual database transaction, outbox, audit, notification, rollback and independent production-limit bucket tests",
+  "counts": {
+    "tests": 7,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "classes": [
+    {
+      "class": "com.fooddelivery.common.service.ApplicationRateLimitsTest",
+      "counts": {
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.68"
+    },
+    {
+      "class": "com.fooddelivery.common.application.ApplicationEventsTransactionTest",
+      "counts": {
+        "tests": 5,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "4.039"
+    }
+  ],
+  "deployed": false
+}

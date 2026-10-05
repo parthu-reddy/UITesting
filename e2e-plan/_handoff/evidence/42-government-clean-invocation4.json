@@ -1,0 +1,196 @@
+{
+  "proof": "local Maven/JUnit reports, not deployed verification",
+  "at": "2026-10-03T21:31:10.741643+00:00",
+  "repository": "GovernmentIDValidationService",
+  "processExitCode": 1,
+  "classes": [
+    {
+      "class": "com.fooddelivery.architecture.ArchitectureEnforcementTest",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-government-clean-invocation4-TEST-com.fooddelivery.architecture.ArchitectureEnforcementTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.contract.GovIdContractConsumerTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-government-clean-invocation4-TEST-com.fooddelivery.contract.GovIdContractConsumerTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.governmentid.AutoConfigurationImportsTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-government-clean-invocation4-TEST-com.fooddelivery.governmentid.AutoConfigurationImportsTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.governmentid.ContextLoadTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-government-clean-invocation4-TEST-com.fooddelivery.governmentid.ContextLoadTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.governmentid.EndpointAuthorizationCoverageTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-government-clean-invocation4-TEST-com.fooddelivery.governmentid.EndpointAuthorizationCoverageTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.governmentid.contract.RestaurantApplicationConsumerContractTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 1,
+      "skips": 0,
+      "report": "42-government-clean-invocation4-TEST-com.fooddelivery.governmentid.contract.RestaurantApplicationConsumerContractTest.xml",
+      "failureMethods": [
+        "submittedProducerEventStartsChecksForItsExactApplicationRevision"
+      ]
+    },
+    {
+      "class": "com.fooddelivery.governmentid.controller.VerificationExpiryPersistenceTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-government-clean-invocation4-TEST-com.fooddelivery.governmentid.controller.VerificationExpiryPersistenceTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.governmentid.controller.VerificationSelfAccessTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-government-clean-invocation4-TEST-com.fooddelivery.governmentid.controller.VerificationSelfAccessTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.governmentid.controller.VerificationSummaryStateTest",
+      "tests": 11,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-government-clean-invocation4-TEST-com.fooddelivery.governmentid.controller.VerificationSummaryStateTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.governmentid.service.ApplicationDocumentSecurityTest",
+      "tests": 11,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-government-clean-invocation4-TEST-com.fooddelivery.governmentid.service.ApplicationDocumentSecurityTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.governmentid.service.BiometricLockoutSuspensionTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-government-clean-invocation4-TEST-com.fooddelivery.governmentid.service.BiometricLockoutSuspensionTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.governmentid.service.BrandVerificationJsonEscapingTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-government-clean-invocation4-TEST-com.fooddelivery.governmentid.service.BrandVerificationJsonEscapingTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.governmentid.service.BrandVerificationPipelineTest",
+      "tests": 10,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-government-clean-invocation4-TEST-com.fooddelivery.governmentid.service.BrandVerificationPipelineTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.governmentid.service.DeliveryDocumentFreezeTest",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-government-clean-invocation4-TEST-com.fooddelivery.governmentid.service.DeliveryDocumentFreezeTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.governmentid.service.DocumentAdminAuditTransactionTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-government-clean-invocation4-TEST-com.fooddelivery.governmentid.service.DocumentAdminAuditTransactionTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.governmentid.service.ProductionVerificationSafetyTest",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-government-clean-invocation4-TEST-com.fooddelivery.governmentid.service.ProductionVerificationSafetyTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.governmentid.service.VerificationCallbackDispatcherTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-government-clean-invocation4-TEST-com.fooddelivery.governmentid.service.VerificationCallbackDispatcherTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.governmentid.service.VerificationCallbackTransactionTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-government-clean-invocation4-TEST-com.fooddelivery.governmentid.service.VerificationCallbackTransactionTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.govvalidation.ContractVerifierTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-government-clean-invocation4-TEST-com.fooddelivery.govvalidation.ContractVerifierTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.govvalidation.Government_id_validation_serviceTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-government-clean-invocation4-TEST-com.fooddelivery.govvalidation.Government_id_validation_serviceTest.xml",
+      "failureMethods": []
+    }
+  ],
+  "totals": {
+    "tests": 99,
+    "failures": 0,
+    "errors": 1,
+    "skips": 0
+  }
+}

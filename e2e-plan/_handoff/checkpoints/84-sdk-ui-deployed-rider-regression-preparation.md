@@ -1,0 +1,11 @@
+# SDK repair deployment and UI-only regression preparation
+
+## 2026-10-04T21:41:52+05:30 — checkpoint84: SDK UI repair published/deployed; Dev configuration gate running
+
+UI2d10f501c8104f23c2f207180901a7bd87a90a95 is published by successful unchanged GitHub37215369928 and deployed by the existing UI-only workflow. The organisation hook now uses its generated get(options) alias; actual hook/client request tests10/10, typecheck/lint/production build pass. The UI-only runbook's four Dev files were reviewed in dry-run (18 sequential readers), and its configuration application is running. All data is retained; no wipe/seed is repeated.
+
+UITesting9d96af6 compiles (invocation14); rider observation/idle cleanup units9/9. Offline UI profile is passively observed because the rider tracking socket starts only after going Online. Checkout requires actual DUTY_STATUS ONLINE, live socket/recent UI location frames, visible Online/no job/no warning; ON_DELIVERY is preserved. Offline confirmation observes the normal UI POST, with no direct request. The canonical lifecycle and admin money no longer intercept requests; visible exact-order assertions and passive read/write observations remain. Customer unrated-review regression now uses the same retained canonical delivered order; partner completed-trip regression creates no second order. Suspended-brand negative search waits for a real loaded feed.
+
+Early operator telemetry is available: portal9successful samples p95estimate31.04ms (upper33.55ms), refresh2samples66.55ms; Gateway96successful samples393.71ms. These small early samples are not final acceptance or a before/after comparison. Collector invocation1 incorrectly checked Gateway's textual status=OK instead of numeric httpStatusCode=200; corrected invocation2 retains the actual96samples. Original measurement failure is retained. Before-O4 Gateway histogram is unavailable/unrecoverable and explicitly deferred O4-PERF-001; no invented unchanged-latency claim.
+
+Next: finish Dev config, health/hardening/reconciliation, rerun positive O4/O5 browser gates on the published repair, then one retained canonical lifecycle plus required compliant regressions and final measurements. O4 invocation1 remains1pass/2failures/5errors/0skips. Stop after O4/O5; Wallet/Ads remain untouched.

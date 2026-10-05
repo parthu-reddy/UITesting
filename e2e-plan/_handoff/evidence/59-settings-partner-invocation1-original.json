@@ -1,0 +1,154 @@
+{
+  "recordedAt": "2026-10-05T01:36:43.684481+00:00",
+  "invocation": 1,
+  "uiCommit": "509d084",
+  "harnessCommit": "afe12f1",
+  "proof": "actual deployed rendered settings/partner UI",
+  "total": 23,
+  "passed": 21,
+  "failures": 2,
+  "errors": 0,
+  "skipped": 0,
+  "results": [
+    {
+      "class": "com.fooddelivery.e2e.tests.smoke.CustomerSettingsUiTest",
+      "counts": {
+        "tests": "14",
+        "failures": "2",
+        "errors": "0",
+        "skipped": "0",
+        "time": "78.92"
+      },
+      "methods": [
+        {
+          "name": "profileDarkThemeChangesRenderedBackground",
+          "result": "FAIL",
+          "problem": "[Dark mode must visibly change the application background] \nExpecting actual:\n  \"rgb(255, 252, 248)\"\nnot to be equal to:\n  \"rgb(255, 252, 248)\"\n"
+        },
+        {
+          "name": "profileThemeClassTogglesAndRestoresLight",
+          "result": "PASS",
+          "problem": ""
+        },
+        {
+          "name": "everyVisibleSettingsButtonHasAnAccessibleName",
+          "result": "PASS",
+          "problem": ""
+        },
+        {
+          "name": "profileIdentityAndStoreCreditBalanceRender",
+          "result": "PASS",
+          "problem": ""
+        },
+        {
+          "name": "myReviewsTabShowsReviewsOrDefinedEmptyState",
+          "result": "PASS",
+          "problem": ""
+        },
+        {
+          "name": "profilePhoneIsReadOnlyAndCloseReturnsHome",
+          "result": "PASS",
+          "problem": ""
+        },
+        {
+          "name": "savedHomeAddressIsVisibleWithoutEditingIt",
+          "result": "PASS",
+          "problem": ""
+        },
+        {
+          "name": "keyboardTabsReachHistoryAndWallet",
+          "result": "PASS",
+          "problem": ""
+        },
+        {
+          "name": "currentLoggedInDeviceIsListedWithoutRemovingIt",
+          "result": "FAIL",
+          "problem": "Locator expected to contain text\nExpected: Last Active:\nReceived: Logged-in DevicesRefresh devicesMacOS \u00b7 ChromeEveryday accountLast active: Oct 5, 2026, 7:04 AMRemove\n\nCall log:\n  - Assert \"containsText\" getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName(\"Logged-in Devices\")).locator(\"..\").locator(\"..\") with timeout 5000ms\n  - waiting for getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName(\"Logged-in Devices\")).locator(\"..\").locator(\"..\")\n    14 \u00d7 locator resolved to <section class=\"pt-6 space-y-3\" aria-label=\"Logged-in Devices\">\u2026</section>\n       - unexpected value \"Logged-in DevicesRefresh devicesMacOS \u00b7 ChromeEveryday accountLast active: Oct 5, 2026, 7:04 AMRemove\""
+        },
+        {
+          "name": "everyVisibleProfileFieldHasAProgrammaticLabel",
+          "result": "PASS",
+          "problem": ""
+        },
+        {
+          "name": "profileDarkThemePersistsAcrossReload",
+          "result": "PASS",
+          "problem": ""
+        },
+        {
+          "name": "everyVisibleNewAddressFieldHasAProgrammaticLabel",
+          "result": "PASS",
+          "problem": ""
+        },
+        {
+          "name": "blankNewAddressFormIsBlockedAndCanBeClosed",
+          "result": "PASS",
+          "problem": ""
+        },
+        {
+          "name": "everyCustomerSettingsTabCanBeSelectedWithoutLosingSettings",
+          "result": "PASS",
+          "problem": ""
+        }
+      ]
+    },
+    {
+      "class": "com.fooddelivery.e2e.tests.smoke.PartnerReadOnlyUiTest",
+      "counts": {
+        "tests": "9",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0",
+        "time": "32.06"
+      },
+      "methods": [
+        {
+          "name": "riderVerificationAndWalletSectionsRender",
+          "result": "PASS",
+          "problem": ""
+        },
+        {
+          "name": "restaurantStockControlsRenderWithoutToggling",
+          "result": "PASS",
+          "problem": ""
+        },
+        {
+          "name": "restaurantProfileCanCloseWithoutChanges",
+          "result": "PASS",
+          "problem": ""
+        },
+        {
+          "name": "riderHistoryShowsEmptyStateForOldDate",
+          "result": "PASS",
+          "problem": ""
+        },
+        {
+          "name": "riderTodayEarningsIsNonNegativeCurrency",
+          "result": "PASS",
+          "problem": ""
+        },
+        {
+          "name": "restaurantEarningsPanel",
+          "result": "PASS",
+          "problem": ""
+        },
+        {
+          "name": "riderSettingsCanCloseWithoutChanges",
+          "result": "PASS",
+          "problem": ""
+        },
+        {
+          "name": "riderHistoryDateCanBeCleared",
+          "result": "PASS",
+          "problem": ""
+        },
+        {
+          "name": "riderProfileValuesArePopulatedWithoutEditing",
+          "result": "PASS",
+          "problem": ""
+        }
+      ]
+    }
+  ],
+  "retention": "no checkout, review, stock change, session removal or financial mutation"
+}

@@ -1,0 +1,8 @@
+{
+  "date": "2026-10-04T01:58:26.428348+05:30",
+  "status": "environment startup failure before schema validation",
+  "error": "PostgreSQL image init temporary server shut down after pg_isready; createdb connection terminated",
+  "schemaAssertionsExecuted": false,
+  "oracleDataMutated": false,
+  "temporaryContainerRemoved": true
+}

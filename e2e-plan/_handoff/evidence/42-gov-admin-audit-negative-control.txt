@@ -1,0 +1,20 @@
+# Portable diagnostic excerpt
+
+Build/test diagnostics and original counts are preserved below. Full original output is retained locally in 42-gov-admin-audit-negative-control.raw.log and excluded from Git.
+
+L42: [INFO] Running com.fooddelivery.governmentid.service.DocumentAdminAuditTransactionTest
+L50: [ERROR] Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 2.379 s <<< FAILURE! -- in com.fooddelivery.governmentid.service.DocumentAdminAuditTransactionTest
+L51: [ERROR] com.fooddelivery.governmentid.service.DocumentAdminAuditTransactionTest.everySuccessfulAdminDownloadCommitsItsAuditInTheSameTransaction -- Time elapsed: 0.096 s <<< FAILURE!
+L52: org.opentest4j.AssertionFailedError: expected: <1> but was: <0>
+L67: [ERROR] Failures:
+L68: [ERROR]   DocumentAdminAuditTransactionTest.everySuccessfulAdminDownloadCommitsItsAuditInTheSameTransaction:74 expected: <1> but was: <0>
+L70: [ERROR] Tests run: 1, Failures: 1, Errors: 0, Skipped: 0
+L73: [INFO] BUILD FAILURE
+L78: [ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.2.5:test (default-test) on project government-id-validation-service: There are test failures.
+L80: [ERROR] Please refer to /Users/parthureddy/Documents/Food Delivery.nosync/GovernmentIDValidationService/target/surefire-reports for the individual test results.
+L81: [ERROR] Please refer to dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+L82: [ERROR] -> [Help 1]
+L84: [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+L85: [ERROR] Re-run Maven using the -X switch to enable full debug logging.
+L87: [ERROR] For more information about the errors and possible solutions, please read the following articles:
+L88: [ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

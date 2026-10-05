@@ -1,0 +1,59 @@
+{
+  "proof": "local Maven/JUnit reports, not deployed verification",
+  "at": "2026-10-03T22:14:26.933026+00:00",
+  "repository": "GovernmentIDValidationService",
+  "processExitCode": 0,
+  "classes": [
+    {
+      "class": "com.fooddelivery.governmentid.controller.VerificationExpiryPersistenceTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "provider-freeze-invocation1-TEST-com.fooddelivery.governmentid.controller.VerificationExpiryPersistenceTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.governmentid.service.ApplicationDocumentSecurityTest",
+      "tests": 11,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "provider-freeze-invocation1-TEST-com.fooddelivery.governmentid.service.ApplicationDocumentSecurityTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.governmentid.service.DeliveryDocumentFreezeTest",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "provider-freeze-invocation1-TEST-com.fooddelivery.governmentid.service.DeliveryDocumentFreezeTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.governmentid.service.ProductionVerificationSafetyTest",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "provider-freeze-invocation1-TEST-com.fooddelivery.governmentid.service.ProductionVerificationSafetyTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.governmentid.service.VerificationInFlightGuardTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "provider-freeze-invocation1-TEST-com.fooddelivery.governmentid.service.VerificationInFlightGuardTest.xml",
+      "failureMethods": []
+    }
+  ],
+  "totals": {
+    "tests": 41,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0
+  }
+}

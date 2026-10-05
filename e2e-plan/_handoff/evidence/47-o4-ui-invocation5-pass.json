@@ -1,0 +1,88 @@
+{
+  "phase": "O4",
+  "invocation": 5,
+  "uiSource": "444c2fcc3e30839c05d43dc3f4d376fa4f89be14",
+  "customerSource": "0849ee650c9624aefe7c99381f894c93468a01a3",
+  "harnessSource": "570c72e",
+  "proofType": "deployed rendered UI; ordinary UI-generated traffic only",
+  "allocation": {
+    "runId": "5ccc9739ca5a740a",
+    "startedAt": "2026-10-05T00:38:34.698105+00:00",
+    "appUrl": "https://gulf-strike-dark-extras.trycloudflare.com",
+    "selectedCases": [
+      "login",
+      "admin",
+      "revocation",
+      "suspension"
+    ],
+    "phoneCandidates": {
+      "fresh.customer": "8999287698",
+      "entitlement.owner": "9999446130",
+      "entitlement.member": "8999226513",
+      "suspension": "9999890074"
+    },
+    "adminPhone": "1000000001",
+    "uiOnly": true,
+    "allocationPolicy": "local candidates; fresh profile completion required in UI",
+    "dataPolicy": "retain",
+    "cleanupPerformed": false,
+    "externalDatabaseOrRedisAccess": false,
+    "exitCode": 0,
+    "finishedAt": "2026-10-05T00:40:42.448610+00:00"
+  },
+  "classes": [
+    {
+      "class": "OneLoginEntitlementsTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timeSeconds": 28.582,
+      "methods": [
+        "pendingRiderSeesApplicationWithoutOperationalAccess",
+        "freshPersonHasCustomerAndApplicationEntryPoints",
+        "approvedRiderUsesCustomerAndDeliveryButCannotOpenRestaurantOperations",
+        "ownerUsesCustomerRestaurantAndBusinessAfterOneOtp"
+      ]
+    },
+    {
+      "class": "AdminStepUpTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timeSeconds": 12.952,
+      "methods": [
+        "nonStaffCannotStartAdministratorVerification",
+        "administratorVerifiesSeparatelyAndKeepsEverydayAccess"
+      ]
+    },
+    {
+      "class": "EntitlementRevocationTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timeSeconds": 83.776,
+      "methods": [
+        "acceptedStaffApprovalAndRemovalRefreshOnNormalUiRequests",
+        "ownBrandSuspensionAndReinstatementChangeAccessAndDiscovery"
+      ]
+    }
+  ],
+  "totals": {
+    "tests": 8,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "portalRefreshObservations": [
+    "[PORTALS] RESTAURANT Suspended confirmed after 0 visible refresh actions in 2 ms",
+    "[PORTALS] RESTAURANT Available confirmed after 1 visible refresh actions in 1307 ms"
+  ],
+  "recoveryBoundary": "Normal entitlement-change 401s are expected before bounded refresh/retry. No claim of zero total HTTP errors.",
+  "cleanupPerformed": false,
+  "allOwnedFixturesRetained": true,
+  "phaseClosed": false,
+  "remaining": "O5 final gate, required same-order regressions and final measurements"
+}

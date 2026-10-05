@@ -1,0 +1,9 @@
+# Retained acceptance transport failure
+
+## 2026-10-05T06:16:59+05:30 — checkpoint99: retained replacement reveals absent-body transport regression
+
+Final O4 invocation5 and O5 invocation3 remain8/8 on UI444c2fc, but acceptance stays open. Canonical lifecycle invocation5 runs1 case,0 passes/1 failure/0 errors/skips. Actual current rider/server/socket/location preflight and1.4km Home proximity pass. Order0dbe6a15-dc7f-4d85-8df6-f6884d6f8a52 is placed at Brand1Outlet5 and its manifest is saved immediately. The actual kitchen now polls and the exact owned card/acceptance-preview checks pass. Its normal Accept POST returns500; no dispatch or delivery is attempted. Keep both this manifest and original terminal1a375719. Do not repeat checkout while this order is active.
+
+Separate redacted Oracle operator exception is HttpMediaTypeNotSupportedException: empty-body Accept arrives with application/x-www-form-urlencoded;charset=UTF-8. Source: the shared axiosFetchAdapter forwards Axios's default form Content-Type even for absent data; native Axios removes that header. Actual generated-client negative control9 cases has6 pass/3 failures, detecting absent-body accept/reject/cancel. Fix only shared transport to omit Content-Type when the effective body is absent, retaining JSON and browser multipart semantics. Local auth/SDK/optimistic checks, typecheck/lint are running. Publish the verified UI correction through unchanged GitHub workflow before deployment. No service authorization, schema/seed/workflow, Docker or external test DB change.
+
+After rollout inspect this exact retained order through rendered UI, and resume only if still active. If the normal server timeout makes it terminal, record that state and retain it before selecting the next canonical fixture. Required same-order regressions, final histograms/checklists remain open. Stop after O4/O5; Wallet/Ads and explicit deferrals unchanged.

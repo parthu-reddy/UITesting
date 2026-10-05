@@ -1,0 +1,9 @@
+# Session release and existing regression proof
+
+## 2026-10-05T11:42:24+05:30 — checkpoint110: session release deployed; existing regression cases pass
+
+UI f73ffe909f34e15add4b8717159eb664e042f477 is published by GitHub37269604733 (941/941 tests,149files) and deployed healthy. Required four Dev configs are unchanged; apply skips restarts. Hardening15/15 and reconciliation29/0drift pass. Focused reruns pass3/3: both prior settings failures and restaurantSectionsRender with seed-verified Rider 1. Combined unique settings/partner coverage is23/23 using21 prior passes plus2 reruns; do not count all25 invocations as25 unique cases. Existing nonzero earnings/statement, public saved review/aggregate and admin delivered-money each passed before deployment; original one navigation input failure remains evidence62. No new order, refund or live session deletion.
+
+Final O4 eight-case gate invocation6 is running on this release. Operator metadata63 has29running/26healthy/0drift/restarts but3recent error lines: one Customer broken-pipe/ClientAbort while returning a response, and two Ledger beneficiary404s. Source confirms RESTAURANT_PAYABLE owner is an outlet id, but InternalRestaurantBeneficiaryController looks it up directly in BrandRepository. Correct that internal lookup via Outlet.brandId; keep endpoint, bank masking, SERVICE/ADMIN protection, money rows and seeds unchanged. Local HTTP/mocked guards and publish-before-deploy are required before final read-only beneficiary UI proof. No external DB/Redis or financial mutation.
+
+Next: O4/O5 final gates, the narrow beneficiary repair/release and read-only proof, final protected telemetry and truthful checklists/docs. Stop after O4/O5; no Wallet/Ads implementation. Previously recorded internal/baseline/CSP-mutation/provider/rate/duration/SSE boundaries remain unverified.

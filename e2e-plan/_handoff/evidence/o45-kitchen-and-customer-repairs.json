@@ -1,0 +1,43 @@
+{
+  "observedAt": "2026-10-05T06:04:00+05:30",
+  "uiCommit": "444c2fcc3e30839c05d43dc3f4d376fa4f89be14",
+  "uiWorkflow": 37247680000,
+  "uiWorkflowStatus": "in_progress",
+  "customerCommit": "0849ee650c9624aefe7c99381f894c93468a01a3",
+  "customerWorkflow": 37247709911,
+  "customerWorkflowConclusion": "success",
+  "customerFullTests": {
+    "tests": 492,
+    "passed": 492,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0
+  },
+  "customerFocusedH2AndIdentity": {
+    "tests": 4,
+    "passed": 4,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0
+  },
+  "uiFocusedTests": {
+    "tests": 10,
+    "passed": 10
+  },
+  "uiNegativeControl": {
+    "tests": 2,
+    "failures": 2,
+    "sourceRestored": true
+  },
+  "typecheck": "pass",
+  "lint": "pass",
+  "retainedOrder": "1a375719-a178-40b4-8c15-75c28a53c9de",
+  "retainedRenderedStatus": "CANCELLED_BY_RESTAURANT",
+  "uiStateProbe": {
+    "tests": 1,
+    "passed": 1,
+    "lifecycleAcceptance": false
+  },
+  "replacementOrderCreated": false,
+  "cleanupPerformed": false
+}

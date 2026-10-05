@@ -1,0 +1,42 @@
+{
+  "observedAt": "2026-10-05T05:03:22+05:30",
+  "invocation": 2,
+  "uiCommit": "2d10f501c8104f23c2f207180901a7bd87a90a95",
+  "harnessCommit": "9d96af6",
+  "tests": 8,
+  "passed": 5,
+  "failures": 1,
+  "errors": 2,
+  "skips": 0,
+  "classes": [
+    {
+      "testClass": "OneLoginEntitlementsTest",
+      "tests": 4,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "testClass": "AdminStepUpTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "testClass": "EntitlementRevocationTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 2,
+      "skipped": 0
+    }
+  ],
+  "fixture": "o45-allocation-16ce9b3de426a690.json",
+  "issues": [
+    "Location Close races initial empty-address load for approved rider",
+    "R2 bucket virtual hostname missing from deployed CSP, blocking both real uploads"
+  ],
+  "dataPolicy": "retain",
+  "cleanupPerformed": false,
+  "proofType": "deployed rendered UI"
+}

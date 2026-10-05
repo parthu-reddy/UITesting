@@ -1,0 +1,23 @@
+{
+  "proof": "local Maven/JUnit reports, not deployed verification",
+  "at": "2026-10-04T00:43:47.398206+00:00",
+  "repository": "GovernmentIDValidationService",
+  "processExitCode": 0,
+  "classes": [
+    {
+      "class": "com.fooddelivery.govvalidation.OpenApiGenerationTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-government-openapi-invocation3-TEST-com.fooddelivery.govvalidation.OpenApiGenerationTest.xml",
+      "failureMethods": []
+    }
+  ],
+  "totals": {
+    "tests": 1,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0
+  }
+}

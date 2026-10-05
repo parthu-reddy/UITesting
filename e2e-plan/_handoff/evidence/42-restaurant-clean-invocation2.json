@@ -1,0 +1,302 @@
+{
+  "proof": "local Maven/JUnit reports, not deployed verification",
+  "at": "2026-10-03T20:49:34.966226+00:00",
+  "repository": "RestaurantApplication",
+  "processExitCode": 0,
+  "classes": [
+    {
+      "class": "com.fooddelivery.architecture.ArchitectureEnforcementTest",
+      "tests": 0,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-restaurant-clean-invocation2-TEST-com.fooddelivery.architecture.ArchitectureEnforcementTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.architecture.TimeDisciplineRules",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-restaurant-clean-invocation2-TEST-com.fooddelivery.common.architecture.TimeDisciplineRules.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.contract.GovIdContractConsumerTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-restaurant-clean-invocation2-TEST-com.fooddelivery.contract.GovIdContractConsumerTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.contract.OrderEventConsumerContractTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-restaurant-clean-invocation2-TEST-com.fooddelivery.contract.OrderEventConsumerContractTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.contract.RestaurantContractConsumerTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-restaurant-clean-invocation2-TEST-com.fooddelivery.contract.RestaurantContractConsumerTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.restaurant.ContractVerifierTest",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-restaurant-clean-invocation2-TEST-com.fooddelivery.restaurant.ContractVerifierTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.restaurant.EndpointAuthorizationCoverageTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-restaurant-clean-invocation2-TEST-com.fooddelivery.restaurant.EndpointAuthorizationCoverageTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.restaurant.MessagingTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-restaurant-clean-invocation2-TEST-com.fooddelivery.restaurant.MessagingTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.restaurant.RestaurantAccessQueryCountTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-restaurant-clean-invocation2-TEST-com.fooddelivery.restaurant.RestaurantAccessQueryCountTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.restaurant.RestaurantAccessTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-restaurant-clean-invocation2-TEST-com.fooddelivery.restaurant.RestaurantAccessTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.restaurant.RestaurantApplicationTransactionTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-restaurant-clean-invocation2-TEST-com.fooddelivery.restaurant.RestaurantApplicationTransactionTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.restaurant.RestaurantEndpointPermissionTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-restaurant-clean-invocation2-TEST-com.fooddelivery.restaurant.RestaurantEndpointPermissionTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.restaurant.RestaurantValidationIntegrationTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-restaurant-clean-invocation2-TEST-com.fooddelivery.restaurant.RestaurantValidationIntegrationTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.restaurant.controller.BrandListPrivacyTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-restaurant-clean-invocation2-TEST-com.fooddelivery.restaurant.controller.BrandListPrivacyTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.restaurant.controller.FulfillmentControllerTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-restaurant-clean-invocation2-TEST-com.fooddelivery.restaurant.controller.FulfillmentControllerTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.restaurant.controller.InternalRestaurantInvoiceDetailsTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-restaurant-clean-invocation2-TEST-com.fooddelivery.restaurant.controller.InternalRestaurantInvoiceDetailsTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.restaurant.controller.InternalRestaurantOutletSummaryTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-restaurant-clean-invocation2-TEST-com.fooddelivery.restaurant.controller.InternalRestaurantOutletSummaryTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.restaurant.controller.RestaurantFleetMapControllerTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-restaurant-clean-invocation2-TEST-com.fooddelivery.restaurant.controller.RestaurantFleetMapControllerTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.restaurant.messaging.BindingFailureIsNotRetryableTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-restaurant-clean-invocation2-TEST-com.fooddelivery.restaurant.messaging.BindingFailureIsNotRetryableTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.restaurant.service.ApprovedOnlyListingTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-restaurant-clean-invocation2-TEST-com.fooddelivery.restaurant.service.ApprovedOnlyListingTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.restaurant.service.CatalogAvailabilityBoundaryTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-restaurant-clean-invocation2-TEST-com.fooddelivery.restaurant.service.CatalogAvailabilityBoundaryTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.restaurant.service.CatalogServiceTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-restaurant-clean-invocation2-TEST-com.fooddelivery.restaurant.service.CatalogServiceTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.restaurant.service.CatalogStockToggleTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-restaurant-clean-invocation2-TEST-com.fooddelivery.restaurant.service.CatalogStockToggleTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.restaurant.service.CrossTenantFulfillmentTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-restaurant-clean-invocation2-TEST-com.fooddelivery.restaurant.service.CrossTenantFulfillmentTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.restaurant.service.FulfillmentServiceTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-restaurant-clean-invocation2-TEST-com.fooddelivery.restaurant.service.FulfillmentServiceTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.restaurant.service.OpeningHoursTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-restaurant-clean-invocation2-TEST-com.fooddelivery.restaurant.service.OpeningHoursTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.restaurant.service.OrderEventConsumerTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-restaurant-clean-invocation2-TEST-com.fooddelivery.restaurant.service.OrderEventConsumerTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.restaurant.service.RestaurantApplicationServiceTest",
+      "tests": 24,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-restaurant-clean-invocation2-TEST-com.fooddelivery.restaurant.service.RestaurantApplicationServiceTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.restaurant.service.RestaurantFleetCityScopeTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-restaurant-clean-invocation2-TEST-com.fooddelivery.restaurant.service.RestaurantFleetCityScopeTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.restaurant.service.RestaurantMembershipsTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-restaurant-clean-invocation2-TEST-com.fooddelivery.restaurant.service.RestaurantMembershipsTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.restaurant.service.RestaurantOnboardingServiceTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-restaurant-clean-invocation2-TEST-com.fooddelivery.restaurant.service.RestaurantOnboardingServiceTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.restaurant.service.ReviewEventConsumerTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-restaurant-clean-invocation2-TEST-com.fooddelivery.restaurant.service.ReviewEventConsumerTest.xml",
+      "failureMethods": []
+    }
+  ],
+  "totals": {
+    "tests": 136,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0
+  }
+}

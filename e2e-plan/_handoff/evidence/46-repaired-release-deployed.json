@@ -1,0 +1,81 @@
+{
+  "observedAt": "2026-10-05T00:38:19.903691+00:00",
+  "proofType": "GitHub publication and read-only Oracle deployment metadata; not browser E2E",
+  "ui": {
+    "source": "444c2fcc3e30839c05d43dc3f4d376fa4f89be14",
+    "workflowRun": 37247680000,
+    "publication": "success",
+    "tests": 934,
+    "testFiles": 148
+  },
+  "customer": {
+    "source": "0849ee650c9624aefe7c99381f894c93468a01a3",
+    "workflowRun": 37247709911,
+    "publication": "success",
+    "localCleanTests": 492,
+    "focusedVerifiedIdentityAndEmbeddedH2Tests": 4
+  },
+  "containers": [
+    {
+      "service": "customer-service",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "startedAt": "2026-10-05T00:33:42.064353256Z",
+      "declaredImage": "hyd.ocir.io/axekmbadoczl/food-delivery/customer-service:0849ee650c9624aefe7c99381f894c93468a01a3",
+      "actualImage": "hyd.ocir.io/axekmbadoczl/food-delivery/customer-service:0849ee650c9624aefe7c99381f894c93468a01a3",
+      "digest": [
+        "hyd.ocir.io/axekmbadoczl/food-delivery/customer-service@sha256:b05fd67a61a3304ea21d2f3cd0822633845fab200e45a1da6ea9d8584953c588"
+      ],
+      "profiles": [
+        "dev"
+      ],
+      "recentErrorLines": 0,
+      "errorClasses": [],
+      "freshBootstrapLines": 1
+    },
+    {
+      "service": "food-delivery-app-ui",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "startedAt": "2026-10-05T00:36:54.75087834Z",
+      "declaredImage": "hyd.ocir.io/axekmbadoczl/food-delivery/food-delivery-app-ui:444c2fcc3e30839c05d43dc3f4d376fa4f89be14",
+      "actualImage": "hyd.ocir.io/axekmbadoczl/food-delivery/food-delivery-app-ui:444c2fcc3e30839c05d43dc3f4d376fa4f89be14",
+      "digest": [
+        "hyd.ocir.io/axekmbadoczl/food-delivery/food-delivery-app-ui@sha256:eb4dc59c32bdb5a805b64254733e428b79b083cc06717c29117eb91108dbdc17"
+      ],
+      "profiles": [],
+      "recentErrorLines": 0,
+      "errorClasses": [],
+      "freshBootstrapLines": 0
+    }
+  ],
+  "operatorState": {
+    "declared": 29,
+    "running": 29,
+    "healthy": 26,
+    "withoutChecks": 3,
+    "drift": 0,
+    "restarts": 0,
+    "recentErrorLines": 0
+  },
+  "hardening": {
+    "passes": 15,
+    "failures": 0
+  },
+  "reconciliation": {
+    "checked": 29,
+    "drift": 0
+  },
+  "devConfigs": "All four required files already synchronized; apply skipped publication and service restarts",
+  "deploymentSource": "3227fd3e6281f92ae2e291eeb94caba00fe5d9a1",
+  "publicTunnel": "https://gulf-strike-dark-extras.trycloudflare.com",
+  "additionalResetOrSeed": false,
+  "originalOrder": {
+    "id": "1a375719-a178-40b4-8c15-75c28a53c9de",
+    "state": "CANCELLED_BY_RESTAURANT",
+    "retained": true
+  },
+  "finalUiGates": "O4 invocation5 running; O5 invocation3 and required regressions pending"
+}

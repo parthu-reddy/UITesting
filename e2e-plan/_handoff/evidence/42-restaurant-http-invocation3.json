@@ -1,0 +1,97 @@
+{
+  "proof": "local Maven/JUnit reports, not deployed verification",
+  "at": "2026-10-03T22:30:31.064176+00:00",
+  "repository": "RestaurantApplication",
+  "processExitCode": 1,
+  "classes": [
+    {
+      "class": "com.fooddelivery.restaurant.ConcurrentApplicationDecisionTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 2,
+      "skips": 0,
+      "report": "42-restaurant-http-invocation3-TEST-com.fooddelivery.restaurant.ConcurrentApplicationDecisionTest.xml",
+      "failureMethods": [
+        "twoAdminsWhoReadTheSameVersionProduceOneDecisionOneAuditAndOneEvent",
+        "outerRollbackRestoresTheApplicationAndLeavesNoAuditOutboxOrMetric"
+      ]
+    },
+    {
+      "class": "com.fooddelivery.restaurant.RestaurantApplicationAuthorizationTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 6,
+      "skips": 0,
+      "report": "42-restaurant-http-invocation3-TEST-com.fooddelivery.restaurant.RestaurantApplicationAuthorizationTest.xml",
+      "failureMethods": [
+        "approvingAdminIsTheAuthenticatedPrincipalAndNotARequestField",
+        "anOwnerWithoutARestaurantPortalRoleCanSubmitOnlyTheirOwnApplication",
+        "nonMemberCannotReadReasonOrSubmitForAnOrganisation",
+        "membersReadStatusAndReasonButCannotEditSubmitOrRequestPrivateUploads(OrganisationRole)[1]",
+        "membersReadStatusAndReasonButCannotEditSubmitOrRequestPrivateUploads(OrganisationRole)[2]",
+        "allAdminApplicationActionsRejectAnOrdinaryOwnerBeforeAnyWrite"
+      ]
+    },
+    {
+      "class": "com.fooddelivery.restaurant.service.RestaurantApplicationServiceTest",
+      "tests": 26,
+      "failures": 0,
+      "errors": 26,
+      "skips": 0,
+      "report": "42-restaurant-http-invocation3-TEST-com.fooddelivery.restaurant.service.RestaurantApplicationServiceTest.xml",
+      "failureMethods": [
+        "serviceCredentialsCannotActAsAnApplicant",
+        "staleDraftOrAdminVersionCannotWrite",
+        "bothChecksLeadToReviewAndADuplicateCheckDoesNoWrite",
+        "editingRejectedDetailsKeepsTheDecisionUntilResubmission",
+        "submitRefusesMissingInvalidOrNonmatchingPan(String)[1]",
+        "submitRefusesMissingInvalidOrNonmatchingPan(String)[2]",
+        "submitRefusesMissingInvalidOrNonmatchingPan(String)[3]",
+        "firstDraftBelongsToTheAuthorisedOrganisationAndDoesNotStartChecks",
+        "verificationInputsAreOnlyReturnedForTheCurrentSubmittedRevision",
+        "aFailedCheckRejectsWithAClearReasonAndCannotBeApprovedDirectly",
+        "approvalCannotBypassMissingOrUnconfirmedPrivateDocuments(ApplicationStatus)[1]",
+        "approvalCannotBypassMissingOrUnconfirmedPrivateDocuments(ApplicationStatus)[2]",
+        "approvedDecisionRequiresBothChecksAndTheActingAdminIsThePrincipal",
+        "applicationsUnderReviewOrApprovedCannotEditDetailsOrOutlets(ApplicationStatus)[1]",
+        "applicationsUnderReviewOrApprovedCannotEditDetailsOrOutlets(ApplicationStatus)[2]",
+        "applicationsUnderReviewOrApprovedCannotEditDetailsOrOutlets(ApplicationStatus)[3]",
+        "applicationsUnderReviewOrApprovedCannotEditDetailsOrOutlets(ApplicationStatus)[4]",
+        "staleCallbackCannotTouchTheCurrentSubmissionOrAnApprovedApplication",
+        "suspensionAndReinstatementAreSeparateActionsWithTheirOwnSourceState",
+        "missingOutletOrUncompletedDocumentCannotSubmit",
+        "completeApplicationSubmitsOnceWithoutApprovingIt",
+        "anOutletOfAnotherBrandCannotBeEdited",
+        "adminRejectionRequiresAnExplanatoryReason(String)[1]",
+        "adminRejectionRequiresAnExplanatoryReason(String)[2]",
+        "adminRejectionRequiresAnExplanatoryReason(String)[3]",
+        "successfulChecksAloneDoNotAllowAnAdminToSkipReview"
+      ]
+    },
+    {
+      "class": "com.fooddelivery.restaurant.service.RestaurantOnboardingServiceTest",
+      "tests": 9,
+      "failures": 0,
+      "errors": 9,
+      "skips": 0,
+      "report": "42-restaurant-http-invocation3-TEST-com.fooddelivery.restaurant.service.RestaurantOnboardingServiceTest.xml",
+      "failureMethods": [
+        "testOnboardOutlet_RefusesAnOffsetForATimeZone",
+        "testOnboardOutlet_Success",
+        "legacyOperationsCannotChangeAnUnapprovedApplicationsOutlets(ApplicationStatus)[1]",
+        "legacyOperationsCannotChangeAnUnapprovedApplicationsOutlets(ApplicationStatus)[2]",
+        "legacyOperationsCannotChangeAnUnapprovedApplicationsOutlets(ApplicationStatus)[3]",
+        "legacyOperationsCannotChangeAnUnapprovedApplicationsOutlets(ApplicationStatus)[4]",
+        "legacyOperationsCannotChangeAnUnapprovedApplicationsOutlets(ApplicationStatus)[5]",
+        "testOnboardOutlet_InvalidFssai",
+        "updateOutletSettings_tellsCustomerAppToDropItsCachedOutlet"
+      ]
+    }
+  ],
+  "totals": {
+    "tests": 43,
+    "failures": 0,
+    "errors": 43,
+    "skips": 0
+  }
+}

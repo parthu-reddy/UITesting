@@ -1,0 +1,12 @@
+{
+  "proof": "local Java test compilation failed before any selected test executed",
+  "processExitCode": 1,
+  "totals": {
+    "tests": 0,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0
+  },
+  "compileFailure": "DeliveryDocumentFreezeTest used URI where the existing R2 presigner API returns URL. Corrected only the fixture return type.",
+  "at": "2026-10-03T21:11:27.604087+00:00"
+}

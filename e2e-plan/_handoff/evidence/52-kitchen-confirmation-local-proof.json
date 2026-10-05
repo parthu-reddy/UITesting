@@ -1,0 +1,21 @@
+{
+  "recordedAt": "2026-10-05T01:16:38.490132+00:00",
+  "proof": "local focused component/hook/transport tests; not deployed UI proof",
+  "uiCommit": "509d084d7fa06ef72ba787b423db139b6ce75be0",
+  "positiveInvocation": 2,
+  "tests": 17,
+  "passed": 17,
+  "failed": 0,
+  "typecheck": "PASS",
+  "lint": "PASS",
+  "negativeInvocation": 2,
+  "negativeTests": 6,
+  "negativeFailed": 3,
+  "negativePassed": 3,
+  "exactSourceRestored": true,
+  "invalidNegativeInvocation1": "two component failures used the wrong busy accessible name; not counted",
+  "githubRun": 37250677754,
+  "publication": "in_progress",
+  "ownedOrder": "60631296-e064-4a59-a2ef-090549edcf01",
+  "newE2ESuite": false
+}

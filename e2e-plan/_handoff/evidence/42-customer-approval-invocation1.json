@@ -1,0 +1,52 @@
+{
+  "proof": "local Maven/JUnit reports, not deployed verification",
+  "at": "2026-10-03T20:49:34.870420+00:00",
+  "repository": "CustomerApplication",
+  "processExitCode": 1,
+  "classes": [
+    {
+      "class": "com.fooddelivery.customer.service.CustomerOrderQuoteValidationTest",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-approval-invocation1-TEST-com.fooddelivery.customer.service.CustomerOrderQuoteValidationTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.customer.service.FreshRestaurantApprovalTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 1,
+      "skips": 0,
+      "report": "42-customer-approval-invocation1-TEST-com.fooddelivery.customer.service.FreshRestaurantApprovalTest.xml",
+      "failureMethods": [
+        "freshEndpointBypassesActualSpringCacheWhenBrowsingHasAnOlderApproval"
+      ]
+    },
+    {
+      "class": "com.fooddelivery.customer.service.RestaurantApplicationCacheInvalidationTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-approval-invocation1-TEST-com.fooddelivery.customer.service.RestaurantApplicationCacheInvalidationTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.customer.service.RestaurantApplicationCacheTransactionTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-approval-invocation1-TEST-com.fooddelivery.customer.service.RestaurantApplicationCacheTransactionTest.xml",
+      "failureMethods": []
+    }
+  ],
+  "totals": {
+    "tests": 17,
+    "failures": 0,
+    "errors": 1,
+    "skips": 0
+  }
+}

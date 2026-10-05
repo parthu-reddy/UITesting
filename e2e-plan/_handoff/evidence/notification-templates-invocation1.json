@@ -1,0 +1,32 @@
+{
+  "proof": "local Maven/JUnit reports, not deployed verification",
+  "at": "2026-10-03T22:08:12.278459+00:00",
+  "repository": "CommunicationIntegration",
+  "processExitCode": 0,
+  "classes": [
+    {
+      "class": "com.fooddelivery.notification.config.TemplateCoverageTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "notification-templates-invocation1-TEST-com.fooddelivery.notification.config.TemplateCoverageTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.notification.config.TemplateSubstitutionTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "notification-templates-invocation1-TEST-com.fooddelivery.notification.config.TemplateSubstitutionTest.xml",
+      "failureMethods": []
+    }
+  ],
+  "totals": {
+    "tests": 11,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0
+  }
+}

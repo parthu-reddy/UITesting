@@ -1,0 +1,10 @@
+{
+  "recordedAt": "2026-10-05T06:16:14.106432+00:00",
+  "tests": 5,
+  "failed": 1,
+  "errors": 0,
+  "skipped": 0,
+  "proof": "actual HTTP/mocked negative assertion for current APPROVED callback status",
+  "reason": "verified was false for an APPROVED bank callback, despite existing RestaurantApplicationService accepting APPROVED and VERIFIED",
+  "externalDatabaseOrRedis": false
+}

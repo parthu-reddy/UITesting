@@ -1,0 +1,63 @@
+{
+  "invocation": 4,
+  "scope": "Local Identity auth and producer JSON contract; real signing and session registry with mocked ports, no deployed product proof",
+  "command": "mvn -B -o clean -Dtest=AuthServiceTest,OneLoginControllerAuthorizationTest,DevOtpAccountPolicyTest,E2eSeededAccountAllowlistTest,E2eOtpControllerTest,Identity_serviceTest -Dwiremock.server.https-port=-1 -DargLine=-Dnet.bytebuddy.experimental=true -Duser.timezone=Pacific/Chatham test",
+  "tests": 33,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "suites": [
+    {
+      "name": "com.fooddelivery.identity.service.AuthServiceTest",
+      "tests": "19",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.719"
+    },
+    {
+      "name": "com.fooddelivery.identity.controller.OneLoginControllerAuthorizationTest",
+      "tests": "2",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.012"
+    },
+    {
+      "name": "com.fooddelivery.identity.service.DevOtpAccountPolicyTest",
+      "tests": "5",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.056"
+    },
+    {
+      "name": "com.fooddelivery.identity.service.E2eSeededAccountAllowlistTest",
+      "tests": "1",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.001"
+    },
+    {
+      "name": "com.fooddelivery.identity.controller.E2eOtpControllerTest",
+      "tests": "5",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.032"
+    },
+    {
+      "name": "com.fooddelivery.identity.Identity_serviceTest",
+      "tests": "1",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "1.752"
+    }
+  ],
+  "prior_failure": "invocation2 rejected neither trailing JSON garbage nor malformed session state; strict parser fixed. Invocation3 stale contract guard required clean generation; guard unchanged.",
+  "deployed": false,
+  "outside_database_fixture": false,
+  "docker": false
+}

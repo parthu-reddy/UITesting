@@ -1,0 +1,41 @@
+{
+  "proof": "local Maven/JUnit reports, not deployed verification",
+  "at": "2026-10-04T00:52:54.374801+00:00",
+  "repository": "RestaurantApplication",
+  "processExitCode": 0,
+  "classes": [
+    {
+      "class": "com.fooddelivery.restaurant.ApprovedOnlyListingPersistenceTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-restaurant-h2-invocation2-TEST-com.fooddelivery.restaurant.ApprovedOnlyListingPersistenceTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.restaurant.ConcurrentApplicationDecisionTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-restaurant-h2-invocation2-TEST-com.fooddelivery.restaurant.ConcurrentApplicationDecisionTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.restaurant.service.ApprovedOnlyListingTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-restaurant-h2-invocation2-TEST-com.fooddelivery.restaurant.service.ApprovedOnlyListingTest.xml",
+      "failureMethods": []
+    }
+  ],
+  "totals": {
+    "tests": 15,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0
+  }
+}

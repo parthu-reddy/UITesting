@@ -1,0 +1,13 @@
+{
+  "proof": "local Maven/JUnit reports, not deployed verification",
+  "at": "2026-10-04T00:50:08.564314+00:00",
+  "repository": "RestaurantApplication",
+  "processExitCode": 1,
+  "classes": [],
+  "totals": {
+    "tests": 0,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "recordedAt": "2026-10-05T01:30:21.360294+00:00",
+  "invocation": 1,
+  "method": "HappyDeliveryFlowTest#completeOrderLifecycle retained-delivered branch",
+  "proof": "actual rendered receipt/trip/admin money/chat quote; passive UI-generated admin response",
+  "counts": {
+    "tests": "1",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "23.304"
+  },
+  "passed": 1,
+  "uiCommit": "509d084",
+  "harnessCommit": "afe12f1",
+  "orderId": "60631296-e064-4a59-a2ef-090549edcf01",
+  "checks": {
+    "orderId": "60631296-e064-4a59-a2ef-090549edcf01",
+    "newOrderCreated": false,
+    "quotePassed": true,
+    "moneyChecked": true
+  },
+  "amounts": {
+    "totalAmount": 72.81,
+    "foodCost": 46.67,
+    "deliveryFee": 18.8,
+    "customerPlatformFee": 5,
+    "sgst": 1.17,
+    "cgst": 1.17,
+    "restaurantPayout": 34.67,
+    "driverNetPayout": 21.16,
+    "paymentMethod": "CARD",
+    "paymentStatus": "SUCCESS"
+  },
+  "ledgerLines": 18,
+  "refunds": 0,
+  "balancedPostedPayouts": "PASS",
+  "newOrderCreated": false,
+  "refundSubmitted": false,
+  "staff": "1000000001"
+}

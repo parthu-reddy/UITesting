@@ -1,0 +1,50 @@
+{
+  "proof": "local Maven/JUnit reports, not deployed verification",
+  "at": "2026-10-03T21:05:24.525179+00:00",
+  "repository": "DeliveryExecutiveApplication",
+  "processExitCode": 0,
+  "classes": [
+    {
+      "class": "com.fooddelivery.delivery.service.DeliveryApplicationServiceTest",
+      "tests": 15,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-delivery-lifecycle-invocation1-TEST-com.fooddelivery.delivery.service.DeliveryApplicationServiceTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.delivery.service.OnboardingActivationStateTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-delivery-lifecycle-invocation1-TEST-com.fooddelivery.delivery.service.OnboardingActivationStateTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.delivery.service.RiderGoOnlineTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-delivery-lifecycle-invocation1-TEST-com.fooddelivery.delivery.service.RiderGoOnlineTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.delivery.service.RiderReadinessTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-delivery-lifecycle-invocation1-TEST-com.fooddelivery.delivery.service.RiderReadinessTest.xml",
+      "failureMethods": []
+    }
+  ],
+  "totals": {
+    "tests": 32,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0
+  }
+}

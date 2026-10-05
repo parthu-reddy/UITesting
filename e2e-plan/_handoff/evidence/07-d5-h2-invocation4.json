@@ -1,0 +1,35 @@
+{
+  "repository": "IdentityService",
+  "scope": "Local proof only; no O4 publication/deployment/E2E",
+  "deployed": false,
+  "tests": 31,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "suites": [
+    {
+      "name": "com.fooddelivery.identity.entitlement.EntitlementServiceTest",
+      "tests": "19",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "6.338"
+    },
+    {
+      "name": "com.fooddelivery.identity.entitlement.PortalServiceTest",
+      "tests": "8",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.201"
+    },
+    {
+      "name": "com.fooddelivery.identity.entitlement.EntitlementProjectionConsumerTest",
+      "tests": "4",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.26"
+    }
+  ]
+}

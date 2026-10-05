@@ -1,0 +1,6 @@
+{
+  "status": "Compile failed before test execution",
+  "reason": "List.getFirst is unavailable at project Java17 target; use get(0)",
+  "tests": 0,
+  "deployed": false
+}

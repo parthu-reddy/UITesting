@@ -1,0 +1,53 @@
+{
+  "recordedAt": "2026-10-05T06:52:48+05:30",
+  "proof": "GitHub publication plus existing Oracle deployment/operator gates",
+  "uiCommit": "509d084d7fa06ef72ba787b423db139b6ce75be0",
+  "githubRun": 37250677754,
+  "publication": "SUCCESS",
+  "uiTests": 941,
+  "uiTestFiles": 149,
+  "deployment": "SUCCESS",
+  "deploymentCommit": "1b543d7568bcce90689f7408bc2c68ab9b809b79",
+  "harnessCommit": "57eca7b",
+  "harnessCompileInvocations": [
+    29,
+    30
+  ],
+  "harnessCompileResult": "PASS",
+  "devConfig": "four required files already synchronized; apply skipped publication/restarts",
+  "hardening": {
+    "passed": 15,
+    "failed": 0
+  },
+  "reconciliation": {
+    "services": 29,
+    "drift": 0
+  },
+  "operatorObservedAt": "2026-10-05T01:21:11.520407+00:00",
+  "running": 29,
+  "healthy": 26,
+  "withoutChecks": 3,
+  "drift": 0,
+  "restarts": 0,
+  "recentErrorLines": 2,
+  "gatewayWarnings": "Netty WARN decoding malformed raw HTTP on /bad-request, separate from rendered UI traffic; operator log check observed the same category again afterward",
+  "uiImageMetadata": {
+    "service": "food-delivery-app-ui",
+    "status": "running",
+    "health": "healthy",
+    "restarts": 0,
+    "startedAt": "2026-10-05T01:19:48.025884484Z",
+    "declaredImage": "hyd.ocir.io/axekmbadoczl/food-delivery/food-delivery-app-ui:509d084d7fa06ef72ba787b423db139b6ce75be0",
+    "actualImage": "hyd.ocir.io/axekmbadoczl/food-delivery/food-delivery-app-ui:509d084d7fa06ef72ba787b423db139b6ce75be0",
+    "digest": [
+      "hyd.ocir.io/axekmbadoczl/food-delivery/food-delivery-app-ui@sha256:4af828e7c58929728e0392f7a0f549cf39f6eab95ff00bfbd824792864ac893e"
+    ],
+    "profiles": [],
+    "recentErrorLines": 0,
+    "errorClasses": [],
+    "freshBootstrapLines": 0
+  },
+  "happyInvocation8": "RUNNING; assigned exact retained order; no checkout",
+  "orderId": "60631296-e064-4a59-a2ef-090549edcf01",
+  "finalPhaseClosure": "OPEN"
+}

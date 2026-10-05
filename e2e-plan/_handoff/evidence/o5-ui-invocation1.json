@@ -1,0 +1,64 @@
+{
+  "observedAt": "2026-10-05T05:36:28+05:30",
+  "invocation": 1,
+  "uiCommit": "2aed6af0bc2624eef1bab201b1721186f3be4d22",
+  "harnessCommit": "c1e8e46",
+  "tests": 8,
+  "passed": 7,
+  "failures": 1,
+  "errors": 0,
+  "skips": 0,
+  "classes": [
+    {
+      "name": "PortalLauncherUiTest",
+      "counts": {
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "name": "BusinessHubOrganisationUiTest",
+      "counts": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "name": "RestaurantApplicationWizardUiTest",
+      "counts": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "name": "DeliveryOnboardingUiTest",
+      "counts": {
+        "tests": 1,
+        "failures": 1,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "name": "CspSmokeUiTest",
+      "counts": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    }
+  ],
+  "allocation": "e82a811adb8276f4",
+  "failure": "Rider driving-licence provider-check waiter selected401 intermediate response before the normal retry",
+  "riderApplicant": "7999385983",
+  "riderApprovalNotExecuted": true,
+  "financialOrdersCreated": 0,
+  "cleanupPerformed": false
+}

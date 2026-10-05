@@ -1,0 +1,20 @@
+# Portable diagnostic excerpt
+
+Build/test diagnostics and original counts are preserved below. Full original output is retained locally in 42-gov-download-prefix-negative-control.raw.log and excluded from Git.
+
+L42: [INFO] Running com.fooddelivery.governmentid.service.ApplicationDocumentSecurityTest
+L43: [ERROR] Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.812 s <<< FAILURE! -- in com.fooddelivery.governmentid.service.ApplicationDocumentSecurityTest
+L44: [ERROR] com.fooddelivery.governmentid.service.ApplicationDocumentSecurityTest.containingTheCallerIdUnderAnotherPrefixIsNeverOwnership -- Time elapsed: 0.784 s <<< FAILURE!
+L45: org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: <org.springframework.security.access.AccessDeniedException> but was: <org.springframework.web.server.ResponseStatusException>
+L65: [ERROR] Failures:
+L66: [ERROR]   ApplicationDocumentSecurityTest.containingTheCallerIdUnderAnotherPrefixIsNeverOwnership:129 Unexpected exception type thrown, expected: <org.springframework.security.access.AccessDeniedException> but was: <org.springframework.web.server.ResponseStatusException>
+L68: [ERROR] Tests run: 1, Failures: 1, Errors: 0, Skipped: 0
+L71: [INFO] BUILD FAILURE
+L76: [ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.2.5:test (default-test) on project government-id-validation-service: There are test failures.
+L78: [ERROR] Please refer to /Users/parthureddy/Documents/Food Delivery.nosync/GovernmentIDValidationService/target/surefire-reports for the individual test results.
+L79: [ERROR] Please refer to dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+L80: [ERROR] -> [Help 1]
+L82: [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+L83: [ERROR] Re-run Maven using the -X switch to enable full debug logging.
+L85: [ERROR] For more information about the errors and possible solutions, please read the following articles:
+L86: [ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

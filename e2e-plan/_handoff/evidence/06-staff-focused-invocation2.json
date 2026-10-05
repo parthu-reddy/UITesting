@@ -1,0 +1,27 @@
+{
+  "repository": "IdentityService",
+  "scope": "Local proof only; no O4 publication/deployment/E2E",
+  "deployed": false,
+  "tests": 11,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "suites": [
+    {
+      "name": "com.fooddelivery.identity.service.InternalUserServiceAccessRevocationTest",
+      "tests": "8",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.034"
+    },
+    {
+      "name": "com.fooddelivery.identity.service.InternalUserServicePhoneLookupTest",
+      "tests": "3",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.811"
+    }
+  ]
+}

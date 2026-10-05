@@ -1,0 +1,179 @@
+{
+  "recordedAt": "2026-10-04T07:17:12+05:30",
+  "scope": "O3 browser-only source and local checks, with an embedded-H2 supplement",
+  "proofBoundary": "local source/compile evidence only; not a deployed Oracle UI execution",
+  "invocations": [
+    {
+      "command": "mvn -B -o -DskipTests test-compile",
+      "result": "success",
+      "compiledSources": 179,
+      "proofType": "local E2E test-source compilation"
+    },
+    {
+      "command": "mvn -B -o test -Dtest=SeededRiderDutyTest",
+      "result": "success",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "proofType": "local visible-duty helper behavior"
+    },
+    {
+      "command": "python3 RandomDocuments/BusinessPlatform_2026-10-03/tools/validate_business_platform.py --phase O3",
+      "result": "success",
+      "pass": 19,
+      "fail": 0,
+      "stale": 0,
+      "proofType": "static O3 plan/source validator"
+    },
+    {
+      "command": "python3 -m py_compile scripts/run_partner_applications_o3_e2e.py",
+      "result": "success",
+      "proofType": "local runner syntax"
+    }
+  ],
+  "currentTree": {
+    "recordedAt": "2026-10-04T07:24:40+05:30",
+    "command": "mvn -B -o -DskipTests test-compile",
+    "result": "success",
+    "compiledSources": 178,
+    "sourceRecompilation": "not required",
+    "note": "The 179-source invocation above is retained as the dated pre-O1/O2-cleanup snapshot."
+  },
+  "latestCurrentTree": {
+    "recordedAt": "2026-10-04T07:40:23+05:30",
+    "command": "mvn -B -o -DskipTests test-compile",
+    "result": "success",
+    "compiledSources": 179,
+    "note": "Current UI-only O3 source compilation; the earlier 178-source snapshot remains dated history."
+  },
+  "o1o2BrowserOnlyCorrection": {
+    "gatewayApi": "deleted",
+    "directPathCoverage": "deferred, not executed, and not passed",
+    "deferredRecord": "UITesting/e2e-plan/05-partner-and-account-management/organisations-and-portal-access/DEFERRED-O1-O2-UI-ONLY-TESTS.md"
+  },
+  "sequentialEmbeddedH2Validations": [
+    {
+      "repository": "RestaurantApplication",
+      "command": "mvn -B -o test -Dtest=ApprovedOnlyListingPersistenceTest,ConcurrentApplicationDecisionTest",
+      "result": "success",
+      "tests": 10,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "fixture": "embedded H2 only",
+      "proofBoundary": "local service persistence and concurrency only; no Docker or external database"
+    },
+    {
+      "repository": "DeliveryExecutiveApplication",
+      "command": "mvn -B -o test -Dtest=ConcurrentApplicationDecisionTest",
+      "result": "success",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "fixture": "embedded H2 only",
+      "proofBoundary": "local service persistence and concurrency only; no Docker or external database"
+    }
+  ],
+  "focusedCustomerApplicationValidation": {
+    "repository": "CustomerApplication",
+    "command": "mvn -B -o test -Dtest=FreshRestaurantApprovalTest,RestaurantApplicationCacheInvalidationTest,RestaurantApplicationCacheTransactionTest",
+    "result": "success",
+    "tests": 8,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "proofBoundary": "local focused service validation only; not browser, external database, publication, deployment, or live E2E proof",
+    "initialRun": {
+      "productAssertionResults": 0,
+      "reason": "Mockito inline agent attachment failed on JDK 26 before product assertions ran",
+      "classification": "resolved test-harness failure"
+    }
+  },
+  "freshDevSchemaAudit": {
+    "recordedAt": "2026-10-04T07:31:02+05:30",
+    "proofBoundary": "source hash audit only; it does not prove a fresh schema, seed, Oracle state, publication, deployment, or live E2E",
+    "manifest": "RandomDocuments/BusinessPlatform_2026-10-03/DEV-SCHEMA-RECREATION.json",
+    "restaurant": {
+      "path": "RestaurantApplication/src/main/resources/db/migration/V1__init_schema.sql",
+      "currentSha256": "93ac35ea9831837be4bbd5524d9e88db490800c32899a603f70366a62fc67af6",
+      "manifestSha256": "93ac35ea9831837be4bbd5524d9e88db490800c32899a603f70366a62fc67af6",
+      "status": "matches manifest"
+    },
+    "delivery": {
+      "path": "DeliveryExecutiveApplication/src/main/resources/db/migration/V1__init_schema.sql",
+      "currentSha256": "400326430433bdf520302274651f6c76870eb1e4faf3095faca613f1b2689b14",
+      "manifestAndPriorEvidenceSha256": "2e18ec0771eb6966075fd3542ce30c8d294fd19c2dc7d7e2556d550c9df833b3",
+      "gitHeadContentSha256": "9ead10291d30fba19c414b14a1719826224a28de39365b2c69868348b1590e3c",
+      "status": "stale fresh-schema and seed evidence for current baseline",
+      "requiredBeforePublicationOrWipe": "rebuild and reprove current Delivery V1 fresh schema and seeds"
+    }
+  },
+  "runnerRemediation": {
+    "recordedAt": "2026-10-04T07:31:02+05:30",
+    "o1AndO2": {
+      "scripts": [
+        "UITesting/scripts/run_organisation_o1_e2e.py",
+        "UITesting/scripts/run_organisation_o2_e2e.py"
+      ],
+      "behavior": "exit 2 with an explicit deferred notice; no remote, process, browser, or server action"
+    },
+    "registration": {
+      "script": "UITesting/scripts/run_registration_e2e.py",
+      "behavior": "rejects loopback; allocates only local random retained candidates; invokes only RegistrationUiTest; deferred session-case options exit 2",
+      "focusedRunnerTest": "UITesting/scripts/test_registration_runner.py",
+      "result": "5/5"
+    },
+    "proofBoundary": "runner policy/source validation only; no browser, Oracle, publication, deployment, or live E2E run"
+  },
+  "resolvedTestHarnessIssues": [
+    {
+      "issue": "initial WireMock dynamic HTTPS-port failure",
+      "status": "resolved",
+      "change": "H2 test classes pin wiremock.server.https-port=-1",
+      "classes": [
+        "RestaurantApplication/src/test/java/com/fooddelivery/restaurant/ApprovedOnlyListingPersistenceTest.java",
+        "RestaurantApplication/src/test/java/com/fooddelivery/restaurant/ConcurrentApplicationDecisionTest.java",
+        "DeliveryExecutiveApplication/src/test/java/com/fooddelivery/delivery/service/ConcurrentApplicationDecisionTest.java"
+      ]
+    },
+    {
+      "issue": "JDK 26 Mockito inline-MockMaker attachment failure",
+      "status": "resolved for current targeted O3 invocations",
+      "change": "the repository-wide Mockito MockMaker resources were removed; each targeted Maven invocation now uses a matching Byte Buddy javaagent",
+      "reason": "avoid altering legacy/default test behavior outside the current O3 scope",
+      "resources": []
+    }
+  ],
+  "uiOnlySourceScan": {
+    "targets": [
+      "UITesting/src/test/java/com/fooddelivery/e2e/tests/features/organisations/RestaurantApplicationApiTest.java",
+      "UITesting/src/test/java/com/fooddelivery/e2e/tests/features/organisations/DeliveryApplicationApiTest.java",
+      "UITesting/src/test/java/com/fooddelivery/e2e/tests/features/organisations/AdminPartnerApprovalsUiTest.java",
+      "UITesting/src/test/java/com/fooddelivery/e2e/tests/features/organisations/UnapprovedOutletHiddenTest.java",
+      "UITesting/scripts/run_partner_applications_o3_e2e.py"
+    ],
+    "prohibitedPatterns": [
+      "GatewayApi",
+      "browser fetch/evaluate",
+      "localStorage/sessionStorage injection",
+      "psycopg2/SSH/Redis/JDBC/Oracle fixture access",
+      "localhost/curl product calls"
+    ],
+    "matches": 0,
+    "note": "Static source scan only; it does not execute a browser journey."
+  },
+  "deployedBrowserExecution": {
+    "executed": false,
+    "result": "not run",
+    "reason": "O3 source is uncommitted, unpublished and undeployed."
+  },
+  "deferredCoverage": [
+    "direct IDOR/retired-route probes",
+    "stale-cart hidden-outlet state injection",
+    "direct measurement loop",
+    "outbox/audit/Redis reads",
+    "intentional duration and rate-limit exhaustion"
+  ]
+}

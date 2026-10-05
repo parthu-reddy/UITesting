@@ -1,0 +1,7 @@
+# O4 first browser invocation and concrete repairs
+
+## 2026-10-04T21:30:26+05:30 — checkpoint83: first UI gate fails; targeted SDK/harness repairs
+
+O4 deployed UI invocation1 executes8methods:1pass,2failures,5errors,0skips. Both approval fixtures stop before document submission because useOrganisationDetails called a generated get alias as if it were the generic get(path, options) method; the real request contains literal :organisationId and returns400. Source now calls get(options), retaining typed params/signal. Actual generated-client/shared-fetch regression5/5 passes; final typecheck/lint and GitHub UI publication/redeployment remain pending. The other5errors are portal controls obscured by the Customer location modal; harness now closes that real dialog with its visible button before switching. Harness compile13 passes. Expected non-staff403 is the sole current passing Admin case; no all-green claim.
+
+Evidence: O4/evidence/33-o4-ui-invocation1.json and _handoff/evidence/o4-ui-invocation1.json; allocation44febc8550b1cdd1 is retained under _handoff/fixtures. Two owned teams were created through UI; no applications/documents/approvals/orders were produced in this failed invocation. All previously deployed images remain healthy. No second wipe or fixture cleanup is needed. Publish the narrow UI repair first, deploy using the existing workflow, then rerun positive O4/O5 gates. Stop after O4/O5.

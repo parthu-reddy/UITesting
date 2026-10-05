@@ -1,0 +1,11 @@
+{
+  "proof": "local unit and actual audit JPA transactions",
+  "counts": {
+    "tests": 26,
+    "failures": 0,
+    "errors": 1,
+    "skipped": 0
+  },
+  "failure": "Mockito when() restubbing re-invoked the previously throwing mock before the intended outage assertion; remaining 25 cases passed",
+  "deployed": false
+}

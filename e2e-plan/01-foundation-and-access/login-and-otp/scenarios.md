@@ -1,5 +1,9 @@
 # 01 — Login and OTP — All Scenarios
 
+## 2026-10-04T17:21:35.186761+05:30 — O4 one-login rewrite in progress
+
+The deployed role-selector login remains on UI d79c33a. O4 auth/API/session/staff/computed entitlement changes are local and unpublished; auth33/33, gateway30/30 and staff11/11 focused checks pass. Real H2 D5/portal/consumer tests are in progress with failures retained. No O4 UI/harness implementation or deployed E2E pass yet. The previous role-based login scenario tables below describe historical deployment until replaced in this phase. New visible O4 journeys are defined in BusinessPlatform Phase4 validation.md; former direct API/DB/token assertions are explicitly superseded and deferred in [DEFERRED-O4-INTERNAL-ASSERTIONS.md](DEFERRED-O4-INTERNAL-ASSERTIONS.md). Finish coherent UI/harness/seeds, publish then clean Dev deploy, and execute only rendered controls. Keep existing wait/rate/SSE exclusions and all owned fixtures.
+
 Successful login, signup, resend and rejection scenarios use real backend authentication and no mocked tokens. Deferred rate-limit response tests use browser routing and are explicitly UI-contract coverage. After the browser requests
 an OTP through the normal login flow, the test clicks the same Dev Autofill Code button used
 for manual developer login. On a Dev backend with `DEV_OTP_ENABLED=true`, this facility accepts valid 10-digit

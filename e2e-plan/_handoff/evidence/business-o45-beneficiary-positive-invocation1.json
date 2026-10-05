@@ -1,0 +1,10 @@
+{
+  "recordedAt": "2026-10-05T06:15:30.506982+00:00",
+  "invocation": 1,
+  "tests": 4,
+  "failed": 0,
+  "errors": 0,
+  "skipped": 0,
+  "proof": "isolated actual HTTP/controller with mocked repositories",
+  "externalDatabaseOrRedis": false
+}

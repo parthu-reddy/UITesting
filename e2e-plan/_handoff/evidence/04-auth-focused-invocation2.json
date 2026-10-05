@@ -1,0 +1,53 @@
+{
+  "invocation": 2,
+  "tests": 32,
+  "passed": 31,
+  "failures": 1,
+  "errors": 0,
+  "skipped": 0,
+  "suites": [
+    {
+      "name": "com.fooddelivery.identity.service.AuthServiceTest",
+      "tests": "19",
+      "failures": "1",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.9"
+    },
+    {
+      "name": "com.fooddelivery.identity.controller.OneLoginControllerAuthorizationTest",
+      "tests": "2",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.724"
+    },
+    {
+      "name": "com.fooddelivery.identity.service.DevOtpAccountPolicyTest",
+      "tests": "5",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.198"
+    },
+    {
+      "name": "com.fooddelivery.identity.service.E2eSeededAccountAllowlistTest",
+      "tests": "1",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.001"
+    },
+    {
+      "name": "com.fooddelivery.identity.controller.E2eOtpControllerTest",
+      "tests": "5",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.032"
+    }
+  ],
+  "failure": "Real malformed session-cache check accepted trailing JSON tokens; strict reader correction pending rerun",
+  "proofType": "local real token signing and session machine; mocked cache/repos; no external fixtures",
+  "publicationPerformed": false
+}

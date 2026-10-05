@@ -1,0 +1,7 @@
+{
+  "invocation": 1,
+  "result": "test compilation failed",
+  "testsExecuted": 0,
+  "detail": "Existing ContractTestBase constructor still passed obsolete RateLimitingService to new AuthController",
+  "publicationPerformed": false
+}

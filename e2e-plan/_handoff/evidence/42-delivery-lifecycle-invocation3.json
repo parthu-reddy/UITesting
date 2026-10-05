@@ -1,0 +1,59 @@
+{
+  "proof": "local Maven/JUnit reports, not deployed verification",
+  "at": "2026-10-03T21:17:18.321477+00:00",
+  "repository": "DeliveryExecutiveApplication",
+  "processExitCode": 0,
+  "classes": [
+    {
+      "class": "com.fooddelivery.OpenApiGenerationTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-delivery-lifecycle-invocation3-TEST-com.fooddelivery.OpenApiGenerationTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.delivery.controller.InternalDriverSummaryPermissionTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-delivery-lifecycle-invocation3-TEST-com.fooddelivery.delivery.controller.InternalDriverSummaryPermissionTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.delivery.service.DeliveryApplicationServiceTest",
+      "tests": 15,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-delivery-lifecycle-invocation3-TEST-com.fooddelivery.delivery.service.DeliveryApplicationServiceTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.delivery.service.OnboardingActivationStateTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-delivery-lifecycle-invocation3-TEST-com.fooddelivery.delivery.service.OnboardingActivationStateTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.delivery.service.RiderReadinessTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-delivery-lifecycle-invocation3-TEST-com.fooddelivery.delivery.service.RiderReadinessTest.xml",
+      "failureMethods": []
+    }
+  ],
+  "totals": {
+    "tests": 29,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0
+  }
+}

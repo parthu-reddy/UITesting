@@ -1,0 +1,29 @@
+{
+  "date": "2026-10-04T02:06:23.737618+05:30",
+  "proof": "controlled negative mutations, one actual failed assertion each; every source restored byte-for-byte",
+  "controls": [
+    {
+      "guard": "foreign-organisation-outlet",
+      "selected": "RestaurantEndpointPermissionTest#anOwnerCannotEditAnOutletUnderAnotherOrganisationPath",
+      "expectedFailureCounts": {
+        "tests": 1,
+        "failures": 1,
+        "errors": 0,
+        "skipped": 0
+      },
+      "originalSourceSha256": "82ec2d6bc6c0ee036f6fdfbff9c1095af32ae4f4a0c9882b8d7636f8f8d33e2a"
+    },
+    {
+      "guard": "stale-submission-callback",
+      "selected": "RestaurantApplicationServiceTest#staleCallbackCannotTouchTheCurrentSubmissionOrAnApprovedApplication",
+      "expectedFailureCounts": {
+        "tests": 1,
+        "failures": 1,
+        "errors": 0,
+        "skipped": 0
+      },
+      "originalSourceSha256": "747c290b56ddc03e9d4fba1d4e9116e905462318248f4fec8136b4056d712f7c"
+    }
+  ],
+  "deployed": false
+}

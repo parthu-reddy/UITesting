@@ -1,0 +1,7 @@
+{
+  "proof": "local-only fixture startup failures; no deployed claim",
+  "restaurant": {"tests":43,"failures":0,"errors":6,"skips":0},
+  "delivery": {"tests":48,"failures":0,"errors":9,"skips":0},
+  "cause": "AuditReader mock has PersistenceContext and plain Spring fixture had no EntityManagerFactory",
+  "repair": "Supply mocked EntityManagerFactory in test configuration; preserve real method-security and service authorization"
+}

@@ -1,5 +1,10 @@
 # Primary user instructions and accepted decisions
 
+## 2026-10-05T12:05:12+05:30 — Current scope fulfilled; stop after O4/O5
+
+The owner's final scope is to complete Phase4 and Phase5, then stop. Both are now published, deployed and accepted within the documented Dev/UI-only scope; the remaining documentation publication completes this handoff. Existing task authorization covered the required commits, pushes, GitHub publication and Oracle Dev rollout. Preserve the UI-only/H2/GitHub-only rules, retained fixtures and explicit unverified deferrals. Wallet/Ads and the broader E2E audit require a later user instruction; no new tests, deployment, wipe or seed is needed for this final documentation commit. Earlier status statements below describe historical checkpoints.
+
+
 ## 2026-10-04T06:22:54+05:30 — Owner requires embedded H2 and UI-only E2E
 
 Direct owner instructions: "No never do that 'disposable databases on Oracle' tests should never depend on DBs directly, why no use H2?" and "All E2E tests should only go through UI, no direct backend db or redis connections should be made for now."
@@ -181,3 +186,17 @@ Owner says continue and finish the current work. Standing task-specific commits/
 ## 2026-10-04T16:11:29.048510+05:30 — Legacy scope explicitly reopened
 
 Direct owner answer: "Include legacy search and 300-line cleanup." This supersedes the earlier no-old-code and component cleanup exclusions for these two items. Existing task commits/pushes, GitHub publication before Oracle Dev deployment remain authorized. All E2E stays visible UI only; no local Docker or external database test fixtures. Other wait/rate/UI-only deferrals retain their recorded scope. Record dated decisions beside the Business Platform plan.
+
+### 2026-10-04T18:58:39+05:30 — task scope retained
+
+The owner included legacy search and the 300-line cleanup; checkpoint71 verifies both on Oracle. Required task commits/pushes, publish-before-deploy and full Dev fresh wipe/seed remain authorised. GitHub builds images; no local Docker. H2 backend fixtures and rendered-UI-only E2E remain binding. O4/O5 are combined only to provide permissible UI membership setup.
+
+## 2026-10-04T19:36:11+05:30 — Resume and O4/O5 scope/fixture choices
+
+Owner requested a brief pause, then resume; task-specific commits/pushes, unchanged GitHub publication and Oracle Dev clean wipe/fresh seeding remain authorised. Publish before deploy; never local Docker; embedded H2 service tests and rendered UI-only E2E remain binding. Use existing restaurant-brand Suspend/Reinstate controls for the original O4 suspension gate; remove the accidental extra admin organisation screen. Preserve the calling everyday SID in admin step-up replacement. Restaurant launcher state belongs to the selected organisation, with a volatile per-person context fallback if persistence is disabled. The E2E URL is normalised without a trailing slash; fresh phone candidates are retained locally and confirmed through normal profile UI, never allocated/audited through a database.
+
+## 2026-10-04T20:25:44+05:30 — Owner stop boundary: complete O4 and O5 only
+
+Direct owner instruction: "sure complete those and stop after phase 4 and phase 5 are completed."
+
+Choice: finish the combined O4/O5 source, unchanged GitHub publication/contract workflows, authorised Oracle Dev fresh wipe/seeding/deployment, UI-only E2E/regressions, measurements and accurate checklists. Stop once both phases meet the current acceptance scope. Do not start W1–W3 or A1–A4. Standing task commits/pushes and publish-before-deploy authorisation remain applicable to this completion; no local Docker or direct-state/API E2E. Explicit existing wait/rate/SSE/internal proof deferrals stay visible and are never counted as passes.

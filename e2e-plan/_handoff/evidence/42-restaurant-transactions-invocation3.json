@@ -1,0 +1,14 @@
+{
+  "proof": "local real concurrent admin and outer-rollback focused invocation; process exit0",
+  "counts": {
+    "tests": 2,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "source": "two selected executed methods and completed Maven process",
+  "xmlRetainedBeforeClean": false,
+  "retainedLog": "42-restaurant-transactions-invocation3.log",
+  "distinctLaterProof": "42-restaurant-clean-invocation1-RestaurantApplicationTransactionTest.xml",
+  "deployed": false
+}

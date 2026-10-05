@@ -1,0 +1,9 @@
+# Transport repair deployed and retained state verified
+
+## 2026-10-05T06:33:00+05:30 — checkpoint100: absent-body transport repair deployed; both earlier orders terminal
+
+UIe055ea1 was published successfully by unchanged GitHub37248890087 after938/938 tests in148 files, then deployed successfully to Oracle through the existing UI-only script. Local focused transport/auth/optimistic27/27, typecheck/lint pass; three actual-generated-client absent-body negative cases failed before the fix and pass after it. Required four Dev configs already synchronize, apply skips reader restarts; hardening15/15 and reconciliation29/29 pass. No backend schema/seed/workflow change, Docker or external test DB.
+
+Rendered-only retained-state invocation2 passes1/1 on owned0dbe6a15 and proves CANCELLED_BY_RESTAURANT at 2026-10-05T01:01:10.422762Z. Its original immediate manifest and bounded state remain retained beside original terminal1a375719. The first state invocation failed because the still-active order was absent from terminal History; its screenshot showed the real active tracker, so the compiled diagnostic now uses the exact active tracker first and History only otherwise. Harness82cdc8b/compile27 saves only status/visibility/time, no API bodies, OTPs or raw tracker text. Assigned resume now honours the parked SSE flag.
+
+Next: one fresh canonical lifecycle invocation6 on this corrected published release because both earlier attempts are proven terminal and their causes repaired. Save its manifest immediately, never duplicate an active order, and retain all failed attempts. Complete actual kitchen/dispatch/delivery/history/chat/money/quote and same-order downstream regressions. Final phase UI checks on the last image, operator measurements and checklist closure remain mandatory. Stop after O4/O5; Wallet/Ads and explicit deferrals unchanged.

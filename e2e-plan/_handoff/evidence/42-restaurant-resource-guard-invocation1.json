@@ -1,0 +1,31 @@
+{
+  "date": "2026-10-04T02:03:50.588753+05:30",
+  "proof": "real method-security path-ID binding and unchanged structural authorization scanner",
+  "counts": {
+    "tests": 13,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "classes": [
+    {
+      "class": "com.fooddelivery.restaurant.RestaurantEndpointPermissionTest",
+      "counts": {
+        "tests": 7,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "class": "com.fooddelivery.restaurant.EndpointAuthorizationCoverageTest",
+      "counts": {
+        "tests": 6,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    }
+  ],
+  "deployed": false
+}

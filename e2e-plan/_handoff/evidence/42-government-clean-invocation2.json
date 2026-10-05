@@ -1,0 +1,157 @@
+{
+  "date": "2026-10-04T02:02:24.608099+05:30",
+  "proof": "full local clean verify with generated producer contracts and OpenAPI; every failure retained",
+  "counts": {
+    "tests": 68,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "classes": [
+    {
+      "class": "com.fooddelivery.architecture.ArchitectureEnforcementTest",
+      "counts": {
+        "tests": 9,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "class": "com.fooddelivery.contract.GovIdContractConsumerTest",
+      "counts": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "class": "com.fooddelivery.governmentid.AutoConfigurationImportsTest",
+      "counts": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "class": "com.fooddelivery.governmentid.ContextLoadTest",
+      "counts": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "class": "com.fooddelivery.governmentid.EndpointAuthorizationCoverageTest",
+      "counts": {
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "class": "com.fooddelivery.governmentid.controller.VerificationSelfAccessTest",
+      "counts": {
+        "tests": 7,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "class": "com.fooddelivery.governmentid.controller.VerificationSummaryStateTest",
+      "counts": {
+        "tests": 7,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "class": "com.fooddelivery.governmentid.service.ApplicationDocumentSecurityTest",
+      "counts": {
+        "tests": 11,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "class": "com.fooddelivery.governmentid.service.BiometricLockoutSuspensionTest",
+      "counts": {
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "class": "com.fooddelivery.governmentid.service.BrandVerificationJsonEscapingTest",
+      "counts": {
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "class": "com.fooddelivery.governmentid.service.BrandVerificationPipelineTest",
+      "counts": {
+        "tests": 9,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "class": "com.fooddelivery.governmentid.service.DocumentAdminAuditTransactionTest",
+      "counts": {
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "class": "com.fooddelivery.governmentid.service.VerificationCallbackDispatcherTest",
+      "counts": {
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "class": "com.fooddelivery.governmentid.service.VerificationCallbackTransactionTest",
+      "counts": {
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "class": "com.fooddelivery.govvalidation.ContractVerifierTest",
+      "counts": {
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "class": "com.fooddelivery.govvalidation.Government_id_validation_serviceTest",
+      "counts": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    }
+  ],
+  "deployed": false
+}

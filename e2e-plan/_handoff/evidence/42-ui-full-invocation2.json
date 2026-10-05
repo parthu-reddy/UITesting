@@ -1,0 +1,4887 @@
+{
+  "proof": "local Vitest rendered components/SDK fixtures, not Oracle E2E",
+  "at": "2026-10-04T00:39:17.962970+00:00",
+  "processExitCode": 0,
+  "total": 842,
+  "passed": 842,
+  "failed": 0,
+  "pending": 0,
+  "success": true,
+  "files": [
+    {
+      "file": "schemas.test.ts",
+      "cases": [
+        {
+          "name": "Auto-generated Zod Schemas from OpenAPI phoneSchema should validate correct phone numbers",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Auto-generated Zod Schemas from OpenAPI phoneSchema should reject numbers shorter than 8 digits",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Auto-generated Zod Schemas from OpenAPI phoneSchema should reject numbers longer than 20 digits",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Auto-generated Zod Schemas from OpenAPI phoneSchema should reject non-numeric strings",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Auto-generated Zod Schemas from OpenAPI otpSchema should validate correct 6-digit OTP",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Auto-generated Zod Schemas from OpenAPI otpSchema should reject OTPs shorter than 6 digits",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Auto-generated Zod Schemas from OpenAPI otpSchema should reject OTPs longer than 6 digits",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Auto-generated Zod Schemas from OpenAPI otpSchema should reject non-numeric OTPs",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "usePolling.test.tsx",
+      "cases": [
+        {
+          "name": "usePolling retains an access denial during a retry and clears it only after success",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "usePolling fetches immediately when the request key changes",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "usePolling identifies the request key that produced retained data while a replacement request loads",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "usePolling schedules the next poll only after a slow request settles",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "usePolling keeps a single polling chain when the key changes while a poll is in flight",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "notificationPermissions.test.ts",
+      "cases": [
+        {
+          "name": "notification permission adapter uses the browser permission API for web and PWA clients",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "notification permission adapter uses a native bridge when an Android or iOS shell provides one",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "notification permission adapter reports unsupported clients instead of silently allowing duty",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "notification permission adapter routes assignment notifications through the native bridge",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "olaMaps.test.ts",
+      "cases": [
+        {
+          "name": "olaMaps proxy URLs olaProxyBase is absolute and points at our own origin",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "olaMaps proxy URLs olaStyleUrl is absolute and resolvable without a base",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "olaMaps proxy URLs olaStyleUrl honours a non-default style id",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "olaMaps proxy URLs rewrites upstream tile URLs onto the proxy, absolutely",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "olaMaps proxy URLs rewrites glyph and sprite URLs, preserving the path and query",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "olaMaps proxy URLs leaves non-Ola URLs untouched",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "olaMaps proxy URLs never returns a bare API key in the URL",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "msw-interception.test.ts",
+      "cases": [
+        {
+          "name": "MSW API Interception intercepts Zodios requests with mocked responses",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "DeliveryApplicationWizard.test.tsx",
+      "cases": [
+        {
+          "name": "delivery application review states saves a draft using the current version and no caller identity or phone fields",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "delivery application review states renders SUBMITTED with no editable fields",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "delivery application review states renders IN_REVIEW with no editable fields",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "delivery application review states renders APPROVED with no editable fields",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "delivery application review states renders SUSPENDED with no editable fields",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "delivery application review states shows rejection and resubmits for human review without manufacturing approval",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "RestaurantApplicationWizard.test.tsx",
+      "cases": [
+        {
+          "name": "restaurant application ownership and review states creates an organisation only for someone who has none, then saves its application",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "restaurant application ownership and review states uses an existing eligible organisation without creating another",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "restaurant application ownership and review states retains details and retries using the organisation already created after a failed save",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "restaurant application ownership and review states shows SUBMITTED read-only without an edit form",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "restaurant application ownership and review states shows IN_REVIEW read-only without an edit form",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "restaurant application ownership and review states shows APPROVED read-only without an edit form",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "restaurant application ownership and review states shows SUSPENDED read-only without an edit form",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "restaurant application ownership and review states shows the rejection reason and resubmits the saved version after confirmation",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "AdminOrderMoney.test.tsx",
+      "cases": [
+        {
+          "name": "Admin Order Money View shows every party on the order at its real value",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Admin Order Money View says so when the breakdown cannot be loaded rather than showing zeros",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Admin Order Money View renders real transaction ids on both ledger legs and preserves a signed restaurant balance",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Admin Order Money View shows missing individual money values as unavailable while preserving an explicit zero",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Admin Order Money View per outcome shows the payment status and each refund with its outcome",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Admin Order Money View per outcome says when an order has no refunds",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Admin Order Money View per outcome shows what was booked for each payee beside the quoted payout",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Admin Order Money View per outcome says nothing was booked for the payees of a cancelled order",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "AdminPayoutWorkflow.test.tsx",
+      "cases": [
+        {
+          "name": "Admin Payout Workflow the queue names a resolved payee and shows what they are owed",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Admin Payout Workflow a payee the owning service could not name is marked unresolved, never given a fake name",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Admin Payout Workflow the detail shows the settled lines and they sum to the payout amount",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Admin Payout Workflow lines that do not sum to the payout are called out rather than shown silently",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Admin Payout Workflow approve is disabled for the administrator who raised the payout",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Admin Payout Workflow approve is offered to a second administrator",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Admin Payout Workflow blocks a conflicting draft action while an approval is in flight",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Admin Payout Workflow marking paid will not proceed without a bank reference",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Admin Payout Workflow does not accept a whitespace-only bank reference",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Admin Payout Workflow marking paid sends the bank reference and an idempotency key",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Admin Payout Workflow reuses the payout action key and refreshes details after an ambiguous payment failure",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Admin Payout Workflow releases a payout action key after the server confirms the action",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Admin Payout Workflow requires a meaningful failure reason and trims it before marking the payout failed",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Admin Payout Workflow blocks an unresolved payee even when the API supplies a fallback display name",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Admin Payout Workflow creates a payout for a resolved payee with verified bank details without a force override",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Admin Payout Workflow reuses the create idempotency key after an ambiguous payout creation failure",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "AdminPortal.test.tsx",
+      "cases": [
+        {
+          "name": "Admin refund navigation mounts call controls for an administrator-initiated support call",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Admin refund navigation gives the compact theme and logout controls accessible names",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Admin refund navigation opens the real refund queue from the sidebar and keeps Support Tickets reachable",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Admin refund navigation renders the queue on direct navigation to /admin/refunds",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Admin refund navigation keeps payout statement order links on their money breakdown route",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "AdminRefundQueue.test.tsx",
+      "cases": [
+        {
+          "name": "Admin Refund Queue lists open refund tickets with the amount at its real value",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Admin Refund Queue reports an empty queue rather than rendering nothing",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Admin Refund Queue blocks approval when the ticket quote is invalid: undefined",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Admin Refund Queue blocks approval when the ticket quote is invalid: null",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Admin Refund Queue blocks approval when the ticket quote is invalid: 0",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Admin Refund Queue blocks approval when the ticket quote is invalid: -1",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Admin Refund Queue blocks approval when the ticket quote is invalid: NaN",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Admin Refund Queue blocks approval when the ticket quote is invalid: Infinity",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "CustomerDashboard.test.tsx",
+      "cases": [
+        {
+          "name": "open customer tracker completion shows the delivered receipt after the order leaves the active list (wide=false)",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "open customer tracker completion shows the delivered receipt after the order leaves the active list (wide=true)",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "restored tracker keeps the same order through completion (false, otherActive=false)",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "restored tracker keeps the same order through completion (true, otherActive=false)",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "restored tracker keeps the same order through completion (false, otherActive=true)",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "restored tracker keeps the same order through completion (true, otherActive=true)",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "address selection updates the owner state, cart location and quote address together",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "DeliveryDashboard.suspension.test.tsx",
+      "cases": [
+        {
+          "name": "suspended rider delivery screen waits for the current assignment instead of displaying onboarding while the request is pending",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "suspended rider delivery screen shows an actionable failure and restores the active delivery after retry",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "suspended rider delivery screen keeps an owned delivery visible through an offline snapshot and a status refresh",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "RiderEarnings.test.tsx",
+      "cases": [
+        {
+          "name": "RiderEarnings renders loading state initially or renders stats correctly",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "RiderEarnings asks for this month on the rider\u2019s calendar, not the UTC one",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "RiderEarnings shows a pending balance the ledger could not report as unavailable, not \u20b90",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "RestaurantEarningsTab.test.tsx",
+      "cases": [
+        {
+          "name": "RestaurantEarningsTab keeps previously loaded financial data hidden throughout a denied-access retry",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "RestaurantEarningsTab renders loading state initially or renders stats correctly",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "RestaurantEarningsTab shows the clawbacks the server reports, and a missing figure as unavailable rather than zero",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "format.test.ts",
+      "cases": [
+        {
+          "name": "format roundRupees leaves whole rupees alone",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "format roundRupees kills float artefacts",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "format roundRupees rounds to whole paise",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "format roundRupees parses strings",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "format roundRupees treats null, undefined and nonsense as zero",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "format roundRupees handles negatives",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "format formatINR renders an API amount at its real value",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "format formatINR renders paise",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "format formatINR groups in the Indian system",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "format formatINR renders zero and nullish as zero",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "format formatINR renders negatives",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "format formatINR drops the minus with sign: 'never'",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "format formatINR adds a plus with sign: 'always', but not for zero",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "format formatINR compacts large amounts",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "format formatINR never uses a dollar sign",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "format sumRupees adds without drifting",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "format sumRupees skips nullish values",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "format sumRupees sums nothing to zero",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "format pctOf takes a share and rounds to paise",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "format pctOf takes nothing from zero",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "time.test.ts",
+      "cases": [
+        {
+          "name": "the test run itself runs in a hostile zone, so nothing here can pass by matching the developer\u2019s zone",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "parseInstant accepts Z and offsets as the same moment",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "parseInstant refuses a zone-less timestamp instead of reading it as local time",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "formatting renders in an explicit zone shows the same instant as each zone\u2019s wall clock",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "formatting renders in an explicit zone defaults to the viewer\u2019s zone, which in this run is St John\u2019s",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "formatting renders in an explicit zone renders a missing value as empty",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "calendar dates never shift west of Greenwich (new Date(\"2026-09-25\") would be the 24th here)",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "calendar dates today is the date in the named zone, not the UTC date",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "day windows start at local midnight and are half-open",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "day windows follow daylight saving: 23 hours in spring, 25 in autumn",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "day windows handle a zone whose midnight does not exist",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "day windows reports offsets including the odd ones",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "month and last-N-days windows a month runs from its first local midnight to the next month\u2019s, DST hour and all",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "month and last-N-days windows December rolls into the next year, on each zone\u2019s own calendar",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "month and last-N-days windows defaults to the viewer\u2019s calendar, which in this run is St John\u2019s, not UTC",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "month and last-N-days windows the last 30 days are 30 calendar days including today, whatever their hours add up to",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "month and last-N-days windows the last 1 day is today",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "zone validation accepts IANA ids and rejects offsets and typos",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "ImageLoader.test.tsx",
+      "cases": [
+        {
+          "name": "ImageLoader shows a named placeholder, not a broken image, when there is no src",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "ImageLoader swaps to the placeholder when the image fails to load",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "ImageLoader shows the fallback image, not the initial, when there is no src and one is given",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "ImageLoader swaps a failed photo for the fallback image",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "ImageLoader drops to the placeholder when the fallback fails too, rather than looping",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "SettingsHistoryTab.test.tsx",
+      "cases": [
+        {
+          "name": "placedAt formats a readable date and time on the viewer's clock",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "placedAt refuses a zone-less timestamp rather than guess whose clock it is",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "placedAt is empty, never \"Invalid Date\", for a missing or unreadable timestamp",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "SettingsHistoryTab shows when each order was placed, machine-readable and human-readable",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "SettingsHistoryTab leaves the date out rather than print \"Invalid Date\"",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "SettingsHistoryTab reloads the first page when the customer pulls down",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "history readiness and recovery renders an empty history only after a successful empty response",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "history readiness and recovery distinguishes an unavailable history from empty and retries the first page",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "history readiness and recovery retains loaded rows after a later page fails and retries that page",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "Skeleton.test.tsx",
+      "cases": [
+        {
+          "name": "Skeleton shows the shape of what is coming, rather than a spinner",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Skeleton pulses, and the pulse is the only motion it has",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Skeleton is covered by the prefers-reduced-motion block rather than a JS branch",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Skeleton renders the menu category placeholder",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "AdminLiveOperations.test.tsx",
+      "cases": [
+        {
+          "name": "AdminLiveOperations removes direct assignment and sends operators to the audited intervention workflow",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "AdminManualInterventions.test.tsx",
+      "cases": [
+        {
+          "name": "AdminManualInterventions failure recovery keeps a new request pending through a stale failure and reopens controls for a new durable failure",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "AdminSupportTickets.test.tsx",
+      "cases": [
+        {
+          "name": "Support Tickets approval confirmation opens the existing order conversation by order id",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Support Tickets approval confirmation opens the remounted chat when switching to another ticket, keeping conversations isolated",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Support Tickets approval confirmation names the amount and order, cancels without resolving, and submits only after confirmation",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Support Tickets approval confirmation does not approve an unavailable or invalid amount: undefined",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Support Tickets approval confirmation does not approve an unavailable or invalid amount: null",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Support Tickets approval confirmation does not approve an unavailable or invalid amount: 0",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Support Tickets approval confirmation does not approve an unavailable or invalid amount: -1",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Support Tickets approval confirmation does not approve an unavailable or invalid amount: NaN",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Support Tickets approval confirmation does not approve an unavailable or invalid amount: Infinity",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Support Tickets approval confirmation still confirms rejection without requiring a refund amount",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Support Tickets refund submission failures keeps the ticket and notes available when refund submission fails",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Support Tickets refund submission failures requires an administrator identity before resolving",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "AdminUserManagement.test.tsx",
+      "cases": [
+        {
+          "name": "AdminUserManagement search finds a user by the phone number they sign in with",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "AdminUserManagement search still finds a user by id",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "AdminUserManagement search sends nothing for a query that is neither",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "AdminUserManagement search limits role changes to supported roles and does not submit after the confirmation is cancelled",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "AdminUserManagement search does not request a status change when suspension confirmation is cancelled",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "AdminUserManagement search waits for the server before changing the displayed status and keeps it unchanged after a failed request",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "AdminUserManagement search allows only one in-flight status request and does not let a stale failure replace a newly selected user",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "AdminUserManagement search ignores delayed active orders from a user who is no longer selected",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "dispatchScope.test.ts",
+      "cases": [
+        {
+          "name": "dispatch scope accepts only a complete server-provided city and positive radius",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "dispatch scope reads finite restaurant coordinates from an API envelope only",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "userLookup.test.ts",
+      "cases": [
+        {
+          "name": "userLookup sends a UUID to the id lookup",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "userLookup sends a phone number as the 10 digits the login stores",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "userLookup looks nothing up for a query that is neither",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "CampaignManagement.test.tsx",
+      "cases": [
+        {
+          "name": "CampaignManagement shows the ad wallet balance on open, not only after a top-up",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "CampaignManagement shows a campaign's lifetime budget, the field the server sends",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "CampaignManagement asks to pay the top-up in rupees, as typed",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "CreateCampaignModal.test.tsx",
+      "cases": [
+        {
+          "name": "CreateCampaignModal default dates start on the advertiser's today, which east of the creator is already tomorrow",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "CreateCampaignModal default dates start on the advertiser's today west of it too",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "CreateCampaignModal request sends budgets and the bid in rupees, as typed",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "CreateCampaignModal request asks for no targeting radius: a campaign has none to send",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "RestaurantCampaigns.test.tsx",
+      "cases": [
+        {
+          "name": "RestaurantCampaigns opens the owner's existing advertiser",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "RestaurantCampaigns offers the start step on a 404 and registers under the brand's name and the outlet's zone",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "RestaurantCampaigns creates nothing until asked",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "RestaurantCampaigns cannot start without an outlet zone to run the calendar on",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "RestaurantCampaigns shows any other failure as an error with a retry, never as \"not advertising yet\"",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "RestaurantCampaigns keeps the form and says why when registration is refused",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "MenuItemRow.test.tsx",
+      "cases": [
+        {
+          "name": "vegClass distinguishes unclassified from non-vegetarian",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "VegMarker labels the marker for screen readers",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "VegMarker renders nothing when the item is unclassified",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "VegMarker uses green for veg and the danger hue for non-veg, never amber",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "viewFromMenuItem reads the category the catalog endpoint actually sends",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "viewFromMenuItem never invents a prep time",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "viewFromMasterItem adds the packing charge, as the backend does when it prices the item",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "viewFromMasterItem shows the pre-override price alongside the override, not instead of it",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "viewFromMasterItem leaves the pre-override price absent when nothing is overridden",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "viewFromMasterItem marks an overridden prep time so a manager can see it was edited",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "viewFromMasterItem treats a missing override as available and only false as unavailable",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "MenuItemRow renders the same item content regardless of capabilities",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "MenuItemRow only offers add-to-cart when granted",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "MenuItemRow switches to a stepper once the item is in the cart",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "MenuItemRow hides add-to-cart and says why when the item is unavailable",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "MenuItemRow blocks ordering for an outlet-level reason without claiming the dish is out of stock",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "MenuItemRow prefers the dish-level reason when both apply",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "MenuItemRow lets a capability-holder toggle availability",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "MenuItemRow never omits a prep time it was given, and never invents one",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "MenuItemRow shows the brand mark in the picture slot when the dish has no photo",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "MenuItemRow keeps exactly one decorative image when the photo fails to load",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "MenuItemRow renders the rating slot it is given and nothing when there is none",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "groupByCategory preserves the order the API returned",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "groupByCategory buckets uncategorised items under Other",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "brandOrganisations.test.ts",
+      "cases": [
+        {
+          "name": "brand organisation selection loads every page so an eligible organisation on a later page remains selectable",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "brand organisation selection offers only active OWNER and ADMIN organisations for applying",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "brand organisation selection reports an outage instead of returning no organisations and encouraging duplicate creation",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "brand organisation selection rejects an incomplete pagination response: {\"content\":[],\"last\":false}",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "brand organisation selection rejects an incomplete pagination response: {\"content\":[]}",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "brand organisation selection rejects an incomplete pagination response: {\"content\":null,\"last\":true}",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "brand organisation selection rejects an organisation without a server role instead of assuming ownership",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "deliveryReason.test.ts",
+      "cases": [
+        {
+          "name": "deliveryUnavailableReason shows the server sentence as written",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "deliveryUnavailableReason does not collapse a no-rider message into an out-of-area one",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "deliveryUnavailableReason maps the codes when a code is what arrives",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "deliveryUnavailableReason falls back rather than showing an unknown code to a customer",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "deliveryUnavailableReason falls back for absent, empty or non-string input",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "menuStore.test.ts",
+      "cases": [
+        {
+          "name": "customer catalog responses preserves a successful empty menu",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "customer catalog responses returns the successful catalog",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "customer catalog responses rejects an outage instead of inventing an empty menu",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "customer catalog responses rejects a malformed success response",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "customer catalog responses changes availability through the stock-only endpoint without sending a price",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "customer catalog responses keeps a price edit on the menu-management endpoint and reports a denial",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "prepTime.test.ts",
+      "cases": [
+        {
+          "name": "outletPrepMinutes turns seconds into whole minutes, rounding up",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "outletPrepMinutes never shows less than the 15-minute floor orders are promised",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "outletPrepMinutes is null when there is no usable value",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "stepPrepMinutes moves in fives and stays within 15..90",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "restaurantFacts.test.ts",
+      "cases": [
+        {
+          "name": "restaurant facts rounds the raw double the backend sends for distance",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "restaurant facts says free instead of a zero fee",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "restaurant facts does not show 0 stars for an unreviewed kitchen",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "useCustomerStorefront.test.ts",
+      "cases": [
+        {
+          "name": "customer catalog recovery reports a failed menu and retries the same outlet successfully",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "customer catalog recovery distinguishes successful empty data from a failed request",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "customer catalog recovery ignores an old outlet response after the customer switches outlets",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "addressParts.test.ts",
+      "cases": [
+        {
+          "name": "parseIndianAddress splits a state and postcode sharing one part, and drops the country",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "parseIndianAddress takes a postcode that stands on its own",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "parseIndianAddress leaves the fields it cannot find empty rather than guessing",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "parseIndianAddress keeps every part between the street and the city as the second line",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "orderStatus.test.ts",
+      "cases": [
+        {
+          "name": "order status classification every OrderStatus the backend declares is classified",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "order status classification every DeliveryStatus the backend declares is classified",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "order status classification the two statuses Phase 3 added are terminal, not active",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "order status classification an order awaiting delay approval is still active",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "order status classification a delivered order is finished but not failed",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "order status classification a failed delivery ends the order whatever the order status says",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "order status classification an in-flight delivery keeps the order active",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "order status classification a status the UI has never heard of keeps polling rather than freezing the tracker",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "order status classification the terminal copy says who ended the order",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "completedStages -- what the customer timeline shows PENDING_ACCEPTANCE / undefined -> 1",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "completedStages -- what the customer timeline shows AWAITING_DELAY_APPROVAL / undefined -> 1",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "completedStages -- what the customer timeline shows ACCEPTED / undefined -> 2",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "completedStages -- what the customer timeline shows PREPARING / undefined -> 2",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "completedStages -- what the customer timeline shows READY_FOR_PICKUP / ASSIGNED -> 3",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "completedStages -- what the customer timeline shows HANDED_OVER / ASSIGNED -> 3",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "completedStages -- what the customer timeline shows HANDED_OVER / AT_RESTAURANT -> 3",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "completedStages -- what the customer timeline shows HANDED_OVER / OUT_FOR_DELIVERY -> 4",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "completedStages -- what the customer timeline shows HANDED_OVER / DELIVERED -> 5",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "completedStages -- what the customer timeline shows CANCELLED_BY_RESTAURANT / undefined -> 0",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "completedStages -- what the customer timeline shows never reports more stages than exist",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "isOrderChatOffered -- the chat and every entry point into it an order still happening always offers chat",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "isOrderChatOffered -- the chat and every entry point into it a delivered order offers chat for two hours after its last update, then stops",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "isOrderChatOffered -- the chat and every entry point into it a finished order with no update time offers none",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "isOrderChatOffered -- the chat and every entry point into it a failed order follows the same window",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "useCustomerAddresses.test.ts",
+      "cases": [
+        {
+          "name": "saved delivery selection reconciliation fallback from a missing saved ID updates label, ID and coordinates together",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "saved delivery selection reconciliation an existing selected saved ID refreshes stale text and coordinates from the server",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "saved delivery selection reconciliation an empty saved-address list clears the removed saved selection and prompts for a location",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "saved delivery selection reconciliation an explicit GPS selection survives reload with saved-address response {\"data\":[{\"id\":\"home-1\",\"label\":\"Home\",\"addressLine1\":\"12 Seed Street\",\"city\":\"Bengaluru\",\"latitude\":12.98,\"longitude\":77.64}]}",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "saved delivery selection reconciliation an explicit GPS selection survives reload with saved-address response {\"data\":[]}",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "useCustomerCart.test.ts",
+      "cases": [
+        {
+          "name": "useCustomerCart payment method no payment method means no order and a visible error",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useCustomerCart payment method a method the customer chose is sent as-is",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useCustomerCart payment method an older empty-menu quote cannot overwrite the cart quote",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useCustomerCart payment method an unavailable-item response removes only rejected items and keeps checkout retryable",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useCustomerCart payment method removing the only rejected cart item does not fabricate successful payment",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useCustomerCart payment method tracking starts from the current server order after fast Dev payment completion",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useCustomerCart payment method a failed tracking refresh preserves successful creation without another order POST",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "validated reorder cart restoration restores multiple lines and quantities atomically without affecting another outlet",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "useCustomerOrders.test.ts",
+      "cases": [
+        {
+          "name": "useCustomerOrders polling an order awaiting delay approval keeps the poller running and sees the transition",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useCustomerOrders polling a terminal order stops the poller",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useCustomerOrders polling a newly created order observes payment completion promptly, then stops rapid polling",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useCustomerOrders polling an order that stays CREATED returns to normal polling after the bounded payment refresh",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "useCustomerReorder.test.ts",
+      "cases": [
+        {
+          "name": "currentReorderItems uses current catalogue prices/names and retains historical quantities",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "currentReorderItems aggregates repeated menu IDs before quoting",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "currentReorderItems rejects invalid quantity 0",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "currentReorderItems rejects invalid quantity -1",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "currentReorderItems rejects invalid quantity 1.5",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "currentReorderItems rejects invalid quantity 9007199254740992",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "currentReorderItems never partially restores 'missing' items",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "currentReorderItems never partially restores 'unavailable' items",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "currentReorderItems never partially restores 'invalid-price' items",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "currentReorderItems refuses an incomplete order rather than replaying a cancelled cart",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useCustomerReorder validates the owned order and current quote before atomically restoring and opening the cart",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useCustomerReorder requires a selected saved address before any network or cart work",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useCustomerReorder keeps an existing cart when its replacement is declined",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useCustomerReorder requires confirmation before replacing an existing cart with the original quantities",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useCustomerReorder rejects mismatched order identity",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useCustomerReorder rejects mismatched order identity",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useCustomerReorder does not add items from a closed/inactive outlet",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useCustomerReorder does not add items from a closed/inactive outlet",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useCustomerReorder keeps the cart unchanged when the authoritative quote rejects the address",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useCustomerReorder does not double-add when repeat clicks happen during validation",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useCustomerReorder does not restore a quote after the customer changes address during validation",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useCustomerReorder preserves edits made to the target cart while validation is pending",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useCustomerReorder reports a safe retry message when the current menu cannot load",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "useLiveOrderActions.test.ts",
+      "cases": [
+        {
+          "name": "useLiveOrderActions.answerDelay shows the status the server settles on when the customer declines",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useLiveOrderActions.answerDelay moves to ACCEPTED when the customer agrees to wait, without asking first",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useLiveOrderActions.answerDelay changes nothing when the customer backs out of the confirm",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useLiveOrderActions.answerDelay leaves the status alone and says why when the server refuses",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "useOrderRefunds.test.tsx",
+      "cases": [
+        {
+          "name": "order-scoped refund recovery distinguishes failed reads from empty success and lets the customer retry",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "order-scoped refund recovery refreshes pending to completed on the same open order and retains last data on failure",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "order-scoped refund recovery rejects late old-order results and does not leak old refund details across orders",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "order-scoped refund recovery does not accumulate polling requests and stops when disabled or unmounted",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "order-scoped refund recovery stops polling an ended order with no refunds",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "order-scoped refund recovery stops polling an ended order with only settled refunds",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "order-scoped refund recovery keeps polling until a pending refund settles, then stops",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "useReorderSuggestions.test.ts",
+      "cases": [
+        {
+          "name": "relativeAgo uses the artboard phrasing",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "relativeAgo returns empty rather than NaN for an unparseable date",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "toSuggestions keeps only the most recent completed order per restaurant",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "toSuggestions excludes orders that did not complete",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "toSuggestions names the order by its largest line, and counts the rest",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "toSuggestions skips an order with no items rather than rendering an unnamed card",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "toSuggestions honours the limit",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "toSuggestions returns nothing for a customer with no history, so the section disappears",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "CustomerActiveOrdersCarousel.test.tsx",
+      "cases": [
+        {
+          "name": "active-order carousel shows each in-flight identity and chooses the exact order even from the same outlet",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "active-order carousel hides when an order is selected",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "active-order carousel hides when every order is complete",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "CustomerCheckout.test.tsx",
+      "cases": [
+        {
+          "name": "CustomerCheckout shows the delivery address as words, the whole bill, and the final total",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "CustomerCheckout pays from the wallet by default when it covers the bill",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "CustomerCheckout does not let a short wallet be charged and waits for another method",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "CustomerCheckout does not assume the wallet can pay while its balance is still loading",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "CustomerCheckout starts with no tip -- the customer opts in",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "CustomerCheckout a tip is on the bill, in the total on the button, and sent with the order",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "CustomerCheckout checks the wallet against the total with the tip",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "CustomerCheckout never offers an unquoted total as payable",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "CustomerCheckout will not place an order with no address",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "CustomerCheckout reopening checkout cannot pay from a stale wallet balance while refreshing",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "CustomerFreeDeliveryTracker.test.tsx",
+      "cases": [
+        {
+          "name": "free delivery threshold boundaries one paisa below the threshold still shows the amount needed",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "free delivery threshold boundaries at or above the threshold (50) unlocks delivery",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "free delivery threshold boundaries at or above the threshold (50.01) unlocks delivery",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "free delivery threshold boundaries an absent quote threshold shows no invented promotion",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "free delivery threshold boundaries a quote in progress hides stale threshold results",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "CustomerLiveOrderRail.test.tsx",
+      "cases": [
+        {
+          "name": "CustomerLiveOrderRail mounts nothing below 1280 -- no second tracker, map or live stream behind the main column",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "CustomerLiveOrderRail shows the order beside the menu on a wide screen",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "CustomerOrderTracker.test.tsx",
+      "cases": [
+        {
+          "name": "CustomerOrderTracker terminal and payment copy a platform cancellation blames the platform, not the restaurant",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "CustomerOrderTracker terminal and payment copy a restaurant cancellation says so, and shows the reason the server sent",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "CustomerOrderTracker terminal and payment copy a refunded order shows where the money went",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "CustomerOrderTracker terminal and payment copy cancellation is not proof of a completed refund",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "CustomerReceipt.test.tsx",
+      "cases": [
+        {
+          "name": "Customer Receipt & Order Details shows payment method badge on receipt",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Customer Receipt & Order Details shows destination-aware refund copy for failed orders",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "OrderDeliveredSummary.test.tsx",
+      "cases": [
+        {
+          "name": "OrderDeliveredSummary offers the tax invoice once the order is delivered",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "OrderDeliveredSummary offers none for an order that was not delivered",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "OrderDeliveredSummary offers \"Something wrong with this order?\" while the order chat is offered",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "OrderDeliveredSummary hides it once the chat it opens is gone, instead of a button that does nothing",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "OrderDeliveredSummary shows a delivered order refund independently of its delivery status",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "OrderMoneyBreakdown.test.tsx",
+      "cases": [
+        {
+          "name": "OrderMoneyBreakdown lists the rider tip, so the lines add up to the total paid",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "OrderMoneyBreakdown has no tip line without a tip",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "OrderRefundState.test.tsx",
+      "cases": [
+        {
+          "name": "authoritative refund status shows a failed read and retries without pretending it is an empty successful read",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "authoritative refund status REQUESTED never claims money returned",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "authoritative refund status PROCESSING never claims money returned",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "authoritative refund status FAILED never claims money returned",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "authoritative refund status CANCELLED never claims money returned",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "authoritative refund status completed money shows its STORE_CREDIT destination",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "authoritative refund status completed money shows its ORIGINAL_METHOD destination",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "authoritative refund status missing money or destination is unavailable without inventing zero or a return",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "OrderTrackerLive.test.tsx",
+      "cases": [
+        {
+          "name": "OrderTrackerLive does not cancel on a single tap -- it asks first",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "OrderTrackerLive counts down to the food being ready while cooking, and calls it that",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "OrderTrackerLive does not reuse the kitchen ready time as an arrival time once the rider has the food",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "OrderTrackerLive shows the delivery code only when there is one",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "OrderTrackerLive shows the delay the kitchen asked for, with its reason",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "OrderTrackerLive falls back to the generic delay prompt when the order carries no request",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "OrderTrackerLive approving a delay sends only the answer -- no invented minutes",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "OrderTrackerLive leads with the arrival estimate when the server has one, and still says when the food is ready",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "OrderTrackerLive keeps counting to the door after pickup",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "OrderTrackerLive carries no demo instructions",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "TaxInvoiceSheet.test.tsx",
+      "cases": [
+        {
+          "name": "TaxInvoiceSheet shows the numbered invoice with the supplier, lines and tax, and prints it",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "TaxInvoiceSheet says why when the order is not delivered yet, and can retry",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "TaxInvoiceSheet asks for nothing while closed",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "DailySelfiePrompt.test.tsx",
+      "cases": [
+        {
+          "name": "daily operational selfie requires a completed duty upload then verifies and syncs readiness without going online",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "daily operational selfie preserves a recoverable failure without claiming verified readiness",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "daily operational selfie serialises repeated clicks and never claims eligibility after the application becomes suspended",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "daily operational selfie rejects malformed provider confidence undefined before refreshing duty eligibility",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "daily operational selfie rejects malformed provider confidence NaN before refreshing duty eligibility",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "daily operational selfie rejects malformed provider confidence 1.01 before refreshing duty eligibility",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "daily operational selfie aborts a departed prompt and ignores a late biometric success",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "DeliveryActiveJob.test.tsx",
+      "cases": [
+        {
+          "name": "prepaid delivery completion asks only for the delivery OTP and can confirm immediately",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "active handover details shows owned items, quantities, customer and order total, and closes accessibly",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "active handover details does not leave the previous order details open when the active job changes",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "active handover details states when handover items are unavailable instead of claiming an empty checklist",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "RiderWalletSection.test.tsx",
+      "cases": [
+        {
+          "name": "RiderWalletSection sums tips over the 30 calendar days up to and including the rider\u2019s today, as its label says",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "RiderWalletSection shows a balance the ledger could not report as unavailable, not \u20b90",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "RiderWalletSection shows the balance the ledger reports",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "CallOverlay.test.tsx",
+      "cases": [
+        {
+          "name": "CallOverlay controls gives an outgoing caller labeled mute and end controls",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "CallOverlay controls gives an incoming caller labeled accept and decline controls",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "ChatMessageList.test.tsx",
+      "cases": [
+        {
+          "name": "ChatMessageList refund actions labels a support moderator message using the server-defined sender type",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "ChatMessageList refund actions does not offer a refund acceptance action to a restaurant or rider viewer",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "ChatMessageList refund actions offers the customer action without a browser-supplied customer id",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "ChatMessageList refund actions preserves the selected partial items, quantities and reason in the submitted request",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "ChatMessageList refund actions blocks a stale, mismatched or incomplete partial quote: {\"quoteAmount\":25,\"refundType\":\"PARTIAL\"}",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "ChatMessageList refund actions blocks a stale, mismatched or incomplete partial quote: {\"quoteAmount\":25,\"refundType\":\"PARTIAL\",\"orderId\":\"order-1\",\"reason\":\"Missing\",\"items\":[]}",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "ChatMessageList refund actions blocks a stale, mismatched or incomplete partial quote: {\"quoteAmount\":25,\"refundType\":\"PARTIAL\",\"orderId\":\"order-2\",\"reason\":\"Missing\",\"items\":[{\"itemId\":\"f0000000-0000-4000-8000-000000000001\",\"quantity\":1}]}",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "ChatMessageList refund actions blocks a stale, mismatched or incomplete partial quote: {\"quoteAmount\":25,\"refundType\":\"PARTIAL\",\"orderId\":\"order-1\",\"reason\":\"Missing\",\"items\":[{\"itemId\":\"f0000000-0000-4000-8000-000000000001\",\"quantity\":0}]}",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "ChatMessageList refund actions does not invent an eligible amount for an invalid quote: undefined",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "ChatMessageList refund actions does not invent an eligible amount for an invalid quote: 0",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "ChatMessageList refund actions does not invent an eligible amount for an invalid quote: -1",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "ChatMessageList refund actions shows the support-request amount without claiming that an OPEN ticket is a paid refund",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "ChatMessageList refund actions marks a legacy decision amount unavailable rather than crediting a fabricated zero",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "ChatMessageList older history offers earlier messages when there are some, and asks for them once per click",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "ChatMessageList older history shows the request in flight and blocks a second one",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "ChatMessageList older history offers nothing when the whole history is shown",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "RefundRequestModal.test.tsx",
+      "cases": [
+        {
+          "name": "Refund quote form readiness retains the validated selection while disconnected and submits only after connection is restored",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Refund quote form readiness keeps the form and selection open when the send fails instead of claiming success",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "confirmedProgress.test.ts",
+      "cases": [
+        {
+          "name": "applyConfirmedProgress keeps a confirmed pickup when a poll still has the rider at the restaurant",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "applyConfirmedProgress keeps a confirmed delivery when a poll still lists the order as out for delivery",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "applyConfirmedProgress hands back to the server once it has caught up",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "applyConfirmedProgress lets a cancellation win over anything the rider confirmed",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "applyConfirmedProgress forgets orders that have left the list",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "recordConfirmedProgress records a step and forgets it on a revert that carries none",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "dispatchOffers.test.ts",
+      "cases": [
+        {
+          "name": "actionable dispatch offers removes a timed-out or declined offer from both presentation choices",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "actionable dispatch offers uses the absolute deadline even when the last poll had positive seconds remaining",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "actionable dispatch offers does not offer assigned, cancelled, or expiry-less orders",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "actionable dispatch offers skips an expired first offer so a subsequent live dispatch can open",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "dutyStatus.test.ts",
+      "cases": [
+        {
+          "name": "parseDutyStatusMessage reads a DUTY_STATUS message",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "parseDutyStatusMessage ignores the other messages on the rider socket, and anything malformed",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "isOnDuty counts carrying an order as on duty",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "dutyChangeNotice explains a server-side demotion and stays quiet about the rider\u2019s own request",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "applyDutyStatus flips a screen that still says Online when the server has the rider offline, and says why",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "applyDutyStatus does not nag a rider already looking at Offline when the reconnect snapshot agrees",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "applyDutyStatus keeps a rider on delivery on duty",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "reactToLocationError does not end the shift for a transient error: it only drops the location fix",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "reactToLocationError ends the shift on a denial once the server accepts, and asks for permission again",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "reactToLocationError tells a rider mid-delivery that location is needed when the server refuses to take them off duty",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "apiErrorMessage prefers the server\u2019s reason",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "useDeliveryOrders.afterOtp.test.ts",
+      "cases": [
+        {
+          "name": "the rider screen right after an accepted OTP stays on \"deliver to door\" after pickup while polls still say at the restaurant",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "the rider screen right after an accepted OTP does not bring a delivered job back as the active contract",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "useDeliveryOrders.reping.test.ts",
+      "cases": [
+        {
+          "name": "a lapsed dispatch offer that the server makes again prompts the rider again on the second offer",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "a lapsed dispatch offer that the server makes again loads completed deliveries while the rider is offline",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "a lapsed dispatch offer that the server makes again keeps the dashboard usable while a just-delivered payout is still enriching",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "a lapsed dispatch offer that the server makes again reconciles a confirmed delivery payout while the rider is offline",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "a lapsed dispatch offer that the server makes again keeps an exact payout when an older history response arrives afterwards",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "a lapsed dispatch offer that the server makes again marks a payout unavailable after four unsuccessful reads",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "a lapsed dispatch offer that the server makes again clears an unavailable payout when history later supplies the confirmed amount",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "a lapsed dispatch offer that the server makes again does not retry after the rider screen unmounts",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "a lapsed dispatch offer that the server makes again does not disguise an authorization failure as a pending payout",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "a lapsed dispatch offer that the server makes again prompts again when the second offer arrives only through polling (socket push missed)",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "useDeliveryOrders.suspension.test.ts",
+      "cases": [
+        {
+          "name": "authoritative current delivery during suspension does not classify a rider as idle while the active-order request is pending",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "authoritative current delivery during suspension exposes an active-order outage and restores the screen only after a successful retry",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "authoritative current delivery during suspension ignores an old rider request that completes after the signed rider changes",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "authoritative current delivery during suspension refreshes suspension without ending an owned delivery or reconnecting for a changed callback",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "authoritative current delivery during suspension never keeps a foreign or terminal delivery active ({\"deliveryExecutiveId\":\"22222222-2222-4222-8222-222222222222\"})",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "authoritative current delivery during suspension never keeps a foreign or terminal delivery active ({\"deliveryStatus\":\"DELIVERED\"})",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "authoritative current delivery during suspension never keeps a foreign or terminal delivery active ({\"deliveryStatus\":\"FAILED\"})",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "authoritative current delivery during suspension never keeps a foreign or terminal delivery active ({\"status\":\"CANCELLED\"})",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "authoritative current delivery during suspension never keeps a foreign or terminal delivery active ({\"status\":\"CANCELLED_BY_RESTAURANT\"})",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "useRiderDuty.test.ts",
+      "cases": [
+        {
+          "name": "useRiderDuty goes online at the position the device just reported",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useRiderDuty stays offline and says why when no location can be found",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useRiderDuty asks for location permission when it was denied, without calling the server",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useRiderDuty shows the server\u2019s reason when it refuses to put the rider on duty",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useRiderDuty goes offline when the server accepts",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useRiderDuty opens daily selfie verification only for the explicit server refusal and stays offline",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useRiderDuty stays on duty and says why when the server refuses to take a rider off mid-delivery",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useRiderDuty does not try to go online when notification permission is refused",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "useRiderJobActions.test.ts",
+      "cases": [
+        {
+          "name": "delivery payout reconciliation starts only after the delivery-status update succeeds",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "delivery payout reconciliation does not start reconciliation when delivery confirmation fails",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "handleAcceptPing assignment confirmation does not activate the job or start dependent subscriptions before the server confirms acceptance",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "handleAcceptPing assignment confirmation keeps an unsuccessful acceptance unassigned and allows a subsequent attempt",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "handleAcceptPing assignment confirmation ignores repeated acceptance clicks while the first request is pending",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "handleAcceptJob assignment confirmation does not activate the job or start dependent subscriptions before the server confirms acceptance",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "handleAcceptJob assignment confirmation keeps an unsuccessful acceptance unassigned and allows a subsequent attempt",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "handleAcceptJob assignment confirmation ignores repeated acceptance clicks while the first request is pending",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "useChatSession.test.tsx",
+      "cases": [
+        {
+          "name": "useChatSession initialization ends initialization before deferred history completes and retains the returned messages",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useChatSession initialization history older than the newest window offers older messages only when the server says the newest page is not the last",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useChatSession initialization history older than the newest window does not offer them when the newest page is the whole history",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useChatSession initialization history older than the newest window loads the next page back, merges it in time order once, and stops at the last page",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useChatSession initialization history older than the newest window keeps what is shown and reports a failed older page so it can be retried",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useChatSession initialization keeps the session usable and reports a history failure without restarting initialization",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useChatSession initialization exposes a retry after session creation fails and retries the request",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useChatSession initialization clears a prior order session and ignores its late response after the selected order changes",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useChatSession initialization shows a retry action instead of silently leaving the composer disabled",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useChatSession initialization exposes the reconnect status after a session opens without a WebSocket connection",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useChatSession initialization keeps a line break on Shift+Enter and sends the complete text on Enter",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useChatSession initialization keeps the composer text when the socket closes before publish",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useChatSession initialization throttles typing indicators and disables both image controls at the four-image limit",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useChatSession initialization shows an upload error when the image endpoint does not return a usable URL",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useChatSession initialization blocks text above the server limit and explains why it cannot be sent",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "useChatWebSocket.test.tsx",
+      "cases": [
+        {
+          "name": "useChatWebSocket image upload uses the generated UploadResponseDto url field after a successful upload",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useChatWebSocket image upload does not report success when the upload response has no URL",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useChatWebSocket image upload subscribes through authenticated user destinations instead of shared chat topics",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "useWebRTC.test.tsx",
+      "cases": [
+        {
+          "name": "useWebRTC call setup keeps a fresh peer connection current through microphone permission and publishes its offer",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useWebRTC call setup still stops a microphone stream granted after cleanup while permission was pending",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "useOtpLogin.test.tsx",
+      "cases": [
+        {
+          "name": "OTP login and explicit registration rejects phone  before requesting an OTP",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "OTP login and explicit registration rejects phone 1 before requesting an OTP",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "OTP login and explicit registration rejects phone 1234567 before requesting an OTP",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "OTP login and explicit registration rejects phone 12345678 before requesting an OTP",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "OTP login and explicit registration rejects phone 123456789 before requesting an OTP",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "OTP login and explicit registration rejects phone 12345678901 before requesting an OTP",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "OTP login and explicit registration rejects phone abcdefghij before requesting an OTP",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "OTP login and explicit registration rejects OTP  before verification or session creation",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "OTP login and explicit registration rejects OTP 1 before verification or session creation",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "OTP login and explicit registration rejects OTP 123 before verification or session creation",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "OTP login and explicit registration rejects OTP 12345 before verification or session creation",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "OTP login and explicit registration rejects OTP 1234567 before verification or session creation",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "OTP login and explicit registration rejects OTP abcdef before verification or session creation",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "OTP login and explicit registration enrolls CUSTOMER through signup after normal OTP initiation and Dev autofill",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "OTP login and explicit registration enrolls DELIVERY through signup after normal OTP initiation and Dev autofill",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "OTP login and explicit registration enrolls RESTAURANT through signup after normal OTP initiation and Dev autofill",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "OTP login and explicit registration keeps admin on the login endpoint and clears signup intent when changing portals",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "OTP login and explicit registration does not finish signup when verification is rejected",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "OTP login and explicit registration shows the device collision for Axios login/signup errors (signup=false)",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "OTP login and explicit registration shows the device collision for Axios login/signup errors (signup=true)",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "OTP login and explicit registration keeps a malformed conflict as an error without exposing an empty collision dialog",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "DocumentUploadField.test.tsx",
+      "cases": [
+        {
+          "name": "registered private document uploads signs actual MIME and size, uploads without app credentials and accepts only the completed key",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "registered private document uploads refuses HTML before requesting a URL",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "registered private document uploads refuses empty before requesting a URL",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "registered private document uploads refuses oversize before requesting a URL",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "registered private document uploads never exposes a signed URL or accepts a file when confirmation fails",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "registered private document uploads blocks a concurrent drop while the first request is pending and aborts on unmount",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "registered private document uploads refuses disabled selection and drag/drop",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "AdminLedgerView.test.tsx",
+      "cases": [
+        {
+          "name": "AdminLedgerView reads transactions from the gateway-routed admin path",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "AdminLedgerView pages through the ledger rather than fetching everything",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "AdminLedgerView shows the backend direction and account for every displayed ledger entry",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "AdminLedgerView offers only the categories the backend enum defines",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "AdminLedgerView refuses an owner id with no owner type instead of querying for it",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "AdminLedgerView clears filters before fetching the unfiltered ledger",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "AdminLedgerView reports a failed fetch instead of showing an empty ledger",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "AdminAssignmentMap.test.tsx",
+      "cases": [
+        {
+          "name": "AdminAssignmentMap does not substitute Bangalore coordinates when the restaurant location is missing",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "AdminFleetMap.test.tsx",
+      "cases": [
+        {
+          "name": "AdminFleetMap refresh lifecycle offers an accessible refresh control and refetches every fleet layer on demand and after 30 seconds",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "AdminFleetMap refresh lifecycle propagates the selected fleet city to every map layer",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "OrderTrackingMap.test.tsx",
+      "cases": [
+        {
+          "name": "owned live map stream aborts the old stream and binds the next owned order when selection changes",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "owned live map stream starts and stops the stream when its live-view mode changes",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "owned live map stream renders valid axis coordinates +0/10",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "owned live map stream renders valid axis coordinates 10/+0",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "owned live map stream does not plot invalid/unset coordinates 91/10",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "owned live map stream does not plot invalid/unset coordinates 10/181",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "owned live map stream does not plot invalid/unset coordinates +0/+0",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "owned live map stream rejects a transient HTTP failure so the stream library can reconnect",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "owned live map stream rejects an HTTP200 JSON response instead of claiming it is a live stream",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "owned live map stream accepts the event-stream content type and aborts on unmount",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "owned live map stream updates the same rendered courier marker on the next location event",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "owned live map stream exposes reconnecting after EOF and resets retry backoff after reconnection",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "owned live map stream stops retrying a denied stream and consumes its rejected promise",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "mapPoints.test.ts",
+      "cases": [
+        {
+          "name": "knownPoint rejects missing, zero and out-of-range values instead of defaulting them",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "routeEnds routes the rider to the restaurant before pickup and to the customer after",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "routeEnds draws restaurant to customer when there is no rider position",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "routeEnds draws no route to or from an unknown point",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "missingPointsNote says what it could not show",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "treats blank coordinate strings as missing while accepting a single zero axis",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "placeOrderMap.test.ts",
+      "cases": [
+        {
+          "name": "placePins popup content uses accessible DOM popup controls instead of parsed HTML",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "smoothPosition.test.ts",
+      "cases": [
+        {
+          "name": "createSmoothMover places the first fix immediately \u2014 there is nothing to move from",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "createSmoothMover travels between fixes instead of jumping",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "createSmoothMover decelerates rather than moving linearly",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "createSmoothMover jumps straight to the fix when useReducedMotion is set, with no frames at all",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "createSmoothMover a new fix mid-hop starts from where the marker actually is",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "createSmoothMover interpolates each axis independently",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "applicationSdk.test.ts",
+      "cases": [
+        {
+          "name": "actual generated application SDK request contracts uses the generated restaurant PUT alias with the authenticated body and resolved organisation",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "actual generated application SDK request contracts uses the outlet update alias rather than the draft PUT alias",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "actual generated application SDK request contracts sends delivery draft fields without supplying a user ID or phone",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "usePartnerApplication.test.tsx",
+      "cases": [
+        {
+          "name": "application submission polling polls at ten seconds only while SUBMITTED, then stops on IN_REVIEW and unmount",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "application submission polling does not poll DRAFT",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "application submission polling does not poll IN_REVIEW",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "application submission polling does not poll APPROVED",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "application submission polling does not poll REJECTED",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "application submission polling does not poll SUSPENDED",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "application submission polling discards an older request after accepting a newer saved version",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "application submission polling clears retained details when access is refused on refresh",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "AcceptClock.test.tsx",
+      "cases": [
+        {
+          "name": "AcceptClock shows the time left to accept",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "AcceptClock turns danger-red in the last two minutes",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "AcceptClock says what happens at zero instead of sitting on 0:00",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "RestaurantOrderDrawers.test.tsx",
+      "cases": [
+        {
+          "name": "RestaurantOrderDrawers -- cancel will not cancel without a reason",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "RestaurantOrderDrawers -- cancel treats whitespace as no reason",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "RestaurantOrderDrawers -- cancel cancels once there is a reason",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "RestaurantOrderDrawers -- cancel says the reason is required",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "RestaurantTabPanels.test.tsx",
+      "cases": [
+        {
+          "name": "RestaurantTabPanels renders the orders panel first",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "RestaurantTabPanels swaps the panel when activeTab changes \u2014 the defect that shipped",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "RestaurantTabPanels shows earnings for the selected outlet",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "RestaurantTabPanels offers campaigns under the selected outlet's brand and time zone",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "acceptDeadline.test.ts",
+      "cases": [
+        {
+          "name": "acceptDeadline is ten minutes after the order arrived",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "acceptDeadline falls back to updatedAt, and gives up rather than inventing a time",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "formatCountdown reads as minutes and seconds and never goes negative",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "promisedPrepMinutes matches the server: prepTime, else 15, plus any added minutes",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "useRestaurantCatalog.test.ts",
+      "cases": [
+        {
+          "name": "restaurant stock independently of customer opening hours a closed category does not mark an otherwise stocked dish sold out",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "restaurant stock independently of customer opening hours persisted out-of-stock still wins when the effective menu is also closed",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "restaurant stock independently of customer opening hours an unreadable stock response cannot render dishes as successfully stocked",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "restaurant stock independently of customer opening hours overlapping clicks cannot reorder two writes and failure restores the persisted stock",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "useRestaurantOrders.test.ts",
+      "cases": [
+        {
+          "name": "useRestaurantOrders -- optimistic status keeps the new status when the server agrees",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useRestaurantOrders -- optimistic status puts the old status back when the server refuses, and says so",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useRestaurantOrders -- optimistic status clears the \"cooking\" flag when start-cooking fails, so the poll cannot resurrect it",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "AdminReviewsView.test.tsx",
+      "cases": [
+        {
+          "name": "AdminReviewsView asks for nothing until an id is supplied",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "AdminReviewsView shows the author and the order a review came from",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "AdminReviewsView looks an author up by id when asked to",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "AdminReviewsView says plainly when nothing was found",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "AdminReviewsView offers no way to change or remove a review",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "AdminReviewsView clears old results on lookup-mode changes and ignores an earlier response",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "DishRatingsPanel.test.tsx",
+      "cases": [
+        {
+          "name": "DishRatingsPanel puts the worst-rated dish at the top",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "DishRatingsPanel sorts unrated dishes last rather than treating them as zero",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "DishRatingsPanel shows the average and the count for a rated dish",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "DishRatingsPanel says how much of the menu has been rated",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "DishRatingsPanel asks for ratings in one request for the whole menu",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "DishRatingsPanel says so plainly when the outlet has no menu",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "RateOrderModal.test.tsx",
+      "cases": [
+        {
+          "name": "RateOrderModal lists every target the order offers",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "RateOrderModal will not submit until something has actually been rated",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "RateOrderModal sends only the targets that were rated",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "RateOrderModal confirms in a way that says the review is final",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "RateOrderModal treats an already-reviewed conflict as a refresh, not an error",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "RateOrderModal surfaces a genuine failure instead of swallowing it",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "RateOrderModal explains why an order cannot be reviewed",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "RateOrderModal shows a previously submitted review read-only",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "RateOrderModal reports a transport failure with a way to retry",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "RateOrderModal asks for nothing while closed",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "StarRating.test.tsx",
+      "cases": [
+        {
+          "name": "StarRating renders read-only as an image with the value in its label",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "StarRating exposes five radios and marks the selected one when interactive",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "StarRating reports a click on a star",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "StarRating is operable from the keyboard",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "StarRating does not step past either end",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "StarRating ignores keys that are not ratings",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "reviewCopy.test.ts",
+      "cases": [
+        {
+          "name": "reviewRejectionCopy translates every reason the service can send",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "reviewRejectionCopy falls back rather than showing an enum name",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "reviewRejectionCopy says plainly that a review cannot be changed",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "isAlreadyReviewed is true only for the already-reviewed code",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "authorLabel uses the name the server chose to send",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "authorLabel stands in neutrally when the author is withheld",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "useEntityAggregates.failure.test.tsx",
+      "cases": [
+        {
+          "name": "useEntityAggregates \u2014 when the review service fails degrades to no ratings rather than breaking the menu",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "useEntityAggregates.test.tsx",
+      "cases": [
+        {
+          "name": "useEntityAggregates maps the batch response by entity id",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useEntityAggregates parses the average out of the string the service sends",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useEntityAggregates asks once for a repeated id, and skips blanks",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useEntityAggregates does not refetch when only the id order changes",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useEntityAggregates asks for nothing when there are no ids",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useEntityAggregates asks for nothing when disabled",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useEntityAggregates never asks for more ids than the server accepts",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "useOrderReviewEligibility.failure.test.tsx",
+      "cases": [
+        {
+          "name": "useOrderReviewEligibility \u2014 when the request itself fails surfaces the failure instead of rendering an empty sheet",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "useOrderReviewEligibility.test.tsx",
+      "cases": [
+        {
+          "name": "useOrderReviewEligibility fetches nothing until it is enabled",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useOrderReviewEligibility loads the eligibility for the order it was given",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useOrderReviewEligibility does not treat a refusal as an error",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useOrderReviewEligibility reports loading again when the order changes, not the previous order data",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useOrderReviewEligibility refetches on demand, which is what the 409 path relies on",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useOrderReviewEligibility passes the order id as a path parameter",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "AdminPayoutsPage.test.tsx",
+      "cases": [
+        {
+          "name": "AdminPayoutsPage opens on the pending queue",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "AdminPayoutsPage asks the gateway-routed admin path for the pending queue",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "AdminPayoutsPage reads the payout history from the admin path once a payee is named",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "AdminPayoutsPage survives a queue the service could not return",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "OperationsPage.test.tsx",
+      "cases": [
+        {
+          "name": "OperationsPage opens on ledger rejections, because that is where money goes missing",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "OperationsPage shows a rejection with its reason, payload and age",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "OperationsPage will not resolve a rejection without a note",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "OperationsPage resolves a rejection with the note the operator typed",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "OperationsPage shows reconciliation runs on its own tab",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "OperationsPage shows a partial run as a failure, not as success",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "OperationsPage shows a successful run in green",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "OperationsPage says when there is nothing stuck rather than showing a blank panel",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "OperationsPage lists failed payment webhooks with the gateway and the error",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "OperationsPage retries a dead-lettered webhook by its event id and refreshes",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "OperationsPage lists wallet outbox events stuck in the DLQ",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "OperationsPage retries a wallet outbox event by its id",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "OperationsPage surfaces a fetch failure to the operator",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "OperationsPage keeps a rejected movement open and shows the mutation failure",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "OperationsPage does not retry a webhook until the operator confirms the action",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "OperationsPage prevents a duplicate webhook retry while the request is pending",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "OperationsPage surfaces a failed wallet retry instead of silently leaving it in the queue",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "OperationsPage failed refunds lists a failed refund with its amount, order and reason",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "OperationsPage failed refunds retries the exact refund only after the operator confirms, then refreshes",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "OperationsPage failed refunds says when no refund has failed",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "OperationsPage failed refunds surfaces a refused retry instead of looking queued",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "PayoutDrawer.test.tsx",
+      "cases": [
+        {
+          "name": "PayoutDrawer order-money links links a UUID order reference and leaves a payout-transfer UUID as plain text",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "PartnerApprovalsPage.test.tsx",
+      "cases": [
+        {
+          "name": "admin partner application decisions requires a clear rejection reason before any decision call",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "admin partner application decisions rejects the saved restaurant version and refreshes its queue",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "admin partner application decisions refreshes the actual current version and queue after a concurrent 409",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "admin partner application decisions approves the selected delivery applicant through the delivery endpoint",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "admin partner application decisions does not offer approval when private documents are unavailable",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "admin partner application decisions discards late history from a previously selected partner type",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "AmountBreakdown.test.tsx",
+      "cases": [
+        {
+          "name": "AmountBreakdown renders labels and computed total",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "AmountBreakdown renders explicitly provided total and totalLabel",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "ConfirmMoneyAction.test.tsx",
+      "cases": [
+        {
+          "name": "ConfirmMoneyAction submits a small amount on one click",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "ConfirmMoneyAction demands the amount be typed at \u20b910,000 and above",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "ConfirmMoneyAction stays disabled while the typed amount is wrong",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "ConfirmMoneyAction enables once the exact amount is typed, and passes an idempotency key",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "ConfirmMoneyAction shows the effect of the action and blocks a second click while pending",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "StatementTable.test.tsx",
+      "cases": [
+        {
+          "name": "StatementTable announces loading rather than printing it as body text",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "StatementTable names the table for assistive technology",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "StatementTable renders empty state",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "StatementTable renders rows with date, description, debit, credit and balance",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "AddToCartControl.test.tsx",
+      "cases": [
+        {
+          "name": "AddToCartControl offers ADD while the cart is empty of it",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "AddToCartControl morphs into the stepper once there is one",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "AddToCartControl reports adding, incrementing and decrementing to the caller",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "AddToCartControl swaps instantly under reduced motion, to the same two states",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "Button.test.tsx",
+      "cases": [
+        {
+          "name": "Button renders a real button element",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Button defaults to type=\"button\" so it never submits a form by accident",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Button meets the 44px touch-target floor at md and lg",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Button gives success and warning visibly different fills",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Button shows a spinner and blocks clicks while loading",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Button does not fire when disabled",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Button fires when enabled",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Button travels on press and springs back on release",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Button does not travel when the pointer leaves mid-press",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Button does not travel when the button is inert",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Button does not travel at all under reduced motion",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "SwipeAction.test.tsx",
+      "cases": [
+        {
+          "name": "SwipeAction is a slider, not a button \u2014 a tap must not be able to fire it",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "SwipeAction confirms on a full swipe",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "SwipeAction does not confirm on a partial swipe, and springs back",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "SwipeAction is operable from a keyboard, so it is not a drag-only control",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "SwipeAction stays locked while the confirmation is in flight",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "SwipeAction re-arms once the confirmation settles, so a rejected code can be retried",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "SwipeAction re-arms after a confirmation that throws",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "SwipeAction says it is confirming once it has been",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "SwipeAction ignores every input when disabled",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "SwipeAction clears the rider touch-target floor",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "SwipeAction follows the pointer exactly, which is not motion the reduced-motion preference removes",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "DataTable.test.tsx",
+      "cases": [
+        {
+          "name": "DataTable gives the table an accessible name",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "DataTable renders a header cell per column and a row per record",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "DataTable applies a column alignment to the head and the body together",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "DataTable shows the empty message instead of an empty table",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "DataTable shows a spinner while loading with nothing yet, and the rows once there are some",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "DataTable renders the footer inside the frame",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "DataTable sorts on the column value, not on the rendered cell",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "DataTable leaves a column without a sortValue unsortable",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "DataTable does not reorder the caller's array when it sorts",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "DataTable selects rows and reports the keys to the caller",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "DataTable select-all covers every row, and shows bulk actions only while something is selected",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "DataTable keeps the header in view when asked to",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "PullToRefresh.test.tsx",
+      "cases": [
+        {
+          "name": "PullToRefresh tracks the drag 1:1 rather than animating its own arrival",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "PullToRefresh gets heavy past the trigger instead of running away with the finger",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "PullToRefresh refreshes only when the pull passed the trigger",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "PullToRefresh announces the state it is in",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "PullToRefresh snaps back without animating under reduced motion, and still refreshes",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "PullToRefresh does not start a pull while the page around it is scrolled",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "Spinner.test.tsx",
+      "cases": [
+        {
+          "name": "Spinner announces itself to screen readers by default",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Spinner can be silenced inside an already-labelled control",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Spinner scales with the size prop",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Spinner inherits the surrounding text colour, with a transparent gap for the ring",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "StatusPill.test.tsx",
+      "cases": [
+        {
+          "name": "StatusPill renders the label",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "StatusPill gives every tone a different colour",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "StatusPill only shows the live dot when asked",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "status models payout PAID and CANCELLED no longer share a tone",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "status models refund OPEN and RESOLVED no longer share a tone",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "status models every payout status maps to a distinct tone",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "status models falls back readably for an unknown status",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "status models crossfades when the status changes",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "status models transitions colour only, so prefers-reduced-motion is handled in CSS",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "Select.test.tsx",
+      "cases": [
+        {
+          "name": "Select renders NO native <select> element",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Select exposes the combobox/listbox roles",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Select opens with the keyboard and selects with Enter",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Select skips disabled options when navigating",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Select tracks the active option with aria-activedescendant",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Select marks the selected option with aria-selected",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Select closes on Escape and returns focus to the trigger",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Select shows the placeholder until a value is chosen",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "Stepper.test.tsx",
+      "cases": [
+        {
+          "name": "Stepper names both controls and the value",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Stepper announces the quantity as it changes",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Stepper pops the value on change, then settles",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Stepper does not pop under reduced motion",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Stepper stops at its bounds",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "Switch.test.tsx",
+      "cases": [
+        {
+          "name": "Switch is a switch, not a button with two icons",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Switch reports the next state to the caller",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Switch travels the thumb and crossfades the track",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Switch arrives instantly under reduced motion, in the same place",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Switch does not report a change while disabled",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "mapMarker.test.ts",
+      "cases": [
+        {
+          "name": "createMapPin takes its depth and shape from the tokens, not from a class string",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "createMapPin gives the amber pin dark ink, because amber cannot carry white text",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "createMapPin carries the caller classes and the glyph through untouched",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "createMapPin makes the callout glass, which is the one part of a marker that floats",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "createMapPin renders external popup values as text rather than markup",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "createMapPin removes executable elements and attributes from an icon string before mounting it",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "ScreenTransition.test.tsx",
+      "cases": [
+        {
+          "name": "ScreenTransition renders the screen it is given",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "ScreenTransition swaps to the next screen when the key changes",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "ScreenTransition rises in and fades out, and leaves faster than it arrives",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "ScreenTransition mounts in its resting state when useReducedMotion is set",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "ScreenTransition is placed outright under reduced motion, and ends in the same state either way",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "motionPresets.test.ts",
+      "cases": [
+        {
+          "name": "useMotionPresets moves by default",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useMotionPresets collapses to no motion, not to fast motion, when the preference is set",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useMotionPresets ends at the same place either way, so the layout never depends on the preference",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useMotionPresets caps the cascade so a long list does not take seconds to appear",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "RoleGuard.test.tsx",
+      "cases": [
+        {
+          "name": "RoleGuard sends a signed-out visitor to login",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "RoleGuard sends a profile with no role to login rather than trusting it",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "RoleGuard renders the protected route when the role matches",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "RoleGuard redirects another role to its OWN area, not to the one it asked for",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "RoleGuard redirects DELIVERY to its own area",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "RoleGuard redirects ADMIN to its own area",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "RoleGuard falls back to login for a role it does not recognise",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "Tabs.test.tsx",
+      "cases": [
+        {
+          "name": "Tabs is a real tabset, not a row of buttons",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Tabs reports the selection to the caller",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Tabs moves with the arrow keys, and wraps",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Tabs keeps exactly one tab in the tab order",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Tabs marks a disabled tab as disabled and will not select it by click",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Tabs steps over a disabled tab with the arrow keys",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Tabs stays put when every other tab is disabled",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Tabs omits a hidden tab from the set and from arrow navigation",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Tabs crossfades the selected tab rather than snapping it",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Tabs moves nothing, so prefers-reduced-motion needs no JS branch here",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "ConfirmDialog.test.tsx",
+      "cases": [
+        {
+          "name": "useConfirm shows nothing until asked",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useConfirm resolves true when confirmed",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useConfirm resolves false when cancelled",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useConfirm resolves false when dismissed with Escape",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useConfirm throws if used outside the provider",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "Modal.test.tsx",
+      "cases": [
+        {
+          "name": "Modal uses its title as the dialog accessible name",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Modal renders nothing when closed",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Modal has a labelled close control",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Modal renders a footer when given one",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "Overlay.test.tsx",
+      "cases": [
+        {
+          "name": "Overlay exposes a labelled modal dialog",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Overlay renders nothing when closed",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Overlay moves focus into the dialog on open",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Overlay returns focus to the previously focused element on close",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Overlay closes on Escape",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Overlay traps Tab inside the dialog",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Overlay locks body scroll while open and restores it after",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Overlay rises on open and leaves faster than it arrived",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Overlay mounts in its resting state when prefers-reduced-motion is set",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "ToastRegion.test.tsx",
+      "cases": [
+        {
+          "name": "ToastRegion renders an empty live region when there are no toasts",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "ToastRegion announces toasts in a polite live region",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "ToastRegion gives each tone a distinct semantic colour",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "ToastRegion portals out of its parent so it is never clipped",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "ToastRegion announces without moving when prefers-reduced-motion is set",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "RoleShell.test.tsx",
+      "cases": [
+        {
+          "name": "RoleShell names its main region",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "RoleShell pads the header for the status bar and the bottom chrome for the home indicator",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "RoleShell pads the sides for a landscape notch",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "RoleShell gives the bottom inset to the scroll region only when nothing is pinned below it",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "RoleShell lets the action bar own the bottom inset when both it and a nav are present",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "RoleShell renders the slots it is given and nothing it is not",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "RoleShell puts glass on the floating chrome, never on the content region",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "RoleShells.test.tsx",
+      "cases": [
+        {
+          "name": "the role shells each names its own main region",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "the role shells forces dark on the rider shell, and only there",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "the role shells gives the two desk-bound roles a side nav and the phone roles a bottom one",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "Surface.test.tsx",
+      "cases": [
+        {
+          "name": "Surface applies the requested elevation from the token ramp",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Surface defaults to a solid, opaque surface",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Surface only applies backdrop-filter for glass variants",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Surface maps radius names onto the token scale",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Surface renders the requested element",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Surface adds transition properties only when interactive",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Surface an interactive Surface travels on press",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "Surface a plain Surface does not move, and neither does an interactive one under reduced motion",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "AdminCategories.test.tsx",
+      "cases": [
+        {
+          "name": "AdminCategories validation rejects a description beyond the backend length limit before it sends a write",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "CustomerMenuView.test.tsx",
+      "cases": [
+        {
+          "name": "customer menu failure and empty presentation offers an explicit retry for a failed catalog",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "customer menu failure and empty presentation shows a successful empty catalog without an outage retry",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "customer menu failure and empty presentation shows loading without briefly claiming an empty menu",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "CustomerRestaurantBrowser.test.tsx",
+      "cases": [
+        {
+          "name": "routes the owned reorder suggestion to validation even when its outlet is absent from the nearby feed",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "blocks additional reorder clicks while a current validation is pending",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "CustomerRestaurantCard.test.tsx",
+      "cases": [
+        {
+          "name": "CustomerRestaurantCard shows the kitchen's live prep default, not the onboarding delivery time",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "CustomerRestaurantCard shows no time at all when the outlet sent none",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "PrepTimeStepper.test.tsx",
+      "cases": [
+        {
+          "name": "PrepTimeStepper shows the saved default in minutes",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "PrepTimeStepper saves once after a burst of presses, in seconds",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "PrepTimeStepper puts the number back and says so when the save fails",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "PrepTimeStepper cannot go under the 15-minute floor orders already have",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "proof": "local Maven/JUnit reports, not deployed verification",
+  "at": "2026-10-04T00:49:47.224774+00:00",
+  "repository": "DeliveryExecutiveApplication",
+  "processExitCode": 0,
+  "classes": [
+    {
+      "class": "com.fooddelivery.delivery.service.ConcurrentApplicationDecisionTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-delivery-h2-invocation1-TEST-com.fooddelivery.delivery.service.ConcurrentApplicationDecisionTest.xml",
+      "failureMethods": []
+    }
+  ],
+  "totals": {
+    "tests": 5,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0
+  }
+}

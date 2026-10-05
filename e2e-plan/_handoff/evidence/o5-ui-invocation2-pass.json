@@ -1,0 +1,81 @@
+{
+  "observedAt": "2026-10-05T05:42:32+05:30",
+  "invocation": 2,
+  "uiCommit": "2aed6af0bc2624eef1bab201b1721186f3be4d22",
+  "harnessCommit": "559d1cdbd61aaf7131d2d8a674cd9932afa8a9c9",
+  "tests": 8,
+  "passed": 8,
+  "failures": 0,
+  "errors": 0,
+  "skips": 0,
+  "classes": [
+    {
+      "name": "PortalLauncherUiTest",
+      "counts": {
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "methods": [
+        "rejectedRiderSeesActionAndReason",
+        "pendingRestaurantOpensItsApplicationStatus",
+        "staffPortalRequestsAdministratorVerification",
+        "ownerSwitchesApprovedPortalsAndSeesDeliveryStart"
+      ]
+    },
+    {
+      "name": "BusinessHubOrganisationUiTest",
+      "counts": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "methods": [
+        "invitationRoleChangesAndRemovalAreVisibleToBothPeople"
+      ]
+    },
+    {
+      "name": "RestaurantApplicationWizardUiTest",
+      "counts": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "methods": [
+        "approvedApplicationOpensItsOutletWithoutAnotherPersonLogin"
+      ]
+    },
+    {
+      "name": "DeliveryOnboardingUiTest",
+      "counts": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "methods": [
+        "approvedRiderEntersDeliveryOfflineWithoutAnotherPersonLogin"
+      ]
+    },
+    {
+      "name": "CspSmokeUiTest",
+      "counts": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "methods": [
+        "securityHeadersAndConsoleHoldAcrossEveryCurrentPortal"
+      ]
+    }
+  ],
+  "allocation": "b9af08bfdf489c44",
+  "uiOnly": true,
+  "dataPolicy": "retain",
+  "cleanupPerformed": false,
+  "financialOrdersCreated": 0
+}

@@ -1,0 +1,62 @@
+{
+  "invocation": 6,
+  "test": "HappyDeliveryFlowTest#completeOrderLifecycle",
+  "uiSource": "e055ea1bd3dbfdb664fce772fd8b68539620009e",
+  "orderId": "60631296-e064-4a59-a2ef-090549edcf01",
+  "totals": {
+    "tests": 1,
+    "passed": 0,
+    "failures": 1,
+    "errors": 0,
+    "skipped": 0
+  },
+  "newOrderCreated": true,
+  "retained": true,
+  "observedPassedSteps": [
+    "actual rider preflight",
+    "nearby outlet1.4km",
+    "CARD checkout",
+    "exact kitchen card and preview",
+    "accept200",
+    "owned dispatch acceptance",
+    "assigned customer state",
+    "both participant chat round trips"
+  ],
+  "failure": {
+    "location": "RestaurantAcceptanceChecks.afterAcceptReload",
+    "expectedOldLabel": "Brand 1 Outlet 5",
+    "actualLabel": "Brand 1 / Brand 1 / Brand 1 Outlet 5"
+  },
+  "fix": "capture the complete rendered grouped label before reload and require the exact same label after reload",
+  "chat": {
+    "proof": "Sanitized actual chat artifact read after invocation6 before its same-order resume; original assertion was not reached",
+    "restaurant": {
+      "customerSessionStatus": 200,
+      "recipientSessionStatus": 200,
+      "customerWebsocketState": "STOMP CONNECTED",
+      "recipientWebsocketState": "STOMP CONNECTED",
+      "customerChatOpened": true,
+      "emptyMessageBlocked": true,
+      "whitespaceMessageBlocked": true,
+      "customerMessageVisible": true,
+      "recipientMessageVisible": true,
+      "peerReplyVisible": true,
+      "customerReplyVisible": true,
+      "failure": ""
+    },
+    "rider": {
+      "customerSessionStatus": 200,
+      "recipientSessionStatus": 200,
+      "customerWebsocketState": "STOMP CONNECTED",
+      "recipientWebsocketState": "STOMP CONNECTED",
+      "customerChatOpened": true,
+      "customerMessageVisible": true,
+      "recipientMessageVisible": true,
+      "peerReplyVisible": true,
+      "customerReplyVisible": true,
+      "failure": ""
+    },
+    "deliveredMessage": "not yet reached",
+    "syntheticReliability": "deferred O4-INT-002"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "invocation": 5,
+  "test": "HappyDeliveryFlowTest#completeOrderLifecycle",
+  "uiSource": "444c2fcc3e30839c05d43dc3f4d376fa4f89be14",
+  "customerSource": "0849ee650c9624aefe7c99381f894c93468a01a3",
+  "harnessSource": "570c72e",
+  "totals": {
+    "tests": 1,
+    "passed": 0,
+    "failures": 1,
+    "errors": 0,
+    "skipped": 0
+  },
+  "orderId": "0dbe6a15-dc7f-4d85-8df6-f6884d6f8a52",
+  "outlet": "Brand 1 Outlet 5",
+  "displayedDistanceKm": 1.4,
+  "manifestRetained": true,
+  "proofType": "deployed UI failure, separately diagnosed from redacted operator exception",
+  "observedUi": {
+    "serverAuthoritativeRiderPreflightPassed": true,
+    "newOrderPlaced": true,
+    "exactOwnedKitchenCardAndBeforeAcceptChecksPassed": true,
+    "acceptStatus": 500
+  },
+  "operatorCause": {
+    "service": "restaurant-service",
+    "exception": "org.springframework.web.HttpMediaTypeNotSupportedException",
+    "message": "Content-Type application/x-www-form-urlencoded;charset=UTF-8 is not supported"
+  },
+  "generatedTransportNegativeControl": {
+    "tests": 9,
+    "passed": 6,
+    "failures": 3,
+    "bodylessActions": [
+      "accept",
+      "reject",
+      "cancel"
+    ],
+    "wrongHeader": "application/x-www-form-urlencoded"
+  },
+  "remaining": "Fix shared absent-body media type, verify/publish/deploy before any resume; read actual owned state through rendered UI; no duplicate active checkout",
+  "cleanupPerformed": false
+}

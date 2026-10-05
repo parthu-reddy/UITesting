@@ -1,0 +1,25 @@
+{
+  "proof": "local focused unit tests, not Oracle E2E",
+  "classes": [
+    {
+      "class": "ApplicationStatusTest",
+      "tests": 37,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "class": "ApplicationEventBindingTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  ],
+  "counts": {
+    "tests": 39,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "proof": "local Maven/JUnit reports, not deployed verification",
+  "at": "2026-10-03T21:43:00.976341+00:00",
+  "repository": "DeliveryExecutiveApplication",
+  "processExitCode": 0,
+  "classes": [
+    {
+      "class": "com.fooddelivery.OpenApiGenerationTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-delivery-openapi-invocation1-TEST-com.fooddelivery.OpenApiGenerationTest.xml",
+      "failureMethods": []
+    }
+  ],
+  "totals": {
+    "tests": 1,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0
+  }
+}

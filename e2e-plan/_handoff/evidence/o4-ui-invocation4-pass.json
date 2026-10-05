@@ -1,0 +1,55 @@
+{
+  "observedAt": "2026-10-05T05:32:24+05:30",
+  "invocation": 4,
+  "uiCommit": "2aed6af0bc2624eef1bab201b1721186f3be4d22",
+  "harnessCommit": "1e76aaf",
+  "tests": 8,
+  "passed": 8,
+  "failures": 0,
+  "errors": 0,
+  "skips": 0,
+  "classes": [
+    {
+      "name": "OneLoginEntitlementsTest",
+      "counts": {
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "name": "EntitlementRevocationTest",
+      "counts": {
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "name": "AdminStepUpTest",
+      "counts": {
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    }
+  ],
+  "observations": [
+    "[UPLOAD] GST registration confirmed 200 and Uploaded; 1 observed entitlement challenges",
+    "[UPLOAD] FSSAI licence confirmed 200 and Uploaded; 0 observed entitlement challenges",
+    "[UPLOAD] GST registration confirmed 200 and Uploaded; 0 observed entitlement challenges",
+    "[UPLOAD] FSSAI licence confirmed 200 and Uploaded; 0 observed entitlement challenges",
+    "[PORTALS] RESTAURANT Suspended confirmed after 1 visible refresh actions in 1317 ms",
+    "[PORTALS] RESTAURANT Available confirmed after 0 visible refresh actions in 2 ms"
+  ],
+  "allocation": "b571a13b0ca12bc9",
+  "proofType": "deployed rendered UI with passive control-generated observations",
+  "expected403": "non-staff ADMIN OTP refusal",
+  "transient401": "entitlement version changes followed by ordinary refresh/retry; actual complete header observed once",
+  "dataPolicy": "retain",
+  "cleanupPerformed": false,
+  "financialOrdersCreated": 0
+}

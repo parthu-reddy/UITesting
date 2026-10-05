@@ -1,0 +1,20 @@
+# Portable diagnostic excerpt
+
+Build/test diagnostics and original counts are preserved below. Full original output is retained locally in 42-gov-public-summary-idor-negative-control.raw.log and excluded from Git.
+
+L42: [INFO] Running com.fooddelivery.governmentid.controller.VerificationSelfAccessTest
+L47: [ERROR] Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 1.581 s <<< FAILURE! -- in com.fooddelivery.governmentid.controller.VerificationSelfAccessTest
+L48: [ERROR] com.fooddelivery.governmentid.controller.VerificationSelfAccessTest.applicantWithoutDeliveryRoleReadsOnlyTheAuthenticatedSummaryAndTheOldIdPathIsGone -- Time elapsed: 0.454 s <<< FAILURE!
+L49: java.lang.AssertionError: Status expected:<404> but was:<200>
+L62: [ERROR] Failures:
+L63: [ERROR]   VerificationSelfAccessTest.applicantWithoutDeliveryRoleReadsOnlyTheAuthenticatedSummaryAndTheOldIdPathIsGone:59 Status expected:<404> but was:<200>
+L65: [ERROR] Tests run: 1, Failures: 1, Errors: 0, Skipped: 0
+L68: [INFO] BUILD FAILURE
+L73: [ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.2.5:test (default-test) on project government-id-validation-service: There are test failures.
+L75: [ERROR] Please refer to /Users/parthureddy/Documents/Food Delivery.nosync/GovernmentIDValidationService/target/surefire-reports for the individual test results.
+L76: [ERROR] Please refer to dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+L77: [ERROR] -> [Help 1]
+L79: [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+L80: [ERROR] Re-run Maven using the -X switch to enable full debug logging.
+L82: [ERROR] For more information about the errors and possible solutions, please read the following articles:
+L83: [ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

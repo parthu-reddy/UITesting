@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-04T01:58:26.407578+05:30",
+  "proof": "local actual transactions; original failures retained",
+  "counts": {
+    "tests": 2,
+    "failures": 0,
+    "errors": 1,
+    "skipped": 0
+  },
+  "classes": [
+    {
+      "class": "com.fooddelivery.restaurant.RestaurantApplicationTransactionTest",
+      "counts": {
+        "tests": 2,
+        "failures": 0,
+        "errors": 1,
+        "skipped": 0
+      },
+      "seconds": "5.083"
+    }
+  ],
+  "deployed": false
+}

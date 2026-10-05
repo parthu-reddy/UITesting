@@ -1,0 +1,73 @@
+{
+  "proof": "local Maven/JUnit reports, not deployed verification",
+  "at": "2026-10-03T22:30:31.201561+00:00",
+  "repository": "DeliveryExecutiveApplication",
+  "processExitCode": 1,
+  "classes": [
+    {
+      "class": "com.fooddelivery.delivery.controller.DailySelfieRequiredHttpTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 3,
+      "skips": 0,
+      "report": "42-delivery-http-invocation3-TEST-com.fooddelivery.delivery.controller.DailySelfieRequiredHttpTest.xml",
+      "failureMethods": [
+        "anotherDriversBodyIsRejectedBeforeReadinessOrDutyWrites",
+        "suspendedApplicationDoesNotMisreportASelfieRefusal",
+        "expiredSelfieReturnsThePromptCodeWithoutChangingDuty"
+      ]
+    },
+    {
+      "class": "com.fooddelivery.delivery.controller.DeliveryApplicationAuthorizationTest",
+      "tests": 9,
+      "failures": 0,
+      "errors": 9,
+      "skips": 0,
+      "report": "42-delivery-http-invocation3-TEST-com.fooddelivery.delivery.controller.DeliveryApplicationAuthorizationTest.xml",
+      "failureMethods": [
+        "anonymousAndServiceCredentialsCannotCreateAnApplicantsProfile",
+        "applicantWithoutDeliveryRoleReadsOnlyTheirOwnApplication",
+        "approvingAdminComesFromThePrincipal",
+        "internalDocumentContextRemainsServiceOnly",
+        "adminApplicationEndpointsAreAdminOnly(String)[1]",
+        "adminApplicationEndpointsAreAdminOnly(String)[2]",
+        "adminApplicationEndpointsAreAdminOnly(String)[3]",
+        "adminApplicationEndpointsAreAdminOnly(String)[4]",
+        "draftIgnoresCallerChosenIdentityAndPhoneAndUsesTheSignedPrincipal"
+      ]
+    },
+    {
+      "class": "com.fooddelivery.delivery.service.DeliveryApplicationServiceTest",
+      "tests": 17,
+      "failures": 0,
+      "errors": 17,
+      "skips": 0,
+      "report": "42-delivery-http-invocation3-TEST-com.fooddelivery.delivery.service.DeliveryApplicationServiceTest.xml",
+      "failureMethods": [
+        "draftUsesPrincipalAndSignedPhoneRatherThanCallerSelectedIdentity",
+        "approvalAndReinstatementRequireCompletedPrivateDocumentsBeforeAnyDecision(ApplicationStatus)[1]",
+        "approvalAndReinstatementRequireCompletedPrivateDocumentsBeforeAnyDecision(ApplicationStatus)[2]",
+        "approvedInactiveRefreshStaysInactiveAndMissingChecksSuspendThroughLifecycle",
+        "rejectedEditPreservesRejectionUntilResubmit",
+        "noneditableApplicationsCannotBeRewritten(ApplicationStatus)[1]",
+        "noneditableApplicationsCannotBeRewritten(ApplicationStatus)[2]",
+        "noneditableApplicationsCannotBeRewritten(ApplicationStatus)[3]",
+        "noneditableApplicationsCannotBeRewritten(ApplicationStatus)[4]",
+        "onlyAdminDecisionAfterReviewCanApproveAndActivate",
+        "submittingStartsChecksAndPassedChecksReachReviewWithoutActivating",
+        "submittedOrChangedDecisionCannotBeApproved",
+        "missingSignedPhoneCannotCreateProfile",
+        "missingCompletedDocumentsCannotSubmit",
+        "rejectNeedsReasonAndCannotBeUsedToReinstate",
+        "onDeliverySuspensionPreservesDutyAndTrackingUntilDeliveryFinishes",
+        "failedChecksRejectWithAReasonAndStaleSubmissionDoesNoWork"
+      ]
+    }
+  ],
+  "totals": {
+    "tests": 29,
+    "failures": 0,
+    "errors": 29,
+    "skips": 0
+  }
+}

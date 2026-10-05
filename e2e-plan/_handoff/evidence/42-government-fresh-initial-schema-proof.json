@@ -1,0 +1,21 @@
+{
+  "proof": "isolated PostgreSQL17 complete fresh GovernmentID initial SQL compared with every original applied DDL plus common initial schema",
+  "oracleDataMutated": false,
+  "oldSchemaColumnCount": 73,
+  "preservedOriginalColumnsAndTypes": true,
+  "preservedOriginalIndexes": true,
+  "auditAppendOnlyTriggerRetained": true,
+  "newDocumentColumnCount": 14,
+  "validDocumentRowAccepted": true,
+  "invalidDocumentRows": {
+    "html": "CHECK constraint rejected invalid row",
+    "zero-size": "CHECK constraint rejected invalid row",
+    "oversize": "CHECK constraint rejected invalid row",
+    "restaurant-without-brand": "CHECK constraint rejected invalid row",
+    "wrong-purpose-type": "CHECK constraint rejected invalid row",
+    "foreign-prefix": "CHECK constraint rejected invalid row"
+  },
+  "auditDeleteRefused": true,
+  "freshInitialSha256": "067c5e03e79954a7418c717dcd4b42823be2c2f5d78d342339929ece319bd6ce",
+  "olderSqlRemovedOnlyAfterThisProof": true
+}

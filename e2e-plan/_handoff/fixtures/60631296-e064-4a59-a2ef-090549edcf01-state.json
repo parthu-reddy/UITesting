@@ -1,0 +1,10 @@
+{
+  "orderId": "60631296-e064-4a59-a2ef-090549edcf01",
+  "status": "HANDED_OVER",
+  "deliveryStatus": "DELIVERED",
+  "proof": "exact customer delivered receipt and rider Delivered history through actual UI",
+  "observedAt": "2026-10-05T01:29:08.016203+00:00",
+  "invocation": 9,
+  "originalManifestPreserved": true,
+  "riderIdleOffline": "shared TestBase teardown executed after delivered assignment cleared; off-duty review test will assert it again"
+}

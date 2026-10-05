@@ -1,0 +1,47 @@
+{
+  "recordedAt": "2026-10-05T11:57:12+05:30",
+  "status": "complete-with-explicit-deferrals",
+  "scope": [
+    "O4",
+    "O5"
+  ],
+  "stopAfter": "O5",
+  "deferred": [
+    "O4-PERF-001",
+    "O5-CSP-001",
+    "O4-INT-002",
+    "existing duration/rate/SSE/provider/load/ONDC boundaries"
+  ],
+  "uiCommit": "f73ffe909f34e15add4b8717159eb664e042f477",
+  "restaurantCommit": "5408c6ef6511ab3ebdf3adc77bc0ee5914442b10",
+  "harnessCommit": "1f3dae0",
+  "deploymentCommit": "8a31eb29c88ea34d6791ecb418126d13417d90b4",
+  "o4": {
+    "tests": 8,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "invocation": 6
+  },
+  "o5": {
+    "tests": 8,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "invocation": 4
+  },
+  "portalP95": {
+    "service": "identity-service",
+    "metric": "http_server_requests_seconds",
+    "method": "GET",
+    "uri": "/api/v1/users/me/portals",
+    "successfulSamples": 268,
+    "p95EstimateMs": 11.632201319999998,
+    "p95BucketUpperMs": 12.58291,
+    "meanMs": 5.963045406716418
+  },
+  "retainedOrderId": "60631296-e064-4a59-a2ef-090549edcf01",
+  "automaticCleanup": false,
+  "additionalWipeOrSeed": false,
+  "remainingWalletAds": "not-started"
+}

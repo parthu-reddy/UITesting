@@ -1,5 +1,17 @@
 # Durable audit status: chat-calls-and-live-tracking
 
+
+## 2026-10-05T11:57:12+05:30 — O4/O5 scoped regression acceptance
+
+The required current methods for this feature pass on the retained Dev fixtures. Canonical60631296 is delivered with exact receipt/posted earnings/18balanced ledger lines, selected-item quote without refund submission and four immutable reviews; actual participant chat round trips are retained from the same lifecycle. Settings15/15 distinct methods,partner10/10,restaurant earnings1/1,navigation2/2,admin-money1/1 and exact beneficiary queue1/1 pass. Original failed invocations remain separately recorded; no duplicate lifecycle or server cleanup. See the checkpoint113 release evidence and feature-specific artifacts. Unselected/outcome/provider/internal/routed/duration/rate/SSE cases remain outside this acceptance.
+## 2026-10-05T06:59:57+05:30 — checkpoint106: canonical delivered; existing money/quote branch running
+
+Happy assigned resume invocation9 passes1/1,0failures/errors/skips in53.834s on UI509d084/harnessafe12f1. Pickup and delivery return actual200; the exact rider Delivered history has positive payout and today earnings increase by it; the exact customer Order delivered receipt and real post-delivery chat assertion pass. Evidence55 and the separate retained state manifest record DELIVERED. Original creation manifest and both older cancelled orders remain preserved. The canonical checkout/accept/dispatch/both actual chat round trips were observed in invocation6 and Ready/saved arrival in invocation8; their original later failures remain failures, not a fabricated single clean full run.
+
+The existing retained-delivered branch now runs money/quote invocation1 on the same60631296. It reads the normal rendered History/receipt, verifies the exact admin money page and balanced posted payouts, then asks for a selected-item quote without submitting a refund. Staff1000000001 is used to spread ordinary admin verification quota before the final O4/O5 gates. No second checkout, direct business API, DB/Redis or cleanup is used.
+
+Next: successful money/quote, unrated-dialog guard before review writes, required settings/partner/restaurant earnings/navigation/admin-money and immutable participant reviews using this one order, final O4/O5 image gates and measured histograms/checklists. Existing static O4 22/22,O5 7/7 and GitHub941/941 remain valid. Stop after O4/O5; explicit internal/performance-baseline/CSP-mutation/SSE/rate/duration/provider deferrals stay unverified and are now linked from the shared DEFERRED index.
+
 Updated 2026-10-02T17:13:01+05:30. Review: Priority source/local/routed work; real aggregate unfinished. Implementation/next scope: Publisher/raw-message/loading fixes deployed. Evidence: Historical native text receipt plus 3 routed passes; current quote blocked; no complete chat signoff.
 
 Read [../../_handoff/START-HERE.md](../../_handoff/START-HERE.md) and [../../_handoff/CURRENT-STATE.md](../../_handoff/CURRENT-STATE.md) first. Current user instructions override older cleanup/publish/item/allowlist text. Historical passes do not prove current retained money fixtures or all feature scenarios. Preserve existing scenarios/PENDING notes and inspect only this feature's relevant source/tests before editing.

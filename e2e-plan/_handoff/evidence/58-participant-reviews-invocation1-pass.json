@@ -1,0 +1,27 @@
+{
+  "recordedAt": "2026-10-05T01:32:49.118937+00:00",
+  "invocation": 1,
+  "method": "OrderReviewsFlowTest#participantsReviewEachOther",
+  "proof": "normal actual rendered participant review dialogs and passive eligibility caused by opening/reopening them",
+  "uiCommit": "509d084",
+  "harnessCommit": "afe12f1",
+  "counts": {
+    "tests": "1",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "23.732"
+  },
+  "passed": 1,
+  "reviews": {
+    "orderId": "60631296-e064-4a59-a2ef-090549edcf01",
+    "outlet": "Brand 1 Outlet 5",
+    "restaurantComment": "E2E review 60631296: hot and on time",
+    "reviews": 4,
+    "newOrderCreated": false
+  },
+  "immutability": "submitted target radio groups absent; existing stars/comments and Already reviewed visible; unrated targets remain offered",
+  "riderOffline": "asserted true; no duty mutation",
+  "newOrderCreated": false,
+  "excludedMethods": "three direct aggregate/cache methods explicitly disabled O4-INT-002; not selected/skipped in this invocation"
+}

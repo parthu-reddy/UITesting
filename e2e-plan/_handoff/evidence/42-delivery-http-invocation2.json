@@ -1,0 +1,78 @@
+{
+  "proof": "local Maven/JUnit reports, not deployed verification",
+  "at": "2026-10-03T22:27:53.428952+00:00",
+  "repository": "DeliveryExecutiveApplication",
+  "processExitCode": 1,
+  "classes": [
+    {
+      "class": "com.fooddelivery.delivery.EndpointAuthorizationCoverageTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-delivery-http-invocation2-TEST-com.fooddelivery.delivery.EndpointAuthorizationCoverageTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.delivery.controller.DeliveryApplicationAuthorizationTest",
+      "tests": 9,
+      "failures": 0,
+      "errors": 9,
+      "skips": 0,
+      "report": "42-delivery-http-invocation2-TEST-com.fooddelivery.delivery.controller.DeliveryApplicationAuthorizationTest.xml",
+      "failureMethods": [
+        "anonymousAndServiceCredentialsCannotCreateAnApplicantsProfile",
+        "applicantWithoutDeliveryRoleReadsOnlyTheirOwnApplication",
+        "approvingAdminComesFromThePrincipal",
+        "internalDocumentContextRemainsServiceOnly",
+        "adminApplicationEndpointsAreAdminOnly(String)[1]",
+        "adminApplicationEndpointsAreAdminOnly(String)[2]",
+        "adminApplicationEndpointsAreAdminOnly(String)[3]",
+        "adminApplicationEndpointsAreAdminOnly(String)[4]",
+        "draftIgnoresCallerChosenIdentityAndPhoneAndUsesTheSignedPrincipal"
+      ]
+    },
+    {
+      "class": "com.fooddelivery.delivery.service.ConcurrentApplicationDecisionTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-delivery-http-invocation2-TEST-com.fooddelivery.delivery.service.ConcurrentApplicationDecisionTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.delivery.service.DeliveryApplicationServiceTest",
+      "tests": 15,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-delivery-http-invocation2-TEST-com.fooddelivery.delivery.service.DeliveryApplicationServiceTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.delivery.service.RiderGoOnlineTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-delivery-http-invocation2-TEST-com.fooddelivery.delivery.service.RiderGoOnlineTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.delivery.service.RiderReadinessTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-delivery-http-invocation2-TEST-com.fooddelivery.delivery.service.RiderReadinessTest.xml",
+      "failureMethods": []
+    }
+  ],
+  "totals": {
+    "tests": 48,
+    "failures": 0,
+    "errors": 9,
+    "skips": 0
+  }
+}

@@ -1,0 +1,13 @@
+# Portable negative-control excerpt
+
+Test-only signing credential and signature values are redacted. The signed-header list and the original failing assertion/counts are preserved. Full original output is retained locally in 42-r2-unsigned-length-negative-control.raw.log and excluded from Git.
+
+L138: [INFO] Running com.fooddelivery.common.service.CloudflareR2DocumentSafetyTest
+L139: [ERROR] Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.971 s <<< FAILURE! -- in com.fooddelivery.common.service.CloudflareR2DocumentSafetyTest
+L140: [ERROR] com.fooddelivery.common.service.CloudflareR2DocumentSafetyTest.actualPresignerSignsTypeLengthAndTenMinuteExpiry -- Time elapsed: 0.959 s <<< FAILURE!
+L141: org.opentest4j.AssertionFailedError: X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261003T193645Z&X-Amz-SignedHeaders=content-type;host&X-Amz-Expires=600&X-Amz-Credential=<redacted>&X-Amz-Signature=<redacted> ==> expected: <true> but was: <false>
+L147: 	at com.fooddelivery.common.service.CloudflareR2DocumentSafetyTest.actualPresignerSignsTypeLengthAndTenMinuteExpiry(CloudflareR2DocumentSafetyTest.java:40)
+L155: [ERROR] Failures:
+L156: [ERROR]   CloudflareR2DocumentSafetyTest.actualPresignerSignsTypeLengthAndTenMinuteExpiry:40 X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20261003T193645Z&X-Amz-SignedHeaders=content-type;host&X-Amz-Expires=600&X-Amz-Credential=<redacted>&X-Amz-Signature=<redacted> ==> expected: <true> but was: <false>
+L158: [ERROR] Tests run: 1, Failures: 1, Errors: 0, Skipped: 0
+L168: [INFO] BUILD FAILURE

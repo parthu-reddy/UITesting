@@ -1,0 +1,68 @@
+{
+  "proof": "local Maven/JUnit reports, not deployed verification",
+  "at": "2026-10-03T21:15:23.447951+00:00",
+  "repository": "GovernmentIDValidationService",
+  "processExitCode": 0,
+  "classes": [
+    {
+      "class": "com.fooddelivery.governmentid.controller.VerificationExpiryPersistenceTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-gov-document-freeze-invocation2-TEST-com.fooddelivery.governmentid.controller.VerificationExpiryPersistenceTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.governmentid.controller.VerificationSummaryStateTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-gov-document-freeze-invocation2-TEST-com.fooddelivery.governmentid.controller.VerificationSummaryStateTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.governmentid.service.ApplicationDocumentSecurityTest",
+      "tests": 11,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-gov-document-freeze-invocation2-TEST-com.fooddelivery.governmentid.service.ApplicationDocumentSecurityTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.governmentid.service.DeliveryDocumentFreezeTest",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-gov-document-freeze-invocation2-TEST-com.fooddelivery.governmentid.service.DeliveryDocumentFreezeTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.governmentid.service.DocumentAdminAuditTransactionTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-gov-document-freeze-invocation2-TEST-com.fooddelivery.governmentid.service.DocumentAdminAuditTransactionTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.governmentid.service.ProductionVerificationSafetyTest",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-gov-document-freeze-invocation2-TEST-com.fooddelivery.governmentid.service.ProductionVerificationSafetyTest.xml",
+      "failureMethods": []
+    }
+  ],
+  "totals": {
+    "tests": 45,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0
+  }
+}

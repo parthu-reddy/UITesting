@@ -1,0 +1,55 @@
+{
+  "proof": "actual current manifest copied to disposable local fixture; Oracle and workspace SQL unchanged",
+  "initialSchemas": 7,
+  "retiredSql": 30,
+  "cases": [
+    {
+      "case": "current seven reviewed schemas and thirty retired SQL paths",
+      "allowedCount": 37,
+      "errorCount": 0,
+      "passed": true
+    },
+    {
+      "case": "changed actual initial SQL bytes denied",
+      "allowedCount": 0,
+      "errorCount": 1,
+      "passed": true
+    },
+    {
+      "case": "failed actual schemaEvidence denied",
+      "allowedCount": 0,
+      "errorCount": 1,
+      "passed": true
+    },
+    {
+      "case": "failed actual constraintEvidence denied",
+      "allowedCount": 0,
+      "errorCount": 1,
+      "passed": true
+    },
+    {
+      "case": "restored reviewed retired SQL denied",
+      "allowedCount": 0,
+      "errorCount": 1,
+      "passed": true
+    },
+    {
+      "case": "invalid expiresOnProductionDeployment authority denied",
+      "allowedCount": 0,
+      "errorCount": 1,
+      "passed": true
+    },
+    {
+      "case": "invalid productionDeployed authority denied",
+      "allowedCount": 0,
+      "errorCount": 0,
+      "passed": true
+    },
+    {
+      "case": "current reviewed authority restored after isolated negative controls",
+      "allowedCount": 37,
+      "errorCount": 0,
+      "passed": true
+    }
+  ]
+}

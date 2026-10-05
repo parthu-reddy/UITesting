@@ -1,0 +1,52 @@
+{
+  "proof": "local Vitest rendered components/SDK fixtures, not Oracle E2E",
+  "at": "2026-10-04T00:24:23.222208+00:00",
+  "processExitCode": 0,
+  "total": 7,
+  "passed": 7,
+  "failed": 0,
+  "pending": 0,
+  "success": true,
+  "files": [
+    {
+      "file": "DailySelfiePrompt.test.tsx",
+      "cases": [
+        {
+          "name": "daily operational selfie requires a completed duty upload then verifies and syncs readiness without going online",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "daily operational selfie preserves a recoverable failure without claiming verified readiness",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "daily operational selfie serialises repeated clicks and never claims eligibility after the application becomes suspended",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "daily operational selfie rejects malformed provider confidence undefined before refreshing duty eligibility",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "daily operational selfie rejects malformed provider confidence NaN before refreshing duty eligibility",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "daily operational selfie rejects malformed provider confidence 1.01 before refreshing duty eligibility",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "daily operational selfie aborts a departed prompt and ignores a late biometric success",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    }
+  ]
+}

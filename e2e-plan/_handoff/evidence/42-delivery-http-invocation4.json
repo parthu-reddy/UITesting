@@ -1,0 +1,41 @@
+{
+  "proof": "local Maven/JUnit reports, not deployed verification",
+  "at": "2026-10-03T22:34:22.077251+00:00",
+  "repository": "DeliveryExecutiveApplication",
+  "processExitCode": 0,
+  "classes": [
+    {
+      "class": "com.fooddelivery.delivery.controller.DailySelfieRequiredHttpTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-delivery-http-invocation4-TEST-com.fooddelivery.delivery.controller.DailySelfieRequiredHttpTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.delivery.controller.DeliveryApplicationAuthorizationTest",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-delivery-http-invocation4-TEST-com.fooddelivery.delivery.controller.DeliveryApplicationAuthorizationTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.delivery.service.DeliveryApplicationServiceTest",
+      "tests": 17,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-delivery-http-invocation4-TEST-com.fooddelivery.delivery.service.DeliveryApplicationServiceTest.xml",
+      "failureMethods": []
+    }
+  ],
+  "totals": {
+    "tests": 29,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0
+  }
+}

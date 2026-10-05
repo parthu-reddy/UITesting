@@ -1,0 +1,256 @@
+{
+  "recordedAt": "2026-10-05T06:17:22.597149+00:00",
+  "invocation": 1,
+  "proof": "full clean Restaurant Maven suite; existing embedded H2 and JVM/mock fixtures",
+  "classes": [
+    {
+      "name": "com.fooddelivery.architecture.ArchitectureEnforcementTest",
+      "tests": 0,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.fooddelivery.common.architecture.TimeDisciplineRules",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.fooddelivery.contract.GovIdContractConsumerTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.fooddelivery.contract.OrderEventConsumerContractTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.fooddelivery.contract.RestaurantContractConsumerTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.fooddelivery.restaurant.ApprovedOnlyListingPersistenceTest",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.fooddelivery.restaurant.ConcurrentApplicationDecisionTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.fooddelivery.restaurant.ContractVerifierTest",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.fooddelivery.restaurant.EndpointAuthorizationCoverageTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.fooddelivery.restaurant.MessagingTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.fooddelivery.restaurant.RestaurantAccessQueryCountTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.fooddelivery.restaurant.RestaurantAccessTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.fooddelivery.restaurant.RestaurantApplicationAuthorizationTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.fooddelivery.restaurant.RestaurantEndpointPermissionTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.fooddelivery.restaurant.RestaurantValidationIntegrationTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.fooddelivery.restaurant.controller.BrandListPrivacyTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.fooddelivery.restaurant.controller.FulfillmentControllerTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.fooddelivery.restaurant.controller.InternalRestaurantBeneficiaryControllerTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.fooddelivery.restaurant.controller.InternalRestaurantInvoiceDetailsTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.fooddelivery.restaurant.controller.InternalRestaurantOutletSummaryTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.fooddelivery.restaurant.controller.RestaurantFleetMapControllerTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.fooddelivery.restaurant.messaging.BindingFailureIsNotRetryableTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.fooddelivery.restaurant.service.ApprovedOnlyListingTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.fooddelivery.restaurant.service.CatalogAvailabilityBoundaryTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.fooddelivery.restaurant.service.CatalogServiceTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.fooddelivery.restaurant.service.CatalogStockToggleTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.fooddelivery.restaurant.service.CrossTenantFulfillmentTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.fooddelivery.restaurant.service.FulfillmentServiceTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.fooddelivery.restaurant.service.OpeningHoursTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.fooddelivery.restaurant.service.OrderEventConsumerTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.fooddelivery.restaurant.service.RestaurantApplicationServiceTest",
+      "tests": 26,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.fooddelivery.restaurant.service.RestaurantFleetCityScopeTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.fooddelivery.restaurant.service.RestaurantMembershipsTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.fooddelivery.restaurant.service.RestaurantOnboardingServiceTest",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    {
+      "name": "com.fooddelivery.restaurant.service.ReviewEventConsumerTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  ],
+  "tests": 163,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0
+}

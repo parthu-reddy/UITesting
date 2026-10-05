@@ -1,0 +1,62 @@
+{
+  "proof": "local Vitest rendered components/SDK fixtures, not Oracle E2E",
+  "at": "2026-10-03T22:03:45.022503+00:00",
+  "processExitCode": 0,
+  "total": 8,
+  "passed": 8,
+  "failed": 0,
+  "pending": 0,
+  "success": true,
+  "files": [
+    {
+      "file": "applicationSdk.test.ts",
+      "cases": [
+        {
+          "name": "actual generated application SDK request contracts uses the generated restaurant PUT alias with the authenticated body and resolved organisation",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "actual generated application SDK request contracts uses the outlet update alias rather than the draft PUT alias",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "actual generated application SDK request contracts sends delivery draft fields without supplying a user ID or phone",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "PartnerApprovalsPage.test.tsx",
+      "cases": [
+        {
+          "name": "admin partner application decisions requires a clear rejection reason before any decision call",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "admin partner application decisions rejects the saved restaurant version and refreshes its queue",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "admin partner application decisions refreshes the actual current version and queue after a concurrent 409",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "admin partner application decisions approves the selected delivery applicant through the delivery endpoint",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "admin partner application decisions does not offer approval when private documents are unavailable",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    }
+  ]
+}

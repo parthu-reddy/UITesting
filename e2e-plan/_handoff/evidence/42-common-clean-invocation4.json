@@ -1,0 +1,563 @@
+{
+  "proof": "local Maven/JUnit reports, not deployed verification",
+  "at": "2026-10-03T21:09:13.149744+00:00",
+  "repository": "CommonLibrary",
+  "processExitCode": 0,
+  "classes": [
+    {
+      "class": "com.fooddelivery.common.config.JacksonBigDecimalConfigTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.config.JacksonBigDecimalConfigTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.config.JacksonTimeWireFormatTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.config.JacksonTimeWireFormatTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.dto.maps.RouteResponseDtoTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.dto.maps.RouteResponseDtoTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.enums.ApplicationStatusTest",
+      "tests": 37,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.enums.ApplicationStatusTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.enums.OrganisationRoleTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.enums.OrganisationRoleTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.event.EventBinderPayloadCollisionTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.event.EventBinderPayloadCollisionTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.event.EventBinderTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.event.EventBinderTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.event.EventSerializationTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.event.EventSerializationTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.event.ObjectMapperUnknownPropertiesTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.event.ObjectMapperUnknownPropertiesTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.event.application.ApplicationEventBindingTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.event.application.ApplicationEventBindingTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.event.organisation.OrganisationEventBindingTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.event.organisation.OrganisationEventBindingTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.location.FleetCityScopeTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.location.FleetCityScopeTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.lock.LockedWorkTimerTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.lock.LockedWorkTimerTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.time.BusinessCalendarTest",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.time.BusinessCalendarTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.time.IanaTimeZoneValidatorTest",
+      "tests": 16,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.time.IanaTimeZoneValidatorTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.util.DeterministicIdUtilsLedgerIdTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.util.DeterministicIdUtilsLedgerIdTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.util.EventPayloadUtilsTest",
+      "tests": 14,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.util.EventPayloadUtilsTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.util.JsonNumberUtilsTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.util.JsonNumberUtilsTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.application.ApplicationEventsTransactionTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.application.ApplicationEventsTransactionTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.architecture.TimeDisciplineRules",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.architecture.TimeDisciplineRules.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.architecture.TimeDisciplineTest",
+      "tests": 0,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.architecture.TimeDisciplineTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.config.KafkaConfigDeadLetterTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.config.KafkaConfigDeadLetterTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.messaging.DeadLetterPositionTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.messaging.DeadLetterPositionTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.messaging.DeadLetterReplayerTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.messaging.DeadLetterReplayerTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.messaging.DltHandlerPositionBindingTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.messaging.DltHandlerPositionBindingTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.outbox.OutboxAggregateRoutingTest",
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.outbox.OutboxAggregateRoutingTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.outbox.OutboxBacklogMetricsTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.outbox.OutboxBacklogMetricsTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.outbox.OutboxBeansAreNotComponentScannedTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.outbox.OutboxBeansAreNotComponentScannedTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.outbox.OutboxEventTypeInvariantTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.outbox.OutboxEventTypeInvariantTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.architecture.TimeDisciplineRules",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.architecture.TimeDisciplineRules.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.architecture.TimeDisciplineTest",
+      "tests": 0,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.architecture.TimeDisciplineTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.audit.AuditConfigurationTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.audit.AuditConfigurationTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.idempotency.IdempotencyKeySweeperTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.idempotency.IdempotencyKeySweeperTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.lock.RedisLockTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.lock.RedisLockTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.service.ApplicationRateLimitsTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.service.ApplicationRateLimitsTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.time.ZoneIdConverterTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.time.ZoneIdConverterTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.architecture.TimeDisciplineRules",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.architecture.TimeDisciplineRules.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.architecture.TimeDisciplineTest",
+      "tests": 0,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.architecture.TimeDisciplineTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.service.CloudflareR2DocumentSafetyTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.service.CloudflareR2DocumentSafetyTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.architecture.CommonCoreTimeDisciplineTest",
+      "tests": 0,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.architecture.CommonCoreTimeDisciplineTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.architecture.TimeDisciplineRules",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.architecture.TimeDisciplineRules.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.architecture.TimeDisciplineRulesTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.architecture.TimeDisciplineRulesTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.contract.PlatformJsonTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.contract.PlatformJsonTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.test.SchemaConsistencyTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.test.SchemaConsistencyTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.architecture.TimeDisciplineRules",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.architecture.TimeDisciplineRules.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.architecture.TimeDisciplineTest",
+      "tests": 0,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.architecture.TimeDisciplineTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.client.MapsServiceClientContractTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.client.MapsServiceClientContractTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.client.MapsServiceClientFallbackTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.client.MapsServiceClientFallbackTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.config.OpenApiSortShapeTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.config.OpenApiSortShapeTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.config.PageSerializationShapeTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.config.PageSerializationShapeTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.filter.IdempotencyFilterTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.filter.IdempotencyFilterTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.filter.RequestCachingFilterTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.filter.RequestCachingFilterTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.security.AuctionTokenServiceTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.security.AuctionTokenServiceTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.security.FeignServiceIdentityTest",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.security.FeignServiceIdentityTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.security.SecurityContextFilterTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.security.SecurityContextFilterTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.security.SecurityFilterChainRejectionTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.security.SecurityFilterChainRejectionTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.security.SecurityHeaderPropagationInterceptorTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.security.SecurityHeaderPropagationInterceptorTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.security.WebSocketSecurityInterceptorTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.security.WebSocketSecurityInterceptorTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.security.money.MoneyAccessPolicyTest",
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.security.money.MoneyAccessPolicyTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.security.organisation.DefaultOrganisationAccessPolicyTest",
+      "tests": 11,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.security.organisation.DefaultOrganisationAccessPolicyTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.security.organisation.OrganisationFeignBootstrapTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-common-clean-invocation4-TEST-com.fooddelivery.common.security.organisation.OrganisationFeignBootstrapTest.xml",
+      "failureMethods": []
+    }
+  ],
+  "totals": {
+    "tests": 304,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0
+  }
+}

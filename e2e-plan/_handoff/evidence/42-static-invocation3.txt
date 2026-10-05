@@ -1,0 +1,21 @@
+== O3 (19 checks)
+[PASS ] O3-STATUS-ENUM           ApplicationStatus with transitions; BusinessType
+[PASS ] O3-EVENTS                DELIVERY_PARTNER aggregate/topic/case and application status events
+[PASS ] O3-BRAND-STATUS          Brand carries applicationStatus
+[PASS ] O3-RIDER-STATUS          DeliveryExecutive and fresh schema use application_status without verification_status
+[PASS ] O3-NO-AUTO-APPROVE       automated checks never approve a rider
+[PASS ] O3-ENDPOINTS             onboarding and admin application endpoints mapped
+[PASS ] O3-DELETED               old onboarding paths, SSE stream and status/{executiveId} gone
+[PASS ] O3-IDOR                  verification status read from the principal
+[PASS ] O3-LISTING               nearby query filters on the brand's application status
+[PASS ] O3-ADMIN-UI              Partner approvals page routed
+[PASS ] O3-GATEWAY               onboarding paths routed and open to signed-in users
+[PASS ] O3-E2E                   the four O3 E2E tests
+[PASS ] O3-RATE-LIMITS           SEC-1: application writes and document uploads rate limited
+[PASS ] O3-UPLOAD-SAFETY         SEC-6: KYC upload allow-list, signed length, prefix-checked downloads
+[PASS ] O3-AUDIT                 SEC-5: application decisions and admin document views audited
+[PASS ] O3-CONCURRENCY           SEC-9: concurrent admin decisions tested
+[PASS ] O3-INDEXES               PERF-4: application queue indexes
+[PASS ] O3-METRICS               OBS-1: application transition metrics and queue-age gauge
+[PASS ] O3-ALERTS                OBS-2: review-queue age alert rule
+== PASS 19  FAIL 0  STALE 0

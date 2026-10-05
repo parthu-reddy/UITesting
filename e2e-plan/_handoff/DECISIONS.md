@@ -1,5 +1,10 @@
 # User instructions and joint decisions register
 
+## 2026-10-05T12:02:56+05:30 — Final documentation publication and diagnostic retention
+
+Choice: commit the bounded O4/O5 plan, checkpoint, retained-fixture and count/state evidence files (.md/.json/.txt), together with the two selected shared lesson documents. Keep raw XML/SQL/log files and Python caches local and unstaged. Historical Maven text diagnostics are published as bounded assertion/build/count excerpts, with full originals retained locally as unstaged logs. The old presigner negative-control portable excerpt redacts test-only signing credential/signature values while preserving signed headers and the original failed assertion/count; the full original log is retained locally. Both final phase checklists are complete within the documented Dev/UI-only scope; explicit deferrals remain unverified. Stop after these documentation commits. No later phase, new test run, reset or deployment is part of this final handoff.
+
+
 ## 2026-10-04T10:15:43.962704+05:30 — Initial O3 timing evidence
 
 Admin queue navigation1/1 passed. Both server queue buckets are under300ms, but browser queue p95 is353.948ms (n4) and Restaurant status bucket447.392ms exceeds150ms (n6). Delivery status n1 is111.848ms. Small samples, no load claim. Evidence59-o3-initial-measurements.json; final measurements stay open. Collect after completed normal journeys; no API warm-up loop. Uploads await user Cloudflare sign-in, application CORS admin403.
@@ -581,3 +586,175 @@ Choice: publish UI d79c33ae644b2924112332a6bba48e0c143272da using existing GitHu
 ### 2026-10-04T16:42:23.916935+05:30 — Close reopened O3 UI items and start coherent O4 auth work
 
 Choice: accept O3-UI-006 only from strengthened current-image invocation11 and accept the four required O3 methods from the single green invocation13. Preserve traversal-only10, sandbox startup failure12 and all previous failures. The same GitHub-published Oracle image also passes unchanged300-line/redesign gates; no owner exclusion remains for those two items. Keep unchanged UI-only/wait/rate/SSE deferrals and real production provider/load gaps. O4 DB versions are changed atomically, excluded from ordinary dirty-user updates, and mirrored only after commit through monotonic cache writes with durable publication retry records. Transfer batches both users in one publication; organisation DTOs batch businesses rather than query per row. These O4 choices have local H2 proof only and are unfinished/unpublished. Continue whole plan; no automatic fixture cleanup.
+
+### 2026-10-04T17:12:45.532346+05:30 — One login security and staff administration
+
+Choice: only staff ADMIN assignments are writable; CUSTOMER/RESTAURANT/DELIVERY/BUSINESS come from active profiles, approved projections and active organisation membership. Admin user lists compute these roles in batches and role-filtered pages use database predicates, preserving pagination. Keep a final active administrator and refuse self-suspension/removal. Remove unused user_devices.portal and old AuthPortal/service-name role aliases from the complete fresh V1 schema, without legacy migration. Refuse changing the sign-in phone through the unverified profile edit endpoint; existing name/email completion stays available. OTP consumption is atomic and deferred until session capacity/replacement checks pass, so409 retains the code. Admin sessions count toward the same three-person-session cap and may replace another owned session but cannot replace the everyday session calling step-up. Version mirrors live for twice the longest configured everyday/admin token lifetime. Require an ev claim on protected fresh-release JWTs; deploy through the authorised clean Dev reseed, not old-token compatibility. Local auth33/33 and gateway30/30 pass; none of O4 is published or deployed yet.
+
+### 2026-10-04T17:21:35.186761+05:30 — O4 browser proof follows UI-only policy
+
+Choice: replace the obsolete O4 E2E draft API/DB/token assertions with visible login, portal switching, profile completion, invitation acceptance, owned-applicant approval/revocation and separate admin step-up journeys. Exact claims/keys/storage/expiry stay in service/H2/gateway/UI unit checks. No browser storage/token decoding/injection, product API requests or direct DB/Redis/SSH in E2E. Keep deferred internals/waits/rate/SSE outside passing totals; publish before task-authorised fresh clean Dev deployment.
+
+## 2026-10-04T17:43:58.319159+05:30 — O4 dispatch identity and strict negative membership checks
+
+Every normal/retry dispatch reads the authoritative customerId from the existing signed Customer dispatch-details endpoint and merges it into exclusions before publishing. This adds one Customer RPC per dispatch attempt; no extra database connection is held across the call. Manual assignment checks the same immutable customer identity before mutations and records SELF_ASSIGNMENT as a terminal audited refusal. Preserve the existing retry/discovery/reservation flow. Exact review authorization remains Customer-owned: one fresh strict membership check per customer batch containing outlet/product targets, no check per dish. A confirmed membership404 means absence; malformed responses/outages503 refuse the review, never grant by a false-negative operational cache result. Ordinary operational permissions retain the approved60second stale grace. A CUSTOMER member can still rate another rider; RESTAURANT cannot rate themselves as CUSTOMER. These choices have local unit/H2/service proof only and require the coherent O4 release.
+
+## 2026-10-04T18:17:32+05:30 — O4/O5 coherent UI-only release and verification discipline
+
+Choice: implement O5's dependent UI after local O4 contract proof and publish/deploy O4+O5 as one release. O4's member invitation/removal/revocation E2E has no permissible setup before the O5 UI exists under the owner's UI-only rule. Both gates and regressions remain mandatory; do not mark either phase complete from local tests. This corrects the original standalone O4→O5 deployment order, without opening wallet/ads work early.
+
+Choice: run the existing `specs` Maven profile for changed endpoint/DTO modules before UI generation, then wait for generation to finish before typecheck/lint/tests. Keep the parent's normal spec exclusion unchanged. Mixed-source or overlapping checks are diagnostics only; preserve failed invocations separately.
+
+Choice: the gateway reads the person's owned active session record in the same Redis multiGet as blacklist/version. Validate purpose and token expiry within absolute lifetime; absent or malformed state denies access even after Dev data/session wipes. No additional Redis round trip or negative session cache. Local tests and deployed performance measurements are required before release.
+
+Known boundary to verify/document: missing version is0 only under the planned normal TTL/no-eviction/persisted Redis premise. Durable after-commit version publication retries every5seconds; an isolated cache write failure with healthy stale reads does not prove instantaneous revocation. Do not represent that outage case or arbitrary early version-key deletion as passed live evidence. Internal fault setup remains deferred under the UI-only policy.
+
+## 2026-10-04T18:58:39+05:30 — O5 contract validation, fresh fixtures and header packaging
+
+Choice: retain the existing global SDK validate:false setting while adding explicit generated-schema validation to the new portal/organisation/session read models and login responses. Existing legacy void-response specs prevent safely enabling it for every old client in this release. Do not claim global generated response validation. Malformed new contracts must fail with a visible error rather than empty data or a fabricated token.
+
+Choice: present organisation names in person invitations through a batched Identity response; omit optional null reason/name fields using NON_NULL for the new wire models. Keep this in the combined O4/O5 contract release.
+
+Choice: package security headers in one nginx include and include it at server, SPA and cached-asset scopes because nginx add_header inheritance stops when a location declares its own headers. Origin entries come from source and must be checked against a recorded normal UI run of every portal. No live CSP acceptance until that run passes.
+
+Choice: remove remote allocation/audit from the registration E2E runner. Allocate and retain local phone candidates; the normal UI must show fresh-profile completion, otherwise reject the collided candidate clearly. Do not infer uniqueness from a random number or query application databases. Retain all created accounts/sessions and manifests on success and failure.
+
+Choice: preserve failed UI invocations separately. Closing the launcher invalidates pending navigation; reopening remounts its data request. No length, style, auth or response-validation gate is exempted to pass these changes.
+
+## 2026-10-04T19:36:11+05:30 — Resume and O4/O5 scope/fixture choices
+
+Owner requested a brief pause, then resume; task-specific commits/pushes, unchanged GitHub publication and Oracle Dev clean wipe/fresh seeding remain authorised. Publish before deploy; never local Docker; embedded H2 service tests and rendered UI-only E2E remain binding. Use existing restaurant-brand Suspend/Reinstate controls for the original O4 suspension gate; remove the accidental extra admin organisation screen. Preserve the calling everyday SID in admin step-up replacement. Restaurant launcher state belongs to the selected organisation, with a volatile per-person context fallback if persistence is disabled. The E2E URL is normalised without a trailing slash; fresh phone candidates are retained locally and confirmed through normal profile UI, never allocated/audited through a database.
+
+## 2026-10-04T19:53:32+05:30 — Current guard and schema choices
+
+Use actual aliased H2 UPDATE inspection for the50-person counter batch and dispatch fixtures that do not already exclude their customer. Keep the guard source restored before publication. Register the two new delegated consumers at their measured one envelope read, without raising old ceilings. Replace retired SessionInfo.serviceName strictness with required purpose/createdAt/absoluteExpiresAt. Review fresh Identity SQL through embedded H2 and explicit dialect bridges; native PostgreSQL bootstrap is a separate deployment check, never an external DB test fixture. Common publication37208293403 succeeds before dependent images.
+
+## 2026-10-04T20:07:27+05:30 — Full registry validation and committing H2 suite isolation
+
+Choice: inspect every cached session row before accepting an owned match; reject invalid purposes/expiry and duplicate IDs using the existing single Redis multiGet. The added registry test retains valid multi-device acceptance.
+
+Choice: isolate the committing entitlement consumer suite in its own embedded H2 database. CI's pagination failure is fixture contamination; do not change query semantics, increase expected counts or use an external database. Preserve failed publication37209498593/149tests/one failure and verify the CI profile with consumer-before-pagination ordering before retrying.
+
+Choice: preserve CSP evidence in a finally block and accumulate header failures before asserting. Static locator defects are repaired against current rendered source; dynamic data and intentional absent-control assertions need explicit source dispositions and live proof, with no exemptions. No live acceptance or global locator green is claimed.
+
+## 2026-10-04T20:25:44+05:30 — Owner stop boundary: complete O4 and O5 only
+
+Direct owner instruction: "sure complete those and stop after phase 4 and phase 5 are completed."
+
+Choice: finish the combined O4/O5 source, unchanged GitHub publication/contract workflows, authorised Oracle Dev fresh wipe/seeding/deployment, UI-only E2E/regressions, measurements and accurate checklists. Stop once both phases meet the current acceptance scope. Do not start W1–W3 or A1–A4. Standing task commits/pushes and publish-before-deploy authorisation remain applicable to this completion; no local Docker or direct-state/API E2E. Explicit existing wait/rate/SSE/internal proof deferrals stay visible and are never counted as passes.
+
+## 2026-10-04T20:37:04+05:30 — O4/O5 telemetry and proof boundaries
+
+Choice: protect non-health Gateway Actuator GETs with verified fresh SERVICE signatures, enable metrics/prometheus/histograms, and remove env exposure. Actuator mutations remain denied. Gateway clean58/58 and image37211376848 pass. Record operator telemetry separately from rendered UI E2E; the unavailable old Gateway histogram baseline cannot be reconstructed or called an unchanged-latency pass.
+
+Choice: defer the deliberately removed CSP-origin browser break test as O5-CSP-001 under the current UI-only rule. Preserve the negative unit/static probes and run positive headers/origin/console checks on all deployed portals. Do not deploy intentionally broken CSP to shared Dev or inject/intercept browser state. Stop after O4 and O5 are complete; Wallet and Ads phases remain outside this resumed scope.
+
+## 2026-10-04T20:47:42+05:30 — Runtime packaging and UI-only regression choice
+
+Choice: include Reviews common-persistence at runtime; it is required by actual messaging imports. Tests previously had it on the test classpath and could not detect the missing packaged library. Preserve GitHub workflows and repair only the service dependency. Fresh volumes are already wiped; resume without another wipe. Local97/97 plus nested runtime-class proof is separate from pending replacement deployment.
+
+Choice: use passive UI-generated eligibility/money responses in the required regression journey. Keep synthetic chat retry/socket-close fixtures and three older direct aggregate/eligibility cases deferred under O4-INT-002; do not count them as passes.
+
+## 2026-10-04T20:52:59+05:30 — HEAD health probe compatibility
+
+Choice: permit GET and HEAD only on Gateway health paths, preserving the existing remote wget --spider health probe. All non-health Actuator HEAD requests and mutations remain denied; signed SERVICE GET telemetry remains protected. Initial af80a72 has GET health UP but the remote HEAD probe is401, so clean deployment invocation1 timed out before the four strict-chain services. Corrected0b729f0 passes58/58 clean local tests including root/readiness HEAD probes and negative non-health HEAD/health POST. Publish the replacement first, then resume Gateway/Reviews and the four unstarted services without another wipe. No browser E2E is run on that failed rollout.
+
+## 2026-10-04T21:08:57+05:30 — Portal model correction and completed rollout
+
+Choice: preserve the source model that omits unavailable ADMIN for non-staff; assert tile absence, not an Unavailable tile. No UI behavior is changed. Gateway/Reviews runtime repairs are published before selected redeployment; fresh seeds have now completed successfully. Run the positive browser gates only on this healthy seeded rollout, retaining all fixtures.
+
+## 2026-10-04T21:30:26+05:30 — SDK get alias and portal setup choice
+
+Use the generated organisation get(options) alias with typed UUID params; it shadows the SDK generic get(path, options). Preserve generated source and endpoint contracts. Add actual generated-client/shared-fetch request coverage, then publish before UI redeployment. Portal E2E dismisses the existing Customer location dialog through its visible Close dialog control; never force a click through it or inject browser/address state. Failed invocation1 remains retained, not passing coverage.
+
+## 2026-10-04T21:41:52+05:30 — Passive rider preflight, single financial fixture and measured baseline limit
+
+Choice: observe the real offline dashboard profile before an Online click; require the actual tracking socket DUTY_STATUS and recent outgoing location before checkout. Preserve ON_DELIVERY. Reuse one canonical UI-created delivered order for completed-trip, unrated-review, money and earnings regressions; remove synthetic responses/request interception. All created fixture records remain retained. Record Gateway latency now and defer the unavailable historical comparison as O4-PERF-001; numeric httpStatusCode labels determine successful samples. No direct product/DB/Redis tests or fabricated baseline.
+
+
+### 2026-10-05T05:03:22+05:30 — O4/O5 exact R2 host and addressless portal setup
+
+Use the actual signed private bucket virtual hostname in CSP, retaining explicit origins and same-origin scripts. Local config tests read the repository file directly because Vitest transforms import.meta.url to HTTP. In UI portal setup, select normal GPS when the real location dialog is open; Close can race the initial empty address response. No browser-state injection, forced clicks, credentials change, second wipe, or cleanup. O4 invocation2 remains5pass/1failure/2errors/0skips until repaired live proof. Resume authorized work; stop after phases4and5.
+
+
+### 2026-10-05T05:08:45+05:30 — Respect Close in the product, then prove it through UI
+
+GPS selection works on the existing deployed UI: one targeted approved-rider portal case passes, zero failures/errors/skips, with no new profile/order. However the underlying slow empty-address response still reopens a dialog the user closed. Correct the product hook so only disappearance of a previously selected saved address prompts again; initial addressless entry already opens the dashboard dialog. A new delayed-response unit preserves Close, existing vanished-ID/GPS/reconciliation cases remain. Local14/14 pass; typecheck/lint running. Harness reverts GPS setup to the real Close control to prove the repaired UX live. Current GitHub37244246232 builds CSP-only73058ad; publish the tested address follow-up afterward and deploy the final image, preserving publication before deployment. No new data reset or Cloudflare credential changes.
+
+
+### 2026-10-05T05:20:57+05:30 — Real confirmation and explicit availability refresh
+
+Wait for the actual200 private-document completion and visible uploaded label rather than treating the normal stale-entitlement401 intermediate attempt as final. Give users an explicit portal availability refresh; do not poll a closed launcher. Observe asynchronous application decisions through that visible control, bounded10seconds, with attempt/time evidence. Common outbox interval is2seconds. Keep the suspended failed fixture and unused member candidate documented; no cleanup or financial duplicate. This corrects the preliminary chat description of a membership-removal failure: it was unreached upload setup.
+
+
+### 2026-10-05 — Observe recovery and projection through the real UI
+
+Upload observers now count only actual401responses carrying X-Auth-Reason=ENTITLEMENTS_CHANGED; retain those counts alongside200+Uploaded proof. Initial invocation3classification was inferred from the central transport source, not directly observed. Restaurant/rider approval follows the same two-second asynchronous read-model bridge as suspension; use the explicit visible refresh with a10second bound, recording actual attempt count/time. An independent targeted revocation subset runs on the existing deployed image while the new portal control image builds; no financial order or cleanup.
+
+
+### 2026-10-05 — Targeted revocation subset reveals stale owner view
+
+Subset1 on ba3650b/e55e063:1test,0passes/0failures/1error/0skips. Both uploads confirm200+visibleUploaded with0observed completion401challenges. Brand approval, invitation acceptance and STAFF operational access pass before the owner tries removal. Owner page still shows only its pre-acceptance membership and PENDING invitation; its real hook reloads on focus. Reopen All organisations→Open organisation→Members through real controls, assert the accepted member row, then remove. No backend role defect is inferred; the owner snapshot was never refreshed in the harness. Owner9999059061/member8999949211 remain a retained approved/active STAFF fixture because removal was not executed. No financial order. Compile21/push running.
+
+UI2aed6af published successfully by unchanged GitHub37245286714 and deployed via existing UI-only script (invocation5). Reviewed Dev configs, hardening/reconciliation and metadata still pending this rollout. Local43/43/typecheck/lint and locator13/13 pass. Full O4 invocation3 remains6pass/2failures/0errors/skips; final positive O4/O5 gates/regressions remain open.
+
+
+### 2026-10-05T05:36:28+05:30 — Provider-check completion uses final response
+
+Extend final200synchronization to driving-licence,RC,bank,selfie checks and rider submit, which share central single entitlement refresh/retry. Step controls remain gated by authoritative visible verification state; a refusal still fails. All-origin CSP/network and actual decoded-image smoke passes; retain failed rider draft and all allocated/created records. O5 invocation1 remains7/8until full corrected rerun.
+
+## 2026-10-05T05:42:32+05:30 — O4/O5 live gate closure and canonical regression fixture
+
+Both eight-case UI gates passed on the published Oracle release. Reuse one fresh retained seeded-account delivery order for required downstream regressions; respect ordinary OTP limits and keep all prior failed fixtures. Current UI publication remains2aed6af; harness-only response synchronization does not require a new application image. Stop after phases4and5; the named internal, historical-baseline and deliberate-CSP-negative deferrals remain explicit.
+
+## 2026-10-05T05:44:13+05:30 — Rider preflight evidence type
+
+Emit the observed location age as a Playwright-supported Double, while keeping the server/socket/recent-fix readiness checks unchanged. Lifecycle invocation1 stopped before checkout and created no order. Rerun once after harness validation; later failures after an order exists must resume that exact retained order.
+
+## 2026-10-05T05:56:52+05:30 — Retained-order polling and provisioning regressions
+
+Repair the actual selected-outlet dependency and verified-customer concurrent insert within required O4/O5 regression scope. Retain1a375719 and resume it only while active; never repeat checkout as a workaround. Save an order manifest immediately after receiving its ID, before optional post-response assertions. The browser renders the selected card method and the authoritative returned paymentMethod; a streaming Request may not expose Playwright postData, so do not silently claim request-body inspection. Publish all application repairs before deployment.
+
+## 2026-10-05T06:04:00+05:30 — Replacement after proven terminal order
+
+Rendered UI proves1a375719 CANCELLED_BY_RESTAURANT. Keep that manifest and failure proof; after publication/deployment of verified kitchen and Customer repairs, create one replacement canonical delivery for required phase regressions. This exception does not allow duplicate active checkouts. The state probe records only rendered status/visibility/timestamp, with no API response-body parsing or raw tracker text. The initial rejected diagnostic was never executed. No migration, reset, seed or financial-provider mutation is needed.
+
+## 2026-10-05T06:16:59+05:30 — Preserve native absent-body transport behavior
+
+Actual generated accept/reject/cancel requests reproduce the incorrect form Content-Type for no body. Correct the shared adapter's effective-body handling, preserving JSON/multipart and ordinary auth refresh, then publish/deploy before resuming. Retain0dbe6a15 and original1a375719. Never bypass the UI or create duplicate active orders; a further fixture is justified only after rendered UI proves a retained attempt terminal and its cause has been repaired. No timeout bypass, reset or seed.
+
+## 2026-10-05T06:33:00+05:30 — Canonical fixture after both repaired terminal attempts
+
+Both1a375719 and0dbe6a15 are now proven CANCELLED_BY_RESTAURANT through rendered UI. Keep both manifests/failure/state evidence. The selected-outlet polling and absent-body transport causes are repaired/published/deployed. Create one fresh canonical lifecycle on UIe055ea1 for required O4/O5 regressions, saving the ID immediately; never duplicate active checkout or bypass timeout/DB/Redis/UI. Resume that exact new fixture if recovery is necessary. No reset/seed or refund submission.
+
+## 2026-10-05T06:40:58+05:30 — Serialize visible kitchen progression with server completion
+
+Keep60631296 assigned/PREPARING and resume it; no duplicate order. Ready400 is a real optimistic UI race, not a pickup-code locator change. Await successful kitchen mutation before rendering its next status/action, and release busy state on settled success/refusal. Verify actual-component and deferred-request guards, publish through GitHub, deploy, then resume. The grouped outlet label is required O5 UX; preserve it and update existing reload assertions to compare the complete visible choice.
+
+## 2026-10-05T06:46:38+05:30 — Confirm kitchen changes before advancing; reuse existing journeys
+
+Choice: keep the current kitchen state/action busy until its real save completes, publish the confirmed state after success, and release busy on completion. An optimistic PREPARING render had enabled Ready before prepare committed and produced a real400. Use existing Happy/financial/review/read-only tests on the retained owned order; new local tests target only this demonstrated race. Retained checks read normal rendered History/receipt and combined GST, observe order writes passively, and never intercept product traffic or invent a tax split. Publish through GitHub before Oracle deployment; stop after O4/O5.
+
+## 2026-10-05T06:56:59+05:30 — Existing owned rider-action observation and shared teardown
+
+Choice: match the real UI action response by POST and exact owned URI path, then assert the expected visible phase, avoiding request-body metadata dependency. Arrival was saved even while the old observer timed out. Reuse TestBase's existing idle-rider teardown; remove the extra call added in57eca7b. Retain the failure and same assigned fixture; no new checkout or backend mutation.
+
+## 2026-10-05T11:20:29+05:30 — Use the issued sessionId claim and observable theme completion
+
+Choice: ActiveSessions and AdminStepUp use Identity AuthService's issued sessionId claim; existing fixtures use the same wire contract. Do not add a sid fallback for nonexistent deployed history. Keep the two original settings failures and rerun only those cases on the published replacement. Theme E2E waits for rendered CSS endpoint colors instead of sampling mid-transition. No live session deletion or duplicate happy order is needed. Scope: O4/O5 final release only; stop after these phases.
+
+## 2026-10-05T11:26:21+05:30 — Correct canonical rider-name input, preserve original failure
+
+Choice: the existing RestaurantNavigationUiTest uses expected rider name `Rider 1`, exactly as deterministic dummy_riders.sql/dummy_riders_customers_identity.sql and the real UI-generated history response. The prior invocation's command supplied `Rider1` and failed the strict enrichment assertion; retain its1failure/3passes. No product or test assertion is changed. Rerun only restaurantSectionsRender on the replacement UI; nonzero earnings/statement, public saved-review/aggregate and admin delivered-money already passed and are not repeated.
+
+## 2026-10-05T11:42:24+05:30 — Resolve an outlet beneficiary through its owning brand
+
+Choice: correct the demonstrated RESTAURANT_PAYABLE outlet-id/brand-id mismatch in the internal Restaurant beneficiary lookup. Read Outlet first, then its brand; retain the existing route, masked output and SERVICE/ADMIN restriction. Missing outlet/brand remains404, never a guessed beneficiary. No schema, migration, data reset, payout action or new Wallet/Ads phase. Prove locally, publish by GitHub before Oracle service deployment, then verify the retained payee through real read-only admin UI.
+
+## 2026-10-05T11:46:20+05:30 — Report the current accepted bank callback states consistently
+
+Choice: beneficiary verification treats both APPROVED and VERIFIED as passed, matching the existing O3 RestaurantApplicationService callback contract and Government ID producer. The deterministic seed and real callback use APPROVED. A new actual HTTP assertion catches the previous false verified flag (4passes/1failure); fix that read projection without changing bank checks, approval rules, schemas/seeds or money. The old outlet-to-brand bug was independently caught by4 failing assertions, then4passed after the lookup correction. Full clean Restaurant/H2/contracts proof is running.
+
+## 2026-10-05T11:57:12+05:30 — Accept O4/O5 and stop
+
+Choice: complete O4/O5 within current Dev/UI-only boundaries after successful GitHub publication, Oracle rollout, final8+8 UI gates, required existing regressions, the demonstrated beneficiary correction and current portal p95 proof. Retain every original failure and owned fixture. Record missing historical Gateway latency as O4-PERF-001 and deliberate CSP mutation as O5-CSP-001; internal/duration/rate/SSE/provider/load/parked ONDC limits remain unverified. Do not count deferrals as passes. No further wipe/seed/automatic cleanup or financial action. Stop after Phase5; W1–W3/A1–A4 are unstarted and require a later instruction. The entire platform is not declared production-validated.

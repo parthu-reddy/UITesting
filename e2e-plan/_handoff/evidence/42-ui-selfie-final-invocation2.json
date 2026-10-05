@@ -1,0 +1,32 @@
+{
+  "proof": "local Vitest rendered components/SDK fixtures, not Oracle E2E",
+  "at": "2026-10-03T22:30:31.239542+00:00",
+  "processExitCode": 0,
+  "total": 3,
+  "passed": 3,
+  "failed": 0,
+  "pending": 0,
+  "success": true,
+  "files": [
+    {
+      "file": "DailySelfiePrompt.test.tsx",
+      "cases": [
+        {
+          "name": "daily operational selfie requires a completed duty upload then verifies and syncs readiness without going online",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "daily operational selfie preserves a recoverable failure without claiming verified readiness",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "daily operational selfie serialises repeated clicks and never claims eligibility after the application becomes suspended",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-04T01:55:32.930198+05:30",
+  "proof": "local focused behavior and security checks; failures retained separately",
+  "counts": {
+    "tests": 2,
+    "failures": 0,
+    "errors": 2,
+    "skipped": 0
+  },
+  "classes": [
+    {
+      "class": "com.fooddelivery.restaurant.RestaurantApplicationTransactionTest",
+      "counts": {
+        "tests": 2,
+        "failures": 0,
+        "errors": 2,
+        "skipped": 0
+      },
+      "seconds": "4.684"
+    }
+  ],
+  "deployed": false
+}

@@ -1,0 +1,13 @@
+{
+  "proof": "Maven validate/check-stale-contracts stopped before test execution",
+  "processExitCode": 1,
+  "at": "2026-10-03T21:35:21.862406+00:00",
+  "totals": {
+    "tests": 0,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0
+  },
+  "reason": "contract source changed since target producer stubs; clean build required",
+  "priorTargetXmlCountsAreNotThisInvocation": true
+}

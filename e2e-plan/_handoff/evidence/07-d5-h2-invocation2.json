@@ -1,0 +1,10 @@
+{
+  "tests": 39,
+  "failures": 0,
+  "errors": 39,
+  "skipped": 0,
+  "status": "Context startup failed; no product assertion passed",
+  "reason": "Unused derived UserDeviceRepository query still referenced the removed portal column. Remove the unused method along with the entity/initial schema field.",
+  "source": "Counts inspected before rerun; per-suite XML overwritten by invocation3 and not attributed to invocation2.",
+  "deployed": false
+}

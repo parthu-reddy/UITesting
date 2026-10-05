@@ -1,0 +1,60 @@
+{
+  "recordedAt": "2026-10-05T11:42:24+05:30",
+  "uiCommit": "f73ffe909f34e15add4b8717159eb664e042f477",
+  "harnessCommit": "db66d24",
+  "githubRun": 37269604733,
+  "githubTests": 941,
+  "githubTestFiles": 149,
+  "hardening": {
+    "passed": 15,
+    "failed": 0
+  },
+  "reconciliation": {
+    "running": 29,
+    "drift": 0
+  },
+  "image": "hyd.ocir.io/axekmbadoczl/food-delivery/food-delivery-app-ui:f73ffe909f34e15add4b8717159eb664e042f477",
+  "digest": [
+    "hyd.ocir.io/axekmbadoczl/food-delivery/food-delivery-app-ui@sha256:6d78c287bc1bd93d0fca933d1418870adc9d88e02459ce8e8ef17a9f7a573952"
+  ],
+  "regressionReruns": [
+    {
+      "testClass": "CustomerSettingsUiTest",
+      "counts": {
+        "tests": "2",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0",
+        "time": "18.139"
+      },
+      "methods": [
+        {
+          "name": "profileDarkThemeChangesRenderedBackground",
+          "result": "PASS"
+        },
+        {
+          "name": "currentLoggedInDeviceIsListedWithoutRemovingIt",
+          "result": "PASS"
+        }
+      ]
+    },
+    {
+      "testClass": "RestaurantNavigationUiTest",
+      "counts": {
+        "tests": "1",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0",
+        "time": "10.481"
+      },
+      "methods": [
+        {
+          "name": "restaurantSectionsRender",
+          "result": "PASS"
+        }
+      ]
+    }
+  ],
+  "newOrderCreated": false,
+  "liveSessionDeletion": false
+}

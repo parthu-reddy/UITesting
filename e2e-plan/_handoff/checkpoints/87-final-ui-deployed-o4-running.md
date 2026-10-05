@@ -1,0 +1,7 @@
+# Final UI deployment and phase gates
+
+## 2026-10-05T05:15:41+05:30 — checkpoint87: final UI published/deployed; O4 live gate running
+
+UIba3650b02f35804c2538a83a70fd8624e5e49d3e published successfully via unchanged GitHub37244536425 (full931tests across147files, zero failures/skips), then deployed through the existing Oracle UI-only workflow. This includes the exact private bucket CSP origin and respect for the user's Close action during the initial address fetch. Local14/14, typecheck/lint pass. Deployment60cbdc5 pins the exact image/digest in evidence38. Reviewed four Dev configs were already synchronized and skipped publication/restarts. Native Nginx syntax passes, hardening15/15, reconciliation29/0drift. Current Oracle metadata29running,26healthy/three without checks, no automatic restarts/drift/recent errors; tunnel unchanged.
+
+UITesting6dc26ce is pushed/compiled; O4 invocation3 is running with fresh browser contexts and retained owned profiles. It verifies Close directly and uses only rendered UI/Dev Autofill. Previous full invocation2 is5pass/1failure/2errors/0skips; the temporary GPS one-case pass remains a distinct subset. Do not claim the live O4/O5 gates complete yet. All data retained; no second wipe/seed or fixture cleanup. Next: finish eight O4 cases, run eight O5 with staff1000000002, one retained canonical delivery and required same-order UI regressions, then final measurements/checklists. Stop after4and5; Wallet/Ads untouched.

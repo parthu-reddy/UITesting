@@ -1,0 +1,32 @@
+{
+  "recordedAt": "2026-10-05T06:14:39.822938+00:00",
+  "invocation": 2,
+  "tests": 4,
+  "failures": 4,
+  "errors": 0,
+  "skipped": 0,
+  "proof": "actual HTTP/controller assertions against old product source with mocked repositories",
+  "methods": [
+    {
+      "name": "missingOwningBrandIsNotFound",
+      "result": "FAIL",
+      "reason": ""
+    },
+    {
+      "name": "missingOutletCannotAccidentallyReturnASameIdBrand",
+      "result": "FAIL",
+      "reason": ""
+    },
+    {
+      "name": "payableOutletResolvesItsBrandAndOnlyReturnsMaskedBankDetails",
+      "result": "FAIL",
+      "reason": "Status expected:<200> but was:<404>"
+    },
+    {
+      "name": "unverifiedShortAccountRemainsMaskedAndUnverified",
+      "result": "FAIL",
+      "reason": "Status expected:<200> but was:<404>"
+    }
+  ],
+  "externalDatabaseOrRedis": false
+}

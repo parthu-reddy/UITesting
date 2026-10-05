@@ -1,0 +1,29 @@
+{
+  "proof": "isolated real PostgreSQL17/PostGIS complete old Delivery DDL versus fresh baseline",
+  "oracleDataMutated": false,
+  "freshInitialSha256": "2e18ec0771eb6966075fd3542ce30c8d294fd19c2dc7d7e2556d550c9df833b3",
+  "originalSqlFiles": [
+    "V1__init_schema.sql",
+    "V20260825200000__add_city_id_to_delivery_executives.sql",
+    "V20260825200001__alter_city_id_type_to_varchar.sql",
+    "V20260825200002__alter_telemetry_location_to_geometry.sql",
+    "V20260910120000__order_assignments.sql",
+    "V20260910140000__order_assignment_payment_method.sql",
+    "V20260916102000__enforce_prepaid_assignments.sql",
+    "V20260927120000__order_assignment_delivery_status.sql",
+    "V20260929140000__manual_force_assignment_concurrency.sql"
+  ],
+  "originalColumnCount": 93,
+  "allOriginalColumnsTypesDefaultsPreservedExceptExplicitRetiredVerificationStatus": true,
+  "allNonRetiredIndexesPreserved": true,
+  "allOriginalConstraintsPreserved": true,
+  "cityIdTypeRetained": "varchar(255)",
+  "telemetryTypeRetained": "geometry(Point,4326)",
+  "newApplicationColumnCount": 6,
+  "prepaidAssignmentConstraintPreservedAndExercised": true,
+  "manualAssignmentVersionNotNullPreservedAndExercised": true,
+  "invalidApplicationStatesRefused": true,
+  "seedsExercised": false,
+  "olderSqlRemovedOnlyAfterProof": true,
+  "at": "2026-10-03T21:35:08Z"
+}

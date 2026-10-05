@@ -1,0 +1,22 @@
+{
+  "observedAt": "2026-10-03T19:42:20.298116+00:00",
+  "proof": "actual Oracle-to-R2 conditional copy of the previously retained synthetic object",
+  "sourceKey": "documents/storage-compatibility/40de4e1c-a427-426a-89e9-8d0552a3b4dc/synthetic.pdf",
+  "finalizedKey": "documents/storage-compatibility/40de4e1c-a427-426a-89e9-8d0552a3b4dc/finalized.pdf",
+  "matchingEtagCopy": {
+    "status": 200,
+    "contentLength": "233",
+    "contentType": "application/xml"
+  },
+  "wrongEtagCopy": {
+    "status": 412
+  },
+  "finalizedHead": {
+    "status": 200,
+    "contentLength": "15",
+    "contentType": "application/pdf"
+  },
+  "retained": true,
+  "applicationOrSeedMutated": false,
+  "noSecretsOrPresignedUrlsInEvidence": true
+}

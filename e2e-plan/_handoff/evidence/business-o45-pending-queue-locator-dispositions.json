@@ -1,0 +1,38 @@
+{
+  "recordedAt": "2026-10-05T11:49:27+05:30",
+  "file": "AdminLedgerAdvancedTest.java",
+  "uiCommit": "f73ffe9",
+  "statuses": {
+    "PASS": 26,
+    "DYNAMIC": 4,
+    "FAIL": 2
+  },
+  "exemptions": 0,
+  "failures": [
+    {
+      "rel": "tests/features/admin/AdminLedgerAdvancedTest.java",
+      "line": 212,
+      "call": "getByText",
+      "text": "Pattern.compile(\"^Page 2 of [0-9]+$\")",
+      "status": "FAIL",
+      "reasons": [
+        "getByText(/^Page 2 of [0-9]+$/)"
+      ]
+    },
+    {
+      "rel": "tests/features/admin/AdminLedgerAdvancedTest.java",
+      "line": 222,
+      "call": "getByText",
+      "text": "Pattern.compile(\"^Page 1 of [0-9]+$\")",
+      "status": "FAIL",
+      "reasons": [
+        "getByText(/^Page 1 of [0-9]+$/)"
+      ]
+    }
+  ],
+  "disposition": "Both static failures belong to the existing unselected ledgerPagination method and interpolated Page n of total label. The selected pendingPayoutsHavePositiveBalances path has no static FAIL. No auditor change or exemption; final actual queue proof remains mandatory.",
+  "harnessCompileInvocation": 33,
+  "harnessCompile": "PASS",
+  "sourceForInterpolatedLabels": "FoodDeliveryAppUI/src/features/ledger/components/AdminLedgerView.tsx: Page {page + 1} of {totalPages}",
+  "harnessCommit": "1f3dae0"
+}

@@ -1,0 +1,28 @@
+{
+  "recordedAt": "2026-10-05T01:29:08.016203+00:00",
+  "invocation": 9,
+  "proof": "actual deployed rendered UI; assigned-order resume of the existing Happy test",
+  "uiCommit": "509d084d7fa06ef72ba787b423db139b6ce75be0",
+  "harnessCommit": "afe12f1",
+  "counts": {
+    "tests": "1",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "53.834"
+  },
+  "passed": 1,
+  "orderId": "60631296-e064-4a59-a2ef-090549edcf01",
+  "newOrderCreated": false,
+  "verified": [
+    "pickup UI POST200",
+    "delivery UI POST200",
+    "exact rider completed Delivered row and positive payout",
+    "rider today earnings increases by that payout",
+    "exact customer Order delivered receipt",
+    "post-delivery actual chat message"
+  ],
+  "earlierSteps": "canonical checkout/accept/dispatch/both chat round trips in invocation6; Ready and saved arrival in invocation8. Original failures50/51/54 retained; those invocations are not full passes.",
+  "excluded": "parked SSE/map and synthetic chat reliability; financial/quote/read-only/review checks pending",
+  "postDeliveryChat": "ChatAttempt[customerSessionStatus=200, customerWebsocketResponseStatus=null, customerWebsocketState=STOMP CONNECTED, recipientSessionStatus=null, recipientWebsocketResponseStatus=null, recipientWebsocketState=null, customerChatOpened=true, emptyMessageBlocked=false, whitespaceMessageBlocked=false, customerMessageVisible=true, recipientMessageVisible=false, peerReplyVisible=false, customerReplyVisible=false, failure=]"
+}

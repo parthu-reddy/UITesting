@@ -1,0 +1,13 @@
+{
+  "recordedAt": "2026-10-05T11:23:48+05:30",
+  "uiCommit": "f73ffe909f34e15add4b8717159eb664e042f477",
+  "harnessCommit": "db66d24",
+  "file": "CustomerSettingsUiTest.java",
+  "callSites": 85,
+  "statuses": {
+    "PASS": 64,
+    "DYNAMIC": 21
+  },
+  "exemptions": 0,
+  "proof": "unchanged static locator audit; dynamic paint/current-device behavior requires deployed UI"
+}

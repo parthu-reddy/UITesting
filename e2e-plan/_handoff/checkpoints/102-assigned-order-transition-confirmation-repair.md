@@ -1,0 +1,9 @@
+# Assigned fixture and kitchen transition race
+
+## 2026-10-05T06:40:58+05:30 — checkpoint102: assigned fixture retained; kitchen transition confirmation repair
+
+Canonical60631296-e064-4a59-a2ef-090549edcf01 remains the one active owned fixture; no further checkout. Invocation6 fails1/1 after actual accepted200/dispatch assignment/customer ACCEPTED and both real participant chat round trips, at the obsolete bare-outlet reload-label assertion. Capture the full grouped organisation/brand/outlet label before reload and require it unchanged afterward; current harness compile28 passes. Evidence50 records the partial steps and original failure, not a full lifecycle pass.
+
+Assigned resume invocation7 creates no order and has0 passes/0 failures/1 error. Start cooking commits PREPARING, but the UI optimistically enabled Mark ready while prepare was still in flight. Actual Ready returns400; native read-only operator timing confirms both requests overlap and Ready reads ACCEPTED before prepare commit. Evidence51 records that real product race. Fix the UI to publish the new kitchen state only after successful server confirmation, propagate/await its promise, and keep/release busy state according to request completion rather than status changes. Focused component/hook/SDK tests, typecheck/lint are running; this correction is not yet published/deployed. Keep active rider duty; no timeout/seed/API/DB/Redis bypass.
+
+Read-only release metadata49 at2026-10-05T01:04:40Z still29 running/26 healthy,0drift/restarts/recent errors before the Ready race. Later known race error is retained separately, so do not reuse that timestamp as current zero-error proof. Resume this exact assigned order after tested UI publication/deployment, then complete same-order financial/quote/review/read-only regressions and final phase gates/measurements/checklists. Stop after O4/O5, no Wallet/Ads.

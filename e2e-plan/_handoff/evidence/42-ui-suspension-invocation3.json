@@ -1,0 +1,152 @@
+{
+  "proof": "local Vitest rendered components/SDK fixtures, not Oracle E2E",
+  "at": "2026-10-04T00:31:55.976036+00:00",
+  "processExitCode": 0,
+  "total": 24,
+  "passed": 24,
+  "failed": 0,
+  "pending": 0,
+  "success": true,
+  "files": [
+    {
+      "file": "DeliveryDashboard.suspension.test.tsx",
+      "cases": [
+        {
+          "name": "suspended rider delivery screen waits for the current assignment instead of displaying onboarding while the request is pending",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "suspended rider delivery screen shows an actionable failure and restores the active delivery after retry",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "suspended rider delivery screen keeps an owned delivery visible through an offline snapshot and a status refresh",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "useDeliveryOrders.afterOtp.test.ts",
+      "cases": [
+        {
+          "name": "the rider screen right after an accepted OTP stays on \"deliver to door\" after pickup while polls still say at the restaurant",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "the rider screen right after an accepted OTP does not bring a delivered job back as the active contract",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "useDeliveryOrders.reping.test.ts",
+      "cases": [
+        {
+          "name": "a lapsed dispatch offer that the server makes again prompts the rider again on the second offer",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "a lapsed dispatch offer that the server makes again loads completed deliveries while the rider is offline",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "a lapsed dispatch offer that the server makes again keeps the dashboard usable while a just-delivered payout is still enriching",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "a lapsed dispatch offer that the server makes again reconciles a confirmed delivery payout while the rider is offline",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "a lapsed dispatch offer that the server makes again keeps an exact payout when an older history response arrives afterwards",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "a lapsed dispatch offer that the server makes again marks a payout unavailable after four unsuccessful reads",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "a lapsed dispatch offer that the server makes again clears an unavailable payout when history later supplies the confirmed amount",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "a lapsed dispatch offer that the server makes again does not retry after the rider screen unmounts",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "a lapsed dispatch offer that the server makes again does not disguise an authorization failure as a pending payout",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "a lapsed dispatch offer that the server makes again prompts again when the second offer arrives only through polling (socket push missed)",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "useDeliveryOrders.suspension.test.ts",
+      "cases": [
+        {
+          "name": "authoritative current delivery during suspension does not classify a rider as idle while the active-order request is pending",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "authoritative current delivery during suspension exposes an active-order outage and restores the screen only after a successful retry",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "authoritative current delivery during suspension ignores an old rider request that completes after the signed rider changes",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "authoritative current delivery during suspension refreshes suspension without ending an owned delivery or reconnecting for a changed callback",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "authoritative current delivery during suspension never keeps a foreign or terminal delivery active ({\"deliveryExecutiveId\":\"22222222-2222-4222-8222-222222222222\"})",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "authoritative current delivery during suspension never keeps a foreign or terminal delivery active ({\"deliveryStatus\":\"DELIVERED\"})",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "authoritative current delivery during suspension never keeps a foreign or terminal delivery active ({\"deliveryStatus\":\"FAILED\"})",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "authoritative current delivery during suspension never keeps a foreign or terminal delivery active ({\"status\":\"CANCELLED\"})",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "authoritative current delivery during suspension never keeps a foreign or terminal delivery active ({\"status\":\"CANCELLED_BY_RESTAURANT\"})",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    }
+  ]
+}

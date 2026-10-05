@@ -1,0 +1,9 @@
+# Verified regression repairs
+
+## 2026-10-05T06:04:00+05:30 — checkpoint95: repairs verified/published in progress; original order terminal
+
+Customer0849ee6 published successfully through unchanged GitHub37247709911 after492/492 full tests and4/4 focused embedded H2/verified-identity checks. Existing selected Oracle customer-service deployment is running, retaining all data. UI444c2fc publication37247680000 remains running; local10/10 targeted, typecheck/lint pass. Restoring the old localStorage input makes both actual-component regression tests fail, then source is restored exactly. New selectedOutletId state plus refreshKey activates fresh-browser kitchen polling and rejects older in-flight outlet responses. No contract schema, initial SQL, workflow, local Docker or external test DB change.
+
+Rendered Customer History/tracker diagnostic1 passes and proves original retained order1a375719 is now CANCELLED_BY_RESTAURANT, so it cannot be resumed. This diagnostic is not a lifecycle acceptance pass. Its bounded status/visibility/timestamp artifact and original manifest are retained. First diagnostic command with API-body parsing was rejected by automatic approval review before execution; replacement reads only rendered UI and passes. Compiled25/harness570c72e records that safer probe. No second order has been created.
+
+After the corrected UI image is published and deployed, one replacement canonical fixture may be created because the original is proven terminal. Retain both; never retry a terminal order or repeat an active checkout. Recheck real Home/proximity/category/rider state, then complete the replacement lifecycle and same-order regressions. Final O4/O5 gates on repaired release, final histograms/checklists remain open. Stop after phases4and5; named deferrals and Wallet/Ads boundary unchanged.

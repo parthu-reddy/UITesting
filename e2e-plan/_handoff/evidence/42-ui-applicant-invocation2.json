@@ -1,0 +1,177 @@
+{
+  "proof": "local Vitest rendered components/SDK fixtures, not Oracle E2E",
+  "at": "2026-10-03T22:03:44.984536+00:00",
+  "processExitCode": 0,
+  "total": 29,
+  "passed": 29,
+  "failed": 0,
+  "pending": 0,
+  "success": true,
+  "files": [
+    {
+      "file": "DeliveryApplicationWizard.test.tsx",
+      "cases": [
+        {
+          "name": "delivery application review states saves a draft using the current version and no caller identity or phone fields",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "delivery application review states renders SUBMITTED with no editable fields",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "delivery application review states renders IN_REVIEW with no editable fields",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "delivery application review states renders APPROVED with no editable fields",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "delivery application review states renders SUSPENDED with no editable fields",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "delivery application review states shows rejection and resubmits for human review without manufacturing approval",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "RestaurantApplicationWizard.test.tsx",
+      "cases": [
+        {
+          "name": "restaurant application ownership and review states creates an organisation only for someone who has none, then saves its application",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "restaurant application ownership and review states uses an existing eligible organisation without creating another",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "restaurant application ownership and review states retains details and retries using the organisation already created after a failed save",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "restaurant application ownership and review states shows SUBMITTED read-only without an edit form",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "restaurant application ownership and review states shows IN_REVIEW read-only without an edit form",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "restaurant application ownership and review states shows APPROVED read-only without an edit form",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "restaurant application ownership and review states shows SUSPENDED read-only without an edit form",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "restaurant application ownership and review states shows the rejection reason and resubmits the saved version after confirmation",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "DocumentUploadField.test.tsx",
+      "cases": [
+        {
+          "name": "registered private document uploads signs actual MIME and size, uploads without app credentials and accepts only the completed key",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "registered private document uploads refuses HTML before requesting a URL",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "registered private document uploads refuses empty before requesting a URL",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "registered private document uploads refuses oversize before requesting a URL",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "registered private document uploads never exposes a signed URL or accepts a file when confirmation fails",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "registered private document uploads blocks a concurrent drop while the first request is pending and aborts on unmount",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "registered private document uploads refuses disabled selection and drag/drop",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "usePartnerApplication.test.tsx",
+      "cases": [
+        {
+          "name": "application submission polling polls at ten seconds only while SUBMITTED, then stops on IN_REVIEW and unmount",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "application submission polling does not poll DRAFT",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "application submission polling does not poll IN_REVIEW",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "application submission polling does not poll APPROVED",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "application submission polling does not poll REJECTED",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "application submission polling does not poll SUSPENDED",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "application submission polling discards an older request after accepting a newer saved version",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "application submission polling clears retained details when access is refused on refresh",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    }
+  ]
+}

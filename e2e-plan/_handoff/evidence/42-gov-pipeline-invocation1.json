@@ -1,0 +1,53 @@
+{
+  "date": "2026-10-04T01:55:32.900226+05:30",
+  "proof": "local focused behavior and security checks; failures retained separately",
+  "counts": {
+    "tests": 21,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "classes": [
+    {
+      "class": "com.fooddelivery.governmentid.controller.VerificationSelfAccessTest",
+      "counts": {
+        "tests": 5,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "2.052"
+    },
+    {
+      "class": "com.fooddelivery.governmentid.service.BrandVerificationJsonEscapingTest",
+      "counts": {
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.049"
+    },
+    {
+      "class": "com.fooddelivery.governmentid.service.BrandVerificationPipelineTest",
+      "counts": {
+        "tests": 9,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.312"
+    },
+    {
+      "class": "com.fooddelivery.governmentid.service.VerificationCallbackDispatcherTest",
+      "counts": {
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.009"
+    }
+  ],
+  "deployed": false
+}

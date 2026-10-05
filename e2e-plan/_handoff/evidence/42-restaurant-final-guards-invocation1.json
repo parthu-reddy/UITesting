@@ -1,0 +1,11 @@
+{
+  "proof": "local Maven compile failure before any test",
+  "processExitCode": 1,
+  "totals": {
+    "tests": 0,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0
+  },
+  "reason": "new transaction fixture used Instant without qualification; corrected to java.time.Instant; target XML from earlier invocations was not counted"
+}

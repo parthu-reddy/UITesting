@@ -1,0 +1,32 @@
+{
+  "proof": "local Maven/JUnit reports, not deployed verification",
+  "at": "2026-10-03T21:20:38.231947+00:00",
+  "repository": "DeliveryExecutiveApplication",
+  "processExitCode": 0,
+  "classes": [
+    {
+      "class": "com.fooddelivery.delivery.service.ConcurrentApplicationDecisionTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-delivery-transactions-invocation2-TEST-com.fooddelivery.delivery.service.ConcurrentApplicationDecisionTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.delivery.service.RiderGoOnlineTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-delivery-transactions-invocation2-TEST-com.fooddelivery.delivery.service.RiderGoOnlineTest.xml",
+      "failureMethods": []
+    }
+  ],
+  "totals": {
+    "tests": 11,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0
+  }
+}

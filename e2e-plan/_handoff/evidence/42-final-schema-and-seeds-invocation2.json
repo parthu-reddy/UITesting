@@ -1,0 +1,68 @@
+{
+  "proof": "isolated actual PostgreSQL17/PostGIS complete current initial SQL plus committed baseline/scenario seeds, replayed without reset",
+  "oracleDataMutated": false,
+  "at": "2026-10-03T21:38:01Z",
+  "rows": [
+    {
+      "service": "restaurant",
+      "sql": "RestaurantApplication/src/main/resources/db/migration/V1__init_schema.sql",
+      "initialSha256": "93ac35ea9831837be4bbd5524d9e88db490800c32899a603f70366a62fc67af6",
+      "seedFiles": [
+        "dummy_data.sql",
+        "scenario_restaurant.sql"
+      ],
+      "counts": {
+        "brands": 13,
+        "outlets": 104,
+        "master_menu_items": 504
+      },
+      "applicationStates": {
+        "IN_REVIEW": 1,
+        "REJECTED": 1,
+        "APPROVED": 11
+      },
+      "schemaAndSeedsPass": true,
+      "seedReplayPreservesCounts": true
+    },
+    {
+      "service": "delivery",
+      "sql": "DeliveryExecutiveApplication/src/main/resources/db/migration/V1__init_schema.sql",
+      "initialSha256": "2e18ec0771eb6966075fd3542ce30c8d294fd19c2dc7d7e2556d550c9df833b3",
+      "seedFiles": [
+        "dummy_riders.sql",
+        "dummy_delivery_data.sql",
+        "scenario_delivery.sql"
+      ],
+      "counts": {
+        "delivery_executives": 34
+      },
+      "applicationStates": {
+        "IN_REVIEW": 1,
+        "REJECTED": 1,
+        "APPROVED": 31,
+        "SUSPENDED": 1
+      },
+      "schemaAndSeedsPass": true,
+      "seedReplayPreservesCounts": true
+    },
+    {
+      "service": "government_id",
+      "sql": "GovernmentIDValidationService/src/main/resources/db/migration/V1__init.sql",
+      "initialSha256": "14de76a5a9fc29b3a6ea9b5798c5e5ba14ef7829a4dd5784da1dafb7f2c616d7",
+      "seedFiles": [
+        "dummy_government_id_brands.sql",
+        "dummy_government_id_executives.sql",
+        "scenario_government_id.sql"
+      ],
+      "counts": {
+        "executive_documents": 98,
+        "executive_bank_details": 34,
+        "brand_documents": 36,
+        "brand_bank_details": 3
+      },
+      "applicationStates": {},
+      "schemaAndSeedsPass": true,
+      "seedReplayPreservesCounts": true
+    }
+  ]
+}

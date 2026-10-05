@@ -1,0 +1,116 @@
+{
+  "phase": "O5",
+  "invocation": 3,
+  "uiSource": "444c2fcc3e30839c05d43dc3f4d376fa4f89be14",
+  "customerSource": "0849ee650c9624aefe7c99381f894c93468a01a3",
+  "harnessSource": "570c72e",
+  "proofType": "deployed rendered UI; normal controls and passive UI-generated traffic",
+  "allocation": {
+    "runId": "3fb2494fdecc8699",
+    "startedAt": "2026-10-05T00:40:54.425153+00:00",
+    "appUrl": "https://gulf-strike-dark-extras.trycloudflare.com",
+    "selectedCases": [
+      "launcher",
+      "membership",
+      "restaurant",
+      "delivery",
+      "csp"
+    ],
+    "phoneCandidates": {
+      "hub.owner": "9999722850",
+      "hub.member": "8999090594",
+      "restaurant": "9999589146",
+      "delivery": "7999850047"
+    },
+    "adminPhone": "1000000002",
+    "uiOnly": true,
+    "allocationPolicy": "local candidates; fresh profile completion required in UI",
+    "dataPolicy": "retain",
+    "cleanupPerformed": false,
+    "externalDatabaseOrRedisAccess": false,
+    "exitCode": 0,
+    "finishedAt": "2026-10-05T00:43:12.763018+00:00"
+  },
+  "classes": [
+    {
+      "class": "PortalLauncherUiTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timeSeconds": 25.966,
+      "methods": [
+        "rejectedRiderSeesActionAndReason",
+        "pendingRestaurantOpensItsApplicationStatus",
+        "staffPortalRequestsAdministratorVerification",
+        "ownerSwitchesApprovedPortalsAndSeesDeliveryStart"
+      ]
+    },
+    {
+      "class": "BusinessHubOrganisationUiTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timeSeconds": 17.468,
+      "methods": [
+        "invitationRoleChangesAndRemovalAreVisibleToBothPeople"
+      ]
+    },
+    {
+      "class": "RestaurantApplicationWizardUiTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timeSeconds": 35.623,
+      "methods": [
+        "approvedApplicationOpensItsOutletWithoutAnotherPersonLogin"
+      ]
+    },
+    {
+      "class": "DeliveryOnboardingUiTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timeSeconds": 34.252,
+      "methods": [
+        "approvedRiderEntersDeliveryOfflineWithoutAnotherPersonLogin"
+      ]
+    },
+    {
+      "class": "CspSmokeUiTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "timeSeconds": 22.696,
+      "methods": [
+        "securityHeadersAndConsoleHoldAcrossEveryCurrentPortal"
+      ]
+    }
+  ],
+  "totals": {
+    "tests": 8,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "uploadCompletionObservations": [
+    "[UPLOAD] GST registration confirmed 200 and Uploaded; 1 observed entitlement challenges",
+    "[UPLOAD] FSSAI licence confirmed 200 and Uploaded; 0 observed entitlement challenges",
+    "[UPLOAD] Driving licence confirmed 200 and Uploaded; 0 observed entitlement challenges",
+    "[UPLOAD] Vehicle registration confirmed 200 and Uploaded; 0 observed entitlement challenges",
+    "[UPLOAD] Selfie confirmed 200 and Uploaded; 0 observed entitlement challenges"
+  ],
+  "portalRefreshObservations": [
+    "[PORTALS] RESTAURANT Available confirmed after 1 visible refresh actions in 1325 ms",
+    "[PORTALS] DELIVERY Available confirmed after 0 visible refresh actions in 4 ms"
+  ],
+  "cspEvidence": "14-csp-origins-invocation3.txt",
+  "cleanupPerformed": false,
+  "allOwnedFixturesRetained": true,
+  "phaseClosed": false,
+  "remaining": "Required retained-order regressions and final measurements"
+}

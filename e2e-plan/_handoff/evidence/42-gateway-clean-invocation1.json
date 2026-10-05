@@ -1,0 +1,77 @@
+{
+  "proof": "local Maven/JUnit reports, not deployed verification",
+  "at": "2026-10-04T00:46:18.131847+00:00",
+  "repository": "ApiGateway",
+  "processExitCode": 0,
+  "classes": [
+    {
+      "class": "com.fooddelivery.apigateway.ApiGatewayApplicationStartupTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-gateway-clean-invocation1-TEST-com.fooddelivery.apigateway.ApiGatewayApplicationStartupTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.apigateway.EndpointAuthorizationCoverageTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-gateway-clean-invocation1-TEST-com.fooddelivery.apigateway.EndpointAuthorizationCoverageTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.apigateway.OrganisationGatewayRoutesTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-gateway-clean-invocation1-TEST-com.fooddelivery.apigateway.OrganisationGatewayRoutesTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.apigateway.RbacRulesTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-gateway-clean-invocation1-TEST-com.fooddelivery.apigateway.RbacRulesTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.apigateway.filter.GlobalJwtAuthFilterRevocationTest",
+      "tests": 14,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-gateway-clean-invocation1-TEST-com.fooddelivery.apigateway.filter.GlobalJwtAuthFilterRevocationTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.apigateway.security.e2e.E2eOtpRunnerAccessFilterTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-gateway-clean-invocation1-TEST-com.fooddelivery.apigateway.security.e2e.E2eOtpRunnerAccessFilterTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.architecture.ArchitectureEnforcementTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-gateway-clean-invocation1-TEST-com.fooddelivery.architecture.ArchitectureEnforcementTest.xml",
+      "failureMethods": []
+    }
+  ],
+  "totals": {
+    "tests": 31,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0
+  }
+}

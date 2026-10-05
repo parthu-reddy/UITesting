@@ -1,0 +1,11 @@
+{
+  "recordedAt": "2026-10-05T06:13:42.981110+00:00",
+  "invocation": 1,
+  "tests": 4,
+  "failures": 0,
+  "errors": 4,
+  "skipped": 0,
+  "proof": "sandbox/JVM mock-agent startup failure; no executed product assertion",
+  "reason": "Mockito inline mock maker could not self-attach in restricted sandbox; retry with isolated local test permission",
+  "externalDatabaseOrRedis": false
+}

@@ -1,0 +1,59 @@
+{
+  "proof": "local Maven/JUnit reports, not deployed verification",
+  "at": "2026-10-03T21:25:19.961453+00:00",
+  "repository": "GovernmentIDValidationService",
+  "processExitCode": 0,
+  "classes": [
+    {
+      "class": "com.fooddelivery.governmentid.controller.VerificationSummaryStateTest",
+      "tests": 11,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-gov-freshness-invocation1-TEST-com.fooddelivery.governmentid.controller.VerificationSummaryStateTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.governmentid.service.BrandVerificationJsonEscapingTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-gov-freshness-invocation1-TEST-com.fooddelivery.governmentid.service.BrandVerificationJsonEscapingTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.governmentid.service.BrandVerificationPipelineTest",
+      "tests": 10,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-gov-freshness-invocation1-TEST-com.fooddelivery.governmentid.service.BrandVerificationPipelineTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.governmentid.service.ProductionVerificationSafetyTest",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-gov-freshness-invocation1-TEST-com.fooddelivery.governmentid.service.ProductionVerificationSafetyTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.governmentid.service.VerificationCallbackTransactionTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-gov-freshness-invocation1-TEST-com.fooddelivery.governmentid.service.VerificationCallbackTransactionTest.xml",
+      "failureMethods": []
+    }
+  ],
+  "totals": {
+    "tests": 36,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0
+  }
+}

@@ -61,3 +61,7 @@ Checkpoint31: the order-money panel fix is verified live (MONEY-05 5/5 on UI 6eb
 Checkpoint33: the restaurant dashboard's restaurantId is always "" (App.tsx), so the Earnings tab never fetched and the Campaigns tab never loaded. Earnings now follow the selected outlet (local). Campaigns also lack any way to create an advertiser profile (decision pending).
 
 Checkpoint34 (local): campaigns could not start (no advertiser creatable, `/me` 400), the advertiser wallet refused every owner (role ADVERTISER does not exist), the campaign form charged budgets and bids ×100, top-ups displayed ×100, the card read a field the server never sends, and the balance never loaded. All fixed locally with guards seen red; `tools/validate_role_names.py` now checks every role name in the workspace. Open: no campaign can be activated (creative moderation has no caller).
+
+## 2026-10-05T11:23:48+05:30 — O4 current-session contract mismatch
+
+Existing settings invocation1 passed21/23; the current-device marker was missing because ActiveSessions read sid while Identity signs sessionId. AdminStepUp had the same mismatch for the protected calling everyday session. Corrected existing fixtures expose2ActiveSessions failures and1AdminStepUp failure; repaired product source passes26/26 focused tests, typecheck and lint. UI f73ffe9 is publishing in GitHub37269604733. Deployed settings proof and final phase gates remain pending. Original evidence59 is retained; do not duplicate the21 unchanged read-only passes or the delivered happy lifecycle.

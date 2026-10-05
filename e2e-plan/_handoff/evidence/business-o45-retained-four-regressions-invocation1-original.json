@@ -1,0 +1,73 @@
+{
+  "recordedAt": "2026-10-05T05:55:20.963536+00:00",
+  "invocation": 1,
+  "uiCommit": "509d084",
+  "harnessCommit": "db66d24",
+  "tests": 4,
+  "passed": 3,
+  "failed": 1,
+  "errors": 0,
+  "skipped": 0,
+  "orderId": "60631296-e064-4a59-a2ef-090549edcf01",
+  "newOrderCreated": false,
+  "proof": "actual deployed UI and passive normal UI-request responses",
+  "results": [
+    {
+      "testClass": "RestaurantEarningsLiveTest",
+      "counts": {
+        "tests": "1",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0",
+        "time": "9.149"
+      },
+      "methods": [
+        {
+          "name": "earningsMatchTheLedger",
+          "result": "PASS",
+          "problem": ""
+        }
+      ]
+    },
+    {
+      "testClass": "RestaurantNavigationUiTest",
+      "counts": {
+        "tests": "2",
+        "failures": "1",
+        "errors": "0",
+        "skipped": "0",
+        "time": "9.943"
+      },
+      "methods": [
+        {
+          "name": "restaurantReviewsShowPublicFeedbackAndAggregate",
+          "result": "PASS",
+          "problem": ""
+        },
+        {
+          "name": "restaurantSectionsRender",
+          "result": "FAIL",
+          "problem": "[the real signed SERVICE summary enriches the completed order] \nexpected: \"Rider1\"\n but was: \"Rider 1\""
+        }
+      ]
+    },
+    {
+      "testClass": "AdminOrderMoneyOutcomesTest",
+      "counts": {
+        "tests": "1",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0",
+        "time": "6.136"
+      },
+      "methods": [
+        {
+          "name": "panelShowsTheOutcome(String, String)[1]",
+          "result": "PASS",
+          "problem": ""
+        }
+      ]
+    }
+  ],
+  "diagnosis": "Command expected Rider1; actual enriched response Rider 1. Verify deterministic seed before rerunning only restaurantSectionsRender."
+}

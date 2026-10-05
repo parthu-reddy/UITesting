@@ -1,0 +1,34 @@
+{
+  "proof": "isolated PostgreSQL17 complete fresh GovernmentID initial SQL compared with every original applied DDL plus common initial schema",
+  "oracleDataMutated": false,
+  "oldSchemaColumnCount": 73,
+  "preservedOriginalColumnsAndTypes": true,
+  "preservedOriginalIndexes": true,
+  "auditAppendOnlyTriggerRetained": true,
+  "newDocumentColumnCount": 14,
+  "validDocumentRowAccepted": true,
+  "invalidDocumentRows": {
+    "duty-documents-selfie-only": "CHECK constraint rejected invalid row",
+    "html": "CHECK constraint rejected invalid row",
+    "zero-size": "CHECK constraint rejected invalid row",
+    "oversize": "CHECK constraint rejected invalid row",
+    "restaurant-without-brand": "CHECK constraint rejected invalid row",
+    "wrong-purpose-type": "CHECK constraint rejected invalid row",
+    "foreign-prefix": "CHECK constraint rejected invalid row"
+  },
+  "auditDeleteRefused": true,
+  "freshInitialSha256": "14de76a5a9fc29b3a6ea9b5798c5e5ba14ef7829a4dd5784da1dafb7f2c616d7",
+  "olderSqlRemovedOnlyAfterThisProof": true,
+  "newCallbackColumnCount": 14,
+  "addedApplicationRevisionColumns": 2,
+  "duplicateCallbackRefused": true,
+  "invalidCallbackRows": {
+    "negative-revision": "CHECK constraint rejected invalid callback state",
+    "negative-attempt": "CHECK constraint rejected invalid callback state",
+    "unknown-check": "CHECK constraint rejected invalid callback state",
+    "nonfinal-result": "CHECK constraint rejected invalid callback state",
+    "invalid-score": "CHECK constraint rejected invalid callback state"
+  },
+  "postgreSqlDueQueryExecuted": true,
+  "separateDutySelfieValidRowAccepted": true
+}

@@ -1686,8 +1686,13 @@
       "methodOptIns": [],
       "methodTags": [],
       "disabled": false,
-      "reviewStatus": "not-reviewed",
-      "executionStatus": "not-run"
+      "reviewStatus": "reviewed-current-source",
+      "executionStatus": "passed-deployed-UI",
+      "evidence": [
+        "73-retained-beneficiary-queue-invocation1-pass.json"
+      ],
+      "lastVerifiedAt": "2026-10-05T11:58:13+05:30",
+      "scope": "O4/O5 current required UI regression or final gate; original failed invocations retained separately"
     },
     {
       "class": "AdminLedgerAdvancedTest",
@@ -4016,8 +4021,13 @@
         "ui-only"
       ],
       "disabled": false,
-      "reviewStatus": "not-reviewed",
-      "executionStatus": "not-run"
+      "reviewStatus": "reviewed-current-source",
+      "executionStatus": "passed-deployed-UI",
+      "evidence": [
+        "64-final-session-release-and-three-reruns.json"
+      ],
+      "lastVerifiedAt": "2026-10-05T11:58:13+05:30",
+      "scope": "O4/O5 current required UI regression or final gate; original failed invocations retained separately"
     },
     {
       "class": "RestaurantNavigationUiTest",
@@ -4030,8 +4040,13 @@
       "methodOptIns": [],
       "methodTags": [],
       "disabled": false,
-      "reviewStatus": "not-reviewed",
-      "executionStatus": "not-run"
+      "reviewStatus": "reviewed-current-source",
+      "executionStatus": "passed-deployed-UI",
+      "evidence": [
+        "62-retained-four-regressions-invocation1-original.json"
+      ],
+      "lastVerifiedAt": "2026-10-05T11:58:13+05:30",
+      "scope": "O4/O5 current required UI regression or final gate; original failed invocations retained separately"
     },
     {
       "class": "RiderAvailabilityUiTest",
@@ -4480,11 +4495,15 @@
       "methodOptIns": [],
       "methodTags": [],
       "disabled": false,
-      "reviewStatus": "priority-flow-reviewed",
-      "executionStatus": "product-failure: retained delivered fixture autonomously changed to DELIVERY_FAILED by abandonment job; quote rerun stopped before submission; checkpoint15",
+      "reviewStatus": "reviewed-current-source",
+      "executionStatus": "passed-deployed-UI",
       "feature": "03-order-fulfillment/cross-role-order-lifecycle",
-      "evidence": "14-postdeployment-financial-contracts.md",
-      "latestEvidence": "15-delivered-terminal-and-capture.md"
+      "evidence": [
+        "55-happy-owned-delivery-invocation9-pass.json; retained earlier-step/failure evidence;56-money-quote branch"
+      ],
+      "latestEvidence": "15-delivered-terminal-and-capture.md",
+      "lastVerifiedAt": "2026-10-05T11:58:13+05:30",
+      "scope": "O4/O5 current required UI regression or final gate; original failed invocations retained separately"
     },
     {
       "class": "HappyDeliveryFlowTest",
@@ -4833,8 +4852,13 @@
         "customer-settings-ui"
       ],
       "disabled": false,
-      "reviewStatus": "not-reviewed",
-      "executionStatus": "not-run"
+      "reviewStatus": "reviewed-current-source",
+      "executionStatus": "passed-deployed-UI",
+      "evidence": [
+        "59-settings-partner-invocation1-original.json"
+      ],
+      "lastVerifiedAt": "2026-10-05T11:58:13+05:30",
+      "scope": "O4/O5 current required UI regression or final gate; original failed invocations retained separately"
     },
     {
       "class": "CustomerSettingsUiTest",
@@ -4847,8 +4871,13 @@
       "methodOptIns": [],
       "methodTags": [],
       "disabled": false,
-      "reviewStatus": "not-reviewed",
-      "executionStatus": "not-run"
+      "reviewStatus": "reviewed-current-source",
+      "executionStatus": "passed-deployed-UI",
+      "evidence": [
+        "59-settings-partner-invocation1-original.json"
+      ],
+      "lastVerifiedAt": "2026-10-05T11:58:13+05:30",
+      "scope": "O4/O5 current required UI regression or final gate; original failed invocations retained separately"
     },
     {
       "class": "CustomerSettingsUiTest",
@@ -4861,8 +4890,13 @@
       "methodOptIns": [],
       "methodTags": [],
       "disabled": false,
-      "reviewStatus": "not-reviewed",
-      "executionStatus": "not-run"
+      "reviewStatus": "reviewed-current-source",
+      "executionStatus": "passed-deployed-UI",
+      "evidence": [
+        "59-settings-partner-invocation1-original.json"
+      ],
+      "lastVerifiedAt": "2026-10-05T11:58:13+05:30",
+      "scope": "O4/O5 current required UI regression or final gate; original failed invocations retained separately"
     },
     {
       "class": "CustomerSettingsUiTest",
@@ -4875,8 +4909,13 @@
       "methodOptIns": [],
       "methodTags": [],
       "disabled": false,
-      "reviewStatus": "not-reviewed",
-      "executionStatus": "not-run"
+      "reviewStatus": "reviewed-current-source",
+      "executionStatus": "passed-deployed-UI",
+      "evidence": [
+        "59-settings-partner-invocation1-original.json"
+      ],
+      "lastVerifiedAt": "2026-10-05T11:58:13+05:30",
+      "scope": "O4/O5 current required UI regression or final gate; original failed invocations retained separately"
     },
     {
       "class": "CustomerSettingsUiTest",
@@ -4889,8 +4928,13 @@
       "methodOptIns": [],
       "methodTags": [],
       "disabled": false,
-      "reviewStatus": "not-reviewed",
-      "executionStatus": "not-run"
+      "reviewStatus": "reviewed-current-source",
+      "executionStatus": "passed-deployed-UI",
+      "evidence": [
+        "64-final-session-release-and-three-reruns.json"
+      ],
+      "lastVerifiedAt": "2026-10-05T11:58:13+05:30",
+      "scope": "O4/O5 current required UI regression or final gate; original failed invocations retained separately"
     },
     {
       "class": "CustomerSettingsUiTest",
@@ -4903,8 +4947,13 @@
       "methodOptIns": [],
       "methodTags": [],
       "disabled": false,
-      "reviewStatus": "not-reviewed",
-      "executionStatus": "not-run"
+      "reviewStatus": "reviewed-current-source",
+      "executionStatus": "passed-deployed-UI",
+      "evidence": [
+        "59-settings-partner-invocation1-original.json"
+      ],
+      "lastVerifiedAt": "2026-10-05T11:58:13+05:30",
+      "scope": "O4/O5 current required UI regression or final gate; original failed invocations retained separately"
     },
     {
       "class": "CustomerSettingsUiTest",
@@ -4917,8 +4966,13 @@
       "methodOptIns": [],
       "methodTags": [],
       "disabled": false,
-      "reviewStatus": "not-reviewed",
-      "executionStatus": "not-run"
+      "reviewStatus": "reviewed-current-source",
+      "executionStatus": "passed-deployed-UI",
+      "evidence": [
+        "59-settings-partner-invocation1-original.json"
+      ],
+      "lastVerifiedAt": "2026-10-05T11:58:13+05:30",
+      "scope": "O4/O5 current required UI regression or final gate; original failed invocations retained separately"
     },
     {
       "class": "CustomerSettingsUiTest",
@@ -4931,8 +4985,13 @@
       "methodOptIns": [],
       "methodTags": [],
       "disabled": false,
-      "reviewStatus": "not-reviewed",
-      "executionStatus": "not-run"
+      "reviewStatus": "reviewed-current-source",
+      "executionStatus": "passed-deployed-UI",
+      "evidence": [
+        "59-settings-partner-invocation1-original.json"
+      ],
+      "lastVerifiedAt": "2026-10-05T11:58:13+05:30",
+      "scope": "O4/O5 current required UI regression or final gate; original failed invocations retained separately"
     },
     {
       "class": "CustomerSettingsUiTest",
@@ -4945,8 +5004,13 @@
       "methodOptIns": [],
       "methodTags": [],
       "disabled": false,
-      "reviewStatus": "not-reviewed",
-      "executionStatus": "not-run"
+      "reviewStatus": "reviewed-current-source",
+      "executionStatus": "passed-deployed-UI",
+      "evidence": [
+        "59-settings-partner-invocation1-original.json"
+      ],
+      "lastVerifiedAt": "2026-10-05T11:58:13+05:30",
+      "scope": "O4/O5 current required UI regression or final gate; original failed invocations retained separately"
     },
     {
       "class": "CustomerSettingsUiTest",
@@ -4959,8 +5023,13 @@
       "methodOptIns": [],
       "methodTags": [],
       "disabled": false,
-      "reviewStatus": "not-reviewed",
-      "executionStatus": "not-run"
+      "reviewStatus": "reviewed-current-source",
+      "executionStatus": "passed-deployed-UI",
+      "evidence": [
+        "59-settings-partner-invocation1-original.json"
+      ],
+      "lastVerifiedAt": "2026-10-05T11:58:13+05:30",
+      "scope": "O4/O5 current required UI regression or final gate; original failed invocations retained separately"
     },
     {
       "class": "CustomerSettingsUiTest",
@@ -4973,8 +5042,13 @@
       "methodOptIns": [],
       "methodTags": [],
       "disabled": false,
-      "reviewStatus": "not-reviewed",
-      "executionStatus": "not-run"
+      "reviewStatus": "reviewed-current-source",
+      "executionStatus": "passed-deployed-UI",
+      "evidence": [
+        "59-settings-partner-invocation1-original.json"
+      ],
+      "lastVerifiedAt": "2026-10-05T11:58:13+05:30",
+      "scope": "O4/O5 current required UI regression or final gate; original failed invocations retained separately"
     },
     {
       "class": "CustomerSettingsUiTest",
@@ -4987,8 +5061,13 @@
       "methodOptIns": [],
       "methodTags": [],
       "disabled": false,
-      "reviewStatus": "not-reviewed",
-      "executionStatus": "not-run"
+      "reviewStatus": "reviewed-current-source",
+      "executionStatus": "passed-deployed-UI",
+      "evidence": [
+        "57-delivered-read-only-invocation1.json"
+      ],
+      "lastVerifiedAt": "2026-10-05T11:58:13+05:30",
+      "scope": "O4/O5 current required UI regression or final gate; original failed invocations retained separately"
     },
     {
       "class": "CustomerSettingsUiTest",
@@ -5001,8 +5080,13 @@
       "methodOptIns": [],
       "methodTags": [],
       "disabled": false,
-      "reviewStatus": "not-reviewed",
-      "executionStatus": "not-run"
+      "reviewStatus": "reviewed-current-source",
+      "executionStatus": "passed-deployed-UI",
+      "evidence": [
+        "59-settings-partner-invocation1-original.json"
+      ],
+      "lastVerifiedAt": "2026-10-05T11:58:13+05:30",
+      "scope": "O4/O5 current required UI regression or final gate; original failed invocations retained separately"
     },
     {
       "class": "CustomerSettingsUiTest",
@@ -5015,8 +5099,13 @@
       "methodOptIns": [],
       "methodTags": [],
       "disabled": false,
-      "reviewStatus": "not-reviewed",
-      "executionStatus": "not-run"
+      "reviewStatus": "reviewed-current-source",
+      "executionStatus": "passed-deployed-UI",
+      "evidence": [
+        "59-settings-partner-invocation1-original.json"
+      ],
+      "lastVerifiedAt": "2026-10-05T11:58:13+05:30",
+      "scope": "O4/O5 current required UI regression or final gate; original failed invocations retained separately"
     },
     {
       "class": "CustomerSettingsUiTest",
@@ -5029,8 +5118,13 @@
       "methodOptIns": [],
       "methodTags": [],
       "disabled": false,
-      "reviewStatus": "not-reviewed",
-      "executionStatus": "not-run"
+      "reviewStatus": "reviewed-current-source",
+      "executionStatus": "passed-deployed-UI",
+      "evidence": [
+        "64-final-session-release-and-three-reruns.json"
+      ],
+      "lastVerifiedAt": "2026-10-05T11:58:13+05:30",
+      "scope": "O4/O5 current required UI regression or final gate; original failed invocations retained separately"
     },
     {
       "class": "LoginSmokeTest",
@@ -5616,8 +5710,13 @@
       "methodOptIns": [],
       "methodTags": [],
       "disabled": false,
-      "reviewStatus": "not-reviewed",
-      "executionStatus": "not-run"
+      "reviewStatus": "reviewed-current-source",
+      "executionStatus": "passed-deployed-UI",
+      "evidence": [
+        "59-settings-partner-invocation1-original.json"
+      ],
+      "lastVerifiedAt": "2026-10-05T11:58:13+05:30",
+      "scope": "O4/O5 current required UI regression or final gate; original failed invocations retained separately"
     },
     {
       "class": "PartnerReadOnlyUiTest",
@@ -5630,8 +5729,13 @@
       "methodOptIns": [],
       "methodTags": [],
       "disabled": false,
-      "reviewStatus": "not-reviewed",
-      "executionStatus": "not-run"
+      "reviewStatus": "reviewed-current-source",
+      "executionStatus": "passed-deployed-UI",
+      "evidence": [
+        "59-settings-partner-invocation1-original.json"
+      ],
+      "lastVerifiedAt": "2026-10-05T11:58:13+05:30",
+      "scope": "O4/O5 current required UI regression or final gate; original failed invocations retained separately"
     },
     {
       "class": "PartnerReadOnlyUiTest",
@@ -5644,8 +5748,13 @@
       "methodOptIns": [],
       "methodTags": [],
       "disabled": false,
-      "reviewStatus": "not-reviewed",
-      "executionStatus": "not-run"
+      "reviewStatus": "reviewed-current-source",
+      "executionStatus": "passed-deployed-UI",
+      "evidence": [
+        "57-delivered-read-only-invocation1.json"
+      ],
+      "lastVerifiedAt": "2026-10-05T11:58:13+05:30",
+      "scope": "O4/O5 current required UI regression or final gate; original failed invocations retained separately"
     },
     {
       "class": "PartnerReadOnlyUiTest",
@@ -5658,8 +5767,13 @@
       "methodOptIns": [],
       "methodTags": [],
       "disabled": false,
-      "reviewStatus": "not-reviewed",
-      "executionStatus": "not-run"
+      "reviewStatus": "reviewed-current-source",
+      "executionStatus": "passed-deployed-UI",
+      "evidence": [
+        "59-settings-partner-invocation1-original.json"
+      ],
+      "lastVerifiedAt": "2026-10-05T11:58:13+05:30",
+      "scope": "O4/O5 current required UI regression or final gate; original failed invocations retained separately"
     },
     {
       "class": "PartnerReadOnlyUiTest",
@@ -5672,8 +5786,13 @@
       "methodOptIns": [],
       "methodTags": [],
       "disabled": false,
-      "reviewStatus": "not-reviewed",
-      "executionStatus": "not-run"
+      "reviewStatus": "reviewed-current-source",
+      "executionStatus": "passed-deployed-UI",
+      "evidence": [
+        "59-settings-partner-invocation1-original.json"
+      ],
+      "lastVerifiedAt": "2026-10-05T11:58:13+05:30",
+      "scope": "O4/O5 current required UI regression or final gate; original failed invocations retained separately"
     },
     {
       "class": "PartnerReadOnlyUiTest",
@@ -5686,8 +5805,13 @@
       "methodOptIns": [],
       "methodTags": [],
       "disabled": false,
-      "reviewStatus": "not-reviewed",
-      "executionStatus": "not-run"
+      "reviewStatus": "reviewed-current-source",
+      "executionStatus": "passed-deployed-UI",
+      "evidence": [
+        "59-settings-partner-invocation1-original.json"
+      ],
+      "lastVerifiedAt": "2026-10-05T11:58:13+05:30",
+      "scope": "O4/O5 current required UI regression or final gate; original failed invocations retained separately"
     },
     {
       "class": "PartnerReadOnlyUiTest",
@@ -5700,8 +5824,13 @@
       "methodOptIns": [],
       "methodTags": [],
       "disabled": false,
-      "reviewStatus": "not-reviewed",
-      "executionStatus": "not-run"
+      "reviewStatus": "reviewed-current-source",
+      "executionStatus": "passed-deployed-UI",
+      "evidence": [
+        "59-settings-partner-invocation1-original.json"
+      ],
+      "lastVerifiedAt": "2026-10-05T11:58:13+05:30",
+      "scope": "O4/O5 current required UI regression or final gate; original failed invocations retained separately"
     },
     {
       "class": "PartnerReadOnlyUiTest",
@@ -5714,8 +5843,13 @@
       "methodOptIns": [],
       "methodTags": [],
       "disabled": false,
-      "reviewStatus": "not-reviewed",
-      "executionStatus": "not-run"
+      "reviewStatus": "reviewed-current-source",
+      "executionStatus": "passed-deployed-UI",
+      "evidence": [
+        "59-settings-partner-invocation1-original.json"
+      ],
+      "lastVerifiedAt": "2026-10-05T11:58:13+05:30",
+      "scope": "O4/O5 current required UI regression or final gate; original failed invocations retained separately"
     },
     {
       "class": "PartnerReadOnlyUiTest",
@@ -5742,8 +5876,13 @@
       "methodOptIns": [],
       "methodTags": [],
       "disabled": false,
-      "reviewStatus": "not-reviewed",
-      "executionStatus": "not-run"
+      "reviewStatus": "reviewed-current-source",
+      "executionStatus": "passed-deployed-UI",
+      "evidence": [
+        "59-settings-partner-invocation1-original.json"
+      ],
+      "lastVerifiedAt": "2026-10-05T11:58:13+05:30",
+      "scope": "O4/O5 current required UI regression or final gate; original failed invocations retained separately"
     },
     {
       "class": "PartnerReadOnlyUiTest",
@@ -5756,8 +5895,13 @@
       "methodOptIns": [],
       "methodTags": [],
       "disabled": false,
-      "reviewStatus": "not-reviewed",
-      "executionStatus": "not-run"
+      "reviewStatus": "reviewed-current-source",
+      "executionStatus": "passed-deployed-UI",
+      "evidence": [
+        "59-settings-partner-invocation1-original.json"
+      ],
+      "lastVerifiedAt": "2026-10-05T11:58:13+05:30",
+      "scope": "O4/O5 current required UI regression or final gate; original failed invocations retained separately"
     },
     {
       "class": "RestaurantDiscoveryUiTest",
@@ -6315,6 +6459,367 @@
       "feature": "organisations-and-portal-access",
       "evidence": "35-local-results.json",
       "updatedAt": "2026-10-03T15:50:36+05:30"
+    },
+    {
+      "class": "AdminOrderMoneyOutcomesTest",
+      "method": "panelShowsTheOutcome",
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/admin/AdminOrderMoneyOutcomesTest.java",
+      "line": 44,
+      "package": "com.fooddelivery.e2e.tests.features.admin",
+      "parameterized": true,
+      "classOptIns": [],
+      "methodOptIns": [],
+      "methodTags": [],
+      "disabled": false,
+      "reviewStatus": "reviewed-current-source",
+      "executionStatus": "passed-deployed-UI",
+      "evidence": [
+        "62-retained-four-regressions-invocation1-original.json"
+      ],
+      "lastVerifiedAt": "2026-10-05T11:58:13+05:30",
+      "scope": "O4/O5 current required UI regression or final gate; original failed invocations retained separately"
+    },
+    {
+      "class": "AdminStepUpTest",
+      "method": "administratorVerifiesSeparatelyAndKeepsEverydayAccess",
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/organisations/AdminStepUpTest.java",
+      "line": 12,
+      "package": "com.fooddelivery.e2e.tests.features.organisations",
+      "parameterized": false,
+      "classOptIns": [],
+      "methodOptIns": [],
+      "methodTags": [],
+      "disabled": false,
+      "reviewStatus": "reviewed-current-source",
+      "executionStatus": "passed-deployed-UI",
+      "evidence": [
+        "66-final-ui-gate-invocation6.json"
+      ],
+      "lastVerifiedAt": "2026-10-05T11:58:13+05:30",
+      "scope": "O4/O5 current required UI regression or final gate; original failed invocations retained separately"
+    },
+    {
+      "class": "AdminStepUpTest",
+      "method": "nonStaffCannotStartAdministratorVerification",
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/organisations/AdminStepUpTest.java",
+      "line": 20,
+      "package": "com.fooddelivery.e2e.tests.features.organisations",
+      "parameterized": false,
+      "classOptIns": [],
+      "methodOptIns": [],
+      "methodTags": [],
+      "disabled": false,
+      "reviewStatus": "reviewed-current-source",
+      "executionStatus": "passed-deployed-UI",
+      "evidence": [
+        "66-final-ui-gate-invocation6.json"
+      ],
+      "lastVerifiedAt": "2026-10-05T11:58:13+05:30",
+      "scope": "O4/O5 current required UI regression or final gate; original failed invocations retained separately"
+    },
+    {
+      "class": "BusinessHubOrganisationUiTest",
+      "method": "invitationRoleChangesAndRemovalAreVisibleToBothPeople",
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/organisations/BusinessHubOrganisationUiTest.java",
+      "line": 13,
+      "package": "com.fooddelivery.e2e.tests.features.organisations",
+      "parameterized": false,
+      "classOptIns": [],
+      "methodOptIns": [],
+      "methodTags": [],
+      "disabled": false,
+      "reviewStatus": "reviewed-current-source",
+      "executionStatus": "passed-deployed-UI",
+      "evidence": [
+        "17-final-ui-gate-invocation4.json"
+      ],
+      "lastVerifiedAt": "2026-10-05T11:58:13+05:30",
+      "scope": "O4/O5 current required UI regression or final gate; original failed invocations retained separately"
+    },
+    {
+      "class": "CspSmokeUiTest",
+      "method": "securityHeadersAndConsoleHoldAcrossEveryCurrentPortal",
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/organisations/CspSmokeUiTest.java",
+      "line": 19,
+      "package": "com.fooddelivery.e2e.tests.features.organisations",
+      "parameterized": false,
+      "classOptIns": [],
+      "methodOptIns": [],
+      "methodTags": [],
+      "disabled": false,
+      "reviewStatus": "reviewed-current-source",
+      "executionStatus": "passed-deployed-UI",
+      "evidence": [
+        "17-final-ui-gate-invocation4.json"
+      ],
+      "lastVerifiedAt": "2026-10-05T11:58:13+05:30",
+      "scope": "O4/O5 current required UI regression or final gate; original failed invocations retained separately"
+    },
+    {
+      "class": "DeliveryOnboardingUiTest",
+      "method": "approvedRiderEntersDeliveryOfflineWithoutAnotherPersonLogin",
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/organisations/DeliveryOnboardingUiTest.java",
+      "line": 13,
+      "package": "com.fooddelivery.e2e.tests.features.organisations",
+      "parameterized": false,
+      "classOptIns": [],
+      "methodOptIns": [],
+      "methodTags": [],
+      "disabled": false,
+      "reviewStatus": "reviewed-current-source",
+      "executionStatus": "passed-deployed-UI",
+      "evidence": [
+        "17-final-ui-gate-invocation4.json"
+      ],
+      "lastVerifiedAt": "2026-10-05T11:58:13+05:30",
+      "scope": "O4/O5 current required UI regression or final gate; original failed invocations retained separately"
+    },
+    {
+      "class": "EntitlementRevocationTest",
+      "method": "acceptedStaffApprovalAndRemovalRefreshOnNormalUiRequests",
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/organisations/EntitlementRevocationTest.java",
+      "line": 18,
+      "package": "com.fooddelivery.e2e.tests.features.organisations",
+      "parameterized": false,
+      "classOptIns": [],
+      "methodOptIns": [],
+      "methodTags": [],
+      "disabled": false,
+      "reviewStatus": "reviewed-current-source",
+      "executionStatus": "passed-deployed-UI",
+      "evidence": [
+        "66-final-ui-gate-invocation6.json"
+      ],
+      "lastVerifiedAt": "2026-10-05T11:58:13+05:30",
+      "scope": "O4/O5 current required UI regression or final gate; original failed invocations retained separately"
+    },
+    {
+      "class": "EntitlementRevocationTest",
+      "method": "ownBrandSuspensionAndReinstatementChangeAccessAndDiscovery",
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/organisations/EntitlementRevocationTest.java",
+      "line": 42,
+      "package": "com.fooddelivery.e2e.tests.features.organisations",
+      "parameterized": false,
+      "classOptIns": [],
+      "methodOptIns": [],
+      "methodTags": [],
+      "disabled": false,
+      "reviewStatus": "reviewed-current-source",
+      "executionStatus": "passed-deployed-UI",
+      "evidence": [
+        "66-final-ui-gate-invocation6.json"
+      ],
+      "lastVerifiedAt": "2026-10-05T11:58:13+05:30",
+      "scope": "O4/O5 current required UI regression or final gate; original failed invocations retained separately"
+    },
+    {
+      "class": "OneLoginEntitlementsTest",
+      "method": "approvedRiderUsesCustomerAndDeliveryButCannotOpenRestaurantOperations",
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/organisations/OneLoginEntitlementsTest.java",
+      "line": 26,
+      "package": "com.fooddelivery.e2e.tests.features.organisations",
+      "parameterized": false,
+      "classOptIns": [],
+      "methodOptIns": [],
+      "methodTags": [],
+      "disabled": false,
+      "reviewStatus": "reviewed-current-source",
+      "executionStatus": "passed-deployed-UI",
+      "evidence": [
+        "66-final-ui-gate-invocation6.json"
+      ],
+      "lastVerifiedAt": "2026-10-05T11:58:13+05:30",
+      "scope": "O4/O5 current required UI regression or final gate; original failed invocations retained separately"
+    },
+    {
+      "class": "OneLoginEntitlementsTest",
+      "method": "freshPersonHasCustomerAndApplicationEntryPoints",
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/organisations/OneLoginEntitlementsTest.java",
+      "line": 34,
+      "package": "com.fooddelivery.e2e.tests.features.organisations",
+      "parameterized": false,
+      "classOptIns": [],
+      "methodOptIns": [],
+      "methodTags": [],
+      "disabled": false,
+      "reviewStatus": "reviewed-current-source",
+      "executionStatus": "passed-deployed-UI",
+      "evidence": [
+        "66-final-ui-gate-invocation6.json"
+      ],
+      "lastVerifiedAt": "2026-10-05T11:58:13+05:30",
+      "scope": "O4/O5 current required UI regression or final gate; original failed invocations retained separately"
+    },
+    {
+      "class": "OneLoginEntitlementsTest",
+      "method": "ownerUsesCustomerRestaurantAndBusinessAfterOneOtp",
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/organisations/OneLoginEntitlementsTest.java",
+      "line": 15,
+      "package": "com.fooddelivery.e2e.tests.features.organisations",
+      "parameterized": false,
+      "classOptIns": [],
+      "methodOptIns": [],
+      "methodTags": [],
+      "disabled": false,
+      "reviewStatus": "reviewed-current-source",
+      "executionStatus": "passed-deployed-UI",
+      "evidence": [
+        "66-final-ui-gate-invocation6.json"
+      ],
+      "lastVerifiedAt": "2026-10-05T11:58:13+05:30",
+      "scope": "O4/O5 current required UI regression or final gate; original failed invocations retained separately"
+    },
+    {
+      "class": "OneLoginEntitlementsTest",
+      "method": "pendingRiderSeesApplicationWithoutOperationalAccess",
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/organisations/OneLoginEntitlementsTest.java",
+      "line": 42,
+      "package": "com.fooddelivery.e2e.tests.features.organisations",
+      "parameterized": false,
+      "classOptIns": [],
+      "methodOptIns": [],
+      "methodTags": [],
+      "disabled": false,
+      "reviewStatus": "reviewed-current-source",
+      "executionStatus": "passed-deployed-UI",
+      "evidence": [
+        "66-final-ui-gate-invocation6.json"
+      ],
+      "lastVerifiedAt": "2026-10-05T11:58:13+05:30",
+      "scope": "O4/O5 current required UI regression or final gate; original failed invocations retained separately"
+    },
+    {
+      "class": "OrderReviewsFlowTest",
+      "method": "participantsReviewEachOther",
+      "file": "src/test/java/com/fooddelivery/e2e/tests/flows/OrderReviewsFlowTest.java",
+      "line": 50,
+      "package": "com.fooddelivery.e2e.tests.flows",
+      "parameterized": false,
+      "classOptIns": [],
+      "methodOptIns": [],
+      "methodTags": [],
+      "disabled": false,
+      "reviewStatus": "reviewed-current-source",
+      "executionStatus": "passed-deployed-UI",
+      "evidence": [
+        "58-participant-reviews-invocation1-pass.json"
+      ],
+      "lastVerifiedAt": "2026-10-05T11:58:13+05:30",
+      "scope": "O4/O5 current required UI regression or final gate; original failed invocations retained separately"
+    },
+    {
+      "class": "PortalLauncherUiTest",
+      "method": "ownerSwitchesApprovedPortalsAndSeesDeliveryStart",
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/organisations/PortalLauncherUiTest.java",
+      "line": 12,
+      "package": "com.fooddelivery.e2e.tests.features.organisations",
+      "parameterized": false,
+      "classOptIns": [],
+      "methodOptIns": [],
+      "methodTags": [],
+      "disabled": false,
+      "reviewStatus": "reviewed-current-source",
+      "executionStatus": "passed-deployed-UI",
+      "evidence": [
+        "17-final-ui-gate-invocation4.json"
+      ],
+      "lastVerifiedAt": "2026-10-05T11:58:13+05:30",
+      "scope": "O4/O5 current required UI regression or final gate; original failed invocations retained separately"
+    },
+    {
+      "class": "PortalLauncherUiTest",
+      "method": "pendingRestaurantOpensItsApplicationStatus",
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/organisations/PortalLauncherUiTest.java",
+      "line": 19,
+      "package": "com.fooddelivery.e2e.tests.features.organisations",
+      "parameterized": false,
+      "classOptIns": [],
+      "methodOptIns": [],
+      "methodTags": [],
+      "disabled": false,
+      "reviewStatus": "reviewed-current-source",
+      "executionStatus": "passed-deployed-UI",
+      "evidence": [
+        "17-final-ui-gate-invocation4.json"
+      ],
+      "lastVerifiedAt": "2026-10-05T11:58:13+05:30",
+      "scope": "O4/O5 current required UI regression or final gate; original failed invocations retained separately"
+    },
+    {
+      "class": "PortalLauncherUiTest",
+      "method": "rejectedRiderSeesActionAndReason",
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/organisations/PortalLauncherUiTest.java",
+      "line": 24,
+      "package": "com.fooddelivery.e2e.tests.features.organisations",
+      "parameterized": false,
+      "classOptIns": [],
+      "methodOptIns": [],
+      "methodTags": [],
+      "disabled": false,
+      "reviewStatus": "reviewed-current-source",
+      "executionStatus": "passed-deployed-UI",
+      "evidence": [
+        "17-final-ui-gate-invocation4.json"
+      ],
+      "lastVerifiedAt": "2026-10-05T11:58:13+05:30",
+      "scope": "O4/O5 current required UI regression or final gate; original failed invocations retained separately"
+    },
+    {
+      "class": "PortalLauncherUiTest",
+      "method": "staffPortalRequestsAdministratorVerification",
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/organisations/PortalLauncherUiTest.java",
+      "line": 31,
+      "package": "com.fooddelivery.e2e.tests.features.organisations",
+      "parameterized": false,
+      "classOptIns": [],
+      "methodOptIns": [],
+      "methodTags": [],
+      "disabled": false,
+      "reviewStatus": "reviewed-current-source",
+      "executionStatus": "passed-deployed-UI",
+      "evidence": [
+        "17-final-ui-gate-invocation4.json"
+      ],
+      "lastVerifiedAt": "2026-10-05T11:58:13+05:30",
+      "scope": "O4/O5 current required UI regression or final gate; original failed invocations retained separately"
+    },
+    {
+      "class": "RestaurantApplicationWizardUiTest",
+      "method": "approvedApplicationOpensItsOutletWithoutAnotherPersonLogin",
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/organisations/RestaurantApplicationWizardUiTest.java",
+      "line": 10,
+      "package": "com.fooddelivery.e2e.tests.features.organisations",
+      "parameterized": false,
+      "classOptIns": [],
+      "methodOptIns": [],
+      "methodTags": [],
+      "disabled": false,
+      "reviewStatus": "reviewed-current-source",
+      "executionStatus": "passed-deployed-UI",
+      "evidence": [
+        "17-final-ui-gate-invocation4.json"
+      ],
+      "lastVerifiedAt": "2026-10-05T11:58:13+05:30",
+      "scope": "O4/O5 current required UI regression or final gate; original failed invocations retained separately"
+    },
+    {
+      "class": "RestaurantEarningsLiveTest",
+      "method": "earningsMatchTheLedger",
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/restaurant/RestaurantEarningsLiveTest.java",
+      "line": 35,
+      "package": "com.fooddelivery.e2e.tests.features.restaurant",
+      "parameterized": false,
+      "classOptIns": [],
+      "methodOptIns": [],
+      "methodTags": [],
+      "disabled": false,
+      "reviewStatus": "reviewed-current-source",
+      "executionStatus": "passed-deployed-UI",
+      "evidence": [
+        "62-retained-four-regressions-invocation1-original.json"
+      ],
+      "lastVerifiedAt": "2026-10-05T11:58:13+05:30",
+      "scope": "O4/O5 current required UI regression or final gate; original failed invocations retained separately"
     }
   ],
   "backendDocuments": [
@@ -7045,26 +7550,24 @@
       "priorAssertionQuality": "vacuous-absent-button"
     }
   ],
-  "latestCheckpoint": "35",
-  "latestDeploymentGate": "checkpoint34 prerequisite then O1 CommonLibrary/Identity/config owner rollout and live gate; D15 confirmation pending",
+  "latestCheckpoint": "_handoff/checkpoints/113-o4-o5-complete-stop-boundary.md",
+  "latestDeploymentGate": "O4/O5 complete: published and deployed Oracle Dev; stop after Phase5",
   "resumeState": {
-    "updatedAt": "2026-10-03T15:50:36+05:30",
-    "scope": "Business Platform O1 local; full platform not complete",
-    "workingChange": "organisation model, security/audit/outbox/client/config and compiled lifecycle test",
-    "deploymentConfirmed": false,
-    "deployedReadOnlySnapshot": {
-      "identity": "c050459409dde7c686eaa2bcebc91a43c4a09c27",
-      "campaign": "53a7887fe595f031bc7e7378dabf755c65d4ea1e",
-      "wallet": "63f546d4d12c536b60ac079a1b318c29144138b0",
-      "UI": "6eb1743d36e084107c047763f7e71dd8097deb11"
-    },
-    "liveO1": "not-run",
-    "liveFixturesCreated": 0,
+    "updatedAt": "2026-10-05T11:58:13+05:30",
+    "scope": "O4/O5 complete; stop",
+    "deploymentConfirmed": true,
     "databaseResetRequired": false,
     "serverCleanupPerformed": false,
-    "ownerDecision": "D15 unconfirmed; D3/D4/D6/D13 later-phase confirmations open"
+    "ownedOrder": "60631296-e064-4a59-a2ef-090549edcf01",
+    "deferred": [
+      "O4-PERF-001",
+      "O5-CSP-001",
+      "O4 internal replacements",
+      "existing duration/rate/SSE/provider/load/ONDC boundaries"
+    ],
+    "walletAndAds": "unstarted"
   },
-  "countsScope": "Historical 2026-10-01 snapshot with incremental O1 addition; not a full current source rescan or passing count.",
+  "countsScope": "Original whole-audit inventory counts remain the2026-10-01 snapshot; current O4/O5 acceptance updates48 selected method records, not a full-source or full-suite green claim.",
   "historicalResumeState_checkpoint19": {
     "deploymentConfirmed": {
       "customer": "4efcf76d9477083dd736c55bcc86b395512f3f1e",
@@ -7075,5 +7578,16 @@
     "workingChange": "checkpoint18 customer/chat/UI plus checkpoint19 payment-gateway stored-confirmation capture recovery; pending deployment gates",
     "serverCleanupPerformed": false,
     "updatedAt": "2026-10-02T18:27:17+05:30"
+  },
+  "updatedAt": "2026-10-05T11:58:13+05:30",
+  "businessPlatformO45Acceptance": {
+    "updatedAt": "2026-10-05T11:58:13+05:30",
+    "selectedDistinctMethods": 48,
+    "phaseMethods": 16,
+    "requiredRegressionMethods": 32,
+    "passedMethods": 48,
+    "failedInvocationsRetained": true,
+    "fullSuiteClaim": false,
+    "evidence": "_handoff/evidence/business-o45-final-acceptance.json"
   }
 }

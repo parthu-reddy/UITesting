@@ -1,0 +1,30 @@
+{
+  "checks": 24,
+  "passed": 24,
+  "names": [
+    "actual routes retained",
+    "spec respects hidden and opt-in routes",
+    "string URLs retained",
+    "Spring default numeric rates resolve",
+    "reject invalid rate ${gateway.rate}",
+    "reject invalid rate bad",
+    "reject invalid rate 0",
+    "reject invalid rate -1",
+    "reject invalid rate True",
+    "six mapped operations allowed",
+    "six real DTO accessors rejected",
+    "entry contract accepted",
+    "lost immutable entry identity rejected",
+    "scoped verified Dev schema allowed",
+    "unverified SQL bytes rejected",
+    "failed schema-proof.json rejected",
+    "failed constraint-proof.json rejected",
+    "restored retired SQL rejected",
+    "missing production expiry rejected",
+    "production restores strict protection",
+    "published shared SQL accepted",
+    "unreviewed shared SQL rejected after production declaration",
+    "missing library publication rejected",
+    "unknown library publication rejected"
+  ]
+}

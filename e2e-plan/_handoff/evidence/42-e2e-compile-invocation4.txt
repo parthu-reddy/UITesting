@@ -1,0 +1,5 @@
+# Portable diagnostic excerpt
+
+Build/test diagnostics and original counts are preserved below. Full original output is retained locally in 42-e2e-compile-invocation4.raw.log and excluded from Git.
+
+L26: [INFO] BUILD SUCCESS

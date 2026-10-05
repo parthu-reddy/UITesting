@@ -1,0 +1,13 @@
+{
+  "proof": "local Maven test compilation; no tests executed",
+  "at": "2026-10-03T21:19:23.275824+00:00",
+  "processExitCode": 1,
+  "totals": {
+    "tests": 0,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0
+  },
+  "compileFailure": "test fixture used nonexistent DeliveryStatus.PICKED_UP; actual post-pickup state is OUT_FOR_DELIVERY",
+  "originalLog": "42-delivery-transactions-invocation1.log"
+}

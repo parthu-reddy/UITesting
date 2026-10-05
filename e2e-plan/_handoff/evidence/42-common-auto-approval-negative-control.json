@@ -1,0 +1,10 @@
+{
+  "mutation": "Allow SUBMITTED directly to APPROVED, bypassing mandatory admin review",
+  "counts": {
+    "tests": 37,
+    "failures": 1,
+    "errors": 0,
+    "skipped": 0
+  },
+  "sourceRestored": true
+}

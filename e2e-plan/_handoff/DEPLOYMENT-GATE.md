@@ -1,5 +1,17 @@
 # Deployment gate — checkpoint 18
 
+## 2026-10-05T11:57:12+05:30 — checkpoint113: O4/O5 complete; stop boundary reached
+
+Phase4 and Phase5 are published, deployed and complete within the documented Dev/UI-only scope. Final O4 gate8/8 and O5 gate8/8 have0failures/errors/skips. The required existing settings/partner/navigation/earnings/admin-money/delivery/chat/refund-quote/immutable-review regressions pass using the same retained delivered order. No new checkout repeated successful work. Restaurant5408c6e is now published/deployed; existing pending-queue check1/1 proves the exact outlet VERIFIED at₹34.67 and0payout writes.
+
+Latest sources: UIf73ffe9 (GitHub37269604733,941/941), Restaurant5408c6e (GitHub37271732121,146/146 CI;163/163 local clean), Customer0849ee6,Identity5210c6e,Gateway0b729f0,Reviewsd589d2f; UITesting1f3dae0 compile33; Deployment8a31eb2. Final operator state at2026-10-05T06:23:59.320213+00:00:29running,26healthy checks/three without checks,0drift/restarts/recent error lines. Hardening15/15 and reconciliation29/0drift pass. Current public Oracle UI remains https://gulf-strike-dark-extras.trycloudflare.com.
+
+Final protected ordinary-UI histograms: portals n268,p95estimate11.632ms/upperbucket12.583ms <=150ms; refresh n93,p95estimate30.479ms/upperbucket33.554ms; Gateway n4775,p95estimate102.061ms/upperbucket111.848ms. Both Measurements sections and final checklist boxes are recorded. [Release acceptance](../../../RandomDocuments/BusinessPlatform_2026-10-03/01_Organisations/RELEASE-2026-10-05.md) and evidence74–76 preserve limits/counts.
+
+Canonical60631296-e064-4a59-a2ef-090549edcf01 remains DELIVERED/CARD/SUCCESS,total₹72.81,restaurant₹34.67,rider₹21.16,with four immutable participant reviews. Two earlier owned cancelled orders and all original failure/allocation manifests remain retained. Final phase allocations4de9964404871016 and7b20efe3e581ba19 remain. No further wipe/seed, refund/payout submission, live session cleanup or direct-state E2E occurred.
+
+No required O4/O5 action remains after final documentation validation/commit. Preserve explicit O4-PERF-001 (missing before Gateway histogram),O5-CSP-001 (deliberate broken CSP),O4 internal replacements, duration/rate/SSE/provider/load/parked ONDC boundaries as unverified. W1–W3/A1–A4 remain unstarted. Stop now; a later user instruction is required to begin those phases. The broader E2E audit outside this scoped regression set is not declared complete. Earlier dated entries are history.
+
 ## Checkpoint35 gate (current; checkpoint34 first)
 
 Confirm D15. After checkpoint34 deployment/proof, owner publishes CommonLibrary/Identity stubs,

@@ -1,0 +1,11 @@
+{
+  "orderId": "1a375719-a178-40b4-8c15-75c28a53c9de",
+  "customerPhone": "8000000001",
+  "restaurantPhone": "9000000001",
+  "riderPhone": "7000000001",
+  "outlet": "Brand 1 Outlet 5",
+  "dataPolicy": "retain",
+  "cleanupPerformed": false,
+  "evidence": "order ID from exact owned teardown artifacts; placed outlet from actual customer screenshot",
+  "recoveredAfterHarnessRequestBodyError": true
+}

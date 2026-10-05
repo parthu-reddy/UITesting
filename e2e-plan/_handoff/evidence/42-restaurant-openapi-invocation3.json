@@ -1,0 +1,23 @@
+{
+  "proof": "local Maven/JUnit reports, not deployed verification",
+  "at": "2026-10-04T00:41:13.603282+00:00",
+  "repository": "RestaurantApplication",
+  "processExitCode": 0,
+  "classes": [
+    {
+      "class": "com.fooddelivery.OpenApiGenerationTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-restaurant-openapi-invocation3-TEST-com.fooddelivery.OpenApiGenerationTest.xml",
+      "failureMethods": []
+    }
+  ],
+  "totals": {
+    "tests": 1,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0
+  }
+}

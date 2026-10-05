@@ -1,0 +1,25 @@
+{
+  "runId": "4de9964404871016",
+  "startedAt": "2026-10-05T06:11:48.958034+00:00",
+  "appUrl": "https://gulf-strike-dark-extras.trycloudflare.com",
+  "selectedCases": [
+    "login",
+    "admin",
+    "revocation",
+    "suspension"
+  ],
+  "phoneCandidates": {
+    "fresh.customer": "8999001651",
+    "entitlement.owner": "9999479757",
+    "entitlement.member": "8999126333",
+    "suspension": "9999227465"
+  },
+  "adminPhone": "1000000001",
+  "uiOnly": true,
+  "allocationPolicy": "local candidates; fresh profile completion required in UI",
+  "dataPolicy": "retain",
+  "cleanupPerformed": false,
+  "externalDatabaseOrRedisAccess": false,
+  "exitCode": 0,
+  "finishedAt": "2026-10-05T06:13:59.311424+00:00"
+}

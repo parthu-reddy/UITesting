@@ -1,0 +1,21 @@
+{
+  "recordedAt": "2026-10-05T06:23:40.300573+00:00",
+  "invocation": 1,
+  "uiCommit": "f73ffe9",
+  "restaurantCommit": "5408c6e",
+  "harnessCommit": "1f3dae0",
+  "proof": "actual deployed rendered pending queue; passive normal UI request; no payout write",
+  "method": "AdminLedgerAdvancedTest#pendingPayoutsHavePositiveBalances",
+  "counts": {
+    "tests": "1",
+    "failures": "0",
+    "errors": "0",
+    "skipped": "0",
+    "time": "9.976"
+  },
+  "expectedPayee": "Brand 1 Outlet 5 (Brand 1)",
+  "expectedUnsettledBalance": "34.67",
+  "bankStatus": "VERIFIED",
+  "payoutWrites": 0,
+  "newOrderCreated": false
+}

@@ -1,5 +1,14 @@
 # Seeded environment data and prerequisites
 
+## 2026-10-04 — Current O4/O5 fresh Dev rollout (seed loaded)
+
+The authorised full Dev wipe has completed; all29 containers run with26 healthy checks/three without checks, no drift/restarts/recent errors. All14 fresh deterministic O4 seed files loaded successfully through the operator workflow; native schema sentinels and cross-service seed validation passed. Current login and business behavior still require live UI proof. All order/application/member manifests dated before this wipe are historical and remain retained. Their IDs, balances/reviews and old preserved-admin-UUID statement below are not current fixtures.
+
+Current UI login is one person followed by a portal choice. Any valid10-digit person may use normal Dev Autofill Code; ADMIN OTP additionally requires an existing active persisted staff account1000000001/1000000002. Roles come from current approvals/membership, not phone ranges. The signup runner allocates local candidates, demands visible fresh profile completion, and makes no allocation DB/Redis/API queries. Retain created records and manifests.
+
+The older role-specific signup/read-only allocation assertions below are historical. Before checkout still prove current Home/outlet distance, category hours, live geolocation/socket and server DUTY_STATUS through observations of the actual rider UI. Never use a DB/Redis or direct API shortcut.
+
+
 User-confirmed on 2026-09-19 from the deployed development setup:
 
 | Role | Phone | Use |

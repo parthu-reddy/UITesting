@@ -1,0 +1,602 @@
+{
+  "proof": "full local clean install after document/API/finalization changes",
+  "counts": {
+    "tests": 297,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "classes": [
+    {
+      "class": "com.fooddelivery.common.config.JacksonBigDecimalConfigTest",
+      "counts": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.003"
+    },
+    {
+      "class": "com.fooddelivery.common.config.JacksonTimeWireFormatTest",
+      "counts": {
+        "tests": 6,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.457"
+    },
+    {
+      "class": "com.fooddelivery.common.dto.maps.RouteResponseDtoTest",
+      "counts": {
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.18"
+    },
+    {
+      "class": "com.fooddelivery.common.enums.ApplicationStatusTest",
+      "counts": {
+        "tests": 37,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.064"
+    },
+    {
+      "class": "com.fooddelivery.common.enums.OrganisationRoleTest",
+      "counts": {
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.003"
+    },
+    {
+      "class": "com.fooddelivery.common.event.EventBinderPayloadCollisionTest",
+      "counts": {
+        "tests": 5,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.025"
+    },
+    {
+      "class": "com.fooddelivery.common.event.EventBinderTest",
+      "counts": {
+        "tests": 5,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.143"
+    },
+    {
+      "class": "com.fooddelivery.common.event.EventSerializationTest",
+      "counts": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.027"
+    },
+    {
+      "class": "com.fooddelivery.common.event.ObjectMapperUnknownPropertiesTest",
+      "counts": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.002"
+    },
+    {
+      "class": "com.fooddelivery.common.event.application.ApplicationEventBindingTest",
+      "counts": {
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.046"
+    },
+    {
+      "class": "com.fooddelivery.common.event.organisation.OrganisationEventBindingTest",
+      "counts": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.045"
+    },
+    {
+      "class": "com.fooddelivery.common.location.FleetCityScopeTest",
+      "counts": {
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.009"
+    },
+    {
+      "class": "com.fooddelivery.common.lock.LockedWorkTimerTest",
+      "counts": {
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.086"
+    },
+    {
+      "class": "com.fooddelivery.common.time.BusinessCalendarTest",
+      "counts": {
+        "tests": 9,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.01"
+    },
+    {
+      "class": "com.fooddelivery.common.time.IanaTimeZoneValidatorTest",
+      "counts": {
+        "tests": 16,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.013"
+    },
+    {
+      "class": "com.fooddelivery.common.util.DeterministicIdUtilsLedgerIdTest",
+      "counts": {
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.017"
+    },
+    {
+      "class": "com.fooddelivery.common.util.EventPayloadUtilsTest",
+      "counts": {
+        "tests": 14,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.016"
+    },
+    {
+      "class": "com.fooddelivery.common.util.JsonNumberUtilsTest",
+      "counts": {
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.046"
+    },
+    {
+      "class": "com.fooddelivery.common.architecture.TimeDisciplineRules",
+      "counts": {
+        "tests": 8,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "1.082"
+    },
+    {
+      "class": "com.fooddelivery.common.architecture.TimeDisciplineTest",
+      "counts": {
+        "tests": 0,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "1.086"
+    },
+    {
+      "class": "com.fooddelivery.common.config.KafkaConfigDeadLetterTest",
+      "counts": {
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.17"
+    },
+    {
+      "class": "com.fooddelivery.common.messaging.DeadLetterPositionTest",
+      "counts": {
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.004"
+    },
+    {
+      "class": "com.fooddelivery.common.messaging.DeadLetterReplayerTest",
+      "counts": {
+        "tests": 7,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.39"
+    },
+    {
+      "class": "com.fooddelivery.common.messaging.DltHandlerPositionBindingTest",
+      "counts": {
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.069"
+    },
+    {
+      "class": "com.fooddelivery.common.outbox.OutboxAggregateRoutingTest",
+      "counts": {
+        "tests": 12,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.955"
+    },
+    {
+      "class": "com.fooddelivery.common.outbox.OutboxBacklogMetricsTest",
+      "counts": {
+        "tests": 5,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.023"
+    },
+    {
+      "class": "com.fooddelivery.common.outbox.OutboxBeansAreNotComponentScannedTest",
+      "counts": {
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.02"
+    },
+    {
+      "class": "com.fooddelivery.common.outbox.OutboxEventTypeInvariantTest",
+      "counts": {
+        "tests": 6,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.332"
+    },
+    {
+      "class": "com.fooddelivery.common.architecture.TimeDisciplineRules",
+      "counts": {
+        "tests": 8,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "1.33"
+    },
+    {
+      "class": "com.fooddelivery.common.architecture.TimeDisciplineTest",
+      "counts": {
+        "tests": 0,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "1.333"
+    },
+    {
+      "class": "com.fooddelivery.common.audit.AuditConfigurationTest",
+      "counts": {
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "1.882"
+    },
+    {
+      "class": "com.fooddelivery.common.idempotency.IdempotencyKeySweeperTest",
+      "counts": {
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.15"
+    },
+    {
+      "class": "com.fooddelivery.common.lock.RedisLockTest",
+      "counts": {
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.844"
+    },
+    {
+      "class": "com.fooddelivery.common.time.ZoneIdConverterTest",
+      "counts": {
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.007"
+    },
+    {
+      "class": "com.fooddelivery.common.architecture.TimeDisciplineRules",
+      "counts": {
+        "tests": 8,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "1.234"
+    },
+    {
+      "class": "com.fooddelivery.common.architecture.TimeDisciplineTest",
+      "counts": {
+        "tests": 0,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "1.238"
+    },
+    {
+      "class": "com.fooddelivery.common.service.CloudflareR2DocumentSafetyTest",
+      "counts": {
+        "tests": 5,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "1.006"
+    },
+    {
+      "class": "com.fooddelivery.common.architecture.CommonCoreTimeDisciplineTest",
+      "counts": {
+        "tests": 0,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.451"
+    },
+    {
+      "class": "com.fooddelivery.common.architecture.TimeDisciplineRules",
+      "counts": {
+        "tests": 8,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.451"
+    },
+    {
+      "class": "com.fooddelivery.common.architecture.TimeDisciplineRulesTest",
+      "counts": {
+        "tests": 7,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "1.299"
+    },
+    {
+      "class": "com.fooddelivery.common.contract.PlatformJsonTest",
+      "counts": {
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.617"
+    },
+    {
+      "class": "com.fooddelivery.common.test.SchemaConsistencyTest",
+      "counts": {
+        "tests": 5,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.015"
+    },
+    {
+      "class": "com.fooddelivery.common.architecture.TimeDisciplineRules",
+      "counts": {
+        "tests": 8,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "1.11"
+    },
+    {
+      "class": "com.fooddelivery.common.architecture.TimeDisciplineTest",
+      "counts": {
+        "tests": 0,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "1.112"
+    },
+    {
+      "class": "com.fooddelivery.common.client.MapsServiceClientContractTest",
+      "counts": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.002"
+    },
+    {
+      "class": "com.fooddelivery.common.client.MapsServiceClientFallbackTest",
+      "counts": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.001"
+    },
+    {
+      "class": "com.fooddelivery.common.config.OpenApiSortShapeTest",
+      "counts": {
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.027"
+    },
+    {
+      "class": "com.fooddelivery.common.config.PageSerializationShapeTest",
+      "counts": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.134"
+    },
+    {
+      "class": "com.fooddelivery.common.filter.IdempotencyFilterTest",
+      "counts": {
+        "tests": 5,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.071"
+    },
+    {
+      "class": "com.fooddelivery.common.filter.RequestCachingFilterTest",
+      "counts": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.004"
+    },
+    {
+      "class": "com.fooddelivery.common.security.AuctionTokenServiceTest",
+      "counts": {
+        "tests": 7,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.038"
+    },
+    {
+      "class": "com.fooddelivery.common.security.FeignServiceIdentityTest",
+      "counts": {
+        "tests": 8,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.022"
+    },
+    {
+      "class": "com.fooddelivery.common.security.SecurityContextFilterTest",
+      "counts": {
+        "tests": 6,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.624"
+    },
+    {
+      "class": "com.fooddelivery.common.security.SecurityFilterChainRejectionTest",
+      "counts": {
+        "tests": 5,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "3.793"
+    },
+    {
+      "class": "com.fooddelivery.common.security.SecurityHeaderPropagationInterceptorTest",
+      "counts": {
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.007"
+    },
+    {
+      "class": "com.fooddelivery.common.security.WebSocketSecurityInterceptorTest",
+      "counts": {
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.023"
+    },
+    {
+      "class": "com.fooddelivery.common.security.money.MoneyAccessPolicyTest",
+      "counts": {
+        "tests": 12,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.056"
+    },
+    {
+      "class": "com.fooddelivery.common.security.organisation.DefaultOrganisationAccessPolicyTest",
+      "counts": {
+        "tests": 11,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.035"
+    },
+    {
+      "class": "com.fooddelivery.common.security.organisation.OrganisationFeignBootstrapTest",
+      "counts": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.526"
+    }
+  ],
+  "deployed": false
+}

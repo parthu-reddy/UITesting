@@ -1,0 +1,11 @@
+# Checkpoint73 — O4 service gates and UI integration
+
+## 2026-10-04T17:43:58.319159+05:30 — O4 service gates and self-dealing guards
+
+O4 is still local/unpublished. Current clean gates: CommonLibrary 309/309, Identity155/155, Gateway47/47; zero failures/errors/skips. Identity includes actual H2 transactions, D5 batched queries, portal states, native idempotency listeners, restaurant/rider stub-consumer contracts, new HTTP chain tests and unverified-phone edit refusal. Producer contract invocations remain restaurant2/2 and rider4/4. Initial Identity clean invocation1 (141passed/1failed/6errors) and Gateway clean invocation2 (43passed/4errors) are retained separately; package/layer/missing synchronous Redis fixture issues were fixed without weakening gates.
+
+Focused service guards pass customer9/9, delivery17/17, Maps8/8, chat5/5. Delivery adds the immutable customer id from Customer's signed dispatch-details call to every dispatch exclusion; Maps proves a sole nearby customer-rider is never ranked/reserved. Audited manual assignment cannot override the exclusion. Exact review targets are still authorized in one Customer batch; CUSTOMER outlet/product reviews use a fresh person-scoped membership lookup and refuse active members with SELF_REVIEW, with outages failing closed. RESTAURANT authors cannot review themselves as customers. Chat resolves dual-role users by the requested entity and preserves canonical customer checks. Remaining service full gates and enumeration are open.
+
+UI one-login/central transport edits are in progress and unverified. Seeds and harness are not integrated yet. No O4 publication, deployment, reset or live E2E; Oracle continues d79c33a/O3 evidence71. Keep UI-only proof policy and historical/deferred gaps separate. Next: UI auth/step-up/active portal/transport tests, deterministic compatible seeds and LoginPage caller migration; then static/final gates, GitHub publication, authorised clean Oracle Dev rollout and visible browser proof.
+
+Original O3 archive and retained fixtures remain linked in checkpoint71. O4 evidence lives in the phase evidence folder:08-common-clean-invocation4,09-identity-clean-invocation2,05-gateway-clean-invocation4,11-consumer-contract-invocation1 and12-*-guards-invocation1.

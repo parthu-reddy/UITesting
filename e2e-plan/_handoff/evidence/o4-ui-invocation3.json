@@ -1,0 +1,52 @@
+{
+  "observedAt": "2026-10-05T05:20:57+05:30",
+  "invocation": 3,
+  "uiCommit": "ba3650b02f35804c2538a83a70fd8624e5e49d3e",
+  "harnessCommit": "6dc26ce",
+  "tests": 8,
+  "passed": 6,
+  "failures": 2,
+  "errors": 0,
+  "skips": 0,
+  "classes": [
+    {
+      "name": "OneLoginEntitlementsTest",
+      "counts": {
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "name": "EntitlementRevocationTest",
+      "counts": {
+        "tests": 2,
+        "failures": 2,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "name": "AdminStepUpTest",
+      "counts": {
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    }
+  ],
+  "issues": [
+    "Upload observation incorrectly selected the temporary ENTITLEMENTS_CHANGED 401 before normal refresh/retry completes",
+    "Admin saved Suspended; open launcher retained its pre-projection Available snapshot"
+  ],
+  "allocation": "7ad8f02482c84fed",
+  "ownedSuspendedBrand": "E2E O45 Restaurant 9999958995",
+  "ownedSuspendedOrganisation": "E2E O45 Restaurant 9999958995 Team 9999958995",
+  "reinstatementNotExecuted": true,
+  "uncreatedMemberCandidate": "8999861844",
+  "financialOrdersCreated": 0,
+  "dataPolicy": "retain",
+  "cleanupPerformed": false
+}

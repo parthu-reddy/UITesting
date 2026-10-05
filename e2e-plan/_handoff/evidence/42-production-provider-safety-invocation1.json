@@ -1,0 +1,31 @@
+{
+  "date": "2026-10-04T02:06:28.933134+05:30",
+  "proof": "actual fail-closed default adapter configuration and real service behavior; Dev preserved, biometric lockout assertions unchanged",
+  "counts": {
+    "tests": 11,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "classes": [
+    {
+      "class": "com.fooddelivery.governmentid.service.ProductionVerificationSafetyTest",
+      "counts": {
+        "tests": 8,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    {
+      "class": "com.fooddelivery.governmentid.service.BiometricLockoutSuspensionTest",
+      "counts": {
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    }
+  ],
+  "deployed": false
+}

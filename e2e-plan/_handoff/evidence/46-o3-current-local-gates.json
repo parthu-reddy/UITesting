@@ -1,0 +1,127 @@
+{
+  "recordedAt": "2026-10-04T08:24:25+05:30",
+  "scope": "Current O3 source and local test gates after the O3 Core-schema reclassification",
+  "proofBoundary": "Every result in this record is local. It proves neither artifact publication, OCI registry contents, Oracle deployment, Dev wipe/seed replay, service health, nor a public browser E2E journey.",
+  "coreGuards": {
+    "validateCoreServices": {
+      "command": "python3 FoodDeliveryContracts/validate_core_services.py",
+      "result": "56/56 PASS",
+      "scope": "current O3 strict schemas, event bindings and scheduled-class classification"
+    },
+    "selftest": {
+      "command": "python3 FoodDeliveryContracts/selftest_core_guard_regressions.py",
+      "result": "28/28 PASS",
+      "scope": "current O3 core guard positive and negative controls"
+    }
+  },
+  "commonLibrary": {
+    "cleanInstall": {
+      "command": "mvn -B -o clean install -DskipTests",
+      "result": "success",
+      "boundary": "fresh local install/package only; tests are recorded separately"
+    },
+    "scopedTests": {
+      "core": "39/0/0/0",
+      "messagingApplicationEventsAndOutboxInvariant": "11/0/0/0",
+      "persistence": "2/0/0/0",
+      "storage": "5/0/0/0",
+      "total": "57/0/0/0",
+      "fixture": "local tests; the expected unique-conflict negative log is covered by the messaging group"
+    }
+  },
+  "serviceAndContractGates": {
+    "CustomerApplication": {
+      "localServiceAndH2": "17/0/0/0",
+      "localStubContract": "8/0/0/0",
+      "total": "25/0/0/0",
+      "details": "FreshRestaurantApprovalTest, cache invalidation/transaction and quote-validation coverage are separate from CustomerContractConsumerTest."
+    },
+    "RestaurantApplication": {
+      "total": "56/0/0/0",
+      "details": "8 persistence, 26 application-service, 6 authorisation, 6 endpoint-coverage, 7 approved-listing, 2 concurrent-decision and 1 OpenAPI test."
+    },
+    "DeliveryExecutiveApplication": {
+      "total": "64/0/0/0",
+      "details": "2 fresh-schema, 3 daily-selfie HTTP, 9 application authorisation, 4 onboarding activation, 3 internal-summary permission, 5 concurrent decision, 6 endpoint coverage, 6 readiness, 17 application service, 7 go-online, 1 consumer contract and 1 OpenAPI test."
+    },
+    "GovernmentIDValidationService": {
+      "currentConsumerContract": "2/0/0/0",
+      "currentRestaurantContract": "1/0/0/0",
+      "currentOpenApi": "1/0/0/0",
+      "priorSelectedLocalSuite": "90 selected tests, retained as prior local evidence",
+      "aggregationBoundary": "Do not present these as one fresh 94-test clean suite: the 2, 1 and 1 are current separately rerun gates, while the 90-test selected suite is prior local evidence."
+    },
+    "ApiGateway": {
+      "total": "21/0/0/0",
+      "details": "3 endpoint-coverage, 4 organisation-route and 14 JWT-revocation tests."
+    },
+    "CommunicationIntegration": {
+      "templateSubstitution": "4/0/0/0",
+      "boundary": "local template substitution only; not a notification delivery or Dev push proof"
+    }
+  },
+  "ui": {
+    "qualityGates": {
+      "lint": "success",
+      "typecheck": "success",
+      "build": "success",
+      "fullVitest": "842/842 passed"
+    },
+    "targetedO3Ux": {
+      "wizardReview": "14/14 passed",
+      "partnerDailySelfieSuspensionInteractions": "16/16 passed",
+      "total": "30/30 passed"
+    },
+    "sharedReviewStep": {
+      "path": "FoodDeliveryAppUI/src/features/partner-onboarding/components/ApplicationReviewStep.tsx",
+      "usage": "shared by RestaurantApplicationWizard and DeliveryApplicationWizard",
+      "behaviour": "renders the review summary and a disabled/busy-aware submit action; it is the verified shared O3 review step, not a separate PartnerReview component"
+    },
+    "partnerApprovalsUx": {
+      "dangerConfirmation": "reject and suspend actions request the shared confirm dialog with tone=danger",
+      "touchTargets": "the shared default md Button clears the 44px touch-target floor",
+      "tabletLayout": "the approval queue/detail layout moves from one column to two at md and three at lg"
+    },
+    "redesignStaticGates": {
+      "phase1": "18/18 PASS",
+      "phase2": "15/15 PASS",
+      "phase3": "13/13 PASS",
+      "phase5": "14/14 PASS",
+      "phase4": "11/12 constituent checks pass; one aggregate check remains failing and identifies 11 unchanged legacy files over 300 lines",
+      "boundary": "The legacy files are outside the owner-limited current O3 scope. This is not a Phase4 pass and no exception was added.",
+      "scope": "Current-session O3 static source checks using the UIRedesign phase validators; these do not reclassify historical UIRedesign evidence or prove live UI behavior."
+    }
+  },
+  "uiOnlyE2eSource": {
+    "command": "mvn -B -o clean test-compile",
+    "result": "success; 179 sources",
+    "boundary": "compilation and UI-only/Dev-Autofill runner policy only; no browser scenario has executed against the deployed public UI",
+    "sourceAudit": {
+      "subjects": [
+        "RestaurantApplicationApiTest",
+        "DeliveryApplicationApiTest",
+        "AdminPartnerApprovalsUiTest",
+        "UnapprovedOutletHiddenTest",
+        "scripts/run_partner_applications_o3_e2e.py"
+      ],
+      "result": "0 prohibited-pattern matches",
+      "patterns": "GatewayApi, fetch, page.request, APIRequest/API client, HttpClient, WebSocket, local/session storage, Redis/JDBC/SSH, Docker/external fixture and OTP-disable paths",
+      "boundary": "source audit only; it does not execute a browser, publish, deploy, wipe/seed or inspect Oracle"
+    }
+  },
+  "releaseStatus": {
+    "published": false,
+    "deployed": false,
+    "devWipe": false,
+    "seedReplay": false,
+    "publicUiE2e": false,
+    "measurements": false
+  },
+  "lastUpdatedAt": "2026-10-04T08:36:01+05:30",
+  "evidenceOrigin": "Current-session locally rerun commands observed during active O3 work. Counts are selected/scoped where labelled and do not reclassify retained historical reports as fresh clean-suite evidence.",
+  "postDocumentationStaticValidator": {
+    "command": "python3 RandomDocuments/BusinessPlatform_2026-10-03/tools/validate_business_platform.py --phase O3",
+    "result": "19 PASS / 0 FAIL / 0 STALE",
+    "boundary": "source/plan invariant validation only; no publication, deployment, wipe/seed, Oracle health or browser E2E"
+  }
+}

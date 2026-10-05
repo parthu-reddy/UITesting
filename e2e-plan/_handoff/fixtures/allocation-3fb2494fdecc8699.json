@@ -1,0 +1,26 @@
+{
+  "runId": "3fb2494fdecc8699",
+  "startedAt": "2026-10-05T00:40:54.425153+00:00",
+  "appUrl": "https://gulf-strike-dark-extras.trycloudflare.com",
+  "selectedCases": [
+    "launcher",
+    "membership",
+    "restaurant",
+    "delivery",
+    "csp"
+  ],
+  "phoneCandidates": {
+    "hub.owner": "9999722850",
+    "hub.member": "8999090594",
+    "restaurant": "9999589146",
+    "delivery": "7999850047"
+  },
+  "adminPhone": "1000000002",
+  "uiOnly": true,
+  "allocationPolicy": "local candidates; fresh profile completion required in UI",
+  "dataPolicy": "retain",
+  "cleanupPerformed": false,
+  "externalDatabaseOrRedisAccess": false,
+  "exitCode": 0,
+  "finishedAt": "2026-10-05T00:43:12.763018+00:00"
+}

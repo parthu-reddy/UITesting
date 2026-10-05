@@ -1,0 +1,16 @@
+{
+  "observedAt": "2026-10-05T05:56:52+05:30",
+  "uiCommit": "2aed6af0bc2624eef1bab201b1721186f3be4d22",
+  "orderId": "1a375719-a178-40b4-8c15-75c28a53c9de",
+  "outlet": "Brand 1 Outlet 5",
+  "dataPolicy": "retain",
+  "cleanupPerformed": false,
+  "invocation": 3,
+  "tests": 1,
+  "passed": 0,
+  "failures": 1,
+  "errors": 0,
+  "skips": 0,
+  "reason": "No visible owned kitchen card within first five-second assertion",
+  "newOrdersCreated": 0
+}

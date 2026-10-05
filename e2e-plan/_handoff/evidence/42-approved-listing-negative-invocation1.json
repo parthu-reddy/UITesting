@@ -1,0 +1,13 @@
+{
+  "proof": "removed both actual native listing approval predicates; real PostGIS JUnit test failed on exposed unapproved outlet IDs",
+  "totals": {
+    "tests": 1,
+    "failures": 1,
+    "errors": 0,
+    "skips": 0
+  },
+  "processExitCode": 1,
+  "sourceRestoredExactly": true,
+  "sourceSha256": "9c2ab6699c0c997eaefe63110460c583a9fc3f8e3585112b861bbadfed0c9c69",
+  "at": "2026-10-03T21:05:00.408205+00:00"
+}

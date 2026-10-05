@@ -1,0 +1,11 @@
+{
+  "proof": "Local actual AWS S3Presigner and mocked storage metadata guard",
+  "counts": {
+    "tests": 4,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "timeSeconds": "0.997",
+  "deployed": false
+}

@@ -1,0 +1,143 @@
+{
+  "proof": "local full clean verify, actual complete Spring context, OpenAPI and generated producer contracts after document security changes",
+  "counts": {
+    "tests": 52,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "classes": [
+    {
+      "class": "com.fooddelivery.architecture.ArchitectureEnforcementTest",
+      "counts": {
+        "tests": 9,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "1.169"
+    },
+    {
+      "class": "com.fooddelivery.contract.GovIdContractConsumerTest",
+      "counts": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "4.817"
+    },
+    {
+      "class": "com.fooddelivery.governmentid.AutoConfigurationImportsTest",
+      "counts": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.049"
+    },
+    {
+      "class": "com.fooddelivery.governmentid.ContextLoadTest",
+      "counts": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "3.911"
+    },
+    {
+      "class": "com.fooddelivery.governmentid.EndpointAuthorizationCoverageTest",
+      "counts": {
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.036"
+    },
+    {
+      "class": "com.fooddelivery.governmentid.controller.VerificationSelfAccessTest",
+      "counts": {
+        "tests": 5,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.155"
+    },
+    {
+      "class": "com.fooddelivery.governmentid.controller.VerificationSummaryStateTest",
+      "counts": {
+        "tests": 7,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.01"
+    },
+    {
+      "class": "com.fooddelivery.governmentid.service.ApplicationDocumentSecurityTest",
+      "counts": {
+        "tests": 11,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.256"
+    },
+    {
+      "class": "com.fooddelivery.governmentid.service.BiometricLockoutSuspensionTest",
+      "counts": {
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.105"
+    },
+    {
+      "class": "com.fooddelivery.governmentid.service.BrandVerificationJsonEscapingTest",
+      "counts": {
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.003"
+    },
+    {
+      "class": "com.fooddelivery.governmentid.service.DocumentAdminAuditTransactionTest",
+      "counts": {
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.167"
+    },
+    {
+      "class": "com.fooddelivery.govvalidation.ContractVerifierTest",
+      "counts": {
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "1.928"
+    },
+    {
+      "class": "com.fooddelivery.govvalidation.Government_id_validation_serviceTest",
+      "counts": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "seconds": "0.02"
+    }
+  ],
+  "deployed": false,
+  "note": "Test profile local Kafka connection warnings are not Oracle runtime evidence"
+}

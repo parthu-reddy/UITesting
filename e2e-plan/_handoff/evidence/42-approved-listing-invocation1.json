@@ -1,0 +1,23 @@
+{
+  "proof": "local Maven/JUnit reports, not deployed verification",
+  "at": "2026-10-03T20:59:46.797239+00:00",
+  "repository": "RestaurantApplication",
+  "processExitCode": 0,
+  "classes": [
+    {
+      "class": "com.fooddelivery.restaurant.service.ApprovedOnlyListingTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-approved-listing-invocation1-TEST-com.fooddelivery.restaurant.service.ApprovedOnlyListingTest.xml",
+      "failureMethods": []
+    }
+  ],
+  "totals": {
+    "tests": 7,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0
+  }
+}

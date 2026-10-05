@@ -1,0 +1,106 @@
+{
+  "recordedAt": "2026-10-05T06:14:39.825353+00:00",
+  "invocation": 6,
+  "uiCommit": "f73ffe909f34e15add4b8717159eb664e042f477",
+  "harnessCommit": "db66d24",
+  "proof": "actual deployed rendered UI; normal OTP controls; passive UI-generated observations",
+  "allocation": {
+    "runId": "4de9964404871016",
+    "startedAt": "2026-10-05T06:11:48.958034+00:00",
+    "appUrl": "https://gulf-strike-dark-extras.trycloudflare.com",
+    "selectedCases": [
+      "login",
+      "admin",
+      "revocation",
+      "suspension"
+    ],
+    "phoneCandidates": {
+      "fresh.customer": "8999001651",
+      "entitlement.owner": "9999479757",
+      "entitlement.member": "8999126333",
+      "suspension": "9999227465"
+    },
+    "adminPhone": "1000000001",
+    "uiOnly": true,
+    "allocationPolicy": "local candidates; fresh profile completion required in UI",
+    "dataPolicy": "retain",
+    "cleanupPerformed": false,
+    "externalDatabaseOrRedisAccess": false,
+    "exitCode": 0,
+    "finishedAt": "2026-10-05T06:13:59.311424+00:00"
+  },
+  "results": [
+    {
+      "testClass": "OneLoginEntitlementsTest",
+      "counts": {
+        "tests": "4",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0",
+        "time": "27.694"
+      },
+      "methods": [
+        {
+          "name": "pendingRiderSeesApplicationWithoutOperationalAccess",
+          "result": "PASS"
+        },
+        {
+          "name": "freshPersonHasCustomerAndApplicationEntryPoints",
+          "result": "PASS"
+        },
+        {
+          "name": "approvedRiderUsesCustomerAndDeliveryButCannotOpenRestaurantOperations",
+          "result": "PASS"
+        },
+        {
+          "name": "ownerUsesCustomerRestaurantAndBusinessAfterOneOtp",
+          "result": "PASS"
+        }
+      ]
+    },
+    {
+      "testClass": "AdminStepUpTest",
+      "counts": {
+        "tests": "2",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0",
+        "time": "12.882"
+      },
+      "methods": [
+        {
+          "name": "nonStaffCannotStartAdministratorVerification",
+          "result": "PASS"
+        },
+        {
+          "name": "administratorVerifiesSeparatelyAndKeepsEverydayAccess",
+          "result": "PASS"
+        }
+      ]
+    },
+    {
+      "testClass": "EntitlementRevocationTest",
+      "counts": {
+        "tests": "2",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0",
+        "time": "86.882"
+      },
+      "methods": [
+        {
+          "name": "acceptedStaffApprovalAndRemovalRefreshOnNormalUiRequests",
+          "result": "PASS"
+        },
+        {
+          "name": "ownBrandSuspensionAndReinstatementChangeAccessAndDiscovery",
+          "result": "PASS"
+        }
+      ]
+    }
+  ],
+  "tests": 8,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0
+}

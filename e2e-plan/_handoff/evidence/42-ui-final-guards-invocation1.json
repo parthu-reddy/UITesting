@@ -1,0 +1,152 @@
+{
+  "proof": "local Vitest rendered components/SDK fixtures, not Oracle E2E",
+  "at": "2026-10-03T22:22:36.610820+00:00",
+  "processExitCode": 0,
+  "total": 24,
+  "passed": 24,
+  "failed": 0,
+  "pending": 0,
+  "success": true,
+  "files": [
+    {
+      "file": "useRiderDuty.test.ts",
+      "cases": [
+        {
+          "name": "useRiderDuty goes online at the position the device just reported",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useRiderDuty stays offline and says why when no location can be found",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useRiderDuty asks for location permission when it was denied, without calling the server",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useRiderDuty shows the server\u2019s reason when it refuses to put the rider on duty",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useRiderDuty goes offline when the server accepts",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useRiderDuty opens daily selfie verification only for the explicit server refusal and stays offline",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useRiderDuty stays on duty and says why when the server refuses to take a rider off mid-delivery",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "useRiderDuty does not try to go online when notification permission is refused",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "DailySelfiePrompt.test.tsx",
+      "cases": [
+        {
+          "name": "daily operational selfie requires a completed duty upload then verifies and syncs readiness without going online",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "daily operational selfie preserves a recoverable failure without claiming verified readiness",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "daily operational selfie serialises repeated clicks and never claims eligibility after the application becomes suspended",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "DocumentUploadField.test.tsx",
+      "cases": [
+        {
+          "name": "registered private document uploads signs actual MIME and size, uploads without app credentials and accepts only the completed key",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "registered private document uploads refuses HTML before requesting a URL",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "registered private document uploads refuses empty before requesting a URL",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "registered private document uploads refuses oversize before requesting a URL",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "registered private document uploads never exposes a signed URL or accepts a file when confirmation fails",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "registered private document uploads blocks a concurrent drop while the first request is pending and aborts on unmount",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "registered private document uploads refuses disabled selection and drag/drop",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    },
+    {
+      "file": "PartnerApprovalsPage.test.tsx",
+      "cases": [
+        {
+          "name": "admin partner application decisions requires a clear rejection reason before any decision call",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "admin partner application decisions rejects the saved restaurant version and refreshes its queue",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "admin partner application decisions refreshes the actual current version and queue after a concurrent 409",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "admin partner application decisions approves the selected delivery applicant through the delivery endpoint",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "admin partner application decisions does not offer approval when private documents are unavailable",
+          "status": "passed",
+          "failure": null
+        },
+        {
+          "name": "admin partner application decisions discards late history from a previously selected partner type",
+          "status": "passed",
+          "failure": null
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "recordedAt": "2026-10-04T19:36:11+05:30",
+  "proofType": "local-only",
+  "published": false,
+  "deployed": false,
+  "liveE2E": false,
+  "o4Static": {
+    "invocation": 3,
+    "passed": 22,
+    "failed": 0
+  },
+  "o5Static": {
+    "invocation": 2,
+    "passed": 7,
+    "failed": 0
+  },
+  "identityH2Followup": {
+    "passed": 31,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0
+  },
+  "uiSafety": {
+    "passed": 27,
+    "failed": 0
+  },
+  "uiFullDiagnostic": {
+    "invocation": 1,
+    "passed": 917,
+    "failed": 5,
+    "pending": 0
+  },
+  "redesign1": {
+    "passed": 18,
+    "failed": 0
+  },
+  "redesign2Diagnostic": {
+    "invocation": 1,
+    "passed": 13,
+    "failed": 2
+  },
+  "runnerUnit": {
+    "invocation": 2,
+    "passed": 12
+  },
+  "configUnit": {
+    "invocation": 1,
+    "passed": 5
+  },
+  "harnessCompile": {
+    "invocation": 5,
+    "success": true
+  },
+  "locatorAudit": {
+    "sites": 2521,
+    "passed": 1966,
+    "failed": 87,
+    "dynamic": 441,
+    "dead": 27,
+    "excepted": 0
+  }
+}

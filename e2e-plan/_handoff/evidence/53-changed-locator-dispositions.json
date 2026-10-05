@@ -1,0 +1,67 @@
+{
+  "proof": "necessary static source audit; dynamic named-region false negatives require live verification",
+  "files": [
+    {
+      "file": "RestaurantNavigationUiTest.java",
+      "counts": {
+        "PASS": 17,
+        "FAIL": 2,
+        "DYNAMIC": 3
+      },
+      "failures": [
+        {
+          "rel": "tests/features/fulfillment/RestaurantNavigationUiTest.java",
+          "line": 47,
+          "call": "getByRole",
+          "text": "AriaRole.REGION,new Page.GetByRoleOptions().setName(Pattern.compile(\"^Incoming, [0-9]+ orders?$\"))",
+          "status": "FAIL",
+          "reasons": [
+            "region named /^Incoming, [0-9]+ orders?$/"
+          ]
+        },
+        {
+          "rel": "tests/features/fulfillment/RestaurantNavigationUiTest.java",
+          "line": 85,
+          "call": "getByRole",
+          "text": "AriaRole.REGION,new Page.GetByRoleOptions().setName(Pattern.compile(\"^In the kitchen, [0-9]+ orders?$\"))",
+          "status": "FAIL",
+          "reasons": [
+            "region named /^In the kitchen, [0-9]+ orders?$/"
+          ]
+        }
+      ]
+    },
+    {
+      "file": "OrderChatChecks.java",
+      "counts": {
+        "PASS": 4,
+        "DYNAMIC": 1
+      },
+      "failures": []
+    },
+    {
+      "file": "HappyDeliveryFlowTest.java",
+      "counts": {
+        "PASS": 95,
+        "DYNAMIC": 22
+      },
+      "failures": []
+    },
+    {
+      "file": "RefundQuoteChecks.java",
+      "counts": {
+        "PASS": 3
+      },
+      "failures": []
+    },
+    {
+      "file": "RestaurantAcceptanceChecks.java",
+      "counts": {
+        "PASS": 8,
+        "DYNAMIC": 1
+      },
+      "failures": []
+    }
+  ],
+  "disposition": "RestaurantNavigation two named-region FAILs are composed dynamically by KanbanColumn aria-label `${title}, ${count} order${count === 1 ? ...}` with RestaurantOrderQueue title Incoming/In the kitchen. Preserve auditor and require live exact named-region assertions; no exemption or static all-green claim."
+}

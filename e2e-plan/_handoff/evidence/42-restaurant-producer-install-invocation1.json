@@ -1,0 +1,41 @@
+{
+  "proof": "local Maven/JUnit reports, not deployed verification",
+  "at": "2026-10-03T21:34:39.921510+00:00",
+  "repository": "RestaurantApplication",
+  "processExitCode": 0,
+  "classes": [
+    {
+      "class": "com.fooddelivery.OpenApiGenerationTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-restaurant-producer-install-invocation1-TEST-com.fooddelivery.OpenApiGenerationTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.restaurant.EndpointAuthorizationCoverageTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-restaurant-producer-install-invocation1-TEST-com.fooddelivery.restaurant.EndpointAuthorizationCoverageTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.restaurant.MessagingTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-restaurant-producer-install-invocation1-TEST-com.fooddelivery.restaurant.MessagingTest.xml",
+      "failureMethods": []
+    }
+  ],
+  "totals": {
+    "tests": 9,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0
+  }
+}

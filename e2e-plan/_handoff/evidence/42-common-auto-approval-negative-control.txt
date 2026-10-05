@@ -1,0 +1,22 @@
+# Portable diagnostic excerpt
+
+Build/test diagnostics and original counts are preserved below. Full original output is retained locally in 42-common-auto-approval-negative-control.raw.log and excluded from Git.
+
+L80: [INFO] Running com.fooddelivery.common.enums.ApplicationStatusTest
+L81: [ERROR] Tests run: 37, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.106 s <<< FAILURE! -- in com.fooddelivery.common.enums.ApplicationStatusTest
+L82: [ERROR] com.fooddelivery.common.enums.ApplicationStatusTest.everyAllowedAndForbiddenPair(ApplicationStatus, ApplicationStatus, boolean)[10] -- Time elapsed: 0.004 s <<< FAILURE!
+L83: org.opentest4j.AssertionFailedError: Expected com.fooddelivery.common.exception.IllegalStateTransitionException to be thrown, but nothing was thrown.
+L154: [ERROR] Failures:
+L155: [ERROR]   ApplicationStatusTest.everyAllowedAndForbiddenPair:30 Expected com.fooddelivery.common.exception.IllegalStateTransitionException to be thrown, but nothing was thrown.
+L157: [ERROR] Tests run: 37, Failures: 1, Errors: 0, Skipped: 0
+L165: [INFO] BUILD FAILURE
+L170: [ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.2.5:test (default-test) on project common-core: There are test failures.
+L172: [ERROR] Please refer to /Users/parthureddy/Documents/Food Delivery.nosync/CommonLibrary/common-core/target/surefire-reports for the individual test results.
+L173: [ERROR] Please refer to dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+L174: [ERROR] -> [Help 1]
+L176: [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+L177: [ERROR] Re-run Maven using the -X switch to enable full debug logging.
+L179: [ERROR] For more information about the errors and possible solutions, please read the following articles:
+L180: [ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+L182: [ERROR] After correcting the problems, you can resume the build with the command
+L183: [ERROR]   mvn <args> -rf :common-core

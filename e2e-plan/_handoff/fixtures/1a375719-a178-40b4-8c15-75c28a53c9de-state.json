@@ -1,0 +1,8 @@
+{
+  "proof": "rendered owned history card and tracker; no response body inspection",
+  "observedAt": "2026-10-05T00:32:01.404536Z",
+  "status": "CANCELLED_BY_RESTAURANT",
+  "orderId": "1a375719-a178-40b4-8c15-75c28a53c9de",
+  "historyVisible": true,
+  "trackerVisible": true
+}

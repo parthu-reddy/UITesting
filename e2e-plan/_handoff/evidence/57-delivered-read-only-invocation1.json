@@ -1,0 +1,39 @@
+{
+  "recordedAt": "2026-10-05T01:31:28.427221+00:00",
+  "invocation": 1,
+  "proof": "deployed real rendered UI, retained canonical order",
+  "orderId": "60631296-e064-4a59-a2ef-090549edcf01",
+  "uiCommit": "509d084",
+  "harnessCommit": "afe12f1",
+  "results": [
+    {
+      "class": "com.fooddelivery.e2e.tests.smoke.CustomerSettingsUiTest",
+      "counts": {
+        "tests": "1",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0",
+        "time": "11.608"
+      },
+      "methods": [
+        "deliveredOrderReviewRequiresAtLeastOneRating"
+      ]
+    },
+    {
+      "class": "com.fooddelivery.e2e.tests.smoke.PartnerReadOnlyUiTest",
+      "counts": {
+        "tests": "1",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0",
+        "time": "6.045"
+      },
+      "methods": [
+        "riderCompletedTripShowsRestaurantPayoutAndDate"
+      ]
+    }
+  ],
+  "newOrderCreated": false,
+  "reviewWritten": false,
+  "refundSubmitted": false
+}

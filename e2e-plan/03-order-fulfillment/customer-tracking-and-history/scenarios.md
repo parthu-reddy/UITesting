@@ -77,3 +77,9 @@ The current customer UI exposes history through Account Settings → History. It
 ## Additional recovery and boundary contracts
 
 History first-page failure remains distinct from empty and can retry; pagination failure keeps loaded rows; loaded IDs remain unique. Reorder confirms replacement and preserves an edited cart if declined; missing/invalid catalogue lines cannot create a partial cart; stale address/cart responses and duplicate clicks cannot commit outdated quantities. Unit/routed contracts are explicitly separate from actual Dev transactions. Map selection/mode changes release prior resources; invalid fixes never plot; HTTP503/non-SSE200/EOF trigger honest recovery and authorization refusal terminates retries. These immediate contracts do not execute quota exhaustion or expiry waits.
+
+## 2026-10-05 — Retained fixture diagnosis after O4/O5 regression failure
+
+| ID | Action | Expected / proof | Status |
+|---|---|---|---|
+| TRACKING-RETAINED-01 | RetainedOrderStateUiTest signs in as the manifest owner, opens History and that exact order. | Owned history card and rendered tracker are visible; record its rendered status before deciding whether resumption is possible. No response-body parsing, checkout, DB/Redis/direct API setup. | Original1a375719 and0dbe6a15 are UI-proven CANCELLED_BY_RESTAURANT and retained; canonical60631296 is UI-proven DELIVERED. These separate state observations do not rewrite original failed lifecycle invocations. |

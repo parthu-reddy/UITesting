@@ -1,0 +1,45 @@
+{
+  "proof": "actual static seed validator run against six isolated mutated copies; actual source unchanged; positive source rerun passes",
+  "at": "2026-10-03T21:43:37.358360+00:00",
+  "oracleDataMutated": false,
+  "controls": [
+    {
+      "case": "missing-application-status",
+      "processExitCode": 1,
+      "refusal": "AssertionError: ('restaurant.brands', 'ed6bfeae-b711-4777-924e-c52bfc4c2eb2', 'missing/invalid application status')",
+      "passed": true
+    },
+    {
+      "case": "short-rejection-reason",
+      "processExitCode": 1,
+      "refusal": "AssertionError: ('restaurant.brands', 'd4981586-9895-513a-99ed-81292935657f', 'missing rejection/suspension reason')",
+      "passed": true
+    },
+    {
+      "case": "approved-brand-missing-fssai",
+      "processExitCode": 1,
+      "refusal": "AssertionError: ('restaurant.brands', 'ed6bfeae-b711-4777-924e-c52bfc4c2eb2', 'approved brand needs an outlet with FSSAI')",
+      "passed": true
+    },
+    {
+      "case": "duplicate-outlet-fssai",
+      "processExitCode": 1,
+      "refusal": "AssertionError: Outlet FSSAI numbers must be unique",
+      "passed": true
+    },
+    {
+      "case": "duplicate-rider-vehicle",
+      "processExitCode": 1,
+      "refusal": "AssertionError: Rider vehicle registrations must be unique",
+      "passed": true
+    },
+    {
+      "case": "scenario-state-mismatch",
+      "processExitCode": 1,
+      "refusal": "AssertionError: ('7000000031', 'scenario application status mismatch')",
+      "passed": true
+    }
+  ],
+  "sourceHashesUnchanged": true,
+  "positiveExitCode": 0
+}

@@ -1,0 +1,50 @@
+{
+  "proof": "local Maven/JUnit reports, not deployed verification",
+  "at": "2026-10-03T22:34:21.955054+00:00",
+  "repository": "RestaurantApplication",
+  "processExitCode": 0,
+  "classes": [
+    {
+      "class": "com.fooddelivery.restaurant.ConcurrentApplicationDecisionTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-restaurant-http-invocation4-TEST-com.fooddelivery.restaurant.ConcurrentApplicationDecisionTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.restaurant.RestaurantApplicationAuthorizationTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-restaurant-http-invocation4-TEST-com.fooddelivery.restaurant.RestaurantApplicationAuthorizationTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.restaurant.service.RestaurantApplicationServiceTest",
+      "tests": 26,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-restaurant-http-invocation4-TEST-com.fooddelivery.restaurant.service.RestaurantApplicationServiceTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.restaurant.service.RestaurantOnboardingServiceTest",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-restaurant-http-invocation4-TEST-com.fooddelivery.restaurant.service.RestaurantOnboardingServiceTest.xml",
+      "failureMethods": []
+    }
+  ],
+  "totals": {
+    "tests": 43,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0
+  }
+}

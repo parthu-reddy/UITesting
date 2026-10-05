@@ -1,5 +1,17 @@
 # Deferred and assigned work
 
+## 2026-10-05 — O4/O5 boundary
+
+These are explicit unverified assertions, excluded from the passing UI counts.
+
+| IDs | Deferred scope | Owner document |
+|---|---|---|
+| O4-INT-001–004 | Browser token/storage/internal API/DB/Redis/forced expiry setup and the listed synthetic/direct aggregate methods | [Internal assertions](../01-foundation-and-access/login-and-otp/DEFERRED-O4-INTERNAL-ASSERTIONS.md) |
+| O4-PERF-001 | Comparison to unavailable pre-O4 Gateway histogram; current portal <=150ms and current measurements remain required | [Performance baseline](../05-partner-and-account-management/organisations-and-portal-access/DEFERRED-O4-PERFORMANCE-BASELINE.md) |
+| O5-CSP-001 | Deliberately break deployed CSP or intercept its response; positive five-portal CSP/header/network gate remains required | [CSP mutation](../05-partner-and-account-management/organisations-and-portal-access/DEFERRED-O5-CSP-TESTS.md) |
+
+Existing duration, deliberate Dev rate-limit, SSE and production-provider/load deferrals below continue to apply. No disabled method, empty fixture or local mocked test is a deployed pass.
+
 ## 2026-10-04T16:42:23.916935+05:30 — Legacy brand search and300-line exclusion closed
 
 O3-UI-006 passed strengthened deployed UI invocation11; all four O3 methods passed invocation13 on the same d79c33a image. All eleven component violations are resolved with the unchanged full13/13 gate and no new exception. Earlier exclusion below is historical. UI-only/wait/rate/SSE deferrals remain; see checkpoint71.

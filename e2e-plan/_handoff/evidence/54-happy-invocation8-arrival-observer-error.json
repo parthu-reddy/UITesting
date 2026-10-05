@@ -1,0 +1,42 @@
+{
+  "recordedAt": "2026-10-05T06:56:59+05:30",
+  "invocation": 8,
+  "proof": "rendered Oracle UI; separate bounded operator timeline",
+  "uiCommit": "509d084d7fa06ef72ba787b423db139b6ce75be0",
+  "harnessCommit": "57eca7b",
+  "tests": 1,
+  "passed": 0,
+  "failures": 0,
+  "errors": 1,
+  "skipped": 0,
+  "durationSeconds": 78.587,
+  "error": "Timeout waiting for rider status response at AT_RESTAURANT; not a passing full lifecycle",
+  "ownedOrder": "60631296-e064-4a59-a2ef-090549edcf01",
+  "renderedFailureState": {
+    "ownedIdVisible": true,
+    "arrivalButtonPresent": false,
+    "pickupInputPresent": true
+  },
+  "operatorTimeline": [
+    {
+      "time": "2026-10-05T01:22:27.73470254Z",
+      "event": "ORDER_READY applied to READY_FOR_PICKUP"
+    },
+    {
+      "time": "2026-10-05T01:22:29.037698397Z",
+      "event": "AT_RESTAURANT transition started"
+    },
+    {
+      "time": "2026-10-05T01:22:29.048677497Z",
+      "event": "AT_RESTAURANT update completed"
+    },
+    {
+      "time": "2026-10-05T01:22:29.320785699Z",
+      "event": "ORDER_AT_RESTAURANT published"
+    }
+  ],
+  "nextHarness": "afe12f1; compile31 PASS; owned URI path + POST response and rendered phase, no body metadata dependency",
+  "redundantCall": "removed extra idle-rider teardown after verifying TestBase already owns it",
+  "newOrderCreated": false,
+  "nextInvocation": 9
+}

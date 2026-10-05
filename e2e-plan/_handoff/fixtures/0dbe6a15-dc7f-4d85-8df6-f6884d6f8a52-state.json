@@ -1,0 +1,8 @@
+{
+  "proof": "rendered owned active tracker or history; no response body inspection",
+  "orderId": "0dbe6a15-dc7f-4d85-8df6-f6884d6f8a52",
+  "status": "CANCELLED_BY_RESTAURANT",
+  "trackerVisible": true,
+  "observedAt": "2026-10-05T01:01:10.422762Z",
+  "historyVisible": true
+}

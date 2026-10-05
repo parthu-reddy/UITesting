@@ -1,0 +1,32 @@
+{
+  "proof": "local Maven/JUnit reports, not deployed verification",
+  "at": "2026-10-03T22:23:49.840079+00:00",
+  "repository": "ApiGateway",
+  "processExitCode": 0,
+  "classes": [
+    {
+      "class": "com.fooddelivery.apigateway.OrganisationGatewayRoutesTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "gateway-invocation1-TEST-com.fooddelivery.apigateway.OrganisationGatewayRoutesTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.apigateway.filter.GlobalJwtAuthFilterRevocationTest",
+      "tests": 14,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "gateway-invocation1-TEST-com.fooddelivery.apigateway.filter.GlobalJwtAuthFilterRevocationTest.xml",
+      "failureMethods": []
+    }
+  ],
+  "totals": {
+    "tests": 18,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0
+  }
+}

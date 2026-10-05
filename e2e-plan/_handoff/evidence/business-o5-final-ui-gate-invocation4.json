@@ -1,0 +1,131 @@
+{
+  "recordedAt": "2026-10-05T06:18:07.724195+00:00",
+  "invocation": 4,
+  "uiCommit": "f73ffe909f34e15add4b8717159eb664e042f477",
+  "harnessCommit": "db66d24",
+  "proof": "actual deployed rendered UI; ordinary OTP; passive UI-generated observations",
+  "allocation": {
+    "runId": "7b20efe3e581ba19",
+    "startedAt": "2026-10-05T06:15:08.936232+00:00",
+    "appUrl": "https://gulf-strike-dark-extras.trycloudflare.com",
+    "selectedCases": [
+      "launcher",
+      "membership",
+      "restaurant",
+      "delivery",
+      "csp"
+    ],
+    "phoneCandidates": {
+      "hub.owner": "9999592443",
+      "hub.member": "8999228647",
+      "restaurant": "9999876348",
+      "delivery": "7999816122"
+    },
+    "adminPhone": "1000000002",
+    "uiOnly": true,
+    "allocationPolicy": "local candidates; fresh profile completion required in UI",
+    "dataPolicy": "retain",
+    "cleanupPerformed": false,
+    "externalDatabaseOrRedisAccess": false,
+    "exitCode": 0,
+    "finishedAt": "2026-10-05T06:17:25.634160+00:00"
+  },
+  "results": [
+    {
+      "testClass": "PortalLauncherUiTest",
+      "counts": {
+        "tests": "4",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0",
+        "time": "26.066"
+      },
+      "methods": [
+        {
+          "name": "rejectedRiderSeesActionAndReason",
+          "result": "PASS"
+        },
+        {
+          "name": "pendingRestaurantOpensItsApplicationStatus",
+          "result": "PASS"
+        },
+        {
+          "name": "staffPortalRequestsAdministratorVerification",
+          "result": "PASS"
+        },
+        {
+          "name": "ownerSwitchesApprovedPortalsAndSeesDeliveryStart",
+          "result": "PASS"
+        }
+      ]
+    },
+    {
+      "testClass": "BusinessHubOrganisationUiTest",
+      "counts": {
+        "tests": "1",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0",
+        "time": "15.056"
+      },
+      "methods": [
+        {
+          "name": "invitationRoleChangesAndRemovalAreVisibleToBothPeople",
+          "result": "PASS"
+        }
+      ]
+    },
+    {
+      "testClass": "RestaurantApplicationWizardUiTest",
+      "counts": {
+        "tests": "1",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0",
+        "time": "34.21"
+      },
+      "methods": [
+        {
+          "name": "approvedApplicationOpensItsOutletWithoutAnotherPersonLogin",
+          "result": "PASS"
+        }
+      ]
+    },
+    {
+      "testClass": "DeliveryOnboardingUiTest",
+      "counts": {
+        "tests": "1",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0",
+        "time": "34.648"
+      },
+      "methods": [
+        {
+          "name": "approvedRiderEntersDeliveryOfflineWithoutAnotherPersonLogin",
+          "result": "PASS"
+        }
+      ]
+    },
+    {
+      "testClass": "CspSmokeUiTest",
+      "counts": {
+        "tests": "1",
+        "failures": "0",
+        "errors": "0",
+        "skipped": "0",
+        "time": "24.73"
+      },
+      "methods": [
+        {
+          "name": "securityHeadersAndConsoleHoldAcrossEveryCurrentPortal",
+          "result": "PASS"
+        }
+      ]
+    }
+  ],
+  "tests": 8,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0
+}

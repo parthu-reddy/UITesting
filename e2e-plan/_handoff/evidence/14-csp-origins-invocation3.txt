@@ -1,0 +1,10 @@
+Observed public UI origins (no paths or credentials)
+https://fonts.googleapis.com
+https://fonts.gstatic.com
+https://gulf-strike-dark-extras.trycloudflare.com
+https://images.unsplash.com
+https://pub-331840c6b8de469a8750b945b9159673.r2.dev
+wss://gulf-strike-dark-extras.trycloudflare.com
+CSP violations: 0
+Header failures: 0
+Network 4xx/5xx: 0

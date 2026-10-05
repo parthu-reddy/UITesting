@@ -1,0 +1,50 @@
+{
+  "proof": "local Maven/JUnit reports, not deployed verification",
+  "at": "2026-10-03T21:34:39.800404+00:00",
+  "repository": "DeliveryExecutiveApplication",
+  "processExitCode": 1,
+  "classes": [
+    {
+      "class": "com.fooddelivery.delivery.DeliveryValidationIntegrationTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-delivery-producer-install-invocation2-TEST-com.fooddelivery.delivery.DeliveryValidationIntegrationTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.delivery.InternalTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-delivery-producer-install-invocation2-TEST-com.fooddelivery.delivery.InternalTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.delivery.MessagingTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-delivery-producer-install-invocation2-TEST-com.fooddelivery.delivery.MessagingTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.delivery.service.ConcurrentApplicationDecisionTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-delivery-producer-install-invocation2-TEST-com.fooddelivery.delivery.service.ConcurrentApplicationDecisionTest.xml",
+      "failureMethods": []
+    }
+  ],
+  "totals": {
+    "tests": 16,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "invocation": 7,
+  "test": "HappyDeliveryFlowTest#completeOrderLifecycle (assigned resume)",
+  "uiSource": "e055ea1bd3dbfdb664fce772fd8b68539620009e",
+  "orderId": "60631296-e064-4a59-a2ef-090549edcf01",
+  "totals": {
+    "tests": 1,
+    "passed": 0,
+    "failures": 0,
+    "errors": 1,
+    "skipped": 0
+  },
+  "newOrderCreated": false,
+  "retained": true,
+  "observedUiFailure": {
+    "readyPostStatus": 400,
+    "lastVisibleKitchenState": "PREPARING",
+    "pickupControl": "absent because Ready did not commit"
+  },
+  "operatorTimelineProof": "separate read-only native logs; no DB/Redis",
+  "operatorTimeline": [
+    {
+      "@timestamp": "2026-10-05T01:06:11.946877097Z",
+      "level": "INFO",
+      "logger_name": "com.fooddelivery.restaurant.service.FulfillmentService",
+      "message": "Restaurant 36342aa6-05fe-5cb3-a755-21b207c601bd preparing order 60631296-e064-4a59-a2ef-090549edcf01",
+      "rootException": ""
+    },
+    {
+      "@timestamp": "2026-10-05T01:06:11.949006788Z",
+      "level": "INFO",
+      "logger_name": "com.fooddelivery.restaurant.entity.RestaurantOrder",
+      "message": "Restaurant order 60631296-e064-4a59-a2ef-090549edcf01 status changing from ACCEPTED to PREPARING",
+      "rootException": ""
+    },
+    {
+      "@timestamp": "2026-10-05T01:06:11.951962845Z",
+      "level": "INFO",
+      "logger_name": "com.fooddelivery.restaurant.service.FulfillmentService",
+      "message": "Restaurant 36342aa6-05fe-5cb3-a755-21b207c601bd marked order 60631296-e064-4a59-a2ef-090549edcf01 as ready",
+      "rootException": ""
+    },
+    {
+      "@timestamp": "2026-10-05T01:06:11.953975376Z",
+      "level": "ERROR",
+      "logger_name": "com.fooddelivery.restaurant.service.FulfillmentService",
+      "message": "Illegal state transition for order 60631296-e064-4a59-a2ef-090549edcf01",
+      "rootException": "com.fooddelivery.common.exception.IllegalStateTransitionException: Cannot ready order in state: ACCEPTED"
+    }
+  ],
+  "productCause": "optimistic PREPARING state plus busy reset on order.status allowed Ready before prepare transaction committed",
+  "fix": "publish status only after successful request; propagate/await the transition promise; release busy state when request settles",
+  "phaseClosed": false
+}

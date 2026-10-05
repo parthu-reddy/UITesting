@@ -1,0 +1,30 @@
+{
+  "proof": "isolated real PostgreSQL17/PostGIS exact repository SQL and fresh baseline comparison",
+  "oracleDataMutated": false,
+  "freshInitialSha256": "93ac35ea9831837be4bbd5524d9e88db490800c32899a603f70366a62fc67af6",
+  "repositorySha256": "9c2ab6699c0c997eaefe63110460c583a9fc3f8e3585112b861bbadfed0c9c69",
+  "originalColumnCount": 159,
+  "originalColumnsTypesDefaultsPreserved": true,
+  "originalIndexesPreserved": true,
+  "originalConstraintsPreserved": true,
+  "newApplicationColumnCount": 6,
+  "allSixStatesWithPassedProviderFlagsExercised": true,
+  "nearbyVisibleStates": [
+    "APPROVED"
+  ],
+  "brandOutletRowCounts": {
+    "DRAFT": 0,
+    "SUBMITTED": 0,
+    "IN_REVIEW": 0,
+    "APPROVED": 1,
+    "REJECTED": 0,
+    "SUSPENDED": 0
+  },
+  "invalidStateConstraintsRefused": {
+    "unknown-status": true,
+    "missing-rejection-reason": true,
+    "short-suspension-reason": true
+  },
+  "seedsExercised": false,
+  "at": "2026-10-03T20:49:23Z"
+}

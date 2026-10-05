@@ -1,0 +1,18 @@
+{
+  "observedAt": "2026-10-05T05:44:13+05:30",
+  "invocation": 1,
+  "method": "HappyDeliveryFlowTest#completeOrderLifecycle",
+  "uiCommit": "2aed6af0bc2624eef1bab201b1721186f3be4d22",
+  "harnessCommit": "559d1cd",
+  "tests": 1,
+  "passed": 0,
+  "failures": 0,
+  "errors": 1,
+  "skips": 0,
+  "stage": "rider readiness evidence serialization before customer checkout",
+  "failure": "Playwright cannot serialize Java Long locationAgeMs",
+  "orderCreated": false,
+  "cleanupPerformed": false,
+  "readinessAssertionsPassed": true,
+  "fix": "locationAgeMs is emitted as a supported Double; readiness logic unchanged"
+}

@@ -1,0 +1,74 @@
+{
+  "invocation": 1,
+  "proofType": "deployed rendered UI",
+  "deployedUi": "3d8486e",
+  "tests": 8,
+  "passed": 1,
+  "failures": 2,
+  "errors": 5,
+  "skipped": 0,
+  "cases": [
+    {
+      "testClass": "OneLoginEntitlementsTest",
+      "method": "pendingRiderSeesApplicationWithoutOperationalAccess",
+      "status": "error",
+      "message": "Error {\n  message='Timeout 60000ms exceeded.\n  name='TimeoutError\n  stack='TimeoutError: Timeout 60000ms exceeded.\n    at _ProgressController.run (/private/var/folders/0h/ntc9lth93bq3sgfrgr9f9ylm0000gn/T/playwright-java-12249481250329800649/package/lib/coreBundle.js:12360:32)\n    at DispatcherConnection.dispatch (/private/var/folders/0h/ntc9lth93bq3sgfrgr9f9ylm0000gn/T/playwright-java-12249481250329800649/package/lib/coreBundle.js:19135:44)\n}\nCall log:\n-   - waiting for getByRole(AriaRole.BUTTON",
+      "seconds": 62.869
+    },
+    {
+      "testClass": "OneLoginEntitlementsTest",
+      "method": "freshPersonHasCustomerAndApplicationEntryPoints",
+      "status": "error",
+      "message": "Error {\n  message='Timeout 60000ms exceeded.\n  name='TimeoutError\n  stack='TimeoutError: Timeout 60000ms exceeded.\n    at _ProgressController.run (/private/var/folders/0h/ntc9lth93bq3sgfrgr9f9ylm0000gn/T/playwright-java-12249481250329800649/package/lib/coreBundle.js:12360:32)\n    at DispatcherConnection.dispatch (/private/var/folders/0h/ntc9lth93bq3sgfrgr9f9ylm0000gn/T/playwright-java-12249481250329800649/package/lib/coreBundle.js:19135:44)\n}\nCall log:\n-   - waiting for getByRole(AriaRole.BUTTON",
+      "seconds": 65.648
+    },
+    {
+      "testClass": "OneLoginEntitlementsTest",
+      "method": "approvedRiderUsesCustomerAndDeliveryButCannotOpenRestaurantOperations",
+      "status": "error",
+      "message": "Error {\n  message='Timeout 60000ms exceeded.\n  name='TimeoutError\n  stack='TimeoutError: Timeout 60000ms exceeded.\n    at _ProgressController.run (/private/var/folders/0h/ntc9lth93bq3sgfrgr9f9ylm0000gn/T/playwright-java-12249481250329800649/package/lib/coreBundle.js:12360:32)\n    at DispatcherConnection.dispatch (/private/var/folders/0h/ntc9lth93bq3sgfrgr9f9ylm0000gn/T/playwright-java-12249481250329800649/package/lib/coreBundle.js:19135:44)\n}\nCall log:\n-   - waiting for getByRole(AriaRole.DIALOG",
+      "seconds": 65.023
+    },
+    {
+      "testClass": "OneLoginEntitlementsTest",
+      "method": "ownerUsesCustomerRestaurantAndBusinessAfterOneOtp",
+      "status": "error",
+      "message": "Error {\n  message='Timeout 60000ms exceeded.\n  name='TimeoutError\n  stack='TimeoutError: Timeout 60000ms exceeded.\n    at _ProgressController.run (/private/var/folders/0h/ntc9lth93bq3sgfrgr9f9ylm0000gn/T/playwright-java-12249481250329800649/package/lib/coreBundle.js:12360:32)\n    at DispatcherConnection.dispatch (/private/var/folders/0h/ntc9lth93bq3sgfrgr9f9ylm0000gn/T/playwright-java-12249481250329800649/package/lib/coreBundle.js:19135:44)\n}\nCall log:\n-   - waiting for getByRole(AriaRole.DIALOG",
+      "seconds": 65.61
+    },
+    {
+      "testClass": "EntitlementRevocationTest",
+      "method": "acceptedStaffApprovalAndRemovalRefreshOnNormalUiRequests",
+      "status": "failure",
+      "message": "Locator expected to be visible\nError: element(s) not found\nCall log:\n  - Assert \"isVisible\" getByTestId(\"restaurant-application\") with timeout 5000ms\n  - waiting for getByTestId(\"restaurant-application\")",
+      "seconds": 14.455
+    },
+    {
+      "testClass": "EntitlementRevocationTest",
+      "method": "ownBrandSuspensionAndReinstatementChangeAccessAndDiscovery",
+      "status": "failure",
+      "message": "Locator expected to be visible\nError: element(s) not found\nCall log:\n  - Assert \"isVisible\" getByTestId(\"restaurant-application\") with timeout 5000ms\n  - waiting for getByTestId(\"restaurant-application\")",
+      "seconds": 9.454
+    },
+    {
+      "testClass": "AdminStepUpTest",
+      "method": "nonStaffCannotStartAdministratorVerification",
+      "status": "pass",
+      "message": "",
+      "seconds": 5.635
+    },
+    {
+      "testClass": "AdminStepUpTest",
+      "method": "administratorVerifiesSeparatelyAndKeepsEverydayAccess",
+      "status": "error",
+      "message": "Error {\n  message='Timeout 60000ms exceeded.\n  name='TimeoutError\n  stack='TimeoutError: Timeout 60000ms exceeded.\n    at _ProgressController.run (/private/var/folders/0h/ntc9lth93bq3sgfrgr9f9ylm0000gn/T/playwright-java-12249481250329800649/package/lib/coreBundle.js:12360:32)\n    at DispatcherConnection.dispatch (/private/var/folders/0h/ntc9lth93bq3sgfrgr9f9ylm0000gn/T/playwright-java-12249481250329800649/package/lib/coreBundle.js:19135:44)\n}\nCall log:\n-   - waiting for getByRole(AriaRole.DIALOG",
+      "seconds": 64.728
+    }
+  ],
+  "disposition": {
+    "failure": "Generated get alias shadows the generic SDK get method; literal :organisationId sent by useOrganisationDetails. Source corrected to typed alias options.",
+    "error": "Customer location dialog intercepts portal controls. Harness must dismiss the real dialog through its visible close button before using launcher."
+  },
+  "fixturesRetained": true,
+  "noServerCleanup": true
+}

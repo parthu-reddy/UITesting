@@ -1,0 +1,896 @@
+{
+  "proof": "local Maven/JUnit reports, not deployed verification",
+  "at": "2026-10-03T20:54:30.375260+00:00",
+  "repository": "CustomerApplication",
+  "processExitCode": 0,
+  "classes": [
+    {
+      "class": "com.fooddelivery.FoodDeliveryApplicationStartupTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.FoodDeliveryApplicationStartupTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.architecture.ArchitectureEnforcementTest",
+      "tests": 0,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.architecture.ArchitectureEnforcementTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.common.architecture.TimeDisciplineRules",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.common.architecture.TimeDisciplineRules.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.contract.CustomerContractConsumerTest",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.contract.CustomerContractConsumerTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.contract.MapsContractConsumerTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.contract.MapsContractConsumerTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.contract.PaymentContractConsumerTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.contract.PaymentContractConsumerTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.customer.ContractHarnessJacksonTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.customer.ContractHarnessJacksonTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.customer.ContractVerifierTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.customer.ContractVerifierTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.customer.CustomerOrderServiceWalletCheckoutTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.customer.CustomerOrderServiceWalletCheckoutTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.customer.CustomerSchemaConsistencyTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.customer.CustomerSchemaConsistencyTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.customer.EndpointAuthorizationCoverageTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.customer.EndpointAuthorizationCoverageTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.customer.EventBinderUnknownPropertiesTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.customer.EventBinderUnknownPropertiesTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.customer.InternalTest",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.customer.InternalTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.customer.MessagingTest",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.customer.MessagingTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.customer.UnpaidOrderCancellerTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.customer.UnpaidOrderCancellerTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.customer.WalletContractConsumerTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.customer.WalletContractConsumerTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.customer.controller.AdminCustomerControllerFleetScopeTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.customer.controller.AdminCustomerControllerFleetScopeTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.customer.controller.AdminRefundCommandControllerTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.customer.controller.AdminRefundCommandControllerTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.customer.controller.CustomerMoneyControllerWalletTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.customer.controller.CustomerMoneyControllerWalletTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.customer.controller.CustomerRestaurantControllerAvailabilityTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.customer.controller.CustomerRestaurantControllerAvailabilityTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.customer.controller.DriverMoneyControllerTest",
+      "tests": 13,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.customer.controller.DriverMoneyControllerTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.customer.controller.InternalMoneyControllerTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.customer.controller.InternalMoneyControllerTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.customer.controller.OrderReadOwnershipTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.customer.controller.OrderReadOwnershipTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.customer.controller.OrderRequestPrepaidOnlyTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.customer.controller.OrderRequestPrepaidOnlyTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.customer.controller.RestaurantMoneyControllerTest",
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.customer.controller.RestaurantMoneyControllerTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.customer.controller.RestaurantRefundPermissionTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.customer.controller.RestaurantRefundPermissionTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.customer.dto.OrderRequestPaymentMethodValidationTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.customer.dto.OrderRequestPaymentMethodValidationTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.customer.dto.OrderResponseLeakTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.customer.dto.OrderResponseLeakTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.customer.mapper.DeliveryEtaTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.customer.mapper.DeliveryEtaTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.customer.mapper.OrderResponseLeakTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.customer.mapper.OrderResponseLeakTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.customer.messaging.KafkaResilienceIntegrationTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.customer.messaging.KafkaResilienceIntegrationTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.customer.service.CustomerOrderPaymentCompensationTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.customer.service.CustomerOrderPaymentCompensationTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.customer.service.CustomerOrderQuoteValidationTest",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.customer.service.CustomerOrderQuoteValidationTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.customer.service.CustomerReceiptTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.customer.service.CustomerReceiptTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.customer.service.DriverSummaryServiceTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.customer.service.DriverSummaryServiceTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.customer.service.DynamicPricingServiceTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.customer.service.DynamicPricingServiceTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.customer.service.FreshRestaurantApprovalTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.customer.service.FreshRestaurantApprovalTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.customer.service.MenuCacheInvalidationListenerTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.customer.service.MenuCacheInvalidationListenerTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.customer.service.OrderPrepTimeTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.customer.service.OrderPrepTimeTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.customer.service.PricingChargeConsistencyTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.customer.service.PricingChargeConsistencyTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.customer.service.RestaurantApplicationCacheInvalidationTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.customer.service.RestaurantApplicationCacheInvalidationTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.customer.service.RestaurantApplicationCacheTransactionTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.customer.service.RestaurantApplicationCacheTransactionTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.customer.service.RestaurantSummaryServiceTest",
+      "tests": 20,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.customer.service.RestaurantSummaryServiceTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.customer.service.money.CustomerInvoiceServiceTest",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.customer.service.money.CustomerInvoiceServiceTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.customer.service.money.SummaryPeriodTest",
+      "tests": 22,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.customer.service.money.SummaryPeriodTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.order.contract.PaymentEventConsumerContractTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.order.contract.PaymentEventConsumerContractTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.order.controller.AdminOrderManualControllerTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.order.controller.AdminOrderManualControllerTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.order.controller.AdminRefundControllerTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.order.controller.AdminRefundControllerTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.order.controller.InternalOrderReviewControllerTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.order.controller.InternalOrderReviewControllerTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.order.controller.RestaurantRefundControllerTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.order.controller.RestaurantRefundControllerTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.order.ledger.ClawbackCapTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.order.ledger.ClawbackCapTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.order.ledger.GatewayAccountIdentityTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.order.ledger.GatewayAccountIdentityTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.order.ledger.LedgerAccountResolverTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.order.ledger.LedgerAccountResolverTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.order.ledger.LedgerBookkeeperRefundTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.order.ledger.LedgerBookkeeperRefundTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.order.ledger.LedgerBookkeeperTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.order.ledger.LedgerBookkeeperTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.order.ledger.LedgerInvariantTest",
+      "tests": 16,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.order.ledger.LedgerInvariantTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.order.ledger.PayableMatchesPayoutTest",
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.order.ledger.PayableMatchesPayoutTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.order.ledger.RiderTipLedgerTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.order.ledger.RiderTipLedgerTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.order.lifecycle.DispatchFailureTerminationTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.order.lifecycle.DispatchFailureTerminationTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.order.lifecycle.LateCaptureAlwaysRefundsTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.order.lifecycle.LateCaptureAlwaysRefundsTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.order.lifecycle.OrderPaidEventCompletenessTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.order.lifecycle.OrderPaidEventCompletenessTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.order.lifecycle.StatusFastForwardRejectedTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.order.lifecycle.StatusFastForwardRejectedTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.order.lifecycle.SweeperScopeTest",
+      "tests": 14,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.order.lifecycle.SweeperScopeTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.order.lifecycle.TerminalStatusIsFinalTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.order.lifecycle.TerminalStatusIsFinalTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.order.notification.RefundNotificationTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.order.notification.RefundNotificationTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.order.payment.PaymentMethodPersistenceTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.order.payment.PaymentMethodPersistenceTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.order.payment.PaymentRoutingExhaustivenessTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.order.payment.PaymentRoutingExhaustivenessTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.order.payment.WalletCaptureTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.order.payment.WalletCaptureTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.order.refund.CustomerRefundViewTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.order.refund.CustomerRefundViewTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.order.refund.PaymentRefundRequestedEventSerializationTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.order.refund.PaymentRefundRequestedEventSerializationTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.order.refund.RefundCommandValidationTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.order.refund.RefundCommandValidationTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.order.refund.RefundDestinationMatrixTest",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.order.refund.RefundDestinationMatrixTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.order.refund.RefundNeverExceedsOrderTest",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.order.refund.RefundNeverExceedsOrderTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.order.refund.RefundOverCompletionTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.order.refund.RefundOverCompletionTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.order.refund.RefundQuoteTest",
+      "tests": 10,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.order.refund.RefundQuoteTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.order.refund.RefundRefusalInCallerTransactionTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.order.refund.RefundRefusalInCallerTransactionTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.order.refund.RefundRemainingTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.order.refund.RefundRemainingTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.order.refund.RefundRetryIsolationTest",
+      "tests": 16,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.order.refund.RefundRetryIsolationTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.order.refund.RefundRetryPersistenceTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.order.refund.RefundRetryPersistenceTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.order.refund.RefundStateMachineTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.order.refund.RefundStateMachineTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.order.refund.RefundStoreCreditHandoffTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.order.refund.RefundStoreCreditHandoffTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.order.repository.ActiveOrdersForDriverQueryTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.order.repository.ActiveOrdersForDriverQueryTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.order.repository.EarningsWindowQueriesTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.order.repository.EarningsWindowQueriesTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.order.scheduler.AbandonedDeliverySweeperTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.order.scheduler.AbandonedDeliverySweeperTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.order.scheduler.RefundRetrySweeperTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.order.scheduler.RefundRetrySweeperTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.order.security.OrderSecurityHelperTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.order.security.OrderSecurityHelperTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.order.service.ChatRefundProcessorServiceTest",
+      "tests": 18,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.order.service.ChatRefundProcessorServiceTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.order.service.ChatRefundRefusalPersistenceTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.order.service.ChatRefundRefusalPersistenceTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.order.service.ManualAssignmentFailureEventConsumerTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.order.service.ManualAssignmentFailureEventConsumerTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.order.service.OrderEventBindingCoverageTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.order.service.OrderEventBindingCoverageTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.order.service.OrderEventConsumerDispatchRoutingTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.order.service.OrderEventConsumerDispatchRoutingTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.order.service.OrderEventConsumerRefundRefusalTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.order.service.OrderEventConsumerRefundRefusalTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.order.service.PaymentEventConsumerTest",
+      "tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.order.service.PaymentEventConsumerTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.order.service.PaymentGatewayOrchestratorTest",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.order.service.PaymentGatewayOrchestratorTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.order.service.RefundServiceTest",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.order.service.RefundServiceTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.order.service.state.DelayRequestStateTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.order.service.state.DelayRequestStateTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.order.service.state.HandoverTimeStateTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.order.service.state.HandoverTimeStateTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.order.service.state.StateRefundTriggerTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-customer-clean-invocation1-TEST-com.fooddelivery.order.service.state.StateRefundTriggerTest.xml",
+      "failureMethods": []
+    }
+  ],
+  "totals": {
+    "tests": 485,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0
+  }
+}

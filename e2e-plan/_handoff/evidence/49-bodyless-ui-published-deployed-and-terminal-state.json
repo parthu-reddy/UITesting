@@ -1,0 +1,46 @@
+{
+  "uiSource": "e055ea1bd3dbfdb664fce772fd8b68539620009e",
+  "workflowRun": 37248890087,
+  "publication": "success",
+  "ciTests": 938,
+  "ciTestFiles": 148,
+  "localFocusedTests": 27,
+  "typecheck": "pass",
+  "lint": "pass",
+  "negativeGeneratedTransport": {
+    "tests": 9,
+    "pass": 6,
+    "fail": 3,
+    "actions": [
+      "accept",
+      "reject",
+      "cancel"
+    ]
+  },
+  "oracleUiDeployment": "success; exact source tag confirmed healthy",
+  "devConfig": "already synchronized; no reader restarts",
+  "hardening": "15/15 pass",
+  "reconciliation": "29 checked; 0 drift",
+  "schemaOrSeedsChanged": false,
+  "harnessSource": "82cdc8b",
+  "harnessCompileInvocation": 27,
+  "retainedStateUiInvocation": 2,
+  "retainedStateUiTests": {
+    "tests": 1,
+    "passed": 1,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "retainedReplacementState": {
+    "proof": "rendered owned active tracker or history; no response body inspection",
+    "orderId": "0dbe6a15-dc7f-4d85-8df6-f6884d6f8a52",
+    "status": "CANCELLED_BY_RESTAURANT",
+    "trackerVisible": true,
+    "observedAt": "2026-10-05T01:01:10.422762Z",
+    "historyVisible": true
+  },
+  "firstStateDiagnosticFailure": "History contains terminal orders only; original no-card diagnostic failure retained",
+  "dataPolicy": "retain",
+  "cleanupPerformed": false
+}

@@ -1,0 +1,45 @@
+{
+  "observedAt": "2026-10-05T06:22:28.921499+00:00",
+  "sourceCommit": "5408c6ef6511ab3ebdf3adc77bc0ee5914442b10",
+  "githubRun": 37271732121,
+  "githubCiTests": {
+    "tests": 146,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "localCleanTests": {
+    "tests": 163,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "hardening": {
+    "passed": 15,
+    "failed": 0
+  },
+  "reconciliation": {
+    "running": 29,
+    "drift": 0
+  },
+  "runtime": {
+    "service": "restaurant-service",
+    "status": "running",
+    "health": "healthy",
+    "restarts": 0,
+    "startedAt": "2026-10-05T06:21:28.040839582Z",
+    "declaredImage": "hyd.ocir.io/axekmbadoczl/food-delivery/restaurant-service:5408c6ef6511ab3ebdf3adc77bc0ee5914442b10",
+    "actualImage": "hyd.ocir.io/axekmbadoczl/food-delivery/restaurant-service:5408c6ef6511ab3ebdf3adc77bc0ee5914442b10",
+    "digest": [
+      "hyd.ocir.io/axekmbadoczl/food-delivery/restaurant-service@sha256:98e817ae30aa7735711df9514172fb56f6cac82efe06d3d998fcddf5b6a22856"
+    ],
+    "profiles": [
+      "dev"
+    ],
+    "recentErrorLines": 0,
+    "errorClasses": [],
+    "freshBootstrapLines": 1
+  },
+  "logDisposition": "The sole global recent ERROR is the intended O4 nonstaff CUSTOMER admin-session OTP403 at06:13:50Z, not a boot/runtime failure. Restaurant boot has no recent errors or restart. Earlier Customer client-disconnect and Ledger beneficiary404 records are retained separately; no all-time zero-error claim.",
+  "pendingQueueUi": "running"
+}

@@ -1,0 +1,39 @@
+{
+  "observedAt": "2026-10-05T05:52:55.123879+00:00",
+  "stage": "after",
+  "method": "protected cumulative histograms from ordinary UI traffic; no load generator",
+  "proof": "operator measurements, separate from rendered UI E2E",
+  "results": [
+    {
+      "service": "identity-service",
+      "metric": "http_server_requests_seconds",
+      "method": "GET",
+      "uri": "/api/v1/users/me/portals",
+      "successfulSamples": 214,
+      "p95EstimateMs": 12.387175859999996,
+      "p95BucketUpperMs": 12.58291,
+      "meanMs": 6.292987275700934
+    },
+    {
+      "service": "identity-service",
+      "metric": "http_server_requests_seconds",
+      "method": "POST",
+      "uri": "/api/v1/auth/session/refresh",
+      "successfulSamples": 70,
+      "p95EstimateMs": 30.7582285,
+      "p95BucketUpperMs": 33.554431,
+      "meanMs": 19.51602702857143
+    },
+    {
+      "service": "api-gateway",
+      "metric": "spring_cloud_gateway_requests_seconds",
+      "method": null,
+      "uri": null,
+      "successfulSamples": 3854,
+      "p95EstimateMs": 111.27191879242415,
+      "p95BucketUpperMs": 111.848106,
+      "meanMs": 32.27392605864038
+    }
+  ],
+  "unavailable": []
+}

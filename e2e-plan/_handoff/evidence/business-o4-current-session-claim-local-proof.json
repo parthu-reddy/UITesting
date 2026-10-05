@@ -1,0 +1,40 @@
+{
+  "recordedAt": "2026-10-05T11:20:29+05:30",
+  "proofType": "local existing unit tests and issuer source",
+  "positive": {
+    "files": 3,
+    "tests": 26,
+    "passed": 26,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "negativeControls": {
+    "ActiveSessions": {
+      "tests": 5,
+      "passed": 3,
+      "failed": 2
+    },
+    "AdminStepUp": {
+      "tests": 6,
+      "passed": 5,
+      "failed": 1
+    }
+  },
+  "claim": "sessionId",
+  "source": "IdentityService AuthService.java:144",
+  "priorReadOnlyBatch": {
+    "tests": 23,
+    "passed": 21,
+    "failed": 2,
+    "errors": 0,
+    "skipped": 0
+  },
+  "liveSessionMutation": false,
+  "newOrderCreated": false,
+  "publication": "running",
+  "uiCommit": "f73ffe909f34e15add4b8717159eb664e042f477",
+  "typecheck": "PASS",
+  "lint": "PASS",
+  "githubPublicationRun": 37269604733
+}

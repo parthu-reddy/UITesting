@@ -1,0 +1,32 @@
+{
+  "proof": "local Maven/JUnit reports, not deployed verification",
+  "at": "2026-10-03T21:44:19.527843+00:00",
+  "repository": "GovernmentIDValidationService",
+  "processExitCode": 0,
+  "classes": [
+    {
+      "class": "com.fooddelivery.governmentid.controller.VerificationSelfAccessTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-government-openapi-invocation2-TEST-com.fooddelivery.governmentid.controller.VerificationSelfAccessTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.govvalidation.OpenApiGenerationTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-government-openapi-invocation2-TEST-com.fooddelivery.govvalidation.OpenApiGenerationTest.xml",
+      "failureMethods": []
+    }
+  ],
+  "totals": {
+    "tests": 8,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0
+  }
+}

@@ -1,0 +1,9 @@
+# O4 local auth, staff and entitlements continuation
+
+## 2026-10-04T17:22:43.692654+05:30 — Staff and real H2 entitlement matrix verified
+
+O4 remains local/unpublished. Staff invocation2 passes11/11. D5/portal/actual consumer invocation4 passes31/31:19D5 and batched-query/filtered-page cases,8portal states and4listener/native-idempotency/rollback cases. Projection persistence8/8 also passed unchanged in invocation3. The H2 consumer uses the actual production ON CONFLICT claim repository with real transactions, no external DB/Redis/Kafka. Body-first event resolution is now implemented and proven. Earlier invocation1 failed test compilation (ambiguous UserRole import), invocation2 had39context errors (unused device repository query referenced deleted portal), and invocation3 had2enum-order assertion failures plus1body-first implementation error; all retained separately. The removed entity/schema portal field now has no stale derived query. Auth33/33 and initial gateway30/30 remain local proof.
+
+Full CommonLibrary clean/install and full gateway clean gates are running. Gateway legacy context fixtures emitted local discovery connection errors; inspect and isolate infrastructure before accepting a clean result. The new Prometheus alert/runbook gate passes13alerts across4files, an initial uncalibrated Dev threshold. Restaurant/delivery producer contracts now include the real outbox eventId for idempotent Identity consumers; producer/stub-consumer proof is pending. UI/harness/seed integration, final guards and coherent publication/deployment/UI-only E2E remain. Live Oracle still serves UI d79c33a and O3 evidence71; no O4 rollout or reset.
+
+Evidence: phase4/evidence/04auth,05gateway,06staff and07D5/H2 invocation records. Keep original failures separate; no production/load claim.

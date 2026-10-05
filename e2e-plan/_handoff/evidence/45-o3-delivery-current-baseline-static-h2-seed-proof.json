@@ -1,0 +1,103 @@
+{
+  "recordedAt": "2026-10-04T07:40:23+05:30",
+  "scope": "Current O3 Delivery V1 source contract, embedded-H2 service proof, committed dummy-seed source validation, and UI-only E2E runner/source compilation",
+  "baseline": {
+    "path": "DeliveryExecutiveApplication/src/main/resources/db/migration/V1__init_schema.sql",
+    "sha256": "400326430433bdf520302274651f6c76870eb1e4faf3095faca613f1b2689b14",
+    "status": "current work-tree baseline"
+  },
+  "proofs": [
+    {
+      "kind": "static source contract",
+      "command": "mvn -B -o test -Dtest=DeliveryFreshSchemaBaselineTest",
+      "resultSource": "DeliveryExecutiveApplication/target/surefire-reports/TEST-com.fooddelivery.delivery.DeliveryFreshSchemaBaselineTest.xml",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "asserts": [
+        "V1 is the only Delivery migration resource",
+        "the current lifecycle, geometry, vehicle-uniqueness and durable-assignment source contract is present"
+      ],
+      "boundary": "Static source assertion only; it does not execute PostGIS or Flyway."
+    },
+    {
+      "kind": "local service persistence and concurrency",
+      "command": "mvn -B -o test -Dtest=ConcurrentApplicationDecisionTest",
+      "resultSource": "DeliveryExecutiveApplication/target/surefire-reports/TEST-com.fooddelivery.delivery.service.ConcurrentApplicationDecisionTest.xml",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "fixture": "embedded H2 only",
+      "asserts": [
+        "vehicle registrations stay unique",
+        "concurrent application decisions produce one committed winner",
+        "rollback and active-assignment suspension guards hold"
+      ],
+      "boundary": "No Docker, Oracle, PostgreSQL/PostGIS, Redis, or external database fixture."
+    },
+    {
+      "kind": "static committed dummy-seed validation",
+      "command": "python3 Deployment/OracleDeployment/DummyData/validate_seed_data.py",
+      "result": "success",
+      "observedOutput": "Static seed validation passed: 14 organisations with one ACTIVE OWNER each, 554 identities, 504 customers, 1003 addresses, 34 riders, 13 brands, 104 outlets, 504 dishes; all application states/reasons, scenario mapping and APPROVED brand FSSAI valid",
+      "boundary": "Reads committed seed files only; it does not load a database or verify deployed state."
+    }
+  ],
+  "currentScopedO3ServiceProofs": [
+    {
+      "repository": "RestaurantApplication",
+      "command": "mvn -B -o test -Dtest=ApprovedOnlyListingPersistenceTest,ConcurrentApplicationDecisionTest",
+      "tests": 10,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "fixture": "embedded H2 only"
+    },
+    {
+      "repository": "DeliveryExecutiveApplication",
+      "command": "mvn -B -o test -Dtest=ConcurrentApplicationDecisionTest",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "fixture": "embedded H2 only"
+    },
+    {
+      "repository": "CustomerApplication",
+      "command": "mvn -B -o test -Dtest=FreshRestaurantApprovalTest,RestaurantApplicationCacheInvalidationTest,RestaurantApplicationCacheTransactionTest",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "fixture": "local focused service test; no browser or external database"
+    }
+  ],
+  "testHarnessIsolation": {
+    "repositoryWideMockMakerResources": "removed",
+    "targetedExecution": "uses a matching Byte Buddy javaagent per Maven invocation",
+    "reason": "avoid changing legacy/default test behavior outside the current targeted O3 checks",
+    "boundary": "a test-harness configuration, not product or E2E proof"
+  },
+  "uiOnlyE2eSource": {
+    "runner": "UITesting/scripts/run_partner_applications_o3_e2e.py",
+    "policy": "uses the current UI-only flow and normal Dev Autofill through visible browser controls; no direct API, browser-state, Docker, or external database shortcut",
+    "testCompileCommand": "mvn -B -o -DskipTests test-compile",
+    "compiledSources": 179,
+    "result": "success",
+    "boundary": "source/runner proof only; no deployed Oracle browser execution"
+  },
+  "historicalEvidence": {
+    "schemaAndSeedRuntimeProof": "UITesting/e2e-plan/_handoff/evidence/42-reviewed-fresh-schema-and-seeds.json",
+    "constraintRuntimeProof": "UITesting/e2e-plan/_handoff/evidence/42-reviewed-fresh-schema-constraints.json",
+    "status": "historical for Delivery because those records bind SHA-256 2e18ec0771eb6966075fd3542ce30c8d294fd19c2dc7d7e2556d550c9df833b3, not the current baseline"
+  },
+  "runtimeProof": {
+    "postgis": "unproven for the current baseline",
+    "flyway": "unproven for the current baseline",
+    "seedLoadAndReplay": "unproven for the current baseline",
+    "requiredSequence": "Publish current artifacts first, then perform the authorised clean Dev --wipe, deploy, and fresh dummy-data reseed. Record the resulting Flyway/PostGIS bootstrap and seed replay separately."
+  },
+  "releaseBoundary": "This record does not prove publication, deployment, Oracle health, public UI E2E, or production readiness."
+}

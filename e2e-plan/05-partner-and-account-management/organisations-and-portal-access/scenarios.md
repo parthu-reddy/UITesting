@@ -1,5 +1,30 @@
 # Organisation and portal access scenarios
 
+## Current O4/O5 rendered UI scenarios — 2026-10-05
+
+Final O4 invocation6 and O5 invocation4 pass8/8 each on published Oracle Dev UI f73ffe9. Required retained-order regressions and current measurements are complete at checkpoint113. All setup/actions use normal UI controls; original failures and explicit deferrals remain separate.
+
+| ID | Executed method | Required visible outcome |
+|---|---|---|
+| O4-UI-001 | OneLoginEntitlementsTest#ownerUsesCustomerRestaurantAndBusinessAfterOneOtp | Same person opens Customer, Restaurant and Business after one login. |
+| O4-UI-002 | OneLoginEntitlementsTest#approvedRiderUsesCustomerAndDeliveryButCannotOpenRestaurantOperations | Customer and Delivery available; restaurant operations refused. |
+| O4-UI-003 | OneLoginEntitlementsTest#freshPersonHasCustomerAndApplicationEntryPoints | Fresh profile completion, Customer and onboarding entry points; no admin grant. |
+| O4-UI-004 | OneLoginEntitlementsTest#pendingRiderSeesApplicationWithoutOperationalAccess | Pending application visible; operational dashboard unavailable. |
+| O4-UI-005 | AdminStepUpTest#administratorVerifiesSeparatelyAndKeepsEverydayAccess | Separate administrator verification; everyday Customer access remains usable. |
+| O4-UI-006 | AdminStepUpTest#nonStaffCannotStartAdministratorVerification | Normal visible nonstaff administrator request refused. |
+| O4-UI-007 | EntitlementRevocationTest#acceptedStaffApprovalAndRemovalRefreshOnNormalUiRequests | Actual invitation acceptance/operation then intended removal revokes operation on the next normal request. |
+| O4-UI-008 | EntitlementRevocationTest#ownBrandSuspensionAndReinstatementChangeAccessAndDiscovery | Owned approved brand suspension removes discovery/operation; reinstatement restores both. |
+| O5-UI-001 | PortalLauncherUiTest#ownerSwitchesApprovedPortalsAndSeesDeliveryStart | Approved portals switch; unapplied Delivery has Get started. |
+| O5-UI-002 | PortalLauncherUiTest#pendingRestaurantOpensItsApplicationStatus | In-review tile opens application status. |
+| O5-UI-003 | PortalLauncherUiTest#rejectedRiderSeesActionAndReason | Action-needed tile opens rejection reason. |
+| O5-UI-004 | PortalLauncherUiTest#staffPortalRequestsAdministratorVerification | Staff portal launches the separate verification dialog. |
+| O5-UI-005 | BusinessHubOrganisationUiTest#invitationRoleChangesAndRemovalAreVisibleToBothPeople | Owner creates organisation, MANAGER accepts, management controls denied, role changes to STAFF and intended removal visible. |
+| O5-UI-006 | RestaurantApplicationWizardUiTest#approvedApplicationOpensItsOutletWithoutAnotherPersonLogin | Fresh actual documents/checks/submission/admin approval; owned outlet opens under same person login. |
+| O5-UI-007 | DeliveryOnboardingUiTest#approvedRiderEntersDeliveryOfflineWithoutAnotherPersonLogin | Licence/RC/bank/selfie/documents pass; actual admin approval; dashboard opens Offline. |
+| O5-UI-008 | CspSmokeUiTest#securityHeadersAndConsoleHoldAcrossEveryCurrentPortal | All five current portals, required headers, fonts loaded/images decoded, zero CSP and network4xx/5xx failures. |
+
+Evidence: Business Platform O4/evidence66 and76, O5/evidence17–18 and retained O45 allocation manifests under `_handoff/fixtures`. Service claims/session storage/forged-header/expiry assertions have explicit `DEFERRED-O4-INTERNAL-ASSERTIONS.md` dispositions and H2/unit replacements. Missing historical Gateway latency comparison is O4-PERF-001; deliberate CSP-origin removal is O5-CSP-001. They are not browser passes. Existing O1–O3 results below remain dated history; no new API/DB/Redis setup is authorised by those older rows.
+
 O1 implements APIs only; launcher/member-management UI belongs to O5. Test source is grounded in
 IdentityService’s organisation controllers and services. Ordinary per-portal customer signup and
 Dev Autofill Code remain unchanged until O4.

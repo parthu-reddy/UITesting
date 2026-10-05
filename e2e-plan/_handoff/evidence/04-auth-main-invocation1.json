@@ -1,0 +1,7 @@
+{
+  "invocation": 1,
+  "result": "failed",
+  "testsExecuted": 0,
+  "detail": "Ambiguous io.jsonwebtoken.Clock/java.time.Clock import; zero tests; fixed explicit JWT imports",
+  "publicationPerformed": false
+}

@@ -1,0 +1,10 @@
+{
+  "proof": "local principal security/registered upload checks and actual JPA admin audit commit/rollback",
+  "counts": {
+    "tests": 26,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "deployed": false
+}

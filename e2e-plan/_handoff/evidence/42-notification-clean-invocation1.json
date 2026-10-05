@@ -1,0 +1,104 @@
+{
+  "proof": "local Maven/JUnit reports, not deployed verification",
+  "at": "2026-10-04T00:46:18.245296+00:00",
+  "repository": "CommunicationIntegration",
+  "processExitCode": 0,
+  "classes": [
+    {
+      "class": "com.fooddelivery.architecture.ArchitectureEnforcementTest",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-notification-clean-invocation1-TEST-com.fooddelivery.architecture.ArchitectureEnforcementTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.notification.EndpointAuthorizationCoverageTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-notification-clean-invocation1-TEST-com.fooddelivery.notification.EndpointAuthorizationCoverageTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.notification.NotificationServiceApplicationTests",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-notification-clean-invocation1-TEST-com.fooddelivery.notification.NotificationServiceApplicationTests.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.notification.config.DevNotificationChannelConfigurationTest",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-notification-clean-invocation1-TEST-com.fooddelivery.notification.config.DevNotificationChannelConfigurationTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.notification.config.TemplateCoverageTest",
+      "tests": 7,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-notification-clean-invocation1-TEST-com.fooddelivery.notification.config.TemplateCoverageTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.notification.config.TemplateSubstitutionTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-notification-clean-invocation1-TEST-com.fooddelivery.notification.config.TemplateSubstitutionTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.notification.contract.AdNotificationConsumerContractTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-notification-clean-invocation1-TEST-com.fooddelivery.notification.contract.AdNotificationConsumerContractTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.notification.service.AdNotificationListenerTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-notification-clean-invocation1-TEST-com.fooddelivery.notification.service.AdNotificationListenerTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.notification.service.MissingTemplateIsTerminalTest",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-notification-clean-invocation1-TEST-com.fooddelivery.notification.service.MissingTemplateIsTerminalTest.xml",
+      "failureMethods": []
+    },
+    {
+      "class": "com.fooddelivery.notification.service.NotificationRouterServiceTest",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "report": "42-notification-clean-invocation1-TEST-com.fooddelivery.notification.service.NotificationRouterServiceTest.xml",
+      "failureMethods": []
+    }
+  ],
+  "totals": {
+    "tests": 43,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0
+  }
+}

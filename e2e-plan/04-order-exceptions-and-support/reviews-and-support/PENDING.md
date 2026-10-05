@@ -1,5 +1,17 @@
 # Validation failures and pending work
 
+
+## 2026-10-05T11:57:12+05:30 — O4/O5 scoped regression acceptance
+
+The required current methods for this feature pass on the retained Dev fixtures. Canonical60631296 is delivered with exact receipt/posted earnings/18balanced ledger lines, selected-item quote without refund submission and four immutable reviews; actual participant chat round trips are retained from the same lifecycle. Settings15/15 distinct methods,partner10/10,restaurant earnings1/1,navigation2/2,admin-money1/1 and exact beneficiary queue1/1 pass. Original failed invocations remain separately recorded; no duplicate lifecycle or server cleanup. See the checkpoint113 release evidence and feature-specific artifacts. Unselected/outcome/provider/internal/routed/duration/rate/SSE cases remain outside this acceptance.
+## 2026-10-05T07:03:25+05:30 — checkpoint108: all four participant reviews pass and remain immutable
+
+Existing OrderReviewsFlowTest#participantsReviewEachOther invocation1 passes1/1,0failures/errors/skips in23.732s on UI509d084/harnessafe12f1. Same60631296: customer rates restaurant4 with the recorded comment and rider5; restaurant rates customer5; Offline rider rates restaurant4. Reopened actual dialogs show saved stars/comment/Already reviewed and no submitted target radio group; unrated targets remain offered. Four intended dummy reviews are retained, no new order. Evidence58 and the owned review artifact preserve exact scope. The three direct aggregate/cache methods stay disabled/deferred, not selected or counted as skips/passes.
+
+Existing settings/partner read-only invocation1 is running:14 customer settings/accessibility/theme and9 partner profile/history/earnings/stock-rendering methods. Source verification confirms TestBase calls random seededPhone per method when no property pins an actor; this batch omits the canonical phone overrides and creates no checkout/financial mutation. Exact canonical unrated dialog and completed rider trip already passed separately in evidence57, so they are not duplicated in this batch.
+
+Remaining: successful23 read-only methods, nonzero restaurant earnings/statement, admin delivered-money outcome, restaurant navigation/retained review display, final O4/O5 image gates and measured histograms/checklists. Current delivered/money/quote proof stays in55–57. Stop after O4/O5.
+
 ## My Reviews HTTP 403 — historical blocker, not reproduced
 
 `CustomerSettingsUiTest.myReviewsTabShowsReviewsOrDefinedEmptyState` is implemented as a strict read-only test. It logs in with a randomized seeded customer, opens Account Settings → My Reviews, and requires either at least one review article or the defined `You haven't reviewed anything yet` empty state.

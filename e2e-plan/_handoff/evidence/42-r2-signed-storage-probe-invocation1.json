@@ -1,0 +1,28 @@
+{
+  "observedAt": "2026-10-03T19:24:22.140264+00:00",
+  "proof": "actual Oracle-to-R2 SigV4 synthetic compatibility probe; application/seed records unchanged",
+  "probeId": "40de4e1c-a427-426a-89e9-8d0552a3b4dc",
+  "objectKey": "documents/storage-compatibility/40de4e1c-a427-426a-89e9-8d0552a3b4dc/synthetic.pdf",
+  "declaredContentLength": 15,
+  "validPut": {
+    "status": 200,
+    "contentLength": "0",
+    "contentType": "text/plain;charset=UTF-8"
+  },
+  "tamperedLengthPut": {
+    "status": 403
+  },
+  "tamperedTypePut": {
+    "status": 403
+  },
+  "authenticatedHead": {
+    "status": 200,
+    "contentLength": "15",
+    "contentType": "application/pdf"
+  },
+  "anonymousConfiguredPublicUrlHead": {
+    "status": 403
+  },
+  "retained": true,
+  "noCredentialsOrPresignedUrlsInEvidence": true
+}

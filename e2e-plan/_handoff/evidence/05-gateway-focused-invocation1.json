@@ -1,0 +1,28 @@
+{
+  "scope": "Local mocked Redis/JVM gateway authorization proof",
+  "tests": 30,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "deployed": false,
+  "suites": [
+    {
+      "name": "com.fooddelivery.apigateway.filter.GlobalJwtAuthFilterEntitlementsTest",
+      "tests": "16",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.481"
+    },
+    {
+      "name": "com.fooddelivery.apigateway.filter.GlobalJwtAuthFilterRevocationTest",
+      "tests": "14",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "7.293"
+    }
+  ],
+  "missing_key_proof": "Fixed clock rejects expired pre-bump token; current version-zero token permitted. TTL model, not arbitrary early eviction.",
+  "pending": "HTML accept assertion strengthened after invocation1; full clean gate reruns current source."
+}

@@ -1,0 +1,8 @@
+{
+  "invocation": 3,
+  "status": "Failed before test execution",
+  "reason": "Contract modified while SCC reported nothing to generate; stale-contract guard correctly required mvn clean",
+  "tests": 0,
+  "guard_unchanged": true,
+  "deployed": false
+}
