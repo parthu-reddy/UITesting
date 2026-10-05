@@ -60,7 +60,7 @@ final class RiderDutyObservation {
     Map<String, Object> evidence(long now) {
         return Map.of("status", status == null ? "UNOBSERVED" : status, "reason", reason == null ? "UNOBSERVED" : reason,
                 "socketConnected", connected, "locationFixCount", fixes, "lat", lat, "lng", lng,
-                "locationAgeMs", fixNanos == 0 ? -1L : (now - fixNanos) / 1_000_000, "serverReady", ready(now));
+                "locationAgeMs", fixNanos == 0 ? -1.0 : (now - fixNanos) / 1_000_000.0, "serverReady", ready(now));
     }
     private static String field(String text, String key) {
         if (text == null) return "";
