@@ -23,11 +23,12 @@ import java.util.Map;
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 /**
- * CAMPAIGN-01/ONBOARD/WALLET/05-07/14: the restaurant's Campaigns tab, against the owner's real advertiser.
+ * CAMPAIGN-01/ONBOARD/WALLET/05-07/14: the restaurant's Campaigns tab, against the organisation's real ad
+ * account (A1: the ad account IS the organisation that owns the selected outlet's brand).
  *
  * <p>{@code -Dcampaign.outlet}: the outlet to select (its brand and time zone seed the start step).
  * Writes nothing unless asked: {@code -Dcampaign.onboard=true} lets it press "Start advertising" when
- * the owner has no advertiser (one profile and one ad wallet, permanently); {@code -Dcampaign.create=true}
+ * the organisation has no ad account (one account, permanently; the business wallet already exists, W1); {@code -Dcampaign.create=true}
  * lets it launch one DRAFT campaign. A DRAFT never serves or spends: activation needs an approved creative.
  */
 @Tag("campaigns")
@@ -52,12 +53,14 @@ public class RestaurantCampaignsLiveTest extends TestBase {
     }
 
     @Test
-    @DisplayName("CAMPAIGN-01/ONBOARD/WALLET: the tab shows the owner's advertiser, or starts one from the outlet's brand and zone")
+    @DisplayName("CAMPAIGN-01/ONBOARD/WALLET: the tab shows the organisation's ad account, or starts one from the outlet's brand and zone")
     void tabMatchesTheOwnersAdvertiser() {
         Map<?, ?> outlet = selectedOutlet();
-        String brandName = brandName((String) outlet.get("brandId"));
+        Map<?, ?> brand = brand((String) outlet.get("brandId"));
+        String brandName = (String) brand.get("name");
+        String organisationId = (String) brand.get("organisationId");
         String zone = (String) outlet.get("timeZone");
-        Map<?, ?> me = get("/api/v1/advertisers/me");
+        Map<?, ?> me = get("/api/v1/advertisers/" + organisationId);
 
         if (Integer.valueOf(404).equals(me.get("status"))) {
             // CAMPAIGN-01 (not advertising yet): the start step, prefilled, and nothing written by opening it.
@@ -70,15 +73,15 @@ public class RestaurantCampaignsLiveTest extends TestBase {
             Assumptions.assumeTrue(Boolean.getBoolean("campaign.onboard"),
                     "start step verified; pass -Dcampaign.onboard=true to create this owner's advertiser");
 
-            // CAMPAIGN-ONBOARD: one press registers exactly one advertiser under the brand's name and the outlet's zone.
+            // CAMPAIGN-ONBOARD: one press starts exactly one ad account, keyed by the organisation, under the brand's name and the outlet's zone.
             start.getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Start advertising").setExact(true)).click();
             assertThat(restaurantPage.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Ad Spending History"))).isVisible();
-            org.assertj.core.api.Assertions.assertThat(advertiserWrites).containsExactly("POST /api/v1/advertisers");
-            me = get("/api/v1/advertisers/me");
+            org.assertj.core.api.Assertions.assertThat(advertiserWrites).containsExactly("PUT /api/v1/advertisers/" + organisationId);
+            me = get("/api/v1/advertisers/" + organisationId);
             Map<?, ?> created = (Map<?, ?>) ((Map<?, ?>) me.get("body")).get("data");
-            org.assertj.core.api.Assertions.assertThat(created.get("companyName")).isEqualTo(brandName);
+            org.assertj.core.api.Assertions.assertThat(created.get("id")).as("the ad account is the organisation").isEqualTo(organisationId);
+            org.assertj.core.api.Assertions.assertThat(created.get("displayName")).isEqualTo(brandName);
             org.assertj.core.api.Assertions.assertThat(created.get("timeZone")).isEqualTo(zone);
-            org.assertj.core.api.Assertions.assertThat(created.get("walletBalanceId")).as("wallet provisioned with the profile").isNotNull();
         }
 
         // CAMPAIGN-01 (advertising): the campaign screen, reloading it finds the same advertiser and creates nothing.
@@ -87,10 +90,10 @@ public class RestaurantCampaignsLiveTest extends TestBase {
         assertThat(restaurantPage.getByTestId("start-advertising")).isHidden();
         assertThat(restaurantPage.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("New Campaign").setExact(true))).isVisible();
 
-        // CAMPAIGN-WALLET: the owner reads their own ad wallet (403 for every owner before the role fix) and the card shows it.
-        Map<?, ?> wallet = get("/api/v1/money/advertiser/ADVERTISER/" + advertiserId);
-        org.assertj.core.api.Assertions.assertThat(wallet.get("status")).as("owner reads own ad wallet").isEqualTo(200);
-        BigDecimal balance = new BigDecimal(String.valueOf(((Map<?, ?>) wallet.get("body")).get("balance")));
+        // CAMPAIGN-WALLET: campaigns spend from the organisation's business wallet (W1) and the card shows it.
+        Map<?, ?> wallet = get("/api/v1/money/business/" + advertiserId);
+        org.assertj.core.api.Assertions.assertThat(wallet.get("status")).as("owner reads the business wallet").isEqualTo(200);
+        BigDecimal balance = new BigDecimal(String.valueOf(((Map<?, ?>) ((Map<?, ?>) wallet.get("body")).get("data")).get("balance")));
         Locator balanceCard = restaurantPage.getByText("Ad Wallet Balance", new Page.GetByTextOptions().setExact(true)).locator("..");
         assertThat(balanceCard).containsText(inr(balance));
 
@@ -155,11 +158,11 @@ public class RestaurantCampaignsLiveTest extends TestBase {
         org.assertj.core.api.Assertions.assertThat(stored.get("status")).isEqualTo("DRAFT");
     }
 
-    /** The owner's advertiser id; the campaign screen is only reachable once one exists. */
+    /** The ad account (organisation) id; the campaign screen is only reachable once one exists. */
     private String requireAdvertiser() {
-        Map<?, ?> me = get("/api/v1/advertisers/me");
+        Map<?, ?> me = get("/api/v1/advertisers/" + brand((String) selectedOutlet().get("brandId")).get("organisationId"));
         Assumptions.assumeTrue(Integer.valueOf(200).equals(me.get("status")),
-                "this owner has no advertiser yet; run tabMatchesTheOwnersAdvertiser with -Dcampaign.onboard=true first");
+                "this organisation has no ad account yet; run tabMatchesTheOwnersAdvertiser with -Dcampaign.onboard=true first");
         assertThat(restaurantPage.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("New Campaign").setExact(true))).isVisible();
         return (String) ((Map<?, ?>) ((Map<?, ?>) me.get("body")).get("data")).get("id");
     }
@@ -171,11 +174,10 @@ public class RestaurantCampaignsLiveTest extends TestBase {
                 .orElseThrow(() -> new AssertionError("outlet " + OUTLET + " is not this owner's"));
     }
 
-    private String brandName(String brandId) {
+    private Map<?, ?> brand(String brandId) {
         Object body = get("/api/v1/brands").get("body");
         List<?> brands = (List<?>) (body instanceof Map<?, ?> envelope ? envelope.get("data") : body);
-        return brands.stream().map(Map.class::cast).filter(b -> brandId.equals(b.get("id")))
-                .map(b -> (String) b.get("name")).findFirst().orElseThrow();
+        return brands.stream().map(Map.class::cast).filter(b -> brandId.equals(b.get("id"))).findFirst().orElseThrow();
     }
 
     /** A signed-in read as the restaurant owner: {status, body}. */

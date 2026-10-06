@@ -25,7 +25,7 @@ public class PartnerOperationsUiTest extends TestBase {
         RestaurantDashboardPage dashboard = new RestaurantDashboardPage(restaurantPage);
         dashboard.waitForDashboard();
         // Which screen depends on whether this owner advertises yet; RestaurantCampaignsLiveTest checks
-        // that it is the right one against /api/v1/advertisers/me.
+        // that it is the right one against the organisation's ad account, /api/v1/advertisers/{organisationId}.
         dashboard.openCampaignsTab();
         com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(dashboard.campaignsScreen()).isVisible();
     }

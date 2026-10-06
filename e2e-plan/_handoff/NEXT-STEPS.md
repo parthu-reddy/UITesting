@@ -1,5 +1,15 @@
 # Ordered continuation
 
+## 2026-10-06T07:49:35+05:30 — Business Platform W1+A1 started (backend only, local)
+
+Nothing deployed. UI, seeds and the two E2E gates (bp-w1, bp-a1) remain: see RandomDocuments/BusinessPlatform_2026-10-03/W1-A1-HANDOFF.md. Do not run W1/A1 E2E until that release is deployed.
+
+## After the F19 fix (2026-10-06) — DONE: UI 843d7f5 deployed, O5 8/8
+
+1. Owner builds and deploys FoodDeliveryAppUI. Only the organisations and pending-invitations stores changed.
+2. Then: `python3 scripts/run_business_platform_o45_e2e.py --app-url <tunnel> --only membership --admin-phone <whichever was not used in the last 5 min>`. Optionally run the full `--only o5`.
+3. Everything else from Phase 5 has already passed live (see CURRENT-STATE 2026-10-06).
+
 ## After review Phase 5 (2026-10-05)
 
 1. **Owner builds and deploys:**

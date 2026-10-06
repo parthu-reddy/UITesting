@@ -1,0 +1,38 @@
+{
+  "recorded": "2026-10-06",
+  "scope": "Business platform review Phase 5, post-deploy, UI-only on the Dev tunnel",
+  "app_url": "https://gulf-strike-dark-extras.trycloudflare.com",
+  "deployed_images": {
+    "ui": "b4b5511",
+    "identity": "7d9b601",
+    "restaurant": "0946e81",
+    "delivery": "d37e05c",
+    "gateway": "7bfcdf6",
+    "govid": "b3d34ac",
+    "customer": "2451795",
+    "common": "6c7f757"
+  },
+  "verified_by": "docker compose ps image tags on the Oracle box == pushed HEAD of each repo",
+  "dev_data": "freshly reseeded (14 organisations) before the run",
+  "results": {
+    "o4": "8/8 (admin 1000000001, allocation 7b2af10d652f4667)",
+    "o5": "7/8 (admin 1000000002, allocation b311ff4b369f1cc0); BusinessHubOrganisationUiTest failed",
+    "o3": "4/4 default + queues 1/1 = 5/5 (admin 1000000001 / 1000000002, allocation b82e1deaffbe2ad8)",
+    "LoginSmokeTest": "9/9",
+    "SessionUiTest": "15/15",
+    "LoginValidationTest": "15/16 then resendOtp rerun 4/4 after the admin verify window: the failure was HTTP 429 from the 5-per-5-min admin step-up limit (deferred rate-limit category), not a product defect"
+  },
+  "o5_failure": {
+    "test": "BusinessHubOrganisationUiTest#invitationRoleChangesAndRemovalAreVisibleToBothPeople",
+    "symptom": "after Accept invitation the team card did not appear within 5 s",
+    "cause": "F19: refreshOrganisations() reused a /organisations request already in flight from a re-check started 99 ms before the accept; gateway log 00:50:54.894 list, 54.993 accept, no list request after it (the passing O4 accept at 00:46:58 did issue one)",
+    "fix": "UI local, awaiting deploy: post-write refreshes queue one follow-up fetch; mount/re-check callers join. Same fix in the pending-invitations store. Race tests go red with the old behaviour. UI 1000/1000"
+  },
+  "browser_401s": "renew-and-retry after ENTITLEMENTS_CHANGED; same pattern and count as the green pre-Phase-5 baseline (14 vs 16 in O4)",
+  "startup_warnings": "Hikari leak warnings at boot in delivery/customer/restaurant were all returned to the pool within 1-4 s; boot-time only",
+  "f19_after_fix": {
+    "ui_image": "843d7f5",
+    "o5": "8/8 (admin 1000000002, allocation a3fed03c98ee414a), 0 HTTP 429",
+    "race_reproduced_and_handled": "gateway 01:17:05.834 list (re-check), 05.948 accept, 06.195 fresh /organisations after the accept; team card visible"
+  }
+}

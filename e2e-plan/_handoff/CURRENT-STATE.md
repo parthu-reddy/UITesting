@@ -1,5 +1,28 @@
 # Current checkpoint
 
+## 2026-10-06T07:20:00+05:30 — Review Phases 1–5 complete and green on Dev
+
+UI 843d7f5 (the F19 fix) is deployed. O5 now passes 8/8. The same race recurred in the run (re-check 114 ms before the accept), and this time a fresh list request followed the accept.
+
+Phase 5 live totals: O4 8/8, O5 8/8, O3 5/5, LoginSmoke 9/9, Session 15/15, LoginValidation 16/16.
+
+Evidence: evidence/review-2026-10-06-phase5-live-e2e.json. No follow-up is required for the review. Wallet/Ads (W1–W3, A1–A4) remain unstarted and need an owner instruction.
+
+## 2026-10-06T07:00:00+05:30 — Review Phase 5 deployed and checked live; one UI fix awaits deploy
+
+Deployed images match the pushed commits: UI b4b5511, Identity 7d9b601, Restaurant 0946e81, Delivery d37e05c, Gateway 7bfcdf6, GovID b3d34ac, Customer 2451795, Common 6c7f757. Dev was freshly reseeded.
+
+UI-only results:
+- O4 8/8.
+- O5 7/8.
+- O3 5/5, including the new "View GST registration" and "View Selfie" labels and the review queues.
+- LoginSmoke 9/9, Session 15/15.
+- LoginValidation 16/16 after rerunning `resendOtp`. Its one failure was a 429 from the admin step-up limit (5 per 5 minutes per phone).
+
+The O5 failure is F19: after accepting an invitation, the refresh reused a list request from before the accept. It is fixed in UI source (local, uncommitted; UI 1000/1000; break-tested).
+
+Evidence: evidence/review-2026-10-06-phase5-live-e2e.json.
+
 ## 2026-10-05T23:30:00+05:30 — Review Phase 5 complete locally; awaiting owner build/deploy
 
 Not deployed yet: Dev still runs the Phase 1–4 release (UI e538427, Restaurant f6bbe39, Delivery a719184).
