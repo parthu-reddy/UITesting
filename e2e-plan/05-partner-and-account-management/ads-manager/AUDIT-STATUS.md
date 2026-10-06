@@ -1,5 +1,16 @@
 # Ads Manager audit status
 
+## 2026-10-06T18:22+05:30 — A2 LIVE-GREEN (bp-a2 PASS); A1 + AM-A1-002 re-run PASS
+
+| Scenario | State | Proof |
+|---|---|---|
+| AM-A2-001 `PromotedOutletApiTest` | **PASS** | own outlet 201 + region = outlet city; client geo 400; other org (active/inactive) 403; campaign 31fa0c7c… retained |
+| AM-A2-002 `SponsoredListingRegressionTest` | **PASS** | 10 outlets, 0 sponsored, all with cityId; no badge |
+| AM-A1-001 re-run (now sends `promotedOutletId`) | **PASS** | phone 9999197089 |
+| AM-A1-002 re-run (asserts promoted outlet) | **PASS 3/3** | 9000000001, Brand 1 Outlet 3 (`-Drestaurant.phone` is required: the default owner is random) |
+
+Release and details: RandomDocuments/BusinessPlatform_2026-10-03/03_AdsManager/Phase2_PromotedOutletAndServing/validation.md. Next: A3.
+
 ## 2026-10-06T14:42+05:30 — AM-A1-002 re-run on W3 UI: PASS 3/3
 
 **2026-10-06T14:40:37+0530 — re-run on the deployed W3 UI (489e2c8): PASS 3/3.** Invocation 1: `tabMatchesTheOwnersAdvertiser`
