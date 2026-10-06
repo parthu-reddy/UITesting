@@ -33,6 +33,18 @@ public final class BusinessHubPage {
         card.waitFor(); String name = card.getByRole(AriaRole.HEADING).innerText();
         card.getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Open organisation").setExact(true)).click(); return name;
     }
+    /**
+     * After openPortal(BUSINESS): a person with exactly one organisation lands on its page, anyone else on
+     * the hub list. Opens the first approved organisation either way and returns its name.
+     */
+    public String openApprovedOrganisationAfterLaunch() {
+        Locator list = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Business hub").setExact(true));
+        Locator orgPage = page.getByTestId("organisation-role");
+        list.or(orgPage).first().waitFor();
+        if (list.isVisible()) return openFirstApproved();
+        assertThat(page.getByText("Approved", new Page.GetByTextOptions().setExact(true))).isVisible();
+        return page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setLevel(1)).first().innerText().trim();
+    }
     public void allOrganisations() { button("All organisations").click(); assertThat(page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Business hub").setExact(true))).isVisible(); }
     public void members() { page.getByRole(AriaRole.TAB, new Page.GetByRoleOptions().setName("Members").setExact(true)).click(); }
     public void invite(String phone, String role) {

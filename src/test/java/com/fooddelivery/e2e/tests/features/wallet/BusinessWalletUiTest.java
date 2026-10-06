@@ -45,7 +45,7 @@ public class BusinessWalletUiTest extends TestBase {
         manifest.put("ownerPhone", owner);
         new LoginPage(restaurantPage).login(owner).openPortal(Portal.BUSINESS);
         BusinessHubPage hub = new BusinessHubPage(restaurantPage);
-        String organisationName = hub.openFirstApproved();
+        String organisationName = hub.openApprovedOrganisationAfterLaunch();
         BusinessWalletPage wallet = new BusinessWalletPage(restaurantPage);
         wallet.open();
         String org = wallet.organisationId();

@@ -1,5 +1,28 @@
 # Business wallet audit status
 
+## 2026-10-06T15:35+05:30 — BW-W2-001 PASS, BW-W3-001 PASS (deployed)
+
+**2026-10-06T15:33:57+0530 — PASS (1 test, 0 failures/errors/skips), invocation 4** on WalletService bae747f, UI fca8a75, payment-gateway 950ba6d (verified running + healthy; 29 up: 26 healthy, 3 without checks). `BusinessWalletTopUpFlowTest#businessWalletTopUpFlow` -Dbp.w2.phone=9999406215; org Brand 1 `1dfc716b-4db7-5395-82dd-fded7dff73fc`. ₹100 top-up `b462cab3-538a-4f91-949e-212e20c37eb8` SUCCESS, balance 100 → 200; same key → same top-up, balance unchanged; same key + ₹200 → 409; Dev-declined ₹10.13 `17c242a9-b9ad-4574-9b07-9fcbe2b930f7` FAILED with reason, nothing credited; ₹5 / ₹100001 → 400; ledger: exactly one BUSINESS_WALLET_TOPUP credit for the top-up, none for the decline; MANAGER `40cee586-a695-45cc-91bd-989c969ca7a9` reads 200, top-up 403. Earlier invocations 1–3 were red on three real defects, all fixed (Feign registration; outbox aggregate_id length; Redis 409 on replay).
+
+**Measurement — not enough samples (open).** wallet-service's own `http.server.requests` histogram for `POST /api/v1/money/business/{organisationId}/topups` since the 15:2x restart (read-only, actuator inside the VM): 200 n=4, mean 106 ms, p50 ≤ 39 ms, slowest bucket ≤ 358 ms (likely the first call after start); 400 n=2 ≤ 8 ms; 403 n=1 ≤ 11 ms; 409 n=1 ≤ 22 ms. n=4 cannot give a p95, so the ≤ 300 ms budget is **not claimed met or missed**. A real sample needs ~40 new top-ups, but the route allows 10/h per organisation and each creates retained Dev records — owner decision.
+
+**2026-10-06T15:34:40+0530 — PASS (1 test, 0 failures/errors/skips), run 3** on WalletService bae747f, UI fca8a75, payment-gateway 950ba6d (verified running + healthy; 29 up: 26 healthy, 3 without checks). `BusinessWalletUiTest#businessWalletPage` -Dbp.w3.phone=9999283428; owner 9000000010 (random seeded), Brand 10 `eac481cc-1da3-5bb7-8d6a-04385a6d635c`. Through the UI only: Wallet tab balance = API (₹0); Add money ₹100 → payment button "Add ₹100.00 to the wallet", no ₹10,000.00; "Money added"; balance ₹100.00; newest line "Top-up" "+₹100.00" whose reference is the exact top-up `7cac25b6-63c3-4fd4-b067-e42437742d23` from the UI's own POST; disposable MANAGER 9999283428 invited/accepted through the hub sees ₹100.00, no Add money, the reason shown. Runs 1–2: harness landing fault and the null-field statement defect, both fixed.
+
+## 2026-10-06T15:05+05:30 — after the full deploy: W2 red (Redis 409 on key replay), W3 red at statement (null field); both fixed locally
+
+**2026-10-06T14:29:46+0530 — third run, after the deploy of WalletService e1bbe04, payment-gateway 950ba6d, UI 489e2c8 (all healthy; 29 containers up, 26 healthy + 3 without checks): RED, third root cause.** Phone 9999909097.
+The first ₹100 top-up `9a4a94d5-2da4-434a-8615-eee2cd4bcda9` settled SUCCESS (order-id fix confirmed live). The replay with the
+same Idempotency-Key got a plain-text 409 "Duplicate request detected." from CommonLibrary's Redis `IdempotencyFilter`
+(24 h lock per key), so the service's durable replay was never reached (the harness then failed parsing it as JSON).
+Fix (local): WalletService `application.yml` `idempotency.filter.bypass-routes: POST:/api/v1/money/business/*/topups` (as
+LedgerService does for payouts) + `createTopup` locks the organisation's wallet row before the key lookup, so a concurrent
+duplicate waits and replays instead of creating a second payment order; 404 if the organisation has no wallet. Guards:
+`WalletIdempotencyBypassTest` (reads the real application.yml through the real filter) and an in-order lock test, both seen
+red. No config overrides the property (platform-defaults, Deployment yml, ConfigService checked). WalletService clean 105/105.
+Harness: `topUp()` keeps a non-JSON body as text. **Redeploy WalletService**, then rerun.
+
+BW-W3-001: run 1 harness landing fault (fixed); run 2 passed login → wallet → ₹100 top-up → balance, failed at the statement (null metadata) — fixed locally. Detail: W3 validation.md.
+
 ## 2026-10-06T14:10+05:30 — BW-W2-001 rerun RED after WalletService redeploy: second root cause, fixed locally
 
 **2026-10-06T13:45:54+0530 — rerun after the WalletService redeploy (0962e78): RED, second root cause.** Phone

@@ -158,6 +158,10 @@ public class RestaurantCampaignsLiveTest extends TestBase {
         org.assertj.core.api.Assertions.assertThat(new BigDecimal(String.valueOf(stored.get("lifetimeBudget")))).isEqualByComparingTo("500");
         org.assertj.core.api.Assertions.assertThat(new BigDecimal(String.valueOf(stored.get("maxBid")))).isEqualByComparingTo("1.5");
         org.assertj.core.api.Assertions.assertThat(stored.get("status")).isEqualTo("DRAFT");
+        // A2: a campaign promotes the outlet selected in the portal, and says so on its card
+        Map<?, ?> outlet = selectedOutlet();
+        org.assertj.core.api.Assertions.assertThat(stored.get("promotedEntityId")).isEqualTo(outlet.get("id"));
+        assertThat(card).containsText("Promotes " + outlet.get("name"));
     }
 
     /** The ad account (organisation) id; the campaign screen is only reachable once one exists. */

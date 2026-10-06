@@ -70,8 +70,13 @@ public class AdAccountPerOrganisationApiTest extends TestBase {
         reloadWithRenewedSession(customerPage);
         assertThat(GatewayApi.get(customerPage, account).status()).isEqualTo(200);
         String tomorrow = LocalDate.now(ZoneId.of("Asia/Kolkata")).plusDays(1).toString();
+        // A2: every campaign promotes one active outlet of the organisation; the owner's list names one
+        var outlets = GatewayApi.get(restaurantPage, "/api/v1/outlets");
+        assertThat(outlets.status()).isEqualTo(200);
+        Object outletId = ((List<?>) outlets.object().get("data")).stream().map(Map.class::cast)
+                .filter(o -> Boolean.TRUE.equals(o.get("isActive"))).findFirst().orElseThrow().get("id");
         var campaign = GatewayApi.post(customerPage, account + "/campaigns", Map.of("advertiserId", org, "name", "E2E A1 " + phone,
-                "dailyBudget", 100, "lifetimeBudget", 1000, "maxBid", 5, "startDate", tomorrow));
+                "dailyBudget", 100, "lifetimeBudget", 1000, "maxBid", 5, "startDate", tomorrow, "promotedOutletId", outletId));
         assertThat(campaign.status()).isEqualTo(201);
         assertThat(campaign.data().get("status")).isEqualTo("DRAFT");
         manifest.put("campaignId", campaign.data().get("id")); saveManifest(retained, manifest);

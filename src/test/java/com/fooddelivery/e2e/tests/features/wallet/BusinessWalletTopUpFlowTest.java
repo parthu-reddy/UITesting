@@ -124,7 +124,11 @@ public class BusinessWalletTopUpFlowTest extends TestBase {
                 headers: {Authorization: 'Bearer ' + token, 'Content-Type': 'application/json', 'Idempotency-Key': key},
                 body: JSON.stringify({amount, paymentMethod: 'CARD'})});
               const text = await response.text();
-              return {status: response.status, body: text ? JSON.parse(text) : null};
+              // Not every refusal is JSON (a plain-text 409 from a filter broke this parse on 2026-10-06):
+              // keep the raw text so the assertion reports the status and body instead of a SyntaxError.
+              let body = null;
+              try { body = text ? JSON.parse(text) : null; } catch (e) { body = text; }
+              return {status: response.status, body};
             }
             """, args);
         return new GatewayApi.Response(((Number) result.get("status")).intValue(), result.get("body"));

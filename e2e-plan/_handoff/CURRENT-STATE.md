@@ -1,5 +1,13 @@
 # Current checkpoint
 
+## 2026-10-06T15:35+05:30 — checkpoint116
+
+WalletService bae747f, UI fca8a75, payment-gateway 950ba6d (verified running + healthy; 29 up: 26 healthy, 3 without checks). bp-w2 PASS, bp-w3 PASS, A1 campaigns 3/3. [checkpoint116](checkpoints/116-business-wallet-live-green.md).
+
+## 2026-10-06T15:05+05:30 — checkpoint115
+
+Deployed WalletService e1bbe04, payment-gateway 950ba6d, UI 489e2c8 (all healthy; 29 containers up, 26 healthy + 3 without checks). A1 campaigns 3/3 on W3 UI. W2 and W3 red on new defects, both fixed locally; WalletService + UI redeploy pending. [checkpoint115](checkpoints/115-business-wallet-third-round.md).
+
 ## 2026-10-06T13:35+05:30 — Business wallet: W2 red (fix local), W3 written; checkpoint114
 
 W1+A1 deployed and live-green. W2 deployed, its E2E red: WalletService never registered PaymentServiceClient (fixed

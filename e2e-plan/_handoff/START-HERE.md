@@ -1,5 +1,9 @@
 # Resume the Food Delivery E2E audit
 
+Latest continuation (2026-10-06T15:35+05:30): [checkpoint116](checkpoints/116-business-wallet-live-green.md) — business wallet W1–W3 live-green; next is A2 on the owner's go-ahead.
+
+Latest continuation (2026-10-06T15:05+05:30): [checkpoint115](checkpoints/115-business-wallet-third-round.md) — WalletService + UI redeploy pending, then W2/W3 reruns.
+
 Latest continuation (2026-10-06T13:35+05:30): Business Platform wallet. W2 E2E red with its fix local; W3 written and not run. See [checkpoint114](checkpoints/114-business-wallet-w2-red-w3-written.md) and [NEXT-STEPS](NEXT-STEPS.md).
 
 Latest continuation (2026-10-05T15:05+05:30): O1–O5 production-readiness review in [RandomDocuments/BusinessPlatformReview_2026-10-05](../../../RandomDocuments/BusinessPlatformReview_2026-10-05/README.md) — Phases 1–2 done locally, awaiting owner deploy; see [NEXT-STEPS](NEXT-STEPS.md). Deployed release is still [checkpoint113](checkpoints/113-o4-o5-complete-stop-boundary.md). Wallet/Ads require a later user instruction.

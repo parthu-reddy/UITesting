@@ -1,5 +1,15 @@
 # Ordered continuation
 
+## 2026-10-06T15:35+05:30 — checkpoint116: wallet W1–W3 live-green
+
+1. Owner: decide on generating samples for W2's top-up p95 (n=4 today).
+2. Next phase A2 on the owner's go-ahead.
+
+## 2026-10-06T15:05+05:30 — checkpoint115
+
+1. Owner deploys WalletService + UI (no wipe).
+2. Rerun `BusinessWalletTopUpFlowTest` then `BusinessWalletUiTest`, new phones each (business-wallet/PENDING.md).
+
 ## 2026-10-06T14:10+05:30 — W2 rerun red (outbox aggregate_id too long); fix local
 
 1. Owner redeploys **WalletService and payment-gateway** (no wipe).

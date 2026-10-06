@@ -1,5 +1,12 @@
 # Ads Manager audit status
 
+## 2026-10-06T14:42+05:30 — AM-A1-002 re-run on W3 UI: PASS 3/3
+
+**2026-10-06T14:40:37+0530 — re-run on the deployed W3 UI (489e2c8): PASS 3/3.** Invocation 1: `tabMatchesTheOwnersAdvertiser`
+and `launchedCampaignIsStoredInRupees` PASS; `draftIsDiscardedOnCancel` SKIPPED (Brand 2's ad account was gone after the W2
+wipe; that test ran first). The first test re-created the account through the UI "Start advertising" step. Invocation 2
+(14:41:33): `draftIsDiscardedOnCancel` PASS. Owner 9000000002, Brand 2 Outlet 1; one new DRAFT campaign retained.
+
 ## 2026-10-06T13:35+05:30 — A1 PASS (deployed with W1); A2–A4 not started
 
 Folder created this date; A1's results were recorded only in
