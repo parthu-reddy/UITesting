@@ -7,7 +7,7 @@ import com.fooddelivery.e2e.pages.common.LoginPage;
 import com.fooddelivery.e2e.pages.restaurant.RestaurantDashboardPage;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
-import com.microsoft.playwright.Request;
+import com.microsoft.playwright.Response;
 import com.microsoft.playwright.options.AriaRole;
 import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.BeforeEach;
@@ -140,10 +140,11 @@ public class RestaurantCampaignsLiveTest extends TestBase {
         dialog.getByLabel("Daily Budget (₹)").fill("50");
         dialog.getByLabel("Total Budget (₹)").fill("500");
         dialog.getByLabel("Bid per Impression (₹)").fill("1.5");
-        Request post = restaurantPage.waitForRequest(r -> r.url().endsWith("/api/v1/advertisers/" + advertiserId + "/campaigns") && "POST".equals(r.method()),
+        // The app's shared transport re-wraps each request, and Playwright reports no body for it, so
+        // "rupees, as typed" is proven by the stored values below (paise would read 5000/50000/150).
+        Response launched = restaurantPage.waitForResponse(r -> r.url().endsWith("/api/v1/advertisers/" + advertiserId + "/campaigns") && "POST".equals(r.request().method()),
                 () -> dialog.getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Launch Campaign").setExact(true)).click());
-        org.assertj.core.api.Assertions.assertThat(post.postData())
-                .contains("\"dailyBudget\":50").contains("\"lifetimeBudget\":500").contains("\"maxBid\":1.5");
+        org.assertj.core.api.Assertions.assertThat(launched.status()).isEqualTo(201);
 
         Locator card = restaurantPage.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName(name).setExact(true)).locator("../../..");
         assertThat(card).containsText("DRAFT");

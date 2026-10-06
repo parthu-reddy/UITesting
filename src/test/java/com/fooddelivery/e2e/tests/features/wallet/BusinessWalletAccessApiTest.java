@@ -5,6 +5,7 @@ import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.common.LoginPage;
 import com.fooddelivery.e2e.pages.common.Portal;
 import com.fooddelivery.e2e.util.GatewayApi;
+import com.fooddelivery.e2e.util.UrlPaths;
 import com.microsoft.playwright.Page;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -57,11 +58,12 @@ public class BusinessWalletAccessApiTest extends TestBase {
         assertThat(GatewayApi.post(customerPage, "/api/v1/organisation-invitations/" + invited.data().get("id") + "/accept", null).status()).isEqualTo(200);
         String userId = memberId(restaurantPage, orgPath, phone);
         manifest.put("userId", userId); saveManifest(retained, manifest);
-        customerPage.reload(); // the new membership grants the BUSINESS role on the next token
+        reloadWithRenewedSession(customerPage); // the new membership grants the BUSINESS role on the renewed token
         assertThat(GatewayApi.get(customerPage, wallet).status()).isEqualTo(403);
 
         assertThat(GatewayApi.patch(restaurantPage, orgPath + "/members/" + userId, Map.of("role", "MANAGER")).status()).isEqualTo(200);
         customerPage.waitForTimeout(5100); // a STAFF decision may stay fresh for five seconds
+        reloadWithRenewedSession(customerPage);
         var manager = GatewayApi.get(customerPage, wallet);
         assertThat(manager.status()).isEqualTo(200);
         assertThat(manager.data().get("balance").toString()).isEqualTo(owner.data().get("balance").toString());
@@ -72,12 +74,30 @@ public class BusinessWalletAccessApiTest extends TestBase {
 
         // A person without an approved business has no BUSINESS role, so the gateway refuses even
         // their own organisation's wallet until it is approved: by design (W1 validation.md).
-        login(customerPage, "9000000011");
+        // No approved business means no Restaurant portal to open: sign in only.
+        customerPage.navigate(TestConfig.APP_URL);
+        new LoginPage(customerPage).login("9000000011");
         String noBrandOrg = onlyOrganisation(customerPage);
         assertThat(GatewayApi.get(customerPage, "/api/v1/money/business/" + noBrandOrg).status()).isEqualTo(403);
 
         manifest.put("finalRole", "MANAGER"); manifest.put("completed", true); saveManifest(retained, manifest);
         System.out.println("W1 business wallet access verified; retained fixture " + retained);
+    }
+
+    /**
+     * Accepting an invitation and changing a role both bump the member's entitlements version, so the
+     * gateway answers their old token with 401 ENTITLEMENTS_CHANGED. GatewayApi reuses the stored token
+     * as-is, so reload and let the app's own transport renew it before the next call.
+     */
+    private void reloadWithRenewedSession(Page page) {
+        var renewed = new com.microsoft.playwright.Response[1];
+        // The landing page's profile request is refused, renews the token, and is retried with it:
+        // its 200 means the renewed token is the stored one. (The app keeps connections open, so
+        // waiting for network idle never finishes.)
+        page.waitForResponse(r -> r.status() == 200 && UrlPaths.path(r.url()).equals("/api/v1/users/profile"),
+                () -> renewed[0] = page.waitForResponse(r -> r.request().method().equals("POST")
+                        && UrlPaths.path(r.url()).equals("/api/v1/auth/session/refresh"), page::reload));
+        assertThat(renewed[0].status()).isEqualTo(200);
     }
 
     private void login(Page page, String phone) {
