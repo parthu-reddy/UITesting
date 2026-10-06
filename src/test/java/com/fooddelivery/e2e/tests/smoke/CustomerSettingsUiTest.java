@@ -198,7 +198,7 @@ public class CustomerSettingsUiTest extends TestBase {
         org.assertj.core.api.Assertions.assertThat(orderId).as("Reuse the owned canonical delivered order").matches("[a-f0-9-]{36}");
         AtomicInteger submissionAttempts = new AtomicInteger();
         customerPage.onRequest(request -> {
-            if (request.method().equals("POST") && java.net.URI.create(request.url()).getPath().equals("/api/v1/reviews")) submissionAttempts.incrementAndGet();
+            if (request.method().equals("POST") && com.fooddelivery.e2e.util.UrlPaths.path(request.url()).equals("/api/v1/reviews")) submissionAttempts.incrementAndGet();
         });
         customerPage.getByRole(AriaRole.TAB,
                 new Page.GetByRoleOptions().setName("History").setExact(true)).click();

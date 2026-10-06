@@ -15,7 +15,7 @@ public final class PortalLauncherPage {
         // remain respected when the initial empty-address response arrives afterward.
         Locator location = page.getByRole(AriaRole.DIALOG,
                 new Page.GetByRoleOptions().setName("Select Delivery Location").setExact(true));
-        if (java.net.URI.create(page.url()).getPath().startsWith("/customer")) {
+        if (com.fooddelivery.e2e.util.UrlPaths.path(page.url()).startsWith("/customer")) {
             try { location.waitFor(new Locator.WaitForOptions().setTimeout(3000)); }
             catch (com.microsoft.playwright.TimeoutError ignored) { /* A selected address needs no prompt. */ }
         }

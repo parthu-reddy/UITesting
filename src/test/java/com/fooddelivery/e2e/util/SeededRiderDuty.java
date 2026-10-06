@@ -146,7 +146,7 @@ public final class SeededRiderDuty implements AutoCloseable {
     }
     private static void goOfflineWithServerConfirmation(Page page, DeliveryOnlineTogglePage toggle) {
         var response = page.waitForResponse(result -> result.request().method().equals("POST")
-                && "/api/delivery/status".equals(java.net.URI.create(result.url()).getPath()), toggle::goOffline);
+                && "/api/delivery/status".equals(com.fooddelivery.e2e.util.UrlPaths.path(result.url())), toggle::goOffline);
         org.assertj.core.api.Assertions.assertThat(response.status()).as("Visible offline action commits on the server").isEqualTo(200);
         org.assertj.core.api.Assertions.assertThat(response.text()).matches("(?s).*\"success\"\\s*:\\s*true.*");
     }

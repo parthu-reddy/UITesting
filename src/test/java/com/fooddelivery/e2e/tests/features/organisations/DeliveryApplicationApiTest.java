@@ -35,14 +35,15 @@ public class DeliveryApplicationApiTest extends PartnerApplicationsUiTestBase {
         approvals.deliveryPartners();
         approvals.select(name);
         approvals.assertChecks("Documents and selfie", "Passed");
-        approvals.requestPrivateView("selfie");
+        approvals.requestPrivateView("Selfie");
         approvals.decide("Approve", null);
         approvals.assertLeftQueue(name);
 
         riderPage.getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
                 new com.microsoft.playwright.Page.GetByRoleOptions().setName("Refresh status").setExact(true)).click();
         com.fooddelivery.e2e.pages.common.PortalLauncherPage launcher = new com.fooddelivery.e2e.pages.common.PortalLauncherPage(riderPage);
-        launcher.open(); launcher.state(Portal.DELIVERY, "Available"); launcher.choose(Portal.DELIVERY);
+        // The approval reaches Identity's portal projection ~2 s later; the open launcher re-checks by itself.
+        launcher.open(); launcher.awaitChangedState(Portal.DELIVERY, "Available"); launcher.choose(Portal.DELIVERY);
         DeliveryDashboardPage dashboard = new DeliveryDashboardPage(riderPage);
         dashboard.waitForDashboard();
         DeliveryOnlineTogglePage duty = new DeliveryOnlineTogglePage(riderPage);

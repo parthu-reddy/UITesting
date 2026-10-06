@@ -8,6 +8,8 @@ public final class GatewayApi {
     private GatewayApi() { }
     public record Response(int status,Object body) {
         public Map<?,?> object(){if(body instanceof Map<?,?> value){return value;}throw new AssertionError("Expected a JSON object, HTTP "+status);}
+        /** The `data` object of the platform ApiResponse envelope. */
+        public Map<?,?> data(){if(object().get("data") instanceof Map<?,?> value){return value;}throw new AssertionError("Expected an ApiResponse data object, HTTP "+status);}
     }
     public static Response get(Page page,String path){return request(page,"GET",path,null);}
     public static Response post(Page page,String path,Object body){return request(page,"POST",path,body);}

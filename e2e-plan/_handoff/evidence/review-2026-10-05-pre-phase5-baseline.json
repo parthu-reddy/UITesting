@@ -1,0 +1,22 @@
+{
+  "recordedAt": "2026-10-05T22:05:00+05:30",
+  "deployed": {
+    "ui": "e538427",
+    "restaurant": "f6bbe39",
+    "delivery": "a719184",
+    "identity/comms/common": "14:45 publish",
+    "jwt": "15 min"
+  },
+  "baseline": {
+    "o4": "8/8",
+    "o5": "8/8 (restaurant, delivery rerun with --admin-phone 1000000002 after admin OTP limit)",
+    "o3": "5/5 (delivery rerun after test waits for projection)",
+    "LoginSmokeTest": "9/9",
+    "SessionUiTest": "15/15",
+    "LoginValidationTest": "16/16"
+  },
+  "notes": [
+    "First baseline pass exhausted the ordinary admin OTP limit (10/10 min) on 1000000001 by running O4+O5+O3 back-to-back \u2014 correct server behaviour ('Too many attempts'), not a defect; runners now take --admin-phone and suites should alternate seeded admins",
+    "ISSUE-PROJ-01 rerun PASS after UI 10 s pending-application re-check (restaurantApplicationLifecycle 55 s)"
+  ]
+}

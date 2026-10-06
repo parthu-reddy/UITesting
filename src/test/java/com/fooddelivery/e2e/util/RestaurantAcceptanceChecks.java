@@ -15,7 +15,7 @@ public final class RestaurantAcceptanceChecks {
         var actions=new RestaurantOrderActionsPage(page);
         Locator card=actions.orderCard(id);
         java.util.function.Consumer<Response> observe = response -> {
-            String path = java.net.URI.create(response.url()).getPath();
+            String path = com.fooddelivery.e2e.util.UrlPaths.path(response.url());
             if (!response.request().method().equals("GET") || !path.endsWith("/fulfillment/orders/active")) return;
             System.out.println("[KITCHEN] UI active-order response status=" + response.status()
                     + " outlet=" + path.split("/")[4]);

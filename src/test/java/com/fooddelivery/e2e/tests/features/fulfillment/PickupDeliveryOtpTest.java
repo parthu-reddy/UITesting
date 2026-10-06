@@ -46,7 +46,7 @@ public class PickupDeliveryOtpTest extends TestBase {
             order=new LiveOrderFixture.Created(resumeId,(String)retained.get("outlet"));
         }
         riderPage.onResponse(response -> {
-            String path = java.net.URI.create(response.url()).getPath();
+            String path = com.fooddelivery.e2e.util.UrlPaths.path(response.url());
             if (path == null) return;
             if (path.endsWith("/status") && response.request().method().equals("POST") && response.request().postData()!=null) {
                 String body=response.request().postData();

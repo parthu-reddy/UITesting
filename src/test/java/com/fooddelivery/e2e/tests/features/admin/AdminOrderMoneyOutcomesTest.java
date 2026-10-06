@@ -47,7 +47,7 @@ public class AdminOrderMoneyOutcomesTest extends TestBase {
         loginAsAdmin();
         String path = "/api/v1/internal/admin/orders/" + orderId + "/money";
         Response response = adminPage.waitForResponse(r -> r.request().method().equals("GET")
-                && java.net.URI.create(r.url()).getPath().equals(path), () -> adminPage.navigate(
+                && com.fooddelivery.e2e.util.UrlPaths.path(r.url()).equals(path), () -> adminPage.navigate(
                 TestConfig.APP_URL + "/admin/orders/" + orderId + "/money"));
         org.assertj.core.api.Assertions.assertThat(response.status()).isEqualTo(200);
         Map<?, ?> money = (Map<?, ?>) adminPage.evaluate("text => JSON.parse(text)", response.text());

@@ -15,12 +15,12 @@ public final class OrderMoneyChecks {
         String path="/api/v1/internal/admin/orders/"+id+"/money";
         var writes=new java.util.concurrent.atomic.AtomicInteger();
         java.util.function.Consumer<Request> observeWrites = request -> {
-            if (java.net.URI.create(request.url()).getPath().equals(path) && !request.method().equals("GET")) writes.incrementAndGet();
+            if (com.fooddelivery.e2e.util.UrlPaths.path(request.url()).equals(path) && !request.method().equals("GET")) writes.incrementAndGet();
         };
         admin.onRequest(observeWrites);
         try {
             Response response=admin.waitForResponse(r -> r.request().method().equals("GET")
-                    && java.net.URI.create(r.url()).getPath().equals(path),
+                    && com.fooddelivery.e2e.util.UrlPaths.path(r.url()).equals(path),
                     ()->admin.navigate(TestConfig.APP_URL.replaceAll("/$","")+"/admin/orders/"+id+"/money"));
             assertThat(response.status()).isEqualTo(200);
             Map<?,?> money=(Map<?,?>)admin.evaluate("text=>JSON.parse(text)",response.text());

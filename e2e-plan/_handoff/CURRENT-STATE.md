@@ -1,5 +1,25 @@
 # Current checkpoint
 
+## 2026-10-05T23:30:00+05:30 — Review Phase 5 complete locally; awaiting owner build/deploy
+
+Not deployed yet: Dev still runs the Phase 1–4 release (UI e538427, Restaurant f6bbe39, Delivery a719184).
+
+Local, uncommitted changes:
+- **Java:** google-java-format applied across 7 repos.
+- **Identity:** organisation envelope `ApiResponse` (F15).
+- **Restaurant:** typed `OrderReasonRequest` (max 255) for reject/cancel (F17), and the spec test now loads `OpenApiConfig` (F18).
+- **UI:** Prettier pass. Nine components split. Rider history moved into state. Readable document names on admin approvals ("View GST registration", "View Selfie"). Cancel-reason field capped at 255. Chat back button labelled "Back".
+
+Harness: `AdminPartnerApprovalsUiTest` and `DeliveryApplicationApiTest` updated to the new document labels; compiles. Locator audit FAIL set is unchanged against HEAD (64 = 64; only the six dynamic `requestPrivateView` labels were renamed).
+
+Local proof: UI 997/997, typecheck 0, lint 0; Restaurant `-Pspecs` 174/0/0 (includes the explicit BUSINESS_APPLY permission on application-outlet edits). Break tests went red then green.
+
+No E2E has been run since the Phase 1–4 baseline, and no fixtures were created.
+
+## 2026-10-05T22:05:00+05:30 — Review Phases 1–4 deployed and fully green on Dev
+
+Deployed UI e538427, Restaurant f6bbe39, Delivery a719184, Identity/Comms/Common (14:45 publish), jwt 15 min. Baseline: O4 8/8, O5 8/8, O3 5/5, LoginSmoke 9/9, Session 15/15, LoginValidation 16/16 (evidence/review-2026-10-05-pre-phase5-baseline.json). ISSUE-PROJ-01 closed (UI re-check cadence, not backend). Next: review Phase 5 (readable code + organisation envelope).
+
 ## 2026-10-05T17:45:00+05:30 — Review Phases 1–3 deployed and checked live
 
 Deployed: UI db3a322 (Phase 1–3), Identity/Comms/Common from the 14:45 publish, Deployment jwt 15 min. Live UI-only results: O4 7/8 then revocation 1/1 after a test-race fix; O5 8/8; LoginSmoke 9/9; Session 15/15; LoginValidation: resend expectation fixed (4/4 rerun), `otpValidationAndBack` x4 is a Phase 3 regression fixed in source, awaiting UI redeploy. Evidence: _handoff/evidence/review-2026-10-05-phase1-3-live-e2e.json. Local uncommitted: UI OTP fix; UITesting harness updates (Phase 2–3 page objects, revocation race, 401 expectations).

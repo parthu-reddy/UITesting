@@ -50,7 +50,7 @@ public class ProfileSettingsTest extends TestBase {
         assertThat(customerPage.evaluate("() => localStorage.getItem('auth_token')")).isInstanceOf(String.class);
         java.util.List<String> saves = new java.util.ArrayList<>();
         customerPage.onRequest(request -> {
-            if (request.method().equals("PUT") && java.net.URI.create(request.url()).getPath().equals("/api/v1/users/profile")) {
+            if (request.method().equals("PUT") && com.fooddelivery.e2e.util.UrlPaths.path(request.url()).equals("/api/v1/users/profile")) {
                 saves.add(request.url());
             }
         });

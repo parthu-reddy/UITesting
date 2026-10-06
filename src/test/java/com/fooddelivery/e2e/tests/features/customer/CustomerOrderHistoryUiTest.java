@@ -210,7 +210,7 @@ public class CustomerOrderHistoryUiTest extends TestBase {
         Locator button = firstReorder();
         String id = button.getAttribute("data-order-id");
         com.microsoft.playwright.Response owned = customerPage.waitForResponse(
-                response -> response.request().method().equals("GET") && java.net.URI.create(response.url()).getPath().equals("/api/v1/orders/" + id), button::click);
+                response -> response.request().method().equals("GET") && com.fooddelivery.e2e.util.UrlPaths.path(response.url()).equals("/api/v1/orders/" + id), button::click);
         assertThat(owned.status()).isEqualTo(200);
         java.util.Map<?, ?> envelope = (java.util.Map<?, ?>) customerPage.evaluate("text => JSON.parse(text)", owned.text());
         java.util.Map<?, ?> order = (java.util.Map<?, ?>) envelope.get("data");

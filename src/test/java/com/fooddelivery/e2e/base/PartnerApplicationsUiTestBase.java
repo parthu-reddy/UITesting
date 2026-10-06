@@ -42,7 +42,7 @@ public abstract class PartnerApplicationsUiTestBase extends TestBase {
     /** Observe requests caused by the normal UI; never issue a request or read response bodies. */
     private void recordUiResponseTiming(Request request) {
         if (!"GET".equals(request.method())) return;
-        String path = java.net.URI.create(request.url()).getPath();
+        String path = com.fooddelivery.e2e.util.UrlPaths.path(request.url());
         String family = switch (path) {
             case "/api/v1/internal/admin/restaurant-applications",
                     "/api/v1/internal/admin/delivery-applications" -> "admin-review-queue";

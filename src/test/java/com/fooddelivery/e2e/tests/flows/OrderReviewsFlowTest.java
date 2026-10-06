@@ -150,7 +150,7 @@ public class OrderReviewsFlowTest extends TestBase {
         dialog.getByRole(AriaRole.TEXTBOX, new Locator.GetByRoleOptions().setName("Comment about " + name)).fill(comment);
         Files.writeString(evidence, (String) customerPage.evaluate("json => { const m=JSON.parse(json);"
                 + "m.submissionAttempted=true; return JSON.stringify(m); }", Files.readString(evidence)));
-        var submitted = customerPage.waitForResponse(response -> "/api/v1/reviews".equals(java.net.URI.create(response.url()).getPath())
+        var submitted = customerPage.waitForResponse(response -> "/api/v1/reviews".equals(com.fooddelivery.e2e.util.UrlPaths.path(response.url()))
                         && "actorRole=CUSTOMER".equals(java.net.URI.create(response.url()).getQuery())
                         && "POST".equals(response.request().method()), () -> dialog.getByRole(AriaRole.BUTTON,
                 new Locator.GetByRoleOptions().setName("Submit 1 review").setExact(true)).click());
@@ -259,7 +259,7 @@ public class OrderReviewsFlowTest extends TestBase {
                 .getByRole(AriaRole.RADIO, new Locator.GetByRoleOptions().setName("4 stars").setExact(true)).click();
         dialog.getByRole(AriaRole.TEXTBOX, new Locator.GetByRoleOptions().setName("Comment about " + name)).fill(comment);
         saveDriverCacheReview(evidence, (String) driver.get("entityId"), false, false);
-        var submitted = restaurantPage.waitForResponse(response -> "/api/v1/reviews".equals(java.net.URI.create(response.url()).getPath())
+        var submitted = restaurantPage.waitForResponse(response -> "/api/v1/reviews".equals(com.fooddelivery.e2e.util.UrlPaths.path(response.url()))
                 && "actorRole=RESTAURANT".equals(java.net.URI.create(response.url()).getQuery())
                 && "POST".equals(response.request().method()), () -> dialog.getByRole(AriaRole.BUTTON,
                 new Locator.GetByRoleOptions().setName("Submit 1 review").setExact(true)).click());
@@ -396,7 +396,7 @@ public class OrderReviewsFlowTest extends TestBase {
     @SuppressWarnings("unchecked")
     private List<Map<?, ?>> targetsFromVisibleOpen(Page page, String actorRole, Runnable open) {
         var response = page.waitForResponse(r -> r.request().method().equals("GET")
-                && java.net.URI.create(r.url()).getPath().equals("/api/v1/reviews/orders/" + ORDER + "/eligibility")
+                && com.fooddelivery.e2e.util.UrlPaths.path(r.url()).equals("/api/v1/reviews/orders/" + ORDER + "/eligibility")
                 && java.net.URI.create(r.url()).getQuery().contains("actorRole=" + actorRole), open);
         org.assertj.core.api.Assertions.assertThat(response.status()).isEqualTo(200);
         Map<?, ?> envelope = (Map<?, ?>) page.evaluate("text => JSON.parse(text)", response.text());

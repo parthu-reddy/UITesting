@@ -45,7 +45,7 @@ public class CustomerOrderPlacementTest extends TestBase {
         AtomicReference<String> trackedId = new AtomicReference<>();
         customerPage.onResponse(response -> {
             if (response.request().method().equals("POST") && response.status() == 200
-                    && java.net.URI.create(response.url()).getPath().equals("/api/v1/orders")) successfulCreates.incrementAndGet();
+                    && com.fooddelivery.e2e.util.UrlPaths.path(response.url()).equals("/api/v1/orders")) successfulCreates.incrementAndGet();
         });
         if (failTrackingRead) customerPage.route("**/api/v1/orders/*", route -> {
             if (route.request().method().equals("GET") && trackedId.get() != null
@@ -82,7 +82,7 @@ public class CustomerOrderPlacementTest extends TestBase {
                     new Locator.GetByRoleOptions().setName("Tip your rider").setExact(true))
                     .getByRole(AriaRole.RADIO, new Locator.GetByRoleOptions().setName("₹" + tip).setExact(true)).click();
             Response created = customerPage.waitForResponse(r -> r.request().method().equals("POST")
-                    && java.net.URI.create(r.url()).getPath().equals("/api/v1/orders"),
+                    && com.fooddelivery.e2e.util.UrlPaths.path(r.url()).equals("/api/v1/orders"),
                     () -> payment.placeOrder("Credit or debit card"));
             assertThat(created.status()).as("Real Dev order creation").isEqualTo(200);
             Map<?, ?> body = (Map<?, ?>) customerPage.evaluate("text => JSON.parse(text)", created.text());

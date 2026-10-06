@@ -22,7 +22,7 @@ public class CspSmokeUiTest extends TestBase {
         List<String> networkFailures = new ArrayList<>();
         for (Page page : List.of(customerPage, restaurantPage, riderPage, adminPage)) {
             page.onConsoleMessage(message -> {
-                String text = message.text(); if (text.toLowerCase().contains("content security policy") || text.toLowerCase().contains("content-security-policy")) violations.add("CSP violation on " + URI.create(page.url()).getPath());
+                String text = message.text(); if (text.toLowerCase().contains("content security policy") || text.toLowerCase().contains("content-security-policy")) violations.add("CSP violation on " + com.fooddelivery.e2e.util.UrlPaths.path(page.url()));
             });
             page.onRequest(request -> recordOrigin(origins, request.url()));
             page.onWebSocket(socket -> recordOrigin(origins, socket.url()));

@@ -41,8 +41,8 @@ public class OrganisationLifecycleApiTest extends TestBase {
         register(customerPage,phoneA,"A");register(restaurantPage,phoneB,"B");
         String name="E2E O1 "+UUID.randomUUID().toString().substring(0,8);
         var created=GatewayApi.post(customerPage,"/api/v1/organisations",Map.of("displayName",name));
-        assertThat(created.status()).isEqualTo(201);assertThat(created.object().get("myRole")).isEqualTo("OWNER");
-        String id=(String)created.object().get("id"),path="/api/v1/organisations/"+id;
+        assertThat(created.status()).isEqualTo(201);assertThat(created.data().get("myRole")).isEqualTo("OWNER");
+        String id=(String)created.data().get("id"),path="/api/v1/organisations/"+id;
         // Persist the owned resource before further mutations so a failed run remains inspectable.
         var folder=Paths.get("target/business-platform/o1");Files.createDirectories(folder);
         Files.writeString(folder.resolve(id+".json"),(String)customerPage.evaluate("manifest => JSON.stringify(manifest,null,2)",Map.of("organisationId",id,"name",name,"phoneA",phoneA,"phoneB",phoneB,"dataPolicy","retain","cleanupPerformed",false)));
@@ -72,7 +72,7 @@ public class OrganisationLifecycleApiTest extends TestBase {
     }
     private String phone(String label){String value=System.getProperty("bp.o1.phone."+label);assertThat(value).matches("8999[0-9]{6}");return value;}
     private void register(Page page,String phone,String label){page.navigate(TestConfig.APP_URL);new LoginPage(page).login(phone, "E2E O1 "+label, "o1_"+phone+"@test.com").openOnboarding(Portal.CUSTOMER);}
-    private String invite(Page page,String path,String phone,String role){var result=GatewayApi.post(page,path+"/invitations",Map.of("phoneNumber",phone,"role",role));assertThat(result.status()).isEqualTo(201);return (String)result.object().get("id");}
-    private void assertRole(Page page,String path,String role){var result=GatewayApi.get(page,path);assertThat(result.status()).isEqualTo(200);assertThat(result.object().get("myRole")).isEqualTo(role);}
-    private List<Map<?,?>> content(GatewayApi.Response response){List<Map<?,?>> rows=new ArrayList<>();for(Object row:(List<?>)response.object().get("content")){rows.add((Map<?,?>)row);}return rows;}
+    private String invite(Page page,String path,String phone,String role){var result=GatewayApi.post(page,path+"/invitations",Map.of("phoneNumber",phone,"role",role));assertThat(result.status()).isEqualTo(201);return (String)result.data().get("id");}
+    private void assertRole(Page page,String path,String role){var result=GatewayApi.get(page,path);assertThat(result.status()).isEqualTo(200);assertThat(result.data().get("myRole")).isEqualTo(role);}
+    private List<Map<?,?>> content(GatewayApi.Response response){List<Map<?,?>> rows=new ArrayList<>();for(Object row:(List<?>)response.data().get("content")){rows.add((Map<?,?>)row);}return rows;}
 }

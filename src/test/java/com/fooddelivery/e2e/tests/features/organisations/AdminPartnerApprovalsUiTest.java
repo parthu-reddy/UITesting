@@ -50,7 +50,7 @@ public class AdminPartnerApprovalsUiTest extends PartnerApplicationsUiTestBase {
 
     private void observeQueue(String type, Runnable action) {
         var response = adminPage.waitForResponse(candidate ->
-                java.net.URI.create(candidate.url()).getPath().equals(
+                com.fooddelivery.e2e.util.UrlPaths.path(candidate.url()).equals(
                         "/api/v1/internal/admin/" + type + "-applications")
                         && candidate.request().method().equals("GET"), action);
         org.assertj.core.api.Assertions.assertThat(response.status())
@@ -81,7 +81,7 @@ public class AdminPartnerApprovalsUiTest extends PartnerApplicationsUiTestBase {
         approvals.select(restaurantName);
         approvals.assertChecks("GST check", "Passed");
         approvals.assertChecks("Bank check", "Passed");
-        approvals.requestPrivateView("gstin");
+        approvals.requestPrivateView("GST registration");
         approvals.rejectWithoutReason();
         String reason = "E2E review requires a clearer document";
         approvals.decide("Reject", reason);
@@ -92,13 +92,14 @@ public class AdminPartnerApprovalsUiTest extends PartnerApplicationsUiTestBase {
         approvals.deliveryPartners();
         approvals.select(deliveryName);
         approvals.assertChecks("Documents and selfie", "Passed");
-        approvals.requestPrivateView("selfie");
+        approvals.requestPrivateView("Selfie");
         approvals.decide("Approve", null);
         approvals.assertLeftQueue(deliveryName);
         riderPage.getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
                 new com.microsoft.playwright.Page.GetByRoleOptions().setName("Refresh status").setExact(true)).click();
         com.fooddelivery.e2e.pages.common.PortalLauncherPage launcher = new com.fooddelivery.e2e.pages.common.PortalLauncherPage(riderPage);
-        launcher.open(); launcher.state(Portal.DELIVERY, "Available"); launcher.choose(Portal.DELIVERY);
+        // The decision reaches Identity's portal projection ~2 s later; the open launcher re-checks by itself.
+        launcher.open(); launcher.awaitChangedState(Portal.DELIVERY, "Available"); launcher.choose(Portal.DELIVERY);
         new DeliveryDashboardPage(riderPage).waitForDashboard();
     }
 

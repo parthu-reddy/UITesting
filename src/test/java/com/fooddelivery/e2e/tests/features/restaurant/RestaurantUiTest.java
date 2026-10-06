@@ -22,7 +22,7 @@ public class RestaurantUiTest extends TestBase {
         restaurantPage.navigate(TestConfig.APP_URL);
         if (testRestaurantPhone.matches("900000001[1-4]")) {
             var brands = restaurantPage.waitForResponse(
-                    r -> java.net.URI.create(r.url()).getPath().equals("/api/v1/brands")
+                    r -> com.fooddelivery.e2e.util.UrlPaths.path(r.url()).equals("/api/v1/brands")
                             && r.request().method().equals("GET"),
                     () -> new LoginPage(restaurantPage).login(testRestaurantPhone).openPortal(Portal.RESTAURANT));
             assertThat(brands.status()).isEqualTo(200);

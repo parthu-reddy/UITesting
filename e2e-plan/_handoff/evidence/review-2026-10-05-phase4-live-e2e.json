@@ -1,0 +1,25 @@
+{
+  "recordedAt": "2026-10-05T20:40:00+05:30",
+  "deployed": {
+    "ui": "40ed355",
+    "restaurant": "f6bbe39",
+    "delivery": "a719184"
+  },
+  "batch1": "all 7 failed during a post-deploy window: 503 on POST /auth/otp, GET restaurant/delivery application, one 500; Identity later answered 400/200 normally \u2014 environment, not code",
+  "batch2": {
+    "o45 restaurant": "PASS",
+    "LoginValidationTest#otpValidationAndBack": "PASS 4/4 (OTP pattern fix live)",
+    "rider cases (o3 delivery, o3 admin, o45 delivery)": "FAIL: picker stayed open (aria-expanded true) \u2014 review Phase 3/4 regression: Select inside FormField <label>; option click re-activated the trigger in a real browser. Fixed in shared Select (option click preventDefault) + unit guard proven red/green; needs UI redeploy",
+    "o3 queues": "FAIL: same Select-in-label cause (Application status FormField); first rerun also hit a harness NPE on opaque data:/blob: URLs \u2014 38 URL predicates now null-safe (UrlPaths)",
+    "o3 restaurant (reject \u2192 resubmit \u2192 approve)": "FAIL: applicant page shows Approved but Business hub card (Identity BusinessEntitlement projection) stayed 'Awaiting admin review' for 60 s. Straight approval projects correctly (o45 restaurant PASS). Root cause NOT established: decision methods are @Transactional (detached-version hypothesis rejected); needs Identity consumer logs / Restaurant outbox rows. Not caused by review changes (no event/version/projection code touched). Issue ISSUE-PROJ-01."
+  },
+  "proofType": "deployed UI-only E2E; fixtures retained",
+  "batch3": {
+    "deployedUi": "9fecb31 (Select label fix)",
+    "o3 queues": "PASS",
+    "o3 delivery": "PASS",
+    "o45 delivery": "PASS",
+    "o3 admin": "FAIL then PASS after test waits for projection (awaitChangedState, 10386 ms)",
+    "oracleReadOnly": "restaurant outbox v0..v10 PROCESSED; identity business_entitlements APPROVED v10 at 14:45:49Z"
+  }
+}

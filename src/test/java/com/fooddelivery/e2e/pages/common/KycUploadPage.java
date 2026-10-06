@@ -14,13 +14,13 @@ public class KycUploadPage {
         lastLabel=label;
         var entitlementChallenges = new java.util.concurrent.atomic.AtomicInteger();
         java.util.function.Consumer<Response> observer = response -> {
-            if (java.net.URI.create(response.url()).getPath().matches("/api/v1/verification/documents/[^/]+/complete")
+            if (com.fooddelivery.e2e.util.UrlPaths.path(response.url()).matches("/api/v1/verification/documents/[^/]+/complete")
                     && response.request().method().equals("POST") && response.status() == 401
                     && "ENTITLEMENTS_CHANGED".equals(response.headerValue("X-Auth-Reason"))) entitlementChallenges.incrementAndGet();
         };
         page.onResponse(observer);
         try {
-        var completed=page.waitForResponse(response -> java.net.URI.create(response.url()).getPath().matches("/api/v1/verification/documents/[^/]+/complete")
+        var completed=page.waitForResponse(response -> com.fooddelivery.e2e.util.UrlPaths.path(response.url()).matches("/api/v1/verification/documents/[^/]+/complete")
                 && response.request().method().equals("POST") && response.status() == 200,
                 () -> page.waitForFileChooser(() -> page.getByRole(AriaRole.BUTTON,
                         new Page.GetByRoleOptions().setName(java.util.regex.Pattern.compile("^(Upload|Replace) " + label + "$"))).click())

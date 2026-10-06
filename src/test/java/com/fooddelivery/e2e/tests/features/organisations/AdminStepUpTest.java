@@ -19,7 +19,7 @@ public class AdminStepUpTest extends TestBase {
     }
     @Test void nonStaffCannotStartAdministratorVerification() {
         new LoginPage(customerPage).login(testCustomerPhone); customerPage.navigate(TestConfig.APP_URL + "/admin");
-        var response = customerPage.waitForResponse(r -> java.net.URI.create(r.url()).getPath().equals("/api/v1/auth/admin-session/otp")
+        var response = customerPage.waitForResponse(r -> com.fooddelivery.e2e.util.UrlPaths.path(r.url()).equals("/api/v1/auth/admin-session/otp")
                 && r.request().method().equals("POST"), () -> customerPage.getByRole(AriaRole.BUTTON,
                 new Page.GetByRoleOptions().setName("Send administrator code").setExact(true)).click());
         org.assertj.core.api.Assertions.assertThat(response.status()).isEqualTo(403);

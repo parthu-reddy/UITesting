@@ -25,7 +25,7 @@ public class RestaurantDiscoveryUiTest extends TestBase {
     }
     private Locator openCustomerHome() {
         customerPage.onResponse(r -> {
-            if (java.net.URI.create(r.url()).getPath().equals("/api/v1/restaurants/nearby")
+            if (com.fooddelivery.e2e.util.UrlPaths.path(r.url()).equals("/api/v1/restaurants/nearby")
                     && r.request().method().equals("GET")) nearby = r;
         });
         signInHome();
@@ -124,7 +124,7 @@ public class RestaurantDiscoveryUiTest extends TestBase {
         com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(customerPage.getByText("Couldn't load restaurants")).isVisible();
         com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(customerPage.getByText("Out of Range", new Page.GetByTextOptions().setExact(true))).hasCount(0);
         customerPage.unroute("**/api/v1/restaurants/nearby?*");
-        Response retried = customerPage.waitForResponse(r -> java.net.URI.create(r.url()).getPath().equals("/api/v1/restaurants/nearby"),
+        Response retried = customerPage.waitForResponse(r -> com.fooddelivery.e2e.util.UrlPaths.path(r.url()).equals("/api/v1/restaurants/nearby"),
                 () -> customerPage.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Try again").setExact(true)).click());
         assertThat(retried.status()).isEqualTo(200);
         com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(cards().first()).isVisible();

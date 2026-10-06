@@ -32,7 +32,7 @@ public class EntitlementRevocationTest extends TestBase {
         owner.allOrganisations(); owner.open(name); owner.members();
         assertThat(owner.member(phone)).isVisible();
         owner.remove(phone); AtomicInteger refreshes = new AtomicInteger(); customerPage.onRequest(request -> {
-            if (request.method().equals("POST") && java.net.URI.create(request.url()).getPath().equals("/api/v1/auth/session/refresh")) refreshes.incrementAndGet();
+            if (request.method().equals("POST") && com.fooddelivery.e2e.util.UrlPaths.path(request.url()).equals("/api/v1/auth/session/refresh")) refreshes.incrementAndGet();
         });
         // The removed person's next ordinary request (here: opening the launcher) renews the token
         // without RESTAURANT, and the app moves them off the Restaurant dashboard to the portal

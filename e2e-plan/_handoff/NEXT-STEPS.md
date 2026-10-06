@@ -1,5 +1,23 @@
 # Ordered continuation
 
+## After review Phase 5 (2026-10-05)
+
+1. **Owner builds and deploys:**
+   - CommonLibrary (publish first)
+   - IdentityService, RestaurantApplication, DeliveryExecutiveApplication, ApiGateway, GovernmentIDValidationService, CustomerApplication
+   - FoodDeliveryAppUI
+
+   CommunicationIntegration and Deployment are unchanged by Phase 5.
+
+2. **Then, UI-only on the current tunnel.** Alternate the admin phone between runs (the step-up OTP limit is per phone):
+   - `python3 scripts/run_business_platform_o45_e2e.py --app-url <tunnel> --only o4 --admin-phone 1000000001`
+   - `python3 scripts/run_business_platform_o45_e2e.py --app-url <tunnel> --only o5 --admin-phone 1000000002`
+   - `python3 scripts/run_partner_applications_o3_e2e.py --app-url <tunnel> --admin-phone 1000000001` (covers the new document labels)
+   - LoginSmokeTest and SessionUiTest, with the normal exclusions.
+
+3. **Optional, owner's call:** `RestaurantRejectFlowTest` exercises the typed reject reason end to end, but it places and refunds a real Dev order.
+
+
 ## 2026-10-05T19:10:00+05:30 — Review Phase 4 ready; deploy Restaurant, Delivery, UI
 
 Owner builds/deploys RestaurantApplication, DeliveryExecutiveApplication and FoodDeliveryAppUI (UI also includes the OTP `pattern` fix). Then UI-only on the tunnel: `run_business_platform_o45_e2e.py --only restaurant`, `--only delivery`; `mvn -q -Dtest='AdminPartnerApprovalsUiTest,RestaurantApplicationApiTest,DeliveryApplicationApiTest,LoginValidationTest#otpValidationAndBack' -Dapp.url=<tunnel> -Dadmin.phone=1000000002 -Dheadless=true -Dslow.mo=0 -Drecord.video=false -De2e.otp.enabled=false -DexcludedGroups=slow-auth,auth-rate-limit test` (check each class's own preflight properties first). Next: review Phase 5 (readable code + organisation envelope).

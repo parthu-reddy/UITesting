@@ -24,13 +24,13 @@ final class RiderDutyObservation {
         // before deciding whether to click Online; live readiness still requires the socket.
         page.onResponse(response -> {
             if (response.ok() && response.request().method().equals("GET")
-                    && "/api/delivery/profile".equals(java.net.URI.create(response.url()).getPath())) {
+                    && "/api/delivery/profile".equals(com.fooddelivery.e2e.util.UrlPaths.path(response.url()))) {
                 try { profile(response.text()); }
                 catch (com.microsoft.playwright.PlaywrightException ignored) { /* No profile proof was obtained. */ }
             }
         });
         page.onWebSocket(next -> {
-            if (!"/api/delivery/tracking".equals(java.net.URI.create(next.url()).getPath())) return;
+            if (!"/api/delivery/tracking".equals(com.fooddelivery.e2e.util.UrlPaths.path(next.url()))) return;
             socket = next; status = null; connected = false; fixNanos = 0;
             next.onFrameReceived(frame -> { if (socket == next) received(frame.text()); });
             next.onFrameSent(frame -> { if (socket == next) sent(frame.text(), System.nanoTime()); });

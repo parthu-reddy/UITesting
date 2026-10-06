@@ -69,7 +69,7 @@ public class OrganisationRestaurantAccessTest extends TestBase {
             new LoginPage(customerPage).login(phone, "E2E O2 Staff", "o2_"+phone+"@test.com").openOnboarding(Portal.RESTAURANT);
             var invited=GatewayApi.post(restaurantPage,orgPath+"/invitations",Map.of("phoneNumber",phone,"role","STAFF"));
             assertThat(invited.status()).isEqualTo(201);
-            String invitation=(String)invited.object().get("id");manifest.put("invitationId",invitation);saveManifest(retained,manifest);
+            String invitation=(String)invited.data().get("id");manifest.put("invitationId",invitation);saveManifest(retained,manifest);
             assertThat(GatewayApi.post(customerPage,"/api/v1/organisation-invitations/"+invitation+"/accept",null).status()).isEqualTo(200);
         }
         var member=content(GatewayApi.get(restaurantPage,orgPath+"/members")).stream()
@@ -140,7 +140,7 @@ public class OrganisationRestaurantAccessTest extends TestBase {
         assertThat(((Map<?,?>)body.get("data")).get("isAvailable")).isEqualTo(available);
         com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(control).isEnabled();
     }
-    private List<Map<?,?>> content(GatewayApi.Response response){assertThat(response.status()).isEqualTo(200);return rows(response.object().get("content"));}
+    private List<Map<?,?>> content(GatewayApi.Response response){assertThat(response.status()).isEqualTo(200);return rows(response.data().get("content"));}
     private List<Map<?,?>> listData(GatewayApi.Response response){assertThat(response.status()).isEqualTo(200);return rows(response.object().get("data"));}
     private List<Map<?,?>> rows(Object body){assertThat(body).isInstanceOf(List.class);var result=new ArrayList<Map<?,?>>();for(Object row:(List<?>)body){result.add((Map<?,?>)row);}return result;}
     private void saveManifest(Path path,Map<String,Object> manifest) throws Exception{

@@ -45,6 +45,8 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--app-url", required=True, help="Public Oracle Dev UI URL")
     parser.add_argument("--only", choices=CASES, help="Run one browser gate")
+    parser.add_argument("--admin-phone", choices=["1000000001", "1000000002"], default="1000000001",
+                        help="Seeded staff actor; alternate between runs so ordinary admin OTP limits are not exhausted")
     args = parser.parse_args()
 
     url = urlparse(args.app_url)
@@ -86,7 +88,7 @@ def main() -> int:
             "-Dcustomer.phone=8000000001",
             "-Drestaurant.phone=9000000001",
             "-Drider.phone=7000000001",
-            "-Dadmin.phone=1000000001",
+            "-Dadmin.phone=" + args.admin_phone,
             "-Dheadless=true",
             "-Dslow.mo=0",
             "-Drecord.video=false",

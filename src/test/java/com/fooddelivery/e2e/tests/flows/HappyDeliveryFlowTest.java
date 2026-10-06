@@ -104,7 +104,7 @@ public class HappyDeliveryFlowTest extends TestBase {
             """);
         // Observe responses only. Never persist request headers, tokens, OTPs or response bodies.
         customerPage.onResponse(response -> {
-            String path = java.net.URI.create(response.url()).getPath();
+            String path = com.fooddelivery.e2e.util.UrlPaths.path(response.url());
             if (path != null && path.endsWith("/live-tracking")) {
                 customerMapStreams.add(Map.of("path", path,
                         "status", response.status(), "contentType", response.headerValue("content-type") == null ? "" : response.headerValue("content-type")));
@@ -144,7 +144,7 @@ public class HappyDeliveryFlowTest extends TestBase {
                     } else { classification = "unclassified-forbidden"; }
                 } catch (com.microsoft.playwright.PlaywrightException ignored) { classification = "body-unavailable"; }
             }
-            streamResponses.add(Map.of("path", java.net.URI.create(response.url()).getPath(),
+            streamResponses.add(Map.of("path", com.fooddelivery.e2e.util.UrlPaths.path(response.url()),
                     "status", response.status(), "requestStage", streamRequestStages.getOrDefault(response.request(), "unknown"),
                     "responseStage", streamStage, "classification", classification));
         });
@@ -346,7 +346,7 @@ public class HappyDeliveryFlowTest extends TestBase {
     private void verifyRetainedDeliveredOrder(String id) {
         var orderWrites=new java.util.concurrent.atomic.AtomicInteger();
         java.util.function.Consumer<com.microsoft.playwright.Request> observeWrites=request->{
-            if(request.method().equals("POST") && java.net.URI.create(request.url()).getPath().equals("/api/v1/orders"))
+            if(request.method().equals("POST") && com.fooddelivery.e2e.util.UrlPaths.path(request.url()).equals("/api/v1/orders"))
                 orderWrites.incrementAndGet();
         };
         customerPage.onRequest(observeWrites);
@@ -473,7 +473,7 @@ public class HappyDeliveryFlowTest extends TestBase {
             org.assertj.core.api.Assertions.assertThat(manifest.get("restaurantPhone")).isEqualTo(testRestaurantPhone);
             selectedOutlet = (String) manifest.get("outlet"); orderId = pendingOrder; expectedOrderId = orderId;
             Response active = customerPage.waitForResponse(response -> response.request().method().equals("GET")
-                    && "/api/v1/orders/active".equals(java.net.URI.create(response.url()).getPath()), customerPage::reload);
+                    && "/api/v1/orders/active".equals(com.fooddelivery.e2e.util.UrlPaths.path(response.url())), customerPage::reload);
             org.assertj.core.api.Assertions.assertThat(active.status()).isEqualTo(200);
             Map<?, ?> envelope = (Map<?, ?>) customerPage.evaluate("text => JSON.parse(text)", active.text());
             java.util.List<?> rows = (java.util.List<?>) ((Map<?, ?>) envelope.get("data")).get("content");
@@ -507,7 +507,7 @@ public class HappyDeliveryFlowTest extends TestBase {
         CheckoutAvailability.requireDeliveryAvailable(CheckoutAvailability.clickCheckoutAndWaitForAvailability(customerPage));
         PaymentModalPage payment = new PaymentModalPage(customerPage);payment.waitForOpen();payment.waitForFinalQuote();
         Response created = customerPage.waitForResponse(r -> r.request().method().equals("POST")
-                && java.net.URI.create(r.url()).getPath().equals("/api/v1/orders"),
+                && com.fooddelivery.e2e.util.UrlPaths.path(r.url()).equals("/api/v1/orders"),
                 () -> payment.placeOrder("Credit or debit card"));
         org.assertj.core.api.Assertions.assertThat(created.status()).isBetween(200,299);
         Map<?,?> envelope = (Map<?,?>) customerPage.evaluate("text => JSON.parse(text)", created.text());
@@ -902,7 +902,7 @@ public class HappyDeliveryFlowTest extends TestBase {
     private void confirmStatus(String orderId, String status, Runnable swipe) {
         com.microsoft.playwright.Response response = riderPage.waitForResponse(
                 r -> r.request().method().equals("POST")
-                        && java.net.URI.create(r.url()).getPath().endsWith("/orders/" + orderId + "/status"),
+                        && com.fooddelivery.e2e.util.UrlPaths.path(r.url()).endsWith("/orders/" + orderId + "/status"),
                 new Page.WaitForResponseOptions().setTimeout(60000),
                 swipe);
         System.out.printf("[OTP SWIPE] %s submission returned HTTP %d for order %s%n",

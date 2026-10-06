@@ -31,7 +31,7 @@ public final class LiveOrderFixture {
         org.assertj.core.api.Assertions.assertThat(manifest.get("customerPhone")).isEqualTo(customerPhone);
         org.assertj.core.api.Assertions.assertThat(manifest.get("restaurantPhone")).isEqualTo(restaurantPhone);
         org.assertj.core.api.Assertions.assertThat(manifest.get("riderPhone")).isEqualTo(riderPhone);
-        Response response=customer.waitForResponse(r->r.request().method().equals("GET") && "/api/v1/orders/active".equals(java.net.URI.create(r.url()).getPath()),customer::reload);
+        Response response=customer.waitForResponse(r->r.request().method().equals("GET") && "/api/v1/orders/active".equals(com.fooddelivery.e2e.util.UrlPaths.path(r.url())),customer::reload);
         org.assertj.core.api.Assertions.assertThat(response.status()).isEqualTo(200);
         Map<?,?> body=(Map<?,?>)customer.evaluate("text=>JSON.parse(text)",response.text());
         java.util.List<?> rows=(java.util.List<?>)((Map<?,?>)body.get("data")).get("content");
@@ -62,7 +62,7 @@ public final class LiveOrderFixture {
         CheckoutAvailability.requireDeliveryAvailable(CheckoutAvailability.clickCheckoutAndWaitForAvailability(customer));
         PaymentModalPage payment = new PaymentModalPage(customer);payment.waitForOpen();payment.waitForFinalQuote();
         Response response = customer.waitForResponse(r -> r.request().method().equals("POST")
-                && java.net.URI.create(r.url()).getPath().equals("/api/v1/orders"), () -> payment.placeOrder("Credit or debit card"));
+                && com.fooddelivery.e2e.util.UrlPaths.path(r.url()).equals("/api/v1/orders"), () -> payment.placeOrder("Credit or debit card"));
         org.assertj.core.api.Assertions.assertThat(response.status()).isBetween(200, 299);
         Map<?, ?> body = (Map<?, ?>) customer.evaluate("text => JSON.parse(text)", response.text());
         org.assertj.core.api.Assertions.assertThat(body.get("success")).isEqualTo(true);

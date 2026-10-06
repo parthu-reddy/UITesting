@@ -67,7 +67,9 @@ public class RestaurantApplicationApiTest extends PartnerApplicationsUiTestBase 
         application.refreshAndAssertStatus("Approved");
         restaurantPage.navigate(TestConfig.APP_URL + "/business");
         com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(restaurantPage.getByTestId("organisation-card")
-                .filter(new com.microsoft.playwright.Locator.FilterOptions().setHasText(submittedName + " Team " + phone))).containsText("Approved");
+                .filter(new com.microsoft.playwright.Locator.FilterOptions().setHasText(submittedName + " Team " + phone))).containsText("Approved",
+                // Identity projects the decision ~2 s after it is made; the hub re-checks every 10 s while an application is pending.
+                new com.microsoft.playwright.assertions.LocatorAssertions.ContainsTextOptions().setTimeout(25_000));
 
         // Customer search filters the loaded feed. Reload through the browser to observe a fresh
         // public listing after another session approves the application.

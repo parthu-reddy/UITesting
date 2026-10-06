@@ -14,7 +14,7 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 public class OneLoginEntitlementsTest extends TestBase {
     @Test void ownerUsesCustomerRestaurantAndBusinessAfterOneOtp() {
         AtomicInteger sessions = new AtomicInteger(); customerPage.onRequest(request -> {
-            if (request.method().equals("POST") && java.net.URI.create(request.url()).getPath().equals("/api/v1/auth/session")) sessions.incrementAndGet();
+            if (request.method().equals("POST") && com.fooddelivery.e2e.util.UrlPaths.path(request.url()).equals("/api/v1/auth/session")) sessions.incrementAndGet();
         });
         new LoginPage(customerPage).login("9000000001").openPortal(Portal.CUSTOMER);
         PortalLauncherPage launcher = new PortalLauncherPage(customerPage); launcher.open(); launcher.state(Portal.CUSTOMER, "Available");

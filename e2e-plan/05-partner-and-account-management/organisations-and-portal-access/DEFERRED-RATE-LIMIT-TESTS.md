@@ -13,3 +13,7 @@ below are **DEFERRED, not executed, and not counted as a pass**.
 
 Focused service/controller tests may verify limiter wiring with H2/mocks. They do not turn these
 deferred deployed UI scenarios into passes.
+
+## 2026-10-05T22:05:00+05:30 — Do not exhaust admin OTP limits by running suites back-to-back
+
+Running O4, O5 and all O3 cases consecutively with one seeded admin (1000000001) hit the ordinary admin OTP limit (10 codes / 10 minutes) and showed "Too many attempts; try again later" — correct behaviour, but it is the deferred rate-limit category and must not happen in normal runs. Both runners accept `--admin-phone 1000000001|1000000002`; alternate them between suites or wait out the window.

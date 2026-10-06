@@ -65,3 +65,15 @@ Checkpoint34 (local): campaigns could not start (no advertiser creatable, `/me` 
 ## 2026-10-05T11:23:48+05:30 — O4 current-session contract mismatch
 
 Existing settings invocation1 passed21/23; the current-device marker was missing because ActiveSessions read sid while Identity signs sessionId. AdminStepUp had the same mismatch for the protected calling everyday session. Corrected existing fixtures expose2ActiveSessions failures and1AdminStepUp failure; repaired product source passes26/26 focused tests, typecheck and lint. UI f73ffe9 is publishing in GitHub37269604733. Deployed settings proof and final phase gates remain pending. Original evidence59 is retained; do not duplicate the21 unchanged read-only passes or the delivered happy lifecycle.
+
+## ISSUE-PROJ-01 — 2026-10-05T20:40:00+05:30 — Restaurant approval after reject → resubmit not reflected in Identity projection (OPEN, root cause unknown)
+
+RestaurantApplicationApiTest#restaurantApplicationLifecycle on deployed f6bbe39/40ed355: applicant's application page shows Approved, but the Business hub card (Identity `BusinessEntitlement` via /api/v1/organisations) stayed IN_REVIEW for 60 s across revalidations. Straight approvals project correctly. Projection ignores events whose applicationVersion ≤ stored. Needs: Identity RestaurantApplicationStatusConsumer logs/DLT for that brand and Restaurant outbox rows (event versions/idempotency keys). Not touched by the 2026-10-05 review changes. Evidence: evidence/review-2026-10-05-phase4-live-e2e.json.
+
+### 2026-10-05T21:15:00+05:30 — ISSUE-PROJ-01 diagnosed: not a backend defect (read-only Oracle evidence, owner-authorised)
+
+restaurant_db outbox for brand 8c48c34b…: seven RESTAURANT_APPLICATION_STATUS_CHANGED events, versions 0,2,4,5,7,9,10, all PROCESSED; APPROVED v10 created 14:45:47Z, published 14:45:49Z. identity_db business_entitlements: APPROVED, application_version 10, updated 14:45:49.08Z. The projection was correct ~2 s after the decision. The Business hub fetched inside that window, its next automatic re-check was 30 s away, and the test's assertion timeout was 5 s. Fix (UI, pending deploy): organisation list re-checks every 10 s while any application is SUBMITTED/IN_REVIEW (unit test + break test). Tests now allow ≤25 s for projected states (RestaurantApplicationApiTest hub card; AdminPartnerApprovalsUiTest uses awaitChangedState — rerun PASS, Delivery Available after 10.4 s). Status: RESOLVED pending UI deploy + rerun of `run_partner_applications_o3_e2e.py --only restaurant`.
+
+### 2026-10-05T22:05:00+05:30 — ISSUE-PROJ-01 CLOSED
+
+UI e538427 deployed; RestaurantApplicationApiTest#restaurantApplicationLifecycle PASS (55 s).
