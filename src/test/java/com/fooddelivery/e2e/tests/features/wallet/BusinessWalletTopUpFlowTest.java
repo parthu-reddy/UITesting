@@ -49,7 +49,7 @@ public class BusinessWalletTopUpFlowTest extends TestBase {
         // ₹100 by CARD with key K: SUCCESS within 10 s, balance + 100.00, newest statement line is this top-up.
         String key = UUID.randomUUID().toString();
         var first = topUp(restaurantPage, wallet, key, "100");
-        assertThat(first.status()).isEqualTo(200);
+        assertThat(first.status()).as("top-up response %s", first.body()).isEqualTo(200);
         String topupId = (String) first.data().get("topupId");
         assertThat(topupId).isNotBlank();
         manifest.put("topupId", topupId); saveManifest(retained, manifest);
@@ -63,7 +63,7 @@ public class BusinessWalletTopUpFlowTest extends TestBase {
 
         // The same key again: the same top-up, no second payment, balance unchanged.
         var again = topUp(restaurantPage, wallet, key, "100");
-        assertThat(again.status()).isEqualTo(200);
+        assertThat(again.status()).as("repeat response %s", again.body()).isEqualTo(200);
         assertThat(again.data().get("topupId")).isEqualTo(topupId);
         assertThat(balance(restaurantPage, wallet)).isEqualByComparingTo(before.add(new BigDecimal("100.00")));
         // The same key with another amount: a conflict.
@@ -71,7 +71,7 @@ public class BusinessWalletTopUpFlowTest extends TestBase {
 
         // Declined by the Dev seam: FAILED with a reason, nothing credited.
         var declined = topUp(restaurantPage, wallet, UUID.randomUUID().toString(), DECLINED_BY_DEV_SEAM);
-        assertThat(declined.status()).isEqualTo(200);
+        assertThat(declined.status()).as("declined top-up response %s", declined.body()).isEqualTo(200);
         String declinedId = (String) declined.data().get("topupId");
         manifest.put("declinedTopupId", declinedId); saveManifest(retained, manifest);
         Map<?, ?> failed = waitForSettlement(restaurantPage, wallet, declinedId);

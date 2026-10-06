@@ -68,14 +68,14 @@ public class RestaurantCampaignsLiveTest extends TestBase {
             assertThat(start).isVisible();
             assertThat(start.getByLabel("Business name")).hasValue(brandName);
             assertThat(start).containsText(zone + ", this outlet's time zone");
-            assertThat(restaurantPage.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Ad Spending History"))).isHidden();
+            assertThat(restaurantPage.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Ad Campaigns").setExact(true))).isHidden();
             org.assertj.core.api.Assertions.assertThat(advertiserWrites).as("opening the tab creates nothing").isEmpty();
             Assumptions.assumeTrue(Boolean.getBoolean("campaign.onboard"),
                     "start step verified; pass -Dcampaign.onboard=true to create this owner's advertiser");
 
             // CAMPAIGN-ONBOARD: one press starts exactly one ad account, keyed by the organisation, under the brand's name and the outlet's zone.
             start.getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Start advertising").setExact(true)).click();
-            assertThat(restaurantPage.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Ad Spending History"))).isVisible();
+            assertThat(restaurantPage.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Ad Campaigns").setExact(true))).isVisible();
             org.assertj.core.api.Assertions.assertThat(advertiserWrites).containsExactly("PUT /api/v1/advertisers/" + organisationId);
             me = get("/api/v1/advertisers/" + organisationId);
             Map<?, ?> created = (Map<?, ?>) ((Map<?, ?>) me.get("body")).get("data");
@@ -90,12 +90,13 @@ public class RestaurantCampaignsLiveTest extends TestBase {
         assertThat(restaurantPage.getByTestId("start-advertising")).isHidden();
         assertThat(restaurantPage.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("New Campaign").setExact(true))).isVisible();
 
-        // CAMPAIGN-WALLET: campaigns spend from the organisation's business wallet (W1) and the card shows it.
+        // CAMPAIGN-WALLET: campaigns spend from the organisation's business wallet (W1); since W3 the Campaigns tab
+        // shows its balance and links to the wallet page in the Business hub instead of carrying wallet UI of its own.
         Map<?, ?> wallet = get("/api/v1/money/business/" + advertiserId);
         org.assertj.core.api.Assertions.assertThat(wallet.get("status")).as("owner reads the business wallet").isEqualTo(200);
         BigDecimal balance = new BigDecimal(String.valueOf(((Map<?, ?>) ((Map<?, ?>) wallet.get("body")).get("data")).get("balance")));
-        Locator balanceCard = restaurantPage.getByText("Ad Wallet Balance", new Page.GetByTextOptions().setExact(true)).locator("..");
-        assertThat(balanceCard).containsText(inr(balance));
+        assertThat(restaurantPage.getByTestId("campaigns-wallet-balance")).hasText(inr(balance));
+        assertThat(restaurantPage.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Manage wallet").setExact(true))).isVisible();
 
         // The list is the server's list.
         Map<?, ?> page = (Map<?, ?>) ((Map<?, ?>) get("/api/v1/advertisers/" + advertiserId + "/campaigns").get("body")).get("data");

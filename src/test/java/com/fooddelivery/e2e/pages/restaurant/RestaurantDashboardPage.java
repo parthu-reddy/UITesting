@@ -87,10 +87,10 @@ public class RestaurantDashboardPage {
         campaignsScreen().waitFor(new Locator.WaitForOptions().setTimeout(15000));
     }
 
-    /** Either Campaigns screen: the campaign list's history heading or the start step's heading. */
+    /** Either Campaigns screen: the campaign list's heading or the start step's heading. */
     public Locator campaignsScreen() {
         return page.getByRole(com.microsoft.playwright.options.AriaRole.HEADING,
-                        new Page.GetByRoleOptions().setName("Ad Spending History").setExact(true))
+                        new Page.GetByRoleOptions().setName("Ad Campaigns").setExact(true))
                 .or(page.getByRole(com.microsoft.playwright.options.AriaRole.HEADING,
                         new Page.GetByRoleOptions().setName("Start advertising").setExact(true)));
     }

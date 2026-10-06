@@ -1,5 +1,16 @@
 # Executable test checklist
 
+## Business Platform wallet and ads gates — 2026-10-06T13:35+05:30
+
+Per-phase gates (E2E-STRATEGY). Detailed results in the owning feature folders; unique methods only.
+
+- [x] `BusinessWalletAccessApiTest#businessWalletAccess` (bp-w1) — deployed W1+A1, invocation 4 PASS; business-wallet/AUDIT-STATUS.md
+- [x] `AdAccountPerOrganisationApiTest#adAccountPerOrganisation` (bp-a1) — deployed W1+A1, invocation 1 PASS; ads-manager/AUDIT-STATUS.md
+- [x] `RestaurantCampaignsLiveTest` 3/3 (`tabMatchesTheOwnersAdvertiser`, `draftIsDiscardedOnCancel`, `launchedCampaignIsStoredInRupees`) — invocation 3 PASS on the pre-W3 UI; **re-run after the W3 UI deploy** (locators changed); ads-manager/AUDIT-STATUS.md
+- [ ] `BusinessWalletTopUpFlowTest#businessWalletTopUpFlow` (bp-w2) — **RED** twice: 12:13 (PaymentServiceClient never registered; fixed, deployed 0962e78) and 13:45 (outbox aggregate_id > 50; fixed locally, WalletService + payment-gateway redeploy pending)
+- [ ] `BusinessWalletUiTest#businessWalletPage` (bp-w3) — written + compiled + locator audit PASS; **not run** (W3 undeployed)
+
+
 ## Current scoped acceptance — 2026-10-05T11:58:13+05:30
 
 48 distinct selected methods pass:16 final phase methods plus32 required existing regression methods. Separate retained Happy money/quote branches and focused reruns are not extra unique methods. No full-suite/all-features green claim. Original failures and explicit deferrals remain in the release.

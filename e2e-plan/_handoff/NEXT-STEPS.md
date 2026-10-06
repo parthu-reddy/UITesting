@@ -1,5 +1,20 @@
 # Ordered continuation
 
+## 2026-10-06T14:10+05:30 — W2 rerun red (outbox aggregate_id too long); fix local
+
+1. Owner redeploys **WalletService and payment-gateway** (no wipe).
+2. Rerun `BusinessWalletTopUpFlowTest` with a new phone (business-wallet/PENDING.md).
+3. Then the W3 UI deploy + `BusinessWalletUiTest` + `RestaurantCampaignsLiveTest` re-run, as below.
+
+## 2026-10-06T13:35+05:30 — Business wallet (checkpoint114)
+
+1. Owner redeploys WalletService (no wipe): the W2 Feign fix plus W3's statement `category`.
+2. Rerun `BusinessWalletTopUpFlowTest` with a new 9999 phone; record it in business-wallet/AUDIT-STATUS.md and W2 validation.md.
+3. Owner deploys the W3 UI (after WalletService). Then run `BusinessWalletUiTest`; the commands are in business-wallet/PENDING.md.
+   Also re-run `RestaurantCampaignsLiveTest`, whose locators changed with W3.
+4. Then A2 (ads), on the owner's go-ahead.
+
+
 ## 2026-10-06T07:49:35+05:30 — Business Platform W1+A1 started (backend only, local)
 
 Nothing deployed. UI, seeds and the two E2E gates (bp-w1, bp-a1) remain: see RandomDocuments/BusinessPlatform_2026-10-03/W1-A1-HANDOFF.md. Do not run W1/A1 E2E until that release is deployed.

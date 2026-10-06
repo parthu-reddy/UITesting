@@ -1,5 +1,13 @@
 # Current checkpoint
 
+## 2026-10-06T13:35+05:30 — Business wallet: W2 red (fix local), W3 written; checkpoint114
+
+W1+A1 deployed and live-green. W2 deployed, its E2E red: WalletService never registered PaymentServiceClient (fixed
+locally). W3 (business wallet page) built locally with its E2E `BusinessWalletUiTest` (compiled, audit PASS, not run).
+Nothing from today's afternoon work is deployed. Feature records: 05-partner-and-account-management/business-wallet and
+ads-manager (new). [checkpoint114](checkpoints/114-business-wallet-w2-red-w3-written.md).
+
+
 ## 2026-10-06T07:20:00+05:30 — Review Phases 1–5 complete and green on Dev
 
 UI 843d7f5 (the F19 fix) is deployed. O5 now passes 8/8. The same race recurred in the run (re-check 114 ms before the accept), and this time a fresh list request followed the accept.
