@@ -1,5 +1,19 @@
 # Ads Manager audit status
 
+## 2026-10-06T21:55+05:30 — A3 deployed: bp-a3 RED (money defect, fix local); A1/A2 re-runs PASS
+
+| Scenario | State | Proof |
+|---|---|---|
+| AM-A3-001 `CampaignModerationActivationFlowTest` | **RED** at the ledger step | everything through the wallet charge passed live; wallet moved 0.42, ledger booked 0.43 (auction priced 0.4250). Fix local (D-A3-PAISE) → redeploy bidding-engine + wallet-service, rerun |
+| AM-A2-001 `PromotedOutletApiTest` | **PASS** | A3 release |
+| AM-A2-002 `SponsoredListingRegressionTest` | **PASS** | A3 release |
+| AM-A1-001 `AdAccountPerOrganisationApiTest` | **PASS** | phone 9999591671 |
+| AM-A1-002 `RestaurantCampaignsLiveTest` | **PASS 3/3** | 9000000001, Brand 1 Outlet 3 |
+| A3 creative queue p95 (`AdCreativeQueueLatencyMeasurement`) | **83 ms** (≤ 300) | n=40, all 200, near-empty queue |
+
+Retained: campaigns f7e5ee2b, e7edd7da (PAUSED after failed runs; the test now pauses in finally). Details:
+RandomDocuments/BusinessPlatform_2026-10-03/03_AdsManager/Phase3_CreativesModerationActivation/validation.md.
+
 ## 2026-10-06T18:22+05:30 — A2 LIVE-GREEN (bp-a2 PASS); A1 + AM-A1-002 re-run PASS
 
 | Scenario | State | Proof |

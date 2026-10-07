@@ -91,6 +91,10 @@ public abstract class TestBase {
         try {
             com.fooddelivery.e2e.util.SeededRiderDuty.finishOfflineIfIdle(riderPage);
         } finally {
+            signOutQuietly("customer", customerPage);
+            signOutQuietly("restaurant", restaurantPage);
+            signOutQuietly("rider", riderPage);
+            signOutQuietly("admin", adminPage);
             closeQuietly(customerContext);
             closeQuietly(restaurantContext);
             closeQuietly(riderContext);
@@ -142,6 +146,16 @@ public abstract class TestBase {
     private static String redactAuthValues(String message) {
         return message.replaceAll("(?i)(https?://[^?\\s'\"]+)\\?[^\\s'\"]+", "$1?[redacted]")
                 .replaceAll("(?i)([?&](?:token|otp)=)[^&#\\s'\"]+", "$1[redacted]");
+    }
+
+    /** Teardown must still close every context when a sign-out fails; the statuses are printed, never asserted. */
+    private void signOutQuietly(String label, Page page) {
+        try {
+            var statuses = com.fooddelivery.e2e.util.SessionSignOut.signOut(page);
+            if (!statuses.isEmpty()) System.out.println("[E2E TEARDOWN] " + label + " signed out " + statuses);
+        } catch (Exception e) {
+            System.out.println("[E2E TEARDOWN] " + label + " sign-out failed: " + e.getMessage());
+        }
     }
 
     private void closeQuietly(BrowserContext ctx) {

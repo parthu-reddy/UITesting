@@ -95,8 +95,6 @@ public class PartnerReadOnlyUiTest extends TestBase {
         assertThat(restaurantPage.getByRole(AriaRole.SWITCH).first()).isVisible();
         assertThat(restaurantPage.getByRole(AriaRole.SWITCH).first()).hasAttribute("aria-checked",Pattern.compile("true|false"));
     }
-    // The unsaved-draft check moved to RestaurantCampaignsLiveTest.draftIsDiscardedOnCancel: the
-    // New Campaign button exists only once the owner has an advertiser, which this smoke cannot know.
     @Test void riderVerificationAndWalletSectionsRender() {
         login(riderPage,Portal.DELIVERY,testRiderPhone);
         riderPage.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("Profile settings").setExact(true)).click();

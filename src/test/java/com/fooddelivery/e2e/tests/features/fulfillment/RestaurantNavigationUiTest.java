@@ -48,8 +48,6 @@ public class RestaurantNavigationUiTest extends TestBase {
         clickTab(Pattern.compile("^Menu$"));
         waitVisible(restaurantPage.getByRole(AriaRole.HEADING,new Page.GetByRoleOptions().setName(Pattern.compile("Today.s menu"))));
         com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(restaurantPage.getByText("Updates every 5 s",new Page.GetByTextOptions().setExact(true))).isHidden();
-        clickTab(Pattern.compile("^Campaigns$"));
-        waitVisible(dashboard.campaignsScreen());
         clickTab(Pattern.compile("^Earnings$"));
         waitVisible(restaurantPage.getByText("Net Earnings", new Page.GetByTextOptions().setExact(true)));
         clickTab(Pattern.compile("^Reviews$"));
@@ -80,7 +78,7 @@ public class RestaurantNavigationUiTest extends TestBase {
             }
         }
         restaurantPage.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("Back to Kitchen Feed").setExact(true)).click();
-        for(String name:new String[]{"Menu","Campaigns","Earnings","Reviews"})clickTab(Pattern.compile("^"+name+"$"));
+        for(String name:new String[]{"Menu","Earnings","Reviews"})clickTab(Pattern.compile("^"+name+"$"));
         clickTab(Pattern.compile("^Orders.*"));
         waitVisible(restaurantPage.getByRole(AriaRole.REGION,new Page.GetByRoleOptions().setName(Pattern.compile("^In the kitchen, [0-9]+ orders?$"))));
         com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(restaurantPage.getByRole(AriaRole.REGION,new Page.GetByRoleOptions().setName("What customers said").setExact(true))).isHidden();

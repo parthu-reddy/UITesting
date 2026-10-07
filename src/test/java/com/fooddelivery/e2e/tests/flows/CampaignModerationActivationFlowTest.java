@@ -87,7 +87,7 @@ public class CampaignModerationActivationFlowTest extends TestBase {
         var creative = GatewayApi.post(restaurantPage, campaign + "/creatives", Map.of("source", "OUTLET_BANNER"));
         assertThat(creative.status()).isEqualTo(201);
         assertThat(creative.data().get("auditStatus")).isEqualTo("PENDING");
-        assertThat(creative.data().get("assetUrl")).isEqualTo(outlet.get("bannerUrl"));
+        assertThat(creative.data().get("previewUrl")).isEqualTo(outlet.get("bannerUrl"));
         String creativeId = (String) creative.data().get("id");
         manifest.put("creativeId", creativeId); save(retained, manifest);
 
@@ -125,62 +125,71 @@ public class CampaignModerationActivationFlowTest extends TestBase {
             manifest.put("toppedUp", 100);
         }
         save(retained, manifest);
-        var activated = GatewayApi.post(restaurantPage, campaign + "/activate", null);
-        assertThat(activated.status()).isEqualTo(200);
-        assertThat(activated.data().get("status")).isEqualTo("ACTIVE");
+        // From here the campaign serves and bills; a failure must not leave it ACTIVE for the next run.
+        boolean paused = false;
+        try {
+            var activated = GatewayApi.post(restaurantPage, campaign + "/activate", null);
+            assertThat(activated.status()).isEqualTo(200);
+            assertThat(activated.data().get("status")).isEqualTo("ACTIVE");
 
-        // The customer's listing: that outlet first, sponsored, with its real data.
-        waitUntil(() -> {
-            List<Map<String, Object>> now = listing(listingUrl);
-            return !now.isEmpty() && Boolean.TRUE.equals(now.get(0).get("isSponsored")) && outletId.equals(now.get(0).get("id"));
-        }, 30000, "the campaign to be indexed and served first in the customer's listing");
-        Map<String, Object> card = listing(listingUrl).get(0);
-        assertThat(card.get("name")).isEqualTo(outlet.get("name"));
-        assertThat(((Map<?, ?>) card.get("adData")).get("campaignId")).isEqualTo(campaignId);
+            // The customer's listing: that outlet first, sponsored, with its real data.
+            waitUntil(() -> {
+                List<Map<String, Object>> now = listing(listingUrl);
+                return !now.isEmpty() && Boolean.TRUE.equals(now.get(0).get("isSponsored")) && outletId.equals(now.get(0).get("id"));
+            }, 30000, "the campaign to be indexed and served first in the customer's listing");
+            Map<String, Object> card = listing(listingUrl).get(0);
+            assertThat(card.get("name")).isEqualTo(outlet.get("name"));
+            assertThat(((Map<?, ?>) card.get("adData")).get("campaignId")).isEqualTo(campaignId);
 
-        // The customer sees it; the card's impression is recorded and bills the business wallet.
-        BigDecimal beforeImpression = balance(wallet);
-        manifest.put("balanceBeforeImpression", beforeImpression.toPlainString());
-        Response impression = customerPage.waitForResponse(
-                r -> UrlPaths.path(r.url()).equals("/api/v1/tracking/impression"),
-                new Page.WaitForResponseOptions().setTimeout(30000),
-                () -> {
-                    customerPage.reload();
-                    Locator dialog = customerPage.getByRole(com.microsoft.playwright.options.AriaRole.DIALOG);
-                    try {
-                        dialog.waitFor(new Locator.WaitForOptions().setTimeout(5000));
-                        new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();
-                    } catch (com.microsoft.playwright.TimeoutError noAddressPrompt) {
-                        // the saved address carried over the reload
-                    }
-                });
-        assertThat(impression.status()).isBetween(200, 299);
-        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(
-                customerPage.getByText("Sponsored", new Page.GetByTextOptions().setExact(true)).first()).isVisible();
-        waitUntil(() -> balance(wallet).compareTo(beforeImpression) < 0, 15000, "the impression to be charged to the business wallet");
-        BigDecimal charged = beforeImpression.subtract(balance(wallet));
-        assertThat(charged).isPositive().isLessThanOrEqualTo(new BigDecimal("0.50"));
-        manifest.put("charged", charged.toPlainString()); save(retained, manifest);
+            // The customer sees it; the card's impression is recorded and bills the business wallet.
+            BigDecimal beforeImpression = balance(wallet);
+            manifest.put("balanceBeforeImpression", beforeImpression.toPlainString());
+            Response impression = customerPage.waitForResponse(
+                    r -> UrlPaths.path(r.url()).equals("/api/v1/tracking/impression"),
+                    new Page.WaitForResponseOptions().setTimeout(30000),
+                    () -> {
+                        customerPage.reload();
+                        Locator dialog = customerPage.getByRole(com.microsoft.playwright.options.AriaRole.DIALOG);
+                        try {
+                            dialog.waitFor(new Locator.WaitForOptions().setTimeout(5000));
+                            new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();
+                        } catch (com.microsoft.playwright.TimeoutError noAddressPrompt) {
+                            // the saved address carried over the reload
+                        }
+                    });
+            assertThat(impression.status()).isBetween(200, 299);
+            com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(
+                    customerPage.getByText("Sponsored", new Page.GetByTextOptions().setExact(true)).first()).isVisible();
+            waitUntil(() -> balance(wallet).compareTo(beforeImpression) < 0, 15000, "the impression to be charged to the business wallet");
+            BigDecimal charged = beforeImpression.subtract(balance(wallet));
+            assertThat(charged).isPositive().isLessThanOrEqualTo(new BigDecimal("0.50"));
+            manifest.put("charged", charged.toPlainString()); save(retained, manifest);
 
-        // The ledger booked it: a debit of the organisation's prepaid account for exactly that amount.
-        var debits = statementLines(org).stream()
-                .filter(l -> "AD_IMPRESSION".equals(l.get("category")) && "DEBIT".equals(l.get("direction")))
-                .filter(l -> new BigDecimal(l.get("amount").toString()).compareTo(charged) == 0).toList();
-        assertThat(debits).as("BUSINESS_PREPAID debit for the impression").isNotEmpty();
+            // The ledger booked it: a debit of the organisation's prepaid account for exactly that amount. The wallet
+            // posts through its outbox (2 s poll) and Kafka, so the line lands after the balance moves.
+            waitUntil(() -> statementLines(org).stream()
+                    .filter(l -> "AD_IMPRESSION".equals(l.get("category")) && "DEBIT".equals(l.get("direction")))
+                    .anyMatch(l -> new BigDecimal(l.get("amount").toString()).compareTo(charged) == 0),
+                    15000, "the BUSINESS_PREPAID debit for the impression to be booked");
 
-        // Performance counts it for today.
-        waitUntil(() -> {
-            var perf = GatewayApi.get(restaurantPage, campaign + "/performance");
-            if (perf.status() != 200) return false;
-            List<?> days = (List<?>) perf.data().get("content");
-            return days.stream().map(Map.class::cast).anyMatch(d -> today.equals(d.get("date"))
-                    && ((Number) d.get("impressions")).longValue() >= 1);
-        }, 15000, "performance to count the impression");
+            // Performance counts it for today.
+            waitUntil(() -> {
+                var perf = GatewayApi.get(restaurantPage, campaign + "/performance");
+                if (perf.status() != 200) return false;
+                List<?> days = (List<?>) perf.data().get("content");
+                return days.stream().map(Map.class::cast).anyMatch(d -> today.equals(d.get("date"))
+                        && ((Number) d.get("impressions")).longValue() >= 1);
+            }, 15000, "performance to count the impression");
 
-        // Paused: out of the listing.
-        assertThat(GatewayApi.post(restaurantPage, campaign + "/pause", null).status()).isEqualTo(200);
-        waitUntil(() -> listing(listingUrl).stream().noneMatch(r -> Boolean.TRUE.equals(r.get("isSponsored"))
-                && r.get("adData") instanceof Map<?, ?> ad && campaignId.equals(ad.get("campaignId"))), 10000, "the paused campaign to leave the listing");
+            // Paused: out of the listing.
+            assertThat(GatewayApi.post(restaurantPage, campaign + "/pause", null).status()).isEqualTo(200);
+            paused = true;
+            waitUntil(() -> listing(listingUrl).stream().noneMatch(r -> Boolean.TRUE.equals(r.get("isSponsored"))
+                    && r.get("adData") instanceof Map<?, ?> ad && campaignId.equals(ad.get("campaignId"))), 10000, "the paused campaign to leave the listing");
+        } finally {
+            if (!paused) System.out.println("A3 cleanup pause after failure: "
+                    + GatewayApi.post(restaurantPage, campaign + "/pause", null).status());
+        }
 
         manifest.put("completed", true); save(retained, manifest);
         System.out.println("A3 campaign moderated, activated, served, billed and paused; retained " + retained);

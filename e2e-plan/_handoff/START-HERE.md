@@ -1,5 +1,7 @@
 # Resume the Food Delivery E2E audit
 
+Latest continuation (2026-10-07): [checkpoint120](checkpoints/120-ads-a4-built-locally.md) — A4 Ads Manager built locally (uploads private-first, server-filtered list); deploy + bp-a4 open, see A4-HANDOFF.md. Previous: [checkpoint119](checkpoints/119-ads-a3-live-green.md).
+
 Latest continuation (2026-10-06T15:35+05:30): [checkpoint116](checkpoints/116-business-wallet-live-green.md) — business wallet W1–W3 live-green; next is A2 on the owner's go-ahead.
 
 Latest continuation (2026-10-06T15:05+05:30): [checkpoint115](checkpoints/115-business-wallet-third-round.md) — WalletService + UI redeploy pending, then W2/W3 reruns.

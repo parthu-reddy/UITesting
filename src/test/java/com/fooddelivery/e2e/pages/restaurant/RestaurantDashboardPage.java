@@ -77,24 +77,6 @@ public class RestaurantDashboardPage {
         page.waitForTimeout(300);
     }
 
-    /**
-     * Opens Campaigns and waits for it to settle on one of its two screens: the campaign screen when
-     * the owner has an advertiser, or the "Start advertising" step when they do not.
-     */
-    public void openCampaignsTab() {
-        page.getByRole(com.microsoft.playwright.options.AriaRole.TAB,
-                new Page.GetByRoleOptions().setName("Campaigns").setExact(true)).click();
-        campaignsScreen().waitFor(new Locator.WaitForOptions().setTimeout(15000));
-    }
-
-    /** Either Campaigns screen: the campaign list's heading or the start step's heading. */
-    public Locator campaignsScreen() {
-        return page.getByRole(com.microsoft.playwright.options.AriaRole.HEADING,
-                        new Page.GetByRoleOptions().setName("Ad Campaigns").setExact(true))
-                .or(page.getByRole(com.microsoft.playwright.options.AriaRole.HEADING,
-                        new Page.GetByRoleOptions().setName("Start advertising").setExact(true)));
-    }
-
     public void openReviewsTab() {
         page.locator("button:has-text('Reviews'), [role='tab']:has-text('Reviews')").first().click();
         page.waitForTimeout(300);
