@@ -1,0 +1,33 @@
+Admin
+Live Operations
+Support Tickets
+Refund Queue
+Manual Interventions
+User Management
+Categories
+Fleet Map
+Ledger Entries
+Pending Payouts
+Money Operations
+Review Moderation
+Partner Approvals
+Ad creatives
+Switch portal
+Refund Exception Queue
+Status Filter
+All Tickets
+Refund tickets awaiting a decision
+TICKET ID
+↕
+	ORDER ID
+↕
+	REASON	REQUESTED AMT
+↕
+	STATUS
+↕
+	CREATED
+↕
+
+47ffbccd…	6fbe0289…	
+E2E visual audit 6fbe0289: owned dummy ticket
+	₹14.26	REJECTED	7 Oct 2026, 11:28

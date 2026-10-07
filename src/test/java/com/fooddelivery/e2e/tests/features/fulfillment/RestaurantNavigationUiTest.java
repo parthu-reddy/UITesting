@@ -33,13 +33,14 @@ public class RestaurantNavigationUiTest extends TestBase {
         new RestaurantDashboardPage(restaurantPage).waitForDashboard();
 
         RestaurantDashboardPage dashboard=new RestaurantDashboardPage(restaurantPage);
-        String outlet=System.getProperty("restaurant.outlet.name","Brand 1 Outlet 3");
+        String outlet=ownOutletName("restaurant.outlet.name",0);
+        String alternate=ownOutletName("restaurant.alternate.outlet.name",1);
+        System.out.println("REST-NAV restaurant "+testRestaurantPhone+", outlets "+outlet+" / "+alternate);
         dashboard.selectOutlet(outlet);
         Locator outletSelector=restaurantPage.getByRole(AriaRole.COMBOBOX,new Page.GetByRoleOptions().setName("Outlet").setExact(true));
         String selectedLabel=outletSelector.innerText().trim();
         restaurantPage.reload();dashboard.waitForDashboard();
         com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(outletSelector).hasText(selectedLabel);
-        String alternate=System.getProperty("restaurant.alternate.outlet.name","Brand 1 Outlet 6");
         dashboard.selectOutlet(alternate);
         dashboard.selectOutlet(outlet);
 
@@ -93,8 +94,9 @@ public class RestaurantNavigationUiTest extends TestBase {
         new LoginPage(restaurantPage).login(testRestaurantPhone).openPortal(Portal.RESTAURANT);
         RestaurantDashboardPage dashboard = new RestaurantDashboardPage(restaurantPage);
         dashboard.waitForDashboard();
-        String outletName = System.getProperty("review.outlet.name", "Brand 1 Outlet 6");
         String expectedComment = System.getProperty("review.customer.comment");
+        String outletName = ownOutletName("review.outlet.name", 0);
+        System.out.println("REVIEW-AGG-01 restaurant " + testRestaurantPhone + ", outlet " + outletName);
         dashboard.selectOutlet(outletName);
 
         AtomicInteger reviewReadResponses = new AtomicInteger();
@@ -151,6 +153,15 @@ public class RestaurantNavigationUiTest extends TestBase {
                 .hasText(Pattern.compile("^[1-5]\\.\\d$"));
         com.microsoft.playwright.assertions.PlaywrightAssertions
                 .assertThat(reviewsPanel.getByText(Pattern.compile("\\d+ reviews?"))).isVisible();
+    }
+
+    /**
+     * The signed-in owner is random (9000000001–010) unless -Drestaurant.phone pins it, so outlets come from that
+     * owner's own outlets: a named one (-D{property}) must be among them, otherwise the one at {@code fallback} by name.
+     */
+    private String ownOutletName(String property, int fallback) {
+        return new RestaurantDashboardPage(restaurantPage)
+                .availableOutlet(System.getProperty(property), fallback);
     }
 
     private void clickTab(Pattern name) {

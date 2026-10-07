@@ -1,5 +1,33 @@
 # Validation and pending work
 
+## 2026-10-07T11:33:21+05:30 — Approved fixture completed; never rerun its write
+
+Owned47ffbccd on6fbe0289 is REJECTED. Same-ticket resume verifies audit and0refunds with0writes,
+1/1green. Original writer error after rejection200 is retained; no populated-audit fixture blocker
+remains. [Checkpoint124](../../_handoff/checkpoints/124-deployed-receipt-owned-refund-and-active-rider-gate.md). Exact ticket manifest is durable in _handoff/fixtures.
+
+## Checkpoint123 — exact dummy visual fixture approved, waiting on UI deployment
+
+All Tickets real UI read passes1/1,GET200,0rows/0resolution writes. Populated detail/confirm/audit
+is unverified. Owner approved one normal support request and rejection for delivered6fbe0289,
+with no refund approval or payout. `OwnedRefundVisualUiTest` compiles and uses normal login/History/
+support/queue controls and observed UI responses only. Run after owner UI6eb4ef6 is live and the
+retained receipt continuation passes:
+
+```sh
+PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 mvn test -Dtest=OwnedRefundVisualUiTest \
+  -Dvisual.refund.order.id=6fbe0289-645e-4f1c-ae0d-caab21689070 \
+  -Dcustomer.phone=8000000001 -Drestaurant.phone=9000000001 -Drider.phone=7000000001 \
+  -Dadmin.phone=1000000002 -Dheadless=false -Dslow.mo=0 -Drecord.video=false \
+  -Ddefault.timeout=30000 -Dvisual.audit.dir=e2e-plan/_handoff/evidence/123-owned-refund-visual
+```
+
+Refuse any other order/reason; reuse the exact matching ticket on retry and never repeat a final
+rejection. Approve confirmation is cancelled; only this dummy rejection commits. Verify no order
+write, exact rejected response/audit and actual UI refund reads empty before/after. Preserve the
+two-hour CTA prerequisite and all captures/identifiers. [Fixture scope](../../../../RandomDocuments/PendingWork_2026-10-07/ITEM-3-ADMIN-FIXTURE.md).
+This permission does not reopen actual refund payments or the older full financial flow below.
+
 ## Local browser-routed coverage
 
 `AdminSupportRefundQueueTest` now checks the actual OPEN/IN_REVIEW/RESOLVED/REJECTED support requests, response status, page counts and empty states. It opens a support rejection confirmation and cancels it. Refund checks verify the queue response/state and open/cancel both approval and rejection confirmations; a request listener asserts that no resolve POST was sent.

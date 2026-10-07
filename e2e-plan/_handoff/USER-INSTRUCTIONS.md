@@ -1,5 +1,65 @@
 # Primary user instructions and accepted decisions
 
+## 2026-10-07T12:05+05:30 — Resume after usage limit; fix mistakes
+
+The owner asked this session to check the previous agent's progress after its usage-limit stop and
+resume the work, adding: "If there are mistakes fix them". Applied as follows. The unrecorded
+invocations 3 and 4 were recorded and corrected. The owned order ce254f3a was resumed and verified
+rather than replaced. Rider UI defects found in its live captures were fixed locally with red-first
+tests. Deployment remains the owner's, so the UI-only deploy is pending; nothing was committed or pushed.
+
+## 2026-10-07T11:33:21+05:30 — Owner confirms UI-only deployment
+
+Direct owner: “I've deployed UI alone for now”. Served UI6eb4ef6 was independently verified from the
+actual CI asset during normal rider login. Proceed with authorized item3 E2E; no backend deployment
+or agent commit/push is inferred. Exact approved ticket47ffbccd is now persisted REJECTED on6fbe0289;
+the successful resume made0resolution writes. Do not repeat its writer to obtain fresh screenshots.
+
+## 2026-10-07T11:16+05:30 — Additional UI deployment and owned dummy refund fixture approved
+
+Owner answered the active-state UI handoff “I'll deploy the UI now” and the exact fixture plan
+“Yes, create and reject the owned dummy ticket”. Authorization is one normal UI support request and
+final rejection on retained delivered Dev order6fbe0289-645e-4f1c-ae0d-caab21689070, customer8000000001,
+owner9000000001/rider7000000001, following
+[ITEM-3-ADMIN-FIXTURE](../../../RandomDocuments/PendingWork_2026-10-07/ITEM-3-ADMIN-FIXTURE.md).
+Approval confirmation may be opened and cancelled; never approve or pay a refund. Verify quote,
+matching ticket, rejection response/audit and absence of customer refund records; preserve all data.
+Only owner commits/builds/deploys UI; no renewed agent deployment/cleanup authority. New UI head
+6eb4ef6 is publishing through owner GitHub37577846909; intent/publication is not live confirmation.
+M1/A5b remains paused until item3 closes. Do not ask again for this exact fixture authorization.
+
+## 2026-10-07T10:35+05:30 — Owner UI deployment in progress
+
+Owner answered the concrete item3 deployment handoff: “I'll deploy the UI now.” Scope is
+FoodDeliveryAppUI rider canvas/sidebar labels only. This is intent, not live confirmation; rerun
+the final strengthened RoleVisualAuditUiTest after actual confirmation. Maps/ETA stays paused.
+No change to the standing owner-managed deployment or local-only work rule.
+
+## 2026-10-07T10:14+05:30 — Sequential work, production-ready UX and E2E
+
+Direct owner instructions: "remember that I want production ready code with best UI for best UX.
+Try creating a plan for one work at a time and fix one by one." Follow-up: "Do not forget to
+include E2E tests as well". The sequential plan is [PendingWork_2026-10-07](../../../RandomDocuments/PendingWork_2026-10-07/README.md).
+Only one active item; finish its appropriate checks and evidence before starting the next. Existing
+parallel tests may finish safely; maps/ETA implementation is paused until its turn. Functional
+completion requires meaningful deployed UI E2E, with local-only/deployment-waiting gaps kept explicit.
+
+Further owner clarification: mark already-fixed items fixed; never assume, always inspect code,
+and learn application flows from existing E2E tests. Status closure must name source/evidence,
+and new test design should reuse the real established UI journey and prerequisite checks.
+
+## 2026-10-07T10:10+05:30 — Resume screenshot pending work
+
+Direct owner request: "I want you to start working on these pending works and complete them",
+with the screenshot listing business-platform paperwork, existing uncommitted changes,
+restaurant harness follow-ups and the older UI redesign backlog. This resumes the ordinary pending
+work beyond the prior stop boundary. Verify source and current evidence before closing stale items.
+The latest owner-managed build/deploy and local-only changes rule remains: no commit, push,
+publication or deployment is inferred from this request. Keep explicitly parked design/measurement/
+CSP/SSE/duration/rate cases separate unless the owner changes their scope. No local servers,
+Docker, direct-state E2E or browser-state injection; live checks use Dev Autofill and visible UI controls.
+Root coordinates current handoff records; parallel work owns paperwork, restaurant harness and maps/ETA.
+
 ## 2026-10-05T14:05:00+05:30 — O1–O5 production-readiness review; nothing runs locally
 
 Direct owner instructions (2026-10-05): review everything completed so far (O1–O5) and make it production ready with the best UI/UX. "The trycloudflare address is for dev purpose, don't worry about using it. When you make changes and want to deploy any service let me know, I'll build and deploy them. Don't do anything locally as nothing is running locally." Learn flows from these E2E tests rather than re-reading all UI source; respect this folder's deferred-test categories.

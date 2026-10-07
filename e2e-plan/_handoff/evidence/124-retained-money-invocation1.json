@@ -1,0 +1,19 @@
+{
+  "recordedAt": "2026-10-07T11:37:19+05:30",
+  "proofType": "deployed normal UI only; retained money and quote",
+  "test": "HappyDeliveryFlowTest#completeOrderLifecycle [retained delivered money/quote]",
+  "invocation": 1,
+  "tests": 1,
+  "passed": 0,
+  "failures": 1,
+  "errors": 0,
+  "skipped": 0,
+  "elapsedSeconds": 20.47,
+  "orderId": "6fbe0289-645e-4f1c-ae0d-caab21689070",
+  "rawLog": "/private/tmp/food-pending-item3-retained-money-invocation1.log",
+  "rawLogSha256": "545ea78bc419b9af9151f81ee7464dcb31c86e80222465d85eff2583a70701a4",
+  "networkErrors": 0,
+  "browserErrors": 0,
+  "failure": "Harness required the undecorated outlet name; actual OwnerNameResolver adds the brand in parentheses.",
+  "writeScope": "No business writer control was reached; no replacement fixture."
+}

@@ -1,0 +1,41 @@
+{
+  "recordedAt": "2026-10-07T12:25:00+05:30",
+  "test": "HappyDeliveryFlowTest#completeOrderLifecycle [retained resume of invocation4 order]",
+  "invocation": 5,
+  "proofType": "deployed UI (6eb4ef6) retained-order resume; no new order",
+  "tests": 1,
+  "passed": 1,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "elapsedSeconds": 52.0,
+  "command": "PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 mvn test '-Dtest=HappyDeliveryFlowTest#completeOrderLifecycle' -Dheadless=false -Dslow.mo=0 -Drecord.video=false -Dcustomer.phone=8000000001 -Drestaurant.phone=9000000001 -Drider.phone=7000000001 -Dresume.order.id=ce254f3a-13c6-4317-a30f-6884595aa090 '-Dresume.outlet=Brand 1 Outlet 5' -Dvisual.audit.dir=e2e-plan/_handoff/evidence/124-role-active-visual -Ddefault.timeout=30000",
+  "newOrderCreated": false,
+  "ownedOrderId": "ce254f3a-13c6-4317-a30f-6884595aa090",
+  "orderStateAfter": "DELIVERED through the rider UI",
+  "harnessChanges": [
+    "resumeAssignedOrder now runs RiderVisualAudit.capture(out-for-delivery) after a fresh rider load (no-op without -Dvisual.audit.dir)",
+    "RiderVisualAudit records <name>-missing-pins.txt (visibility, focus, permission, restaurant lookup timing/status, timed geolocation probe, marker labels) before rethrowing a missing courier pin"
+  ],
+  "verified": [
+    "out-for-delivery 390x844 capture after fresh rider load: canvas, 2 call targets >=48px, courier/customer/restaurant pins, slide-to-deliver >=48px and uncovered at 10/50/90%, header chat >=48px, no horizontal overflow",
+    "delivery OTP + swipe attempt 1, DELIVERED HTTP 200",
+    "rider completed trip with positive payout",
+    "customer delivered receipt"
+  ],
+  "missingPinDiagnosticTriggered": false,
+  "invocation4PinFailure": "NOT reproduced; cause still undetermined. Diagnostics will record it if it recurs.",
+  "falseZeroObserved": "Same capture: map PNG (earlier) shows Today's earnings \u20b90.00 / 0 orders; text dump (seconds later) shows \u20b921.16 / 1 orders. The deployed UI renders a pending history read as a confirmed zero.",
+  "weakCheck": "resumeAssignedOrder read earningsBefore before the capture, while the tile still read \u20b90.00, so its 'earnings >= before + payout' assertion was effectively '>= payout'. The exact increase over \u20b921.16 is NOT proven by this invocation.",
+  "artifacts": [
+    "124-role-active-visual/rider-out-for-delivery-ce254f3a-13c6-4317-a30f-6884595aa090-map.png",
+    "124-role-active-visual/rider-out-for-delivery-ce254f3a-13c6-4317-a30f-6884595aa090-contacts-swipe.png",
+    "124-role-active-visual/rider-out-for-delivery-ce254f3a-13c6-4317-a30f-6884595aa090.txt"
+  ],
+  "capturesInspected": true,
+  "notCovered": [
+    "money ledger/payout drawer checks for ce254f3a (resume path does not run OrderMoneyChecks)"
+  ],
+  "rawLog": "/private/tmp/food-pending-item3-active-invocation5-resume.log",
+  "rawLogSha256": "832f476433751a0b8cf0ce023a31fc47a1d480cf02a673d0c40b4a89507d8fd2"
+}

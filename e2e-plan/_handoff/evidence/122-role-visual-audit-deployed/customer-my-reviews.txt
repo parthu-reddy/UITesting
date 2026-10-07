@@ -1,0 +1,25 @@
+reviewsStatus=200
+LA BOUFFE
+ELEGANCE DELIVERED
+Home
+Orders
+Wallet
+Addresses
+Account
+Dark mode
+Sign out
+DELIVER TO
+Home: 121, Random Street 22, Bangalore
+Switch portal
+Account Settings
+
+Manage your profile and orders
+
+Profile
+History
+Addresses
+My Reviews
+Store Credit
+You haven't reviewed anything yet
+
+After an order is delivered you can rate the restaurant, the delivery partner and the dishes.

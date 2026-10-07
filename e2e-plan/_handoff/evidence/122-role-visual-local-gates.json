@@ -1,0 +1,86 @@
+{
+  "recordedAt": "2026-10-07T10:32:55+05:30",
+  "proofType": "local source/unit/toolchain; no local server or deployed acceptance",
+  "sourceHashes": {
+    "src/shared/ui/SidebarNav.tsx": "8ee076116ac67afde5277e1bfad2afaab088f69cb8a0c13d3be1358a56053224",
+    "src/shared/ui/shell/RoleShell.tsx": "8eaed609089d256d578725a84748dbf30f204e70e53dae692def82ab0410cf80",
+    "src/shared/ui/shell/RoleShells.test.tsx": "be2d702f578c7513c9a25ddce799a868ccf0a0bc36ddc8b2824e9159c7ef5444"
+  },
+  "harnessSourceSha256": "e389fd5c23ccc76181b4a8f344c7f3e16572f261b09261b2ad85c5ade8c27b1e",
+  "checks": {
+    "fullUiSuite": {
+      "files": 173,
+      "assertions": 1045,
+      "failed": 0,
+      "skipped": 0,
+      "log": {
+        "rawLog": "/private/tmp/food-pending-item3-full-ui.log",
+        "sha256": "0a9d5f2b75a02b9727d96f68f500a976587f6644ddab988ee456dfba5caba6e3",
+        "networkErrorLines": 0,
+        "browserErrorLines": 0
+      }
+    },
+    "focusedRoleShell": {
+      "assertions": 13,
+      "failed": 0,
+      "log": {
+        "rawLog": "/private/tmp/food-pending-rider-unit-green.log",
+        "sha256": "5148d5e333e9014a00dd0cf5d2e2f59a7fe2b74f3388ddbeab21830cae92fbbc",
+        "networkErrorLines": 0,
+        "browserErrorLines": 0
+      }
+    },
+    "canvasNegativeControl": {
+      "failed": 1,
+      "passed": 2,
+      "log": {
+        "rawLog": "/private/tmp/food-pending-rider-unit-red.log",
+        "sha256": "7b6050d8cff755e32ae0bed6596e05739606b51103fea9eebe91293bb0720266",
+        "networkErrorLines": 0,
+        "browserErrorLines": 0
+      }
+    },
+    "typecheck": {
+      "exitCode": 0,
+      "log": {
+        "rawLog": "/private/tmp/food-pending-item3-typecheck.log",
+        "sha256": "def73bc9dc3c6849610213c995b572f667d411edbeb539cf86df6f854ac33fd4",
+        "networkErrorLines": 0,
+        "browserErrorLines": 0
+      }
+    },
+    "lint": {
+      "exitCode": 0,
+      "log": {
+        "rawLog": "/private/tmp/food-pending-item3-lint.log",
+        "sha256": "9b97ec448dcd48c702e488266f43ba91e796e4fa73fbc9234daf4ed02afbff7a",
+        "networkErrorLines": 0,
+        "browserErrorLines": 0
+      }
+    },
+    "viteBuild": {
+      "exitCode": 0,
+      "log": {
+        "rawLog": "/private/tmp/food-pending-item3-vite-build.log",
+        "sha256": "b45c607f922518a9f7bc9c498305eabd4bfa71343d89ab7413fd2cd172632b59",
+        "networkErrorLines": 0,
+        "browserErrorLines": 0
+      }
+    },
+    "redesignPhase4": {
+      "passed": 12,
+      "total": 12,
+      "skipToolchain": true,
+      "log": {
+        "rawLog": "/private/tmp/food-pending-item3-role-gate.log",
+        "sha256": "1d9861a1a95afb02cf29e9f48d1699d6cae49030bf13d31537f6b5a6b35c794b",
+        "networkErrorLines": 0,
+        "browserErrorLines": 0
+      }
+    }
+  },
+  "deploymentRequired": [
+    "FoodDeliveryAppUI"
+  ],
+  "releaseAccepted": false
+}

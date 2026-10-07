@@ -18,8 +18,15 @@ public class NearbyOutletPage {
 
     /** Opens a brand card from the post-reload restaurant feed, then selects its nearest outlet. */
     public String openBrandCardAndSelectNearby(String brandName) {
-        page.getByRole(AriaRole.HEADING,
-                new Page.GetByRoleOptions().setName(brandName).setExact(true)).first().click();
+        // The feed initially renders six cards; an unrendered brand cannot be clicked.
+        // Search filters the actual nearby list before that visible-count limit.
+        page.getByRole(AriaRole.TEXTBOX, new Page.GetByRoleOptions()
+                .setName("Search restaurants or cuisines").setExact(true)).fill(brandName);
+        Locator brand = page.getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions()
+                .setHas(page.getByText(brandName, new Page.GetByTextOptions().setExact(true))));
+        assertThat(brand).hasCount(1, new com.microsoft.playwright.assertions.LocatorAssertions.HasCountOptions()
+                .setTimeout(30000));
+        brand.click();
         return selectNearbyOutlet(brandName);
     }
 

@@ -1,0 +1,14 @@
+{
+  "orderId": "6fbe0289-645e-4f1c-ae0d-caab21689070",
+  "reason": "E2E visual audit 6fbe0289: owned dummy ticket",
+  "note": "E2E visual audit: reject this owned dummy request; no refund approved.",
+  "ownerAuthorized": true,
+  "cleanupPerformed": false,
+  "createdInInvocation": true,
+  "rejectedInInvocation": false,
+  "quotedAmount": "14.26",
+  "ticketId": "47ffbccd-1f4a-42f1-93dd-f610f07bd923",
+  "status": "OPEN",
+  "orderWrites": 0,
+  "resolutionWrites": 1
+}

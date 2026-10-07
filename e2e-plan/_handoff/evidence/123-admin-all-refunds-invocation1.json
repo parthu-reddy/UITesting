@@ -1,0 +1,43 @@
+{
+  "recordedAt": "2026-10-07T11:17:55+05:30",
+  "proofType": "deployed normal UI only; fresh All Tickets read",
+  "test": "RoleVisualAuditUiTest#adminAllRefundHistoryRead",
+  "invocation": 1,
+  "tests": 1,
+  "passed": 1,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "elapsedSeconds": 10.67,
+  "responseStatus": 200,
+  "rows": 0,
+  "resolutionWrites": 0,
+  "networkErrors": 0,
+  "browserErrors": 0,
+  "capturesInspected": true,
+  "disposition": {
+    "rows": 0,
+    "actionDetailRead": false,
+    "resolutionAuditRead": false,
+    "resolutionWrites": 0
+  },
+  "artifacts": [
+    {
+      "file": "evidence/123-admin-all-refunds/admin-refunds-all-disposition.json",
+      "sha256": "ef77c274c88e0623868e1887919fa04c662c0708f92e53b0c73b237c6d79e251"
+    },
+    {
+      "file": "evidence/123-admin-all-refunds/admin-refunds-all.png",
+      "sha256": "d82bf33a99b55177b996f407fbe32eb5d2f358f5a46b564a36c98fbfb14bf297"
+    },
+    {
+      "file": "evidence/123-admin-all-refunds/admin-refunds-all.txt",
+      "sha256": "6bba511fe6d7a08d6fedcd4bc5510c3aad8240d6c61886be402cd568d4dc6e1a"
+    }
+  ],
+  "rawLog": "/private/tmp/food-pending-item3-admin-all-invocation1.log",
+  "rawLogSha256": "8fd9598bab911a5dda0f904109fdb64d2d029ab99a8a633b4d2f039a4a025cb5",
+  "limitations": [
+    "No populated detail/confirmation/resolution-audit branch executed; owner approved exact new dummy fixture afterward"
+  ]
+}

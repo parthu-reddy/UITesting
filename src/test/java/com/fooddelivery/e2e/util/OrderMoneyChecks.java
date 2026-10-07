@@ -1,8 +1,9 @@
 package com.fooddelivery.e2e.util;
 
-import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.pages.admin.AdminOrderMoneyPage;
+import com.fooddelivery.e2e.pages.admin.AdminPortalPage;
 import com.microsoft.playwright.*;
+import com.microsoft.playwright.options.AriaRole;
 import java.math.BigDecimal;
 import java.nio.file.*;
 import java.util.*;
@@ -11,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /** Real read-only admin response, exact-order UI amounts, arithmetic and balanced ledger trace. */
 public final class OrderMoneyChecks {
     private OrderMoneyChecks() {}
-    public static Map<?,?> verify(Page admin,String id,Map<?,?> created,double completedTripPayout) {
+    public static Map<?,?> verify(Page admin,String id,Map<?,?> created,double completedTripPayout,String outletName) {
         String path="/api/v1/internal/admin/orders/"+id+"/money";
         var writes=new java.util.concurrent.atomic.AtomicInteger();
         java.util.function.Consumer<Request> observeWrites = request -> {
@@ -21,7 +22,7 @@ public final class OrderMoneyChecks {
         try {
             Response response=admin.waitForResponse(r -> r.request().method().equals("GET")
                     && com.fooddelivery.e2e.util.UrlPaths.path(r.url()).equals(path),
-                    ()->admin.navigate(TestConfig.APP_URL.replaceAll("/$","")+"/admin/orders/"+id+"/money"));
+                    ()->openFromUnsettledOrderReference(admin,id,created,outletName));
             assertThat(response.status()).isEqualTo(200);
             Map<?,?> money=(Map<?,?>)admin.evaluate("text=>JSON.parse(text)",response.text());
             assertThat(money.get("orderId")).isEqualTo(id);
@@ -84,6 +85,46 @@ public final class OrderMoneyChecks {
             return money;
         } catch(java.io.IOException failure) {throw new AssertionError("Cannot retain order money evidence",failure);}
         finally {admin.offRequest(observeWrites);}
+    }
+
+    /** Follow the actual admin queue/drawer/reference link; never type an order-money URL. */
+    private static void openFromUnsettledOrderReference(Page admin,String id,Map<?,?> created,String outletName) {
+        assertThat(outletName).as("the owned manifest or selected outlet identifies the payee").isNotBlank();
+        Response pending=admin.waitForResponse(r -> r.request().method().equals("GET")
+                && UrlPaths.path(r.url()).equals("/api/v1/internal/admin/payouts/pending"),
+                () -> new AdminPortalPage(admin).openPayoutsTab());
+        assertThat(pending.status()).isEqualTo(200);
+        List<?> accounts=(List<?>)admin.evaluate("text=>JSON.parse(text)",pending.text());
+        List<Map<?,?>> matches=accounts.stream().<Map<?,?>>map(value -> (Map<?,?>)value)
+                .filter(account -> "RESTAURANT".equals(account.get("payeeType"))
+                        && (outletName.equals(account.get("displayName"))
+                        || String.valueOf(account.get("displayName")).startsWith(outletName+" ("))).toList();
+        assertThat(matches).as("the exact outlet has an unsettled payable account").hasSize(1);
+        Map<?,?> account=matches.get(0);
+        assertThat(account.get("nameResolved")).isEqualTo(true);
+        assertThat(account.get("payeeId")).isNotNull();
+        String payeeId=account.get("payeeId").toString();
+        String displayName=account.get("displayName").toString();
+        if(created.get("restaurantId")!=null) assertThat(payeeId).isEqualTo(created.get("restaurantId"));
+        Locator card=admin.locator("div.cursor-pointer")
+                .filter(new Locator.FilterOptions().setHas(admin.getByText(displayName,
+                        new Page.GetByTextOptions().setExact(true))));
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(card).hasCount(1);
+        Response statement=admin.waitForResponse(r -> r.request().method().equals("GET")
+                && UrlPaths.path(r.url()).equals("/api/v1/ledger/statements/RESTAURANT_PAYABLE/"+payeeId),card::click);
+        assertThat(statement.status()).isEqualTo(200);
+        List<?> lines=(List<?>)((Map<?,?>)admin.evaluate("text=>JSON.parse(text)",statement.text())).get("content");
+        assertThat(lines.stream().map(value -> (Map<?,?>)value)
+                .filter(line -> id.equals(line.get("referenceId"))).toList())
+                .as("the drawer's real statement includes this owned order").isNotEmpty();
+        Locator dialog=admin.getByRole(AriaRole.DIALOG,
+                new Page.GetByRoleOptions().setName(displayName).setExact(true));
+        Locator reference=dialog.getByRole(AriaRole.LINK,
+                new Locator.GetByRoleOptions().setName("Ref: "+id).setExact(true)).first();
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(reference).isVisible();
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(reference)
+                .hasAttribute("href","/admin/orders/"+id+"/money");
+        reference.click();
     }
     public static BigDecimal amount(Map<?,?> data,String field) {
         Object value=data.get(field);assertThat(value).as("authoritative money field %s",field).isNotNull();

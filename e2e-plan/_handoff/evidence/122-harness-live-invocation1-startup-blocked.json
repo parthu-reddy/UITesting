@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-07",
+  "results": [
+    {
+      "class": "RestaurantEarningsLiveTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 1,
+      "skipped": 0,
+      "proof": "browser startup blocked before test methods",
+      "error": "Chromium macOS MachPortRendezvous permission denied (1100)"
+    },
+    {
+      "class": "RestaurantNavigationUiTest",
+      "tests": 1,
+      "failures": 0,
+      "errors": 1,
+      "skipped": 0,
+      "proof": "browser startup blocked before test methods",
+      "error": "Chromium macOS MachPortRendezvous permission denied (1100)"
+    }
+  ],
+  "businessMethodsExecuted": 0
+}

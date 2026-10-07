@@ -1,0 +1,58 @@
+[
+ {
+  "rel": "tests/features/restaurant/RestaurantEarningsLiveTest.java",
+  "line": 57,
+  "call": "getByText",
+  "text": "\"Net Earnings\", new Page.GetByTextOptions().setExact(true)",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/features/restaurant/RestaurantEarningsLiveTest.java",
+  "line": 62,
+  "call": "getByRole",
+  "text": "AriaRole.TABLE, new Page.GetByRoleOptions().setName(\"Account statement\")",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/features/restaurant/RestaurantEarningsLiveTest.java",
+  "line": 63,
+  "call": "locator",
+  "text": "\"tbody tr\"",
+  "status": "DYNAMIC",
+  "reasons": []
+ },
+ {
+  "rel": "tests/features/restaurant/RestaurantEarningsLiveTest.java",
+  "line": 71,
+  "call": "getByText",
+  "text": "\"No transactions found.\", new Page.GetByTextOptions().setExact(true)",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/features/restaurant/RestaurantEarningsLiveTest.java",
+  "line": 91,
+  "call": "getByText",
+  "text": "label, new Page.GetByTextOptions().setExact(true)",
+  "status": "DYNAMIC",
+  "reasons": []
+ },
+ {
+  "rel": "tests/features/restaurant/RestaurantEarningsLiveTest.java",
+  "line": 91,
+  "call": "locator",
+  "text": "\"..\"",
+  "status": "DYNAMIC",
+  "reasons": []
+ },
+ {
+  "rel": "tests/features/restaurant/RestaurantEarningsLiveTest.java",
+  "line": 91,
+  "call": "locator",
+  "text": "\"h3\"",
+  "status": "DYNAMIC",
+  "reasons": []
+ }
+]

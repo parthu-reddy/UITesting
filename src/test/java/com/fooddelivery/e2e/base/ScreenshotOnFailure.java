@@ -36,22 +36,19 @@ public class ScreenshotOnFailure implements AfterTestExecutionCallback {
             String prefix = testName + "_" + label;
 
             try {
-                // Expand viewport height to force rendering of the full layout
-                int width = page.viewportSize().width;
-                page.setViewportSize(width, 2500);
-
-                page.screenshot(new Page.ScreenshotOptions()
-                        .setPath(SCREENSHOT_DIR.resolve(prefix + ".png"))
-                        .setFullPage(true));
-            } catch (Exception e) {
-                System.err.println("Failed to capture screenshot for " + label + ": " + e.getMessage());
-            }
-
-            try {
                 Path htmlPath = SCREENSHOT_DIR.resolve(prefix + ".html");
                 Files.writeString(htmlPath, page.content());
             } catch (Exception e) {
                 System.err.println("Failed to capture HTML for " + label + ": " + e.getMessage());
+            }
+            try {
+                // Resizing to 2500px used to trigger infinite-scroll observers and reveal
+                // cards which were absent when the assertion failed. Preserve this viewport.
+                page.screenshot(new Page.ScreenshotOptions()
+                        .setPath(SCREENSHOT_DIR.resolve(prefix + ".png"))
+                        .setFullPage(false));
+            } catch (Exception e) {
+                System.err.println("Failed to capture screenshot for " + label + ": " + e.getMessage());
             }
         }
     }

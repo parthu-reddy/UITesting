@@ -1,0 +1,57 @@
+Admin
+Live Operations
+Support Tickets
+Refund Queue
+Manual Interventions
+User Management
+Categories
+Fleet Map
+Ledger Entries
+Pending Payouts
+Money Operations
+Review Moderation
+Partner Approvals
+Ad creatives
+Switch portal
+Refund Exception Queue
+Status Filter
+All Tickets
+Refund tickets awaiting a decision
+TICKET ID
+↕
+	ORDER ID
+↕
+	REASON	REQUESTED AMT
+↕
+	STATUS
+↕
+	CREATED
+↕
+
+47ffbccd…	6fbe0289…	
+E2E visual audit 6fbe0289: owned dummy ticket
+	₹14.26	OPEN	7 Oct 2026, 11:28
+Ticket Details
+×
+Customer Reason
+
+E2E visual audit 6fbe0289: owned dummy ticket
+
+Requested Amount
+
+₹14.26
+
+Resolution Action
+Approve
+Reject
+Fault Attribution
+Unknown / Not Investigated
+Override Amount (Quote Cap)
+Resolution Notes
+Approve Refund
+Approve a refund of ₹14.26?
+
+₹14.26 will be refunded on order #6FBE0289 and posted to the ledger as a refund entry; the ticket will close. Refunds cannot be reversed from this screen.
+
+Cancel
+Approve refund

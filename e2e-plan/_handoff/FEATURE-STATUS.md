@@ -1,5 +1,91 @@
 # Feature audit status
 
+## 2026-10-07T12:40+05:30 — checkpoint125
+
+Cross-role lifecycle: owned ce254f3a delivered through the retained resume (1/1), and its retained
+money check passes (1/1, 18 ledger lines balance). The invocation 4 courier-pin failure was not
+reproduced, and diagnostics are now in place. Rider earnings: a false ₹0.00 before load, GPS-gated
+pins, and the customer fee shown as rider credit are all fixed locally, with the UI deploy pending.
+RIDER-EARN-03's exact increase is unproven, because invocation 5 read an unloaded baseline.
+[Checkpoint125](checkpoints/125-retained-resume-false-zero-and-gps-pins.md).
+
+## 2026-10-07T11:37:19+05:30 — Retained finance now green; active rider regression running
+
+Same6fbe0289 money/quote continuation passes1/1 through real payout drawer/order-reference controls:
+18balanced ledger lines, CARD/SUCCESS₹43.02, restaurant₹6.54 and rider₹21.16,0new order/refund.
+First invocation's brand-decorated-name assertion failure is preserved separately. UI6eb4ef6 is live;
+receipt and owned47ffbccd REJECTED audit already pass. One justified fresh active lifecycle is
+running; current authoritative ONLINE/live-location preflight is verified, no final result yet.
+Its new identity is retained immediately at creation. Item3 active, M1/A5b paused.
+[Checkpoint124](checkpoints/124-deployed-receipt-owned-refund-and-active-rider-gate.md) supersedes earlier finance-running text below.
+
+## 2026-10-07T11:33:21+05:30 — checkpoint124: UI live; retained receipt and owned rejected audit pass
+
+Owner confirmed UI-only deployment. UI6eb4ef6's actual CI asset is observed by normal rider login,
+1/1green. Retained6fbe0289 receipt/quote is fixed live,1/1green,0new order/refund submission.
+Owned ticket47ffbccd was created/rejected once; original writer errored after rejection200 while
+reading an unavailable request body. Same-ticket read-only resume passes1/1, verifies REJECTED,
+exact resolution note/actor/timestamp and0customer refunds, with0new order/resolve writes.
+Preserve both invocations; no duplicate ticket or refund approval. All three green methods have
+0failures/errors/skips/network/browser errors within their stated scope.
+
+Item3 stays active for strengthened active rider checks. The money helper now follows actual
+Pending Payouts/drawer/order-reference controls; retained money continuation is running, not passed.
+Then one fresh active lifecycle is justified for changed mobile UX, with current preflight/retention.
+No UI deployment is currently pending for these fixes. M1/A5b remains paused.
+[Current checkpoint124](checkpoints/124-deployed-receipt-owned-refund-and-active-rider-gate.md) supersedes older deployment-waiting statements below.
+
+## 2026-10-07T11:17:55+05:30 — checkpoint123: active receipt/mobile fixes; owner deploying UI
+
+Items1/2 are DONE. Item3 alone remains active. UI5a1e97c's canvas/sidebar fixes and F12 pass live3/3.
+The new owned lifecycle reached DELIVERED, then failed the history-to-receipt assertion:1failure,
+0errors/skips. Keep **6fbe0289-645e-4f1c-ae0d-caab21689070** at Brand1Outlet5,
+customer8000000001/owner9000000001/rider7000000001. Its401 was after sign-out in teardown.
+
+Additional UI fixes keep terminal history over stale active cache, fit the pickup hint and place48px
+rider chat in the header away from swipes. Local UI1049/174files,focused34,typecheck,lint,build,
+Phase4source12/12 pass. Owner committed6eb4ef6 and GitHub37577846909 is publishing; actual live
+deployment is not yet confirmed. [Exact UI handoff](../../../RandomDocuments/PendingWork_2026-10-07/ITEM-3-ACTIVE-DEPLOYMENT.md).
+
+Read-only All Tickets E2E passes1/1,GET200,0rows/0resolution writes; populated states remain unverified.
+Owner **approved** one dummy request/rejection on6fbe0289, with approval confirmation cancelled and no
+refund approval/payout. OwnedRefundVisualUiTest is prepared/compiled, not yet executed. First verify
+the retained receipt after deployment, then this writer. Strengthened active mobile checks need one
+justified new lifecycle after deployment; preserve any new identity on failure. M1/A5b stays paused.
+
+[Checkpoint123](checkpoints/123-active-visual-receipt-and-mobile-fixes.md), [local gates](evidence/123-active-ui-local-gates.json),
+[All Tickets proof](evidence/123-admin-all-refunds-invocation1.json),
+[approved exact fixture plan](../../../RandomDocuments/PendingWork_2026-10-07/ITEM-3-ADMIN-FIXTURE.md).
+Older running/deployment-waiting statements below are dated history superseded by this entry.
+
+## 2026-10-07T10:49+05:30 — UI visual defects fixed live; active-state audit continues
+
+Owner published UI `5a1e97c`; GitHub build37574491813 succeeded and matches all three tested files.
+RoleVisualAuditUiTest invocation5 passes **3/3, 0 failures/errors/skips/network/browser errors**.
+Actual captures show opaque dark rider canvas, full wrapped sidebar labels and settled Support
+Tickets. The two UI defects and F12 are fixed; no current UI deployment gate remains.
+
+Item3 stays active for D1/E2 fixture states. Existing HappyDeliveryFlowTest now has opt-in assigned/
+out-for-delivery 390×844 visual assertions; compile and focused locator checks pass. Its one-method
+UI-only run has started with customer8000000001/owner9000000001/rider7000000001; it created owned
+order6fbe0289-645e-4f1c-ae0d-caab21689070. No result is claimed while it runs. Retain/resume that
+exact fixture on failure. [Active-state plan](../../../RandomDocuments/PendingWork_2026-10-07/ITEM-3-ACTIVE-STATE-PLAN.md).
+
+[Green evidence](evidence/122-role-visual-invocation5-green.json), [owner publication](evidence/122-owner-ui-publication.json).
+M1/A5b remain paused; no new backend deployment or state shortcut. Older deployment-waiting entries
+below describe their dated state.
+
+
+## 2026-10-07T10:35+05:30 — checkpoint122: current screenshot scope
+
+Business Platform paperwork through-A4 reconciled; restaurant owner-safe earnings/navigation and
+runtime locator follow-ups live-green. F12 verification/reviews failures fixed by fresh200UI reads.
+New rider/admin visual regressions fail on old deployment and are fixed locally; UI1045/1045,
+typecheck/lint/build/source gate green. Owner is deploying UI; final3-method visual E2E pending.
+Idle/empty captures do not cover active delivery/refund detail states. Maps/ETA partial code paused.
+[Checkpoint122](checkpoints/122-pending-work-sequential-review.md) and owning feature audits below
+supersede older stop/unstarted claims for this request; no full-suite or production-load claim.
+
 ## 2026-10-05T11:57:12+05:30 — checkpoint113: O4/O5 complete; stop boundary reached
 
 Phase4 and Phase5 are published, deployed and complete within the documented Dev/UI-only scope. Final O4 gate8/8 and O5 gate8/8 have0failures/errors/skips. The required existing settings/partner/navigation/earnings/admin-money/delivery/chat/refund-quote/immutable-review regressions pass using the same retained delivered order. No new checkout repeated successful work. Restaurant5408c6e is now published/deployed; existing pending-queue check1/1 proves the exact outlet VERIFIED at₹34.67 and0payout writes.
@@ -764,16 +850,16 @@ Updated 2026-10-03T09:47:00+05:30. Fast historical passes may precede database r
 | [04-order-exceptions-and-support/chat-calls-and-live-tracking](../04-order-exceptions-and-support/chat-calls-and-live-tracking/AUDIT-STATUS.md) | Isolation + history paging proven live (checkpoint29) | CHAT-ISO-01..03, CHAT-22, CHAT-REFUND-05 pass | Typing, unread, reconnect, images, calls still unverified live |
 | [04-order-exceptions-and-support/refunds-and-payment-recovery](../04-order-exceptions-and-support/refunds-and-payment-recovery/AUDIT-STATUS.md) | Active priority; retry proven live (checkpoint29) | Item refunds, refusal answers, routing-refusal keep, admin retry | Admin retry: one decline, one retry, one gateway refund, ledger balanced; consumer routing refusal still local-proof only |
 | [04-order-exceptions-and-support/rejection-cancellation-and-delays](../04-order-exceptions-and-support/rejection-cancellation-and-delays/AUDIT-STATUS.md) | Canonical fast terminal UI reviewed | Shared retained money helper; duplicate methods removed | Cancellation/rejection UI passed, whole flows failed money completion; resume owned IDs |
-| [04-order-exceptions-and-support/reviews-and-support](../04-order-exceptions-and-support/reviews-and-support/AUDIT-STATUS.md) | Reviewed (checkpoint32) | Cross-role review flow added; SUPPORT-01..11 retired (UI deleted) | REVIEW-01..06, 09..11, 13 live pass; validator 85/85; REVIEW-12 pagination not exercised |
+| [04-order-exceptions-and-support/reviews-and-support](../04-order-exceptions-and-support/reviews-and-support/AUDIT-STATUS.md) | Current My Reviews/restaurant navigation reviewed (checkpoint122) | Owner's rendered outlet selector; no direct outlet API helper; F12 My Reviews fixed | Fresh My Reviews200and defined view; navigation2unique/4executions; prior immutable-review proof retained; pagination remains unverified |
 | [05-partner-and-account-management/campaigns-and-promotions](../05-partner-and-account-management/campaigns-and-promotions/AUDIT-STATUS.md) | Source and live reviewed (checkpoint36) | Owner access/cancel/draft verified; activation remains plan work | Live3/0/0/0; retained INR0 wallet + DRAFT; Notification codec correction active |
 | [05-partner-and-account-management/profiles-settings-and-kyc](../05-partner-and-account-management/profiles-settings-and-kyc/AUDIT-STATUS.md) | Pending | Pending | Not run |
-| [05-partner-and-account-management/restaurant-earnings](../05-partner-and-account-management/restaurant-earnings/AUDIT-STATUS.md) | Fresh-seed empty-state reviewed (checkpoint36) | Zero balances/empty statement verified; nonzero proof open | Live1/0/0/0 with actual Oracle baseline; earlier nonzero fixtures absent |
+| [05-partner-and-account-management/restaurant-earnings](../05-partner-and-account-management/restaurant-earnings/AUDIT-STATUS.md) | Named owner/outlet reviewed (checkpoint122) | Explicit named outlet requires signed-in matching owner and visible membership | Fresh1/0/0/0 zero/empty statement; prior nonzero evidence historical, no new settlement claim |
 | [05-partner-and-account-management/restaurant-outlets-and-menu-management](../05-partner-and-account-management/restaurant-outlets-and-menu-management/AUDIT-STATUS.md) | Pending | Pending | Not run |
-| [05-partner-and-account-management/rider-wallet-earnings-and-history](../05-partner-and-account-management/rider-wallet-earnings-and-history/AUDIT-STATUS.md) | Pending | Pending | Not run |
+| [05-partner-and-account-management/rider-wallet-earnings-and-history](../05-partner-and-account-management/rider-wallet-earnings-and-history/AUDIT-STATUS.md) | Idle dashboard source/visual reviewed (checkpoint122) | Verification200; forced-dark canvas fix local | Baseline earnings/trips visible; strengthened paint1failureonolddeployment; owner UI deploy pending; active/nonzero outcomes unverified |
 | [06-admin-operations/ledger-payouts-and-order-money](../06-admin-operations/ledger-payouts-and-order-money/AUDIT-STATUS.md) | Order money per outcome proven live (checkpoint31) | Panel shows payment, refunds, booked amounts | MONEY-05 5/5 on owned delivered/partial/cancelled/rejected orders; payout maker/checker still fixture-gated |
 | [06-admin-operations/live-operations-fleet-and-interventions](../06-admin-operations/live-operations-fleet-and-interventions/AUDIT-STATUS.md) | Pending | Pending | Not run |
-| [06-admin-operations/support-and-refund-queues](../06-admin-operations/support-and-refund-queues/AUDIT-STATUS.md) | Batch 5 + REFUND-RETRY-01 pass live (checkpoint29) | Failed Refunds tab deployed; Dev seam declines ₹1.13 once | Support decisions and admin retry proven with DB money; remaining-cap UI path deleted (unit only) |
+| [06-admin-operations/support-and-refund-queues](../06-admin-operations/support-and-refund-queues/AUDIT-STATUS.md) | Current empty queue/source visual reviewed (checkpoint122); older financial results historical | Full sidebar labels fixed locally; settled-support capture strengthened | Baseline queue read/render passes; label1failureonolddeployment; owner UI deploy pending; populated detail/confirm not covered by this batch |
 | [06-admin-operations/users-categories-and-moderation](../06-admin-operations/users-categories-and-moderation/AUDIT-STATUS.md) | Pending | Pending | Not run |
 | [07-resilience-and-regression/reload-reconnect-and-recovery](../07-resilience-and-regression/reload-reconnect-and-recovery/AUDIT-STATUS.md) | Pending | Pending | Not run |
-| [07-resilience-and-regression/responsive-accessibility-and-navigation](../07-resilience-and-regression/responsive-accessibility-and-navigation/AUDIT-STATUS.md) | Pending | Pending | Not run |
+| [07-resilience-and-regression/responsive-accessibility-and-navigation](../07-resilience-and-regression/responsive-accessibility-and-navigation/AUDIT-STATUS.md) | Restaurant navigation live-green; rider/admin visual source reviewed (checkpoint122) | Two exact runtime exceptions, wrong-name probes still FAIL; canvas/label fixes local | Navigation2unique/4executions pass; baseline visual3/3; two stronger live regressions fail old UI; final3methodsawaitdeploy |
 | [07-resilience-and-regression/suite-isolation-and-regression](../07-resilience-and-regression/suite-isolation-and-regression/AUDIT-STATUS.md) | Pending | Pending | Not run |

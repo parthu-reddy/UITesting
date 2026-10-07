@@ -2,6 +2,28 @@
 
 Uses: Playwright viewport override, keyboard simulation, standard ARIA assertions.
 
+## Checkpoint122 — strict deployed visual regression checks (2026-10-07)
+
+Current checkpoint123 supersedes the earlier deployment-pending cells below: all three original
+strengthened methods pass on UI5a1e97c; fresh All Tickets read1/1passes with0rows. Additional real
+active-run receipt/hint/chat defects are fixed locally and await owner UI6eb4ef6 deployment. New
+active assertions wait for actual known pins, measure hint fit and hit-test swipes/header chat.
+Owned refund visual writer is approved/compiled for6fbe0289, unexecuted. Missing active/populated
+fixture proof is a gate, not a green scenario. [Checkpoint123](../../_handoff/checkpoints/123-active-visual-receipt-and-mobile-fixes.md).
+
+| ID | Method / state | Current proof and next gate |
+|---|---|---|
+| VIS-RIDER-01 | `RoleVisualAuditUiTest#riderMobileDashboardAndVerificationRead`, 390×844 idle rider | Verification200, ≥48px duty, earnings/trips, opaque dark canvas and no overflow pass live invocation5 |
+| VIS-ADMIN-01 | `RoleVisualAuditUiTest#adminDesktopRefundQueueAndSupport`, 1280×800 | Full wrapped sidebar labels, empty queue and settled support pass live invocation5 |
+| VIS-REVIEWS-01 | `RoleVisualAuditUiTest#customerMyReviewsReadReturns200` | Actual UI GET200 and reviews/defined empty state pass; F12 historical403 fixed |
+| VIS-ADMIN-02 | `RoleVisualAuditUiTest#adminAllRefundHistoryRead` | ALL UI GET200 and empty state pass1/1;0rows means populated branches not executed |
+| VIS-RIDER-02 | Existing Happy lifecycle opt-in `RiderVisualAudit` at assigned/delivery boundaries | Older canvas/contact/swipe checks passed before late receipt failure; new pin/hint/obstruction/header-chat checks compiled, waiting on current UI deployment and active fixture |
+| VIS-ADMIN-03 | `OwnedRefundVisualUiTest#ownedTicketDetailsConfirmationAndRejectedAudit` | Exact owned dummy request/rejection authorized and compiled; detail/approval-cancel/rejection/audit/refunds-empty checks unexecuted |
+
+This is selected coverage, not a replacement for every responsive/accessibility scenario below.
+Initial3/3 predates stronger rider/admin assertions. Active job/contact/swipe/map and populated
+refund detail/audit/confirm require their real fixture states and remain unverified here.
+
 ## Batch 1 — Responsive layout
 
 | ID | Description | Action | Expected result |

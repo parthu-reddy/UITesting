@@ -1,0 +1,45 @@
+{
+  "recordedAt": "2026-10-07T10:32:55+05:30",
+  "proofType": "real deployed UI regression assertions against old product",
+  "invocations": [
+    {
+      "invocation": 3,
+      "method": "riderMobileDashboardAndVerificationRead",
+      "log": {
+        "rawLog": "/private/tmp/food-pending-visual-invocation3-red.log",
+        "sha256": "be60c35d35b05a09420d291342ed2e245888fee61c7b5a01e3c0e76a4dea3907",
+        "networkErrorLines": 0,
+        "browserErrorLines": 0,
+        "counts": {
+          "tests": 1,
+          "failures": 1,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      "assertion": "forced-dark rider shell paints opaque rgb(18, 22, 28)",
+      "actual": "rgba(0, 0, 0, 0)"
+    },
+    {
+      "invocation": 4,
+      "method": "adminDesktopRefundQueueAndSupport",
+      "log": {
+        "rawLog": "/private/tmp/food-pending-visual-invocation4-admin-red.log",
+        "sha256": "eb0501b552d81fd38f970349d00f22c7b2794e45ff14b1d91405b5dc6217df9f",
+        "networkErrorLines": 0,
+        "browserErrorLines": 0,
+        "counts": {
+          "tests": 1,
+          "failures": 1,
+          "errors": 0,
+          "skipped": 0
+        }
+      },
+      "assertion": "full Manual Interventions sidebar label readable",
+      "actual": "scrollWidth > clientWidth"
+    }
+  ],
+  "totalSuccessfulExecutions": 0,
+  "totalAssertionFailures": 2,
+  "currentState": "product fixes local; current strengthened source awaits owner UI deployment and green live rerun"
+}

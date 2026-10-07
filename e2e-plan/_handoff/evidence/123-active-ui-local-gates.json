@@ -1,0 +1,156 @@
+{
+  "recordedAt": "2026-10-07T11:17:55+05:30",
+  "proofType": "local current source checks; no active UX deployed acceptance yet",
+  "ownerGithubRun": 37577846909,
+  "publicationAtRecording": "success; owner GitHub37577846909, actual running deployment still pending",
+  "ui": {
+    "files": 174,
+    "passed": 1049,
+    "failed": 0,
+    "skipped": 0
+  },
+  "focused": {
+    "files": 5,
+    "passed": 34,
+    "failed": 0
+  },
+  "receiptOldCode": {
+    "tests": 3,
+    "failed": 2,
+    "passed": 1,
+    "skipped": 0
+  },
+  "receiptAndDashboardFixed": {
+    "passed": 10,
+    "failed": 0
+  },
+  "typecheck": "passed",
+  "lint": "passed",
+  "build": "passed",
+  "phase4Source": "12/12",
+  "generatedClientsResidualDiff": 0,
+  "sources": [
+    {
+      "file": "FoodDeliveryAppUI/src/features/customer-orders/model/useTrackedOrder.ts",
+      "sha256": "9c2cf99c02084d45b979c4252adfb055039dbb5c15ab4db6725d33e6ccda805c"
+    },
+    {
+      "file": "FoodDeliveryAppUI/src/features/customer-orders/model/useTrackedOrder.test.ts",
+      "sha256": "8b1098441bc4e5fb7191e8d0fd6b2efcaccba920b38cf0d7aa240eab5511c61a"
+    },
+    {
+      "file": "FoodDeliveryAppUI/src/features/communication/components/ChatWidget.tsx",
+      "sha256": "e5c9b2a856011135b9da5a4bd716586c7a033a7e011cd7c6e83138faae34683c"
+    },
+    {
+      "file": "FoodDeliveryAppUI/src/features/communication/models/useChatSession.test.tsx",
+      "sha256": "379cdc2e75bf0a54f8a8bc1ba019eda3bffb045e560b4041e26e6dfffd55c99d"
+    },
+    {
+      "file": "FoodDeliveryAppUI/src/features/delivery-tasks/components/ActiveDeliveryCard.tsx",
+      "sha256": "f4c57df7465624c48a1d4efd8405c7f4301eab9c67237474f7ea85b9bd728520"
+    },
+    {
+      "file": "FoodDeliveryAppUI/src/features/delivery-tasks/components/RiderHeader.tsx",
+      "sha256": "b04f479204d1362123f598f03a6a7ff94c8e6cffeeab3541ca14505f818ac38d"
+    },
+    {
+      "file": "FoodDeliveryAppUI/src/features/delivery-tasks/components/RiderJobChat.tsx",
+      "sha256": "21068448748599154649c70bedf99eac57e2d323c97bda6d8d32361d497b7bee"
+    },
+    {
+      "file": "FoodDeliveryAppUI/src/pages/delivery/DeliveryDashboard.tsx",
+      "sha256": "72a254ce411dbdd5bf987e371ccc7bc14e2917aff7e1e2f0424c0c3de7c3a46e"
+    }
+  ],
+  "logs": [
+    {
+      "file": "/private/tmp/food-pending-item3-receipt-red.log",
+      "sha256": "cd05f5a85f577e22680f19c99f0d5b5ee8c826bb73878caf417951acd84bd526"
+    },
+    {
+      "file": "/private/tmp/food-pending-item3-receipt-green.log",
+      "sha256": "43a002e84df797acb6a398d11b65b433e1bafd0ee245aa77b1ee3983feba3a3d"
+    },
+    {
+      "file": "/private/tmp/food-pending-item3-round2-focused.log",
+      "sha256": "56b2b81f3f891fb39750e34d88dcd8a2040a7725cdf3bd1687905d771ab4b5a8"
+    },
+    {
+      "file": "/private/tmp/food-pending-item3-round2-full-ui.log",
+      "sha256": "cc1a6054871cd9fc6342799d99483f36dca4f98a3d63b88c368bbeaba9a959e0"
+    },
+    {
+      "file": "/private/tmp/food-pending-item3-round2-typecheck.log",
+      "sha256": "def73bc9dc3c6849610213c995b572f667d411edbeb539cf86df6f854ac33fd4"
+    },
+    {
+      "file": "/private/tmp/food-pending-item3-round2-lint.log",
+      "sha256": "9b97ec448dcd48c702e488266f43ba91e796e4fa73fbc9234daf4ed02afbff7a"
+    },
+    {
+      "file": "/private/tmp/food-pending-item3-round2-build.log",
+      "sha256": "6afad1ce9cab13112f4cfce7c71c7830123be4211f186570d926440f130a3a88"
+    },
+    {
+      "file": "/private/tmp/food-pending-item3-round2-phase4.log",
+      "sha256": "1d9861a1a95afb02cf29e9f48d1699d6cae49030bf13d31537f6b5a6b35c794b"
+    },
+    {
+      "file": "/private/tmp/food-pending-item3-round2-compile.log",
+      "sha256": "8491e97e4cbdabe076fbd4f54196fb8c95c238d243356258b4d8b55358e9ebaa"
+    },
+    {
+      "file": "/private/tmp/food-pending-item3-owned-refund-compile.log",
+      "sha256": "3642fa69932fef6d0a0730aa1beca44cd13c5d66f65c1bd12be99ca36125ed45"
+    },
+    {
+      "file": "/private/tmp/food-pending-item3-owned-refund-compile2.log",
+      "sha256": "43e158c46fc37e8e69d448d349bcb957d2832eff5ccc27eb2633029de58e5fcb"
+    }
+  ],
+  "initialCompileFailures": [
+    "RoleVisualAuditUiTest incorrectly used Jackson, which this harness does not depend on; replaced with established pure JSON parse of observed UI response",
+    "OwnedRefundVisualUiTest wildcard stream capture needed explicit Map<?,?> type witness; compile2 passes"
+  ],
+  "limitations": [
+    "Active helper new pin/hint/obstruction/header-chat assertions are compiled, not yet run",
+    "Owned ticket writer is approved and prepared but not yet executed",
+    "Owner deployment remains pending live confirmation; M1/A5b paused"
+  ],
+  "ownerSourceHead": "6eb4ef6ad643e1bf4ac14f8fb3001ddf427725b5",
+  "ownerHeadMatchesTestedFiles": [
+    {
+      "file": "src/features/customer-orders/model/useTrackedOrder.ts",
+      "testedEqualsOwnerHead": true
+    },
+    {
+      "file": "src/features/customer-orders/model/useTrackedOrder.test.ts",
+      "testedEqualsOwnerHead": true
+    },
+    {
+      "file": "src/features/communication/components/ChatWidget.tsx",
+      "testedEqualsOwnerHead": true
+    },
+    {
+      "file": "src/features/communication/models/useChatSession.test.tsx",
+      "testedEqualsOwnerHead": true
+    },
+    {
+      "file": "src/features/delivery-tasks/components/ActiveDeliveryCard.tsx",
+      "testedEqualsOwnerHead": true
+    },
+    {
+      "file": "src/features/delivery-tasks/components/RiderHeader.tsx",
+      "testedEqualsOwnerHead": true
+    },
+    {
+      "file": "src/features/delivery-tasks/components/RiderJobChat.tsx",
+      "testedEqualsOwnerHead": true
+    },
+    {
+      "file": "src/pages/delivery/DeliveryDashboard.tsx",
+      "testedEqualsOwnerHead": true
+    }
+  ]
+}

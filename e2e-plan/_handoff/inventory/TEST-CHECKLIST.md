@@ -1,5 +1,60 @@
 # Executable test checklist
 
+## Checkpoint124 finance update — 2026-10-07T11:37:19+05:30
+
+- [x] Retained6fbe0289 money/quote through actual admin link — second invocation1/1,18balanced lines.
+- [ ] First finance invocation — preserved outlet-label assertion failure, no replacement order.
+- [ ] Strengthened active rider run — current UI preflight verified; execution in progress.
+
+[Evidence](../evidence/124-retained-money-invocation2.json); reruns are not new unique methods.
+
+## Checkpoint124 — deployed scope, failed write and safe resume
+
+- [x] Served CI rider asset and opaque canvas —1/1,0failures/errors/skips.
+- [x] Exact retained6fbe0289 receipt/quote —1/1,0new order/refund submission.
+- [x] Exact owned47ffbccd persisted REJECTED audit/0refunds — same-ticket resume1/1,0writes.
+- [ ] Original ticket writer invocation —1error after rejection200; preserved as failed, never ticked green.
+- [ ] Retained money through actual payout drawer/order link — compiled; running, no result yet.
+- [ ] Strengthened active rider checks — still require one justified new active lifecycle.
+
+[Checkpoint124](../checkpoints/124-deployed-receipt-owned-refund-and-active-rider-gate.md); reruns are executions, not extra unique methods.
+
+## Checkpoint123 — current item3 gate (supersedes older pending/running statements)
+
+- [x] Three strengthened RoleVisualAuditUiTest methods — UI5a1e97c, invocation5:3/3,0failures/errors/skips.
+- [x] `RoleVisualAuditUiTest#adminAllRefundHistoryRead` — real ALL200/0rows,1/1,0resolution writes; empty-state scope.
+- [x] Local receipt/mobile repair — UI1049/174files,focused34,typecheck/lint/build/Phase4source12/12.
+- [ ] `HappyDeliveryFlowTest#completeOrderLifecycle` retained-delivered continuation on6fbe0289 — original active method failed after delivery; new UI deploy pending.
+- [ ] Strengthened active rider pin/hint/swipe/header-chat assertions — compiled; active fixture after deploy required.
+- [ ] `OwnedRefundVisualUiTest#ownedTicketDetailsConfirmationAndRejectedAudit` — exact dummy writer approved/compiled; not run.
+
+Fresh source scan includes disabled/parameterized sites and is not a passing test total:
+[scan](../evidence/123-current-test-source-scan.json). Older counts/executions below remain dated history.
+
+## Checkpoint122 — current sequential work, 2026-10-07
+
+The old 72-class/326-method inventory below is dated history. A fresh static source scan finds
+107 files / 370 test-annotation sites, including disabled/parameterized definitions; this is not
+370 passing cases. [Current source scan](../evidence/122-current-test-source-scan.json).
+
+- [x] `RestaurantEarningsLiveTest#earningsMatchTheLedger` — pinned owner/outlet, deployed 1/1;
+  zero balances/empty statement scope, [invocation2](../evidence/122-harness-live-invocation2.json).
+- [x] `RestaurantNavigationUiTest#restaurantSectionsRender` — pinned + unpinned deployed passes;
+  actual rendered owner outlet selector, [invocation3](../evidence/122-harness-live-invocation3-unpinned.json).
+- [x] `RestaurantNavigationUiTest#restaurantReviewsShowPublicFeedbackAndAggregate` — same 2 live
+  executions; exact runtime region exceptions preserve wrong-name failures.
+- [x] `RoleVisualAuditUiTest#customerMyReviewsReadReturns200` — actual UI-generated GET200 and
+  rows/defined empty state; no review write; [initial baseline](../evidence/122-role-visual-baseline.json).
+- [ ] `RoleVisualAuditUiTest#riderMobileDashboardAndVerificationRead` — initial read-only baseline
+  passes; stronger paint check fails old deployed transparency; fix local, owner UI deployment pending.
+- [ ] `RoleVisualAuditUiTest#adminDesktopRefundQueueAndSupport` — initial empty-queue baseline
+  passes; stronger full-label check fails old UI; fix local, settled-capture final rerun pending.
+
+Count 3 unique harness methods / 5 successful executions, and initial visual 3 methods / 3 successful
+executions. Two later stronger visual executions fail assertions, 0 errors/skips. Never add repeated
+executions to unique-method coverage or promote the baseline to final stronger-source acceptance.
+UI local checks: 1,045 assertions / 173 files; final deployed gate still open.
+
 ## Business Platform wallet and ads gates — 2026-10-06T13:35+05:30
 
 Per-phase gates (E2E-STRATEGY). Detailed results in the owning feature folders; unique methods only.

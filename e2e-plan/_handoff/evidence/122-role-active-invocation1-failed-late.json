@@ -1,0 +1,59 @@
+{
+  "recordedAt": "2026-10-07T10:54:24+05:30",
+  "invocation": 1,
+  "test": "HappyDeliveryFlowTest#completeOrderLifecycle",
+  "proofType": "real deployed UI with opt-in active visual assertions; complete method failed late",
+  "tests": 1,
+  "failures": 1,
+  "errors": 0,
+  "skipped": 0,
+  "elapsedSeconds": 253.778,
+  "ownedOrder": "6fbe0289-645e-4f1c-ae0d-caab21689070",
+  "fixture": "fixtures/122-visual-owned-6fbe0289-645e-4f1c-ae0d-caab21689070.json",
+  "reachedState": "DELIVERED confirmed by UI, completed rider payout/history and customer history assertions before failure",
+  "failure": "After clicking customer history, exact Order delivered tracker not found at HappyDeliveryFlowTest:742",
+  "activeVisualAssertions": "assigned and out-for-delivery canvas/contact>=48/swipe>=48/no overflow passed, captures saved; this does not pass the whole method",
+  "captures": [
+    {
+      "file": "122-role-active-visual/rider-assigned-6fbe0289-645e-4f1c-ae0d-caab21689070-contacts-swipe.png",
+      "sha256": "6733a3e2a7a23a8e9c157b164c4b1c6c5c5183230adc27c56473c953f1a10db7"
+    },
+    {
+      "file": "122-role-active-visual/rider-assigned-6fbe0289-645e-4f1c-ae0d-caab21689070-map.png",
+      "sha256": "a794e6125bc63cce443e8e190f6a657685d35425fe1f8ab4cfbb698f5152e856"
+    },
+    {
+      "file": "122-role-active-visual/rider-assigned-6fbe0289-645e-4f1c-ae0d-caab21689070.txt",
+      "sha256": "4c264085cda9fd764e9aef05fe2974fdd934c632e11169607bef89048bfe2126"
+    },
+    {
+      "file": "122-role-active-visual/rider-out-for-delivery-6fbe0289-645e-4f1c-ae0d-caab21689070-contacts-swipe.png",
+      "sha256": "e5d745add6987b497af468d2edac451f4c0bd5d333391a00c9f9b3981cbc11d2"
+    },
+    {
+      "file": "122-role-active-visual/rider-out-for-delivery-6fbe0289-645e-4f1c-ae0d-caab21689070-map.png",
+      "sha256": "45aa78ca7220b0dec703af88e5480ffb767140cfdadaa41fec328d1132217537"
+    },
+    {
+      "file": "122-role-active-visual/rider-out-for-delivery-6fbe0289-645e-4f1c-ae0d-caab21689070.txt",
+      "sha256": "0ae87fdb8d4b452405b2b3940500c44e055ffb23e9e22410d4ec364833aecdeb"
+    }
+  ],
+  "observations": [
+    "First assigned map capture blank; later delivery map has provider tiles/POIs, so initial blank cannot alone prove a backend map defect. Loading/readiness and route markers need investigation.",
+    "Pickup placeholder clipped by inherited tracking/text size.",
+    "Floating chat overlaps part of delivery swipe in390pxcapture.",
+    "One active-orders401/resource error immediately after customer sign-out in teardown; timing inspected, not a pre-receipt business response."
+  ],
+  "networkErrorLines": 1,
+  "browserErrorLines": 1,
+  "rawLog": "/private/tmp/food-pending-item3-active-invocation1.log",
+  "rawLogSha256": "f7bdd21f385214172ae2a0fdc7409d13530ec983bdb41773f257a3ddbb32eeef",
+  "dataPolicy": "retain exact order; no new replacement, refund decision, reset or API setup",
+  "backgroundErrorDisposition": {
+    "timing": "log lines56-58: customer signed out200, then active-orders401/resource error; receipt assertion had already failed",
+    "networkErrors": 1,
+    "browserErrors": 1,
+    "limit": "Not a clean invocation; this is not evidence that a business request failed before delivery/receipt assertion"
+  }
+}

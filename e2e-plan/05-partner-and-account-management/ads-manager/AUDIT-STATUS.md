@@ -1,5 +1,17 @@
 # Ads Manager audit status
 
+## 2026-10-07T08:43+05:30 — A4 deployed: bp-a4 PASS; every rerun PASS (checkpoint 121)
+
+| Scenario | State | Proof |
+|---|---|---|
+| AM-A4-001 `AdsManagerPortalUiTest` | **PASS** (invocation 2) | owner 9000000002, customer 8000000019, Brand 2 Outlet 8; campaign `51f340aa-7b92-4c16-9d25-00bcae0a92e6` left PAUSED; uploaded PNG private → published `pub-331840c6….r2.dev`, served on the card. Invocation 1 RED = harness `Pattern.quote` in a Playwright name regex (fixed) |
+| AM-A3-001 `CampaignModerationActivationFlowTest` | **PASS** | campaign `eeb1d320…`, charged 0.43 = ledger ; **rerun 09:41 on UI 3d25d56 PASS** — reject now through the danger confirm (dialog repeats the reason), campaign `c8d67414…` |
+| AM-A2-001 `PromotedOutletApiTest` | **PASS** | A4 release |
+| AM-A2-002 `SponsoredListingRegressionTest` | **PASS** | A4 release |
+| AM-A1-001 `AdAccountPerOrganisationApiTest` | **PASS** | phone 9999788045 |
+| AM-A1-002 `RestaurantCampaignsLiveTest` | **DELETED in A4** | restaurant Campaigns tab removed; covered by AM-A4-001 |
+| `RestaurantNavigationUiTest` / `PartnerOperationsUiTest` | **PASS 2/2 / 1/1** | navigation pinned `-Drestaurant.phone=9000000001`. The unpinned failure (hard-coded Brand 1 outlets vs random owner, pre-existing) was **fixed 2026-10-07 08:52**, see reviews-and-support/AUDIT-STATUS.md |
+
 ## 2026-10-06T21:55+05:30 — A3 deployed: bp-a3 RED (money defect, fix local); A1/A2 re-runs PASS
 
 | Scenario | State | Proof |

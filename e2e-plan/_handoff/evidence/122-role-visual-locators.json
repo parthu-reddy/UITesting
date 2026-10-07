@@ -1,0 +1,202 @@
+{
+  "recordedAt": "2026-10-07T10:32:55+05:30",
+  "counts": {
+    "PASS": 20,
+    "DYNAMIC": 4
+  },
+  "sites": [
+    {
+      "rel": "tests/features/resilience/RoleVisualAuditUiTest.java",
+      "line": 42,
+      "call": "getByRole",
+      "text": "AriaRole.BUTTON, new Page.GetByRoleOptions().setName(Pattern.compile(\"^(Offline|Online Duty)$\"))",
+      "status": "PASS",
+      "reasons": []
+    },
+    {
+      "rel": "tests/features/resilience/RoleVisualAuditUiTest.java",
+      "line": 46,
+      "call": "getByText",
+      "text": "Pattern.compile(\"^(Today\u2019s earnings|Paid today)$\")",
+      "status": "PASS",
+      "reasons": []
+    },
+    {
+      "rel": "tests/features/resilience/RoleVisualAuditUiTest.java",
+      "line": 47,
+      "call": "getByRole",
+      "text": "AriaRole.BUTTON, new Page.GetByRoleOptions().setName(Pattern.compile(\"^Trips Completed\"))",
+      "status": "PASS",
+      "reasons": []
+    },
+    {
+      "rel": "tests/features/resilience/RoleVisualAuditUiTest.java",
+      "line": 53,
+      "call": "getByRole",
+      "text": "AriaRole.MAIN, new Page.GetByRoleOptions().setName(\"Delivery\").setExact(true)",
+      "status": "PASS",
+      "reasons": []
+    },
+    {
+      "rel": "tests/features/resilience/RoleVisualAuditUiTest.java",
+      "line": 54,
+      "call": "locator",
+      "text": "\"xpath=../..\"",
+      "status": "DYNAMIC",
+      "reasons": []
+    },
+    {
+      "rel": "tests/features/resilience/RoleVisualAuditUiTest.java",
+      "line": 72,
+      "call": "getByRole",
+      "text": "AriaRole.NAVIGATION",
+      "status": "PASS",
+      "reasons": []
+    },
+    {
+      "rel": "tests/features/resilience/RoleVisualAuditUiTest.java",
+      "line": 73,
+      "call": "getByRole",
+      "text": "AriaRole.BUTTON, new Locator.GetByRoleOptions().setName(name)",
+      "status": "PASS",
+      "reasons": []
+    },
+    {
+      "rel": "tests/features/resilience/RoleVisualAuditUiTest.java",
+      "line": 73,
+      "call": "locator",
+      "text": "\"span\"",
+      "status": "DYNAMIC",
+      "reasons": []
+    },
+    {
+      "rel": "tests/features/resilience/RoleVisualAuditUiTest.java",
+      "line": 78,
+      "call": "getByRole",
+      "text": "AriaRole.HEADING, new Page.GetByRoleOptions().setName(\"Refund Exception Queue\").setExact(true)",
+      "status": "PASS",
+      "reasons": []
+    },
+    {
+      "rel": "tests/features/resilience/RoleVisualAuditUiTest.java",
+      "line": 80,
+      "call": "getByRole",
+      "text": "AriaRole.COMBOBOX, new Page.GetByRoleOptions().setName(\"Status Filter\").setExact(true)",
+      "status": "PASS",
+      "reasons": []
+    },
+    {
+      "rel": "tests/features/resilience/RoleVisualAuditUiTest.java",
+      "line": 82,
+      "call": "getByRole",
+      "text": "AriaRole.TABLE",
+      "status": "PASS",
+      "reasons": []
+    },
+    {
+      "rel": "tests/features/resilience/RoleVisualAuditUiTest.java",
+      "line": 82,
+      "call": "getByRole",
+      "text": "AriaRole.HEADING, new Page.GetByRoleOptions().setName(\"Queue Empty\").setExact(true)",
+      "status": "PASS",
+      "reasons": []
+    },
+    {
+      "rel": "tests/features/resilience/RoleVisualAuditUiTest.java",
+      "line": 87,
+      "call": "getByRole",
+      "text": "AriaRole.HEADING, new Page.GetByRoleOptions().setName(\"Support Tickets\").setExact(true)",
+      "status": "PASS",
+      "reasons": []
+    },
+    {
+      "rel": "tests/features/resilience/RoleVisualAuditUiTest.java",
+      "line": 89,
+      "call": "getByText",
+      "text": "\"Loading tickets\u2026\", new Page.GetByTextOptions().setExact(true)",
+      "status": "PASS",
+      "reasons": []
+    },
+    {
+      "rel": "tests/features/resilience/RoleVisualAuditUiTest.java",
+      "line": 90,
+      "call": "getByText",
+      "text": "\"Tickets could not be refreshed. Existing results are still shown.\", new Page.GetByTextOptions().setExact(true)",
+      "status": "PASS",
+      "reasons": []
+    },
+    {
+      "rel": "tests/features/resilience/RoleVisualAuditUiTest.java",
+      "line": 92,
+      "call": "getByText",
+      "text": "\"No tickets found\", new Page.GetByTextOptions().setExact(true)",
+      "status": "PASS",
+      "reasons": []
+    },
+    {
+      "rel": "tests/features/resilience/RoleVisualAuditUiTest.java",
+      "line": 93,
+      "call": "getByRole",
+      "text": "AriaRole.BUTTON",
+      "status": "PASS",
+      "reasons": []
+    },
+    {
+      "rel": "tests/features/resilience/RoleVisualAuditUiTest.java",
+      "line": 93,
+      "call": "setHasText",
+      "text": "\"View Details\"",
+      "status": "PASS",
+      "reasons": []
+    },
+    {
+      "rel": "tests/features/resilience/RoleVisualAuditUiTest.java",
+      "line": 95,
+      "call": "getByRole",
+      "text": "AriaRole.NAVIGATION",
+      "status": "PASS",
+      "reasons": []
+    },
+    {
+      "rel": "tests/features/resilience/RoleVisualAuditUiTest.java",
+      "line": 95,
+      "call": "getByRole",
+      "text": "AriaRole.BUTTON, new Locator.GetByRoleOptions().setName(\"Support Tickets\").setExact(true)",
+      "status": "PASS",
+      "reasons": []
+    },
+    {
+      "rel": "tests/features/resilience/RoleVisualAuditUiTest.java",
+      "line": 112,
+      "call": "getByRole",
+      "text": "AriaRole.TAB, new Page.GetByRoleOptions().setName(\"My Reviews\").setExact(true)",
+      "status": "PASS",
+      "reasons": []
+    },
+    {
+      "rel": "tests/features/resilience/RoleVisualAuditUiTest.java",
+      "line": 115,
+      "call": "locator",
+      "text": "\"article\"",
+      "status": "DYNAMIC",
+      "reasons": []
+    },
+    {
+      "rel": "tests/features/resilience/RoleVisualAuditUiTest.java",
+      "line": 115,
+      "call": "getByText",
+      "text": "\"You haven't reviewed anything yet\", new Page.GetByTextOptions().setExact(true)",
+      "status": "PASS",
+      "reasons": []
+    },
+    {
+      "rel": "tests/features/resilience/RoleVisualAuditUiTest.java",
+      "line": 131,
+      "call": "locator",
+      "text": "\"body\"",
+      "status": "DYNAMIC",
+      "reasons": []
+    }
+  ],
+  "limits": "Static necessary condition only; four dynamic sites need real browser assertions."
+}

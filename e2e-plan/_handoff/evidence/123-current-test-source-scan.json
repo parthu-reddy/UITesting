@@ -1,0 +1,548 @@
+{
+  "recordedAt": "2026-10-07T11:17:55+05:30",
+  "proofType": "static annotation sites including disabled/parameterized definitions; not passing executions",
+  "filesWithTestAnnotations": 108,
+  "annotatedMethodSites": 372,
+  "files": [
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/base/TestConfigTest.java",
+      "annotatedMethodSites": 5,
+      "sha256": "dafbffd80d6a36fbf3b12b9d6f23f665436adcd9456a013d32b9cb3bf982ce7c"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/admin/AdminAuthorizationLiveE2ETest.java",
+      "annotatedMethodSites": 1,
+      "sha256": "b288f67565587cce8ecfc297599c512df0e176ce1b35400bf3672bcc9273ca5c"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/admin/AdminDispatchSafetyRoutedUiTest.java",
+      "annotatedMethodSites": 6,
+      "sha256": "b5589bf4768db0d845d63477f867420f217b5eb0508ce309dbea54e46ebd9b79"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/admin/AdminFleetSafetyRoutedUiTest.java",
+      "annotatedMethodSites": 2,
+      "sha256": "0af868ce460970c208c56a74652b0a49599fcf65f95519d57897313459fc3032"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/admin/AdminLedgerAdvancedTest.java",
+      "annotatedMethodSites": 13,
+      "sha256": "bcc45af8bfa739b395f16c1d44ffdf3d8a0bc80e6c8b679fb18bc9c1d7647e27"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/admin/AdminLedgerMoneyReadOnlyRoutedUiTest.java",
+      "annotatedMethodSites": 2,
+      "sha256": "8f1e5b28e548b5dfdf324a857a0cee21c27a8bdd2fff5e316fa688030765c43d"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/admin/AdminLiveOpsFleetTest.java",
+      "annotatedMethodSites": 13,
+      "sha256": "b8da922d90fb94c962f3ab739641c1e7e648baf27c310c7eacd8ce52a997e2fb"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/admin/AdminMoneyOperationsSafetyUiTest.java",
+      "annotatedMethodSites": 7,
+      "sha256": "e925fcf30f5bd63cf20a2441484c644548380a3d36dd2c71cfeada7dc63705ac"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/admin/AdminOrderMoneyOutcomesTest.java",
+      "annotatedMethodSites": 1,
+      "sha256": "bd573cc0d0638e1b5ab3b566edd6e2f294f7aed3357ecb13433c6ebd22059cdd"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/admin/AdminPayoutSafetyUiTest.java",
+      "annotatedMethodSites": 10,
+      "sha256": "4dd45cc517b65836522011a828a1ffcae5fb124ee733e590f9efcfea86ebbd18"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/admin/AdminPortalRouteCoverageRoutedUiTest.java",
+      "annotatedMethodSites": 1,
+      "sha256": "d8626a21f2be411a5086e45aeba56150daabd70549774451c3f037019aaaebd8"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/admin/AdminRefundPolicyRoutedUiTest.java",
+      "annotatedMethodSites": 4,
+      "sha256": "d35cf8d88c37272f9984c2e400642e8badb427e2ece545c5597c440459aa2199"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/admin/AdminSupportChatIsolationRoutedUiTest.java",
+      "annotatedMethodSites": 4,
+      "sha256": "c169a7175b0c6e7ef25fd2f2b475522ee7fa690aa73ab19a1c8ad52b3731a4da"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/admin/AdminSupportRefundQueueTest.java",
+      "annotatedMethodSites": 1,
+      "sha256": "00c5720338a90628c35fc77f3d5efa6536c2c38a8d27711eea960cd8260d5b17"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/admin/AdminSupportTicketResolutionRoutedUiTest.java",
+      "annotatedMethodSites": 3,
+      "sha256": "21450f2bccfbc8097f9b9f65b36b17e0325342e5049cb6c32c755f15b3160ff6"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/admin/AdminSupportUserReviewTest.java",
+      "annotatedMethodSites": 14,
+      "sha256": "d617ce5ff14b459ca0055025f8ecf13849a9eb2e32f5c786e7e9102084d83752"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/admin/AdminUiTest.java",
+      "annotatedMethodSites": 2,
+      "sha256": "3923f1cc2d501723341ca10c3cf7fecdf516af528fea18eddde63f6601fc4773"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/admin/AdminUserCatalogModerationRoutedUiTest.java",
+      "annotatedMethodSites": 10,
+      "sha256": "5138af2bfa458b70b129a30354f40af4cb4700fdfe468f4eba0e780d508c841f"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/admin/AdminUserOpsTest.java",
+      "annotatedMethodSites": 1,
+      "sha256": "c75c3a5a969a1cc15889a3baec0e21ed4b3bde920911526bf741e71b2bfbe8fa"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/admin/OwnedRefundVisualUiTest.java",
+      "annotatedMethodSites": 1,
+      "sha256": "d6a8d36db7e501c6d206d1f25e622d779bce71aaadd0dd6893b893fe640b7453"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/ads/AdAccountPerOrganisationApiTest.java",
+      "annotatedMethodSites": 1,
+      "sha256": "f5bb626ba8119bb677afb88b4da034209400363a94e09d87e3baed916d54cb72"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/ads/AdCreativeQueueLatencyMeasurement.java",
+      "annotatedMethodSites": 1,
+      "sha256": "2b1d9b8572ac318d88439d55a26e7db8d0db811821a89249872d1aebfe646432"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/ads/NearbyListingLatencyMeasurement.java",
+      "annotatedMethodSites": 1,
+      "sha256": "6ba1c1b20bf377f2ef467288bd7bd49d7af7af55ddc4ea7d6db61c7b5e4405f9"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/ads/PromotedOutletApiTest.java",
+      "annotatedMethodSites": 1,
+      "sha256": "aa6f061a9a0625fe07b0050d1746474ffe8110ed3a2d553132921a3f32b36dc5"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/ads/SponsoredListingRegressionTest.java",
+      "annotatedMethodSites": 1,
+      "sha256": "4c5be455482872c6b8f9866eefd10b09fb0f4abe150222ddb55a4f182517f6cb"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/auth/CrossRoleSessionIsolationTest.java",
+      "annotatedMethodSites": 3,
+      "sha256": "b56cdb1fc3a593d01a23015ece0de5e44ae0022c78ed0ccbd95fc22ef7e2948e"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/auth/ProfileSettingsTest.java",
+      "annotatedMethodSites": 4,
+      "sha256": "d21283916517f1dd408aee5bf3e2afe6c1ef308bf936ea8c5d4eade9ea956a11"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/auth/RegistrationUiTest.java",
+      "annotatedMethodSites": 3,
+      "sha256": "a052bc77689b9e73ec70ed40bf69ba17038a107dbec9c695c8c19bb92cf4a95a"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/auth/SessionManagementTest.java",
+      "annotatedMethodSites": 5,
+      "sha256": "20acec5705df87aa72af9b6c64be88ed302f92a66a3f8c3908d919b32413947a"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/auth/SettingsTest.java",
+      "annotatedMethodSites": 2,
+      "sha256": "0a1695cc6fdbf00b77a3d76e82ed7be87155fae8a24e96f02fb20360669be0b3"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/customer/CheckoutRoutedUiTest.java",
+      "annotatedMethodSites": 6,
+      "sha256": "677fd990262e081f53f53db5a5fc0cabae518e1527d0fa854c328b3573c1ff7c"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/customer/CheckoutUiTest.java",
+      "annotatedMethodSites": 4,
+      "sha256": "72bd95c5314ba15c323e60af011d596e3086cbfc52e362dd6422ee1e1a55a98f"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/customer/CustomerAddressTest.java",
+      "annotatedMethodSites": 2,
+      "sha256": "5e4fd00be06427e8425ceb5a5d56a49ff4c01eb27b2a1950d1b73de8eab7a853"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/customer/CustomerCartTest.java",
+      "annotatedMethodSites": 1,
+      "sha256": "0dd095fcb4f074fe3200e3035dbd7ac053cee97b6c829b02bbf7c97e8afb6f22"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/customer/CustomerHomeAddressTest.java",
+      "annotatedMethodSites": 7,
+      "sha256": "45df403d6df59ad90118300e00420de52ac56a6f726b7ce2c8e3b20ecbeb0a09"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/customer/CustomerOrderHistoryUiTest.java",
+      "annotatedMethodSites": 13,
+      "sha256": "cc2e2bbc24f63f505e1b7f4dad7162b3c9a857e9290f4434749202492aacdb62"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/customer/CustomerRoutingUiTest.java",
+      "annotatedMethodSites": 1,
+      "sha256": "22505f85cf4caa14df2577ce52911790d9a0fbf89f68e81f7fdc848356075642"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/customer/MenuCartFeatureTest.java",
+      "annotatedMethodSites": 2,
+      "sha256": "c567c6c482695d7c6daf1cbe4f021128608ed26c885f7dc14e780533ec5e1e19"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/customer/OutletSelectionTest.java",
+      "annotatedMethodSites": 6,
+      "sha256": "f91f58b37475a1109c706ea06477dc91652d2b5b2c5b6b995b0e3845d8028c42"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/exceptions/ChatAndRefundIsolationTest.java",
+      "annotatedMethodSites": 1,
+      "sha256": "aae6629b4ad6b1107536b33baa619a0e9ca55151a66dca6bb4a433d66d16ce01"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/exceptions/ChatHistoryPagingTest.java",
+      "annotatedMethodSites": 1,
+      "sha256": "ff1d4065d1ff7d6b448c37ebeeb6c564c33005a67f984f58a60f0179c402bdb3"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/exceptions/ChatRefundMapTest.java",
+      "annotatedMethodSites": 4,
+      "sha256": "d04a5d31fe159a0ad8477b5e048f0631fd8556b854dfa4159ba1f532b8937bfb"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/exceptions/ChatSupportWindowClosedTest.java",
+      "annotatedMethodSites": 1,
+      "sha256": "a45969d48cb204e3696d211d0aff1e5560b1753f9782c74d5e28aeaf38df2c7f"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/exceptions/ChatWindowRoutedUiTest.java",
+      "annotatedMethodSites": 3,
+      "sha256": "327fe4aabdcac248ce34b6234686feca3a2b0ef5dd1b82268f43a9b70c412070"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/fulfillment/CustomerOrderPlacementTest.java",
+      "annotatedMethodSites": 3,
+      "sha256": "20f47f3a856d8ac98c92f8ca7770cfea90a83962e3799f04d3b4092b3f244088"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/fulfillment/PickupDeliveryOtpTest.java",
+      "annotatedMethodSites": 7,
+      "sha256": "1b045d36134e6ddd277869a9e9d45907900a84cb08fc239d498156e2c5786cc6"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/fulfillment/RestaurantFulfillmentTest.java",
+      "annotatedMethodSites": 1,
+      "sha256": "1c59c2e31712e77ef061cb783f35e356595b891cb0c7058c92423f1496d65d97"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/fulfillment/RestaurantNavigationUiTest.java",
+      "annotatedMethodSites": 2,
+      "sha256": "9ae6c28c53f8025ca4d4f5019f0ef8a3774f10a07150c8d36fceee9a9c97038f"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/fulfillment/RiderAvailabilityUiTest.java",
+      "annotatedMethodSites": 1,
+      "sha256": "bde42d2b7a153859e4abef0316d81b051c9f64ce4ddf23a7f2183b24e1bd8069"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/fulfillment/RiderFulfillmentTest.java",
+      "annotatedMethodSites": 1,
+      "sha256": "da567bc0acf9265a81df171e22ae0fb79c914e8646c903716f39d7ebfb50262a"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/organisations/AdminPartnerApprovalsUiTest.java",
+      "annotatedMethodSites": 2,
+      "sha256": "4a2660fca566d4326ffc70efa78d49eaf5d40e39bc2cbc515743787f56337a86"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/organisations/AdminStepUpTest.java",
+      "annotatedMethodSites": 2,
+      "sha256": "d47dfeef96929454abfeecf70e75759f1245cfa22a0415607678e234d0405121"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/organisations/ApprovedRestaurantBrandSearchUiTest.java",
+      "annotatedMethodSites": 1,
+      "sha256": "e666aab04618791f4538ef19a9975f7e4694c5e0f3e2330e024db736c2a24f2f"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/organisations/BusinessHubOrganisationUiTest.java",
+      "annotatedMethodSites": 1,
+      "sha256": "6ca6f46baa837e4c78457fd78665dbc775000c620085aa32b37aa00f6621820d"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/organisations/CspSmokeUiTest.java",
+      "annotatedMethodSites": 1,
+      "sha256": "d46ee36704ad7b6ab0797f54443143aabc3d46451f7b6541cb70645e00ddb701"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/organisations/DeliveryApplicationApiTest.java",
+      "annotatedMethodSites": 1,
+      "sha256": "de8389f681305bbd0bf1dd3dc2c35011c7ea75f041eb36bac5b8175e399203bb"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/organisations/DeliveryOnboardingUiTest.java",
+      "annotatedMethodSites": 1,
+      "sha256": "16f3b6ef94b701ba7309d08bd11c49805279e347d2bcc264b58854e328d6b88f"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/organisations/EntitlementRevocationTest.java",
+      "annotatedMethodSites": 2,
+      "sha256": "0aa17cfe92d723c22e20d19dc44fc479d8e63c7c7f625383b2b9c186c4d2e02c"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/organisations/OneLoginEntitlementsTest.java",
+      "annotatedMethodSites": 4,
+      "sha256": "946e43a73a49d069dbd53b612d58ce3dfe25ee7492e151dbf1165ea22b5de457"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/organisations/OrganisationLifecycleApiTest.java",
+      "annotatedMethodSites": 2,
+      "sha256": "7e515b7ac225641b800cce2a731d2598a036d991bd570f342bae2fb4b6cd56af"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/organisations/OrganisationRestaurantAccessTest.java",
+      "annotatedMethodSites": 1,
+      "sha256": "a398062b6120fdde485f606c36a790c6495d7e24eb8771af2f304fb50a7d1cfb"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/organisations/PortalLauncherUiTest.java",
+      "annotatedMethodSites": 4,
+      "sha256": "a7e1bb93f1f99be17f88fddb0bd4c712e622c1e2a4d02ea6438389365da5092e"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/organisations/RestaurantApplicationApiTest.java",
+      "annotatedMethodSites": 1,
+      "sha256": "e12b8864babe63e90b259de504a981cfce75a7345800d462555642ac6fc9ff6e"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/organisations/RestaurantApplicationWizardUiTest.java",
+      "annotatedMethodSites": 1,
+      "sha256": "e084ce87d2f69343849f4c4c7a153448279dbf93d80ccbdefc3062959c9513a7"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/organisations/UnapprovedOutletHiddenTest.java",
+      "annotatedMethodSites": 1,
+      "sha256": "8c0511f2176ffbb7340a3dd5286ef9f3644d5405c5db7649bfc70879085eb249"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/resilience/ResilienceRegressionUiTest.java",
+      "annotatedMethodSites": 2,
+      "sha256": "ab9801fbdec487602cbe369568b410b19edca090adc99639f5f49a0965140c16"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/resilience/ResponsiveAccessibilityTest.java",
+      "annotatedMethodSites": 12,
+      "sha256": "398766d83ffdac398593f864afa9d6b373f707fa2855af35967d991a4be27049"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/resilience/RoleVisualAuditUiTest.java",
+      "annotatedMethodSites": 4,
+      "sha256": "7db5f341829aa5360f7fe725ce53e26de70741f51f14798236671ce836e8d172"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/restaurant/PartnerOperationsUiTest.java",
+      "annotatedMethodSites": 1,
+      "sha256": "9e0e71d212d2f891fc0449448b1d1eb6034b232cca5bb21d633b40c18e4c77b9"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/restaurant/RestaurantEarningsLiveTest.java",
+      "annotatedMethodSites": 1,
+      "sha256": "0ae821a2da30a43d50b23446f08a3dd3dc81d380635e7b841bdf2631f8dd5be7"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/restaurant/RestaurantMenuManagementTest.java",
+      "annotatedMethodSites": 1,
+      "sha256": "860767cb3e00f7158bb4b76c9772c80d35d8ea9313e2f4b39e0b6d84dfdb116d"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/restaurant/RestaurantUiTest.java",
+      "annotatedMethodSites": 2,
+      "sha256": "a4fed86582664436874aa5cd83a6aa6ebb670e8db8ffaaf06d051a6cb4b42dd8"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/rider/RiderOnboardingFullTest.java",
+      "annotatedMethodSites": 1,
+      "sha256": "81a10f0e9995c8b977ffa706abf0d449309644f2091227f4b4afc7067861c2d5"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/rider/RiderOnboardingTest.java",
+      "annotatedMethodSites": 1,
+      "sha256": "ba55c09659e3d72909994fd21c33f9fb7344d6bd32d320763c99dfc2290a42cd"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/rider/RiderUiTest.java",
+      "annotatedMethodSites": 2,
+      "sha256": "b227b374d108f28221a389825ab417a89194dfa5d28fafa60352b9b63544f77b"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/wallet/BusinessWalletAccessApiTest.java",
+      "annotatedMethodSites": 1,
+      "sha256": "a06c2fea959d9b0be7fe037ccf9e8f735c632258e771e05877d858f3bb2aa93d"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/wallet/BusinessWalletTopUpFlowTest.java",
+      "annotatedMethodSites": 1,
+      "sha256": "75884d3933858757d6a153fa0c33b0f962262ff6024de9317c1d533dd7e290de"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/wallet/BusinessWalletUiTest.java",
+      "annotatedMethodSites": 1,
+      "sha256": "5663d81b80fa102afd230723d992a8375834aac74d6ef6f55671a207794b311f"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/flows/AdminRefundRetryFlowTest.java",
+      "annotatedMethodSites": 1,
+      "sha256": "9cbf17fcc26d4a10debec493225efac4e9b8883c33e26c1bb671c6888f1810a4"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/flows/AdsManagerPortalUiTest.java",
+      "annotatedMethodSites": 1,
+      "sha256": "7ca0434ae055fc7f6b134874d7e6316973844028a3b3af294be91bad93c59420"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/flows/CampaignModerationActivationFlowTest.java",
+      "annotatedMethodSites": 1,
+      "sha256": "dad7afbf4ad52da21d1f140f239e275aee77f7391d1f994de8f5bb47faac8649"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/flows/DelayApprovalFlowTest.java",
+      "annotatedMethodSites": 2,
+      "sha256": "2b4c44eb3b1349b8ee1117c6b954c81d683b55dd9d0f0b7769a4318cb7b105d9"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/flows/HappyDeliveryFlowTest.java",
+      "annotatedMethodSites": 2,
+      "sha256": "add9db75989ca0bcbdbeb0ff8316b3d86d07e00f42f9006ef78e09b59a3f04ad"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/flows/OrderCancellationFlowTest.java",
+      "annotatedMethodSites": 1,
+      "sha256": "843a1da37e4fd9bd0a52653238a34f1202778d2fb3bfa86e135b3009e36b6baa"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/flows/OrderReviewsFlowTest.java",
+      "annotatedMethodSites": 4,
+      "sha256": "1ea63a38d80ea4ab3c5be31cb8206d7eb7c7fab4a4a0beca47e6634b807576b7"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/flows/RestaurantRejectFlowTest.java",
+      "annotatedMethodSites": 1,
+      "sha256": "e8273e8ef21d48c0a4d3a49cc7efcb2de9d0cbcffd588b4514eac5c30b7dcaa9"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/flows/RetainedOrderStateUiTest.java",
+      "annotatedMethodSites": 1,
+      "sha256": "f5ed4a83a3c601304c2f6197a1d94341f97e06553c1a2aa5cd26a0fb7fb6b8ee"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/flows/ReviewFlowTest.java",
+      "annotatedMethodSites": 1,
+      "sha256": "da1c616ebcf16a3fde024059703d47cad307cb8eba3a713ec68a1f9e2e17e328"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/flows/RiderReviewHistoryApiTest.java",
+      "annotatedMethodSites": 1,
+      "sha256": "2a4a3cc0f116279ea82e7edef9d58d1189624e7fe245d4af851411a65b090451"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/flows/SupportRefundResolutionFlowTest.java",
+      "annotatedMethodSites": 3,
+      "sha256": "53c6bee5a7ea85788ef0b415dfaa3f3707bc2ca118f521a8654a151436624203"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/resilience/NetworkRecoveryUiTest.java",
+      "annotatedMethodSites": 1,
+      "sha256": "40ebf3e35c56830e88a8518e10dc0fdb54ef389c4231e1e369d4d21c6fb2ade3"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/resilience/PageReloadRecoveryTest.java",
+      "annotatedMethodSites": 8,
+      "sha256": "058bf8494dc2f283f17ac9bde739c50bdecea9e96bfbc3876d1d9404047bad39"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/resilience/SSEReconnectTest.java",
+      "annotatedMethodSites": 1,
+      "sha256": "e6e4ca9ad548e4d67b666e936e024db140e63a064ec3d2314379e14076b49449"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/smoke/AdminReadOnlyUiTest.java",
+      "annotatedMethodSites": 7,
+      "sha256": "90881df4da7791f686d2b28ffa42c5bf6826962fbbd36fc22667c04b06a14c79"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/smoke/CustomerSettingsUiTest.java",
+      "annotatedMethodSites": 15,
+      "sha256": "990c7d513d553c30e73d9ed0035d35f2226e0c24f8869cd78b42e4dfe624cb3c"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/smoke/LoginSmokeTest.java",
+      "annotatedMethodSites": 2,
+      "sha256": "2ebec38ea9cbcc7379204339a2b80e6a2915cffa805e533fb3464db81bcc72a9"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/smoke/LoginThemeUiTest.java",
+      "annotatedMethodSites": 1,
+      "sha256": "82295be49bfe012de511a0aff32db165fee23ddc94a6f4ab0fa3b1de2aa29cb5"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/smoke/LoginValidationTest.java",
+      "annotatedMethodSites": 4,
+      "sha256": "ce7e39db79b83a630e8c5c10b09c87ff897d0c30e0bf4d01b759977517e72171"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/smoke/MenuCartUiTest.java",
+      "annotatedMethodSites": 19,
+      "sha256": "1541df744a52dfdec646d75ea9b24dd99c3de284d634acb281dfa798c3c5e451"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/smoke/NavigationSmokeTest.java",
+      "annotatedMethodSites": 4,
+      "sha256": "42d34d2fd8a9056166b00e683ec6a95f894ba2ea214131e1f2084f76cc54eff0"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/smoke/PartnerReadOnlyUiTest.java",
+      "annotatedMethodSites": 10,
+      "sha256": "9981052bd72ae04df9128ab887b4bf5e0213d2c249f646b86f7c8dfc36fc8322"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/smoke/RestaurantDiscoveryUiTest.java",
+      "annotatedMethodSites": 8,
+      "sha256": "23eb12d01968473ee550ffdf2734c57683946a7ea7fe76f742da9b90671bd8d9"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/smoke/RoleNavigationUiTest.java",
+      "annotatedMethodSites": 1,
+      "sha256": "4e8138b7dba88ed17a5c2a12aef5230f31ab432c3128e8204f1458279c29ef8e"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/smoke/SavedAddressOutletUiTest.java",
+      "annotatedMethodSites": 11,
+      "sha256": "4b4b226e20c37443dff276f1a4669abdcc7f03a777dd05721812b200ba959dbe"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/tests/smoke/SessionUiTest.java",
+      "annotatedMethodSites": 4,
+      "sha256": "6a02d9df68ca270f704776909f457075a96fc95102146a45cae05433f47055c6"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/util/E2eOtpClientTest.java",
+      "annotatedMethodSites": 3,
+      "sha256": "6839127c5552a4b12da84da2d0e2300f61a7efcfabee6e7645c1a6e9d210a7a6"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/util/RiderDutyObservationTest.java",
+      "annotatedMethodSites": 5,
+      "sha256": "9f1b7845ba13703a4f09136086059dc2fd697290645d9fc0b4a352cf3277b276"
+    },
+    {
+      "file": "src/test/java/com/fooddelivery/e2e/util/SeededRiderDutyTest.java",
+      "annotatedMethodSites": 4,
+      "sha256": "76cb9929cdf51faa836b61500a515752abeebabd18864b3678d82fc795acce0e"
+    }
+  ]
+}

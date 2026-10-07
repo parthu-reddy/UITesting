@@ -1,0 +1,46 @@
+{
+  "recordedAt": "2026-10-07T12:40:00+05:30",
+  "proofType": "local current source checks; NOT deployed",
+  "baseUiRelease": "6eb4ef6 (deployed)",
+  "changedFiles": [
+    "src/features/delivery-tasks/model/useDeliveryOrders.ts",
+    "src/features/delivery-tasks/model/useDeliveryOrders.todayFigures.test.ts (new)",
+    "src/features/delivery-tasks/components/RiderStatsBar.tsx",
+    "src/features/delivery-tasks/components/RiderStatsBar.test.tsx (new)",
+    "src/pages/delivery/DeliveryDashboard.tsx",
+    "src/features/maps-tracking/components/OrderTrackingMap.tsx",
+    "src/features/maps-tracking/components/OrderTrackingMap.test.tsx",
+    "src/features/delivery-tasks/components/DeliveryActiveJob.tsx",
+    "src/features/delivery-tasks/components/DeliveryActiveJob.test.tsx",
+    "src/features/delivery-tasks/components/DeliveryOrderDetailsModal.tsx",
+    "src/features/delivery-tasks/components/DeliveryOrderDetailsModal.test.tsx (new)"
+  ],
+  "fixes": {
+    "F-125-1 false-zero today tiles": "todayFigures loading|ready|unavailable|other-day; money/trip figure only when ready",
+    "F-125-2 GPS-gated pins": "known customer/restaurant pins placed when restaurant lookup settles; GPS adds courier + route",
+    "F-125-3 fee shown as rider credit": "slider label 'Slide to deliver'; history modal 'Your net payout' = earnings.netPayout or 'Not confirmed yet'"
+  },
+  "redFirst": {
+    "todayFigures hook": "3/3 red on old code; throwaway probe proved old hook returned 0/0 loading, 21.16/1 loaded, 0/0 other-day",
+    "RiderStatsBar": "3 red with old always-render behaviour forced, 4/4 green restored",
+    "OrderTrackingMap rider pins": "1 red on old code (placePins not called while GPS pending)",
+    "payout labels": "3 red on old code"
+  },
+  "gates": {
+    "vitest": {
+      "files": 177,
+      "tests": 1060,
+      "failed": 0
+    },
+    "typecheck": "pass",
+    "lint": "pass (0 warnings)",
+    "build": "pass",
+    "phase4Source": "12/12 (--skip-toolchain)",
+    "e2eLocatorAudit": "PASS for RiderVisualAudit, HappyDeliveryFlowTest, SwipeHelper",
+    "auditMoneyAsis": "0/23 (clean baseline)"
+  },
+  "notDone": [
+    "owner build/deploy of FoodDeliveryAppUI",
+    "live verification of the four fixes"
+  ]
+}

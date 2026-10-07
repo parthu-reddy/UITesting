@@ -1,0 +1,61 @@
+{
+  "recordedAt": "2026-10-07T10:47:21+05:30",
+  "proofType": "real deployed UI, actual paint/full label/settled loading assertions",
+  "invocation": 5,
+  "ownerPublishedUiCommit": "5a1e97c391e592f5508ecf580641aefd4238a8f5",
+  "publication": "122-owner-ui-publication.json",
+  "tests": 3,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "elapsedSeconds": 20.926,
+  "methods": [
+    "adminDesktopRefundQueueAndSupport",
+    "riderMobileDashboardAndVerificationRead",
+    "customerMyReviewsReadReturns200"
+  ],
+  "networkErrorLines": 0,
+  "browserErrorLines": 0,
+  "rawLog": "/private/tmp/food-pending-visual-invocation5-deployed.log",
+  "rawLogSha256": "f98ba0c44ecf21923cff0e73a84b135261f7d648fa8121bd3a2c6e44afdd8189",
+  "captures": [
+    {
+      "file": "122-role-visual-audit-deployed/admin-refunds-desktop.png",
+      "sha256": "a0b8a553bbcd01803686840203f9f5154f258e91998c22e8eb34893b2cfd04a1"
+    },
+    {
+      "file": "122-role-visual-audit-deployed/admin-refunds-desktop.txt",
+      "sha256": "81b54ba8886dd69ab3f172280dc455372051b54d23f258e018cf3f0b4140ab4a"
+    },
+    {
+      "file": "122-role-visual-audit-deployed/admin-support-desktop.png",
+      "sha256": "fa2e28970633f98d1fb3c4b9d90d33775ba2a8b1a6e9ad204eeadbe67ee07388"
+    },
+    {
+      "file": "122-role-visual-audit-deployed/admin-support-desktop.txt",
+      "sha256": "b809efcf3eb972184be3241b60c44d20a499fdf7782d19ebcfa4f0f416040e20"
+    },
+    {
+      "file": "122-role-visual-audit-deployed/customer-my-reviews.png",
+      "sha256": "a2e2e1c4c1fd5c6cd9f2d7abee4627e04b9f7f180187f975cc35e2e186293f01"
+    },
+    {
+      "file": "122-role-visual-audit-deployed/customer-my-reviews.txt",
+      "sha256": "35f073343713d4936b55f2cc41f33f120bea55c29d5a2ed97c1a919c4512544d"
+    },
+    {
+      "file": "122-role-visual-audit-deployed/rider-mobile.png",
+      "sha256": "188e55b15612cfc475f038c2fbc4b92dfc41c8b5e64223caea7c0314882d0c46"
+    },
+    {
+      "file": "122-role-visual-audit-deployed/rider-mobile.txt",
+      "sha256": "b055b5056d1e5ca40f192396023b7c09dea1d7ff6aaea45a024803217b369808"
+    }
+  ],
+  "review": "Rider own dark canvas readable; full admin labels wrap; support captures settled No tickets found. Both UI defects fixed.",
+  "remainingVisualGaps": [
+    "Active rider stage captures are next via existing HappyDeliveryFlowTest",
+    "Populated refund detail/audit/confirm needs actual retained ticket; no dummy money action invented"
+  ],
+  "runtimeVersionLimit": "Actual visible fixes confirmed; no SSH/container/image-digest health audit performed."
+}

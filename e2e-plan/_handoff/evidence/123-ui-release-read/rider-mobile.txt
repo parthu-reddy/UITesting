@@ -1,0 +1,14 @@
+verificationStatuses=[200]
+scriptPaths=[/assets/vendor-animation-C3HNGYXC.js, /assets/vendor-validation-DqDuAUND.js, /assets/index-CIvNH0Bs.js, /assets/maplibre-gl-kOAb795E.js, /assets/key-round-ngDcM2_5.js, /assets/LoginScreen-D0rgdIHo.js, /assets/arrow-left-DErB1gpd.js, /assets/sun-BHMqV_qn.js, /assets/LaBouffeLogo-g6Dgneak.js, /assets/shield-DvteKwlw.js, /assets/index-CIvNH0Bs.js, /assets/vendor-animation-C3HNGYXC.js, /assets/vendor-validation-DqDuAUND.js, /assets/maplibre-gl-kOAb795E.js, /assets/key-round-ngDcM2_5.js, /assets/arrow-left-DErB1gpd.js, /assets/LaBouffeLogo-g6Dgneak.js, /assets/ImageLoader-CJkiJWZ6.js, /assets/ImageUploadField-C_VheUeO.js, /assets/DocumentUploadField-DKs7wKCT.js, /assets/phone-BEYgNEWp.js, /assets/usePartnerApplication-D1GPtVp3.js, /assets/applications-CLnkqdCk.js, /assets/RoleShells-DV68nrkD.js, /assets/mapMarker-R1f5k1fK.js, /assets/OrderTrackingMap-DUi7by5l.js, /assets/shield-alert-B_QVU9Sr.js, /assets/clock-B15SbOw_.js, /assets/DeliveryDashboard-CubehF8y.js, /assets/useDeliveryApplication-Dx-MP44W.js, /assets/map-pin-off-RCCaLYLv.js, /assets/calendar-K35h20zu.js, /assets/CallOverlay-B8mi9zGq.js]
+Rider 1
+KA60AB5496
+Offline
+TODAY’S EARNINGS
+₹0.00
+TRIPS COMPLETED
+0 orders
+YOUR RATING
+Not rated yet
+You are currently Duty Offline
+
+Switch your duty status to Online at the top right to start receiving dispatch jobs, navigating maps, and pocketing payouts.

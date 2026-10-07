@@ -1,0 +1,27 @@
+viewport=1280x800
+Admin
+Live Operations
+Support Tickets
+Refund Queue
+Manual Interventions
+User Management
+Categories
+Fleet Map
+Ledger Entries
+Pending Payouts
+Money Operations
+Review Moderation
+Partner Approvals
+Ad creatives
+Switch portal
+Support Tickets
+
+Review refund requests and support cases
+
+OPEN
+IN REVIEW
+RESOLVED
+REJECTED
+OPEN Tickets (0)
+
+Loading tickets…

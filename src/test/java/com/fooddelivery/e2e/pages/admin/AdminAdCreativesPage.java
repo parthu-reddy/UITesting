@@ -40,7 +40,13 @@ public class AdminAdCreativesPage {
         Locator card = card(creativeId);
         card.getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Reject").setExact(true)).click();
         card.getByLabel("Reason for the advertiser", new Locator.GetByLabelOptions().setExact(true)).fill(reason);
-        card.getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Confirm rejection").setExact(true)).click();
+        card.getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Reject creative").setExact(true)).click();
+        // Final, so a danger confirm repeats the reason before anything is sent.
+        Locator dialog = page.getByRole(AriaRole.DIALOG, new Page.GetByRoleOptions().setName("Reject this creative?").setExact(true));
+        assertThat(dialog).containsText(reason.trim());
+        Locator confirm = dialog.getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Reject creative").setExact(true));
+        assertThat(confirm).hasAttribute("data-variant", "danger");
+        confirm.click();
         assertThat(card(creativeId)).hasCount(0);
     }
 }

@@ -1,0 +1,22 @@
+viewport=1280x800
+Admin
+Live Operations
+Support Tickets
+Refund Queue
+Manual Interventions
+User Management
+Categories
+Fleet Map
+Ledger Entries
+Pending Payouts
+Money Operations
+Review Moderation
+Partner Approvals
+Ad creatives
+Switch portal
+Refund Exception Queue
+Status Filter
+Open
+Queue Empty
+
+There are no refund tickets requiring action right now.

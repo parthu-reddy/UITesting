@@ -1,0 +1,22 @@
+{
+  "recordedAt": "2026-10-07T11:33:21+05:30",
+  "proofType": "deployed normal rendered UI through Dev Autofill",
+  "test": "RoleVisualAuditUiTest#riderMobileDashboardAndVerificationRead",
+  "rawLog": "/private/tmp/food-pending-item3-release-read-invocation1.log",
+  "rawLogSha256": "c4ce022a945ef4920e9036c88ac4a2b95a154af1669c69211da494d7c10053f8",
+  "tests": 1,
+  "passed": 1,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "elapsedSeconds": 7.762,
+  "networkErrors": 0,
+  "browserErrors": 0,
+  "ownerUiHead": "6eb4ef6ad643e1bf4ac14f8fb3001ddf427725b5",
+  "ownerGithubRun": 37577846909,
+  "observedAsset": "/assets/DeliveryDashboard-CubehF8y.js",
+  "verificationStatus": 200,
+  "ownerConfirmedUiDeployment": true,
+  "captureInspected": true,
+  "limitation": "Public built chunk identity and rendered UI; no infrastructure health/image digest audit"
+}

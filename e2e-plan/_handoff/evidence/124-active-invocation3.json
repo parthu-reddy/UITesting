@@ -1,0 +1,26 @@
+{
+  "test": "HappyDeliveryFlowTest#completeOrderLifecycle [active visual]",
+  "tests": 1,
+  "passed": 0,
+  "skipped": 0,
+  "actors": {
+    "customer": "8000000001",
+    "restaurant": "9000000001",
+    "rider": "7000000001"
+  },
+  "recordedBy": "continuation session 2026-10-07 after usage-limit stop; earlier handoff left this invocation as running",
+  "recordedAt": "2026-10-07T12:05:00+05:30",
+  "invocation": 3,
+  "proofType": "deployed normal UI attempt; failed before checkout",
+  "failures": 1,
+  "errors": 0,
+  "elapsedSeconds": 27.18,
+  "newOrderCreated": false,
+  "ownedManifestCreated": false,
+  "riderPreflight": "authoritative ONLINE/live location verified",
+  "riderTeardown": "'Restored seeded rider to Offline through the delivery portal' logged",
+  "failure": "NearbyOutletPage.openBrandCardAndSelectNearby:23 hasCount(1) on button-with-exact-text 'Brand 1' resolved 0 elements for 5s (14 polls).",
+  "fix": "Helper (edited 11:41:37) now fills 'Search restaurants or cuisines' with the brand before matching and waits up to 30s; the feed initially renders six cards. Invocation 4 then selected Brand 1 Outlet 5 at 1.4 km.",
+  "rawLog": "/private/tmp/food-pending-item3-active-invocation3.log",
+  "rawLogSha256": "b2978e3b99121a64dd9d421a1b0a2b2e67cca96358864bf1e7db09169ceb89bc"
+}

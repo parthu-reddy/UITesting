@@ -1,0 +1,45 @@
+{
+  "recordedAt": "2026-10-07T11:21:02+05:30",
+  "proofType": "bounded new/prefix link and exact owner source review",
+  "linksChecked": 83,
+  "brokenLinks": [],
+  "ownerSourceFiles": [
+    {
+      "file": "src/features/customer-orders/model/useTrackedOrder.ts",
+      "testedEqualsOwnerHead": true
+    },
+    {
+      "file": "src/features/customer-orders/model/useTrackedOrder.test.ts",
+      "testedEqualsOwnerHead": true
+    },
+    {
+      "file": "src/features/communication/components/ChatWidget.tsx",
+      "testedEqualsOwnerHead": true
+    },
+    {
+      "file": "src/features/communication/models/useChatSession.test.tsx",
+      "testedEqualsOwnerHead": true
+    },
+    {
+      "file": "src/features/delivery-tasks/components/ActiveDeliveryCard.tsx",
+      "testedEqualsOwnerHead": true
+    },
+    {
+      "file": "src/features/delivery-tasks/components/RiderHeader.tsx",
+      "testedEqualsOwnerHead": true
+    },
+    {
+      "file": "src/features/delivery-tasks/components/RiderJobChat.tsx",
+      "testedEqualsOwnerHead": true
+    },
+    {
+      "file": "src/pages/delivery/DeliveryDashboard.tsx",
+      "testedEqualsOwnerHead": true
+    }
+  ],
+  "ownerGithubRun": 37577846909,
+  "publication": "success",
+  "deployedConfirmation": false,
+  "ownedRefundWriter": "compiled; authorized; not executed",
+  "originalLateFailurePreserved": true
+}

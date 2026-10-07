@@ -1,5 +1,29 @@
 # Durable audit status: reviews-and-support
 
+## 2026-10-07T10:35+05:30 — F12 fixed; navigation follows visible owner outlets
+
+RoleVisualAuditUiTest#customerMyReviewsReadReturns200 passes on seeded customer8000000001 through
+normal Dev Autofill/customer settings/My Reviews. The actual UI-generated GET/api/v1/reviews/me
+returns200 and reviews/defined empty state renders. F12's historical403 is fixed; no speculative
+backend edit or review write. [Baseline evidence](../../_handoff/evidence/122-role-visual-baseline.json).
+
+The dated 08:52 entry below used a direct GatewayApi outlet helper. Checkpoint122 replaces that with
+the rendered Outlet combobox/listbox under the current UI-only policy. Named outlets must belong
+to the signed-in owner. Pinned navigation2/2 plus unpinned2/2 pass; exact runtime-name exceptions
+keep wrong-name controls failing. [Current navigation audit](../../07-resilience-and-regression/responsive-accessibility-and-navigation/AUDIT-STATUS.md).
+
+## 2026-10-07T08:52+05:30 — REVIEW-AGG-01 / REST-NAV outlets follow the signed-in owner
+
+`RestaurantNavigationUiTest` defaulted its outlets to Brand 1 ("Brand 1 Outlet 3/6") while `TestBase` signs in a random
+owner 9000000001–010, so each method failed ~9 in 10 runs unpinned ("Outlet not found in the rendered grouped
+selector"). Seen red on HEAD for REVIEW-AGG-01 with `-Drestaurant.phone=9000000009` and for REST-NAV unpinned. Now both
+methods take outlets from the owner's own `GET /api/v1/outlets` (server: `getOutletsForUser(principal, ORG_VIEW)`),
+first/second by name; a named `-Dreview.outlet.name` / `-Drestaurant.outlet.name` / `-Drestaurant.alternate.outlet.name`
+must be one of them or the test fails saying to pass `-Drestaurant.phone` (seen: Brand 1 Outlet 6 for 9000000009).
+Each run prints the owner and outlets. Live: class **2/2 in 5 unpinned runs** (owners 2,3,5,6,7,9,10) + REVIEW-AGG-01
+alone 5/5 unpinned (4,7,8,9,10) + named mode 2/2 (9000000001, Brand 1 Outlet 9/3/6). Locator audit: 2 FAIL in this file,
+both unchanged from HEAD (runtime-built region names "Incoming, N orders" / "In the kitchen, N orders"; they render live).
+
 
 ## 2026-10-05T11:57:12+05:30 — O4/O5 scoped regression acceptance
 

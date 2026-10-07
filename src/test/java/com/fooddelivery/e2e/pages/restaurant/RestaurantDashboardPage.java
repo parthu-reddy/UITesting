@@ -4,6 +4,8 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.WaitForSelectorState;
 
+import java.util.List;
+
 /**
  * Page Object for the Restaurant Dashboard shell.
  * Maps to: {@code RestaurantDashboard.tsx, RestaurantPortal.tsx}
@@ -35,6 +37,41 @@ public class RestaurantDashboardPage {
     }
 
     // ── Outlet selection ─────────────────────────────────────────────────
+
+    /** Read the signed-in person's available outlets through the visible selector. */
+    public List<String> availableOutletLabels() {
+        Locator outlet = page.getByRole(com.microsoft.playwright.options.AriaRole.COMBOBOX,
+                new Page.GetByRoleOptions().setName("Outlet").setExact(true));
+        outlet.click();
+        try {
+            Locator options = page.getByRole(com.microsoft.playwright.options.AriaRole.LISTBOX,
+                    new Page.GetByRoleOptions().setName("Outlet").setExact(true))
+                    .getByRole(com.microsoft.playwright.options.AriaRole.OPTION)
+                    .filter(new Locator.FilterOptions().setVisible(true));
+            options.first().waitFor();
+            return options.allInnerTexts().stream().map(String::trim).sorted().toList();
+        } finally {
+            outlet.press("Escape");
+        }
+    }
+
+    /** A named fixture must be visible for the same owner; defaults use that owner's own options. */
+    public String availableOutlet(String requested, int fallback) {
+        List<String> available = availableOutletLabels();
+        if (requested == null || requested.isBlank()) {
+            if (available.size() <= fallback) {
+                throw new AssertionError("Signed-in restaurant needs " + (fallback + 1)
+                        + " outlets, but selector shows " + available);
+            }
+            return available.get(fallback);
+        }
+        List<String> matching = available.stream().filter(label -> matchesOutlet(label, requested)).toList();
+        if (matching.size() != 1) {
+            throw new AssertionError("Named outlet " + requested + " must match exactly one visible outlet of the"
+                    + " signed-in restaurant; pass -Drestaurant.phone for its owner. Available: " + available);
+        }
+        return matching.get(0);
+    }
 
     public void selectOutlet(String outletName) {
         Locator outlet = page.getByRole(com.microsoft.playwright.options.AriaRole.COMBOBOX,

@@ -1,0 +1,21 @@
+{
+  "cleanupPerformed": false,
+  "restaurantPhone": "9000000001",
+  "orderId": "ce254f3a-13c6-4317-a30f-6884595aa090",
+  "customerPhone": "8000000001",
+  "outlet": "Brand 1 Outlet 5",
+  "riderPhone": "7000000001",
+  "dataPolicy": "retain",
+  "history": [
+    {
+      "at": "2026-10-07T11:46+05:30",
+      "state": "OUT_FOR_DELIVERY",
+      "by": "invocation4 failure at out-for-delivery visual capture"
+    },
+    {
+      "at": "2026-10-07T12:03+05:30",
+      "state": "DELIVERED",
+      "by": "invocation5 retained resume through rider UI"
+    }
+  ]
+}

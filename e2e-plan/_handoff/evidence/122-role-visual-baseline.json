@@ -1,0 +1,73 @@
+{
+  "recordedAt": "2026-10-07T10:32:55+05:30",
+  "proofType": "real deployed UI, read-only normal Dev Autofill login",
+  "testClass": "RoleVisualAuditUiTest",
+  "invocation": 2,
+  "methods": [
+    "riderMobileDashboardAndVerificationRead",
+    "adminDesktopRefundQueueAndSupport",
+    "customerMyReviewsReadReturns200"
+  ],
+  "log": {
+    "rawLog": "/private/tmp/food-pending-visual-invocation2.log",
+    "sha256": "a561c217f306859a7f8579b73e5a83f4fe2f59c3a60a745be23c311d59d9eead",
+    "networkErrorLines": 0,
+    "browserErrorLines": 0,
+    "counts": {
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0
+    }
+  },
+  "historicalFailures": {
+    "F12-rider-verification": {
+      "fixed": true,
+      "GET /api/delivery/verification/status": 200
+    },
+    "F12-customer-reviews": {
+      "fixed": true,
+      "GET /api/v1/reviews/me": 200
+    }
+  },
+  "captures": [
+    {
+      "file": "122-role-visual-audit/admin-refunds-desktop.png",
+      "sha256": "0641642ecc9e8587615cc6b7e3ee6f97b28b383d7fcfd8378dc33ae146b90b55"
+    },
+    {
+      "file": "122-role-visual-audit/admin-refunds-desktop.txt",
+      "sha256": "81b54ba8886dd69ab3f172280dc455372051b54d23f258e018cf3f0b4140ab4a"
+    },
+    {
+      "file": "122-role-visual-audit/admin-support-desktop.png",
+      "sha256": "0a424c2709ae40d9c1274b69d854425f4fff2ee0b8d2d7ced891f99f63fbf5e4"
+    },
+    {
+      "file": "122-role-visual-audit/admin-support-desktop.txt",
+      "sha256": "ac3606b73f1237d3bd47bd57769cb101d21c31e016e727e390dcbf9448364125"
+    },
+    {
+      "file": "122-role-visual-audit/customer-my-reviews.png",
+      "sha256": "98c26545ee7c32872153476d227f8cae9ea02a99772d818f5596c5902a3c0dee"
+    },
+    {
+      "file": "122-role-visual-audit/customer-my-reviews.txt",
+      "sha256": "35f073343713d4936b55f2cc41f33f120bea55c29d5a2ed97c1a919c4512544d"
+    },
+    {
+      "file": "122-role-visual-audit/rider-mobile.png",
+      "sha256": "c02935a14fd8a263d4f8ddcdfd5f0ed1430d2a9c648b636283206feef6f0a716"
+    },
+    {
+      "file": "122-role-visual-audit/rider-mobile.txt",
+      "sha256": "b055b5056d1e5ca40f192396023b7c09dea1d7ff6aaea45a024803217b369808"
+    }
+  ],
+  "limits": [
+    "Initial source had no opaque-canvas or full-label assertion; it does not pass the strengthened final tests.",
+    "Rider was idle; active order/contact/swipe/map states not live-audited.",
+    "Refund queue empty; row/audit rail/confirmation not live-audited.",
+    "Initial Support Tickets screenshot was taken before loading/selection transitions settled."
+  ]
+}

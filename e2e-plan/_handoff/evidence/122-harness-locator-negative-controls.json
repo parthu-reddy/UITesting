@@ -1,0 +1,22 @@
+{
+  "date": "2026-10-07",
+  "proof": "local static scratch-tree probes",
+  "controls": [
+    {
+      "probe": "incoming-name-miss",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "mutatedSite": "AriaRole.REGION,new Page.GetByRoleOptions().setName(Pattern.compile(\"^Incoming forever, [0-9]+ orders?$\"))",
+      "remainingExactExceptionCount": 1,
+      "sourceRestored": true
+    },
+    {
+      "probe": "kitchen-name-miss",
+      "expected": "FAIL",
+      "actual": "FAIL",
+      "mutatedSite": "AriaRole.REGION,new Page.GetByRoleOptions().setName(Pattern.compile(\"^In the kitchen forever, [0-9]+ orders?$\"))",
+      "remainingExactExceptionCount": 1,
+      "sourceRestored": true
+    }
+  ]
+}

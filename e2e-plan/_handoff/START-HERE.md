@@ -1,6 +1,104 @@
 # Resume the Food Delivery E2E audit
 
-Latest continuation (2026-10-07): [checkpoint120](checkpoints/120-ads-a4-built-locally.md) — A4 Ads Manager built locally (uploads private-first, server-filtered list); deploy + bp-a4 open, see A4-HANDOFF.md. Previous: [checkpoint119](checkpoints/119-ads-a3-live-green.md).
+## 2026-10-07T12:40+05:30 — checkpoint125: ce254f3a delivered + verified; 3 rider defects fixed locally, UI deploy pending
+
+**Correction:** the earlier "invocation 3 running" entries were stale. Invocation 3 failed before
+checkout (no order). Invocation 4 created **ce254f3a-13c6-4317-a30f-6884595aa090** and failed at the
+out-for-delivery courier-pin capture (0 markers in the DOM; cause undetermined).
+
+The retained resume (invocation 5) passes 1/1 in 52.0s: out-for-delivery visual checks after a
+fresh load, then DELIVERED through the UI. The retained read-only money check passes 1/1:
+CARD ₹43.02, rider net ₹21.16, 18 ledger lines balancing ₹92.72, 0 refunds, 0 order writes.
+
+Three defects are fixed locally, red-first:
+- today's earnings/trips showed a false ₹0.00 before loading, on error, and while browsing another day;
+- the rider map's known pins waited for a GPS fix;
+- the slider and history modal presented the customer delivery fee (₹23.76) as rider money, while
+  the ledger shows ₹21.16.
+
+Full UI 177/1,060, typecheck, lint, build, Phase4 12/12 and locator/money audits pass.
+**Waiting on the owner: a FoodDeliveryAppUI-only deploy.** Invocation 5's earnings-increase check
+used an unloaded ₹0.00 baseline, so it is not proven. Item3 stays active; M1/A5b are paused.
+[Checkpoint125](checkpoints/125-retained-resume-false-zero-and-gps-pins.md),
+[deployment handoff](../../../RandomDocuments/PendingWork_2026-10-07/ITEM-3-ACTIVE-DEPLOYMENT.md).
+Older "running" statements below are superseded.
+
+## 2026-10-07T11:37:19+05:30 — Retained finance now green; active rider regression running
+
+Same6fbe0289 money/quote continuation passes1/1 through real payout drawer/order-reference controls:
+18balanced ledger lines, CARD/SUCCESS₹43.02, restaurant₹6.54 and rider₹21.16,0new order/refund.
+First invocation's brand-decorated-name assertion failure is preserved separately. UI6eb4ef6 is live;
+receipt and owned47ffbccd REJECTED audit already pass. One justified fresh active lifecycle is
+running; current authoritative ONLINE/live-location preflight is verified, no final result yet.
+Its new identity is retained immediately at creation. Item3 active, M1/A5b paused.
+[Checkpoint124](checkpoints/124-deployed-receipt-owned-refund-and-active-rider-gate.md) supersedes earlier finance-running text below.
+
+## 2026-10-07T11:33:21+05:30 — checkpoint124: UI live; retained receipt and owned rejected audit pass
+
+Owner confirmed UI-only deployment. UI6eb4ef6's actual CI asset is observed by normal rider login,
+1/1green. Retained6fbe0289 receipt/quote is fixed live,1/1green,0new order/refund submission.
+Owned ticket47ffbccd was created/rejected once; original writer errored after rejection200 while
+reading an unavailable request body. Same-ticket read-only resume passes1/1, verifies REJECTED,
+exact resolution note/actor/timestamp and0customer refunds, with0new order/resolve writes.
+Preserve both invocations; no duplicate ticket or refund approval. All three green methods have
+0failures/errors/skips/network/browser errors within their stated scope.
+
+Item3 stays active for strengthened active rider checks. The money helper now follows actual
+Pending Payouts/drawer/order-reference controls; retained money continuation is running, not passed.
+Then one fresh active lifecycle is justified for changed mobile UX, with current preflight/retention.
+No UI deployment is currently pending for these fixes. M1/A5b remains paused.
+[Current checkpoint124](checkpoints/124-deployed-receipt-owned-refund-and-active-rider-gate.md) supersedes older deployment-waiting statements below.
+
+## 2026-10-07T11:17:55+05:30 — checkpoint123: active receipt/mobile fixes; owner deploying UI
+
+Items1/2 are DONE. Item3 alone remains active. UI5a1e97c's canvas/sidebar fixes and F12 pass live3/3.
+The new owned lifecycle reached DELIVERED, then failed the history-to-receipt assertion:1failure,
+0errors/skips. Keep **6fbe0289-645e-4f1c-ae0d-caab21689070** at Brand1Outlet5,
+customer8000000001/owner9000000001/rider7000000001. Its401 was after sign-out in teardown.
+
+Additional UI fixes keep terminal history over stale active cache, fit the pickup hint and place48px
+rider chat in the header away from swipes. Local UI1049/174files,focused34,typecheck,lint,build,
+Phase4source12/12 pass. Owner committed6eb4ef6 and GitHub37577846909 is publishing; actual live
+deployment is not yet confirmed. [Exact UI handoff](../../../RandomDocuments/PendingWork_2026-10-07/ITEM-3-ACTIVE-DEPLOYMENT.md).
+
+Read-only All Tickets E2E passes1/1,GET200,0rows/0resolution writes; populated states remain unverified.
+Owner **approved** one dummy request/rejection on6fbe0289, with approval confirmation cancelled and no
+refund approval/payout. OwnedRefundVisualUiTest is prepared/compiled, not yet executed. First verify
+the retained receipt after deployment, then this writer. Strengthened active mobile checks need one
+justified new lifecycle after deployment; preserve any new identity on failure. M1/A5b stays paused.
+
+[Checkpoint123](checkpoints/123-active-visual-receipt-and-mobile-fixes.md), [local gates](evidence/123-active-ui-local-gates.json),
+[All Tickets proof](evidence/123-admin-all-refunds-invocation1.json),
+[approved exact fixture plan](../../../RandomDocuments/PendingWork_2026-10-07/ITEM-3-ADMIN-FIXTURE.md).
+Older running/deployment-waiting statements below are dated history superseded by this entry.
+
+## 2026-10-07T10:49+05:30 — UI visual defects fixed live; active-state audit continues
+
+Owner published UI `5a1e97c`; GitHub build37574491813 succeeded and matches all three tested files.
+RoleVisualAuditUiTest invocation5 passes **3/3, 0 failures/errors/skips/network/browser errors**.
+Actual captures show opaque dark rider canvas, full wrapped sidebar labels and settled Support
+Tickets. The two UI defects and F12 are fixed; no current UI deployment gate remains.
+
+Item3 stays active for D1/E2 fixture states. Existing HappyDeliveryFlowTest now has opt-in assigned/
+out-for-delivery 390×844 visual assertions; compile and focused locator checks pass. Its one-method
+UI-only run has started with customer8000000001/owner9000000001/rider7000000001; it created owned
+order6fbe0289-645e-4f1c-ae0d-caab21689070. No result is claimed while it runs. Retain/resume that
+exact fixture on failure. [Active-state plan](../../../RandomDocuments/PendingWork_2026-10-07/ITEM-3-ACTIVE-STATE-PLAN.md).
+
+[Green evidence](evidence/122-role-visual-invocation5-green.json), [owner publication](evidence/122-owner-ui-publication.json).
+M1/A5b remain paused; no new backend deployment or state shortcut. Older deployment-waiting entries
+below describe their dated state.
+
+
+Latest continuation (2026-10-07T10:35+05:30): [checkpoint122](checkpoints/122-pending-work-sequential-review.md)
+— screenshot pending work is sequential. Items1/2 DONE. F12 fixed; two real rider/admin UI defects
+fixed locally (UI1045/1045). Owner is deploying UI; final strengthened visual E2E awaits live
+confirmation. [Current state](CURRENT-STATE.md), [next steps](NEXT-STEPS.md),
+[deployment gate](../../../RandomDocuments/PendingWork_2026-10-07/ITEM-3-DEPLOYMENT.md).
+Maps/ETA partial code remains paused and unverified. Earlier dated entries are historical;
+checkpoint121 is the retained through-A4 release acceptance, not a stop on this new request.
+
+Latest continuation (2026-10-07T08:43+05:30): [checkpoint121](checkpoints/121-ads-a4-live-green.md) — A4 Ads Manager LIVE-GREEN (bp-a4 + all A1–A3 reruns pass); the business-platform plan's phases are all live-green. A3 Reject danger confirm live-green 09:41 (UI 3d25d56); nothing pending. Previous: [checkpoint120](checkpoints/120-ads-a4-built-locally.md) — A4 Ads Manager built locally (uploads private-first, server-filtered list); deploy + bp-a4 open, see A4-HANDOFF.md. Previous: [checkpoint119](checkpoints/119-ads-a3-live-green.md).
 
 Latest continuation (2026-10-06T15:35+05:30): [checkpoint116](checkpoints/116-business-wallet-live-green.md) — business wallet W1–W3 live-green; next is A2 on the owner's go-ahead.
 
@@ -10,7 +108,7 @@ Latest continuation (2026-10-06T13:35+05:30): Business Platform wallet. W2 E2E r
 
 Latest continuation (2026-10-05T15:05+05:30): O1–O5 production-readiness review in [RandomDocuments/BusinessPlatformReview_2026-10-05](../../../RandomDocuments/BusinessPlatformReview_2026-10-05/README.md) — Phases 1–2 done locally, awaiting owner deploy; see [NEXT-STEPS](NEXT-STEPS.md). Deployed release is still [checkpoint113](checkpoints/113-o4-o5-complete-stop-boundary.md). Wallet/Ads require a later user instruction.
 
-Earlier dated entries below are historical checkpoints. Checkpoint113 is the current release and stop instruction.
+Earlier dated entries below are historical checkpoints. Their stop/unstarted statements are superseded by the latest owner request and checkpoint122.
 
 ## 2026-10-04T19:53:32+05:30 — checkpoint77: Common published; O4 service source ready for workflows
 

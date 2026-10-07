@@ -276,6 +276,9 @@ public class HappyDeliveryFlowTest extends TestBase {
             confirmStatus(orderId, "OUT_FOR_DELIVERY", activeJob::swipeToConfirmPickup);
         }
         assertThat(riderPage.getByPlaceholder("Ask customer for 6-digit OTP")).isVisible();
+        // A retained order resumes after a fresh rider load, the same state the main flow
+        // audits after its delivery-phase reload. A no-op unless -Dvisual.audit.dir is set.
+        com.fooddelivery.e2e.util.RiderVisualAudit.capture(riderPage, orderId, "out-for-delivery");
 
         customerPage.reload();
         // Login/reload can restore a different active order. Choose the owned one through the UI
@@ -383,7 +386,7 @@ public class HappyDeliveryFlowTest extends TestBase {
                 assertThat(trip).isVisible();
                 double payout=parseInr(trip.innerText());
                 loginAsAdmin();
-                com.fooddelivery.e2e.util.OrderMoneyChecks.verify(adminPage,id,order,payout);
+                com.fooddelivery.e2e.util.OrderMoneyChecks.verify(adminPage,id,order,payout,(String)manifest.get("outlet"));
             }
             com.fooddelivery.e2e.util.RefundQuoteChecks.verify(customerPage,id,items.add(gst));
             org.assertj.core.api.Assertions.assertThat(orderWrites.get()).as("retained checks create no order").isZero();
@@ -518,9 +521,15 @@ public class HappyDeliveryFlowTest extends TestBase {
         org.assertj.core.api.Assertions.assertThat(orderId).matches("[0-9a-fA-F-]{36}");
         try {
             Path manifest = Path.of("target/lifecycle",orderId + ".json");Files.createDirectories(manifest.getParent());
-            Files.writeString(manifest,(String) customerPage.evaluate("data => JSON.stringify(data,null,2)", Map.of(
+            String manifestText=(String) customerPage.evaluate("data => JSON.stringify(data,null,2)", Map.of(
                     "orderId",orderId,"customerPhone",testCustomerPhone,"restaurantPhone",testRestaurantPhone,
-                    "riderPhone",testRiderPhone,"outlet",selectedOutlet,"dataPolicy","retain","cleanupPerformed",false)));
+                    "riderPhone",testRiderPhone,"outlet",selectedOutlet,"dataPolicy","retain","cleanupPerformed",false));
+            Files.writeString(manifest,manifestText);
+            if(!System.getProperty("visual.audit.dir", "").isBlank()) {
+                Path durable=Path.of("e2e-plan/_handoff/fixtures","124-visual-owned-"+orderId+".json");
+                Files.createDirectories(durable.getParent());
+                Files.writeString(durable,manifestText);
+            }
         } catch (java.io.IOException failure) { throw new AssertionError("Cannot retain lifecycle order manifest",failure); }
         org.assertj.core.api.Assertions.assertThat(order.get("paymentMethod")).isEqualTo("CARD");
         }
@@ -593,6 +602,8 @@ public class HappyDeliveryFlowTest extends TestBase {
         assertThat(customerAddress).containsText(deliveryAddress);
         assertThat(riderPage.getByRole(AriaRole.BUTTON,
                 new Page.GetByRoleOptions().setName("Mark Arrived at Restaurant").setExact(true))).isVisible();
+
+        com.fooddelivery.e2e.util.RiderVisualAudit.capture(riderPage, orderId, "assigned");
 
         // Prove the first authorised subscription succeeds before navigation can abort it.
         // A later successful reload subscription alone does not cover the acceptance race.
@@ -676,6 +687,7 @@ public class HappyDeliveryFlowTest extends TestBase {
         assertThat(riderPage.getByPlaceholder("Ask customer for 6-digit OTP")).isVisible();
 
         // ── Step 12: Get customer delivery OTP ────────────────────────────
+        com.fooddelivery.e2e.util.RiderVisualAudit.capture(riderPage, orderId, "out-for-delivery");
         System.out.println("═══ STEP 12: Getting customer delivery OTP ═══");
         String deliveryOtp = tracker.getDeliveryOtp();
         assertThat(deliveryOtp).isNotEmpty().hasSize(6);
@@ -767,7 +779,7 @@ public class HappyDeliveryFlowTest extends TestBase {
 
         }
         loginAsAdmin();
-        Map<?,?> money=com.fooddelivery.e2e.util.OrderMoneyChecks.verify(adminPage,orderId,order,recordedPayout);
+        Map<?,?> money=com.fooddelivery.e2e.util.OrderMoneyChecks.verify(adminPage,orderId,order,recordedPayout,selectedOutlet);
         org.junit.jupiter.api.Assertions.assertAll("Chat and refund quote",
                 () -> chatChecks.assertPassed(),
                 () -> com.fooddelivery.e2e.util.RefundQuoteChecks.verify(customerPage,orderId,money));

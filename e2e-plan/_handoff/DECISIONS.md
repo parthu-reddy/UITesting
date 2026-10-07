@@ -1,5 +1,40 @@
 # User instructions and joint decisions register
 
+## 2026-10-07T11:33:21+05:30 — Preserve a completed write after an observer error
+
+Owned ticket rejection returned200, then a post-response body observer failed. Read the same ticket
+before retrying any mutation: its persisted state is REJECTED and the read-only resume passes. Keep
+original error, stale in-memory disposition and fresh actual state distinct. No replacement ticket.
+The full lifecycle's admin money gate uses the real existing payout-drawer order link; preserve all
+financial assertions and avoid a typed order-money URL. Item3 stays active before M1/A5b.
+
+## 2026-10-07T11:17:55+05:30 — item3 active-state repair and exact ticket decision
+
+Real delivery/active capture revealed stale terminal-history selection, clipped pickup hint and chat
+obstruction; fix actual call paths and validate terminal selection/portal placement before owner UI
+release. Do not call the full original Happy method green: its order delivered but receipt failed.
+Use the retained-delivered branch before any new active lifecycle. A fresh active-only lifecycle is
+justified after release because the completed fixture cannot re-enter pickup/delivery.
+
+Owner replies “I'll deploy the UI now” and “Yes, create and reject the owned dummy ticket” authorize
+only the exact UI fixture plan for6fbe0289: real quote → OPEN request → approval-confirm cancel →
+owned rejection → rejected audit and no-refund reads. No refund approval/payment or arbitrary ticket
+mutation. All Tickets returned0rows, so source/empty-state proof cannot close populated branches.
+Keep item3active and M1/A5bpaused; do not ask again for that exact authorization.
+
+## 2026-10-07T10:35+05:30 — Sequential pending work and real visual proof
+
+Owner requires production-ready UX, one item at a time, source checks, existing E2E flow reuse,
+and marking already-fixed work fixed. [Sequential plan](../../../RandomDocuments/PendingWork_2026-10-07/README.md).
+Items1/2 are complete from evidence. Item3 F12 is fixed by fresh200reads; actual rider canvas/admin
+label defects are fixed locally with red→green unit and red deployed assertions retained. Owner
+will deploy UI; only a new green run validates final source. Intent to deploy is not confirmation.
+
+Keep idle/empty versus active/populated branches explicit. Artboard dummy values/bulk refund/GPS
+history are not authorization to fabricate data or alter financial behaviour. Paused M1/A5b changes
+stay unverified. [Visual comparison](../../../RandomDocuments/PendingWork_2026-10-07/ITEM-3-VISUAL-AUDIT.md)
+and checkpoint122 record source differences and deployment continuation.
+
 ## 2026-10-05T17:30:00+05:30 — Review D-R5: no OTP resend cooldown (owner)
 
 Owner chose no 30-second resend cooldown on login/admin code screens: the server already limits each phone to 10 codes per 10 minutes, and LoginValidationTest#resendRejectsThePreviousCode / #resendOtp stay in normal runs instead of moving to deferred duration tests. The code screen instead shows the destination number with "Change number".
@@ -766,3 +801,11 @@ Choice: beneficiary verification treats both APPROVED and VERIFIED as passed, ma
 ## 2026-10-05T11:57:12+05:30 — Accept O4/O5 and stop
 
 Choice: complete O4/O5 within current Dev/UI-only boundaries after successful GitHub publication, Oracle rollout, final8+8 UI gates, required existing regressions, the demonstrated beneficiary correction and current portal p95 proof. Retain every original failure and owned fixture. Record missing historical Gateway latency as O4-PERF-001 and deliberate CSP mutation as O5-CSP-001; internal/duration/rate/SSE/provider/load/parked ONDC limits remain unverified. Do not count deferrals as passes. No further wipe/seed/automatic cleanup or financial action. Stop after Phase5; W1–W3/A1–A4 are unstarted and require a later instruction. The entire platform is not declared production-validated.
+# 2026-10-07T10:10+05:30 — Screenshot pending queue resumed
+
+Owner requests completion of the attached pending list. Work begins with evidence-grounded W1/A1/A3
+paperwork, restaurant fixture/locator follow-ups, fresh read-only D1/E2/F12 browser checks and numeric
+maps/live ETA source changes. Keep existing dirty work and local-only owner-managed publication.
+Missing historical measurements or invisible UI assertions remain unverified; do not manufacture
+evidence or create replacement lifecycle fixtures just to fill a checklist. Parked design choices and
+explicit earlier deferrals retain their recorded status.

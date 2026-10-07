@@ -1,0 +1,17 @@
+{
+  "conclusion": "success",
+  "createdAt": "2026-10-07T05:04:05Z",
+  "databaseId": 37574491813,
+  "headSha": "5a1e97c391e592f5508ecf580641aefd4238a8f5",
+  "status": "completed",
+  "updatedAt": "2026-10-07T05:08:05Z",
+  "url": "https://github.com/parthu-reddy/FoodDeliveryAppUI/actions/runs/37574491813",
+  "recordedAt": "2026-10-07T10:42:24+05:30",
+  "proofType": "owner-published GitHub image build; runtime rollout remains separate UI E2E proof",
+  "publishedBy": "owner; no agent commit/push/deploy",
+  "currentSourceMatchesHead": {
+    "src/shared/ui/SidebarNav.tsx": true,
+    "src/shared/ui/shell/RoleShell.tsx": true,
+    "src/shared/ui/shell/RoleShells.test.tsx": true
+  }
+}

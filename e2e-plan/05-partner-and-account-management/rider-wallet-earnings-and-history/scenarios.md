@@ -9,7 +9,7 @@ Uses: `RiderEarningsPage`, `RiderWalletPage`, `DeliveryHistoryPage`.
 | ID | Description | Action | Expected result |
 |---|---|---|---|
 | RIDER-EARN-01 | Earnings tab renders | Login as rider → tap "Earnings" tab. | `RiderEarningsPage` renders; summary visible. |
-| RIDER-EARN-02 | Today's earnings visible | On dashboard. | Implemented and live-passed: INR-formatted value is numeric and ≥ ₹0. |
+| RIDER-EARN-02 | Today's earnings visible | On dashboard. | Implemented and live-passed: INR-formatted value is numeric and ≥ ₹0. 2026-10-07 (local, not deployed): before today's history loads, on a failed read, or while browsing another day, the tile shows "—" with the reason, never ₹0.00. |
 | RIDER-EARN-03 | Earnings increase after delivery | After completing a delivery. | Earnings figure increases by the delivery payout; not ₹0 increase if payout > ₹0. |
 | RIDER-EARN-04 | Weekly earnings visible | On Earnings page, weekly total shown. | Weekly figure ≥ ₹0; non-null. |
 | RIDER-EARN-05 | Monthly earnings visible | Monthly total shown. | Monthly figure ≥ ₹0; non-null. |

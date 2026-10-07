@@ -318,7 +318,8 @@
         "CROSS-15"
       ],
       "reviewStatus": "reviewed fast CROSS01\u201315; explicit slow/quota deferred",
-      "executionStatus": "corrected full single-order and overlapping-pair invocations passed;3retained delivered orders;product fixes deployed"
+      "executionStatus": "partial-deployed-proof; active receipt failed; local UI repair awaits deployment and exact fixture E2E",
+      "latestCheckpoint": "123"
     },
     {
       "feature": "03-order-fulfillment/customer-tracking-and-history",
@@ -376,7 +377,8 @@
         "TRACKING-13"
       ],
       "reviewStatus": "fast reviewed; follow-ups assigned",
-      "executionStatus": "Fast source review complete with assigned gaps.13history/reorder methods and strengthened dismissal passed; real Oracle-origin map motion passed44.067s; strengthened two-order carousel passed135.077s. Public Quick Tunnel SSE is explicitly deferred by the user; real delay lifecycle belongs to its owning feature."
+      "executionStatus": "partial-deployed-proof; active receipt failed; local UI repair awaits deployment and exact fixture E2E",
+      "latestCheckpoint": "123"
     },
     {
       "feature": "03-order-fulfillment/pickup-and-delivery",
@@ -419,7 +421,8 @@
         "PICKUP-11"
       ],
       "reviewStatus": "fast source reviewed",
-      "executionStatus": "Prior package-delivery checks passed; unnecessary item visibility requirement withdrawn per user clarification; retained-order resume pending."
+      "executionStatus": "partial-deployed-proof; active receipt failed; local UI repair awaits deployment and exact fixture E2E",
+      "latestCheckpoint": "123"
     },
     {
       "feature": "03-order-fulfillment/restaurant-acceptance-and-preparation",
@@ -711,8 +714,10 @@
         "SUPPORT-10",
         "SUPPORT-11"
       ],
-      "reviewStatus": "not-reviewed",
-      "executionStatus": "not-run"
+      "reviewStatus": "current selected source reviewed; broader scenarios retain their feature audit limits",
+      "executionStatus": "F12 My Reviews200; current owner-safe navigation passed; immutable-review proof historical",
+      "lastUpdatedAt": "2026-10-07T10:38:25+05:30",
+      "latestCheckpoint": "122"
     },
     {
       "feature": "05-partner-and-account-management/campaigns-and-promotions",
@@ -852,8 +857,10 @@
         "EARNINGS-12",
         "EARNINGS-13"
       ],
-      "reviewStatus": "not-reviewed",
-      "executionStatus": "not-run"
+      "reviewStatus": "current selected source reviewed; broader scenarios retain their feature audit limits",
+      "executionStatus": "owner-pinned zero/empty statement passed deployed UI",
+      "lastUpdatedAt": "2026-10-07T10:38:25+05:30",
+      "latestCheckpoint": "122"
     },
     {
       "feature": "05-partner-and-account-management/restaurant-outlets-and-menu-management",
@@ -932,8 +939,10 @@
         "RIDER-WALLET-05",
         "RIDER-WALLET-06"
       ],
-      "reviewStatus": "not-reviewed",
-      "executionStatus": "not-run"
+      "reviewStatus": "current selected source reviewed; broader scenarios retain their feature audit limits",
+      "executionStatus": "partial-deployed-proof; active receipt failed; local UI repair awaits deployment and exact fixture E2E",
+      "lastUpdatedAt": "2026-10-07T10:38:25+05:30",
+      "latestCheckpoint": "123"
     },
     {
       "feature": "06-admin-operations/ledger-payouts-and-order-money",
@@ -1112,8 +1121,10 @@
         "SUPPORT-QUEUE-07",
         "SUPPORT-QUEUE-08"
       ],
-      "reviewStatus": "not-reviewed",
-      "executionStatus": "not-run"
+      "reviewStatus": "current selected source reviewed; broader scenarios retain their feature audit limits",
+      "executionStatus": "partial-deployed-proof; active receipt failed; local UI repair awaits deployment and exact fixture E2E",
+      "lastUpdatedAt": "2026-10-07T10:38:25+05:30",
+      "latestCheckpoint": "123"
     },
     {
       "feature": "06-admin-operations/users-categories-and-moderation",
@@ -1254,8 +1265,10 @@
         "RESP-06",
         "RESP-07"
       ],
-      "reviewStatus": "not-reviewed",
-      "executionStatus": "not-run"
+      "reviewStatus": "current selected source reviewed; broader scenarios retain their feature audit limits",
+      "executionStatus": "partial-deployed-proof; active receipt failed; local UI repair awaits deployment and exact fixture E2E",
+      "lastUpdatedAt": "2026-10-07T10:38:25+05:30",
+      "latestCheckpoint": "123"
     },
     {
       "feature": "07-resilience-and-regression/suite-isolation-and-regression",
@@ -4012,7 +4025,7 @@
       "class": "RestaurantNavigationUiTest",
       "method": "restaurantSectionsRender",
       "file": "src/test/java/com/fooddelivery/e2e/tests/features/fulfillment/RestaurantNavigationUiTest.java",
-      "line": 26,
+      "line": 30,
       "package": "com.fooddelivery.e2e.tests.features.fulfillment",
       "parameterized": false,
       "classOptIns": [],
@@ -4024,16 +4037,18 @@
       "reviewStatus": "reviewed-current-source",
       "executionStatus": "passed-deployed-UI",
       "evidence": [
-        "64-final-session-release-and-three-reruns.json"
+        "64-final-session-release-and-three-reruns.json",
+        "122-harness-live-invocation2.json",
+        "122-harness-live-invocation3-unpinned.json"
       ],
-      "lastVerifiedAt": "2026-10-05T11:58:13+05:30",
-      "scope": "O4/O5 current required UI regression or final gate; original failed invocations retained separately"
+      "lastVerifiedAt": "2026-10-07T10:38:25+05:30",
+      "scope": "Checkpoint122 owner-safe rendered outlet selector; earnings zero/empty scope; pinned/unpinned navigation passes"
     },
     {
       "class": "RestaurantNavigationUiTest",
       "method": "restaurantReviewsShowPublicFeedbackAndAggregate",
       "file": "src/test/java/com/fooddelivery/e2e/tests/features/fulfillment/RestaurantNavigationUiTest.java",
-      "line": 74,
+      "line": 92,
       "package": "com.fooddelivery.e2e.tests.features.fulfillment",
       "parameterized": false,
       "classOptIns": [],
@@ -4043,10 +4058,12 @@
       "reviewStatus": "reviewed-current-source",
       "executionStatus": "passed-deployed-UI",
       "evidence": [
-        "62-retained-four-regressions-invocation1-original.json"
+        "62-retained-four-regressions-invocation1-original.json",
+        "122-harness-live-invocation2.json",
+        "122-harness-live-invocation3-unpinned.json"
       ],
-      "lastVerifiedAt": "2026-10-05T11:58:13+05:30",
-      "scope": "O4/O5 current required UI regression or final gate; original failed invocations retained separately"
+      "lastVerifiedAt": "2026-10-07T10:38:25+05:30",
+      "scope": "Checkpoint122 owner-safe rendered outlet selector; earnings zero/empty scope; pinned/unpinned navigation passes"
     },
     {
       "class": "RiderAvailabilityUiTest",
@@ -4496,14 +4513,20 @@
       "methodTags": [],
       "disabled": false,
       "reviewStatus": "reviewed-current-source",
-      "executionStatus": "passed-deployed-UI",
+      "executionStatus": "failed-deployed-ui; delivered order retained; receipt/mobile repair pending",
       "feature": "03-order-fulfillment/cross-role-order-lifecycle",
       "evidence": [
-        "55-happy-owned-delivery-invocation9-pass.json; retained earlier-step/failure evidence;56-money-quote branch"
+        "55-happy-owned-delivery-invocation9-pass.json; retained earlier-step/failure evidence;56-money-quote branch",
+        "122-role-active-invocation1-failed-late.json"
       ],
       "latestEvidence": "15-delivered-terminal-and-capture.md",
-      "lastVerifiedAt": "2026-10-05T11:58:13+05:30",
-      "scope": "O4/O5 current required UI regression or final gate; original failed invocations retained separately"
+      "lastVerifiedAt": "2026-10-07T11:17:55+05:30",
+      "scope": "One current active visual invocation failed after delivery; prior successful outcomes remain dated history",
+      "historicalExecutionBefore123": {
+        "executionStatus": "passed-deployed-UI",
+        "scope": "O4/O5 current required UI regression or final gate; original failed invocations retained separately"
+      },
+      "latestCheckpoint": "123"
     },
     {
       "class": "HappyDeliveryFlowTest",
@@ -6816,10 +6839,138 @@
       "reviewStatus": "reviewed-current-source",
       "executionStatus": "passed-deployed-UI",
       "evidence": [
-        "62-retained-four-regressions-invocation1-original.json"
+        "62-retained-four-regressions-invocation1-original.json",
+        "122-harness-live-invocation2.json"
       ],
-      "lastVerifiedAt": "2026-10-05T11:58:13+05:30",
-      "scope": "O4/O5 current required UI regression or final gate; original failed invocations retained separately"
+      "lastVerifiedAt": "2026-10-07T10:38:25+05:30",
+      "scope": "Checkpoint122 owner-safe rendered outlet selector; earnings zero/empty scope; pinned/unpinned navigation passes"
+    },
+    {
+      "class": "RoleVisualAuditUiTest",
+      "method": "riderMobileDashboardAndVerificationRead",
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/resilience/RoleVisualAuditUiTest.java",
+      "line": 32,
+      "package": "com.fooddelivery.e2e.tests.features.resilience",
+      "parameterized": false,
+      "classOptIns": [],
+      "methodOptIns": [],
+      "methodTags": [],
+      "classTags": [
+        "role-visual-audit",
+        "ui-only"
+      ],
+      "disabled": false,
+      "reviewStatus": "reviewed-current-source",
+      "executionStatus": "passed-deployed-UI",
+      "evidence": [
+        "122-role-visual-baseline.json",
+        "122-role-visual-red-regressions.json",
+        "122-role-visual-local-gates.json",
+        "122-role-visual-invocation5-green.json"
+      ],
+      "lastVerifiedAt": "2026-10-07T10:49+05:30",
+      "scope": "Invocation5 final stronger canvas/full-label/settled support checks pass; idle rider and empty queue only; active/populated states remain open"
+    },
+    {
+      "class": "RoleVisualAuditUiTest",
+      "method": "adminDesktopRefundQueueAndSupport",
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/resilience/RoleVisualAuditUiTest.java",
+      "line": 66,
+      "package": "com.fooddelivery.e2e.tests.features.resilience",
+      "parameterized": false,
+      "classOptIns": [],
+      "methodOptIns": [],
+      "methodTags": [],
+      "classTags": [
+        "role-visual-audit",
+        "ui-only"
+      ],
+      "disabled": false,
+      "reviewStatus": "reviewed-current-source",
+      "executionStatus": "passed-deployed-UI",
+      "evidence": [
+        "122-role-visual-baseline.json",
+        "122-role-visual-red-regressions.json",
+        "122-role-visual-local-gates.json",
+        "122-role-visual-invocation5-green.json"
+      ],
+      "lastVerifiedAt": "2026-10-07T10:49+05:30",
+      "scope": "Invocation5 final stronger canvas/full-label/settled support checks pass; idle rider and empty queue only; active/populated states remain open"
+    },
+    {
+      "class": "RoleVisualAuditUiTest",
+      "method": "customerMyReviewsReadReturns200",
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/resilience/RoleVisualAuditUiTest.java",
+      "line": 104,
+      "package": "com.fooddelivery.e2e.tests.features.resilience",
+      "parameterized": false,
+      "classOptIns": [],
+      "methodOptIns": [],
+      "methodTags": [],
+      "classTags": [
+        "role-visual-audit",
+        "ui-only"
+      ],
+      "disabled": false,
+      "reviewStatus": "reviewed-current-source",
+      "executionStatus": "passed-deployed-UI",
+      "evidence": [
+        "122-role-visual-baseline.json",
+        "122-role-visual-red-regressions.json",
+        "122-role-visual-local-gates.json",
+        "122-role-visual-invocation5-green.json"
+      ],
+      "lastVerifiedAt": "2026-10-07T10:49+05:30",
+      "scope": "Invocation5 final stronger canvas/full-label/settled support checks pass; idle rider and empty queue only; active/populated states remain open"
+    },
+    {
+      "class": "RoleVisualAuditUiTest",
+      "method": "adminAllRefundHistoryRead",
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/resilience/RoleVisualAuditUiTest.java",
+      "line": 122,
+      "package": "com.fooddelivery.e2e.tests.features.resilience",
+      "parameterized": false,
+      "classOptIns": [],
+      "methodOptIns": [],
+      "methodTags": [],
+      "classTags": [
+        "ui-only"
+      ],
+      "disabled": false,
+      "reviewStatus": "reviewed-current-source",
+      "executionStatus": "passed-deployed-ui-empty-state-only",
+      "evidence": [
+        "123-admin-all-refunds-invocation1.json"
+      ],
+      "lastVerifiedAt": "2026-10-07T11:17:55+05:30",
+      "scope": "ALL UI GET200 and0rows; action/audit branches not exercised",
+      "latestCheckpoint": "123"
+    },
+    {
+      "class": "OwnedRefundVisualUiTest",
+      "method": "ownedTicketDetailsConfirmationAndRejectedAudit",
+      "file": "src/test/java/com/fooddelivery/e2e/tests/features/admin/OwnedRefundVisualUiTest.java",
+      "line": 45,
+      "package": "com.fooddelivery.e2e.tests.features.admin",
+      "parameterized": false,
+      "classOptIns": [
+        "visual.refund.order.id=6fbe0289-645e-4f1c-ae0d-caab21689070"
+      ],
+      "methodOptIns": [],
+      "methodTags": [],
+      "classTags": [
+        "ui-only"
+      ],
+      "disabled": false,
+      "reviewStatus": "reviewed",
+      "executionStatus": "passed-readonly-resume-after-writer-observer-error",
+      "evidence": "_handoff/evidence/123-owned-refund-invocation2-readonly-green.json",
+      "lastVerifiedAt": "2026-10-07T11:17:55+05:30",
+      "scope": "Owned dummy ticket request/approval-cancel/rejection/audit/no-refund reads; awaiting live UI",
+      "latestCheckpoint": "123",
+      "invocations": 2,
+      "writerInvocationsPassed": 0,
+      "readOnlyResumeInvocationsPassed": 1
     }
   ],
   "backendDocuments": [
@@ -7550,9 +7701,61 @@
       "priorAssertionQuality": "vacuous-absent-button"
     }
   ],
-  "latestCheckpoint": "_handoff/checkpoints/113-o4-o5-complete-stop-boundary.md",
-  "latestDeploymentGate": "O4/O5 complete: published and deployed Oracle Dev; stop after Phase5",
+  "latestCheckpoint": "_handoff/checkpoints/124-deployed-receipt-owned-refund-and-active-rider-gate.md",
+  "latestDeploymentGate": "Owner UI6eb4ef6 publishing; retained receipt + active mobile + approved owned refund visual E2E pending; backend M1/A5b paused",
   "resumeState": {
+    "updatedAt": "2026-10-07T11:17:55+05:30",
+    "scope": "Pending screenshot work sequentially: items1/2 done, item3 active, M1/A5b paused",
+    "deploymentConfirmed": false,
+    "deploymentRequired": [
+      "FoodDeliveryAppUI"
+    ],
+    "databaseResetRequired": false,
+    "serverCleanupPerformed": false,
+    "ownedOrder": "6fbe0289-645e-4f1c-ae0d-caab21689070",
+    "deferred": [
+      "O4-PERF-001",
+      "O5-CSP-001",
+      "C7/B10/B11",
+      "F11 deletion",
+      "duration/rate/SSE/provider/load/ONDC boundaries"
+    ],
+    "walletAndAds": "Through-A4 live-green retained in checkpoint121; paperwork reconciled item1",
+    "ownerDeploymentReply": "I'll deploy the UI now",
+    "activeVisualStateGaps": [
+      "New active hint/obstruction/header-chat/pin assertions unexecuted",
+      "ALL queue empty; exact owned request/rejection writer approved but unexecuted"
+    ],
+    "activeOwnedOrder": "6fbe0289-645e-4f1c-ae0d-caab21689070",
+    "activeOrderState": "DELIVERED; original method failed history-to-receipt assertion",
+    "ownerRefundFixtureReply": "Yes, create and reject the owned dummy ticket",
+    "ownerUiHead": "6eb4ef6ad643e1bf4ac14f8fb3001ddf427725b5",
+    "ownerGithubRun": 37577846909
+  },
+  "countsScope": "counts remains historical checkpoint113 full inventory. Current static source annotation sites are in evidence/122-current-test-source-scan.json; only selected methods have current execution proof.",
+  "historicalResumeState_checkpoint19": {
+    "deploymentConfirmed": {
+      "customer": "4efcf76d9477083dd736c55bcc86b395512f3f1e",
+      "payment": "0a0a227fa97e455d90aba2d7f6e9daa1bd558729"
+    },
+    "databaseResetRequired": false,
+    "retainedRefundCompletion": "FAILED; not recovered",
+    "workingChange": "checkpoint18 customer/chat/UI plus checkpoint19 payment-gateway stored-confirmation capture recovery; pending deployment gates",
+    "serverCleanupPerformed": false,
+    "updatedAt": "2026-10-02T18:27:17+05:30"
+  },
+  "updatedAt": "2026-10-07T11:37:19+05:30",
+  "businessPlatformO45Acceptance": {
+    "updatedAt": "2026-10-05T11:58:13+05:30",
+    "selectedDistinctMethods": 48,
+    "phaseMethods": 16,
+    "requiredRegressionMethods": 32,
+    "passedMethods": 48,
+    "failedInvocationsRetained": true,
+    "fullSuiteClaim": false,
+    "evidence": "_handoff/evidence/business-o45-final-acceptance.json"
+  },
+  "historicalResumeState_checkpoint113": {
     "updatedAt": "2026-10-05T11:58:13+05:30",
     "scope": "O4/O5 complete; stop",
     "deploymentConfirmed": true,
@@ -7567,27 +7770,45 @@
     ],
     "walletAndAds": "unstarted"
   },
-  "countsScope": "Original whole-audit inventory counts remain the2026-10-01 snapshot; current O4/O5 acceptance updates48 selected method records, not a full-source or full-suite green claim.",
-  "historicalResumeState_checkpoint19": {
-    "deploymentConfirmed": {
-      "customer": "4efcf76d9477083dd736c55bcc86b395512f3f1e",
-      "payment": "0a0a227fa97e455d90aba2d7f6e9daa1bd558729"
+  "historicalCounts_checkpoint113": {
+    "counts": {
+      "testClasses": 72,
+      "testMethods": 326,
+      "features": 29
     },
-    "databaseResetRequired": false,
-    "retainedRefundCompletion": "FAILED; not recovered",
-    "workingChange": "checkpoint18 customer/chat/UI plus checkpoint19 payment-gateway stored-confirmation capture recovery; pending deployment gates",
-    "serverCleanupPerformed": false,
-    "updatedAt": "2026-10-02T18:27:17+05:30"
+    "scope": "Original whole-audit inventory counts remain the2026-10-01 snapshot; current O4/O5 acceptance updates48 selected method records, not a full-source or full-suite green claim.",
+    "asOf": "2026-10-05T11:58:13+05:30"
   },
-  "updatedAt": "2026-10-05T11:58:13+05:30",
-  "businessPlatformO45Acceptance": {
-    "updatedAt": "2026-10-05T11:58:13+05:30",
-    "selectedDistinctMethods": 48,
-    "phaseMethods": 16,
-    "requiredRegressionMethods": 32,
-    "passedMethods": 48,
-    "failedInvocationsRetained": true,
-    "fullSuiteClaim": false,
-    "evidence": "_handoff/evidence/business-o45-final-acceptance.json"
+  "pendingWork122": {
+    "plan": "RandomDocuments/PendingWork_2026-10-07/README.md",
+    "done": [
+      1,
+      2
+    ],
+    "active": 3,
+    "paused": [
+      4,
+      5
+    ],
+    "F12": "fixed with fresh deployed200UI reads",
+    "sourceScan": "evidence/123-current-test-source-scan.json",
+    "localUiAssertions": 1049,
+    "finalRoleVisualE2EAccepted": true,
+    "latestCheckpoint": 124,
+    "oldCanvasSidebarE2EAccepted": true,
+    "currentActiveUxE2EAccepted": false,
+    "ownedRefundFixtureAuthorized": true,
+    "uiDeploymentConfirmed": true,
+    "retainedReceiptQuotePassed": true,
+    "ownedRefundState": "REJECTED",
+    "ownedRefundNewWritesOnResume": 0,
+    "retainedMoneyThroughRenderedNavigationPassed": true,
+    "activeMobileRun": "in_progress"
+  },
+  "currentSourceScan123": {
+    "path": "evidence/123-current-test-source-scan.json",
+    "files": 108,
+    "annotationSites": 372,
+    "passingCoverageClaim": false
   }
 }

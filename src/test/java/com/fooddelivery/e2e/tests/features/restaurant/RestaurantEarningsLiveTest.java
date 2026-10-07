@@ -20,7 +20,7 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 /**
  * EARNINGS-01..04, 09: the outlet's Earnings tab shows the money the platform actually owes it.
  *
- * <p>{@code -Dearnings.outlet}, plus the figures retained from the canonical UI-created order and rendered admin money view:
+ * <p>{@code -Drestaurant.phone} pins the owner of {@code -Dearnings.outlet}, plus the figures retained from the canonical UI-created order and rendered admin money view:
  * {@code -Dearnings.expected.net} (quoted payouts of orders delivered this month),
  * {@code -Dearnings.expected.clawbacks} (restaurant-fault clawbacks booked this month) and
  * {@code -Dearnings.expected.pending} (the outlet's unsettled ledger balance). Read-only.
@@ -35,6 +35,10 @@ public class RestaurantEarningsLiveTest extends TestBase {
     void earningsMatchTheLedger() {
         String outlet = System.getProperty("earnings.outlet", "").trim();
         Assumptions.assumeFalse(outlet.isEmpty(), "needs -Dearnings.outlet and the expected figures");
+        org.assertj.core.api.Assertions.assertThat(System.getProperty("restaurant.phone", "").trim())
+                .as("a named earnings fixture needs -Drestaurant.phone for its owner; a random owner cannot use it")
+                .matches("[0-9]{10}")
+                .isEqualTo(testRestaurantPhone);
         BigDecimal net = new BigDecimal(System.getProperty("earnings.expected.net"));
         BigDecimal clawbacks = new BigDecimal(System.getProperty("earnings.expected.clawbacks"));
         BigDecimal pending = new BigDecimal(System.getProperty("earnings.expected.pending"));
@@ -43,7 +47,7 @@ public class RestaurantEarningsLiveTest extends TestBase {
         new LoginPage(restaurantPage).login(testRestaurantPhone).openPortal(Portal.RESTAURANT);
         RestaurantDashboardPage dashboard = new RestaurantDashboardPage(restaurantPage);
         dashboard.waitForDashboard();
-        dashboard.selectOutlet(outlet);
+        dashboard.selectOutlet(dashboard.availableOutlet(outlet, 0));
         dashboard.openEarningsTab();
 
         // EARNINGS-01..04: the tab stays open and every card shows a real rupee figure, never "—" or a placeholder.

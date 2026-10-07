@@ -1,0 +1,90 @@
+{
+  "recordedAt": "2026-10-07T11:39:32+05:30",
+  "proofType": "static necessary locator checks; not live proof",
+  "counts": {
+    "PASS": 7,
+    "DYNAMIC": 3
+  },
+  "sites": [
+    {
+      "rel": "util/RiderVisualAudit.java",
+      "line": 22,
+      "call": "getByRole",
+      "text": "AriaRole.MAIN, new Page.GetByRoleOptions().setName(\"Delivery\").setExact(true)",
+      "status": "PASS",
+      "reasons": []
+    },
+    {
+      "rel": "util/RiderVisualAudit.java",
+      "line": 24,
+      "call": "locator",
+      "text": "\"xpath=../..\"",
+      "status": "DYNAMIC",
+      "reasons": []
+    },
+    {
+      "rel": "util/RiderVisualAudit.java",
+      "line": 28,
+      "call": "getByText",
+      "text": "\"#\" + orderId, new Page.GetByTextOptions().setExact(true)",
+      "status": "DYNAMIC",
+      "reasons": []
+    },
+    {
+      "rel": "util/RiderVisualAudit.java",
+      "line": 29,
+      "call": "getByPlaceholder",
+      "text": "stage.equals(\"assigned\") ? \"Enter 6-digit pickup OTP\" : \"Ask customer for 6-digit OTP\"",
+      "status": "DYNAMIC",
+      "reasons": []
+    },
+    {
+      "rel": "util/RiderVisualAudit.java",
+      "line": 33,
+      "call": "getByRole",
+      "text": "AriaRole.BUTTON, new Locator.GetByRoleOptions().setName(Pattern.compile(\"^Call \"))",
+      "status": "PASS",
+      "reasons": []
+    },
+    {
+      "rel": "util/RiderVisualAudit.java",
+      "line": 42,
+      "call": "getByRole",
+      "text": "AriaRole.REGION, new Locator.GetByRoleOptions().setName(\"Live order tracking\").setExact(true)",
+      "status": "PASS",
+      "reasons": []
+    },
+    {
+      "rel": "util/RiderVisualAudit.java",
+      "line": 47,
+      "call": "getByRole",
+      "text": "AriaRole.IMG, new Locator.GetByRoleOptions().setName(\"Courier location\").setExact(true)",
+      "status": "PASS",
+      "reasons": []
+    },
+    {
+      "rel": "util/RiderVisualAudit.java",
+      "line": 50,
+      "call": "getByRole",
+      "text": "AriaRole.BUTTON, new Locator.GetByRoleOptions() .setName(\"Open directions to \" + destination).setExact(true)",
+      "status": "PASS",
+      "reasons": []
+    },
+    {
+      "rel": "util/RiderVisualAudit.java",
+      "line": 53,
+      "call": "getByRole",
+      "text": "AriaRole.SLIDER, new Locator.GetByRoleOptions().setName(Pattern.compile(stage.equals(\"assigned\") ? \"^Slide to confirm pickup$\" : \"^Slide to deliver\"))",
+      "status": "PASS",
+      "reasons": []
+    },
+    {
+      "rel": "util/RiderVisualAudit.java",
+      "line": 74,
+      "call": "getByRole",
+      "text": "AriaRole.BUTTON, new Page.GetByRoleOptions() .setName(Pattern.compile(\"^Open chat for order \" + orderId.substring(0, 6)))",
+      "status": "PASS",
+      "reasons": []
+    }
+  ]
+}

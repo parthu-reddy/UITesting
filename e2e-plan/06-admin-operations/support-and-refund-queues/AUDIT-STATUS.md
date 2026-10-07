@@ -1,6 +1,75 @@
 # Durable audit status: support-and-refund-queues
 
-Updated 2026-10-02T17:13:01+05:30. Review: Partial source/routed/read-only baseline. Implementation/next scope: Existing support/refund fixtures; do not duplicate. Evidence: Historical UI/contract passes; real owned approval/partial/denial unfinished.
+## 2026-10-07T11:37:19+05:30 — Retained financial continuation passes; active UI gate running
+
+Exact6fbe0289 retained money/quote passes1/1,0failures/errors/skips,18balanced lines and matching
+posted payables through actual admin navigation. Original queue-name failure remains failed.
+Changed active pickup/chat/swipe/pin gates have started one justified lifecycle, no final result yet.
+[Checkpoint124](../../_handoff/checkpoints/124-deployed-receipt-owned-refund-and-active-rider-gate.md). Item3 active; M1/A5b paused.
+
+## 2026-10-07T11:33:21+05:30 — item3 deployed follow-up
+
+UI6eb4ef6 is confirmed live. Exact6fbe0289 delivered receipt/quote passes1/1 with0new order/refund
+submission. One approved ticket47ffbccd was rejected200, then the writer errored in a request-body
+observer. Same-ticket read-only resume passes1/1,0failures/errors/skips, persisted REJECTED audit,
+0customer refunds and0new order/resolve writes. Keep the original writer error. Final audit capture
+is inspected; no duplicate ticket. The actual rider CI-asset check also passes1/1.
+Changed active mobile pin/hint/swipe/header-chat gate remains unverified; retained money through
+normal payout drawer/reference controls is running. Item3 remains active, M1/A5b paused.
+[Current checkpoint and exact evidence](../../_handoff/checkpoints/124-deployed-receipt-owned-refund-and-active-rider-gate.md).
+
+## 2026-10-07T11:17:55+05:30 — checkpoint123: real active-state failure and local repair
+
+One deployed HappyDeliveryFlowTest delivered retained6fbe0289 at Brand1Outlet5, then failed its
+history-to-receipt assertion:1failure/0errors/skips,253.778s. Actual delivery,completed rider payout,
+customer delivered history and old active canvas/contact/swipe checks passed before failure.
+Mobile capture found a clipped pickup hint and floating chat overlap. Terminal history was hidden
+by stale active cache. These three UI fixes pass1049local assertions/174files,focused34 and all
+toolchain/Phase4gates; owner UI6eb4ef6 is publishing, not yet live-confirmed. Old canvas/sidebar/F12
+fixes remain live-green. New pin/hint/obstruction/header-chat E2E is compiled but unexecuted.
+
+All Tickets read passes1/1(GET200,0rows/0resolution writes). Populated refund detail/confirm/audit
+is unverified. Owner approved an exact dummy support request/rejection for6fbe0289, no approval/pay;
+the UI-only test is compiled and must wait for retained receipt proof after deployment.
+
+[Checkpoint123](../../_handoff/checkpoints/123-active-visual-receipt-and-mobile-fixes.md),
+[local gates](../../_handoff/evidence/123-active-ui-local-gates.json),
+[original failure](../../_handoff/evidence/122-role-active-invocation1-failed-late.json),
+[All queue](../../_handoff/evidence/123-admin-all-refunds-invocation1.json).
+Keep the original manifest and execution failure; M1/A5b and explicit deferrals remain paused.
+Older current/running claims below are their dated state.
+
+## 2026-10-07T10:49+05:30 — UI deployment gate closed
+
+Owner-published UI5a1e97c passes all3strengthened RoleVisualAuditUiTest methods in invocation5,
+0failures/errors/skips/network/browser errors. Rider dark canvas/full admin labels/settled support
+captures manually inspected. [Green evidence](../../_handoff/evidence/122-role-visual-invocation5-green.json).
+Active rider and populated refund visual states remain open; the existing lifecycle is running
+with its new opt-in visual helper. Later deployment-waiting entries below are dated history.
+
+
+Updated 2026-10-07T10:35+05:30. Current reachable queue/detail source reviewed; empty-queue visual baseline passes. Sidebar fix local; owner UI deployment/final strengthened E2E pending. Prior financial fixtures are historical.
+
+## Checkpoint122 — admin 1280×800 visual read-only audit
+
+Initial RoleVisualAuditUiTest admin method passes refund navigation, Status Filter and Queue Empty,
+then Support Tickets heading with no document overflow. Its first support capture caught loading;
+final source now waits for rows/defined empty state, no load error and settled selection colour.
+Strengthened admin invocation4 fails1/1 (0errors/skips) on a clipped Manual Interventions label.
+SidebarNav wrapping fixes that locally; full UI1045/1045 and toolchain checks pass. Owner is
+deploying UI. Final method has not passed live yet.
+
+Reachable RefundQueue/RefundTicketPanel support per-ticket quote-capped decisions and a resolution
+audit. The empty live OPEN queue does not prove populated rows, detail rail or confirmations.
+Artboard bulk/search/GPS/customer-history timeline is not in this reachable queue; do not represent
+it as already implemented or copy its dummy financial wording. No refund/support decision made.
+
+[Comparison](../../../../RandomDocuments/PendingWork_2026-10-07/ITEM-3-VISUAL-AUDIT.md),
+[baseline](../../_handoff/evidence/122-role-visual-baseline.json),
+[live regression failures](../../_handoff/evidence/122-role-visual-red-regressions.json),
+[owner UI gate](../../../../RandomDocuments/PendingWork_2026-10-07/ITEM-3-DEPLOYMENT.md).
+Earlier approval/retry/money results below describe their dated fixtures and proof policy, not this
+UI-only batch or a refreshed live financial assertion.
 
 Read [../../_handoff/START-HERE.md](../../_handoff/START-HERE.md) and [../../_handoff/CURRENT-STATE.md](../../_handoff/CURRENT-STATE.md) first. Current user instructions override older cleanup/publish/item/allowlist text. Historical passes do not prove current retained money fixtures or all feature scenarios. Preserve existing scenarios/PENDING notes and inspect only this feature's relevant source/tests before editing.
 

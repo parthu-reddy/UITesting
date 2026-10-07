@@ -29,9 +29,13 @@ public class CampaignWizardPage {
         return this;
     }
 
-    /** Only promotable outlets are offered; the one named is chosen. */
+    /**
+     * Only promotable outlets are offered; the one named is chosen. Playwright runs the name pattern as a JavaScript
+     * RegExp, which has no {@code \Q…\E}, so Pattern.quote never matches: escape each metacharacter instead.
+     */
     public CampaignWizardPage outlet(String outletName) {
-        Locator choice = wizard.getByRole(AriaRole.RADIO, new Locator.GetByRoleOptions().setName(Pattern.compile("^" + Pattern.quote(outletName) + " · ")));
+        String literal = outletName.replaceAll("[\\\\^$.|?*+()\\[\\]{}]", "\\\\$0");
+        Locator choice = wizard.getByRole(AriaRole.RADIO, new Locator.GetByRoleOptions().setName(Pattern.compile("^" + literal + " · ")));
         choice.waitFor(new Locator.WaitForOptions().setTimeout(20000));
         choice.click();
         next();

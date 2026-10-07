@@ -1,0 +1,13 @@
+verificationStatuses=[200]
+Rider 1
+KA60AB5496
+Offline
+TODAY’S EARNINGS
+₹0.00
+TRIPS COMPLETED
+0 orders
+YOUR RATING
+Not rated yet
+You are currently Duty Offline
+
+Switch your duty status to Online at the top right to start receiving dispatch jobs, navigating maps, and pocketing payouts.

@@ -1,0 +1,50 @@
+{
+  "test": "HappyDeliveryFlowTest#completeOrderLifecycle [active visual]",
+  "tests": 1,
+  "passed": 0,
+  "skipped": 0,
+  "actors": {
+    "customer": "8000000001",
+    "restaurant": "9000000001",
+    "rider": "7000000001"
+  },
+  "recordedBy": "continuation session 2026-10-07 after usage-limit stop; earlier handoff left this invocation as running",
+  "recordedAt": "2026-10-07T12:05:00+05:30",
+  "invocation": 4,
+  "proofType": "deployed normal UI lifecycle; failed at out-for-delivery visual capture",
+  "failures": 1,
+  "errors": 0,
+  "elapsedSeconds": 249.9,
+  "newOrderCreated": true,
+  "ownedOrderId": "ce254f3a-13c6-4317-a30f-6884595aa090",
+  "outlet": "Brand 1 Outlet 5",
+  "manifest": "../fixtures/124-visual-owned-ce254f3a-13c6-4317-a30f-6884595aa090.json",
+  "passedBeforeFailure": [
+    "rider ONLINE/live-location preflight",
+    "checkout CARD",
+    "accept/cook/ready",
+    "dispatch accept",
+    "assigned 390x844 capture incl. pickup-hint fit, header chat 48px, uncovered swipe, courier/customer/restaurant pins",
+    "AT_RESTAURANT 200",
+    "pickup swipe attempt 1, OUT_FOR_DELIVERY 200",
+    "customer total/CARD",
+    "delivery-phase reload restores Step 2"
+  ],
+  "failure": "RiderVisualAudit.capture:48 (HappyDeliveryFlowTest:687, out-for-delivery, after rider reload): IMG 'Courier location' not found in 5s.",
+  "failureDom": "Saved rider DOM has 0 .maplibregl-marker elements in the 'Live order tracking' region and no missing-points note, so placePins() had not run: either the restaurant lookup or navigator.geolocation.getCurrentPosition (15s UI timeout) was still pending. Which one is NOT determined by the saved artifacts.",
+  "orderStateAfter": "OUT_FOR_DELIVERY, retained; teardown left the visible active delivery unchanged",
+  "notExecuted": [
+    "out-for-delivery capture",
+    "delivery OTP/swipe",
+    "rider completed trip/payout",
+    "customer receipt",
+    "money checks"
+  ],
+  "artifacts": [
+    "124-role-active-visual/rider-assigned-ce254f3a-13c6-4317-a30f-6884595aa090*.png|.txt",
+    "124-active-invocation4-missing-courier/rider-failure-frame.png",
+    "124-active-invocation4-missing-courier/rider-failure-dom.html"
+  ],
+  "rawLog": "/private/tmp/food-pending-item3-active-invocation4.log",
+  "rawLogSha256": "84b7085e5e1160852c59b73beb36a002b885082ab2b5e7ac86e33fcd18bd6b7b"
+}

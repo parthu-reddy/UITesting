@@ -1,0 +1,184 @@
+[
+ {
+  "rel": "tests/features/fulfillment/RestaurantNavigationUiTest.java",
+  "line": 40,
+  "call": "getByRole",
+  "text": "AriaRole.COMBOBOX,new Page.GetByRoleOptions().setName(\"Outlet\").setExact(true)",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/features/fulfillment/RestaurantNavigationUiTest.java",
+  "line": 48,
+  "call": "getByRole",
+  "text": "AriaRole.REGION,new Page.GetByRoleOptions().setName(Pattern.compile(\"^Incoming, [0-9]+ orders?$\"))",
+  "status": "EXCEPTED",
+  "reasons": [
+   "region named /^Incoming, [0-9]+ orders?$/",
+   "allow-listed: Runtime-composed accessible region name: RestaurantOrderQueue passes title=Incoming and count=pendingOrders.length to reachable KanbanColumn, which renders aria-label `${title}, ${count} orders`. The anchored name is asserted by the deployed restaurant navigation test; the static corpus cannot interpolate that prop pair."
+  ]
+ },
+ {
+  "rel": "tests/features/fulfillment/RestaurantNavigationUiTest.java",
+  "line": 50,
+  "call": "getByRole",
+  "text": "AriaRole.HEADING,new Page.GetByRoleOptions().setName(Pattern.compile(\"Today.s menu\"))",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/features/fulfillment/RestaurantNavigationUiTest.java",
+  "line": 51,
+  "call": "getByText",
+  "text": "\"Updates every 5 s\",new Page.GetByTextOptions().setExact(true)",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/features/fulfillment/RestaurantNavigationUiTest.java",
+  "line": 53,
+  "call": "getByText",
+  "text": "\"Net Earnings\", new Page.GetByTextOptions().setExact(true)",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/features/fulfillment/RestaurantNavigationUiTest.java",
+  "line": 55,
+  "call": "getByRole",
+  "text": "AriaRole.REGION,new Page.GetByRoleOptions().setName(\"What customers said\").setExact(true)",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/features/fulfillment/RestaurantNavigationUiTest.java",
+  "line": 57,
+  "call": "getByRole",
+  "text": "AriaRole.HEADING,new Page.GetByRoleOptions().setName(\"Restaurant Console Settings\").setExact(true)",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/features/fulfillment/RestaurantNavigationUiTest.java",
+  "line": 64,
+  "call": "getByRole",
+  "text": "AriaRole.TAB,new Page.GetByRoleOptions().setName(\"Order History\").setExact(true)",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/features/fulfillment/RestaurantNavigationUiTest.java",
+  "line": 66,
+  "call": "getByRole",
+  "text": "AriaRole.ROW",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/features/fulfillment/RestaurantNavigationUiTest.java",
+  "line": 66,
+  "call": "setHasText",
+  "text": "completed.substring(0,8)",
+  "status": "DYNAMIC",
+  "reasons": []
+ },
+ {
+  "rel": "tests/features/fulfillment/RestaurantNavigationUiTest.java",
+  "line": 81,
+  "call": "getByRole",
+  "text": "AriaRole.BUTTON,new Page.GetByRoleOptions().setName(\"Back to Kitchen Feed\").setExact(true)",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/features/fulfillment/RestaurantNavigationUiTest.java",
+  "line": 84,
+  "call": "getByRole",
+  "text": "AriaRole.REGION,new Page.GetByRoleOptions().setName(Pattern.compile(\"^In the kitchen, [0-9]+ orders?$\"))",
+  "status": "EXCEPTED",
+  "reasons": [
+   "region named /^In the kitchen, [0-9]+ orders?$/",
+   "allow-listed: Runtime-composed accessible region name: RestaurantOrderQueue passes title=In the kitchen and count=activePreparing.length to reachable KanbanColumn, which renders aria-label `${title}, ${count} orders`. The anchored name is asserted by the deployed restaurant navigation test; the static corpus cannot interpolate that prop pair."
+  ]
+ },
+ {
+  "rel": "tests/features/fulfillment/RestaurantNavigationUiTest.java",
+  "line": 85,
+  "call": "getByRole",
+  "text": "AriaRole.REGION,new Page.GetByRoleOptions().setName(\"What customers said\").setExact(true)",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/features/fulfillment/RestaurantNavigationUiTest.java",
+  "line": 86,
+  "call": "getByRole",
+  "text": "AriaRole.HEADING,new Page.GetByRoleOptions().setName(Pattern.compile(\"Today.s menu\"))",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/features/fulfillment/RestaurantNavigationUiTest.java",
+  "line": 117,
+  "call": "getByRole",
+  "text": "AriaRole.REGION, new Page.GetByRoleOptions().setName(\"What customers said\").setExact(true)",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/features/fulfillment/RestaurantNavigationUiTest.java",
+  "line": 127,
+  "call": "getByText",
+  "text": "expectedComment, new Locator.GetByTextOptions().setExact(true)",
+  "status": "DYNAMIC",
+  "reasons": []
+ },
+ {
+  "rel": "tests/features/fulfillment/RestaurantNavigationUiTest.java",
+  "line": 129,
+  "call": "locator",
+  "text": "\"article\"",
+  "status": "DYNAMIC",
+  "reasons": []
+ },
+ {
+  "rel": "tests/features/fulfillment/RestaurantNavigationUiTest.java",
+  "line": 130,
+  "call": "getByText",
+  "text": "\"No reviews yet\", new Locator.GetByTextOptions().setExact(true)",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/features/fulfillment/RestaurantNavigationUiTest.java",
+  "line": 142,
+  "call": "locator",
+  "text": "\"span.text-3xl.font-black\"",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/features/fulfillment/RestaurantNavigationUiTest.java",
+  "line": 152,
+  "call": "locator",
+  "text": "\"span.text-3xl.font-black\"",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/features/fulfillment/RestaurantNavigationUiTest.java",
+  "line": 155,
+  "call": "getByText",
+  "text": "Pattern.compile(\"\\\\d+ reviews?\")",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "tests/features/fulfillment/RestaurantNavigationUiTest.java",
+  "line": 168,
+  "call": "getByRole",
+  "text": "AriaRole.TAB, new Page.GetByRoleOptions().setName(name)",
+  "status": "PASS",
+  "reasons": []
+ }
+]

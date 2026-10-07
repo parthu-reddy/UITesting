@@ -1,0 +1,98 @@
+[
+ {
+  "rel": "pages/restaurant/RestaurantDashboardPage.java",
+  "line": 27,
+  "call": "getByRole",
+  "text": "com.microsoft.playwright.options.AriaRole.TAB, new Page.GetByRoleOptions().setName(\"Menu\").setExact(true)",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "pages/restaurant/RestaurantDashboardPage.java",
+  "line": 28,
+  "call": "getByText",
+  "text": "\"Updates every 5 s\", new Page.GetByTextOptions().setExact(true)",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "pages/restaurant/RestaurantDashboardPage.java",
+  "line": 43,
+  "call": "getByRole",
+  "text": "com.microsoft.playwright.options.AriaRole.COMBOBOX, new Page.GetByRoleOptions().setName(\"Outlet\").setExact(true)",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "pages/restaurant/RestaurantDashboardPage.java",
+  "line": 47,
+  "call": "getByRole",
+  "text": "com.microsoft.playwright.options.AriaRole.LISTBOX, new Page.GetByRoleOptions().setName(\"Outlet\").setExact(true)",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "pages/restaurant/RestaurantDashboardPage.java",
+  "line": 49,
+  "call": "getByRole",
+  "text": "com.microsoft.playwright.options.AriaRole.OPTION",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "pages/restaurant/RestaurantDashboardPage.java",
+  "line": 77,
+  "call": "getByRole",
+  "text": "com.microsoft.playwright.options.AriaRole.COMBOBOX, new Page.GetByRoleOptions().setName(\"Outlet\")",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "pages/restaurant/RestaurantDashboardPage.java",
+  "line": 80,
+  "call": "getByRole",
+  "text": "com.microsoft.playwright.options.AriaRole.OPTION",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "pages/restaurant/RestaurantDashboardPage.java",
+  "line": 95,
+  "call": "getByRole",
+  "text": "com.microsoft.playwright.options.AriaRole.TAB, new com.microsoft.playwright.Page.GetByRoleOptions() .setName(java.util.regex.Pattern.compile(\"^Orders.*\"))",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "pages/restaurant/RestaurantDashboardPage.java",
+  "line": 103,
+  "call": "locator",
+  "text": "\"button:has-text('Menu'), [role='tab']:has-text('Menu')\"",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "pages/restaurant/RestaurantDashboardPage.java",
+  "line": 108,
+  "call": "locator",
+  "text": "\"button[aria-label='Restaurant management and menu settings']\"",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "pages/restaurant/RestaurantDashboardPage.java",
+  "line": 113,
+  "call": "locator",
+  "text": "\"button:has-text('Earnings'), [role='tab']:has-text('Earnings')\"",
+  "status": "PASS",
+  "reasons": []
+ },
+ {
+  "rel": "pages/restaurant/RestaurantDashboardPage.java",
+  "line": 118,
+  "call": "locator",
+  "text": "\"button:has-text('Reviews'), [role='tab']:has-text('Reviews')\"",
+  "status": "PASS",
+  "reasons": []
+ }
+]

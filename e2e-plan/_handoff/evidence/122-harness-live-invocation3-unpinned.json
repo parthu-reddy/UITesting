@@ -1,0 +1,21 @@
+{
+  "date": "2026-10-07T10:13:20+05:30",
+  "proof": "deployed Dev UI, normal Dev Autofill Code; no restaurant.phone property; owner-specific visible Outlet selector",
+  "class": "RestaurantNavigationUiTest",
+  "tests": 2,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "cases": [
+    "restaurantReviewsShowPublicFeedbackAndAggregate",
+    "restaurantSectionsRender"
+  ],
+  "boundedLog": [
+    "REVIEW-AGG-01 restaurant 9000000006, outlet Brand 6 / Brand 6 / Brand 6 Outlet 1",
+    "[E2E TEARDOWN] restaurant signed out [everyday=200]",
+    "REST-NAV restaurant 9000000001, outlets Brand 1 / Brand 1 / Brand 1 Outlet 1 / Brand 1 / Brand 1 / Brand 1 Outlet 10",
+    "[E2E TEARDOWN] restaurant signed out [everyday=200]"
+  ],
+  "networkErrorCount": 0,
+  "dataPolicy": "read-only feature navigation; standard session logout during teardown; no seed/reset/orders"
+}
