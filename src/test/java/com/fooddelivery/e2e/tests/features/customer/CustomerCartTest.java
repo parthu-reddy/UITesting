@@ -17,7 +17,7 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 
 /** UI contract for the product's independent per-restaurant carts. */
 @Tag("ui-only")
-@Tag("cart")
+@Tag("feature-cart-checkout")
 public class CustomerCartTest extends TestBase {
 
     @Test

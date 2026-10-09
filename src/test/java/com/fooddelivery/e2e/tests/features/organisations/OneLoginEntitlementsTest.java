@@ -10,7 +10,9 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import java.util.concurrent.atomic.AtomicInteger;
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
-@Tag("business-platform") @Tag("bp-o4") @Tag("ui-only")
+@Tag("ui-only")
+@Tag("feature-auth")
+@Tag("feature-organisations")
 public class OneLoginEntitlementsTest extends TestBase {
     @Test void ownerUsesCustomerRestaurantAndBusinessAfterOneOtp() {
         AtomicInteger sessions = new AtomicInteger(); customerPage.onRequest(request -> {

@@ -1,0 +1,26 @@
+{
+  "actors": {
+    "customer": "8000000001",
+    "restaurant": "9000000001",
+    "rider": "7000000001"
+  },
+  "deployedUi": "cfb83e2",
+  "recordedAt": "2026-10-07T14:00+05:30",
+  "test": "ZzGeoReloadProbeTest (throwaway, deleted after use; read-only rider login on active d3e0ebed)",
+  "run1": {
+    "afterLogin": "position in 1ms, courier pin",
+    "afterReload": "position in 0ms, courier pin",
+    "afterNavigate": "position in 0ms, courier pin"
+  },
+  "run2": {
+    "afterLogin": "fix age 6s, instant",
+    "after70sThenReload": "timeout code 3 in 15002ms; markers: customer+restaurant only",
+    "afterReapplyingSameFixThenReload": "fix age 1s, instant, courier pin"
+  },
+  "conclusion": "Playwright's emulated geolocation is one static fix that ages; the map's maximumAge 60000 rejects it after 60s and the emulator never yields a new fix. Test-environment artifact, not a product defect. Reload alone is not the trigger (earlier hypothesis wrong).",
+  "harnessFix": "RiderVisualAudit.capture re-applies the rider's current emulated position (LiveCustomerMap's moved point when present) and reloads before auditing",
+  "rawLogs": {
+    "/private/tmp/food-pending-item3-geo-probe.log": "6bc623536ceda80b7fb0e680d858c0e4e38e335082ad33aac8f2895115fc1330",
+    "/private/tmp/food-pending-item3-geo-probe2.log": "7351819513bb3019e4fb9e1a0d4a2c870c8202eb047324f9d2d6a02d0df5b5c2"
+  }
+}

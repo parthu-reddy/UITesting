@@ -17,7 +17,6 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
  * Tests for customer home page, restaurant search, address modal, and free delivery tracker.
  * Covers: HOME-01..07, ADDR-MODAL-01..07, TRACKER-ADV-01..06
  */
-@Tag("customer-home")
 public class CustomerHomeAddressTest extends TestBase {
 
     private CustomerDashboardPage dashboard;
@@ -49,6 +48,7 @@ public class CustomerHomeAddressTest extends TestBase {
 
     // ── HOME PAGE SCENARIOS ──────────────────────────────────────────────
 
+    @Tag("feature-catalog")
     @Test
     @DisplayName("HOME-01: Search restaurant from home page")
     void searchRestaurantFromHome() {
@@ -62,6 +62,7 @@ public class CustomerHomeAddressTest extends TestBase {
         }
     }
 
+    @Tag("feature-catalog")
     @Test
     @DisplayName("HOME-02: Restaurant count on home page")
     void restaurantCountOnHome() {
@@ -79,6 +80,7 @@ public class CustomerHomeAddressTest extends TestBase {
         }
     }
 
+    @Tag("feature-catalog")
     @Test
     @DisplayName("HOME-04: Open restaurant from home")
     void openRestaurantFromHome() {
@@ -91,6 +93,7 @@ public class CustomerHomeAddressTest extends TestBase {
 
     // ── ADDRESS MODAL SCENARIOS ──────────────────────────────────────────
 
+    @Tag("feature-addresses")
     @Test
     @DisplayName("ADDR-MODAL-01: Address modal opens via Deliver to")
     void addressModalOpens() {
@@ -100,6 +103,7 @@ public class CustomerHomeAddressTest extends TestBase {
         assertThat(modal.isModalOpen()).isTrue();
     }
 
+    @Tag("feature-addresses")
     @Test
     @DisplayName("ADDR-MODAL-02: Select existing Home address")
     void selectExistingHomeAddress() {
@@ -113,6 +117,7 @@ public class CustomerHomeAddressTest extends TestBase {
                 .containsText("Home:");
     }
 
+    @Tag("feature-addresses")
     @Test
     @DisplayName("ADDR-MODAL-07: Address count is accurate")
     void addressCountAccurate() {
@@ -134,6 +139,7 @@ public class CustomerHomeAddressTest extends TestBase {
 
     // ── FREE DELIVERY TRACKER SCENARIOS ──────────────────────────────────
 
+    @Tag("feature-cart-checkout")
     @Test
     @DisplayName("HOME-05: Free delivery tracker visible")
     void freeDeliveryTrackerVisible() {

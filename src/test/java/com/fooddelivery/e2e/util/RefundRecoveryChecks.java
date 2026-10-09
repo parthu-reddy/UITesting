@@ -15,10 +15,16 @@ public final class RefundRecoveryChecks {
     public static Map<?,?> read(Page page,String path) {
         Map<?,?> result=(Map<?,?>)page.evaluate("""
             async path => {
-              const response = await fetch(path, {headers:{Authorization:'Bearer '+localStorage.getItem('auth_token')}});
+              // Admin endpoints need the step-up token (FoodDeliveryAppUI tokenStore.ts: sessionStorage
+              // 'admin_auth_token'); the person's session token gets 403 with an empty body there.
+              const admin = path.startsWith('/api/v1/internal/admin/');
+              const token = admin ? sessionStorage.getItem('admin_auth_token') : localStorage.getItem('auth_token');
+              if (!token) return {status: 0, body: null, missing: admin ? 'admin_auth_token' : 'auth_token'};
+              const response = await fetch(path, {headers:{Authorization:'Bearer '+token}});
               return {status:response.status, body:await response.json()};
             }
             """,path);
+        assertThat(result.get("missing")).as("token for %s",path).isNull();
         assertThat(result.get("status")).as("owned read %s",path).isEqualTo(200);
         return result;
     }
@@ -64,7 +70,7 @@ public final class RefundRecoveryChecks {
 
         customer.reload();CustomerDashboardPage.openProfileSettings(customer);
         customer.getByRole(AriaRole.TAB,new Page.GetByRoleOptions().setName("History").setExact(true)).click();
-        customer.locator("[data-testid='customer-history-order'][data-order-id='"+id+"']").click();
+        new com.fooddelivery.e2e.pages.customer.CustomerOrderHistoryPage(customer).pageToOrder(id, 20).click();
         Locator state=customer.locator("[data-testid='order-tracker'][data-order-id='"+id+"'] [data-testid='refund-state']");
         com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(state).containsText("COMPLETED");
         assertThat(OrderMoneyChecks.parseInr(state.innerText())).isEqualByComparingTo(originalPaid);

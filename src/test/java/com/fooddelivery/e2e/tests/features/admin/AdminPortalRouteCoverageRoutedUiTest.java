@@ -29,9 +29,9 @@ import static org.assertj.core.api.Assertions.assertThat;
  * non-read request is blocked. This makes the route assertions independent of mutable Dev data
  * while still exercising the deployed bundle, sidebar controls, and client router.</p>
  */
-@Tag("admin")
-@Tag("admin-navigation")
 @Tag("browser-routed")
+@Tag("feature-admin-ops")
+@Tag("feature-shell")
 public class AdminPortalRouteCoverageRoutedUiTest extends TestBase {
 
     private static final String ACTIVE_ORDERS_PATH = "/api/v1/internal/admin/orders/active-all";
@@ -45,6 +45,8 @@ public class AdminPortalRouteCoverageRoutedUiTest extends TestBase {
     private static final String FLEET_DRIVERS_PATH =
             "/api/v1/internal/admin/delivery/drivers/all-with-location";
     private static final String FLEET_CUSTOMERS_PATH = "/api/v1/internal/admin/customers/addresses";
+    // The Fleet Map loads its city scope first and only then the three layers (AdminFleetMap).
+    private static final String FLEET_CITIES_PATH = "/api/v1/internal/admin/delivery/fleet-cities";
     private static final String LEDGER_PATH = "/api/v1/internal/admin/ledger/transactions";
     private static final String PENDING_PAYOUTS_PATH = "/api/v1/internal/admin/payouts/pending";
     private static final String LEDGER_REJECTIONS_PATH = "/api/v1/internal/admin/ledger/rejections";
@@ -58,7 +60,7 @@ public class AdminPortalRouteCoverageRoutedUiTest extends TestBase {
             new SidebarDestination("User Management", "/admin/users", List.of(USERS_PATH)),
             new SidebarDestination("Categories", "/admin/categories", List.of(CATEGORIES_PATH)),
             new SidebarDestination("Fleet Map", "/admin/map", List.of(
-                    FLEET_RESTAURANTS_PATH, FLEET_DRIVERS_PATH, FLEET_CUSTOMERS_PATH)),
+                    FLEET_CITIES_PATH, FLEET_RESTAURANTS_PATH, FLEET_DRIVERS_PATH, FLEET_CUSTOMERS_PATH)),
             new SidebarDestination("Ledger Entries", "/admin/ledger", List.of(LEDGER_PATH)),
             new SidebarDestination("Pending Payouts", "/admin/payouts", List.of(PENDING_PAYOUTS_PATH)),
             new SidebarDestination("Money Operations", "/admin/money_ops", List.of(LEDGER_REJECTIONS_PATH)),
@@ -106,7 +108,7 @@ public class AdminPortalRouteCoverageRoutedUiTest extends TestBase {
     private void registerFixtureRoutes(NavigationFixture fixture) {
         // Registration follows real authentication. It prevents every admin screen read in this
         // test from depending on shared data, and terminates an unexpected write in the browser.
-        adminPage.route(url -> url.contains("/api/v1/"), fixture::handleApiRequest);
+        adminPage.route(com.fooddelivery.e2e.util.FixtureShell::isFixturedApi, fixture::handleApiRequest);
         adminPage.route(url -> pathOf(url).startsWith(MAP_STYLE_PREFIX), fixture::handleMapStyleRequest);
     }
 
@@ -159,6 +161,7 @@ public class AdminPortalRouteCoverageRoutedUiTest extends TestBase {
                 REFUNDS_PATH,
                 USERS_PATH,
                 CATEGORIES_PATH,
+                FLEET_CITIES_PATH,
                 FLEET_RESTAURANTS_PATH,
                 FLEET_DRIVERS_PATH,
                 FLEET_CUSTOMERS_PATH,
@@ -207,9 +210,14 @@ public class AdminPortalRouteCoverageRoutedUiTest extends TestBase {
                 // PayoutQueue consumes a direct array rather than a page envelope.
                 return "[]";
             }
+            if (FLEET_CITIES_PATH.equals(path)) {
+                // A direct array of canonical city ids, as the delivery service returns it.
+                return "[\"BLR\"]";
+            }
             if (CATEGORIES_PATH.equals(path)) {
-                // AdminCategories accepts the legacy { data: Category[] } response shape.
-                return "{\"data\":[]}";
+                // CategoryController.getCategories: ApiResponse<List<CategoryDTO>>.
+                return "{\"success\":true,\"message\":\"Categories retrieved\",\"data\":[],"
+                        + "\"timestamp\":\"2026-09-29T10:00:00Z\"}";
             }
             return emptyPageEnvelope();
         }

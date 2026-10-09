@@ -52,16 +52,18 @@ public class CustomerHomePage {
 
     // ── Restaurant browsing ──────────────────────────────────────────────
 
+    /**
+     * The feed renders only its first six cards, so an unsearched brand may be absent (2026-10-08: new approved
+     * brands pushed Brand 1 out). NearbyOutletPage searches first, then clicks the exact card.
+     */
     public void openRestaurant(String brandName) {
-        page.locator("h5")
-                .filter(new Locator.FilterOptions()
-                        .setHasText(java.util.regex.Pattern.compile("^" + brandName + "$")))
-                .first().click();
-        page.waitForTimeout(500);
+        new NearbyOutletPage(page).openBrandCard(brandName);
     }
 
     public void searchRestaurant(String query) {
-        Locator search = page.locator("input[placeholder*='Search'], input[type='search']").first();
+        // CustomerRestaurantBrowser.tsx's only search box, by its accessible name.
+        Locator search = page.getByRole(com.microsoft.playwright.options.AriaRole.TEXTBOX,
+                new Page.GetByRoleOptions().setName("Search restaurants or cuisines").setExact(true));
         search.fill(query);
         page.waitForTimeout(500);
     }

@@ -12,7 +12,8 @@ import java.util.List;
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 /** UI-only owned device replacement/removal; three sessions per person across all purposes. */
-@Tag("session-management") @Tag("ui-only")
+@Tag("ui-only")
+@Tag("feature-auth")
 public class SessionManagementTest extends TestBase {
     private SessionManagementPage sessions;
     private final List<BrowserContext> devices=new ArrayList<>();

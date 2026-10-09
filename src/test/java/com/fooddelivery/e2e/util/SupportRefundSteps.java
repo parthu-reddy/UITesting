@@ -29,11 +29,19 @@ public final class SupportRefundSteps {
     private final Page customerPage;
     private final Page adminPage;
     private final String customerPhone;
+    /** The customer's latest chat history read (page 0), parsed on the test thread, never inside the callback. */
+    private final java.util.concurrent.atomic.AtomicReference<com.microsoft.playwright.Response> chatHistory =
+            new java.util.concurrent.atomic.AtomicReference<>();
 
     public SupportRefundSteps(Page customerPage, Page adminPage, String customerPhone) {
         this.customerPage = customerPage;
         this.adminPage = adminPage;
         this.customerPhone = customerPhone;
+        customerPage.onResponse(r -> {
+            if (r.request().method().equals("GET") && r.status() == 200
+                    && UrlPaths.path(r.url()).matches("/api/v1/chat/sessions/[^/]+/messages") && r.url().contains("page=0"))
+                chatHistory.set(r);
+        });
     }
 
     // ── Customer actions ────────────────────────────────────────────────────
@@ -49,7 +57,7 @@ public final class SupportRefundSteps {
         new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();
         CustomerDashboardPage.openProfileSettings(customerPage);
         customerPage.getByRole(AriaRole.TAB, new Page.GetByRoleOptions().setName("History").setExact(true)).click();
-        customerPage.locator("[data-testid='customer-history-order'][data-order-id='" + id + "']").click();
+        new com.fooddelivery.e2e.pages.customer.CustomerOrderHistoryPage(customerPage).pageToOrder(id, 20).click();
         assertThat(new CustomerOrderTrackerPage(customerPage, id).tracker()).isVisible();
         // Fail on the precondition, not on a missing dialog a minute later.
         java.time.Instant updated = java.time.Instant.parse((String) RefundRecoveryChecks.order(customerPage, id).get("updatedAt"));
@@ -67,6 +75,14 @@ public final class SupportRefundSteps {
         chat.fillRefundReason(reason);
         Locator replies = customerPage.locator("[data-testid='chat-message'][data-message-type='REFUND_QUOTE_RESPONSE'],"
                 + "[data-testid='chat-message'][data-message-type='REFUND_ERROR']");
+        // Count only after the earlier replies are on screen: history arrives asynchronously after the session opens,
+        // and counting first saw 0 of an order's 2 earlier replies (2026-10-08, without the 400 ms slow-mo).
+        customerPage.waitForCondition(() -> chatHistory.get() != null,
+                new Page.WaitForConditionOptions().setTimeout(20000));
+        Map<?, ?> history = (Map<?, ?>) customerPage.evaluate("text => JSON.parse(text)", chatHistory.get().text());
+        long earlier = ((List<?>) ((Map<?, ?>) history.get("data")).get("content")).stream().map(m -> (Map<?, ?>) m)
+                .filter(m -> List.of("REFUND_QUOTE_RESPONSE", "REFUND_ERROR").contains(m.get("messageType"))).count();
+        assertThat(replies).hasCount((int) earlier, new com.microsoft.playwright.assertions.LocatorAssertions.HasCountOptions().setTimeout(20000));
         int before = replies.count();
         chat.submitRefundRequest();
         assertThat(replies).hasCount(before + 1, new com.microsoft.playwright.assertions.LocatorAssertions.HasCountOptions().setTimeout(20000));
@@ -79,6 +95,11 @@ public final class SupportRefundSteps {
         assertThat(quote).hasAttribute("data-message-type", "REFUND_QUOTE_RESPONSE");
         org.assertj.core.api.Assertions.assertThat(OrderMoneyChecks.parseInr(quote.innerText())).isEqualByComparingTo(expectedQuote);
         quote.getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Submit Refund Request").setExact(true)).click();
+        // The customer is told the request is pending, never that money moved (moved here from the deleted
+        // OwnedRefundVisualUiTest so every support/refund flow checks it).
+        assertThat(customerPage.getByText("Refund Request Submitted", new Page.GetByTextOptions().setExact(true))).isVisible();
+        assertThat(customerPage.getByText("Under review by support. No refund has been approved yet.",
+                new Page.GetByTextOptions().setExact(true))).isVisible();
     }
 
     // ── Admin actions ───────────────────────────────────────────────────────

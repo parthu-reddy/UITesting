@@ -1,17 +1,14 @@
 # Deferred tests requiring intentional waits
 
-User instruction on 2026-10-01: do not execute intentional long-wait scenarios during the feature audit. Record them per feature and run them at the end only when explicitly enabled. Ordinary waits for UI/network readiness are not duration-based business scenarios.
+None remain for login (2026-10-08, FastE2E_2026-10-08 Phase 2).
 
-| Scenario | Implementation | Why deferred | Opt-in and final-run requirements |
-|---|---|---|---|
-| Natural OTP expiry | LoginValidationTest#expiredOtpIsRejectedWithoutCreatingASession; tag slow-auth; disabled unless auth.slow.enabled=true | Waits 305 seconds beyond the real server five-minute TTL; browser clock changes cannot prove expiry | Use a seeded customer with no concurrent OTP activity; enable only this method with -Dauth.slow.enabled=true; expect rejection, visible expiry message and no token/profile. No server-state manipulation. |
+The natural-expiry E2E (`LoginValidationTest#expiredOtpIsRejectedWithoutCreatingASession`, tag `slow-auth`, waited
+305 s) is deleted. Its claims now live where they run in milliseconds:
 
-The case completed once before this instruction: 1 passed, 0 failures/errors/skips, 312.61 seconds. That evidence is retained in RandomDocuments/E2ECoverageAudit_2026-10-01/evidence/02-login-expiry.xml. It is excluded from subsequent normal runs and is not required for the current fast feature pass.
+| Claim | Test |
+|---|---|
+| A login code lives 5 minutes | IdentityService `AuthServiceTest#loginCodeIsStoredForFiveMinutes` |
+| An expired code (Redis key gone) gets 401 "Invalid or expired code" and creates no account or session | IdentityService `AuthServiceTest#expiredCodeIsRefusedAndCreatesNoSession` |
+| The login screen shows that message | `LoginValidationTest#resendRejectsThePreviousCode`: a replaced code takes the same `verifyOtp` branch, and the test asserts the alert contains "expired" |
 
-Final explicit command, only when slow cases are requested:
-
-```sh
-mvn -q '-Dtest=LoginValidationTest#expiredOtpIsRejectedWithoutCreatingASession' -Dauth.slow.enabled=true -Dcustomer.phone=8000000481 -Dapp.url='<current Dev URL>' -Dheadless=true -Dslow.mo=0 -Drecord.video=false test
-```
-
-Normal feature/suite commands should also exclude the slow-auth tag (-DexcludedGroups=slow-auth) so the intentionally deferred case is not included in passing totals. Other features will create their own DEFERRED-WAIT-TESTS.md when reviewed.
+The `slow-auth` tag and the `auth.slow.enabled` property no longer exist.

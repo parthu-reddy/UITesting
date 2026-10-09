@@ -13,6 +13,8 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Tag("ui-only")
+@Tag("feature-rider-delivery")
+@Tag("feature-shell")
 public class RiderUiTest extends TestBase {
 
     @Test

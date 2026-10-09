@@ -22,7 +22,7 @@ import java.util.Set;
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@Tag("accessibility-responsive")
+@Tag("feature-shell")
 public class ResponsiveAccessibilityTest extends TestBase {
 
     private int horizontalOverflow(Page page) {
@@ -31,13 +31,14 @@ public class ResponsiveAccessibilityTest extends TestBase {
                 .intValue();
     }
 
+    @Tag("feature-auth")
     @Test
-    @DisplayName("RESP-01/06/07: Desktop role selector has no overflow")
-    void desktopRoleSelectorFitsViewport() {
+    @DisplayName("RESP-01/06/07: Desktop login has no overflow")
+    void desktopLoginFitsViewport() {
         customerPage.setViewportSize(1280, 800);
         customerPage.navigate(TestConfig.APP_URL);
 
-        assertThat(customerPage.locator("button:has-text('Order Food'):visible").first()).isVisible();
+        assertThat(customerPage.getByLabel("PHONE NUMBER", new Page.GetByLabelOptions().setExact(true))).isVisible();
         assertThat(horizontalOverflow(customerPage)).isLessThanOrEqualTo(0);
         int overflowingImages = ((Number) customerPage.evaluate(
                 "Array.from(document.images).filter(i => i.getBoundingClientRect().width > innerWidth + 1).length"))
@@ -45,6 +46,7 @@ public class ResponsiveAccessibilityTest extends TestBase {
         assertThat(overflowingImages).isZero();
     }
 
+    @Tag("feature-catalog")
     @Test
     @DisplayName("RESP-02/06: Mobile customer dashboard has no horizontal overflow")
     void mobileCustomerDashboardFitsViewport() {
@@ -59,6 +61,7 @@ public class ResponsiveAccessibilityTest extends TestBase {
         assertThat(horizontalOverflow(customerPage)).isLessThanOrEqualTo(0);
     }
 
+    @Tag("feature-catalog")
     @Test
     @DisplayName("RESP-05/06: Tablet customer dashboard has no horizontal overflow")
     void tabletCustomerDashboardFitsViewport() {
@@ -73,13 +76,12 @@ public class ResponsiveAccessibilityTest extends TestBase {
         assertThat(horizontalOverflow(customerPage)).isLessThanOrEqualTo(0);
     }
 
+    @Tag("feature-restaurant-orders")
     @Test
     @DisplayName("RESP-03: Mobile restaurant dashboard fits viewport")
     void mobileRestaurantDashboardFitsViewport() {
         restaurantPage.setViewportSize(390, 844);
         restaurantPage.navigate(TestConfig.APP_URL);
-        restaurantPage.getByRole(AriaRole.TAB,
-                new Page.GetByRoleOptions().setName("Restaurant Partner").setExact(true)).click();
         new LoginPage(restaurantPage).login(testRestaurantPhone).openPortal(Portal.RESTAURANT);
         new RestaurantDashboardPage(restaurantPage).waitForDashboard();
 
@@ -88,13 +90,12 @@ public class ResponsiveAccessibilityTest extends TestBase {
         assertThat(horizontalOverflow(restaurantPage)).isLessThanOrEqualTo(0);
     }
 
+    @Tag("feature-rider-delivery")
     @Test
     @DisplayName("RESP-04: Mobile rider dashboard keeps duty control accessible")
     void mobileRiderDashboardFitsViewport() {
         riderPage.setViewportSize(390, 844);
         riderPage.navigate(TestConfig.APP_URL);
-        riderPage.getByRole(AriaRole.TAB,
-                new Page.GetByRoleOptions().setName("Delivery Executive").setExact(true)).click();
         new LoginPage(riderPage).login(testRiderPhone).openPortal(Portal.DELIVERY);
         new DeliveryDashboardPage(riderPage).waitForDashboard();
 
@@ -104,19 +105,20 @@ public class ResponsiveAccessibilityTest extends TestBase {
         assertThat(horizontalOverflow(riderPage)).isLessThanOrEqualTo(0);
     }
 
+    @Tag("feature-addresses")
     @Test
     @DisplayName("ACCESS-04: Escape closes the delivery-location dialog")
     void escapeClosesAddressDialog() {
         customerPage.navigate(TestConfig.APP_URL);
         new LoginPage(customerPage).login(testCustomerPhone).openPortal(Portal.CUSTOMER);
-        Locator dialog = customerPage.getByRole(AriaRole.DIALOG);
-        assertThat(dialog).containsText("Select Delivery Location");
+        Locator dialog = new SavedDeliveryAddressPage(customerPage).openSelector();
 
         customerPage.keyboard().press("Escape");
 
         assertThat(dialog).isHidden();
     }
 
+    @Tag("feature-cart-checkout")
     @Test
     @DisplayName("ACCESS-04/09: Cart quantity is announced and Escape closes the drawer")
     void cartQuantityIsLiveAndEscapeClosesDrawer() {
@@ -143,9 +145,10 @@ public class ResponsiveAccessibilityTest extends TestBase {
         assertThat(cart).isHidden();
     }
 
+    @Tag("feature-auth")
     @Test
-    @DisplayName("ACCESS-07/10: Visible role-selector buttons have accessible names")
-    void visibleRoleButtonsHaveAccessibleNames() {
+    @DisplayName("ACCESS-07/10: Visible login buttons have accessible names")
+    void visibleLoginButtonsHaveAccessibleNames() {
         customerPage.navigate(TestConfig.APP_URL);
         int unnamedVisibleButtons = ((Number) customerPage.evaluate("""
                 Array.from(document.querySelectorAll('button')).filter(button => {
@@ -157,11 +160,11 @@ public class ResponsiveAccessibilityTest extends TestBase {
                 """)).intValue();
 
         assertThat(unnamedVisibleButtons).isZero();
-        assertThat(customerPage.locator("button:has-text('Order Food'):visible").first()).isVisible();
-        assertThat(customerPage.locator("button:has-text('Restaurant Partner'):visible").first()).isVisible();
-        assertThat(customerPage.locator("button:has-text('Delivery Executive'):visible").first()).isVisible();
+        assertThat(customerPage.getByRole(AriaRole.BUTTON,
+                new Page.GetByRoleOptions().setName("Send One-Time OTP").setExact(true))).isVisible();
     }
 
+    @Tag("feature-catalog")
     @Test
     @DisplayName("ACCESS-02: Tab key advances through customer dashboard controls")
     void tabKeyAdvancesThroughCustomerDashboardControls() {
@@ -187,6 +190,7 @@ public class ResponsiveAccessibilityTest extends TestBase {
                 .isGreaterThanOrEqualTo(2);
     }
 
+    @Tag("feature-catalog")
     @Test
     @DisplayName("ACCESS-06: Customer restaurant images expose alt attributes")
     void customerRestaurantImagesHaveAltAttributes() {
@@ -203,6 +207,7 @@ public class ResponsiveAccessibilityTest extends TestBase {
                 .isZero();
     }
 
+    @Tag("feature-auth")
     @Test
     @DisplayName("ACCESS-08: Phone input has a programmatically associated label")
     void phoneInputHasAssociatedLabel() {
@@ -224,7 +229,7 @@ public class ResponsiveAccessibilityTest extends TestBase {
     }
 
     @Test
-    @DisplayName("NAV-03: Unknown route renders authenticated customer safely")
+    @DisplayName("NAV-03: Unknown route returns an authenticated customer to their portal")
     void unknownRouteRendersAuthenticatedCustomerSafely() {
         customerPage.navigate(TestConfig.APP_URL);
         new LoginPage(customerPage).login(testCustomerPhone).openPortal(Portal.CUSTOMER);
@@ -232,7 +237,8 @@ public class ResponsiveAccessibilityTest extends TestBase {
 
         customerPage.navigate(TestConfig.APP_URL.replaceAll("/$", "") + "/i-do-not-exist");
 
-        org.assertj.core.api.Assertions.assertThat(customerPage.url()).endsWith("/i-do-not-exist");
+        // App.tsx: <Route path="*" element={<RootRedirect />}> -> lastPortal(roles), here /customer.
+        customerPage.waitForURL(Pattern.compile(".*/customer(?:[/?#].*)?$"));
         assertThat(customerPage.getByRole(AriaRole.BUTTON,
                 new Page.GetByRoleOptions().setName(Pattern.compile("Deliver to"))))
                 .containsText("Home:");

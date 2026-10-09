@@ -36,7 +36,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * campaign is activated and paused from its page, its impression appears in its performance, and the restaurant
  * portal has no Campaigns tab. Real sign-ins, no routed responses; the campaign is left PAUSED.
  */
-@Tag("business-platform") @Tag("bp-a4")
+@Tag("feature-ads")
 public class AdsManagerPortalUiTest extends TestBase {
 
     private static final String NEARBY = "/api/v1/restaurants/nearby";

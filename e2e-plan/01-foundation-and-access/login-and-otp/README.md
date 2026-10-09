@@ -28,6 +28,6 @@ The session feature owns four-role reload/logout, simultaneous customer/restaura
 
 ## Deferred cases
 
-See [DEFERRED-WAIT-TESTS.md](DEFERRED-WAIT-TESTS.md) and [DEFERRED-RATE-LIMIT-TESTS.md](DEFERRED-RATE-LIMIT-TESTS.md). Their tests are opt-in; leave auth.slow.enabled/auth.limits.enabled unset and use -DexcludedGroups=slow-auth,auth-rate-limit for current runs. Do not count deferred cases as passes.
+See [DEFERRED-WAIT-TESTS.md](DEFERRED-WAIT-TESTS.md) and [DEFERRED-RATE-LIMIT-TESTS.md](DEFERRED-RATE-LIMIT-TESTS.md). The rate-limit tests are opt-in; leave auth.limits.enabled unset and use -DexcludedGroups=auth-rate-limit for current runs. Natural OTP expiry moved to IdentityService unit tests (2026-10-08). Do not count deferred cases as passes.
 
 See [scenarios.md](scenarios.md) and [PENDING.md](PENDING.md) for the mapping and outstanding dependent verification.

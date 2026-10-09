@@ -34,17 +34,17 @@ public final class TestConfig {
     public static final int DEFAULT_TIMEOUT = Integer.parseInt(
             System.getProperty("default.timeout", "60000"));
 
-    /** Artificial delay between Playwright actions (ms). 0 for CI, 300–500 for local debugging. */
+    /** Artificial delay after every Playwright action (ms). Runs are fast by default; the runner's --debug sets 400. */
     public static final int SLOW_MO = Integer.parseInt(
-            System.getProperty("slow.mo", "400"));
+            System.getProperty("slow.mo", "0"));
 
-    /** Run browsers headless (true for CI, false for local). */
+    /** Headless by default; the runner's --debug opens a visible window. */
     public static final boolean HEADLESS = Boolean.parseBoolean(
-            System.getProperty("headless", "false"));
+            System.getProperty("headless", "true"));
 
-    /** Enable video recording of browser sessions. */
+    /** Video recording of browser sessions; off by default, the runner's --debug turns it on. */
     public static final boolean RECORD_VIDEO = Boolean.parseBoolean(
-            System.getProperty("record.video", "true"));
+            System.getProperty("record.video", "false"));
 
     /** The retained runner-secret OTP harness is disabled until explicitly re-enabled. */
     public static boolean e2eOtpEnabled() {

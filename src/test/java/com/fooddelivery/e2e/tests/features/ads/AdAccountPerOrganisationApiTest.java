@@ -24,7 +24,8 @@ import static org.assertj.core.api.Assertions.assertThat;
  * it exists, an organisation without an approved business cannot start one. Real Dev sign-in through
  * the UI; calls go through the gateway from the signed-in page. Fixtures are retained.
  */
-@Tag("business-platform") @Tag("bp-a1")
+@Tag("feature-ads")
+@Tag("feature-organisations")
 public class AdAccountPerOrganisationApiTest extends TestBase {
 
     @Test void adAccountPerOrganisation() throws Exception {

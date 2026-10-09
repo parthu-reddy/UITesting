@@ -15,8 +15,8 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /** Tests the rider application state that is rendered after normal browser login. */
-@Tag("feature")
 @Tag("ui-only")
+@Tag("feature-partner-onboarding")
 public class RiderOnboardingTest extends TestBase {
 
     @Test
@@ -52,7 +52,7 @@ public class RiderOnboardingTest extends TestBase {
             dashboard.openSettingsTab();
 
             RiderSettingsPage settings = new RiderSettingsPage(riderPage);
-            assertThat(settings.isSettingsVisible() || settings.isOnboardingWizardVisible()).isTrue();
+            assertThat(settings.isSettingsVisible()).isTrue();
         }
     }
 }

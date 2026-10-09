@@ -16,7 +16,7 @@ Existing duration, deliberate Dev rate-limit, SSE and production-provider/load d
 
 O3-UI-006 passed strengthened deployed UI invocation11; all four O3 methods passed invocation13 on the same d79c33a image. All eleven component violations are resolved with the unchanged full13/13 gate and no new exception. Earlier exclusion below is historical. UI-only/wait/rate/SSE deferrals remain; see checkpoint71.
 
-Excluded by the user: intentional duration waits, relaxed Dev rate-limit exhaustion, and public SSE. Existing opt-ins auth.slow.enabled/auth.limits.enabled must remain false/unset; normal selectors exclude slow-auth and auth-rate-limit. Skipped/deferred tests are not passes. Fake-clock/local boundary checks are allowed when no live waiting is involved.
+Excluded by the user: intentional duration waits, relaxed Dev rate-limit exhaustion, and public SSE. The opt-in auth.limits.enabled must remain false/unset; normal selectors exclude auth-rate-limit. (Natural OTP expiry is no longer an E2E wait: AuthServiceTest covers it, 2026-10-08.) Skipped/deferred tests are not passes. Fake-clock/local boundary checks are allowed when no live waiting is involved.
 
 Rider item visibility/checklist is withdrawn, not a future deferred requirement. Real WebRTC/media calling, large/concurrent chat history, telemetry security, real delay/unavailable delivery and financial recovery are assigned open work; no proof is inferred from normal UI navigation.
 

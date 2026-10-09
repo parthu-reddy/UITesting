@@ -13,8 +13,10 @@ import java.util.Map;
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 /** One owned paid pending order covers customer cancellation, retained views and refund recovery. */
-@Tag("flow") @Tag("cancellation")
+@Tag("feature-cancellation")
+@Tag("feature-money-ledger")
 public class OrderCancellationFlowTest extends TestBase {
+    @Tag("slow")
     @Test @DisplayName("Customer cancels exact paid pending order; original payment and ledger recover")
     void customerCancelsBeforeAcceptance() throws java.io.IOException {
         String retained=System.getProperty("refund.resume.order.id", "").trim();

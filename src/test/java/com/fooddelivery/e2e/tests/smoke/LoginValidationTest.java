@@ -15,7 +15,8 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 import static org.assertj.core.api.Assertions.assertThat;
 
 /** Person-login validation in isolated browser contexts; portal access is chosen separately. */
-@Tag("login") @Tag("ui-only")
+@Tag("ui-only")
+@Tag("feature-auth")
 public class LoginValidationTest extends TestBase {
 
 
@@ -104,29 +105,6 @@ public class LoginValidationTest extends TestBase {
         assertThat(requests).isEmpty();
     }
 
-    @org.junit.jupiter.api.Test
-    @Tag("slow-auth")
-    @org.junit.jupiter.api.condition.EnabledIfSystemProperty(named = "auth.slow.enabled", matches = "true")
-    void expiredOtpIsRejectedWithoutCreatingASession() {
-        Page page = customerPage;
-        LoginPage login = open(page, LoginSmokeTest.Account.CUSTOMER);
-        login.fillPhoneNumber(testCustomerPhone);
-        login.clickSendOtp();
-        login.waitForOtpInput();
-        login.clickAutofillCode();
-        // AuthService stores the server OTP for five minutes. Changing browser time cannot
-        // expire it; wait beyond its real lifetime without touching Redis or the test account.
-        page.waitForTimeout(305_000);
-        Response rejected = page.waitForResponse(
-                r -> r.url().contains("/api/v1/auth/session") && r.request().method().equals("POST"),
-                login::clickVerifyAndLogin);
-        // Since O4 (IdentityService c1a4856) a wrong, replaced or expired code is an authentication failure.
-        assertThat(rejected.status()).isEqualTo(401);
-        assertThat(page.getByRole(com.microsoft.playwright.options.AriaRole.ALERT)).containsText("expired");
-        assertThat(page.getByPlaceholder("- - - - - -")).isVisible();
-
-    }
-
     @ParameterizedTest(name = "{0}: resend replaces the old OTP and the latest code authenticates")
     @EnumSource(LoginSmokeTest.Account.class)
     void resendRejectsThePreviousCode(LoginSmokeTest.Account account) {
@@ -156,7 +134,8 @@ public class LoginValidationTest extends TestBase {
                 login::clickVerifyAndLogin);
         // Since O4 (IdentityService c1a4856) a wrong, replaced or expired code is an authentication failure.
         assertThat(rejected.status()).isEqualTo(401);
-        assertThat(page.getByRole(com.microsoft.playwright.options.AriaRole.ALERT)).isVisible();
+        // An expired code takes the same path (its Redis key is gone; AuthServiceTest covers the lifetime).
+        assertThat(page.getByRole(com.microsoft.playwright.options.AriaRole.ALERT)).containsText("expired");
         login.fillOtp(latest);
         Response accepted = page.waitForResponse(
                 r -> r.url().contains("/api/v1/auth/session") && r.request().method().equals("POST"),
@@ -167,27 +146,4 @@ public class LoginValidationTest extends TestBase {
         assertThat(page.getByRole(com.microsoft.playwright.options.AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Switch portal").setExact(true))).isVisible();
     }
 
-    @ParameterizedTest(name = "{0}: resent OTP authenticates the selected account")
-    @EnumSource(LoginSmokeTest.Account.class)
-    void resendOtp(LoginSmokeTest.Account account) {
-        Page page = pageFor(account);
-        String phoneStr = phoneFor(account);
-        LoginPage login = open(page, account);
-        login.fillPhoneNumber(phoneStr);
-        login.clickSendOtp();
-        login.waitForOtpInput();
-        Response resent = page.waitForResponse(
-                r -> r.url().contains("/api/v1/auth/otp") && r.request().method().equals("POST"),
-                login::clickResendSmsCode);
-        assertThat(resent.ok()).isTrue();
-        login.clickAutofillCode();
-        assertThat(page.getByPlaceholder("- - - - - -")).hasValue(Pattern.compile("[0-9]{6}"));
-        Response verified = page.waitForResponse(
-                r -> r.url().contains("/api/v1/auth/session") && r.request().method().equals("POST"),
-                login::clickVerifyAndLogin);
-        assertThat(verified.ok()).isTrue();
-        page.waitForCondition(() -> !page.url().contains("/login"));
-        login.openPortal(account.portal);
-        assertThat(page.getByRole(com.microsoft.playwright.options.AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Switch portal").setExact(true))).isVisible();
-    }
 }

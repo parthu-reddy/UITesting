@@ -1,0 +1,39 @@
+{
+  "observations": [
+    {
+      "orderId": "f3b3d38b-6e4f-4ff7-a26f-1264e775c267",
+      "stage": "ASSIGNED",
+      "source": "live",
+      "etaMs": 1.79137455671E12,
+      "browserNowMs": 1.791373248978E12,
+      "etaMinusNowSeconds": 1307.0,
+      "riderLat": 12.9808,
+      "riderLng": 77.6467,
+      "liveChipVisible": true
+    },
+    {
+      "orderId": "f3b3d38b-6e4f-4ff7-a26f-1264e775c267",
+      "stage": "OUT_FOR_DELIVERY",
+      "recordedAt": "2026-10-07T11:43:10.178419Z",
+      "source": "live",
+      "etaMs": 1791374417249,
+      "browserNowMs": 1791373390185,
+      "etaMinusNowSeconds": 1027,
+      "riderLat": 12.9808,
+      "riderLng": 77.6467,
+      "liveChipVisible": true
+    },
+    {
+      "orderId": "f3b3d38b-6e4f-4ff7-a26f-1264e775c267",
+      "stage": "AT_DOOR",
+      "recordedAt": "2026-10-07T11:43:50.893623Z",
+      "source": "live",
+      "etaMs": 1791373430812,
+      "browserNowMs": 1791373430894,
+      "etaMinusNowSeconds": 0,
+      "riderLat": 12.987296090340854,
+      "riderLng": 77.66694101792037,
+      "liveChipVisible": true
+    }
+  ]
+}

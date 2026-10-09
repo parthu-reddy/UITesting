@@ -1,0 +1,2 @@
+page={pageAgeMs=6299, visibility=visible, focused=true, permission=granted, restaurantLookups=[{startMs=1196, endMs=1518, status=200}], geolocationProbe={outcome=error, code=3, elapsedMs=15003}}
+markersAfterProbe=[Map marker, Map marker]

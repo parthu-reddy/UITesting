@@ -1,5 +1,6 @@
 package com.fooddelivery.e2e.tests.features.admin;
 
+import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.base.TestBase;
 import com.fooddelivery.e2e.pages.admin.AdminPortalPage;
 import com.fooddelivery.e2e.pages.admin.AdminSupportTicketsPage;
@@ -29,14 +30,14 @@ import static org.assertj.core.api.Assertions.assertThat;
  * browser. This proves the production UI's real confirmation and audit payload without changing
  * a shared support ticket or refund.</p>
  */
-@Tag("admin")
-@Tag("admin-support-refund")
 @Tag("browser-routed")
+@Tag("feature-refunds-support")
 public class AdminSupportTicketResolutionRoutedUiTest extends TestBase {
 
     private static final String SUPPORT_TICKETS_PATH =
             "/api/v1/internal/admin/orders/intervention/support-tickets";
     private static final String INTERVENTION_PATH = "/api/v1/internal/admin/orders/intervention";
+    private static final String FLEET_CITIES_PATH = "/api/v1/internal/admin/delivery/fleet-cities";
     private static final String REFUND_PATH = "/api/v1/internal/admin/refunds";
     private static final String CHAT_SESSIONS_PATH = "/api/v1/chat/sessions";
     private static final String TICKET_ID = "f1000000-0000-4000-8000-000000000011";
@@ -189,7 +190,7 @@ public class AdminSupportTicketResolutionRoutedUiTest extends TestBase {
     private void registerFixtureRoutes(SupportResolutionFixture fixture) {
         // Registration happens after normal login. Every post-login REST request for this page
         // remains local, including the portal's intervention-count poll and the embedded chat.
-        adminPage.route(url -> url.contains("/api/v1/"), fixture::handleApi);
+        adminPage.route(com.fooddelivery.e2e.util.FixtureShell::isFixturedApi, fixture::handleApi);
         adminPage.routeWebSocket(url -> url.contains("/ws/chat"), socket -> {
             fixture.webSocketConnections.incrementAndGet();
             socket.onMessage(frame -> {
@@ -201,6 +202,10 @@ public class AdminSupportTicketResolutionRoutedUiTest extends TestBase {
                 }
             });
         });
+        // routeWebSocket only intercepts sockets in documents loaded after it is registered; the
+        // admin page is already loaded by login, so load Support Tickets again or /ws/chat reaches
+        // Dev. A reload would land on the fleet map and send its reads to the fixture.
+        adminPage.navigate(TestConfig.APP_URL + "/admin/support_tickets");
     }
 
     private String authenticatedAdminId() {
@@ -271,6 +276,12 @@ public class AdminSupportTicketResolutionRoutedUiTest extends TestBase {
             }
             if ("GET".equals(method) && INTERVENTION_PATH.equals(path)) {
                 fulfillJson(route, 200, emptyInterventionPage());
+                return;
+            }
+            if ("GET".equals(method) && FLEET_CITIES_PATH.equals(path)) {
+                // The fleet map that login lands on can still read its cities after these routes are
+                // registered. No cities means the map asks for no layers.
+                fulfillJson(route, 200, "[]");
                 return;
             }
             if (path.startsWith(REFUND_PATH + "/")) {

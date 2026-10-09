@@ -25,9 +25,8 @@ import static org.assertj.core.api.Assertions.assertThat;
  * one of those financial endpoints is aborted and counted, so shared Dev financial data cannot be
  * changed while this UI coverage runs.</p>
  */
-@Tag("admin")
-@Tag("admin-ledger-read-only")
 @Tag("browser-routed")
+@Tag("feature-money-ledger")
 public class AdminLedgerMoneyReadOnlyRoutedUiTest extends TestBase {
 
     private static final String PAYEE_ID = "b0000000-0000-4000-8000-000000000001";

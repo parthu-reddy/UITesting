@@ -66,15 +66,15 @@ public class SharedSettingsPage {
 
     // ── History tab ──────────────────────────────────────────────────────
 
-    public boolean isTransactionHistoryVisible() {
-        Locator selectedHistory = page.getByRole(AriaRole.TAB,
-                new Page.GetByRoleOptions().setName("History").setExact(true));
-        if (!"true".equals(selectedHistory.getAttribute("aria-selected"))) return false;
-
-        Locator definedState = page.getByText("Loading history...", new Page.GetByTextOptions().setExact(true))
-                .or(page.getByText("No order history found.", new Page.GetByTextOptions().setExact(true)))
-                .or(page.locator("[data-screen='settings'] .space-y-4 > button").first());
-        return definedState.first().isVisible();
+    /**
+     * Waits until the History tab is selected and its list settled (SettingsHistoryTab.tsx data-state):
+     * populated or empty, never loading or error. Rows are nested in a wrapper div, so structure selectors miss them.
+     */
+    public void assertHistoryLoaded() {
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(page.getByRole(AriaRole.TAB,
+                new Page.GetByRoleOptions().setName("History").setExact(true))).hasAttribute("aria-selected", "true");
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(page.getByTestId("customer-history-state"))
+                .hasAttribute("data-state", java.util.regex.Pattern.compile("populated|empty"));
     }
 
     // ── Logout ───────────────────────────────────────────────────────────

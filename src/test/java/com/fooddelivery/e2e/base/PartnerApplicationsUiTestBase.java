@@ -15,7 +15,9 @@ import java.util.UUID;
 
 /**
  * O3 retains each applicant and closes browser contexts without invoking legacy state helpers.
- * Duty changes belong to the visible scenario itself; teardown never reads or changes backend state.
+ * Duty changes belong to the visible scenario itself; teardown changes no business state. It does sign
+ * each page out, as TestBase does: Identity keeps at most three sessions per person, so a teardown that
+ * only closes contexts leaves a 30-day session per run and the seeded admin and customer hit the limit.
  */
 public abstract class PartnerApplicationsUiTestBase extends TestBase {
     private Path measurements;
@@ -70,6 +72,14 @@ public abstract class PartnerApplicationsUiTestBase extends TestBase {
     @Override
     @AfterEach
     public void tearDownContexts() {
+        for (Page page : Arrays.asList(customerPage, restaurantPage, riderPage, adminPage)) {
+            try {
+                var statuses = com.fooddelivery.e2e.util.SessionSignOut.signOut(page);
+                if (!statuses.isEmpty()) System.out.println("[E2E TEARDOWN] signed out " + statuses);
+            } catch (RuntimeException failure) {
+                System.out.println("[E2E TEARDOWN] sign-out failed: " + failure.getMessage());
+            }
+        }
         RuntimeException closeFailure = null;
         for (BrowserContext context : Arrays.asList(
                 customerContext, restaurantContext, riderContext, adminContext)) {

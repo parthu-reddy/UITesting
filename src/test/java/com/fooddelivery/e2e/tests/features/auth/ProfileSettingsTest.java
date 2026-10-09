@@ -14,7 +14,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Tests for Profile completion modal and SharedSettings tabs (Addresses, Wallet, History).
  * Covers: PROFILE-16..19, SETTINGS-01..06
  */
-@Tag("profile-settings")
+@Tag("feature-settings-profile")
 public class ProfileSettingsTest extends TestBase {
 
     // ── PROFILE COMPLETION MODAL SCENARIOS ───────────────────────────────
@@ -86,6 +86,7 @@ public class ProfileSettingsTest extends TestBase {
 
     // ── SHARED SETTINGS TABS SCENARIOS ───────────────────────────────────
 
+    @Tag("feature-addresses")
     @Test
     @DisplayName("SETTINGS-01: SharedSettings Address tab")
     void sharedSettingsAddressTab() {
@@ -106,6 +107,7 @@ public class ProfileSettingsTest extends TestBase {
         }
     }
 
+    @Tag("feature-wallet")
     @Test
     @DisplayName("SETTINGS-03: SharedSettings Wallet tab")
     void sharedSettingsWalletTab() {
@@ -124,6 +126,7 @@ public class ProfileSettingsTest extends TestBase {
         assertThat(balance).isNotNull();
     }
 
+    @Tag("feature-order-tracking")
     @Test
     @DisplayName("SETTINGS-05: SharedSettings History tab")
     void sharedSettingsHistoryTab() {
@@ -135,8 +138,6 @@ public class ProfileSettingsTest extends TestBase {
         
         SharedSettingsPage settings = new SharedSettingsPage(customerPage);
         settings.openHistoryTab();
-        customerPage.waitForTimeout(500);
-        
-        assertThat(settings.isTransactionHistoryVisible()).isTrue();
+        settings.assertHistoryLoaded();
     }
 }

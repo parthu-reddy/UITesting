@@ -8,7 +8,8 @@ import com.microsoft.playwright.options.AriaRole;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
-@Tag("business-platform") @Tag("bp-o5") @Tag("ui-only")
+@Tag("ui-only")
+@Tag("feature-organisations")
 public class BusinessHubOrganisationUiTest extends TestBase {
     @Test void invitationRoleChangesAndRemovalAreVisibleToBothPeople() {
         String owner = BusinessPlatformFixture.phone("hub.owner", "9999"), member = BusinessPlatformFixture.phone("hub.member", "8999");

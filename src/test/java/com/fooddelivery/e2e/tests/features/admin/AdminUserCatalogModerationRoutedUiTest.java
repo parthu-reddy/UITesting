@@ -30,9 +30,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * needed by the selected view with disposable in-browser fixtures. Any mutation under those API
  * prefixes is recorded and terminated in the browser, so the tests cannot alter shared Dev data.</p>
  */
-@Tag("admin")
 @Tag("browser-routed")
-@Tag("admin-user-catalog-moderation")
 public class AdminUserCatalogModerationRoutedUiTest extends TestBase {
 
     private static final String USER_API_PATH = "/api/v1/internal/admin/users";
@@ -73,6 +71,7 @@ public class AdminUserCatalogModerationRoutedUiTest extends TestBase {
         portal.waitForPortal();
     }
 
+    @Tag("feature-admin-ops")
     @Test
     @DisplayName("ADMIN-USER-SAFE-01: stale active orders are discarded and cancelled role/status confirmations send no write")
     void userSelectionIsolationAndCanceledRoleStatusChangesAreWriteFree() {
@@ -88,10 +87,10 @@ public class AdminUserCatalogModerationRoutedUiTest extends TestBase {
         waitFor(() -> fixture.activeOrderRoute(USER_A_ID) != null,
                 "selecting user A must request A's active orders");
 
-        users.chooseNewRole("DELIVERY");
+        users.chooseNewRole("ADMIN");
         users.openAddRoleConfirmation();
-        PlaywrightAssertions.assertThat(users.confirmationDialog("Grant DELIVERY role?")).isVisible();
-        users.cancelConfirmation("Grant DELIVERY role?");
+        PlaywrightAssertions.assertThat(users.confirmationDialog("Grant ADMIN role?")).isVisible();
+        users.cancelConfirmation("Grant ADMIN role?");
 
         users.openSuspendConfirmation();
         PlaywrightAssertions.assertThat(users.confirmationDialog("Suspend this user?")).isVisible();
@@ -124,10 +123,11 @@ public class AdminUserCatalogModerationRoutedUiTest extends TestBase {
         assertThat(fixture.blockedWrites.get()).isZero();
     }
 
+    @Tag("feature-admin-ops")
     @Test
     @DisplayName("ADMIN-USER-SAFE-02: confirmed role removal and suspension use only fulfilled fixture writes and update the visible record")
     void confirmedRoleRemovalAndStatusUpdateUseOnlyFixtureWrites() {
-        UserFixture fixture = UserFixture.fulfillMutations();
+        UserFixture fixture = UserFixture.fulfillMutations().withUserAHoldingAdmin();
         adminPage.route(AdminUserCatalogModerationRoutedUiTest::isUserFixtureUrl, fixture::handle);
 
         portal.openUsersTab();
@@ -135,13 +135,14 @@ public class AdminUserCatalogModerationRoutedUiTest extends TestBase {
         users.waitForUserManagement();
         users.selectUserByPhone(USER_A_PHONE);
         users.waitForActiveOrderRestaurant(USER_A_RESTAURANT);
+        assertThat(users.hasRemoveRoleButton("CUSTOMER")).as("partner/customer roles are not removable here").isFalse();
 
-        users.openRemoveRoleConfirmation("CUSTOMER");
-        PlaywrightAssertions.assertThat(users.confirmationDialog("Remove CUSTOMER role?")).isVisible();
-        users.confirmConfirmation("Remove CUSTOMER role?", "Remove role");
+        users.openRemoveRoleConfirmation("ADMIN");
+        PlaywrightAssertions.assertThat(users.confirmationDialog("Remove ADMIN role?")).isVisible();
+        users.confirmConfirmation("Remove ADMIN role?", "Remove role");
         waitFor(() -> fixture.roleWrites.get() == 1, "the browser fixture receives the confirmed role removal");
         users.waitForToast("Role removed");
-        assertThat(users.hasRemoveRoleButton("CUSTOMER")).isFalse();
+        assertThat(users.hasRemoveRoleButton("ADMIN")).isFalse();
 
         users.openSuspendConfirmation();
         PlaywrightAssertions.assertThat(users.confirmationDialog("Suspend this user?")).isVisible();
@@ -157,6 +158,7 @@ public class AdminUserCatalogModerationRoutedUiTest extends TestBase {
         assertThat(fixture.unexpectedRequests.get()).isZero();
     }
 
+    @Tag("feature-admin-ops")
     @Test
     @DisplayName("ADMIN-USER-SAFE-04: confirmed role grant and activation use fulfilled fixture writes and update the visible user")
     void confirmedRoleGrantAndActivationUseOnlyFixtureWrites() {
@@ -169,18 +171,18 @@ public class AdminUserCatalogModerationRoutedUiTest extends TestBase {
         users.selectUserByPhone(USER_A_PHONE);
         users.waitForActiveOrderRestaurant(USER_A_RESTAURANT);
 
-        users.chooseNewRole("DELIVERY");
+        users.chooseNewRole("ADMIN");
         users.openAddRoleConfirmation();
-        PlaywrightAssertions.assertThat(users.confirmationDialog("Grant DELIVERY role?")).isVisible();
-        users.confirmConfirmation("Grant DELIVERY role?", "Grant role");
+        PlaywrightAssertions.assertThat(users.confirmationDialog("Grant ADMIN role?")).isVisible();
+        users.confirmConfirmation("Grant ADMIN role?", "Grant role");
         waitFor(() -> fixture.roleWrites.get() == 1, "the confirmed role grant reaches the browser fixture");
         users.waitForToast("Role added");
-        users.waitForRemoveRoleButton("DELIVERY");
+        users.waitForRemoveRoleButton("ADMIN");
 
         assertThat(fixture.roleRequestMethod.get()).isEqualTo("POST");
         assertThat(fixture.roleRequestPath.get()).isEqualTo(USER_API_PATH + "/" + USER_A_ID + "/roles");
-        assertThat(fixture.roleRequestBody.get())
-                .contains("\"serviceName\":\"CustomerApplication\"", "\"roleName\":\"DELIVERY\"");
+        // AdminUserManagement posts { roleName } only; partner roles come from applications and membership.
+        assertThat(fixture.roleRequestBody.get()).contains("\"roleName\":\"ADMIN\"").doesNotContain("serviceName");
 
         users.selectUserByPhone(USER_B_PHONE);
         users.waitForActiveOrderRestaurant(USER_B_RESTAURANT);
@@ -198,10 +200,11 @@ public class AdminUserCatalogModerationRoutedUiTest extends TestBase {
         assertThat(fixture.unexpectedRequests.get()).isZero();
     }
 
+    @Tag("feature-admin-ops")
     @Test
     @DisplayName("ADMIN-USER-SAFE-03: failed role removal and suspension preserve the displayed user and recover the controls")
     void failedRoleRemovalAndStatusUpdateLeaveTheUserUnchanged() {
-        UserFixture fixture = UserFixture.rejectMutations();
+        UserFixture fixture = UserFixture.rejectMutations().withUserAHoldingAdmin();
         adminPage.route(AdminUserCatalogModerationRoutedUiTest::isUserFixtureUrl, fixture::handle);
 
         portal.openUsersTab();
@@ -210,11 +213,11 @@ public class AdminUserCatalogModerationRoutedUiTest extends TestBase {
         users.selectUserByPhone(USER_A_PHONE);
         users.waitForActiveOrderRestaurant(USER_A_RESTAURANT);
 
-        users.openRemoveRoleConfirmation("CUSTOMER");
-        users.confirmConfirmation("Remove CUSTOMER role?", "Remove role");
+        users.openRemoveRoleConfirmation("ADMIN");
+        users.confirmConfirmation("Remove ADMIN role?", "Remove role");
         waitFor(() -> fixture.roleWrites.get() == 1, "the rejected role removal reaches only the fixture");
         users.waitForToast(ROLE_REMOVE_FAILURE);
-        assertThat(users.hasRemoveRoleButton("CUSTOMER")).isTrue();
+        assertThat(users.hasRemoveRoleButton("ADMIN")).isTrue();
 
         users.openSuspendConfirmation();
         users.confirmConfirmation("Suspend this user?", "Suspend user");
@@ -227,6 +230,7 @@ public class AdminUserCatalogModerationRoutedUiTest extends TestBase {
         assertThat(fixture.unexpectedRequests.get()).isZero();
     }
 
+    @Tag("feature-catalog")
     @Test
     @DisplayName("ADMIN-CATEGORY-SAFE-01: client validation and cancelling edit are inert; a fixture-only create preserves its request")
     void categoryValidationEditCancellationAndFixtureCreateAreDeterministic() {
@@ -273,6 +277,7 @@ public class AdminUserCatalogModerationRoutedUiTest extends TestBase {
         assertThat(fixture.unexpectedRequests.get()).isZero();
     }
 
+    @Tag("feature-catalog")
     @Test
     @DisplayName("ADMIN-CATEGORY-SAFE-02: a confirmed fixture update refreshes the saved category and preserves its exact request")
     void categoryUpdateSuccessUsesOnlyTheBrowserFixture() {
@@ -300,6 +305,7 @@ public class AdminUserCatalogModerationRoutedUiTest extends TestBase {
         assertThat(fixture.unexpectedRequests.get()).isZero();
     }
 
+    @Tag("feature-catalog")
     @Test
     @DisplayName("ADMIN-CATEGORY-SAFE-03: a rejected fixture update keeps the edit correctable without a false success or list change")
     void categoryUpdateErrorKeepsThePendingEditCorrectableWithoutFalseSuccess() {
@@ -338,6 +344,7 @@ public class AdminUserCatalogModerationRoutedUiTest extends TestBase {
         assertThat(fixture.unexpectedRequests.get()).isZero();
     }
 
+    @Tag("feature-catalog")
     @Test
     @DisplayName("ADMIN-CATEGORY-SAFE-04: a rejected fixture create keeps the new category editable without a false success or list update")
     void categoryCreateErrorKeepsThePendingCategoryCorrectableWithoutFalseSuccess() {
@@ -374,6 +381,7 @@ public class AdminUserCatalogModerationRoutedUiTest extends TestBase {
         assertThat(fixture.unexpectedRequests.get()).isZero();
     }
 
+    @Tag("feature-reviews")
     @Test
     @DisplayName("ADMIN-REVIEW-SAFE-01: lookup-mode change releases Loading and rejects a stale read; review records remain immutable")
     void reviewModeSelectionRejectsStaleResultsAndNeverExposesMutationControls() {
@@ -418,6 +426,7 @@ public class AdminUserCatalogModerationRoutedUiTest extends TestBase {
         assertThat(fixture.unexpectedRequests.get()).isZero();
     }
 
+    @Tag("feature-reviews")
     @Test
     @DisplayName("ADMIN-REVIEW-SAFE-02: a routed review-read failure is visible, leaves no stale cards, and restores search")
     void reviewApiErrorIsVisibleAndDoesNotExposeMutationControls() {
@@ -501,6 +510,8 @@ public class AdminUserCatalogModerationRoutedUiTest extends TestBase {
 
         private final MutationOutcome mutationOutcome;
         private final boolean holdActiveOrders;
+        /** Only ADMIN is manageable (MANAGEABLE_ROLES, staffRoles.isStaffRole); removal needs a holder. */
+        private boolean userAHoldsAdmin;
         private final AtomicInteger listReads = new AtomicInteger();
         private final AtomicInteger activeOrderReads = new AtomicInteger();
         private final AtomicInteger roleWrites = new AtomicInteger();
@@ -533,6 +544,11 @@ public class AdminUserCatalogModerationRoutedUiTest extends TestBase {
             return new UserFixture(MutationOutcome.FAILURE, false);
         }
 
+        private UserFixture withUserAHoldingAdmin() {
+            userAHoldsAdmin = true;
+            return this;
+        }
+
         private void handle(Route route) {
             Request request = route.request();
             String method = request.method();
@@ -556,7 +572,7 @@ public class AdminUserCatalogModerationRoutedUiTest extends TestBase {
                 return;
             }
 
-            if ("DELETE".equals(method) && (USER_API_PATH + "/" + USER_A_ID + "/roles/CUSTOMER").equals(path)) {
+            if ("DELETE".equals(method) && (USER_API_PATH + "/" + USER_A_ID + "/roles/ADMIN").equals(path)) {
                 roleWrites.incrementAndGet();
                 recordRoleRequest(request, path);
                 handleRoleMutation(route);
@@ -660,14 +676,14 @@ public class AdminUserCatalogModerationRoutedUiTest extends TestBase {
             fulfillJson(route, 200, activeOrdersJson(userId));
         }
 
-        private static String userPageJson() {
+        private String userPageJson() {
             return """
                     {
                       "success": true,
                       "message": "fixture",
                       "data": {
                         "content": [
-                          {"id":"%s","phoneNumber":"%s","roles":["CUSTOMER"],"active":true},
+                          {"id":"%s","phoneNumber":"%s","roles":%s,"active":true},
                           {"id":"%s","phoneNumber":"%s","roles":["CUSTOMER"],"active":false}
                         ],
                         "totalElements": 2,
@@ -681,7 +697,8 @@ public class AdminUserCatalogModerationRoutedUiTest extends TestBase {
                       },
                       "timestamp": "%s"
                     }
-                    """.formatted(USER_A_ID, USER_A_PHONE, USER_B_ID, USER_B_PHONE, FIXTURE_TIME);
+                    """.formatted(USER_A_ID, USER_A_PHONE, userAHoldsAdmin ? "[\"CUSTOMER\",\"ADMIN\"]" : "[\"CUSTOMER\"]",
+                            USER_B_ID, USER_B_PHONE, FIXTURE_TIME);
         }
 
         private static String activeOrdersJson(String userId) {

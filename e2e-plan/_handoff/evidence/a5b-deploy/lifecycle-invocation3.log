@@ -1,0 +1,48 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------------< com.fooddelivery:e2e-tests >---------------------
+[INFO] Building e2e-tests 1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.4.0:resources (default-resources) @ e2e-tests ---
+[INFO] skip non existing resourceDirectory /Users/parthureddy/Documents/Food Delivery.nosync/UITesting/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ e2e-tests ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- resources:3.4.0:testResources (default-testResources) @ e2e-tests ---
+[INFO] Copying 3 resources from src/test/resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ e2e-tests ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- surefire:3.5.2:test (default-test) @ e2e-tests ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.fooddelivery.e2e.tests.flows.HappyDeliveryFlowTest
+[E2E STARTUP] Creating Playwright driver
+[E2E STARTUP] Launching Chromium (headless=false)
+[E2E STARTUP] Chromium ready
+═══ STEP 1: Logging in all actors ═══
+Customer=8000000001 Restaurant=9000000001 Rider=7000000001
+[SWIPE] Slide to deliver confirmed on attempt 1
+[OTP SWIPE] DELIVERED submission returned HTTP 200 for order f3b3d38b-6e4f-4ff7-a26f-1264e775c267
+[E2E TEARDOWN] customer signed out [everyday=200]
+[E2E TEARDOWN] restaurant signed out [everyday=200]
+[E2E TEARDOWN] rider signed out [everyday=200]
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 101.3 s -- in com.fooddelivery.e2e.tests.flows.HappyDeliveryFlowTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  01:41 min
+[INFO] Finished at: 2026-10-07T17:14:03+05:30
+[INFO] ------------------------------------------------------------------------

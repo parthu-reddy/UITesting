@@ -1,0 +1,17 @@
+{
+  "recordedAt": "2026-10-07T15:40+05:30",
+  "test": "HappyDeliveryFlowTest#completeOrderLifecycle [M1 phase1]",
+  "tests": 1,
+  "passed": 0,
+  "failures": 0,
+  "errors": 1,
+  "skipped": 0,
+  "elapsedSeconds": 277.7,
+  "ownedOrderId": "046fa470-f2a2-47a4-94b6-443cc5b70702",
+  "orderState": "DELIVERED",
+  "m1RouteAssertion": "PASSED",
+  "routes": "customer 150s/789m; rider 939s/4577m and 150s/789m; all 200, integer, travelSeconds==durationSeconds",
+  "failure": "later RIDER-EARN-03 wait: tile showed \u20b963.48 (3 orders) but 42.32+21.16 = 63.480000000000004 as a double -> harness bug, fixed with whole paise",
+  "rawLog": "/private/tmp/food-m1-phase1-lifecycle1.log",
+  "rawLogSha256": "b28288f4d838d4c614951ba20b64569cde3acf05e13bd9a95e2e8455c2718a71"
+}

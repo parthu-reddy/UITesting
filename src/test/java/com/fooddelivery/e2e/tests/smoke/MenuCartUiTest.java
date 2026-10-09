@@ -17,7 +17,6 @@ import java.util.Map;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
-@Tag("cart-ui")
 public class MenuCartUiTest extends TestBase {
     private String selectedOutlet;
 
@@ -40,6 +39,7 @@ public class MenuCartUiTest extends TestBase {
         selectedOutlet = new NearbyOutletPage(customerPage).openBrand1AndSelectNearby();
         assertThat(customerPage.locator("[data-menu-item]").first()).isVisible();
     }
+    @Tag("feature-catalog")
     @Test
     void menuDisplaysItemsWithoutRestaurantEditingControls() {
         Locator first = customerPage.locator("[data-menu-item]").first();
@@ -48,6 +48,7 @@ public class MenuCartUiTest extends TestBase {
         assertThat(customerPage.locator("[data-menu-item] input[type=checkbox]")).hasCount(0);
         assertThat(customerPage.locator("[data-menu-item] button[aria-label^='Edit ']")).hasCount(0);
     }
+    @Tag("feature-catalog")
     @Test
     void allMenuItemsHaveNamesPositivePricesAndCategories() {
         Locator rows = customerPage.locator("[data-menu-item]");
@@ -71,6 +72,7 @@ public class MenuCartUiTest extends TestBase {
         }
     }
 
+    @Tag("feature-catalog")
     @Test void menuDescriptionsUseSecondaryTextStyling() {
         Locator descriptions = customerPage.locator("[data-menu-item] p.text-\\[11\\.5px\\]");
         org.assertj.core.api.Assertions.assertThat(descriptions.count())
@@ -92,6 +94,7 @@ public class MenuCartUiTest extends TestBase {
         }
     }
 
+    @Tag("feature-catalog")
     @Test void everyMenuItemHasLoadedImageOrFallback() {
         Locator rows = customerPage.locator("[data-menu-item]");
         org.assertj.core.api.Assertions.assertThat(rows.count()).isGreaterThan(0);
@@ -125,6 +128,7 @@ public class MenuCartUiTest extends TestBase {
         }
     }
 
+    @Tag("feature-catalog")
     @Test void dietaryMarkersAndPrepTimesNeverInventValues() {
         Locator rows = customerPage.locator("[data-menu-item]");
         int dietaryMarkers = 0;
@@ -150,6 +154,8 @@ public class MenuCartUiTest extends TestBase {
                 .as("seeded menu should include explicitly configured preparation times").isGreaterThan(0);
     }
 
+    @Tag("feature-cart-checkout")
+    @Tag("feature-catalog")
     @Test
     void outOfStockItemsCannotBeAdded() {
         Locator existing = customerPage.locator("[data-menu-item]").filter(new Locator.FilterOptions().setHasText("Out of stock"));
@@ -186,6 +192,7 @@ public class MenuCartUiTest extends TestBase {
         assertThat(unavailable.locator("output")).hasCount(0);
     }
 
+    @Tag("feature-catalog")
     @Test
     void customerOutletSelectorExposesNoManagementActions() {
         customerPage.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Change outlet").setExact(true)).click();
@@ -196,15 +203,27 @@ public class MenuCartUiTest extends TestBase {
         assertThat(dialog.locator("input, [role='switch']")).hasCount(0);
     }
 
+    /**
+     * The open outlet lives in the URL (/customer/restaurant/:id, useCustomerRoute), so a reload
+     * re-renders that outlet's menu -- through the routed catalog -- instead of the feed.
+     */
+    private void assertReloadKeepsTheSelectedOutlet() {
+        String outletUrl = customerPage.url();
+        org.assertj.core.api.Assertions.assertThat(outletUrl).matches(".*/customer/restaurant/[^/?#]+.*");
+        customerPage.reload();
+        org.assertj.core.api.Assertions.assertThat(customerPage.url()).isEqualTo(outletUrl);
+        assertThat(customerPage.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName(selectedOutlet).setExact(true)))
+                .isVisible();
+    }
+
+    @Tag("feature-catalog")
     @Test
     @Tag("routed-ui")
     void catalogFailureOffersRetryAndRecoversTheSelectedOutlet() {
         customerPage.route("**/api/v1/restaurants/*/catalog/items", route -> route.fulfill(
                 new Route.FulfillOptions().setStatus(502).setContentType("application/json")
                         .setBody("{\"success\":false,\"message\":\"Test catalog outage\"}")));
-        customerPage.reload();
-        String reopened = new NearbyOutletPage(customerPage).openBrandCardAndSelectNearby("Brand 1");
-        org.assertj.core.api.Assertions.assertThat(reopened).isEqualTo(selectedOutlet);
+        assertReloadKeepsTheSelectedOutlet();
         assertThat(customerPage.getByText("Couldn't load menu", new Page.GetByTextOptions().setExact(true))).isVisible();
         assertThat(customerPage.locator("[data-menu-item]")).hasCount(0);
         assertThat(customerPage.getByText("Menu unavailable", new Page.GetByTextOptions().setExact(true))).hasCount(0);
@@ -217,14 +236,14 @@ public class MenuCartUiTest extends TestBase {
         assertThat(customerPage.getByText("Couldn't load menu", new Page.GetByTextOptions().setExact(true))).hasCount(0);
     }
 
+    @Tag("feature-catalog")
     @Test
     @Tag("routed-ui")
     void successfulEmptyCatalogShowsAnExplicitEmptyState() {
         customerPage.route("**/api/v1/restaurants/*/catalog/items", route -> route.fulfill(
                 new Route.FulfillOptions().setStatus(200).setContentType("application/json")
-                        .setBody("{\"success\":true,\"data\":[]}")));
-        customerPage.reload();
-        new NearbyOutletPage(customerPage).openBrandCardAndSelectNearby("Brand 1");
+                        .setBody("{\"success\":true,\"message\":\"Menu items retrieved\",\"data\":[],\"timestamp\":\"2026-09-29T10:00:00Z\"}")));
+        assertReloadKeepsTheSelectedOutlet();
         assertThat(customerPage.getByText("Menu unavailable", new Page.GetByTextOptions().setExact(true))).isVisible();
         assertThat(customerPage.locator("[data-menu-item]")).hasCount(0);
         assertThat(customerPage.getByText("Couldn't load menu", new Page.GetByTextOptions().setExact(true))).hasCount(0);
@@ -236,14 +255,17 @@ public class MenuCartUiTest extends TestBase {
         if (current == available) return;
 
         com.microsoft.playwright.Response response = restaurantPage.waitForResponse(
-                candidate -> candidate.request().method().equals("POST")
-                        && candidate.url().contains("/menu-overrides/"),
+                // The availability switch sends PUT /outlets/{id}/menu-items/{id}/stock (menuStore.ts setStock);
+                // POST /menu-overrides/ is the price/name editor and never fires here.
+                candidate -> candidate.request().method().equals("PUT")
+                        && candidate.url().matches(".*/api/v1/outlets/[^/]+/menu-items/[^/]+/stock$"),
                 stockSwitch::click);
         org.assertj.core.api.Assertions.assertThat(response.status())
                 .as("restaurant stock update should be accepted before checking customer availability")
                 .isBetween(200, 299);
         assertThat(stockSwitch).hasAttribute("aria-checked", Boolean.toString(available));
     }
+    @Tag("feature-cart-checkout")
     @Test
     void addIncrementDecrementAndEmptyCart() {
         Locator row = customerPage.locator("[data-menu-item]").filter(new Locator.FilterOptions()
@@ -276,6 +298,7 @@ public class MenuCartUiTest extends TestBase {
         assertThat(choice).isVisible();
         return customerPage.locator("[data-menu-item=\"" + choice.getAttribute("data-menu-item") + "\"]");
     }
+    @Tag("feature-cart-checkout")
     @Test void removeOnlyItemFromCart() {
         Locator row = firstOrderableItem();
         String name = row.locator("h4").innerText();
@@ -291,6 +314,7 @@ public class MenuCartUiTest extends TestBase {
         assertThat(cart).isHidden();
         assertThat(customerPage.getByText("View Cart", new Page.GetByTextOptions().setExact(true))).isHidden();
     }
+    @Tag("feature-cart-checkout")
     @Test void fiveSequentialIncrementsReachQuantitySix() {
         Locator row = firstOrderableItem();
         String name = row.locator("h4").innerText().trim();
@@ -301,6 +325,7 @@ public class MenuCartUiTest extends TestBase {
         for (int click = 0; click < 5; click++) increment.click();
         assertThat(row.locator("output")).hasText("6");
     }
+    @Tag("feature-cart-checkout")
     @Test void menuQuantityControlsAndRemoval() {
         Locator row = firstOrderableItem();
         String name = row.locator("h4").innerText();
@@ -317,6 +342,7 @@ public class MenuCartUiTest extends TestBase {
         assertThat(row.getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("ADD").setExact(true))).isVisible();
         assertThat(customerPage.getByText("View Cart", new Page.GetByTextOptions().setExact(true))).isHidden();
     }
+    @Tag("feature-cart-checkout")
     @Test void cartSubtotalAndCloseReopen() {
         Locator row = firstOrderableItem();
         String name = row.locator("h4").innerText();
@@ -337,6 +363,7 @@ public class MenuCartUiTest extends TestBase {
         assertThat(cart.getByText("Your cart is empty", new Locator.GetByTextOptions().setExact(true))).isVisible();
     }
 
+    @Tag("feature-cart-checkout")
     @Test void twoDistinctItemsProduceExactSubtotal() {
         Locator orderable = customerPage.locator(
                 "[data-menu-item]:has([data-testid='add-to-cart-button'])");
@@ -378,6 +405,7 @@ public class MenuCartUiTest extends TestBase {
                 .isEqualTo(firstPrice + secondPrice);
     }
 
+    @Tag("feature-cart-checkout")
     @Test void cartPersistsAfterSettingsNavigation() {
         Locator row = firstOrderableItem();
         String name = row.locator("h4").innerText().trim();
@@ -397,6 +425,7 @@ public class MenuCartUiTest extends TestBase {
         assertThat(cart.locator("output")).hasText("1");
     }
 
+    @Tag("feature-cart-checkout")
     @Test void freeDeliveryTrackerShowsProgressAfterAddingItem() {
         try (SeededRiderDuty ignored = SeededRiderDuty.ensureOnline(riderPage, testRiderPhone)) {
             Locator row = firstOrderableItem();
@@ -413,6 +442,7 @@ public class MenuCartUiTest extends TestBase {
         }
     }
 
+    @Tag("feature-cart-checkout")
     @Test void freeDeliveryCanBeUnlockedThroughCartAdditions() {
         try (SeededRiderDuty ignored = SeededRiderDuty.ensureOnline(riderPage, testRiderPhone)) {
             Locator row = firstOrderableItem();
@@ -461,6 +491,7 @@ public class MenuCartUiTest extends TestBase {
      * total", "Delivery fee" (FREE at zero), "Platform fee" (only when charged) and "GST &
      * restaurant charges" (only once quoted), and they must add up to "Total".
      */
+    @Tag("feature-cart-checkout")
     @Test void checkoutTotalEqualsItemTotalFeesAndTaxes() {
         try (SeededRiderDuty ignored = SeededRiderDuty.ensureOnline(riderPage, testRiderPhone)) {
             Locator row = firstOrderableItem();

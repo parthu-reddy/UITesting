@@ -10,7 +10,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 import com.fooddelivery.e2e.pages.common.Portal;
-@Tag("customer-settings-ui")
+@Tag("feature-settings-profile")
 public class CustomerSettingsUiTest extends TestBase {
     @BeforeEach void openSettings() {
         customerPage.navigate(TestConfig.APP_URL);
@@ -26,6 +26,8 @@ public class CustomerSettingsUiTest extends TestBase {
         customerPage.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("Close settings")).click();
         assertThat(customerPage.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName(java.util.regex.Pattern.compile("Deliver to")))).containsText("Home:");
     }
+    @Tag("feature-order-tracking")
+    @Tag("feature-wallet")
     @Test void keyboardTabsReachHistoryAndWallet() {
         Locator profile=customerPage.getByRole(AriaRole.TAB,new Page.GetByRoleOptions().setName("Profile").setExact(true));
         profile.focus(); profile.press("ArrowRight");
@@ -48,6 +50,7 @@ public class CustomerSettingsUiTest extends TestBase {
                     new Page.GetByRoleOptions().setName("Account Settings"))).isVisible();
         }
     }
+    @Tag("feature-wallet")
     @Test void profileIdentityAndStoreCreditBalanceRender() {
         Locator name = customerPage.locator("input[type=text]").first();
         assertThat(name).not().hasValue("");
@@ -62,6 +65,7 @@ public class CustomerSettingsUiTest extends TestBase {
         String amount = balance.innerText().trim().substring(1).replace(",", "");
         org.assertj.core.api.Assertions.assertThat(Double.parseDouble(amount)).isGreaterThanOrEqualTo(0);
     }
+    @Tag("feature-auth")
     @Test void currentLoggedInDeviceIsListedWithoutRemovingIt() {
         Locator sessions = customerPage.getByRole(AriaRole.HEADING,
                 new Page.GetByRoleOptions().setName("Logged-in Devices")).locator("..").locator("..");
@@ -74,6 +78,7 @@ public class CustomerSettingsUiTest extends TestBase {
         assertThat(current).containsText("Everyday account");
         assertThat(current).containsText("Last active:");
     }
+    @Tag("feature-addresses")
     @Test void savedHomeAddressIsVisibleWithoutEditingIt() {
         customerPage.getByRole(AriaRole.TAB,
                 new Page.GetByRoleOptions().setName("Addresses").setExact(true)).click();
@@ -112,6 +117,7 @@ public class CustomerSettingsUiTest extends TestBase {
         }
     }
 
+    @Tag("feature-addresses")
     @Test void everyVisibleNewAddressFieldHasAProgrammaticLabel() {
         customerPage.getByRole(AriaRole.TAB,
                 new Page.GetByRoleOptions().setName("Addresses").setExact(true)).click();
@@ -134,6 +140,7 @@ public class CustomerSettingsUiTest extends TestBase {
         }
         panel.locator("button:has(svg.lucide-x)").click();
     }
+    @Tag("feature-addresses")
     @Test void blankNewAddressFormIsBlockedAndCanBeClosed() {
         customerPage.getByRole(AriaRole.TAB,
                 new Page.GetByRoleOptions().setName("Addresses").setExact(true)).click();
@@ -175,6 +182,7 @@ public class CustomerSettingsUiTest extends TestBase {
         assertThat(reopenedPanel.getByPlaceholder("ZIP Code")).hasValue("");
         reopenedPanel.locator("button:has(svg.lucide-x)").click();
     }
+    @Tag("feature-reviews")
     @Test void myReviewsTabShowsReviewsOrDefinedEmptyState() {
         customerPage.getByRole(AriaRole.TAB,
                 new Page.GetByRoleOptions().setName("My Reviews").setExact(true)).click();
@@ -191,6 +199,7 @@ public class CustomerSettingsUiTest extends TestBase {
         assertThat(outcome).isVisible();
     }
 
+    @Tag("feature-reviews")
     @Test
     @DisplayName("REVIEW-01/06: Eligible targets render and an unrated review cannot be submitted")
     void deliveredOrderReviewRequiresAtLeastOneRating() {
@@ -202,7 +211,7 @@ public class CustomerSettingsUiTest extends TestBase {
         });
         customerPage.getByRole(AriaRole.TAB,
                 new Page.GetByRoleOptions().setName("History").setExact(true)).click();
-        Locator orderCard = customerPage.locator("[data-testid='customer-history-order'][data-order-id='" + orderId + "']");
+        Locator orderCard = new com.fooddelivery.e2e.pages.customer.CustomerOrderHistoryPage(customerPage).pageToOrder(orderId, 20);
         assertThat(orderCard).isVisible(); orderCard.click();
         new com.fooddelivery.e2e.pages.customer.CustomerOrderTrackerPage(customerPage, orderId)
                 .tracker().getByTestId("rate-order-prompt").click();

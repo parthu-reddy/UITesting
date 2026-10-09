@@ -8,6 +8,7 @@ import os
 from pathlib import Path
 import secrets
 import subprocess
+import live_run_lock
 from urllib.parse import urlparse
 from run_registration_e2e import candidate
 
@@ -60,7 +61,8 @@ def main():
         print('Running combined UI gate; retained candidates: ' + str(manifest), flush=True)
         code = 1
         try:
-            code = subprocess.run(command, cwd=ROOT, env={**os.environ, 'PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD': '1'}).returncode
+            with live_run_lock.held(ROOT):
+                code = subprocess.run(command, cwd=ROOT, env={**os.environ, 'PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD': '1'}).returncode
         except OSError as failure:
             report['runnerError'] = type(failure).__name__; raise
         finally:

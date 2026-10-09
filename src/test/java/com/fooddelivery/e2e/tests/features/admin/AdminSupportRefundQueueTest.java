@@ -12,8 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@Tag("admin")
-@Tag("admin-support-refund")
+@Tag("feature-refunds-support")
 public class AdminSupportRefundQueueTest extends TestBase {
 
     private AdminPortalPage portal;

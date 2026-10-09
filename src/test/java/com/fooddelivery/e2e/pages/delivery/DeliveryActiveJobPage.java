@@ -95,26 +95,6 @@ public class DeliveryActiveJobPage {
         return page.getByPlaceholder("Enter 6-digit pickup OTP").isVisible();
     }
 
-    /** After pickup it asks for the customer's code instead. */
-    public boolean isDeliveryPhase() {
-        return page.getByPlaceholder("Ask customer for 6-digit OTP").isVisible();
-    }
-
-    /**
-     * A confirmed delivery closes the job panel (useRiderJobActions: setActiveJobId(null)); there
-     * is no toast. A rejected code keeps the panel open with an error, so "closed" is the signal.
-     */
-    public boolean hasCompletedDelivery() {
-        try {
-            activeContract().waitFor(new Locator.WaitForOptions()
-                    .setState(WaitForSelectorState.HIDDEN)
-                    .setTimeout(15000));
-            return true;
-        } catch (com.microsoft.playwright.PlaywrightException e) {
-            return false;
-        }
-    }
-
     // ── Navigation ───────────────────────────────────────────────────────
 
     public void openNavigationMap() {

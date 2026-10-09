@@ -24,7 +24,8 @@ import static org.assertj.core.api.Assertions.assertThat;
  * browser, so the figures include the tunnel round trip (an upper bound on server time).
  * Opt-in: {@code -Dmeasure.creatives=true}. Writes target/business-platform/a3/.
  */
-@Tag("business-platform") @Tag("measurement")
+@Tag("measurement")
+@Tag("feature-ads")
 public class AdCreativeQueueLatencyMeasurement extends TestBase {
 
     private static final String QUEUE = "/api/v1/internal/admin/ad-creatives";

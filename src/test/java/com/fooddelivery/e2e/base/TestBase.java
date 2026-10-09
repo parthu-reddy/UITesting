@@ -131,12 +131,19 @@ public abstract class TestBase {
         page.onConsoleMessage(msg ->
                 System.out.println("[BROWSER " + msg.type().toUpperCase() + "] " + redactAuthValues(msg.text())));
         page.onDialog(dialog -> {
-            System.out.println("[BROWSER DIALOG] " + dialog.message());
+            System.out.println("[BROWSER DIALOG] " + redactAuthValues(dialog.message()));
             dialog.dismiss();
         });
         page.onResponse(response -> {
             if (response.status() >= 400) {
                 System.out.println("[BROWSER NETWORK ERROR] " + response.status() + " " + response.request().method() + " " + redactAuthValues(response.url()));
+            }
+            // Every API write, so a run proves what it changed on Dev (P0-2 impact verdicts come from source).
+            // A route.fulfill response has no server address: "fixture" never reached Dev.
+            String method = response.request().method();
+            if (response.url().contains("/api/v1/") && !method.equals("GET") && !method.equals("HEAD") && !method.equals("OPTIONS")) {
+                System.out.println("[E2E WRITE] " + method + " " + response.status() + " "
+                        + (response.serverAddr() == null ? "fixture" : "dev") + " " + redactAuthValues(response.url()));
             }
         });
 

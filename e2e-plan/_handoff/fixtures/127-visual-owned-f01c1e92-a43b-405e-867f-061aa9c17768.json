@@ -1,0 +1,21 @@
+{
+  "orderId": "f01c1e92-a43b-405e-867f-061aa9c17768",
+  "customerPhone": "8000000001",
+  "outlet": "Brand 1 Outlet 5",
+  "riderPhone": "7000000001",
+  "dataPolicy": "retain",
+  "cleanupPerformed": false,
+  "restaurantPhone": "9000000001",
+  "history": [
+    {
+      "at": "2026-10-07T14:02+05:30",
+      "state": "ACCEPTED/assigned",
+      "by": "post-deploy invocation3 error at assigned capture geometry wait"
+    },
+    {
+      "at": "2026-10-07T14:08+05:30",
+      "state": "DELIVERED",
+      "by": "retained resume through rider UI"
+    }
+  ]
+}

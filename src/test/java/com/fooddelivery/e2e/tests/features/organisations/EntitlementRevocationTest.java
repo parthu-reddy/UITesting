@@ -13,7 +13,8 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import java.util.concurrent.atomic.AtomicInteger;
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
-@Tag("business-platform") @Tag("bp-o4") @Tag("ui-only")
+@Tag("ui-only")
+@Tag("feature-organisations")
 public class EntitlementRevocationTest extends TestBase {
     @Test void acceptedStaffApprovalAndRemovalRefreshOnNormalUiRequests() {
         String phone = BusinessPlatformFixture.phone("entitlement.member", "8999");
@@ -45,6 +46,9 @@ public class EntitlementRevocationTest extends TestBase {
         org.assertj.core.api.Assertions.assertThat(refreshes.get()).isLessThanOrEqualTo(1);
         customerPage.navigate(TestConfig.APP_URL + "/restaurant"); assertThat(customerPage.getByTestId("portal-choices")).isVisible();
     }
+    @Tag("slow")
+    @Tag("feature-catalog")
+    @Tag("feature-partner-onboarding")
     @Test void ownBrandSuspensionAndReinstatementChangeAccessAndDiscovery() {
         String phone = BusinessPlatformFixture.phone("suspension", "9999");
         String brand = BusinessPlatformFixture.approvedRestaurant(restaurantPage, adminPage, phone, testAdminPhone);

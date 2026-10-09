@@ -1,0 +1,24 @@
+{
+  "recordedAt": "2026-10-07T14:10+05:30",
+  "test": "HappyDeliveryFlowTest#completeOrderLifecycle [post-deploy active visual]",
+  "invocation": 3,
+  "actors": {
+    "customer": "8000000001",
+    "restaurant": "9000000001",
+    "rider": "7000000001"
+  },
+  "tests": 1,
+  "passed": 0,
+  "failures": 0,
+  "errors": 1,
+  "skipped": 0,
+  "elapsedSeconds": 61.82,
+  "newOrderCreated": true,
+  "ownedOrderId": "f01c1e92-a43b-405e-867f-061aa9c17768",
+  "failure": "TimeoutError in RiderVisualAudit's new map-geometry wait at the ASSIGNED capture",
+  "cause": "harness ordering: capture reloaded at desktop width and then shrank to 390px while the map loaded; failure DOM shows all pins at x=612-871px in a 333px map (courier at y=127 = centre of a ~1224px layout); frame shows loaded tiles with no pins",
+  "fix": "viewport set before the fix refresh and reload",
+  "observation": "resize during map load leaves pins outside the view; earlier runs resized after load and placed pins correctly. Recorded, not claimed as a product defect.",
+  "rawLog": "/private/tmp/food-pending-item3-postdeploy-lifecycle3.log",
+  "rawLogSha256": "ef37c38ff966a85ef32326c2a5c058cdfa5024d993e39eba5cc6772ffb436c19"
+}

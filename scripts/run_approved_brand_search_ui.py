@@ -8,6 +8,7 @@ from pathlib import Path
 import re
 import secrets
 import subprocess
+import live_run_lock
 from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -45,8 +46,9 @@ def main():
                    '-Dheadless=true', '-Dslow.mo=0', '-Drecord.video=false',
                    '-DexcludedGroups=slow-auth,auth-rate-limit', 'test']
         print('Running read-only UI brand search; retained manifest: ' + str(manifest), flush=True)
-        result = subprocess.run(command, cwd=ROOT,
-                                env={**os.environ, 'PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD': '1'})
+        with live_run_lock.held(ROOT):
+            result = subprocess.run(command, cwd=ROOT,
+                                    env={**os.environ, 'PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD': '1'})
         report['exitCode'] = result.returncode
         manifest.write_text(json.dumps(report, indent=2) + '\n')
         return result.returncode

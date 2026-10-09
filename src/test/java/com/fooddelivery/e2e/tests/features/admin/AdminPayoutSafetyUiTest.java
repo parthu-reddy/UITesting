@@ -32,9 +32,8 @@ import static org.assertj.core.api.Assertions.assertThat;
  * transition receive an explicit response; every other payout write is terminated by the browser
  * fixture. No test can alter shared Dev financial data.</p>
  */
-@Tag("admin")
-@Tag("admin-payout-safety")
 @Tag("browser-routed")
+@Tag("feature-money-ledger")
 public class AdminPayoutSafetyUiTest extends TestBase {
 
     private static final String PAYOUTS_PATH = "/api/v1/internal/admin/payouts";

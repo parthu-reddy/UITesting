@@ -14,7 +14,9 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Tests SSE reconnection after network interruption.
  * Uses Playwright route interception to simulate SSE drop.
  */
-@Tag("resilience")
+@Tag("parked")
+@Tag("feature-order-tracking")
+@Tag("feature-shell")
 public class SSEReconnectTest extends TestBase {
 
     @Test

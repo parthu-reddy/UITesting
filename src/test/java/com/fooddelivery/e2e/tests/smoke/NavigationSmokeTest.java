@@ -17,6 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 @Tag("smoke")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@Tag("feature-shell")
 public class NavigationSmokeTest extends TestBase {
 
     @BeforeEach
@@ -78,6 +79,10 @@ public class NavigationSmokeTest extends TestBase {
     void riderTabs() {
         DeliveryDashboardPage dashboard = new DeliveryDashboardPage(riderPage);
         dashboard.waitForDashboard();
+        // No Earnings tab since the redesign: today's figure is a dashboard tile (RiderStatsBar),
+        // checked here because the Settings panel opened below covers the dashboard.
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(riderPage.getByText(
+                java.util.regex.Pattern.compile("^(Today’s earnings|Paid today)$"))).isVisible();
 
         dashboard.openHistoryTab();
         assertThat(riderPage.content()).containsAnyOf("History", "Past", "Completed");
@@ -85,10 +90,8 @@ public class NavigationSmokeTest extends TestBase {
         dashboard.openSettingsTab();
         assertThat(riderPage.content()).containsAnyOf("Settings", "Profile", "Vehicle");
 
-        dashboard.openEarningsTab();
-        assertThat(riderPage.content()).containsAnyOf("Earnings", "Today", "Total");
 
-        dashboard.openActiveTab();
+        dashboard.backToJobs();
     }
 
     @Test

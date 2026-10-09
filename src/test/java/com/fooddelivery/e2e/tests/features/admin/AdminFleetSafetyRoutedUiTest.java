@@ -28,9 +28,9 @@ import static org.assertj.core.api.Assertions.assertThat;
  * location nor a real customer address. Any assignment or cancellation write is blocked before
  * it could leave the browser.</p>
  */
-@Tag("admin")
-@Tag("admin-fleet")
 @Tag("browser-routed")
+@Tag("feature-admin-ops")
+@Tag("feature-rider-delivery")
 public class AdminFleetSafetyRoutedUiTest extends TestBase {
 
     private static final String RESTAURANTS_PATH =
@@ -136,7 +136,7 @@ public class AdminFleetSafetyRoutedUiTest extends TestBase {
     private void registerFixtureRoutes(FleetFixture fixture) {
         // Route registration occurs after login. This preserves normal deployed authentication,
         // while making only Fleet Map data and map styling deterministic.
-        adminPage.route(url -> url.contains("/api/v1/"), fixture::handleApiRequest);
+        adminPage.route(com.fooddelivery.e2e.util.FixtureShell::isFixturedApi, fixture::handleApiRequest);
         adminPage.route(url -> pathOf(url).startsWith(MAP_STYLE_PREFIX), fixture::handleMapStyleRequest);
     }
 
@@ -282,13 +282,15 @@ public class AdminFleetSafetyRoutedUiTest extends TestBase {
                 if (customerReadsFail.get()) {
                     fulfillJson(route, 503, "{\"message\":\"Fixture customer layer unavailable\"}");
                 } else {
-                    fulfillJson(route, 200, customerAddressResponse(recoveredCustomerLayer.get()));
+                    fulfillJson(route, 200, customerAddressResponse(recoveredCustomerLayer.get(),
+                            queryValue(request.url(), "cityId")));
                 }
                 return;
             }
             if ("GET".equals(method) && INTERVENTION_COUNT_PATH.equals(path)) {
                 interventionCountReads.incrementAndGet();
-                fulfillJson(route, 200, "{\"content\":[]}");
+                fulfillJson(route, 200, "{\"content\":[],\"totalElements\":0,\"totalPages\":0,\"last\":true,"
+                        + "\"size\":20,\"number\":0,\"first\":true,\"numberOfElements\":0,\"empty\":true}");
                 return;
             }
 
@@ -397,7 +399,7 @@ public class AdminFleetSafetyRoutedUiTest extends TestBase {
                     """;
         }
 
-        private static String customerAddressResponse(boolean includeRecoveredAddress) {
+        private static String customerAddressResponse(boolean includeRecoveredAddress, String cityId) {
             String recoveredAddress = includeRecoveredAddress ? """
                     ,{
                       "id": "e1000000-0000-4000-8000-000000000005",
@@ -405,12 +407,13 @@ public class AdminFleetSafetyRoutedUiTest extends TestBase {
                       "label": "Fixture Work",
                       "addressLine1": "2 Fixture Street",
                       "city": "Bengaluru",
+                      "cityId": "%s",
                       "state": "Karnataka",
                       "zipCode": "560001",
                       "latitude": 12.9890,
                       "longitude": 77.6100,
                       "isDefault": false
-                    }""" : "";
+                    }""".formatted(cityId) : "";
             int count = includeRecoveredAddress ? 2 : 1;
             return """
                     {
@@ -423,6 +426,7 @@ public class AdminFleetSafetyRoutedUiTest extends TestBase {
                           "label": "Fixture Home",
                           "addressLine1": "1 Fixture Street",
                           "city": "Bengaluru",
+                          "cityId": "%s",
                           "state": "Karnataka",
                           "zipCode": "560001",
                           "latitude": 12.9650,
@@ -440,7 +444,7 @@ public class AdminFleetSafetyRoutedUiTest extends TestBase {
                       },
                       "timestamp": "%s"
                     }
-                    """.formatted(recoveredAddress, count, count, FIXTURE_TIME);
+                    """.formatted(cityId, recoveredAddress, count, count, FIXTURE_TIME);
         }
     }
 }

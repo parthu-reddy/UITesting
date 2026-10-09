@@ -34,7 +34,7 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
  * hours ago), manifest in target/lifecycle. If its chat holds fewer than {@value #TARGET} messages the
  * test tops it up as the order's customer, through the app's own STOMP path; they are retained.
  */
-@Tag("chat")
+@Tag("feature-chat")
 public class ChatHistoryPagingTest extends TestBase {
     private static final String ORDER = System.getProperty("chat.history.order.id", "").trim();
     private static final int TARGET = 60;
@@ -104,7 +104,7 @@ public class ChatHistoryPagingTest extends TestBase {
 
         CustomerDashboardPage.openProfileSettings(customerPage);
         customerPage.getByRole(AriaRole.TAB, new Page.GetByRoleOptions().setName("History").setExact(true)).click();
-        customerPage.locator("[data-testid='customer-history-order'][data-order-id='" + ORDER + "']").click();
+        new com.fooddelivery.e2e.pages.customer.CustomerOrderHistoryPage(customerPage).pageToOrder(ORDER, 20).click();
         assertThat(new CustomerOrderTrackerPage(customerPage, ORDER).tracker()).isVisible();
         customerPage.locator("[data-testid='chat-launcher']").click();
 

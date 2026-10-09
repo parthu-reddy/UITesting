@@ -50,6 +50,28 @@ public class CustomerOrderHistoryPage {
         return page.getByTestId("customer-history-order");
     }
 
+    /**
+     * The history row of one order, clicking "Load More History" until it is rendered. History is newest first and
+     * paged, so an older owned order is not on page 0. Fails when the list ends (no button) without the order.
+     */
+    public Locator pageToOrder(String orderId, int maxPages) {
+        Locator card = page.locator("[data-testid='customer-history-order'][data-order-id='" + orderId + "']");
+        Locator loadMore = page.getByRole(AriaRole.BUTTON,
+                new Page.GetByRoleOptions().setName("Load More History").setExact(true));
+        waitForHistoryLoad();
+        for (int loaded = 1; card.count() == 0; loaded++) {
+            if (loaded > maxPages || loadMore.count() == 0) {
+                throw new AssertionError("order " + orderId + " not in " + loaded + " history page(s); rows="
+                        + getOrderCount() + ", more=" + (loadMore.count() > 0));
+            }
+            int before = getOrderCount();
+            loadMore.click();
+            page.waitForCondition(() -> getOrderCount() > before, new Page.WaitForConditionOptions().setTimeout(30000));
+            waitForHistoryLoad();
+        }
+        return card;
+    }
+
     public Locator emptyState() {
         return page.getByText("No order history found.",
                 new Page.GetByTextOptions().setExact(true));

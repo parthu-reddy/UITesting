@@ -41,7 +41,7 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
  * reviews yet; manifest in target/lifecycle. Reviews are immutable, so this runs once per order. The
  * customer's restaurant comment is written to target/lifecycle/{order}-reviews.json for REVIEW-AGG-01.
  */
-@Tag("flow") @Tag("review")
+@Tag("feature-reviews")
 public class OrderReviewsFlowTest extends TestBase {
     private static final String ORDER = System.getProperty("review.order.id", "").trim();
 
@@ -64,7 +64,7 @@ public class OrderReviewsFlowTest extends TestBase {
         new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();
         CustomerDashboardPage.openProfileSettings(customerPage);
         customerPage.getByRole(AriaRole.TAB, new Page.GetByRoleOptions().setName("History").setExact(true)).click();
-        customerPage.locator("[data-testid='customer-history-order'][data-order-id='" + ORDER + "']").click();
+        new com.fooddelivery.e2e.pages.customer.CustomerOrderHistoryPage(customerPage).pageToOrder(ORDER, 20).click();
         assertThat(new CustomerOrderTrackerPage(customerPage, ORDER).tracker()).isVisible();
         review(customerPage, new CustomerOrderTrackerPage(customerPage, ORDER).tracker(), "CUSTOMER", "Rate your order", Set.of("RESTAURANT", "DRIVER", "PRODUCT"),
                 Map.of("RESTAURANT", new Rating(4, restaurantComment), "DRIVER", new Rating(5, null)));
@@ -119,7 +119,7 @@ public class OrderReviewsFlowTest extends TestBase {
         new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();
         CustomerDashboardPage.openProfileSettings(customerPage);
         customerPage.getByRole(AriaRole.TAB, new Page.GetByRoleOptions().setName("History").setExact(true)).click();
-        customerPage.locator("[data-testid='customer-history-order'][data-order-id='" + ORDER + "']").click();
+        new com.fooddelivery.e2e.pages.customer.CustomerOrderHistoryPage(customerPage).pageToOrder(ORDER, 20).click();
         Locator tracker = new CustomerOrderTrackerPage(customerPage, ORDER).tracker();
         assertThat(tracker).isVisible();
 
@@ -286,7 +286,7 @@ public class OrderReviewsFlowTest extends TestBase {
         new SavedDeliveryAddressPage(customerPage).selectHomeFromOpenDialog();
         CustomerDashboardPage.openProfileSettings(customerPage);
         customerPage.getByRole(AriaRole.TAB, new Page.GetByRoleOptions().setName("History").setExact(true)).click();
-        customerPage.locator("[data-testid='customer-history-order'][data-order-id='" + ORDER + "']").click();
+        new com.fooddelivery.e2e.pages.customer.CustomerOrderHistoryPage(customerPage).pageToOrder(ORDER, 20).click();
         Locator tracker = new CustomerOrderTrackerPage(customerPage, ORDER).tracker();
         assertThat(tracker).isVisible();
         return tracker;

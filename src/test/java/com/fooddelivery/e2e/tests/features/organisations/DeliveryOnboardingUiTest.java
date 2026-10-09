@@ -8,7 +8,9 @@ import com.microsoft.playwright.options.AriaRole;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
-@Tag("business-platform") @Tag("bp-o5") @Tag("ui-only")
+@Tag("ui-only")
+@Tag("feature-organisations")
+@Tag("feature-partner-onboarding")
 public class DeliveryOnboardingUiTest extends TestBase {
     @Test void approvedRiderEntersDeliveryOfflineWithoutAnotherPersonLogin() {
         String phone = BusinessPlatformFixture.phone("delivery", "7999"), name = "E2E O45 Rider " + phone;

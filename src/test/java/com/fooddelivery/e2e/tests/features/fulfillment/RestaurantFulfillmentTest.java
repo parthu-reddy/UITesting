@@ -12,6 +12,7 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 
 /** Queue-only assertions; happy/rejection flows own lifecycle outcomes without duplicate orders. */
 @Tag("ui-only")
+@Tag("feature-restaurant-orders")
 public class RestaurantFulfillmentTest extends TestBase {
     @BeforeEach void loginRestaurant() {
         restaurantPage.navigate(TestConfig.APP_URL);

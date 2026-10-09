@@ -67,10 +67,6 @@ public class AdminOrderMoneyPage {
         return page.locator("text=Platform Fee").first().locator("xpath=..").locator("span").last().innerText().trim();
     }
 
-    public String getTaxes() {
-        return page.locator("text=Taxes, text=SGST").first().locator("xpath=..").locator("span").last().innerText().trim();
-    }
-
     // ── Restaurant section ───────────────────────────────────────────────
 
     public String getRestaurantNetPayout() {

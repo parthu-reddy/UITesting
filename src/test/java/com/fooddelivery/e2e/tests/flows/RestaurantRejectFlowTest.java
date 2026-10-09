@@ -8,8 +8,11 @@ import org.junit.jupiter.api.*;
 
 import com.fooddelivery.e2e.pages.common.Portal;
 /** Existing rejection flow uses the same quote/payment/readiness and owned-reason checks. */
-@Tag("flow")
+@Tag("feature-cancellation")
+@Tag("feature-money-ledger")
+@Tag("feature-restaurant-orders")
 public class RestaurantRejectFlowTest extends TestBase {
+    @Tag("slow")
     @Test @DisplayName("Restaurant rejects exact quoted order and customer sees retained cancellation")
     void restaurantCancelsOrder() throws java.io.IOException {
         String retained=System.getProperty("refund.resume.order.id", "").trim();

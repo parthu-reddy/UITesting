@@ -25,6 +25,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Tag("ui-only")
 public class RestaurantNavigationUiTest extends TestBase {
 
+    @Tag("feature-restaurant-orders")
+    @Tag("feature-shell")
     @Test
     @DisplayName("REST-NAV-01-05/07: Restaurant sections render without state bleed")
     void restaurantSectionsRender() {
@@ -87,6 +89,7 @@ public class RestaurantNavigationUiTest extends TestBase {
 
     }
 
+    @Tag("feature-reviews")
     @Test
     @DisplayName("REVIEW-AGG-01: Restaurant sees its review aggregate or the defined empty state")
     void restaurantReviewsShowPublicFeedbackAndAggregate() {

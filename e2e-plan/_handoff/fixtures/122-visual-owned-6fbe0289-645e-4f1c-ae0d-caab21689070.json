@@ -5,5 +5,6 @@
   "customerPhone": "8000000001",
   "outlet": "Brand 1 Outlet 5",
   "riderPhone": "7000000001",
-  "dataPolicy": "retain"
+  "dataPolicy": "retain",
+  "wipedAt": "2026-10-07 (owner fresh installation; no longer exists on Dev)"
 }

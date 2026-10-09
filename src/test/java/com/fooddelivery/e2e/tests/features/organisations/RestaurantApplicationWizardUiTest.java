@@ -5,8 +5,10 @@ import com.fooddelivery.e2e.pages.restaurant.RestaurantDashboardPage;
 import com.fooddelivery.e2e.util.BusinessPlatformFixture;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-@Tag("business-platform") @Tag("bp-o5") @Tag("ui-only")
+@Tag("ui-only")
+@Tag("feature-partner-onboarding")
 public class RestaurantApplicationWizardUiTest extends TestBase {
+    @Tag("slow")
     @Test void approvedApplicationOpensItsOutletWithoutAnotherPersonLogin() {
         String phone = BusinessPlatformFixture.phone("restaurant", "9999");
         String brand = BusinessPlatformFixture.approvedRestaurant(restaurantPage, adminPage, phone, testAdminPhone);

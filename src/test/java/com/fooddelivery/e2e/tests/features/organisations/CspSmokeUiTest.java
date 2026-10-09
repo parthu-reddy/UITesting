@@ -14,7 +14,8 @@ import java.nio.file.Path;
 import java.util.*;
 import static org.assertj.core.api.Assertions.assertThat;
 /** Passive console/origin/header observation while operating the deployed portal UI. */
-@Tag("business-platform") @Tag("bp-o5") @Tag("ui-only")
+@Tag("ui-only")
+@Tag("feature-shell")
 public class CspSmokeUiTest extends TestBase {
     @Test void securityHeadersAndConsoleHoldAcrossEveryCurrentPortal() throws Exception {
         Set<String> origins = new TreeSet<>(); List<String> violations = new ArrayList<>(); List<String> mainHeaders = new ArrayList<>();

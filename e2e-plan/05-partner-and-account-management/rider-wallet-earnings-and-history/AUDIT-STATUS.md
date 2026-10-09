@@ -1,5 +1,11 @@
 # Durable audit status: rider-wallet-earnings-and-history
 
+## 2026-10-07T14:15+05:30 — Today tiles and net payout verified live
+
+Deployed cfb83e2: the tiles show the real ₹21.16 / 1 order, and the true zero right after the wipe.
+The history details "Your net payout" equals the trip row (₹21.16). RIDER-EARN-03 now runs against
+a real loaded baseline. [Checkpoint127](../../_handoff/checkpoints/127-postdeploy-active-rider-verified.md).
+
 ## 2026-10-07T12:40+05:30 — False ₹0.00 today tiles and fee-as-earnings fixed locally
 
 Live evidence on the deployed 6eb4ef6: one capture's PNG shows ₹0.00 / 0 orders and its text dump

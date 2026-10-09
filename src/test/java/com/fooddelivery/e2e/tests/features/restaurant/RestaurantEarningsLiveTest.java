@@ -27,7 +27,7 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
  * Independently of those inputs: with no payout yet, Pending = Net - Clawbacks, and the statement's
  * signed lines add up to Pending.
  */
-@Tag("money")
+@Tag("feature-money-ledger")
 public class RestaurantEarningsLiveTest extends TestBase {
 
     @Test

@@ -24,7 +24,7 @@ import java.util.regex.Pattern;
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 /** UI-only recovery checks. No order is submitted and no backend state is changed. */
-@Tag("resilience")
+@Tag("feature-shell")
 public class PageReloadRecoveryTest extends TestBase {
 
     private void loginCustomerAtHome() {
@@ -49,6 +49,7 @@ public class PageReloadRecoveryTest extends TestBase {
         return cart.getFirstItemName();
     }
 
+    @Tag("feature-auth")
     @Test
     @DisplayName("RECOVERY-01: Customer session survives a hard reload")
     void sessionPersistsAcrossReload() {
@@ -59,9 +60,10 @@ public class PageReloadRecoveryTest extends TestBase {
 
         assertThat(deliverToButton()).containsText("Home:");
         assertThat(customerPage.getByRole(AriaRole.BUTTON,
-                new Page.GetByRoleOptions().setName("Order Food").setExact(true))).hasCount(0);
+                new Page.GetByRoleOptions().setName("Send One-Time OTP").setExact(true))).hasCount(0);
     }
 
+    @Tag("feature-addresses")
     @Test
     @DisplayName("RECOVERY-03: Selected Home address survives a hard reload")
     void selectedAddressPersistsAcrossReload() {
@@ -74,6 +76,7 @@ public class PageReloadRecoveryTest extends TestBase {
         assertThat(customerPage.getByRole(AriaRole.DIALOG)).hasCount(0);
     }
 
+    @Tag("feature-cart-checkout")
     @Test
     @DisplayName("RECOVERY-02: Cart item survives a hard reload")
     void cartPersistsAcrossReload() {
@@ -102,6 +105,7 @@ public class PageReloadRecoveryTest extends TestBase {
                 new Page.GetByRoleOptions().setName("Your cart")).locator("output")).hasText("2");
     }
 
+    @Tag("feature-settings-profile")
     @Test
     @DisplayName("RECOVERY-01: Customer settings route survives a hard reload")
     void settingsRoutePersistsAcrossReload() {
@@ -119,6 +123,8 @@ public class PageReloadRecoveryTest extends TestBase {
         assertThat(customerPage.locator("input[type=tel]")).hasValue(testCustomerPhone);
     }
 
+    @Tag("feature-addresses")
+    @Tag("feature-auth")
     @Test
     @DisplayName("RECOVERY-16: Second customer tab shares session and Home selection")
     void secondTabSharesCustomerSession() {
@@ -132,12 +138,13 @@ public class PageReloadRecoveryTest extends TestBase {
                     new Page.GetByRoleOptions().setName(Pattern.compile("Deliver to")));
             assertThat(secondDeliverTo.locator("span").last()).hasText(selectedAddress);
             assertThat(secondTab.getByRole(AriaRole.BUTTON,
-                    new Page.GetByRoleOptions().setName("Order Food").setExact(true))).hasCount(0);
+                    new Page.GetByRoleOptions().setName("Send One-Time OTP").setExact(true))).hasCount(0);
         } finally {
             secondTab.close();
         }
     }
 
+    @Tag("feature-cart-checkout")
     @Test
     @DisplayName("RECOVERY-12/13: Browser Back closes payment and preserves the exact cart")
     void browserBackFromPaymentPreservesCart() {
@@ -158,6 +165,7 @@ public class PageReloadRecoveryTest extends TestBase {
         }
     }
 
+    @Tag("feature-catalog")
     @Test
     @DisplayName("RECOVERY-15: Browser Back from a restaurant menu restores the restaurant list")
     void browserBackFromRestaurantMenuRestoresHome() {
@@ -171,6 +179,7 @@ public class PageReloadRecoveryTest extends TestBase {
         assertThat(customerPage.locator("button:has(h5)").first()).isVisible();
     }
 
+    @Tag("feature-cart-checkout")
     @Test
     @DisplayName("RECOVERY-16: Cart created in one tab is available in a second tab after reload")
     void cartSynchronizesAcrossCustomerTabs() {

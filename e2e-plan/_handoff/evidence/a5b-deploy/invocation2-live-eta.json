@@ -1,0 +1,15 @@
+{
+  "observations": [
+    {
+      "orderId": "f3b3d38b-6e4f-4ff7-a26f-1264e775c267",
+      "stage": "ASSIGNED",
+      "source": "live",
+      "etaMs": 1791374556710,
+      "browserNowMs": 1791373248978,
+      "etaMinusNowSeconds": 1307,
+      "riderLat": 12.9808,
+      "riderLng": 77.6467,
+      "liveChipVisible": true
+    }
+  ]
+}

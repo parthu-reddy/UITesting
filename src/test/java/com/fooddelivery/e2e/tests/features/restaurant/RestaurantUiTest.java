@@ -14,13 +14,17 @@ import com.microsoft.playwright.options.AriaRole;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Tag("ui-only")
+@Tag("feature-restaurant-orders")
+@Tag("feature-shell")
 public class RestaurantUiTest extends TestBase {
 
     @Test
     @DisplayName("REST-01: Verify Restaurant Dashboard loads and basic elements are visible")
     void verifyRestaurantDashboardUI() {
         restaurantPage.navigate(TestConfig.APP_URL);
-        if (testRestaurantPhone.matches("900000001[1-4]")) {
+        // 9000000011..13 have no approved brand: they get the application page, not this dashboard
+        // (PortalLauncherUiTest, UnapprovedOutletHiddenTest). 14 is approved with an inactive outlet.
+        if (testRestaurantPhone.equals("9000000014")) {
             var brands = restaurantPage.waitForResponse(
                     r -> com.fooddelivery.e2e.util.UrlPaths.path(r.url()).equals("/api/v1/brands")
                             && r.request().method().equals("GET"),
@@ -28,7 +32,7 @@ public class RestaurantUiTest extends TestBase {
             assertThat(brands.status()).isEqualTo(200);
             assertThat(restaurantPage.evaluate("body => JSON.parse(body).success", brands.text())).isEqualTo(true);
             assertThat(((Number) restaurantPage.evaluate("body => JSON.parse(body).data.length", brands.text())).intValue())
-                    .isEqualTo(testRestaurantPhone.endsWith("11") ? 0 : 1);
+                    .isEqualTo(1);
         } else {
             new LoginPage(restaurantPage).login(testRestaurantPhone).openPortal(Portal.RESTAURANT);
         }
@@ -40,30 +44,6 @@ public class RestaurantUiTest extends TestBase {
                 restaurantPage.getByRole(AriaRole.HEADING,
                         new Page.GetByRoleOptions().setName("Orders").setExact(true))).isVisible();
         switch (testRestaurantPhone) {
-            case "9000000011" -> {
-                com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(
-                        restaurantPage.getByRole(AriaRole.HEADING,
-                                new Page.GetByRoleOptions().setName("No Outlet Registered").setExact(true))).isVisible();
-                dashboard.openSettingsTab();
-                com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(
-                        restaurantPage.getByRole(AriaRole.TAB,
-                                new Page.GetByRoleOptions().setName("Menu Catalog Editor").setExact(true))).isDisabled();
-                com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(
-                        restaurantPage.getByRole(AriaRole.BUTTON,
-                                new Page.GetByRoleOptions().setName("Register New Brand").setExact(true))).isVisible();
-            }
-            case "9000000012", "9000000013" -> {
-                String expected = testRestaurantPhone.endsWith("12") ? "PENDING" : "REJECTED";
-                dashboard.openSettingsTab();
-                restaurantPage.getByRole(AriaRole.TAB,
-                        new Page.GetByRoleOptions().setName("Outlet Management").setExact(true)).click();
-                com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(
-                        restaurantPage.getByText("GSTIN: " + expected,
-                                new Page.GetByTextOptions().setExact(true))).isVisible();
-                com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(
-                        restaurantPage.getByText("BANK: " + expected,
-                                new Page.GetByTextOptions().setExact(true))).isVisible();
-            }
             case "9000000014" -> {
                 restaurantPage.getByRole(AriaRole.COMBOBOX,
                         new Page.GetByRoleOptions().setName("Outlet").setExact(true)).click();

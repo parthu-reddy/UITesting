@@ -208,10 +208,6 @@ public class CustomerMenuViewPage {
         page.waitForTimeout(500);
     }
 
-    public boolean isCartPopupVisible() {
-        return page.locator("text=Items Added, text=View Cart").first().isVisible();
-    }
-
     public void clickViewCart() {
         page.locator("text=View Cart").click();
         page.waitForTimeout(1000);

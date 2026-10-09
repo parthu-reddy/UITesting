@@ -115,6 +115,11 @@ public class CustomerOrderTrackerPage {
 
     /** Declining the delay asks first ("Cancel instead of waiting?"), like any other cancel. */
     public void rejectDelay() {
+        // The delay prompt's "Cancel order" answers the delay (POST .../delay-approval). While the screen still shows
+        // CREATED/PENDING_ACCEPTANCE the same name belongs to the plain cancel, so wait for the prompt first
+        // (2026-10-08: without the 400 ms slow-mo the plain cancel was clicked; the order ended CANCELLED).
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(tracker())
+                .hasAttribute("data-status", "AWAITING_DELAY_APPROVAL");
         Locator reject = tracker().getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
                 new Locator.GetByRoleOptions().setName("Cancel order").setExact(true));
         reject.waitFor(new Locator.WaitForOptions()

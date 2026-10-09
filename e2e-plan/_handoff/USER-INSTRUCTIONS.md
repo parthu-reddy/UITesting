@@ -1,5 +1,51 @@
 # Primary user instructions and accepted decisions
 
+## 2026-10-08T17:50+05:30 — Owner: feature tags; run only the tests a change needs
+
+"if there are changes in backend, try to run the specific tests that are needed to run. Why don't you add tags to
+for tests based on the features they cover so that when we run tests we can only run tests for the features we made
+changes for?" Applied: every E2E test gets a feature tag; a mapping from feature to the source paths it lives in
+(backend services + UI folders) lets a change select only its features' tests. Plan:
+RandomDocuments/PendingWork_2026-10-07/P02_E2EInventory/Phase7_FeatureTags/.
+
+## 2026-10-08T17:40+05:30 — Owner: no full sweep; run only tests I add or change, never slow ones
+
+Owner asked to "complete all of them based on priority" (checkpoint135 list), then, asked about a 3+ h window:
+"Do not run slow running tests for now, only run tests that you add. Why do you need to run all tests when there are
+no backend changes?" Applied: the full re-confirmation sweep before P0-2 close is DROPPED (supersedes the 15:40 "a full
+sweep still precedes P0-2 close"); live runs only for tests added or changed in this session, and never `slow`-tagged
+ones. Not run under this rule: CustomerOrderPlacementTest#tippedOrderMatchesMockPaidTotal (auto-cancel, unchanged now),
+ChatSupportWindowClosedTest (unchanged), DelayApproval#customerRejectsRestaurantDelay and
+HappyDeliveryFlow#overlappingOrdersRemainIndependent (slow), F13's RiderAvailabilityUiTest/REST-01 (unchanged).
+
+## 2026-10-08T15:40+05:30 — Owner: accelerate P0-2 with parallel lanes
+
+Owner approved (direct, lane 1 session): two live lanes (A = C4 on …0001 accounts + admin 1000000001; B = C1 → C2, then
+C3 after C4, on fresh people + admin 1000000002 from a separate UITesting copy); deploy-scoped re-checks instead of
+re-running the 80 remaining admin tests (77f29d7 changed only useChatSession; a full sweep still precedes P0-2 close);
+C4 step 15 runs last without an intentional wait; lane 1 does the offline fixes in the gaps; no deploys for ~1 h;
+Mac kept awake. Option 3 (reusing admin browser state) NOT approved: the no-browser-state-injection rule stands.
+
+## 2026-10-08T12:35+05:30 — P0-2 lane 3 decisions confirmed by the owner in lane 1
+
+Lane 3 (Phase4_OwnerApprovedRuns/LANE1-SUMMARY.md) relayed: owner 07:05 "Accept C0 reclassification; delete ReviewFlowTest
+and RiderFulfillmentTest", then "take best decisions and complete the work", under which lane 3 decided: C1-C4 go-ahead;
+delete the O1/O2 GatewayApi gates and `run_organisation_o1/o2_e2e.py`; delete ChatRefundMapTest + MapTrackingPage; direct
+API calls only for setup/refusal probes/gates (journey E2E stays UI-only); one dummy refund ticket on D2 (created, rejected,
+no refund). The owner then confirmed directly in the lane 1 session (AskUserQuestion, 12:33 IST):
+**apply all 7 lane-3 diffs; C1-C4 approved; start now.** Conditions: one batch at a time in BATCHES.md order, watched;
+compare created records to BATCHES.md; stop on any unlisted write. C0 is impact A (ChatWindowRoutedUiTest's POST
+/chat/sessions is fixture-served, ChatWindowRoutedUiTest.java:139-150; checkpoint132 step 4 was wrong).
+
+## 2026-10-07T19:00+05:30 — P0-2 full inventory; pause E2E during an owner deploy
+
+"continue with P0-2" (the full E2E inventory on Dev). Mid-work the owner said: "I also started building
+and deploying customer application, avoid running E2E tests till I mention it's deployed", then
+"customerapplication deployed" (DEPLOY_LOG 2026-10-07T13:36:25Z customer-service 4cf2d7c = pin = HEAD).
+Standing rule from this: **while the owner reports a deploy in progress, run no E2E against Dev**; static
+work continues. Runs that create business records (P0-2 impact class C) wait for an explicit owner go-ahead.
+Plan and gates: `RandomDocuments/PendingWork_2026-10-07/P02_E2EInventory/README.md`.
+
 ## 2026-10-07T12:05+05:30 — Resume after usage limit; fix mistakes
 
 The owner asked this session to check the previous agent's progress after its usage-limit stop and

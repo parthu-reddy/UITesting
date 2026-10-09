@@ -34,7 +34,8 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
  * <p>{@code -Dretry.order.id}: an owned delivered CARD order with no tickets or refunds, inside its
  * two-hour chat window, manifest in target/lifecycle. No order is created.
  */
-@Tag("flow") @Tag("support-refund")
+@Tag("feature-money-ledger")
+@Tag("feature-refunds-support")
 public class AdminRefundRetryFlowTest extends TestBase {
     private static final String ORDER = System.getProperty("retry.order.id", "").trim();
     /** The amount the Dev mock gateways decline once (MockRefundFailureSeam.FAIL_FIRST_ATTEMPT_RUPEES). */

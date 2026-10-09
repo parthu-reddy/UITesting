@@ -14,7 +14,7 @@ import java.util.regex.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /** Live browsing and explicit routed UI contracts; no order is created. */
-@Tag("catalog-ui")
+@Tag("feature-catalog")
 public class RestaurantDiscoveryUiTest extends TestBase {
     private Response nearby;
     private Locator cards() { return customerPage.locator("button:has(h5)"); }
@@ -134,7 +134,7 @@ public class RestaurantDiscoveryUiTest extends TestBase {
     @Tag("routed-ui")
     void emptyNearbyAreaOffersAnAddressChange() {
         customerPage.route("**/api/v1/restaurants/nearby?*", route -> route.fulfill(new Route.FulfillOptions()
-                .setStatus(200).setContentType("application/json").setBody("{\"success\":true,\"data\":[]}")));
+                .setStatus(200).setContentType("application/json").setBody("{\"success\":true,\"message\":\"Successfully fetched nearby restaurants\",\"data\":[],\"timestamp\":\"2026-09-29T10:00:00Z\"}")));
         signInHome();
         com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(customerPage.getByText("Out of Range", new Page.GetByTextOptions().setExact(true))).isVisible();
         com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(cards()).hasCount(0);

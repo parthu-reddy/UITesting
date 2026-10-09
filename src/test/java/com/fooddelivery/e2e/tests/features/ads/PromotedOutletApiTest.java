@@ -23,7 +23,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * owner's own outlet list, not hard-coded. Real Dev sign-in through the UI; calls go through the gateway
  * from the signed-in page. The created DRAFT campaign is retained (manifest under target/).
  */
-@Tag("business-platform") @Tag("bp-a2")
+@Tag("feature-ads")
 public class PromotedOutletApiTest extends TestBase {
 
     @Test void campaignPromotesOneOfItsOwnOutlets() throws Exception {

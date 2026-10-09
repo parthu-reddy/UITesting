@@ -1,0 +1,44 @@
+{
+  "recordedAt": "2026-10-07T14:45+05:30",
+  "proofType": "deployed served bundle + read-only rider UI observation",
+  "release": {
+    "uiCommit": "8c5b15e481df70022e6a504ddf8a68eae4a536ad",
+    "files": 5,
+    "ciRun": 37597411296,
+    "deployLog": "2026-10-07T09:05:42Z food-delivery-app-ui 8c5b15e",
+    "pinMatchesOrigin": true,
+    "servedChunk": "DeliveryDashboard-5WarXXPe.js contains 'Connecting to dispatch' (and 'Connection lost. Reconnecting' for real drops)"
+  },
+  "probe": "throwaway ZzBannerProbeTest (deleted after use): MutationObserver on [role=alert] dispatch text from first paint; rider online via SeededRiderDuty, restored Offline after",
+  "offlineRun": {
+    "duty": "Offline",
+    "result": "no banner (not evidence; banner requires on-duty)",
+    "rawLog": "/private/tmp/food-pending-item3-banner-probe.log",
+    "rawLogSha256": "57408e32f0d8c9023045b4d2062dc837dfde26283e3d4a970f20e84a20987e1d"
+  },
+  "onlineRun": {
+    "tests": 1,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "elapsedSeconds": 40.21,
+    "reloads": [
+      {
+        "text": "Connecting to dispatch\u2026",
+        "atMs": 1051
+      },
+      {
+        "text": "Connecting to dispatch\u2026",
+        "atMs": 755
+      },
+      {
+        "text": "Connecting to dispatch\u2026",
+        "atMs": 899
+      }
+    ],
+    "connectionLostShown": false,
+    "riderRestoredOffline": true,
+    "rawLog": "/private/tmp/food-pending-item3-banner-probe2.log",
+    "rawLogSha256": "ac8f0ec09c82471467a97dfa213d956a9a11267b34e7067bbee4f948776ad439"
+  }
+}

@@ -21,9 +21,9 @@ import static org.assertj.core.api.Assertions.assertThat;
  * those controls may be observed inside page objects, but this class never reads application APIs
  * or browser storage to manufacture assertions.
  */
-@Tag("e2e-registration")
 @Tag("ui-only")
 @EnabledIfSystemProperty(named = "registration.enabled", matches = "true")
+@Tag("feature-auth")
 public class RegistrationUiTest extends TestBase {
 
     @Test
@@ -33,6 +33,7 @@ public class RegistrationUiTest extends TestBase {
                 disposablePhone("customer", "8999"), "Test Registration Home");
     }
 
+    @Tag("feature-partner-onboarding")
     @Test
     @DisplayName("REG-02: Rider Registration Flow")
     void riderRegistrationFlow() {
@@ -54,6 +55,7 @@ public class RegistrationUiTest extends TestBase {
                 new Page.GetByRoleOptions().setName("Offline").setExact(true))).isHidden();
     }
 
+    @Tag("feature-partner-onboarding")
     @Test
     @DisplayName("REG-03: Restaurant Registration Flow")
     void restaurantRegistrationFlow() {

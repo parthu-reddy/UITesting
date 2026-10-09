@@ -1,0 +1,34 @@
+{
+  "recordedAt": "2026-10-07T14:15+05:30",
+  "test": "HappyDeliveryFlowTest#completeOrderLifecycle [retained delivered checks f01c1e92]",
+  "actors": {
+    "customer": "8000000001",
+    "restaurant": "9000000001",
+    "rider": "7000000001"
+  },
+  "tests": 1,
+  "passed": 1,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "elapsedSeconds": 30.04,
+  "newOrderCreated": false,
+  "refundSubmitted": false,
+  "verified": {
+    "payment": "CARD/SUCCESS",
+    "totalAmount": 43.02,
+    "deliveryFee": 23.76,
+    "driverGrossPayout": 25.8,
+    "driverTaxes": 4.64,
+    "driverNetPayout": 21.16,
+    "restaurantPayout": 6.54,
+    "ledgerLines": 18,
+    "ledgerDebit": 92.72,
+    "ledgerCredit": 92.72,
+    "refunds": 0,
+    "tripDetailsNetPayoutEqualsRow": true,
+    "quote": "passed (quote only)"
+  },
+  "rawLog": "/private/tmp/food-pending-item3-retained-money-f01c1e92.log",
+  "rawLogSha256": "9cc34bbac1121fc38c438d1529b5d8460a8f4a4e03c6967ef657cabead4f1638"
+}

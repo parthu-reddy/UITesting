@@ -20,7 +20,7 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 
 /** Existing-address and unsaved-draft coverage; never creates shared address data. */
 @Tag("ui-only")
-@Tag("customer-address")
+@Tag("feature-addresses")
 public class CustomerAddressTest extends TestBase {
 
     @BeforeEach

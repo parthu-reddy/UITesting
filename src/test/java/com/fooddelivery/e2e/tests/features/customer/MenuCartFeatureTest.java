@@ -14,6 +14,8 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Tag("ui-only")
+@Tag("feature-cart-checkout")
+@Tag("feature-catalog")
 public class MenuCartFeatureTest extends TestBase {
 
     @Test

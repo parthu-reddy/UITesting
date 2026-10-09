@@ -35,7 +35,8 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
  * a pass. Read-only: nothing is clicked except navigation. The open side (button shown and opening the quote form inside
  * the window) is CHAT-REFUND-01, exercised right after delivery by HappyDeliveryFlowTest.
  */
-@Tag("chat") @Tag("support-refund")
+@Tag("feature-chat")
+@Tag("feature-refunds-support")
 public class ChatSupportWindowClosedTest extends TestBase {
     private static final List<String> ORDERS = Arrays.stream(System.getProperty("support.closed.order.ids", "").split(","))
             .map(String::trim).filter(id -> !id.isEmpty()).toList();
@@ -60,7 +61,7 @@ public class ChatSupportWindowClosedTest extends TestBase {
 
         CustomerDashboardPage.openProfileSettings(customerPage);
         customerPage.getByRole(AriaRole.TAB, new Page.GetByRoleOptions().setName("History").setExact(true)).click();
-        customerPage.locator("[data-testid='customer-history-order'][data-order-id='" + id + "']").click();
+        new com.fooddelivery.e2e.pages.customer.CustomerOrderHistoryPage(customerPage).pageToOrder(id, 20).click();
         assertThat(new CustomerOrderTrackerPage(customerPage, id).tracker()).isVisible();
 
         // The invoice button renders in the same receipt as the support button, so once it is

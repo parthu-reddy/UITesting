@@ -40,10 +40,6 @@ public class DispatchPingPage {
                         .setTimeout(120000));
     }
 
-    public boolean hasPing() {
-        return popup().isVisible();
-    }
-
     /**
      * Accepts the dispatch by clicking "Accept Order".
      */

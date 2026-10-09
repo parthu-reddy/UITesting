@@ -19,13 +19,12 @@ import java.util.regex.Pattern;
 public final class SeededRiderDuty implements AutoCloseable {
 
     private static final Pattern CONNECTION_OR_LOCATION_WARNING = Pattern.compile(
-            "Connection lost|Waiting for your location|your location stopped reaching us");
+            "Connection lost|Connecting to dispatch|Waiting for your location|your location stopped reaching us");
 
     private final Page page;
     private final DeliveryOnlineTogglePage toggle;
     private final RiderDutyObservation observation = new RiderDutyObservation();
     private boolean restoreOffline;
-    private boolean preserveOnlineForActiveDelivery;
 
     private SeededRiderDuty(Page page, String phone) {
         this.page = page;
@@ -86,14 +85,6 @@ public final class SeededRiderDuty implements AutoCloseable {
         } catch (java.io.IOException failure) { throw new AssertionError("Cannot retain rider UI preflight evidence", failure); }
     }
 
-    void preserveOnlineForActiveDelivery() {
-        preserveOnlineForActiveDelivery = true;
-    }
-
-    void markDeliveryCompleted() {
-        preserveOnlineForActiveDelivery = false;
-    }
-
     /**
      * Rider duty is the sole automatic UI reset requested for this E2E harness. It only clicks
      * the rendered duty control; a page outside the delivery portal or an active job is left alone.
@@ -135,7 +126,7 @@ public final class SeededRiderDuty implements AutoCloseable {
 
     @Override
     public void close() {
-        if (!restoreOffline || preserveOnlineForActiveDelivery || "ON_DELIVERY".equals(observation.status()) || hasActiveDeliveryOrDispatch()) return;
+        if (!restoreOffline || "ON_DELIVERY".equals(observation.status()) || hasActiveDeliveryOrDispatch()) return;
         if (!toggle.isOnline()) return;
 
         goOfflineWithServerConfirmation(page, toggle);

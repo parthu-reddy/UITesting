@@ -23,7 +23,8 @@ import static org.assertj.core.api.Assertions.assertThat;
  * through the UI; calls go through the gateway from the signed-in page. The disposable member and
  * the manifest are retained; nothing is cleaned up.
  */
-@Tag("business-platform") @Tag("bp-w1")
+@Tag("feature-organisations")
+@Tag("feature-wallet")
 public class BusinessWalletAccessApiTest extends TestBase {
 
     @Test void businessWalletAccess() throws Exception {

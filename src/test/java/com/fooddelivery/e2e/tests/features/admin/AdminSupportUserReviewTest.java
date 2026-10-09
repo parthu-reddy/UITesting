@@ -14,8 +14,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /** Strict, read-only checks for admin support, user, review and category screens. */
-@Tag("admin")
-@Tag("admin-support-users")
 public class AdminSupportUserReviewTest extends TestBase {
 
     private static final String UNKNOWN_UUID = "00000000-0000-0000-0000-000000000000";
@@ -30,6 +28,7 @@ public class AdminSupportUserReviewTest extends TestBase {
 
     // ── SUPPORT TICKETS ──────────────────────────────────────────────────
 
+    @Tag("feature-refunds-support")
     @Test
     @DisplayName("SUPPORT-ADV-01..03: Support queue loads and exposes a count or explicit empty state")
     void supportTicketsVisibleAndCounted() {
@@ -41,6 +40,7 @@ public class AdminSupportUserReviewTest extends TestBase {
         assertSupportCountMatchesHeader(support, "OPEN");
     }
 
+    @Tag("feature-refunds-support")
     @Test
     @DisplayName("SUPPORT-ADV-07: Support pagination advances and returns, or is absent for one page")
     void supportPagination() {
@@ -80,6 +80,7 @@ public class AdminSupportUserReviewTest extends TestBase {
 
     // ── REFUND QUEUE ─────────────────────────────────────────────────────
 
+    @Tag("feature-refunds-support")
     @Test
     @DisplayName("REFUND-ADV-01/02: Refund queue shows pending rows or its explicit empty state")
     void refundQueueVisibleAndCounted() {
@@ -97,6 +98,7 @@ public class AdminSupportUserReviewTest extends TestBase {
 
     // ── USER MANAGEMENT ──────────────────────────────────────────────────
 
+    @Tag("feature-admin-ops")
     @Test
     @DisplayName("ADMIN-USER-11/13: Search a seeded phone and verify its exact detail record")
     void searchAndOpenSeededUser() {
@@ -120,6 +122,7 @@ public class AdminSupportUserReviewTest extends TestBase {
         }
     }
 
+    @Tag("feature-admin-ops")
     @Test
     @DisplayName("ADMIN-USER-15: Role filter returns only users with the selected role")
     void filterByRole() {
@@ -141,6 +144,7 @@ public class AdminSupportUserReviewTest extends TestBase {
         }
     }
 
+    @Tag("feature-admin-ops")
     @Test
     @DisplayName("ADMIN-USER-18: User pagination changes page and returns, or disables both controls")
     void userPagination() {
@@ -173,6 +177,7 @@ public class AdminSupportUserReviewTest extends TestBase {
         assertThat(users.getPageInfo()).startsWith("Page 1 of ");
     }
 
+    @Tag("feature-admin-ops")
     @Test
     @DisplayName("ADMIN-USER: Status controls are state-aware, and an available suspension confirmation can be canceled")
     void statusControlIsStateAwareAndSuspensionConfirmationCanBeCanceled() {
@@ -217,6 +222,7 @@ public class AdminSupportUserReviewTest extends TestBase {
         assertThat(statusUpdates.get()).isZero();
     }
 
+    @Tag("feature-admin-ops")
     @Test
     @DisplayName("ADMIN-USER: Available role changes require confirmation and cancellation sends no write")
     void roleChangeConfirmationCanBeCanceled() {
@@ -269,6 +275,7 @@ public class AdminSupportUserReviewTest extends TestBase {
 
     // ── REVIEW MODERATION ───────────────────────────────────────────────
 
+    @Tag("feature-reviews")
     @Test
     @DisplayName("ADMIN-REVIEW-07..09: Entity and author lookup modes show the right fields")
     void reviewLookupModes() {
@@ -294,6 +301,7 @@ public class AdminSupportUserReviewTest extends TestBase {
         assertThat(reviews.isSearchDisabled()).isTrue();
     }
 
+    @Tag("feature-reviews")
     @Test
     @DisplayName("ADMIN-REVIEW-10: An unknown entity returns the explicit no reviews state")
     void searchReviewsByUnknownEntity() {
@@ -310,6 +318,7 @@ public class AdminSupportUserReviewTest extends TestBase {
         assertThat(reviews.getReviewCount()).isZero();
     }
 
+    @Tag("feature-reviews")
     @Test
     @DisplayName("ADMIN-REVIEW-08/09/11/12: Seeded author search shows readable stars and immutable records")
     void searchSeededAuthorAndInspectReviews() {
@@ -339,6 +348,7 @@ public class AdminSupportUserReviewTest extends TestBase {
 
     // ── CATEGORIES ───────────────────────────────────────────────────────
 
+    @Tag("feature-catalog")
     @Test
     @DisplayName("ADMIN-CAT-09/10: Categories renders saved cards or an explicit empty state")
     void categoriesEditorAndCount() {
@@ -354,6 +364,7 @@ public class AdminSupportUserReviewTest extends TestBase {
         }
     }
 
+    @Tag("feature-catalog")
     @Test
     @DisplayName("ADMIN-CAT: Invalid category name is rejected without a write")
     void invalidCategoryNameDoesNotCreateCategory() {
@@ -374,6 +385,7 @@ public class AdminSupportUserReviewTest extends TestBase {
         assertThat(categoryWrites.get()).isZero();
     }
 
+    @Tag("feature-catalog")
     @Test
     @DisplayName("ADMIN-CAT: The live category list exposes its empty state or an edit form without saving")
     void categoryListEmptyStateOrEditFormIsReadOnly() {

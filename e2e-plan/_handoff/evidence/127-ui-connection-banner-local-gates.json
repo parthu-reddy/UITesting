@@ -1,0 +1,28 @@
+{
+  "recordedAt": "2026-10-07T14:15+05:30",
+  "proofType": "local; NOT deployed",
+  "baseUiRelease": "cfb83e2 (deployed)",
+  "defect": "ConnectionBanner showed 'Connection lost. Reconnecting to dispatch\u2026' whenever on duty and !wsConnected, including every page load's first auth probe + WebSocket handshake",
+  "fix": "wsLost true only when a socket that had opened closes; banner says 'Connecting to dispatch\u2026' before the first connection",
+  "changedFiles": [
+    "FoodDeliveryAppUI/src/features/delivery-tasks/model/useDeliveryOrders.ts",
+    "FoodDeliveryAppUI/src/features/delivery-tasks/model/useDeliveryOrders.connection.test.ts (new)",
+    "FoodDeliveryAppUI/src/features/delivery-tasks/components/RiderNotices.tsx",
+    "FoodDeliveryAppUI/src/features/delivery-tasks/components/RiderNotices.test.tsx (new)",
+    "FoodDeliveryAppUI/src/pages/delivery/DeliveryDashboard.tsx"
+  ],
+  "testOnlyChange": "UITesting SeededRiderDuty preflight also rejects 'Connecting to dispatch'",
+  "redFirst": "new tests on committed cfb83e2 sources: 4 failed / 1 passed (banner said 'Connection lost' before any connection); restored: 5/5",
+  "gates": {
+    "vitest": {
+      "files": 179,
+      "tests": 1065,
+      "failed": 0
+    },
+    "typecheck": "pass",
+    "lint": "pass",
+    "build": "pass",
+    "phase4": "12/12",
+    "locatorAudit": "PASS"
+  }
+}

@@ -21,9 +21,12 @@ import java.util.regex.Pattern;
 import static org.assertj.core.api.Assertions.assertThat;
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
-/** Exact retained Dev handover flows. Each method proves its scenario then completes that order. */
-@Tag("pickup-delivery")
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+/**
+ * Exact retained Dev handover flow. One owned order carries every pickup/drop-off check in the order a
+ * rider meets them; each check used to place and deliver its own order (seven per run, P0-2 lane 3).
+ */
+@Tag("feature-restaurant-orders")
+@Tag("feature-rider-delivery")
 public class PickupDeliveryOtpTest extends TestBase {
     private SeededRiderDuty duty;
     private LiveOrderFixture.Created order;
@@ -45,11 +48,17 @@ public class PickupDeliveryOtpTest extends TestBase {
             assertThat(retained.get("riderPhone")).isEqualTo(testRiderPhone);
             order=new LiveOrderFixture.Created(resumeId,(String)retained.get("outlet"));
         }
+        // response.request().postData() was null for these POSTs on 2026-10-08 (cause not established); an
+        // intercepted request exposes its body. The route only records it and resumes it unchanged to Dev.
+        riderPage.route("**/orders/*/status", route -> {
+            if ("POST".equals(route.request().method())) sentStatusBodies.put(route.request().url(), route.request().postData());
+            route.resume();
+        });
         riderPage.onResponse(response -> {
             String path = com.fooddelivery.e2e.util.UrlPaths.path(response.url());
             if (path == null) return;
-            if (path.endsWith("/status") && response.request().method().equals("POST") && response.request().postData()!=null) {
-                String body=response.request().postData();
+            if (path.endsWith("/status") && response.request().method().equals("POST") && sentStatusBodies.get(response.url())!=null) {
+                String body=sentStatusBodies.get(response.url());
                 if (body.contains("\"OUT_FOR_DELIVERY\"")) pickupPosts++;
                 if (body.contains("\"DELIVERED\"")) deliveryPosts++;
             }
@@ -130,9 +139,12 @@ public class PickupDeliveryOtpTest extends TestBase {
         assertThat(riderPage.getByText("DELIVERY ADDRESS",new Page.GetByTextOptions().setExact(true)).locator("..").locator("p")).not().isEmpty();
     }
 
+    /** Last body sent per status URL, captured by the pass-through route (one status POST in flight at a time). */
+    private final java.util.Map<String, String> sentStatusBodies = new java.util.concurrent.ConcurrentHashMap<>();
+
     private Response expectStatus(String status,Runnable action,boolean success) {
         Response response=riderPage.waitForResponse(r->r.request().method().equals("POST") && r.url().endsWith("/orders/"+order.id()+"/status")
-                && r.request().postData()!=null && r.request().postData().contains("\""+status+"\""),new Page.WaitForResponseOptions().setTimeout(20000),action);
+                && sentStatusBodies.get(r.url())!=null && sentStatusBodies.get(r.url()).contains("\""+status+"\""),new Page.WaitForResponseOptions().setTimeout(20000),action);
         confirmations.add(Map.of("orderId",order.id(),"status",status,"httpStatus",response.status(),"expectedSuccess",success));
         if(success) assertThat(response.ok()).as("%s exact order status confirmation HTTP%s",status,response.status()).isTrue();
         else assertThat(response.status()).as("Incorrect %s OTP must be rejected by the server",status).isEqualTo(400);
@@ -154,12 +166,10 @@ public class PickupDeliveryOtpTest extends TestBase {
         String code=tracker.getByTestId("delivery-code").innerText().trim();assertThat(code).matches("[0-9]{6}");return code;
     }
 
-    private void complete(DeliveryActiveJobPage job) { complete(job, false); }
-
     private void complete(DeliveryActiveJobPage job, boolean offlineAfter) {
         if (offlineAfter) riderPage.getByLabel("Go offline after delivery", new Page.GetByLabelOptions().setExact(true)).check();
         job.enterDeliveryOtp(deliveryOtp());Response delivered=expectStatus("DELIVERED",job::swipeToConfirmDelivery,true);
-        Map<?,?> command=(Map<?,?>)riderPage.evaluate("text=>JSON.parse(text)",delivered.request().postData());
+        Map<?,?> command=(Map<?,?>)riderPage.evaluate("text=>JSON.parse(text)",sentStatusBodies.get(delivered.url()));
         assertThat(command.get("goOfflineAfter")).isEqualTo(offlineAfter);
         assertThat(riderPage.getByRole(AriaRole.HEADING,new Page.GetByRoleOptions().setName("Active Contract").setExact(true))).isHidden();
         assertThat(riderPage.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName(offlineAfter ? "Offline" : "Online Duty").setExact(true))).isVisible();
@@ -176,39 +186,12 @@ public class PickupDeliveryOtpTest extends TestBase {
 
     private static String wrongCode(String actual) {return "000000".equals(actual)?"000001":"000000";}
 
-    @Test @Order(1) @DisplayName("PICKUP-07: Numeric input, short-code validation and restored pickup phase")
-    void pickupOtpInputAppears() throws java.io.IOException {
+    @Tag("slow")
+    @Test
+    @DisplayName("PICKUP-03/07/08/09/10/11, DELIVERY-01..07/09/10/12: one exact order through every handover check")
+    void everyHandoverCheckOnOneOrder() throws java.io.IOException {
         DeliveryActiveJobPage job=prepareAndArrive();
-        riderPage.reload();assertOwnedJob();assertThat(riderPage.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("Mark Arrived at Restaurant").setExact(true))).isHidden();
-        job.enterPickupOtp("12");int before=pickupPosts;job.swipeToConfirmPickup();
-        assertThat(riderPage.getByText("OTP must be exactly 6 digits",new Page.GetByTextOptions().setExact(true))).isVisible();assertThat(pickupPosts).isEqualTo(before);
-        riderPage.getByPlaceholder("Enter 6-digit pickup OTP").fill("12a345678");assertThat(riderPage.getByPlaceholder("Enter 6-digit pickup OTP")).hasValue("123456");
-        pickUp(job);complete(job);
-    }
-    @Test @Order(2) @DisplayName("PICKUP-08/09/11: Valid restaurant code confirms exact pickup and destination")
-    void enterValidPickupOtpAndSwipeToConfirm() throws java.io.IOException {DeliveryActiveJobPage job=prepareAndArrive();pickUp(job);complete(job);}
-    @Test @Order(3) @DisplayName("PICKUP-10: Wrong code receives owned400, restores phase, then same order succeeds")
-    void wrongPickupOtpBlocked() throws java.io.IOException {
-        DeliveryActiveJobPage job=prepareAndArrive();job.enterPickupOtp(wrongCode(pickupOtp));expectStatus("OUT_FOR_DELIVERY",job::swipeToConfirmPickup,false);
-        assertThat(riderPage.getByText("Invalid pickup OTP.",new Page.GetByTextOptions().setExact(true))).isVisible();
-        assertThat(riderPage.getByPlaceholder("Enter 6-digit pickup OTP")).isVisible();assertThat(riderPage.getByPlaceholder("Ask customer for 6-digit OTP")).isHidden();
-        riderPage.reload();assertOwnedJob();assertThat(riderPage.getByPlaceholder("Enter 6-digit pickup OTP")).isVisible();pickUp(job);complete(job);
-    }
-    @Test @Order(4) @DisplayName("DELIVERY-01/02/03/12: Exact drop-off phase survives reload with customer code")
-    void deliveryPhaseWithOtp() throws java.io.IOException {DeliveryActiveJobPage job=prepareAndArrive();pickUp(job);riderPage.reload();assertOwnedJob();assertThat(riderPage.getByPlaceholder("Ask customer for 6-digit OTP")).isVisible();assertThat(riderPage.getByPlaceholder("Enter 6-digit pickup OTP")).isHidden();deliveryOtp();complete(job);}
-    @Test @Order(5) @DisplayName("DELIVERY-04/05/09/10: Correct code completes exact order and retained history")
-    void completeDeliveryWithOtp() throws java.io.IOException {DeliveryActiveJobPage job=prepareAndArrive();pickUp(job);complete(job,true);}
-    @Test @Order(6) @DisplayName("DELIVERY-06: Short validation and wrong code reject without completion, then recover")
-    void wrongDeliveryOtpBlocked() throws java.io.IOException {
-        DeliveryActiveJobPage job=prepareAndArrive();pickUp(job);job.enterDeliveryOtp("12");int before=deliveryPosts;job.swipeToConfirmDelivery();
-        assertThat(riderPage.getByText("OTP must be exactly 6 digits",new Page.GetByTextOptions().setExact(true))).isVisible();assertThat(deliveryPosts).isEqualTo(before);
-        job.enterDeliveryOtp(wrongCode(deliveryOtp()));expectStatus("DELIVERED",job::swipeToConfirmDelivery,false);
-        assertThat(riderPage.getByText("Invalid delivery OTP.",new Page.GetByTextOptions().setExact(true))).isVisible();assertOwnedJob();
-        riderPage.reload();assertOwnedJob();assertThat(riderPage.getByPlaceholder("Ask customer for 6-digit OTP")).isVisible();complete(job);
-    }
-    @Test @Order(7) @DisplayName("PICKUP-03/DELIVERY-07: Accessible restaurant directions opens validated navigation target")
-    void openNavigationMapDuringJob() throws java.io.IOException {
-        DeliveryActiveJobPage job=prepareAndArrive();
+        // PICKUP-03/DELIVERY-07: accessible restaurant directions open a validated navigation target.
         // Verify the external navigation URL only; external map service behavior is a boundary contract.
         riderPage.context().route("https://www.google.com/maps/**",route->route.fulfill(new com.microsoft.playwright.Route.FulfillOptions().setContentType("text/html").setBody("<p>External navigation boundary</p>")));
         try(Page popup=riderPage.waitForPopup(()->job.openNavigationMap())) {
@@ -217,6 +200,28 @@ public class PickupDeliveryOtpTest extends TestBase {
             java.util.regex.Matcher coords=Pattern.compile("destination=(-?[0-9.]+),(-?[0-9.]+)").matcher(uri.getQuery());assertThat(coords.find()).isTrue();
             assertThat(Double.parseDouble(coords.group(1))).isBetween(-90.0,90.0);assertThat(Double.parseDouble(coords.group(2))).isBetween(-180.0,180.0);
         }
-        pickUp(job);complete(job);
+        // PICKUP-07: numeric input, short-code validation and the restored pickup phase.
+        riderPage.reload();assertOwnedJob();assertThat(riderPage.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("Mark Arrived at Restaurant").setExact(true))).isHidden();
+        job.enterPickupOtp("12");int before=pickupPosts;job.swipeToConfirmPickup();
+        assertThat(riderPage.getByText("OTP must be exactly 6 digits",new Page.GetByTextOptions().setExact(true))).isVisible();assertThat(pickupPosts).isEqualTo(before);
+        riderPage.getByPlaceholder("Enter 6-digit pickup OTP").fill("12a345678");assertThat(riderPage.getByPlaceholder("Enter 6-digit pickup OTP")).hasValue("123456");
+        // PICKUP-10: a wrong code receives the owned 400 and the pickup phase survives a reload.
+        job.enterPickupOtp(wrongCode(pickupOtp));expectStatus("OUT_FOR_DELIVERY",job::swipeToConfirmPickup,false);
+        assertThat(riderPage.getByText("Invalid pickup OTP.",new Page.GetByTextOptions().setExact(true))).isVisible();
+        assertThat(riderPage.getByPlaceholder("Enter 6-digit pickup OTP")).isVisible();assertThat(riderPage.getByPlaceholder("Ask customer for 6-digit OTP")).isHidden();
+        riderPage.reload();assertOwnedJob();assertThat(riderPage.getByPlaceholder("Enter 6-digit pickup OTP")).isVisible();
+        // PICKUP-08/09/11: the restaurant's code confirms the exact pickup and destination.
+        pickUp(job);
+        // DELIVERY-01/02/03/12: the drop-off phase survives a reload, with the customer's code.
+        riderPage.reload();assertOwnedJob();assertThat(riderPage.getByPlaceholder("Ask customer for 6-digit OTP")).isVisible();assertThat(riderPage.getByPlaceholder("Enter 6-digit pickup OTP")).isHidden();deliveryOtp();
+        // DELIVERY-06: short and wrong codes are refused without completion; the phase survives a reload.
+        job.enterDeliveryOtp("12");before=deliveryPosts;job.swipeToConfirmDelivery();
+        assertThat(riderPage.getByText("OTP must be exactly 6 digits",new Page.GetByTextOptions().setExact(true))).isVisible();assertThat(deliveryPosts).isEqualTo(before);
+        job.enterDeliveryOtp(wrongCode(deliveryOtp()));expectStatus("DELIVERED",job::swipeToConfirmDelivery,false);
+        assertThat(riderPage.getByText("Invalid delivery OTP.",new Page.GetByTextOptions().setExact(true))).isVisible();assertOwnedJob();
+        riderPage.reload();assertOwnedJob();assertThat(riderPage.getByPlaceholder("Ask customer for 6-digit OTP")).isVisible();
+        // DELIVERY-04/05/09/10: the correct code completes the exact order and its retained history. The rider
+        // asks to go offline after it; staying on duty after a delivery is HappyDeliveryFlowTest's step 14.
+        complete(job,true);
     }
 }

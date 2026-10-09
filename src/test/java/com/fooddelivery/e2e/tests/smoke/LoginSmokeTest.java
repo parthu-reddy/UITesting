@@ -16,7 +16,8 @@ import java.util.regex.Pattern;
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 /** Visible person login and a separate portal choice. Internal token assertions are deferred. */
-@Tag("smoke") @Tag("login")
+@Tag("smoke")
+@Tag("feature-auth")
 public class LoginSmokeTest extends TestBase {
     enum Account {
         CUSTOMER(Portal.CUSTOMER,"Deliver to"), RESTAURANT(Portal.RESTAURANT,"Updates every 5 s"),

@@ -19,16 +19,18 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 
 /** Proves the three operational roles remain isolated in simultaneous browser contexts. */
 @Tag("ui-only")
+@Tag("feature-auth")
+@Tag("feature-shell")
 public class ResilienceRegressionUiTest extends TestBase {
 
     @Test
     @DisplayName("ISOLATION-05: Fresh browser context starts unauthenticated")
-    void freshContextStartsAtRoleSelector() {
+    void freshContextStartsAtLogin() {
         customerPage.navigate(TestConfig.APP_URL);
 
-        assertThat(customerPage.locator("button:has-text('Order Food'):visible").first()).isVisible();
-        assertThat(customerPage.locator("button:has-text('Restaurant Partner'):visible").first()).isVisible();
-        assertThat(customerPage.locator("button:has-text('Delivery Executive'):visible").first()).isVisible();
+        assertThat(customerPage.getByLabel("PHONE NUMBER", new Page.GetByLabelOptions().setExact(true))).isVisible();
+        assertThat(customerPage.getByRole(AriaRole.BUTTON,
+                new Page.GetByRoleOptions().setName("Send One-Time OTP").setExact(true))).isVisible();
         assertThat(customerPage.getByRole(AriaRole.BUTTON,
                 new Page.GetByRoleOptions().setName(Pattern.compile("Deliver to")))).hasCount(0);
     }

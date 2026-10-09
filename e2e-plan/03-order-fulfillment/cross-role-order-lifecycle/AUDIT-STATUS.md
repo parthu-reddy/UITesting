@@ -1,5 +1,13 @@
 # Durable audit status: cross-role-order-lifecycle
 
+## 2026-10-07T14:15+05:30 — Post-deploy active lifecycle verified (after Dev wipe)
+
+Post-deploy invocations 1–3 failed: a login during startup, the ageing emulated GPS fix, and my
+harness's viewport ordering. Each failure is recorded separately. Both owned orders were resumed and
+delivered (1/1 each), and the retained money check on f01c1e92 passes (18 lines, ₹92.72). The
+missing courier pin is a Playwright emulation artifact; the harness refreshes the fix and waits for
+pins inside the map. [Checkpoint127](../../_handoff/checkpoints/127-postdeploy-active-rider-verified.md).
+
 ## 2026-10-07T12:40+05:30 — ce254f3a resumed and verified; active rider fixes pending deploy
 
 `HappyDeliveryFlowTest#completeOrderLifecycle` invocations, counted separately:

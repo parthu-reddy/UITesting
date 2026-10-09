@@ -17,7 +17,8 @@ import org.junit.jupiter.api.Test;
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 /** Browser-network recovery without submitting an order or changing shared backend data. */
-@Tag("resilience")
+@Tag("feature-cart-checkout")
+@Tag("feature-shell")
 public class NetworkRecoveryUiTest extends TestBase {
 
     @Test

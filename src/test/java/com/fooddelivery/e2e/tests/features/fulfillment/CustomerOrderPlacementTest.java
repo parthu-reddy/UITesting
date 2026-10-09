@@ -19,22 +19,19 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@Tag("flow")
+@Tag("feature-cart-checkout")
+@Tag("feature-order-tracking")
 public class CustomerOrderPlacementTest extends TestBase {
-    @Test
-    @DisplayName("CHECKOUT-11-13: Real Dev order matches creation response/tracker and cannot redeem its quote twice")
-    void customerPlacesOrderSuccessfully() throws Exception {
-        placeOrderAndValidate(0, false);
-    }
-
+    @Tag("auto-cancel")
     @Test
     @DisplayName("CHECKOUT-22: Dev mock payment persists the tip-inclusive charge")
     void tippedOrderMatchesMockPaidTotal() throws Exception {
         placeOrderAndValidate(20, false);
     }
 
+    @Tag("auto-cancel")
     @Test
-    @DisplayName("CHECKOUT-24: Failed tracking read preserves one successful Dev order")
+    @DisplayName("CHECKOUT-11-13/24: Real Dev order matches creation response/tracker, cannot redeem its quote twice, and a failed tracking read preserves one order")
     void trackingReadFailureDoesNotCreateDuplicateOrder() throws Exception {
         placeOrderAndValidate(0, true);
     }
@@ -81,13 +78,22 @@ public class CustomerOrderPlacementTest extends TestBase {
             if (tip > 0) sheet.getByRole(AriaRole.RADIOGROUP,
                     new Locator.GetByRoleOptions().setName("Tip your rider").setExact(true))
                     .getByRole(AriaRole.RADIO, new Locator.GetByRoleOptions().setName("₹" + tip).setExact(true)).click();
+            // response.request().postData() was null for this POST on 2026-10-08 (cause not established); an
+            // intercepted request exposes its body. The route only records it and resumes it unchanged to Dev.
+            java.util.concurrent.atomic.AtomicReference<String> sentBody = new java.util.concurrent.atomic.AtomicReference<>();
+            customerPage.route("**/api/v1/orders", route -> {
+                if ("POST".equals(route.request().method())) sentBody.set(route.request().postData());
+                route.resume();
+            });
             Response created = customerPage.waitForResponse(r -> r.request().method().equals("POST")
                     && com.fooddelivery.e2e.util.UrlPaths.path(r.url()).equals("/api/v1/orders"),
                     () -> payment.placeOrder("Credit or debit card"));
             assertThat(created.status()).as("Real Dev order creation").isEqualTo(200);
             Map<?, ?> body = (Map<?, ?>) customerPage.evaluate("text => JSON.parse(text)", created.text());
             Map<?, ?> order = (Map<?, ?>) body.get("data");
-            Map<?, ?> payload = (Map<?, ?>) customerPage.evaluate("text => JSON.parse(text)", created.request().postData());
+            customerPage.unroute("**/api/v1/orders");
+            assertThat(sentBody.get()).as("order request body seen by the pass-through route").isNotNull();
+            Map<?, ?> payload = (Map<?, ?>) customerPage.evaluate("text => JSON.parse(text)", sentBody.get());
             String orderId = (String) order.get("id");
             assertThat(UUID.fromString(orderId).toString()).isEqualTo(orderId);
             trackedId.set(orderId);

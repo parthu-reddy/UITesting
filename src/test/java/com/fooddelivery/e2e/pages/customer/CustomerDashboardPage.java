@@ -15,7 +15,6 @@ public class CustomerDashboardPage {
 
     public CustomerDashboardPage(Page page) {
         this.page = page;
-        this.page.onConsoleMessage(msg -> System.out.println("[BROWSER CONSOLE] " + msg.text()));
     }
 
     public void waitForDashboard() {

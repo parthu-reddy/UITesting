@@ -25,7 +25,9 @@ import static org.assertj.core.api.Assertions.assertThat;
  * browser, so the figures include the tunnel round trip (an upper bound on server time).
  * Opt-in: {@code -Dmeasure.nearby=true -Dmeasure.label=before|after}. Writes target/business-platform/a2/.
  */
-@Tag("business-platform") @Tag("measurement")
+@Tag("measurement")
+@Tag("feature-ads")
+@Tag("feature-catalog")
 public class NearbyListingLatencyMeasurement extends TestBase {
 
     @Test void nearbyListingLatency() throws Exception {

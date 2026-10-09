@@ -1,0 +1,632 @@
+{
+  "observedAt": "2026-10-07T11:36:38.018344+00:00",
+  "declared": [
+    {
+      "service": "api-docs",
+      "image": "nginx:alpine"
+    },
+    {
+      "service": "api-gateway",
+      "image": "hyd.ocir.io/axekmbadoczl/food-delivery/api-gateway:e8642106b0d7c57308bf7603f2cfeaefca27e109"
+    },
+    {
+      "service": "bidding-engine",
+      "image": "hyd.ocir.io/axekmbadoczl/food-delivery/bidding-engine:457d1251ce484bd9669cfc22948075eb8d3e050e"
+    },
+    {
+      "service": "budget-pacing-service",
+      "image": "hyd.ocir.io/axekmbadoczl/food-delivery/budget-pacing-service:01d10b83832921b6ba63f1ab7f914fc433a54751"
+    },
+    {
+      "service": "campaign-service",
+      "image": "hyd.ocir.io/axekmbadoczl/food-delivery/campaign-service:bcdcc6b7d82c60c88ab1b047ab17b1233079920a"
+    },
+    {
+      "service": "chat-service",
+      "image": "hyd.ocir.io/axekmbadoczl/food-delivery/chat-service:a46486810d01f83d0c26cd7eb7eca68ae7f7fc5c"
+    },
+    {
+      "service": "clickhouse",
+      "image": "clickhouse/clickhouse-server:latest"
+    },
+    {
+      "service": "communication-integration",
+      "image": "hyd.ocir.io/axekmbadoczl/food-delivery/communication-integration:fcc974513a3d167cd9bd47ce0d59b281e56d78d1"
+    },
+    {
+      "service": "config-service",
+      "image": "hyd.ocir.io/axekmbadoczl/food-delivery/config-service:894d5c1dab4708b5dbe229977b6a5510b72dc0c4"
+    },
+    {
+      "service": "customer-service",
+      "image": "hyd.ocir.io/axekmbadoczl/food-delivery/customer-service:ea0760237a5cad4b862d97dd0cda9e23c466c4f7"
+    },
+    {
+      "service": "delivery-service",
+      "image": "hyd.ocir.io/axekmbadoczl/food-delivery/delivery-service:48077cc8ec758a229eaa9eea8c31a0e822d59daa"
+    },
+    {
+      "service": "eureka-server-1",
+      "image": "hyd.ocir.io/axekmbadoczl/food-delivery/eureka-server-1:ce9b9bf1e6ad9f988d3906f27f5f7b1eb8d5dd0a"
+    },
+    {
+      "service": "eureka-server-2",
+      "image": "hyd.ocir.io/axekmbadoczl/food-delivery/eureka-server-2:ce9b9bf1e6ad9f988d3906f27f5f7b1eb8d5dd0a"
+    },
+    {
+      "service": "event-tracking-service",
+      "image": "hyd.ocir.io/axekmbadoczl/food-delivery/event-tracking-service:d872a073e48a3547a67852d97914526e5c5c59e6"
+    },
+    {
+      "service": "food-delivery-app-ui",
+      "image": "hyd.ocir.io/axekmbadoczl/food-delivery/food-delivery-app-ui:7e7ebceccd5d8193db010f92b76c0de7d94d81cc"
+    },
+    {
+      "service": "government-id-service",
+      "image": "hyd.ocir.io/axekmbadoczl/food-delivery/government-id-service:f28dbb5bc5482a4da6d375d0a75faa80a91e703a"
+    },
+    {
+      "service": "identity-service",
+      "image": "hyd.ocir.io/axekmbadoczl/food-delivery/identity-service:1e16311b8148b788c9e834a8d88b2b163bc4fd7c"
+    },
+    {
+      "service": "jaeger",
+      "image": "jaegertracing/all-in-one:1.50"
+    },
+    {
+      "service": "kafka",
+      "image": "confluentinc/cp-kafka:7.5.0"
+    },
+    {
+      "service": "ledger-service",
+      "image": "hyd.ocir.io/axekmbadoczl/food-delivery/ledger-service:3666d62c795d226d50599429525427e9e914d767"
+    },
+    {
+      "service": "maps-integration",
+      "image": "hyd.ocir.io/axekmbadoczl/food-delivery/maps-integration:28afef7a919da61c08df4b2716c99cc6afa07897"
+    },
+    {
+      "service": "ondc-integration-service",
+      "image": "hyd.ocir.io/axekmbadoczl/food-delivery/ondc-integration-service:7d620ee8a47c0d82df794bad7585bc9974d5b89a"
+    },
+    {
+      "service": "payment-gateway",
+      "image": "hyd.ocir.io/axekmbadoczl/food-delivery/payment-gateway:950ba6db64f0f2a0729d072c77195dc889370dd0"
+    },
+    {
+      "service": "postgres",
+      "image": "kartoza/postgis:16-3.4"
+    },
+    {
+      "service": "redis",
+      "image": "redis:7.2"
+    },
+    {
+      "service": "restaurant-service",
+      "image": "hyd.ocir.io/axekmbadoczl/food-delivery/restaurant-service:f7a59abd7514ee7a3d47f38c7ddfa27bc68d2b90"
+    },
+    {
+      "service": "reviews-service",
+      "image": "hyd.ocir.io/axekmbadoczl/food-delivery/reviews-service:d589d2f03e7ee1f94f6e3b81add917b1b3b704cc"
+    },
+    {
+      "service": "wallet-service",
+      "image": "hyd.ocir.io/axekmbadoczl/food-delivery/wallet-service:37c860d37590618dbfdd065d9bef8a7fe69e8efa"
+    },
+    {
+      "service": "zookeeper",
+      "image": "confluentinc/cp-zookeeper:7.5.0"
+    }
+  ],
+  "containers": [
+    {
+      "service": "api-docs",
+      "status": "running",
+      "health": null,
+      "restarts": 0,
+      "startedAt": "2026-10-07T07:41:29.335334065Z",
+      "declaredImage": "nginx:alpine",
+      "actualImage": "nginx:alpine",
+      "digest": [
+        "nginx@sha256:db35bfc6b2951e7f8a72db5db120288c127ffaeeb4a6d4b95a26fead017d5913"
+      ],
+      "profiles": [],
+      "recentErrorLines": 0,
+      "errorClasses": [],
+      "freshBootstrapLines": 0
+    },
+    {
+      "service": "api-gateway",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "startedAt": "2026-10-07T07:43:29.324487514Z",
+      "declaredImage": "hyd.ocir.io/axekmbadoczl/food-delivery/api-gateway:e8642106b0d7c57308bf7603f2cfeaefca27e109",
+      "actualImage": "hyd.ocir.io/axekmbadoczl/food-delivery/api-gateway:e8642106b0d7c57308bf7603f2cfeaefca27e109",
+      "digest": [
+        "hyd.ocir.io/axekmbadoczl/food-delivery/api-gateway@sha256:72b928f1321b76cdf663720cb29c8bf175d53adf55a89177f19d96e0c3402894"
+      ],
+      "profiles": [
+        "dev"
+      ],
+      "recentErrorLines": 0,
+      "errorClasses": [],
+      "freshBootstrapLines": 0
+    },
+    {
+      "service": "bidding-engine",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "startedAt": "2026-10-07T07:43:29.299129054Z",
+      "declaredImage": "hyd.ocir.io/axekmbadoczl/food-delivery/bidding-engine:457d1251ce484bd9669cfc22948075eb8d3e050e",
+      "actualImage": "hyd.ocir.io/axekmbadoczl/food-delivery/bidding-engine:457d1251ce484bd9669cfc22948075eb8d3e050e",
+      "digest": [
+        "hyd.ocir.io/axekmbadoczl/food-delivery/bidding-engine@sha256:83e868faf2c47139f4229c6bb1de5d42eb82c3fa719ffc72b52780f207c8388b"
+      ],
+      "profiles": [
+        "dev"
+      ],
+      "recentErrorLines": 0,
+      "errorClasses": [],
+      "freshBootstrapLines": 0
+    },
+    {
+      "service": "budget-pacing-service",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "startedAt": "2026-10-07T07:43:29.249531021Z",
+      "declaredImage": "hyd.ocir.io/axekmbadoczl/food-delivery/budget-pacing-service:01d10b83832921b6ba63f1ab7f914fc433a54751",
+      "actualImage": "hyd.ocir.io/axekmbadoczl/food-delivery/budget-pacing-service:01d10b83832921b6ba63f1ab7f914fc433a54751",
+      "digest": [
+        "hyd.ocir.io/axekmbadoczl/food-delivery/budget-pacing-service@sha256:b878b461b30a678f06e3d0de238e6965b31f8177f1df3325070ae2bb022b25bb"
+      ],
+      "profiles": [
+        "dev"
+      ],
+      "recentErrorLines": 0,
+      "errorClasses": [],
+      "freshBootstrapLines": 0
+    },
+    {
+      "service": "campaign-service",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "startedAt": "2026-10-07T07:43:29.27840486Z",
+      "declaredImage": "hyd.ocir.io/axekmbadoczl/food-delivery/campaign-service:bcdcc6b7d82c60c88ab1b047ab17b1233079920a",
+      "actualImage": "hyd.ocir.io/axekmbadoczl/food-delivery/campaign-service:bcdcc6b7d82c60c88ab1b047ab17b1233079920a",
+      "digest": [
+        "hyd.ocir.io/axekmbadoczl/food-delivery/campaign-service@sha256:89cfd65789d59f9f42a07802b160bba6324e35e1e3e0b4d3aa8c3ea5462f4216"
+      ],
+      "profiles": [
+        "dev"
+      ],
+      "recentErrorLines": 0,
+      "errorClasses": [],
+      "freshBootstrapLines": 0
+    },
+    {
+      "service": "chat-service",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "startedAt": "2026-10-07T07:43:29.324046472Z",
+      "declaredImage": "hyd.ocir.io/axekmbadoczl/food-delivery/chat-service:a46486810d01f83d0c26cd7eb7eca68ae7f7fc5c",
+      "actualImage": "hyd.ocir.io/axekmbadoczl/food-delivery/chat-service:a46486810d01f83d0c26cd7eb7eca68ae7f7fc5c",
+      "digest": [
+        "hyd.ocir.io/axekmbadoczl/food-delivery/chat-service@sha256:4c678dc0efbd987004d0c3d5fbafcf884e82627ab063a5ae4221183daec3f29c"
+      ],
+      "profiles": [
+        "dev"
+      ],
+      "recentErrorLines": 0,
+      "errorClasses": [],
+      "freshBootstrapLines": 0
+    },
+    {
+      "service": "clickhouse",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "startedAt": "2026-10-07T07:41:29.323187718Z",
+      "declaredImage": "clickhouse/clickhouse-server:latest",
+      "actualImage": "clickhouse/clickhouse-server:latest",
+      "digest": [
+        "clickhouse/clickhouse-server@sha256:800e82865530eb2f1c4bc1b960e43b435fd9b2d83b4bd04a2564a5cfd88fdb6e"
+      ],
+      "profiles": [],
+      "recentErrorLines": 0,
+      "errorClasses": [],
+      "freshBootstrapLines": 0
+    },
+    {
+      "service": "communication-integration",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "startedAt": "2026-10-07T07:43:29.26924153Z",
+      "declaredImage": "hyd.ocir.io/axekmbadoczl/food-delivery/communication-integration:fcc974513a3d167cd9bd47ce0d59b281e56d78d1",
+      "actualImage": "hyd.ocir.io/axekmbadoczl/food-delivery/communication-integration:fcc974513a3d167cd9bd47ce0d59b281e56d78d1",
+      "digest": [
+        "hyd.ocir.io/axekmbadoczl/food-delivery/communication-integration@sha256:fb87c9f9e71bdaea15673a0e4111de67c4448a1a79ff1e5797d79fde57d2db9e"
+      ],
+      "profiles": [
+        "dev"
+      ],
+      "recentErrorLines": 0,
+      "errorClasses": [],
+      "freshBootstrapLines": 0
+    },
+    {
+      "service": "config-service",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "startedAt": "2026-10-07T07:41:57.451645321Z",
+      "declaredImage": "hyd.ocir.io/axekmbadoczl/food-delivery/config-service:894d5c1dab4708b5dbe229977b6a5510b72dc0c4",
+      "actualImage": "hyd.ocir.io/axekmbadoczl/food-delivery/config-service:894d5c1dab4708b5dbe229977b6a5510b72dc0c4",
+      "digest": [
+        "hyd.ocir.io/axekmbadoczl/food-delivery/config-service@sha256:04f8e07c02fd6ca8f45f86da0c323d45cdca0e885b603dc9bb89626ea4a6346c"
+      ],
+      "profiles": [
+        "native"
+      ],
+      "recentErrorLines": 0,
+      "errorClasses": [],
+      "freshBootstrapLines": 0
+    },
+    {
+      "service": "customer-service",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "startedAt": "2026-10-07T11:23:37.372094884Z",
+      "declaredImage": "hyd.ocir.io/axekmbadoczl/food-delivery/customer-service:ea0760237a5cad4b862d97dd0cda9e23c466c4f7",
+      "actualImage": "hyd.ocir.io/axekmbadoczl/food-delivery/customer-service:ea0760237a5cad4b862d97dd0cda9e23c466c4f7",
+      "digest": [
+        "hyd.ocir.io/axekmbadoczl/food-delivery/customer-service@sha256:fd1648b04275419cb12de6c1f638c8a589d43ed2ff3afabd30fc8efa2206fd4f"
+      ],
+      "profiles": [
+        "dev"
+      ],
+      "recentErrorLines": 0,
+      "errorClasses": [],
+      "freshBootstrapLines": 0
+    },
+    {
+      "service": "delivery-service",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "startedAt": "2026-10-07T11:24:39.549219391Z",
+      "declaredImage": "hyd.ocir.io/axekmbadoczl/food-delivery/delivery-service:48077cc8ec758a229eaa9eea8c31a0e822d59daa",
+      "actualImage": "hyd.ocir.io/axekmbadoczl/food-delivery/delivery-service:48077cc8ec758a229eaa9eea8c31a0e822d59daa",
+      "digest": [
+        "hyd.ocir.io/axekmbadoczl/food-delivery/delivery-service@sha256:b7cffb0e68ad65a177e52068131c71f03e9f0d3903a00b2c464ef4d198ea9494"
+      ],
+      "profiles": [
+        "dev"
+      ],
+      "recentErrorLines": 0,
+      "errorClasses": [],
+      "freshBootstrapLines": 0
+    },
+    {
+      "service": "eureka-server-1",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "startedAt": "2026-10-07T07:41:57.453270209Z",
+      "declaredImage": "hyd.ocir.io/axekmbadoczl/food-delivery/eureka-server-1:ce9b9bf1e6ad9f988d3906f27f5f7b1eb8d5dd0a",
+      "actualImage": "hyd.ocir.io/axekmbadoczl/food-delivery/eureka-server-1:ce9b9bf1e6ad9f988d3906f27f5f7b1eb8d5dd0a",
+      "digest": [
+        "hyd.ocir.io/axekmbadoczl/food-delivery/eureka-server-1@sha256:79b8d9337249ef84a6d783db71896fc2d7932b9d71c9cf30e615f77f9de4701c",
+        "hyd.ocir.io/axekmbadoczl/food-delivery/eureka-server-2@sha256:79b8d9337249ef84a6d783db71896fc2d7932b9d71c9cf30e615f77f9de4701c"
+      ],
+      "profiles": [
+        "dev"
+      ],
+      "recentErrorLines": 0,
+      "errorClasses": [],
+      "freshBootstrapLines": 0
+    },
+    {
+      "service": "eureka-server-2",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "startedAt": "2026-10-07T07:41:57.454834698Z",
+      "declaredImage": "hyd.ocir.io/axekmbadoczl/food-delivery/eureka-server-2:ce9b9bf1e6ad9f988d3906f27f5f7b1eb8d5dd0a",
+      "actualImage": "hyd.ocir.io/axekmbadoczl/food-delivery/eureka-server-2:ce9b9bf1e6ad9f988d3906f27f5f7b1eb8d5dd0a",
+      "digest": [
+        "hyd.ocir.io/axekmbadoczl/food-delivery/eureka-server-1@sha256:79b8d9337249ef84a6d783db71896fc2d7932b9d71c9cf30e615f77f9de4701c",
+        "hyd.ocir.io/axekmbadoczl/food-delivery/eureka-server-2@sha256:79b8d9337249ef84a6d783db71896fc2d7932b9d71c9cf30e615f77f9de4701c"
+      ],
+      "profiles": [
+        "dev"
+      ],
+      "recentErrorLines": 0,
+      "errorClasses": [],
+      "freshBootstrapLines": 0
+    },
+    {
+      "service": "event-tracking-service",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "startedAt": "2026-10-07T07:43:29.286640866Z",
+      "declaredImage": "hyd.ocir.io/axekmbadoczl/food-delivery/event-tracking-service:d872a073e48a3547a67852d97914526e5c5c59e6",
+      "actualImage": "hyd.ocir.io/axekmbadoczl/food-delivery/event-tracking-service:d872a073e48a3547a67852d97914526e5c5c59e6",
+      "digest": [
+        "hyd.ocir.io/axekmbadoczl/food-delivery/event-tracking-service@sha256:4d8675172f5b4ba7d432bbcfda06c0ccf3a7880d1c4e0e9f5b56436cdcd5ad3c"
+      ],
+      "profiles": [
+        "dev"
+      ],
+      "recentErrorLines": 0,
+      "errorClasses": [],
+      "freshBootstrapLines": 0
+    },
+    {
+      "service": "food-delivery-app-ui",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "startedAt": "2026-10-07T11:25:27.261779499Z",
+      "declaredImage": "hyd.ocir.io/axekmbadoczl/food-delivery/food-delivery-app-ui:7e7ebceccd5d8193db010f92b76c0de7d94d81cc",
+      "actualImage": "hyd.ocir.io/axekmbadoczl/food-delivery/food-delivery-app-ui:7e7ebceccd5d8193db010f92b76c0de7d94d81cc",
+      "digest": [
+        "hyd.ocir.io/axekmbadoczl/food-delivery/food-delivery-app-ui@sha256:72668c77f0c010aa6ca5d3dbb7b3f4381744bc464bf1244f125aeb8172362c1d"
+      ],
+      "profiles": [],
+      "recentErrorLines": 0,
+      "errorClasses": [],
+      "freshBootstrapLines": 0
+    },
+    {
+      "service": "government-id-service",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "startedAt": "2026-10-07T07:43:29.3183088Z",
+      "declaredImage": "hyd.ocir.io/axekmbadoczl/food-delivery/government-id-service:f28dbb5bc5482a4da6d375d0a75faa80a91e703a",
+      "actualImage": "hyd.ocir.io/axekmbadoczl/food-delivery/government-id-service:f28dbb5bc5482a4da6d375d0a75faa80a91e703a",
+      "digest": [
+        "hyd.ocir.io/axekmbadoczl/food-delivery/government-id-service@sha256:2524d27a58cad487e98a38e5f592efd311dc0d89732269e0b89d25315dee3766"
+      ],
+      "profiles": [
+        "dev"
+      ],
+      "recentErrorLines": 0,
+      "errorClasses": [],
+      "freshBootstrapLines": 0
+    },
+    {
+      "service": "identity-service",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 1,
+      "startedAt": "2026-10-07T08:09:30.02947221Z",
+      "declaredImage": "hyd.ocir.io/axekmbadoczl/food-delivery/identity-service:1e16311b8148b788c9e834a8d88b2b163bc4fd7c",
+      "actualImage": "hyd.ocir.io/axekmbadoczl/food-delivery/identity-service:1e16311b8148b788c9e834a8d88b2b163bc4fd7c",
+      "digest": [
+        "hyd.ocir.io/axekmbadoczl/food-delivery/identity-service@sha256:7d7a81b011854f6fac54ca006f8b14d9cecb3bc1947eb90cfa724a899cc901f5"
+      ],
+      "profiles": [
+        "dev"
+      ],
+      "recentErrorLines": 0,
+      "errorClasses": [],
+      "freshBootstrapLines": 0
+    },
+    {
+      "service": "jaeger",
+      "status": "running",
+      "health": null,
+      "restarts": 0,
+      "startedAt": "2026-10-07T07:41:29.326030654Z",
+      "declaredImage": "jaegertracing/all-in-one:1.50",
+      "actualImage": "jaegertracing/all-in-one:1.50",
+      "digest": [
+        "jaegertracing/all-in-one@sha256:d589499a01e1e2f9d302db8e210af09688076fd8a93278fa024824a755c1a0f1"
+      ],
+      "profiles": [],
+      "recentErrorLines": 0,
+      "errorClasses": [],
+      "freshBootstrapLines": 0
+    },
+    {
+      "service": "kafka",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "startedAt": "2026-10-07T07:41:29.717278807Z",
+      "declaredImage": "confluentinc/cp-kafka:7.5.0",
+      "actualImage": "confluentinc/cp-kafka:7.5.0",
+      "digest": [
+        "confluentinc/cp-kafka@sha256:fbbb6fa11b258a88b83f54d4f0bddfcffbf2279f99d66a843486e3da7bdfbf41"
+      ],
+      "profiles": [],
+      "recentErrorLines": 0,
+      "errorClasses": [],
+      "freshBootstrapLines": 0
+    },
+    {
+      "service": "ledger-service",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "startedAt": "2026-10-07T07:43:29.312630609Z",
+      "declaredImage": "hyd.ocir.io/axekmbadoczl/food-delivery/ledger-service:3666d62c795d226d50599429525427e9e914d767",
+      "actualImage": "hyd.ocir.io/axekmbadoczl/food-delivery/ledger-service:3666d62c795d226d50599429525427e9e914d767",
+      "digest": [
+        "hyd.ocir.io/axekmbadoczl/food-delivery/ledger-service@sha256:ee4cd7af53478eedf6316bfd45a13852a27861da4f87f8c5dd6bf48f959a508d"
+      ],
+      "profiles": [
+        "dev"
+      ],
+      "recentErrorLines": 0,
+      "errorClasses": [],
+      "freshBootstrapLines": 0
+    },
+    {
+      "service": "maps-integration",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "startedAt": "2026-10-07T10:03:35.832001516Z",
+      "declaredImage": "hyd.ocir.io/axekmbadoczl/food-delivery/maps-integration:28afef7a919da61c08df4b2716c99cc6afa07897",
+      "actualImage": "hyd.ocir.io/axekmbadoczl/food-delivery/maps-integration:28afef7a919da61c08df4b2716c99cc6afa07897",
+      "digest": [
+        "hyd.ocir.io/axekmbadoczl/food-delivery/maps-integration@sha256:1077e6b73ee96f971bb4070ee19ee756b4c3a1f526c6ef8a228e959edcf9fedb"
+      ],
+      "profiles": [
+        "dev"
+      ],
+      "recentErrorLines": 0,
+      "errorClasses": [],
+      "freshBootstrapLines": 0
+    },
+    {
+      "service": "ondc-integration-service",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "startedAt": "2026-10-07T07:43:29.259533717Z",
+      "declaredImage": "hyd.ocir.io/axekmbadoczl/food-delivery/ondc-integration-service:7d620ee8a47c0d82df794bad7585bc9974d5b89a",
+      "actualImage": "hyd.ocir.io/axekmbadoczl/food-delivery/ondc-integration-service:7d620ee8a47c0d82df794bad7585bc9974d5b89a",
+      "digest": [
+        "hyd.ocir.io/axekmbadoczl/food-delivery/ondc-integration-service@sha256:adae809543174d5ddc629484498c214ad20ea80f394937018486991eb2bcd137"
+      ],
+      "profiles": [
+        "dev"
+      ],
+      "recentErrorLines": 0,
+      "errorClasses": [],
+      "freshBootstrapLines": 0
+    },
+    {
+      "service": "payment-gateway",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "startedAt": "2026-10-07T07:43:29.306452775Z",
+      "declaredImage": "hyd.ocir.io/axekmbadoczl/food-delivery/payment-gateway:950ba6db64f0f2a0729d072c77195dc889370dd0",
+      "actualImage": "hyd.ocir.io/axekmbadoczl/food-delivery/payment-gateway:950ba6db64f0f2a0729d072c77195dc889370dd0",
+      "digest": [
+        "hyd.ocir.io/axekmbadoczl/food-delivery/payment-gateway@sha256:9f6480bf25280316da147310b5e2d4e5db20cc337d3719f8484a194562834a77"
+      ],
+      "profiles": [
+        "dev"
+      ],
+      "recentErrorLines": 0,
+      "errorClasses": [],
+      "freshBootstrapLines": 0
+    },
+    {
+      "service": "postgres",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "startedAt": "2026-10-07T07:41:29.341792501Z",
+      "declaredImage": "kartoza/postgis:16-3.4",
+      "actualImage": "kartoza/postgis:16-3.4",
+      "digest": [
+        "kartoza/postgis@sha256:5bf96a8c181181d84a901b093b873bbbe42fe444dc9a985afc8dde6fd5fc4860"
+      ],
+      "profiles": [],
+      "recentErrorLines": 0,
+      "errorClasses": [],
+      "freshBootstrapLines": 0
+    },
+    {
+      "service": "redis",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "startedAt": "2026-10-07T07:41:29.335774587Z",
+      "declaredImage": "redis:7.2",
+      "actualImage": "redis:7.2",
+      "digest": [
+        "redis@sha256:74566c6910d13ae61e7ce73ebd3127438a1fe805b309b097c323142719ec8a5b"
+      ],
+      "profiles": [],
+      "recentErrorLines": 0,
+      "errorClasses": [],
+      "freshBootstrapLines": 0
+    },
+    {
+      "service": "restaurant-service",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "startedAt": "2026-10-07T07:49:24.763501717Z",
+      "declaredImage": "hyd.ocir.io/axekmbadoczl/food-delivery/restaurant-service:f7a59abd7514ee7a3d47f38c7ddfa27bc68d2b90",
+      "actualImage": "hyd.ocir.io/axekmbadoczl/food-delivery/restaurant-service:f7a59abd7514ee7a3d47f38c7ddfa27bc68d2b90",
+      "digest": [
+        "hyd.ocir.io/axekmbadoczl/food-delivery/restaurant-service@sha256:fa14a7404acd3880777f5d37eb4a9e797b995d7915f6edb45529cc98864e2a27"
+      ],
+      "profiles": [
+        "dev"
+      ],
+      "recentErrorLines": 0,
+      "errorClasses": [],
+      "freshBootstrapLines": 0
+    },
+    {
+      "service": "reviews-service",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "startedAt": "2026-10-07T07:43:29.217368004Z",
+      "declaredImage": "hyd.ocir.io/axekmbadoczl/food-delivery/reviews-service:d589d2f03e7ee1f94f6e3b81add917b1b3b704cc",
+      "actualImage": "hyd.ocir.io/axekmbadoczl/food-delivery/reviews-service:d589d2f03e7ee1f94f6e3b81add917b1b3b704cc",
+      "digest": [
+        "hyd.ocir.io/axekmbadoczl/food-delivery/reviews-service@sha256:fa7872149f315bd181f363d946327b18e27a881ce972e6bd0a6fca7e8f210942"
+      ],
+      "profiles": [
+        "dev"
+      ],
+      "recentErrorLines": 0,
+      "errorClasses": [],
+      "freshBootstrapLines": 0
+    },
+    {
+      "service": "wallet-service",
+      "status": "running",
+      "health": "healthy",
+      "restarts": 0,
+      "startedAt": "2026-10-07T07:43:29.274878201Z",
+      "declaredImage": "hyd.ocir.io/axekmbadoczl/food-delivery/wallet-service:37c860d37590618dbfdd065d9bef8a7fe69e8efa",
+      "actualImage": "hyd.ocir.io/axekmbadoczl/food-delivery/wallet-service:37c860d37590618dbfdd065d9bef8a7fe69e8efa",
+      "digest": [
+        "hyd.ocir.io/axekmbadoczl/food-delivery/wallet-service@sha256:e79378ffade4a88eb6361e993f49fe8308324d44f0fad96514e49b3299f8c0fb"
+      ],
+      "profiles": [
+        "dev"
+      ],
+      "recentErrorLines": 0,
+      "errorClasses": [],
+      "freshBootstrapLines": 0
+    },
+    {
+      "service": "zookeeper",
+      "status": "running",
+      "health": null,
+      "restarts": 0,
+      "startedAt": "2026-10-07T07:41:29.344197634Z",
+      "declaredImage": "confluentinc/cp-zookeeper:7.5.0",
+      "actualImage": "confluentinc/cp-zookeeper:7.5.0",
+      "digest": [
+        "confluentinc/cp-zookeeper@sha256:02f6c042bb9a7844382fc4cedc513a44585d8a5acae873fb9e510e3ca9dcabc6"
+      ],
+      "profiles": [],
+      "recentErrorLines": 0,
+      "errorClasses": [],
+      "freshBootstrapLines": 0
+    }
+  ],
+  "publicTunnel": "https://gulf-strike-dark-extras.trycloudflare.com"
+}

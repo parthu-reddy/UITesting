@@ -30,8 +30,9 @@ import static org.assertj.core.api.Assertions.assertThat;
  * owned order with a chat session whose manifest is in target/lifecycle. Nothing is created; the one
  * write attempted (an intruder's STOMP SEND) must be refused, and the owner's history proves it was.
  */
-@Tag("chat") @Tag("isolation")
 @org.junit.jupiter.api.Disabled("O4-INT-002: direct request, storage and handcrafted STOMP assertions are deferred under the UI-only policy")
+@Tag("feature-chat")
+@Tag("feature-refunds-support")
 public class ChatAndRefundIsolationTest extends TestBase {
     private static final String ORDER = System.getProperty("isolation.order.id", "").trim();
     private static final String INTRUDER_CUSTOMER = System.getProperty("isolation.customer.phone", "8000000485").trim();

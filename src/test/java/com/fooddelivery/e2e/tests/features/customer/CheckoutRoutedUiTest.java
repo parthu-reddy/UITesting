@@ -22,7 +22,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 /** Routed error/balance UI contracts; real login, menu, availability and quotes. No real order POST. */
-@Tag("ui-contract")
+@Tag("feature-cart-checkout")
 public class CheckoutRoutedUiTest extends TestBase {
     private SeededRiderDuty duty;
     private final AtomicInteger orderPosts = new AtomicInteger();
@@ -147,6 +147,7 @@ public class CheckoutRoutedUiTest extends TestBase {
         assertThat(cart().locator("output")).hasText("1");
     }
 
+    @Tag("feature-wallet")
     @Test
     void walletCannotBeSelectedBeforeItsBalanceArrives() {
         AtomicReference<Route> pending = new AtomicReference<>();
@@ -163,6 +164,7 @@ public class CheckoutRoutedUiTest extends TestBase {
         org.assertj.core.api.Assertions.assertThat(orderPosts.get()).isZero();
     }
 
+    @Tag("feature-wallet")
     @Test
     void reopeningCheckoutWaitsForCurrentWalletBalance() {
         AtomicInteger requests = new AtomicInteger();AtomicReference<Route> pending = new AtomicReference<>();
@@ -191,6 +193,7 @@ public class CheckoutRoutedUiTest extends TestBase {
         return new BigDecimal(match.group(1).replace(",", ""));
     }
 
+    @Tag("feature-wallet")
     @Test
     void tipChangesChargeWalletEligibilityAndExactSubmissionPayload() {
         AtomicReference<Route> pending = new AtomicReference<>();

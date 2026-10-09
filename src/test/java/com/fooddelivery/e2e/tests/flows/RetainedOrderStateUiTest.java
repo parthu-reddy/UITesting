@@ -13,6 +13,7 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 
 /** Inspect only the rendered owned active tracker or history before any further checkout. */
 @Tag("ui-only")
+@Tag("feature-order-tracking")
 public class RetainedOrderStateUiTest extends TestBase {
     @Test void ownedActiveTrackerOrHistoryExposesState() throws Exception {
         String id = System.getProperty("retained.order.id", "");
@@ -29,7 +30,7 @@ public class RetainedOrderStateUiTest extends TestBase {
         } catch (TimeoutError noActiveTracker) {
             CustomerDashboardPage.openProfileSettings(customerPage);
             customerPage.getByRole(AriaRole.TAB, new Page.GetByRoleOptions().setName("History").setExact(true)).click();
-            var card = customerPage.locator("[data-testid='customer-history-order'][data-order-id='" + id + "']");
+            var card = new CustomerOrderHistoryPage(customerPage).pageToOrder(id, 20);
             assertThat(card).isVisible(); card.click(); fromHistory = true;
         }
         assertThat(tracker).isVisible();

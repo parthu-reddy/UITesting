@@ -27,9 +27,8 @@ import static org.assertj.core.api.Assertions.assertThat;
  * intercepted. The fixture either rejects the request, or fulfills the one response the test is
  * expressly checking; no mutation can reach shared Dev data.</p>
  */
-@Tag("admin")
-@Tag("admin-money-operations")
 @Tag("browser-routed")
+@Tag("feature-money-ledger")
 public class AdminMoneyOperationsSafetyUiTest extends TestBase {
 
     private static final String LEDGER_REJECTIONS_PATH = "/api/v1/internal/admin/ledger/rejections";

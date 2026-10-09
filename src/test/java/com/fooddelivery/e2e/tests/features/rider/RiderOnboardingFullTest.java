@@ -14,8 +14,9 @@ import org.junit.jupiter.api.Test;
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 /** Approved seed stays operational with reviewed settings visibly locked in the rider portal. */
-@Tag("rider-onboarding")
 @Tag("ui-only")
+@Tag("feature-partner-onboarding")
+@Tag("feature-rider-delivery")
 public class RiderOnboardingFullTest extends TestBase {
 
     @Test
@@ -32,7 +33,10 @@ public class RiderOnboardingFullTest extends TestBase {
         assertThat(riderPage.getByText(
                 "Reviewed delivery details are locked. Contact support if they need to change.",
                 new Page.GetByTextOptions().setExact(true))).isVisible();
-        assertThat(riderPage.locator("fieldset")).isDisabled();
+        // Playwright's isDisabled() only applies to form controls, never to <fieldset> itself; the frozen
+        // fieldset carries the attribute and disables every control inside it.
+        assertThat(riderPage.locator("fieldset")).hasAttribute("disabled", "");
+        assertThat(riderPage.locator("fieldset input, fieldset select, fieldset textarea").first()).isDisabled();
         assertThat(riderPage.getByRole(AriaRole.BUTTON,
                 new Page.GetByRoleOptions().setName("Save Profile Changes").setExact(true))).isDisabled();
     }

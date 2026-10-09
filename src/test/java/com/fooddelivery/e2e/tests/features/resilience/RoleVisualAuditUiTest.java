@@ -24,11 +24,13 @@ import java.util.regex.Pattern;
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 /** Read-only deployed screenshots for redesign D1/E2 and strict responses for historical F12. */
-@Tag("role-visual-audit")
 @Tag("ui-only")
+@Tag("feature-shell")
 public class RoleVisualAuditUiTest extends TestBase {
     private final Path evidence = Path.of(System.getProperty("visual.audit.dir", "target/role-visual-audit"));
 
+    @Tag("feature-partner-onboarding")
+    @Tag("feature-rider-delivery")
     @Test
     void riderMobileDashboardAndVerificationRead() throws IOException {
         riderPage.setViewportSize(390, 844);
@@ -70,6 +72,7 @@ public class RoleVisualAuditUiTest extends TestBase {
                 .isEqualTo("rgb(255, 255, 255)");
     }
 
+    @Tag("feature-refunds-support")
     @Test
     void adminDesktopRefundQueueAndSupport() throws IOException {
         adminPage.setViewportSize(1280, 800);
@@ -108,6 +111,7 @@ public class RoleVisualAuditUiTest extends TestBase {
         noHorizontalOverflow(adminPage);
     }
 
+    @Tag("feature-reviews")
     @Test
     void customerMyReviewsReadReturns200() throws IOException {
         customerPage.setViewportSize(1280, 800);
@@ -125,6 +129,7 @@ public class RoleVisualAuditUiTest extends TestBase {
         capture(customerPage, "customer-my-reviews", "reviewsStatus=" + reviews.status());
     }
 
+    @Tag("feature-refunds-support")
     @Test
     void adminAllRefundHistoryRead() throws IOException {
         adminPage.setViewportSize(1280, 800);

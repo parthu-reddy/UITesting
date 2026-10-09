@@ -1,0 +1,24 @@
+{
+  "recordedAt": "2026-10-07T13:50+05:30",
+  "proofType": "public served bundle; deployed normal UI",
+  "deployLog": "2026-10-07T08:04:51-52Z food-delivery-app-ui cfb83e2, customer-service e8ee38f, delivery-service 6be214c, maps-integration 89468aa",
+  "servedChunk": "DeliveryDashboard-DzSDaAKB.js contains 'Loading today', 'Your net payout', 'Not confirmed yet', 'History shows another day'; '\u00b7 credit' and 'Total Earnings' absent",
+  "servedMap": "OrderTrackingMap-CTLNVUS7.js places {restaurant,customer,rider:null} before navigator.geolocation.getCurrentPosition",
+  "ownerStatement": "old data is completely wiped with fresh installation",
+  "retainedCheckAttempt": {
+    "order": "ce254f3a-13c6-4317-a30f-6884595aa090",
+    "tests": 1,
+    "failures": 1,
+    "errors": 0,
+    "skipped": 0,
+    "elapsedSeconds": 47.69,
+    "failure": "customer History data-state=empty (server 200, empty content): order no longer exists after the owner's fresh installation; not a product defect",
+    "rawLog": "/private/tmp/food-pending-item3-retained-ce254f3a-postdeploy.log",
+    "rawLogSha256": "886ce4cefaa1f764f8d3294ca4f871d393eea68902d4755463f27fc5196f1e61"
+  },
+  "retiredFixtures": [
+    "6fbe0289-645e-4f1c-ae0d-caab21689070",
+    "ce254f3a-13c6-4317-a30f-6884595aa090",
+    "ticket 47ffbccd-1f4a-42f1-93dd-f610f07bd923"
+  ]
+}

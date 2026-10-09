@@ -1,0 +1,38 @@
+[
+  {
+    "actor": "customer",
+    "status": 200,
+    "parsed": true,
+    "durationSeconds": 160,
+    "distanceMeters": 789,
+    "durationKind": "integer",
+    "distanceKind": "integer",
+    "duration": "0 hours 3 minutes",
+    "distance": "0.79",
+    "hasPolyline": true
+  },
+  {
+    "actor": "rider",
+    "status": 200,
+    "parsed": true,
+    "durationSeconds": 1129,
+    "distanceMeters": 4577,
+    "durationKind": "integer",
+    "distanceKind": "integer",
+    "duration": "0 hours 19 minutes",
+    "distance": "4.58",
+    "hasPolyline": true
+  },
+  {
+    "actor": "rider",
+    "status": 200,
+    "parsed": true,
+    "durationSeconds": 164,
+    "distanceMeters": 789,
+    "durationKind": "integer",
+    "distanceKind": "integer",
+    "duration": "0 hours 3 minutes",
+    "distance": "0.79",
+    "hasPolyline": true
+  }
+]

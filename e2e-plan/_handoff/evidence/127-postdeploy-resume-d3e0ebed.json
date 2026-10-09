@@ -1,0 +1,20 @@
+{
+  "recordedAt": "2026-10-07T13:55+05:30",
+  "test": "HappyDeliveryFlowTest#completeOrderLifecycle [retained resume d3e0ebed]",
+  "tests": 1,
+  "passed": 1,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "elapsedSeconds": 53.47,
+  "newOrderCreated": false,
+  "orderStateAfter": "DELIVERED through rider UI",
+  "verifiedLive": [
+    "out-for-delivery 390x844 capture with refreshed fix: canvas, 2 call targets >=48px, courier+customer+restaurant pins (DOM), uncovered 'Slide to deliver' with NO credit amount, header chat >=48px, no overflow",
+    "trip details modal 'Your net payout' equals the completed-trip row payout",
+    "customer delivered receipt"
+  ],
+  "inspection": "swipe capture correct; map PNG blank (tiles/pins not yet painted after the capture's reload) although DOM pin assertions passed -> geometric in-bounds wait added before screenshot; that wait is not yet executed",
+  "rawLog": "/private/tmp/food-pending-item3-postdeploy-resume-d3e0ebed.log",
+  "rawLogSha256": "4342859f609dde12bdc3fa24b20ae15068ed0d6dcfe24a1770e9c059233f49f2"
+}

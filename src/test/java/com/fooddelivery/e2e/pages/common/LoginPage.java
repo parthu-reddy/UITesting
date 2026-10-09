@@ -3,6 +3,7 @@ package com.fooddelivery.e2e.pages.common;
 import com.fooddelivery.e2e.base.TestConfig;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.microsoft.playwright.Response;
 import com.microsoft.playwright.options.AriaRole;
 import java.util.regex.Pattern;
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
@@ -67,12 +68,27 @@ public class LoginPage {
         Locator heading = page.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Admin").setExact(true));
         page.waitForCondition(() -> dialog.isVisible() || heading.isVisible());
         if (dialog.isVisible()) {
-            dialog.getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Send administrator code").setExact(true)).click();
+            stepUpCall("/api/v1/auth/admin-session/otp", () -> dialog.getByRole(AriaRole.BUTTON,
+                    new Locator.GetByRoleOptions().setName("Send administrator code").setExact(true)).click());
             page.getByTestId("dev-admin-otp-autofill").click();
             assertThat(page.getByLabel("Administrator code")).hasValue(Pattern.compile("[0-9]{6}"));
-            dialog.getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Verify administrator access").setExact(true)).click();
+            stepUpCall("/api/v1/auth/admin-session", () -> dialog.getByRole(AriaRole.BUTTON,
+                    new Locator.GetByRoleOptions().setName("Verify administrator access").setExact(true)).click());
         }
         assertThat(heading).isVisible();
+    }
+    /**
+     * Identity hard-limits admin step-up per phone (AuthService.sendOtp/verifyOtp: 10 sends / 10 min,
+     * 5 verifies / 5 min). A 429 fails here at once with the cause, instead of a 60 s locator timeout
+     * on every following step (P0-2 batch 1 lost an hour that way). Pace admin classes with
+     * e2e-plan/_handoff/tools/run_e2e_batch.py.
+     */
+    private void stepUpCall(String path, Runnable click) {
+        Response response = page.waitForResponse(r -> r.request().method().equals("POST")
+                && com.fooddelivery.e2e.util.UrlPaths.path(r.url()).equals(path), click);
+        if (response.status() == 429)
+            throw new AssertionError("ADMIN_STEP_UP_RATE_LIMITED: " + path + " returned 429. Identity allows 10 code sends per 10 min "
+                    + "and 5 verifies per 5 min per admin phone; run admin classes through run_e2e_batch.py, which paces them.");
     }
     private void waitForLoginComplete(String name, String email, boolean requireFresh) {
         page.waitForCondition(() -> !page.url().contains("/login")

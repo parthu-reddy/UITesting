@@ -8,7 +8,8 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import java.util.regex.Pattern;
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
-@Tag("appearance-ui")
+@Tag("feature-auth")
+@Tag("feature-settings-profile")
 public class LoginThemeUiTest extends TestBase {
     @ParameterizedTest(name="{0}px: theme switch works through phone and OTP navigation")
     @ValueSource(ints={390,1280})

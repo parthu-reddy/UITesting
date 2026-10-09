@@ -1,5 +1,7 @@
 # Workspace and execution
 
+**Batches: always `python3 e2e-plan/_handoff/tools/run_e2e_batch.py --classes A,B --evidence DIR` (from UITesting); see e2e-plan/AGENTS.md "Running tests against Dev". Single methods may still use mvn -Dtest=Class#method.**
+
 Workspace: /Users/parthureddy/Documents/Food Delivery.nosync. Root is not a Git repository; children are. Executable tests: UITesting/src/test/java/com/fooddelivery/e2e/{base,pages,util,tests}; plan is documentation, not a second test implementation. Key helpers: SeededRiderDuty, LiveOrderFixture, OrderChatChecks, OrderMoneyChecks, RefundQuoteChecks, RefundRecoveryChecks. Target/lifecycle manifests must not be lost when switching agents; portable copies are in fixtures/.
 
 Relevant repositories: CustomerApplication (orders/refunds/consumer/ledger producer), PaymentGatewayIntegration (capture/refund provider mocks/consumer/webhook), LedgerService (double-entry/rejection/payout), CommunicationService (chat/WebSocket/outbox), DeliveryExecutiveApplication (duty/assignment/OTP/telemetry), RestaurantApplication, FoodDeliveryAppUI, CommonLibrary, IdentityService, ApiGateway, ConfigServer and Deployment. Confirm actual directory names via rg --files or directory inventory before opening guessed paths.
@@ -9,6 +11,8 @@ Historical reports: RandomDocuments/BackendIssues_2026-09-29, RandomDocuments/E2
 Dev URL at last verification: https://gulf-strike-dark-extras.trycloudflare.com/ . Resolve UITesting TestConfig plus E2E_APP_URL/-Dapp.url each time. The tunnel may change; do not embed it in individual test methods. Dev Autofill Code UI is mandatory for automated login.
 
 ## Focused commands, subject to current prerequisites
+
+**2026-10-07 (checkpoint129):** the order ids in the commands below were wiped by the owner's fresh install. For the current retained fixtures and a working command, see `RandomDocuments/PendingWork_2026-10-07/Item6_BacklogReconcile/README.md` §4.
 
 Run from UITesting. PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1 uses installed Chromium. Explicit phones reproduce owned state; choose current app.url. Do not run these while known fixture state is invalid. None creates another order when resume properties are present and manifests validate.
 

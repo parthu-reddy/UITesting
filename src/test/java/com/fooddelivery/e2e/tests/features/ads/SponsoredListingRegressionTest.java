@@ -21,7 +21,8 @@ import static org.assertj.core.api.Assertions.assertThat;
  * the listing the customer UI itself requested has no sponsored entry, every entry is a real outlet with
  * its city (the city the listing asks ads for), and Home renders no "Sponsored" badge. Read-only.
  */
-@Tag("business-platform") @Tag("bp-a2")
+@Tag("feature-ads")
+@Tag("feature-catalog")
 public class SponsoredListingRegressionTest extends TestBase {
 
     @Test void listingHasNoAdOnlyCard() {

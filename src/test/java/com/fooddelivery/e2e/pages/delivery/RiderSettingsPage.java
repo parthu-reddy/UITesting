@@ -20,12 +20,6 @@ public class RiderSettingsPage {
                 new Page.GetByRoleOptions().setName("Rider Settings").setExact(true)).isVisible();
     }
 
-    /** An unverified rider sees the takeover wizard instead: "Partner Onboarding" (RiderOnboardingWizard.tsx). */
-    public boolean isOnboardingWizardVisible() {
-        return page.getByRole(com.microsoft.playwright.options.AriaRole.HEADING,
-                new Page.GetByRoleOptions().setName("Partner Onboarding").setExact(true)).isVisible();
-    }
-
     public void fillVehicleNumber(String number) {
         page.locator("input[placeholder*='vehicle'], input[placeholder*='Vehicle']").first().fill(number);
     }

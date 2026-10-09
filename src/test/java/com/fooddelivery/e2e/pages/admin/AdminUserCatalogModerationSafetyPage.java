@@ -96,9 +96,11 @@ public final class AdminUserCatalogModerationSafetyPage {
                 .waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
     }
 
+    /** The selected user's status in the detail panel's "Status" card; list badges also read "Suspended". */
     public void waitForUserStatus(String status) {
-        page.getByText(status, new Page.GetByTextOptions().setExact(true)).waitFor(
-                new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
+        page.getByText("Status", new Page.GetByTextOptions().setExact(true)).locator("..")
+                .getByText(status, new Locator.GetByTextOptions().setExact(true))
+                .waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
     }
 
     public boolean isUserActionEnabled(String label) {

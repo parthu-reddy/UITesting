@@ -21,7 +21,8 @@ import static org.assertj.core.api.Assertions.assertThat;
  * O3 browser gate. The historical filename remains for plan compatibility, but this class uses
  * only visible applicant, customer, and admin controls.
  */
-@Tag("business-platform") @Tag("bp-o3")
+@Tag("feature-catalog")
+@Tag("feature-partner-onboarding")
 public class RestaurantApplicationApiTest extends PartnerApplicationsUiTestBase {
     @Test
     void restaurantApplicationLifecycle() {

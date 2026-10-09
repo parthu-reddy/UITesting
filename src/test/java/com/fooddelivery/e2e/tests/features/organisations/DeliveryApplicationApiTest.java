@@ -17,7 +17,7 @@ import static com.fooddelivery.e2e.util.BrowserTestData.phone;
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 /** Historical filename retained for the plan; the test is a browser-only O3 flow. */
-@Tag("business-platform") @Tag("bp-o3")
+@Tag("feature-partner-onboarding")
 public class DeliveryApplicationApiTest extends PartnerApplicationsUiTestBase {
     @Test
     void deliveryApplicationLifecycle() {

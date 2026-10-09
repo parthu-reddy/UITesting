@@ -33,7 +33,8 @@ import static org.assertj.core.api.Assertions.assertThat;
  * balanced ledger line and counts in performance; pausing takes it out of the listing.
  * Real sign-ins, gateway calls from the signed-in pages, no routed responses. The campaign is left PAUSED.
  */
-@Tag("business-platform") @Tag("bp-a3")
+@Tag("feature-ads")
+@Tag("feature-wallet")
 public class CampaignModerationActivationFlowTest extends TestBase {
 
     private static final String NEARBY = "/api/v1/restaurants/nearby";

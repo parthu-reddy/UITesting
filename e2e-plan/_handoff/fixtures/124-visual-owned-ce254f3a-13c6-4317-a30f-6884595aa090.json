@@ -17,5 +17,6 @@
       "state": "DELIVERED",
       "by": "invocation5 retained resume through rider UI"
     }
-  ]
+  ],
+  "wipedAt": "2026-10-07 (owner fresh installation; no longer exists on Dev)"
 }

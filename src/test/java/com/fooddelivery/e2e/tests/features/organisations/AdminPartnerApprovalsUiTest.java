@@ -18,7 +18,7 @@ import static com.fooddelivery.e2e.util.BrowserTestData.phone;
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 /** Admin review is driven entirely by the rendered partner-approvals interface. */
-@Tag("business-platform") @Tag("bp-o3")
+@Tag("feature-partner-onboarding")
 public class AdminPartnerApprovalsUiTest extends PartnerApplicationsUiTestBase {
     /** Read-only queue navigation remains testable while private storage setup is unavailable. */
     @Test
@@ -57,6 +57,7 @@ public class AdminPartnerApprovalsUiTest extends PartnerApplicationsUiTestBase {
                 .as("Queue response caused by the visible admin control").isEqualTo(200);
     }
 
+    @Tag("slow")
     @Test
     void privateReviewAndDecisions() {
         String restaurantPhone = phone("restaurant.admin", "9999");

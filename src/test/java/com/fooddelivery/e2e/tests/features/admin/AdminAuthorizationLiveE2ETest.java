@@ -11,7 +11,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 /** Non-staff cannot pass the rendered admin step-up. Direct endpoint probes are deferred. */
-@Tag("admin") @Tag("admin-authorization")
+@Tag("feature-admin-ops")
+@Tag("feature-auth")
 public class AdminAuthorizationLiveE2ETest extends TestBase {
     @ParameterizedTest(name="{0}: admin step-up denies non-staff") @ValueSource(strings={"CUSTOMER","RESTAURANT"})
     void nonStaffCannotPassAdministratorStepUp(String selected) {

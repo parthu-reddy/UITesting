@@ -1,5 +1,6 @@
 package com.fooddelivery.e2e.tests.features.admin;
 
+import com.fooddelivery.e2e.base.TestConfig;
 import com.fooddelivery.e2e.base.TestBase;
 import com.fooddelivery.e2e.pages.admin.AdminPortalPage;
 import com.fooddelivery.e2e.pages.admin.AdminSupportChatPage;
@@ -33,9 +34,9 @@ import static org.assertj.core.api.Assertions.assertThat;
  * message history, and the WebSocket are all served in the browser. No shared support ticket,
  * chat session, or message is created by this test.</p>
  */
-@Tag("admin")
-@Tag("admin-support-chat")
 @Tag("browser-routed")
+@Tag("feature-chat")
+@Tag("feature-refunds-support")
 public class AdminSupportChatIsolationRoutedUiTest extends TestBase {
 
     private static final String SUPPORT_TICKETS_PATH =
@@ -56,9 +57,10 @@ public class AdminSupportChatIsolationRoutedUiTest extends TestBase {
             "f1000000-0000-4000-8000-000000000401",
             "Fixture support ticket A",
             "Fixture history: ticket A only");
+    // The ticket list shows the first 8 characters of the order id; B's must differ from A's there.
     private static final TicketFixture TICKET_B = new TicketFixture(
             "f1000000-0000-4000-8000-000000000012",
-            "f1000000-0000-4000-8000-000000000102",
+            "f2000000-0000-4000-8000-000000000102",
             "f1000000-0000-4000-8000-000000000202",
             "f1000000-0000-4000-8000-000000000302",
             "f1000000-0000-4000-8000-000000000402",
@@ -285,6 +287,10 @@ public class AdminSupportChatIsolationRoutedUiTest extends TestBase {
                 }
             });
         });
+        // routeWebSocket only intercepts sockets in documents loaded after it is registered; the
+        // admin page is already loaded by login, so load Support Tickets again or /ws/chat reaches
+        // Dev. A reload would land on the fleet map and send its reads to the fixture.
+        adminPage.navigate(TestConfig.APP_URL + "/admin/support_tickets");
     }
 
     private String authenticatedAdminId() {
@@ -597,13 +603,15 @@ public class AdminSupportChatIsolationRoutedUiTest extends TestBase {
                         "createdAt": "%s",
                         "participants": [{
                           "userId": "%s",
+                          "entityId": "%s",
                           "entityType": "CUSTOMER",
                           "displayName": "Fixture customer"
                         }]
                       },
                       "timestamp": "%s"
                     }
-                    """.formatted(ticket.sessionId(), ticket.orderId(), FIXTURE_TIME, ticket.customerId(), FIXTURE_TIME);
+                    """.formatted(ticket.sessionId(), ticket.orderId(), FIXTURE_TIME, ticket.customerId(),
+                    ticket.customerId(), FIXTURE_TIME);
         }
 
         private static String imageUploadResponse(TicketFixture ticket) {

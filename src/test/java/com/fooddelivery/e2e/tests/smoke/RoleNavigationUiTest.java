@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 /** One person form on both viewports. Portal selection follows successful authentication. */
-@Tag("login-ui")
+@Tag("feature-auth")
 public class RoleNavigationUiTest extends TestBase {
     @ParameterizedTest(name="{0}px: one accessible person login") @ValueSource(ints={1280,390})
     void onePersonLoginOnBothViewports(int width) {

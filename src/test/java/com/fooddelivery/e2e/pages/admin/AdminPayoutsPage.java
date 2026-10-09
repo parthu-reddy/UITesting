@@ -54,10 +54,6 @@ public class AdminPayoutsPage {
         page.waitForTimeout(500);
     }
 
-    public void forceCreatePayout() {
-        page.locator("label:has-text('Force create')").first().locator("input[type='checkbox']").click();
-    }
-
     public void confirmCreateDraftPayout() {
         page.locator("button:has-text('Create Draft Payout')").first().click();
         page.waitForTimeout(1000);

@@ -7,8 +7,6 @@ import com.fooddelivery.e2e.pages.customer.CustomerCartDrawerPage;
 import com.fooddelivery.e2e.pages.customer.CustomerHomePage;
 import com.fooddelivery.e2e.pages.customer.CustomerMenuViewPage;
 import com.fooddelivery.e2e.pages.customer.CustomerOrderTrackerPage;
-import com.fooddelivery.e2e.pages.restaurant.RestaurantOrderActionsPage;
-import com.fooddelivery.e2e.pages.restaurant.RestaurantOrderQueuePage;
 import com.microsoft.playwright.Page;
 
 /**
@@ -48,91 +46,18 @@ public class StateSetupHelper {
             
             CustomerCartDrawerPage cart = new CustomerCartDrawerPage(page);
             cart.waitForCartOpen();
-            cart.checkout();
-            
-            CustomerOrderTrackerPage tracker = new CustomerOrderTrackerPage(page);
-            tracker.waitForTracker();
-            return new OrderSetupResult(tracker.getOrderId(), outletName);
-        } finally {
-            // Context stays open for reuse
-        }
-    }
+            // The id comes from this checkout's own response. Reading the tracker straight after checkout
+            // returned an older active order's id when the customer had one (2026-10-08, fast defaults).
+            com.microsoft.playwright.Response created = page.waitForResponse(r -> r.request().method().equals("POST")
+                    && UrlPaths.path(r.url()).equals("/api/v1/orders"), cart::checkout);
+            org.assertj.core.api.Assertions.assertThat(created.status()).isBetween(200, 299);
+            java.util.Map<?, ?> body = (java.util.Map<?, ?>) page.evaluate("text => JSON.parse(text)", created.text());
+            String orderId = (String) ((java.util.Map<?, ?>) body.get("data")).get("id");
+            System.out.println("[E2E ORDER] created " + orderId + " at " + outletName);
+            org.assertj.core.api.Assertions.assertThat(orderId).matches("[0-9a-fA-F-]{36}");
 
-    /**
-     * Rapidly accepts an order on behalf of the restaurant.
-     * This triggers the ORDER_ACCEPTED event, which in turn triggers the rider dispatch ping.
-     */
-    public static void acceptOrder(Page page, String restaurantPhone, String shortOrderId, String outletName) {
-        try {
-            page.navigate(TestConfig.APP_URL);
-            new LoginPage(page).login(restaurantPhone).openPortal(Portal.RESTAURANT);
-            
-            RestaurantOrderQueuePage orderQueue = new RestaurantOrderQueuePage(page);
-            orderQueue.waitForQueueLoad();
-            if (outletName != null) {
-                orderQueue.selectOutlet(outletName);
-                orderQueue.waitForQueueLoad();
-            }
-            
-            RestaurantOrderActionsPage actions = new RestaurantOrderActionsPage(page);
-            actions.acceptOrder(shortOrderId);
-        } finally {
-            // Context stays open for reuse
-        }
-    }
-
-    /**
-     * Rapidly prepares an order that has already been accepted.
-     */
-    public static String cookAndPrepareOrder(Page page, String shortOrderId) {
-        try {
-            RestaurantOrderActionsPage actions = new RestaurantOrderActionsPage(page);
-            actions.startCooking(shortOrderId);
-            actions.markPrepared(shortOrderId);
-            
-            return actions.getPickupOtp(shortOrderId);
-        } finally {
-            // Context stays open for reuse
-        }
-    }
-
-    /**
-     * Fetches the delivery OTP from a customer page that is already logged in.
-     * Navigates to the home page, clicks the active order tracker, and extracts the OTP.
-     */
-    public static String getDeliveryOtp(Page page, String customerPhone) {
-        try {
-            // Navigate to home — customer is already logged in from placeOrder
-            page.navigate(TestConfig.APP_URL);
-            page.waitForTimeout(3000); // Wait for dashboard + SSE to connect and push order state
-            
-            // Check if address modal is open and close it if present to avoid intercepting clicks
-            com.microsoft.playwright.Locator closeModal = page.locator("button[aria-label='Close dialog']").first();
-            try {
-                closeModal.waitFor(new com.microsoft.playwright.Locator.WaitForOptions().setTimeout(2000).setState(com.microsoft.playwright.options.WaitForSelectorState.VISIBLE));
-                closeModal.click();
-            } catch (Exception ignored) {}
-            
-            // If login screen appears (fresh context), log in
-            com.microsoft.playwright.Locator roleButton = page.locator("button:has-text('Order Food'):visible").first();
-            try {
-                roleButton.waitFor(new com.microsoft.playwright.Locator.WaitForOptions().setTimeout(3000).setState(com.microsoft.playwright.options.WaitForSelectorState.VISIBLE));
-                // Login screen is showing — need to log in
-                new LoginPage(page).login(customerPhone).openPortal(Portal.CUSTOMER);
-            } catch (Exception ignored) {
-                // Already logged in — proceed
-            }
-            
-            // Wait for dashboard to load and click on the active order tracking button
-            com.microsoft.playwright.Locator trackButton = page.locator("button[aria-label^='Track your order']").first();
-            trackButton.waitFor(new com.microsoft.playwright.Locator.WaitForOptions()
-                    .setState(com.microsoft.playwright.options.WaitForSelectorState.VISIBLE)
-                    .setTimeout(30000));
-            trackButton.click();
-            page.waitForTimeout(2000); // Let tracker load with latest state from SSE
-            
-            CustomerOrderTrackerPage tracker = new CustomerOrderTrackerPage(page);
-            return tracker.getDeliveryOtp();
+            new CustomerOrderTrackerPage(page, orderId).waitForTracker();
+            return new OrderSetupResult(orderId, outletName);
         } finally {
             // Context stays open for reuse
         }

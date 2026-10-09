@@ -21,7 +21,7 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Tag("ui-only")
-@Tag("customer-history")
+@Tag("feature-order-tracking")
 public class CustomerOrderHistoryUiTest extends TestBase {
 
     private CustomerOrderHistoryPage history;
@@ -108,6 +108,7 @@ public class CustomerOrderHistoryUiTest extends TestBase {
         assertThat(customerPage.locator("[data-testid='order-tracker'][data-order-id='" + fullId + "']")).isVisible();
     }
 
+    @Tag("feature-cancellation")
     @Test
     @DisplayName("HISTORY-06: A real restaurant-cancelled history row opens its exact terminal tracker")
     void cancelledHistoryRowOpensExactTerminalTracker() {
@@ -134,6 +135,7 @@ public class CustomerOrderHistoryUiTest extends TestBase {
         assertThat(customerPage.locator("[data-testid='customer-history-order'][data-order-id='" + fullId + "']")).isVisible();
     }
 
+    @Tag("auto-cancel")
     @Test
     @DisplayName("HISTORY: Loading another real page appends unique rows and preserves the first page")
     void historyPaginationPreservesRowsWithoutDuplicates() {
@@ -154,7 +156,7 @@ public class CustomerOrderHistoryUiTest extends TestBase {
     void successfulEmptyHistoryHasExplicitState() {
         customerPage.route("**/api/v1/orders/history**", route -> route.fulfill(new com.microsoft.playwright.Route.FulfillOptions()
                 .setStatus(200).setContentType("application/json")
-                .setBody("{\"success\":true,\"data\":{\"content\":[],\"last\":true,\"first\":true,\"totalElements\":0,\"totalPages\":0,\"number\":0,\"size\":10,\"numberOfElements\":0,\"empty\":true},\"message\":\"Order history retrieved\"}")));
+                .setBody("{\"success\":true,\"data\":{\"content\":[],\"last\":true,\"first\":true,\"totalElements\":0,\"totalPages\":0,\"number\":0,\"size\":10,\"numberOfElements\":0,\"empty\":true},\"message\":\"Order history retrieved\",\"timestamp\":\"2026-09-29T10:00:00Z\"}")));
         openHistory();
         assertThat(history.emptyState()).isVisible();
         assertThat(history.getOrderCount()).isZero();
@@ -229,12 +231,14 @@ public class CustomerOrderHistoryUiTest extends TestBase {
         return lines;
     }
 
+    @Tag("feature-cart-checkout")
     @Test
     @DisplayName("REORDER-01/02: A real completed order restores its current items and quantities into the cart without purchasing")
     void completedOrderReordersIntoTheCartWithoutSubmitting() {
         assertThat(reorderThroughLiveUi()).isNotEmpty();
     }
 
+    @Tag("feature-cart-checkout")
     @Test
     @DisplayName("REORDER UI contract: Declining replacement preserves the customer's edited cart")
     void decliningReorderReplacementPreservesEditedCart() {
@@ -254,6 +258,8 @@ public class CustomerOrderHistoryUiTest extends TestBase {
         assertThat(cart.getByLabel(name + " quantity", new Locator.GetByLabelOptions().setExact(true))).hasText(String.valueOf(edited));
     }
 
+    @Tag("feature-cart-checkout")
+    @Tag("feature-catalog")
     @Test
     @DisplayName("REORDER-03 UI contract: A currently closed outlet shows a warning without creating a cart")
     void closedReorderOutletShowsWarningWithoutCart() {
@@ -268,6 +274,7 @@ public class CustomerOrderHistoryUiTest extends TestBase {
         assertThat(customerPage.getByPlaceholder("Search restaurants or cuisines")).isVisible();
     }
 
+    @Tag("feature-cart-checkout")
     @Test
     @DisplayName("REORDER-03 UI contract: An out-of-area quote warns and leaves the cart untouched")
     void unavailableReorderQuoteShowsWarningWithoutCart() {
@@ -278,11 +285,13 @@ public class CustomerOrderHistoryUiTest extends TestBase {
         assertThat(customerPage.getByRole(AriaRole.DIALOG, new Page.GetByRoleOptions().setName("Your cart").setExact(true))).isHidden();
     }
 
+    @Tag("feature-cart-checkout")
+    @Tag("feature-catalog")
     @Test
     @DisplayName("REORDER UI contract: Missing catalogue items warn instead of silently building a partial cart")
     void missingReorderItemsShowWarningWithoutPartialCart() {
         customerPage.route("**/api/v1/restaurants/*/catalog/items", route -> route.fulfill(new com.microsoft.playwright.Route.FulfillOptions()
-                .setStatus(200).setContentType("application/json").setBody("{\"success\":true,\"data\":[],\"message\":\"Catalog retrieved\"}")));
+                .setStatus(200).setContentType("application/json").setBody("{\"success\":true,\"data\":[],\"message\":\"Menu items retrieved\",\"timestamp\":\"2026-09-29T10:00:00Z\"}")));
         firstReorder().click();
         assertThat(customerPage.getByText("Some items from this order are no longer available. Please choose from the current menu.", new Page.GetByTextOptions().setExact(true))).isVisible();
         assertThat(customerPage.getByRole(AriaRole.DIALOG, new Page.GetByRoleOptions().setName("Your cart").setExact(true))).isHidden();

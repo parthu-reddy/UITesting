@@ -1,0 +1,36 @@
+orderId=d3e0ebed-082b-4ccc-8d1b-eb4c73df282f
+stage=assigned
+viewport=390x844
+callTargets=2
+minTargetPx=48
+TODAY’S EARNINGS
+₹0.00
+TRIPS COMPLETED
+0 orders
+YOUR RATING
+Not rated yet
+Active Contract
+#d3e0ebed-082b-4ccc-8d1b-eb4c73df282f
+View order details
+Customer
+Click for Google Maps
+Restaurant
+Click for Google Maps
+Tap markers for Google Maps
+NAVIGATIONAL STEPS
+
+Step 1: Collect food packages
+
+A
+RESTAURANT ADDRESS
+Brand 1 Outlet 5
+B
+DELIVERY ADDRESS
+Customer 1
+
+121, Random Street 22, Bangalore, Karnataka - 560001
+
+Mark Arrived at Restaurant
+RESTAURANT HANDOVER OTP
+SLIDE TO CONFIRM PICKUP
+Abort Delivery (Emergency)

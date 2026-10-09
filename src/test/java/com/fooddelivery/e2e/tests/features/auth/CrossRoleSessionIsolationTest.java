@@ -23,7 +23,7 @@ import java.util.regex.Pattern;
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 @Tag("ui-only")
-@Tag("session-isolation")
+@Tag("feature-auth")
 public class CrossRoleSessionIsolationTest extends TestBase {
 
     private final List<String> pageErrors = new ArrayList<>();

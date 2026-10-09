@@ -29,7 +29,7 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
  * each payee exactly its quoted payout; a restaurant-fault partial refund books the restaurant its payout
  * less the clawback; a cancelled or rejected order books neither payee anything and shows a full refund.
  */
-@Tag("money")
+@Tag("feature-money-ledger")
 public class AdminOrderMoneyOutcomesTest extends TestBase {
 
     static java.util.stream.Stream<org.junit.jupiter.params.provider.Arguments> outcomes() {

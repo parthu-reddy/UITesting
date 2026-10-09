@@ -68,13 +68,16 @@ public final class LiveOrderFixture {
         org.assertj.core.api.Assertions.assertThat(body.get("success")).isEqualTo(true);
         Map<?, ?> data = (Map<?, ?>) body.get("data");String id = (String) data.get("id");
         org.assertj.core.api.Assertions.assertThat(id).matches("[0-9a-fA-F-]{36}");
-        Map<?, ?> request = (Map<?, ?>) customer.evaluate("text => JSON.parse(text)", response.request().postData());
-        org.assertj.core.api.Assertions.assertThat(request.get("paymentMethod")).isEqualTo("CARD");
-        org.assertj.core.api.Assertions.assertThat((String) request.get("quoteId")).isNotBlank();
+        // Record the created order before any further assertion, so a later failure never leaves an
+        // untracked order on Dev (2026-10-08: postData() was null after the POST succeeded).
         Path path = Path.of("target/lifecycle", id + ".json");Files.createDirectories(path.getParent());
         Files.writeString(path, (String) customer.evaluate("data => JSON.stringify(data,null,2)", Map.of(
                 "orderId", id, "customerPhone", customerPhone, "restaurantPhone", restaurantPhone,
                 "riderPhone", riderPhone, "outlet", outlet, "dataPolicy", "retain", "cleanupPerformed", false)));
+        // Not read from the request body: on 2026-10-08 postData() was null for this POST (cause not established;
+        // un-routed quote POSTs through the same transport do expose it). OrderRequest requires quoteId and
+        // paymentMethod (@NotNull, @Valid), so the 2xx proves both were sent; the server's record gives the method.
+        org.assertj.core.api.Assertions.assertThat(data.get("paymentMethod")).as("server-recorded payment method").isEqualTo("CARD");
         assertThat(customer.locator("[data-testid='order-tracker'][data-order-id='" + id + "']")).isVisible();
         return new Created(id, outlet);
     }

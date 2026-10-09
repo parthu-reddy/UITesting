@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 /** UI-only reload, logout, session isolation and portal access; backend probes are deferred. */
-@Tag("session-ui")
+@Tag("feature-auth")
 public class SessionUiTest extends TestBase {
     private Page pageFor(LoginSmokeTest.Account account) { return switch(account) {
         case CUSTOMER -> customerPage; case RESTAURANT -> restaurantPage; case DELIVERY -> riderPage; case ADMIN -> adminPage;
@@ -53,11 +53,13 @@ public class SessionUiTest extends TestBase {
         customerPage.navigate(TestConfig.APP_URL.replaceAll("/$","")+path); assertThat(customerPage).hasURL(Pattern.compile(".*/login$"));
         assertThat(customerPage.getByLabel("PHONE NUMBER",new Page.GetByLabelOptions().setExact(true))).isVisible();
     }
+    @Tag("feature-organisations")
     @ParameterizedTest(name="{0}: a partner person can also use Customer") @EnumSource(value=LoginSmokeTest.Account.class,names={"RESTAURANT","DELIVERY","ADMIN"})
     void authenticatedPartnerCanOpenCustomerPortal(LoginSmokeTest.Account account) {
         Page page=pageFor(account); login(page,account); new LoginPage(page).openPortal(Portal.CUSTOMER);
         assertThat(page.getByText("Deliver to",new Page.GetByTextOptions().setExact(true)).first()).isVisible();
     }
+    @Tag("feature-organisations")
     @ParameterizedTest(name="Customer-only person: {0} returns to portal availability") @ValueSource(strings={"/restaurant","/delivery"})
     void customerWithoutApprovalCannotOpenPartnerDashboard(String path) {
         new LoginPage(customerPage).login(testCustomerPhone).openPortal(Portal.CUSTOMER);

@@ -18,7 +18,7 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 import static org.assertj.core.api.Assertions.assertThat;
 
 /** Strict UI coverage for the seeded Brand 1 outlet selector. */
-@Tag("feature")
+@Tag("feature-catalog")
 public class OutletSelectionTest extends TestBase {
     private Locator outletDialog;
     private Locator outletChoices;
@@ -46,8 +46,7 @@ public class OutletSelectionTest extends TestBase {
                 route.fulfill(new com.microsoft.playwright.Route.FulfillOptions().setResponse(original).setBody(body));
             });
         }
-        customerPage.getByRole(AriaRole.BUTTON,
-                new Page.GetByRoleOptions().setName(Pattern.compile("Brand 1\\b"))).first().click();
+        new com.fooddelivery.e2e.pages.customer.NearbyOutletPage(customerPage).openBrandCard("Brand 1");
         customerPage.getByRole(AriaRole.BUTTON,
                 new Page.GetByRoleOptions().setName("Change outlet").setExact(true)).click();
         outletDialog = customerPage.getByRole(AriaRole.DIALOG);
@@ -113,6 +112,7 @@ public class OutletSelectionTest extends TestBase {
         assertThat(customerPage.locator("[data-menu-item]").first()).isVisible();
     }
 
+    @Tag("feature-cart-checkout")
     @Test
     @DisplayName("ADDRESS-15: Selected outlet persists while cart opens and closes")
     void outletPersistsDuringCartNavigation() {
@@ -135,6 +135,7 @@ public class OutletSelectionTest extends TestBase {
         assertThat(customerPage.locator("[data-menu-item]").first()).isVisible();
     }
 
+    @Tag("feature-addresses")
     @Test
     @DisplayName("ADDRESS-14: Home address remains selected after reload")
     void homeAddressPersistsAfterReload() {

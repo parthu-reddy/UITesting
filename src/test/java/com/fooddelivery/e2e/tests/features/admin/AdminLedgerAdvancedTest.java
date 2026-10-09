@@ -19,8 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Read-only checks for the Admin Ledger and payout navigation. Mutating payout actions require
  * a disposable financial fixture and are deliberately not exercised against shared Dev data.
  */
-@Tag("admin")
-@Tag("admin-ledger")
+@Tag("feature-money-ledger")
 public class AdminLedgerAdvancedTest extends TestBase {
 
     private AdminPortalPage portal;

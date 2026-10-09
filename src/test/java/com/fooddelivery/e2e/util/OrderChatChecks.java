@@ -2,7 +2,6 @@ package com.fooddelivery.e2e.util;
 
 import com.fooddelivery.e2e.pages.customer.CustomerOrderChatPage;
 import com.fooddelivery.e2e.pages.restaurant.RestaurantOrderActionsPage;
-import com.fooddelivery.e2e.util.CompletedDeliveryFixture;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.Response;
@@ -21,6 +20,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /** Shared assertions for the happy lifecycle; no order creation or standalone test. */
 public final class OrderChatChecks implements AutoCloseable {
+    /** The order a chat check runs on: its id and the outlet the restaurant side selects. */
+    private record ChatOrder(String orderId, String outletName) {
+        String shortOrderId() {
+            return orderId.substring(0, Math.min(8, orderId.length()));
+        }
+    }
+
     private final Page customer;
     private final Page restaurant;
     private final Page rider;
@@ -40,14 +46,14 @@ public final class OrderChatChecks implements AutoCloseable {
 
     /** The dispatch is accepted first, so chat checks cannot exhaust an offer's countdown. */
     public void afterDispatch(String orderId,String outlet) {
-        var order=new CompletedDeliveryFixture.Result(orderId,outlet);
+        var order=new ChatOrder(orderId,outlet);
         restaurantConversation=tryRestaurantRoundTrip(customer,restaurant,order,
                 customerTelemetry,restaurantTelemetry);
         riderConversation=tryRiderRoundTrip(customer,rider,order,customerTelemetry,riderTelemetry);
     }
 
     public void afterDelivery(String orderId,String outlet) {
-        deliveredConversation=trySendMessage(customer,new CompletedDeliveryFixture.Result(orderId,outlet),
+        deliveredConversation=trySendMessage(customer,new ChatOrder(orderId,outlet),
                 "E2E delivery-window check "+orderId.substring(0,8),customerTelemetry);
     }
 
@@ -87,7 +93,7 @@ public final class OrderChatChecks implements AutoCloseable {
         } else if(text.stripLeading().startsWith("ERROR")) telemetry.websocketState().set("STOMP ERROR");
     }
     private static ChatWindowAttempt tryChatWindowInteractions(
-            Page customerPage, Page restaurantPage, CompletedDeliveryFixture.Result order,
+            Page customerPage, Page restaurantPage, ChatOrder order,
             ChatTelemetry customerTelemetry, ChatTelemetry restaurantTelemetry,
             AtomicReference<WebSocketRoute> customerSocket, AtomicInteger customerSocketConnections,
             Consumer<Route> rejectInitialSession) {
@@ -305,7 +311,7 @@ public final class OrderChatChecks implements AutoCloseable {
     }
 
     private static ChatAttempt tryRestaurantRoundTrip(Page customerPage, Page restaurantPage,
-                                                      CompletedDeliveryFixture.Result order,
+                                                      ChatOrder order,
                                                       ChatTelemetry customerTelemetry,
                                                       ChatTelemetry restaurantTelemetry) {
         CustomerOrderChatPage customerChat = new CustomerOrderChatPage(customerPage);
@@ -377,7 +383,7 @@ public final class OrderChatChecks implements AutoCloseable {
     }
 
     private static ChatAttempt tryRiderRoundTrip(Page customerPage, Page riderPage,
-                                                 CompletedDeliveryFixture.Result order,
+                                                 ChatOrder order,
                                                  ChatTelemetry customerTelemetry,
                                                  ChatTelemetry riderTelemetry) {
         CustomerOrderChatPage customerChat = new CustomerOrderChatPage(customerPage);
@@ -452,7 +458,7 @@ public final class OrderChatChecks implements AutoCloseable {
         }
     }
 
-    private static ChatAttempt trySendMessage(Page customerPage, CompletedDeliveryFixture.Result order,
+    private static ChatAttempt trySendMessage(Page customerPage, ChatOrder order,
                                               String message, ChatTelemetry telemetry) {
         CustomerOrderChatPage customerChat = new CustomerOrderChatPage(customerPage);
         Integer customerSessionStatus = null;

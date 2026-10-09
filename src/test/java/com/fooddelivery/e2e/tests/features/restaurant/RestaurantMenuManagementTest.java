@@ -10,7 +10,7 @@ import org.junit.jupiter.api.*;
 /**
  * Tests restaurant menu management: toggle item availability.
  */
-@Tag("feature")
+@Tag("feature-catalog")
 public class RestaurantMenuManagementTest extends TestBase {
 
     @Test

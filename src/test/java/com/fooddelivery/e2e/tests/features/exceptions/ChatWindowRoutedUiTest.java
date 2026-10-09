@@ -25,9 +25,8 @@ import java.util.concurrent.atomic.AtomicReference;
  * tests therefore exercise the real browser UI without creating an order or calling the chat
  * service.</p>
  */
-@Tag("feature")
-@Tag("chat")
 @Tag("browser-routed")
+@Tag("feature-chat")
 public class ChatWindowRoutedUiTest extends TestBase {
 
     private static final String ORDER_ID = "c1000000-0000-4000-8000-000000000001";
@@ -261,17 +260,18 @@ public class ChatWindowRoutedUiTest extends TestBase {
                     "createdAt": "%s",
                     "participants": [{
                       "userId": "%s",
+                      "entityId": "%s",
                       "entityType": "CUSTOMER",
                       "displayName": "Fixture customer"
                     }, {
-                      "userId": "%s",
+                      "entityId": "%s",
                       "entityType": "RESTAURANT",
                       "displayName": "Fixture restaurant"
                     }]
                   },
                   "timestamp": "%s"
                 }
-                """.formatted(SESSION_ID, ORDER_ID, FIXTURE_TIME, customerId, RESTAURANT_ID, FIXTURE_TIME);
+                """.formatted(SESSION_ID, ORDER_ID, FIXTURE_TIME, customerId, customerId, RESTAURANT_ID, FIXTURE_TIME);
     }
 
     private static String failedSessionResponse() {

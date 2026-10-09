@@ -78,7 +78,7 @@ Earlier cleanup/retirement evidence below describes past runs before this instru
 
 ## Deferred duration and rate-limit cases
 
-The user requested deferral on 2026-10-01. Natural OTP expiry is implemented, opt-in and listed in DEFERRED-WAIT-TESTS.md. Rate-limit UI/backend cases are implemented, opt-in and listed in DEFERRED-RATE-LIMIT-TESTS.md. Do not execute either group during the current Dev feature audit or count them as passing. Dev raises limits to one million, so production thresholds must not be applied to this target.
+The user requested deferral on 2026-10-01. Natural OTP expiry moved to IdentityService AuthServiceTest on 2026-10-08 (see DEFERRED-WAIT-TESTS.md); the 305 s E2E is deleted. Rate-limit UI/backend cases are implemented, opt-in and listed in DEFERRED-RATE-LIMIT-TESTS.md. Do not execute either group during the current Dev feature audit or count them as passing. Dev raises limits to one million, so production thresholds must not be applied to this target.
 
 ## Current fast coverage review
 

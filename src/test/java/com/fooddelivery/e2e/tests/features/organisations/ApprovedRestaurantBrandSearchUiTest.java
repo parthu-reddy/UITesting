@@ -18,7 +18,8 @@ import static com.fooddelivery.e2e.util.BrowserTestData.phone;
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
 /** Read-only regression against the retained, previously approved O3 applicant. */
-@Tag("business-platform") @Tag("bp-o3")
+@Tag("feature-catalog")
+@Tag("feature-partner-onboarding")
 public class ApprovedRestaurantBrandSearchUiTest extends PartnerApplicationsUiTestBase {
     @Test
     void findsRenamedBrandAndKeepsOutletSearch() {

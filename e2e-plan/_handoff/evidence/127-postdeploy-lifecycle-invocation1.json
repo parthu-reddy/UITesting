@@ -1,0 +1,17 @@
+{
+  "recordedAt": "2026-10-07T13:42+05:30",
+  "test": "HappyDeliveryFlowTest#completeOrderLifecycle [post-deploy active visual]",
+  "invocation": 1,
+  "proofType": "deployed normal UI attempt; failed at first login",
+  "tests": 1,
+  "passed": 0,
+  "failures": 1,
+  "errors": 0,
+  "skipped": 0,
+  "elapsedSeconds": 9.094,
+  "newOrderCreated": false,
+  "failure": "LoginPage.waitForLoginComplete: UI error 'The sign-in response could not be read' (auth response was not the JSON envelope) for customer 8000000001",
+  "followUp": "At 08:10Z GET /api/v1/auth/dev/otp and /api/v1/restaurants/nearby returned JSON 400s via the gateway; consistent with services still starting after the fresh install, not proven",
+  "rawLog": "/private/tmp/food-pending-item3-postdeploy-lifecycle1.log",
+  "rawLogSha256": "139394ce4f3fd40fcca153f10d5e2302d3e446e9d17e209defbedc78125ae715"
+}

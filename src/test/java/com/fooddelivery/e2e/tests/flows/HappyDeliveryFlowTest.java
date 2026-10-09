@@ -33,8 +33,11 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
  * across 3 separate browser contexts using the deployed polling and live-update paths.
  * </p>
  */
-@Tag("flow")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@Tag("feature-cart-checkout")
+@Tag("feature-order-tracking")
+@Tag("feature-restaurant-orders")
+@Tag("feature-rider-delivery")
 public class HappyDeliveryFlowTest extends TestBase {
 
     private SeededRiderDuty duty;
@@ -45,6 +48,7 @@ public class HappyDeliveryFlowTest extends TestBase {
     private AutomaticCustomerProgress customerProgress;
     private String streamStage = "login";
     private final java.util.List<Map<String, Object>> customerMapStreams = new java.util.ArrayList<>();
+    private final com.fooddelivery.e2e.util.RouteNumericObserver routes = new com.fooddelivery.e2e.util.RouteNumericObserver();
     private final java.util.List<Map<String, Object>> riderTelemetry = new java.util.ArrayList<>();
     private java.util.List<Map<String, Object>> customerMapPoints = java.util.List.of();
     private final java.util.List<Map<String, Object>> streamResponses = new java.util.ArrayList<>();
@@ -103,6 +107,7 @@ public class HappyDeliveryFlowTest extends TestBase {
             })();
             """);
         // Observe responses only. Never persist request headers, tokens, OTPs or response bodies.
+        routes.attach(riderPage, "rider").attach(customerPage, "customer");
         customerPage.onResponse(response -> {
             String path = com.fooddelivery.e2e.util.UrlPaths.path(response.url());
             if (path != null && path.endsWith("/live-tracking")) {
@@ -163,6 +168,8 @@ public class HappyDeliveryFlowTest extends TestBase {
                                 "streams", customerMapStreams, "points", customerMapPoints, "telemetry", riderTelemetry,
                                 "wire", customerPage.evaluate("() => window.__mapWire || []"))));
                 Files.writeString(evidence, (String) riderPage.evaluate("data => JSON.stringify(data,null,2)", streamResponses));
+                Files.writeString(Path.of("target/lifecycle", expectedOrderId + "-route.json"),
+                        (String) customerPage.evaluate("data => JSON.stringify(data,null,2)", routes.summary(customerPage)));
                 if (customerProgress != null) Files.writeString(Path.of("target/lifecycle", expectedOrderId + "-progress.json"),
                         (String) customerPage.evaluate("data => JSON.stringify(data,null,2)", customerProgress.observations()));
             }
@@ -177,6 +184,36 @@ public class HappyDeliveryFlowTest extends TestBase {
             }
             if(duty!=null) duty.close();
         }
+    }
+
+    /** Rider visual audit at the rider's current emulated position: LiveCustomerMap moves it. */
+    private void captureRider(String orderId, String stage) {
+        double lat = TestConfig.GEO_LAT, lng = TestConfig.GEO_LNG;
+        if (!customerMapPoints.isEmpty()) {
+            Map<String, Object> latest = customerMapPoints.get(customerMapPoints.size() - 1);
+            lat = ((Number) latest.get("lat")).doubleValue();
+            lng = ((Number) latest.get("lng")).doubleValue();
+        }
+        com.fooddelivery.e2e.util.RiderVisualAudit.capture(riderPage, orderId, stage, lat, lng);
+    }
+
+    /** The trip's details modal shows the same server net payout as its row, never the customer's fee. */
+    private void assertTripDetailsPayout(Locator trip, String orderId, double payout) {
+        trip.click();
+        Locator details = riderPage.getByRole(AriaRole.DIALOG,
+                new Page.GetByRoleOptions().setName("Order #" + orderId.substring(0, 8)));
+        Locator netPayout = details.getByText("Your net payout",
+                new Locator.GetByTextOptions().setExact(true)).locator("..");
+        assertThat(netPayout).containsText("₹");
+        org.assertj.core.api.Assertions.assertThat(parseInr(netPayout.innerText()))
+                .as("details net payout").isEqualTo(payout);
+        details.getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Close").setExact(true)).click();
+        assertThat(details).isHidden();
+    }
+
+    /** Rupees as whole paise: 42.32 + 21.16 is 63.480000000000004 in double and never >= 63.48. */
+    private static long paise(double rupees) {
+        return Math.round(rupees * 100);
     }
 
     private static double parseInr(String text) {
@@ -200,6 +237,8 @@ public class HappyDeliveryFlowTest extends TestBase {
 
     private void resumeAssignedOrder(String orderId, String outletName) {
         String shortOrderId = orderId.substring(0, Math.min(8, orderId.length()));
+        com.fooddelivery.e2e.util.LiveArrivalEstimate liveEta =
+                new com.fooddelivery.e2e.util.LiveArrivalEstimate(customerPage, riderPage, orderId);
         Locator activeHeading = riderPage.getByRole(AriaRole.HEADING,
                 new Page.GetByRoleOptions().setName("Active Contract").setExact(true));
         Locator dispatchOffer = riderPage.getByRole(AriaRole.ALERT)
@@ -235,6 +274,14 @@ public class HappyDeliveryFlowTest extends TestBase {
                 new Page.WaitForConditionOptions().setTimeout(15000));
         DeliveryActiveJobPage activeJob = new DeliveryActiveJobPage(riderPage);
         if (!riderPage.getByPlaceholder("Ask customer for 6-digit OTP").isVisible()) {
+            // Pre-pickup retained order: audit the assigned stage before anything advances it.
+            captureRider(orderId, "assigned");
+            if (riderPage.getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions()
+                    .setName("Mark Arrived at Restaurant").setExact(true)).isVisible()) {
+                // A5b: still ASSIGNED (not at the outlet) -- the estimate is live from the rider.
+                showOwnedCustomerTracker(orderId, outletName);
+                liveEta.awaitLive("ASSIGNED", TestConfig.GEO_LAT, TestConfig.GEO_LNG);
+            }
             RestaurantDashboardPage restaurantDashboard = new RestaurantDashboardPage(restaurantPage);
             restaurantDashboard.selectOutlet(outletName);
             restaurantDashboard.openOrdersTab();
@@ -278,19 +325,10 @@ public class HappyDeliveryFlowTest extends TestBase {
         assertThat(riderPage.getByPlaceholder("Ask customer for 6-digit OTP")).isVisible();
         // A retained order resumes after a fresh rider load, the same state the main flow
         // audits after its delivery-phase reload. A no-op unless -Dvisual.audit.dir is set.
-        com.fooddelivery.e2e.util.RiderVisualAudit.capture(riderPage, orderId, "out-for-delivery");
+        captureRider(orderId, "out-for-delivery");
 
-        customerPage.reload();
-        // Login/reload can restore a different active order. Choose the owned one through the UI
-        // before reading its code; never take the first OTP from another order.
-        customerPage.getByTestId("order-tracker").first().waitFor();
+        Map<?, ?> ownedOrder = showOwnedCustomerTracker(orderId, outletName);
         Locator ownedCustomerTracker = customerPage.locator("[data-testid='order-tracker'][data-order-id='" + orderId + "']");
-        if (!ownedCustomerTracker.isVisible()) {
-            customerPage.setViewportSize(1100, 900);
-            customerPage.getByRole(AriaRole.COMBOBOX, new Page.GetByRoleOptions().setName("Which order to track").setExact(true)).click();
-            customerPage.getByRole(AriaRole.OPTION).filter(new Locator.FilterOptions().setHasText(outletName)).click();
-        }
-        assertThat(ownedCustomerTracker).isVisible();
         if (Boolean.getBoolean("resume.verify.customer.map")) {
             CustomerOrderTrackerPage details = new CustomerOrderTrackerPage(customerPage, orderId);
             org.assertj.core.api.Assertions.assertThat(parseInr(details.getTotalPaid())).isPositive();
@@ -306,6 +344,11 @@ public class HappyDeliveryFlowTest extends TestBase {
                 org.assertj.core.api.Assertions.assertThat((String) stream.get("contentType")).startsWith("text/event-stream");
             }
         }
+        // A5b: the rider has the food -- live to the door; at the door it falls to arriving now.
+        double moved = customerMapPoints.isEmpty() ? 0 : 0.00001; // LiveCustomerMap moved the rider 1 m
+        liveEta.awaitLive("OUT_FOR_DELIVERY", TestConfig.GEO_LAT + moved, TestConfig.GEO_LNG + moved);
+        liveEta.moveRiderAndAwaitArrivalWithin("AT_DOOR", ((Number) ownedOrder.get("deliveryLat")).doubleValue(),
+                ((Number) ownedOrder.get("deliveryLng")).doubleValue(), 120);
         String deliveryOtp = ownedCustomerTracker.getByTestId("delivery-code").innerText().trim();
         org.assertj.core.api.Assertions.assertThat(deliveryOtp).matches("[0-9]{6}");
         activeJob.enterDeliveryOtp(deliveryOtp);
@@ -322,10 +365,11 @@ public class HappyDeliveryFlowTest extends TestBase {
         assertThat(completedTrip).containsText(outletName);
         double recordedPayout = parseInr(completedTrip.innerText());
         org.assertj.core.api.Assertions.assertThat(recordedPayout).isPositive();
+        assertTripDetailsPayout(completedTrip, orderId, recordedPayout);
         riderPage.getByRole(AriaRole.HEADING,
                         new Page.GetByRoleOptions().setName("Completed Deliveries").setExact(true))
                 .locator("..").getByRole(AriaRole.BUTTON).click();
-        riderPage.waitForCondition(() -> parseInr(todayEarnings.innerText()) >= earningsBefore + recordedPayout,
+        riderPage.waitForCondition(() -> paise(parseInr(todayEarnings.innerText())) >= paise(earningsBefore) + paise(recordedPayout),
                 new Page.WaitForConditionOptions().setTimeout(30000));
         Locator receipt = customerPage.locator("[data-testid='order-tracker'][data-order-id='" + orderId + "']")
                 .filter(new Locator.FilterOptions().setHas(customerPage.getByRole(AriaRole.HEADING,
@@ -343,6 +387,29 @@ public class HappyDeliveryFlowTest extends TestBase {
         for (Map<String, Object> event : ownedStreams) org.assertj.core.api.Assertions.assertThat(event.get("status"))
                 .as("resumed order's authorised stream %s", event).isEqualTo(200);
         }
+    }
+
+    /**
+     * Reloads the customer's page, keeps this order's row from its own /orders/active read, and
+     * selects its tracker. Login/reload can restore a different active order; never act on another.
+     */
+    private Map<?, ?> showOwnedCustomerTracker(String orderId, String outletName) {
+        Response active = customerPage.waitForResponse(response -> response.request().method().equals("GET")
+                && "/api/v1/orders/active".equals(com.fooddelivery.e2e.util.UrlPaths.path(response.url())), customerPage::reload);
+        org.assertj.core.api.Assertions.assertThat(active.status()).isEqualTo(200);
+        Map<?, ?> envelope = (Map<?, ?>) customerPage.evaluate("text => JSON.parse(text)", active.text());
+        Map<?, ?> row = ((java.util.List<?>) ((Map<?, ?>) envelope.get("data")).get("content")).stream()
+                .map(r -> (Map<?, ?>) r).filter(r -> orderId.equals(r.get("id"))).findFirst()
+                .orElseThrow(() -> new AssertionError("Resumed order is not among the customer's active orders"));
+        customerPage.getByTestId("order-tracker").first().waitFor();
+        Locator owned = customerPage.locator("[data-testid='order-tracker'][data-order-id='" + orderId + "']");
+        if (!owned.isVisible()) {
+            customerPage.setViewportSize(1100, 900);
+            customerPage.getByRole(AriaRole.COMBOBOX, new Page.GetByRoleOptions().setName("Which order to track").setExact(true)).click();
+            customerPage.getByRole(AriaRole.OPTION).filter(new Locator.FilterOptions().setHasText(outletName)).click();
+        }
+        assertThat(owned).isVisible();
+        return row;
     }
 
     /** Continue financial/quote checks on this audit's delivered manifest without an order POST. */
@@ -385,6 +452,7 @@ public class HappyDeliveryFlowTest extends TestBase {
                         .filter(new Locator.FilterOptions().setHasText("Delivered"));
                 assertThat(trip).isVisible();
                 double payout=parseInr(trip.innerText());
+                assertTripDetailsPayout(trip,id,payout);
                 loginAsAdmin();
                 com.fooddelivery.e2e.util.OrderMoneyChecks.verify(adminPage,id,order,payout,(String)manifest.get("outlet"));
             }
@@ -404,6 +472,9 @@ public class HappyDeliveryFlowTest extends TestBase {
         return com.fooddelivery.e2e.util.OrderMoneyChecks.parseInr(value.locator("..").locator("..").innerText());
     }
 
+    @Tag("slow")
+    @Tag("feature-chat")
+    @Tag("feature-money-ledger")
     @Test
     @Order(1)
     @DisplayName("Complete order lifecycle: Customer → Restaurant → Rider → Delivered")
@@ -603,7 +674,7 @@ public class HappyDeliveryFlowTest extends TestBase {
         assertThat(riderPage.getByRole(AriaRole.BUTTON,
                 new Page.GetByRoleOptions().setName("Mark Arrived at Restaurant").setExact(true))).isVisible();
 
-        com.fooddelivery.e2e.util.RiderVisualAudit.capture(riderPage, orderId, "assigned");
+        captureRider(orderId, "assigned");
 
         // Prove the first authorised subscription succeeds before navigation can abort it.
         // A later successful reload subscription alone does not cover the acceptance race.
@@ -615,6 +686,11 @@ public class HappyDeliveryFlowTest extends TestBase {
         customerProgress = new AutomaticCustomerProgress(customerPage, orderId);
         customerProgress.orderStatus("ACCEPTED");
         customerProgress.deliveryLabel("Courier assigned");
+        // A5b: with the rider assigned and the food not yet collected, the estimate is live from the
+        // rider's position (road time to the outlet, the kitchen's ready time, then the drive).
+        com.fooddelivery.e2e.util.LiveArrivalEstimate liveEta =
+                new com.fooddelivery.e2e.util.LiveArrivalEstimate(customerPage, riderPage, orderId);
+        liveEta.awaitLive("ASSIGNED", TestConfig.GEO_LAT, TestConfig.GEO_LNG);
         assertThat(orderActions.orderCard(orderId)).hasAttribute("data-status", "ACCEPTED");
         chatChecks.afterDispatch(orderId,selectedOutlet);
         com.fooddelivery.e2e.util.RestaurantAcceptanceChecks.afterAcceptReload(restaurantPage,orderId,selectedOutlet);
@@ -670,6 +746,13 @@ public class HappyDeliveryFlowTest extends TestBase {
         }
         }
 
+        // A5b: the rider has the food -- live from their position to the door; then at the door it
+        // falls to arriving now. The rider moves only through their browser's geolocation.
+        double moved = SSE_ENABLED ? 0.00001 : 0; // LiveCustomerMap moved the rider 1 m when it ran
+        liveEta.awaitLive("OUT_FOR_DELIVERY", TestConfig.GEO_LAT + moved, TestConfig.GEO_LNG + moved);
+        liveEta.moveRiderAndAwaitArrivalWithin("AT_DOOR", ((Number) order.get("deliveryLat")).doubleValue(),
+                ((Number) order.get("deliveryLng")).doubleValue(), 120);
+
         assertThat(riderPage.getByText("Step 2: Deliver to door",
                 new Page.GetByTextOptions().setExact(true))).isVisible();
         assertThat(riderPage.getByText("Package Picked Up",
@@ -687,7 +770,7 @@ public class HappyDeliveryFlowTest extends TestBase {
         assertThat(riderPage.getByPlaceholder("Ask customer for 6-digit OTP")).isVisible();
 
         // ── Step 12: Get customer delivery OTP ────────────────────────────
-        com.fooddelivery.e2e.util.RiderVisualAudit.capture(riderPage, orderId, "out-for-delivery");
+        captureRider(orderId, "out-for-delivery");
         System.out.println("═══ STEP 12: Getting customer delivery OTP ═══");
         String deliveryOtp = tracker.getDeliveryOtp();
         assertThat(deliveryOtp).isNotEmpty().hasSize(6);
@@ -719,16 +802,19 @@ public class HappyDeliveryFlowTest extends TestBase {
         org.assertj.core.api.Assertions.assertThat(recordedPayout)
                 .as("completed-trip net payout should be positive")
                 .isPositive();
+        assertTripDetailsPayout(completedTrip, orderId, recordedPayout);
+        // M1: the maps provider's numeric route totals reach the route responses the UI requested.
+        routes.assertNumeric(customerPage, Path.of("target/lifecycle", orderId + "-route.json"));
 
         riderPage.getByRole(AriaRole.HEADING,
                         new Page.GetByRoleOptions().setName("Completed Deliveries").setExact(true))
                 .locator("..").getByRole(AriaRole.BUTTON).click();
-        riderPage.waitForCondition(() -> parseInr(todayEarnings.innerText()) >= earningsBefore + recordedPayout,
+        riderPage.waitForCondition(() -> paise(parseInr(todayEarnings.innerText())) >= paise(earningsBefore) + paise(recordedPayout),
                 new Page.WaitForConditionOptions().setTimeout(30000));
         double earningsAfter = parseInr(todayEarnings.innerText());
-        org.assertj.core.api.Assertions.assertThat(earningsAfter)
+        org.assertj.core.api.Assertions.assertThat(paise(earningsAfter))
                 .as("today's earnings after exact completed delivery")
-                .isGreaterThanOrEqualTo(earningsBefore + recordedPayout);
+                .isGreaterThanOrEqualTo(paise(earningsBefore) + paise(recordedPayout));
 
         Locator deliveredSummary = customerPage.locator(
                 "[data-testid='order-tracker'][data-order-id='"+orderId+"']")
@@ -789,6 +875,7 @@ public class HappyDeliveryFlowTest extends TestBase {
         System.out.println("════════════════════════════════════════");
     }
 
+    @Tag("slow")
     @Test
     @Order(2)
     @DisplayName("CROSS-15: overlapping orders from two brands remain independently tracked")
@@ -802,6 +889,8 @@ public class HappyDeliveryFlowTest extends TestBase {
         new RestaurantDashboardPage(restaurantPage).waitForDashboard();
         Page originalCustomer = customerPage;
         Page originalRestaurant = restaurantPage;
+        // resumeAssignedOrder sends the after-delivery chat from the pages these checks observe; one set per customer.
+        chatChecks = new com.fooddelivery.e2e.util.OrderChatChecks(customerPage, restaurantPage, riderPage);
         String secondRestaurantPhone = System.getProperty("concurrent.restaurant.phone", "9000000002");
         org.assertj.core.api.Assertions.assertThat(secondRestaurantPhone).isNotEqualTo(testRestaurantPhone);
         try (var secondCustomerContext = browser.newContext(new com.microsoft.playwright.Browser.NewContextOptions()
@@ -889,6 +978,7 @@ public class HappyDeliveryFlowTest extends TestBase {
                     .hasAttribute("data-status", "CREATED");
             // Preserve the exact first receipt in its browser while progressing the second order.
             customerPage = secondCustomer;restaurantPage = secondRestaurant;expectedOrderId = second.id();
+            chatChecks = new com.fooddelivery.e2e.util.OrderChatChecks(secondCustomer, secondRestaurant, riderPage);
             RestaurantOrderActionsPage secondActions = new RestaurantOrderActionsPage(restaurantPage);
             secondActions.acceptOrder(second.id());secondActions.startCooking(second.id());secondActions.markPrepared(second.id());
             resumeAssignedOrder(second.id(), second.outlet());

@@ -1,0 +1,21 @@
+{
+  "cleanupPerformed": false,
+  "dataPolicy": "retain",
+  "riderPhone": "7000000001",
+  "outlet": "Brand 1 Outlet 5",
+  "customerPhone": "8000000001",
+  "orderId": "f3b3d38b-6e4f-4ff7-a26f-1264e775c267",
+  "restaurantPhone": "9000000001",
+  "history": [
+    {
+      "at": "2026-10-07T17:14+05:30",
+      "state": "DELIVERED",
+      "by": "A5b phase4 lifecycle invocation3 (resume of the same order)"
+    },
+    {
+      "at": "2026-10-07T17:25+05:30",
+      "state": "HANDED_OVER/DELIVERED",
+      "by": "item6 read-only customer_db check (orders.status/delivery_status)"
+    }
+  ]
+}

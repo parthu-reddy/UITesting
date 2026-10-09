@@ -2,7 +2,9 @@ package com.fooddelivery.e2e.util;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
+import com.fooddelivery.e2e.base.TestConfig;
 import com.microsoft.playwright.options.AriaRole;
+import com.microsoft.playwright.options.Geolocation;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -16,9 +18,24 @@ public final class RiderVisualAudit {
     private RiderVisualAudit() {}
 
     public static void capture(Page page, String orderId, String stage) {
+        capture(page, orderId, stage, TestConfig.GEO_LAT, TestConfig.GEO_LNG);
+    }
+
+    /** {@code lat}/{@code lng} is the rider's current emulated position (moved by LiveCustomerMap). */
+    public static void capture(Page page, String orderId, String stage, double lat, double lng) {
         String directory = System.getProperty("visual.audit.dir", "").trim();
         if (directory.isEmpty()) return;
+        // Playwright's emulated GPS is one static fix stamped when it is set, and it never yields
+        // another. The map accepts a cached fix up to 60s old, then waits for a fresh one that never
+        // comes (2026-10-07 probe: a 70s-old fix timed out with code 3; the same fix re-applied
+        // placed the courier at once). A real device keeps producing fixes, so give the page a
+        // current one and remount the map with it; the reload restores the server-backed job.
+        // The phone size comes first: a map built at desktop width and shrunk while still loading
+        // left every pin outside the 333px map (2026-10-07, f01c1e92). A phone builds it at size.
         page.setViewportSize(390, 844);
+        page.context().setGeolocation(new Geolocation(lat, lng));
+        page.reload();
+        assertThat(page.getByText("#" + orderId, new Page.GetByTextOptions().setExact(true))).isVisible();
         Locator main = page.getByRole(AriaRole.MAIN,
                 new Page.GetByRoleOptions().setName("Delivery").setExact(true));
         Locator shell = main.locator("xpath=../..");
@@ -55,6 +72,20 @@ public final class RiderVisualAudit {
             assertThat(map.getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions()
                     .setName("Open directions to " + destination).setExact(true))).isVisible();
         }
+        // isVisible ignores clipping. Before MapLibre's first render the pins sit outside the map
+        // box and the capture shows an empty map (2026-10-07, d3e0ebed). Wait until the courier's
+        // centre and part of each directions popup are drawn inside the visible map.
+        page.waitForCondition(() -> (Boolean) map.evaluate("region => {"
+                + "const r = region.getBoundingClientRect();"
+                + "const box = el => el && el.getBoundingClientRect();"
+                + "const centred = b => !!b && b.width > 0 && b.left + b.width / 2 >= r.left"
+                + "  && b.left + b.width / 2 <= r.right && b.top + b.height / 2 >= r.top && b.top + b.height / 2 <= r.bottom;"
+                + "const overlaps = b => !!b && b.width > 0 && b.right > r.left && b.left < r.right"
+                + "  && b.bottom > r.top && b.top < r.bottom;"
+                + "return centred(box(region.querySelector('[aria-label=\"Courier location\"]')))"
+                + "  && ['Customer', 'Restaurant'].every(d =>"
+                + "    overlaps(box(region.querySelector('[aria-label=\"Open directions to ' + d + '\"]')))); }"),
+                new Page.WaitForConditionOptions().setTimeout(15000));
         Locator swipe = main.getByRole(AriaRole.SLIDER,
                 new Locator.GetByRoleOptions().setName(Pattern.compile(stage.equals("assigned")
                         ? "^Slide to confirm pickup$" : "^Slide to deliver")));

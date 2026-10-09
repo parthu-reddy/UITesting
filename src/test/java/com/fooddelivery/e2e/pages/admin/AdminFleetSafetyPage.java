@@ -39,14 +39,15 @@ public final class AdminFleetSafetyPage {
                 new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
     }
 
+    /** "Fleet city" is the shared ARIA combobox/listbox (no native select): open it, pick the option. */
     public void selectFleetCity(String cityId) {
-        fleetCitySelector().selectOption(cityId);
+        fleetCitySelector().click();
+        page.getByRole(AriaRole.OPTION, new Page.GetByRoleOptions().setName(cityId).setExact(true)).click();
     }
 
     public void waitForFleetCity(String cityId) {
-        fleetCitySelector().waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
-        page.waitForCondition(() -> cityId.equals(fleetCitySelector().inputValue()),
-                new Page.WaitForConditionOptions().setTimeout(10_000));
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(fleetCitySelector())
+                .hasText(cityId, new com.microsoft.playwright.assertions.LocatorAssertions.HasTextOptions().setTimeout(10_000));
     }
 
     public void waitForFixtureMarkerCount(int expectedCount) {

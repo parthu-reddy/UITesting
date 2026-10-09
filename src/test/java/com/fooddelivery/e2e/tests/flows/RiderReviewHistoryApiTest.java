@@ -20,7 +20,8 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /** Read-only rider history checks used by the cross-role review journey. */
-@Tag("review")
+@Tag("feature-reviews")
+@Tag("feature-rider-delivery")
 public class RiderReviewHistoryApiTest extends TestBase {
 
     @Test

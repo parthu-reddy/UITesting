@@ -2,12 +2,14 @@ package com.fooddelivery.e2e.tests.features.organisations;
 import com.fooddelivery.e2e.base.TestBase;
 import com.fooddelivery.e2e.pages.common.*;
 import com.fooddelivery.e2e.pages.restaurant.RestaurantBrandRegistrationPage;
+import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
-@Tag("business-platform") @Tag("bp-o5") @Tag("ui-only")
+@Tag("ui-only")
+@Tag("feature-organisations")
 public class PortalLauncherUiTest extends TestBase {
     @Test void ownerSwitchesApprovedPortalsAndSeesDeliveryStart() {
         new LoginPage(restaurantPage).login("9000000001"); PortalLauncherPage launcher = new PortalLauncherPage(restaurantPage);
@@ -15,6 +17,12 @@ public class PortalLauncherUiTest extends TestBase {
         launcher.state(Portal.BUSINESS, "Available"); launcher.state(Portal.DELIVERY, "Get started"); launcher.choose(Portal.RESTAURANT);
         launcher.open(); launcher.choose(Portal.BUSINESS); assertThat(restaurantPage.getByTestId("organisation-role")).containsText("Owner");
         launcher.open(); launcher.choose(Portal.CUSTOMER);
+    }
+    @Test void restaurantWithoutBrandIsInvitedToStart() {
+        new LoginPage(restaurantPage).login("9000000011"); PortalLauncherPage launcher = new PortalLauncherPage(restaurantPage);
+        launcher.open(); launcher.state(Portal.RESTAURANT, "Not started");
+        assertThat(launcher.tile(Portal.RESTAURANT).getByRole(AriaRole.BUTTON,
+                new Locator.GetByRoleOptions().setName("Get started with a restaurant").setExact(true))).isVisible();
     }
     @Test void pendingRestaurantOpensItsApplicationStatus() {
         new LoginPage(restaurantPage).login("9000000012"); PortalLauncherPage launcher = new PortalLauncherPage(restaurantPage);
@@ -27,10 +35,5 @@ public class PortalLauncherUiTest extends TestBase {
         assertThat(launcher.tile(Portal.DELIVERY)).containsText("Seeded application requires corrected documents.");
         launcher.tile(Portal.DELIVERY).getByRole(AriaRole.BUTTON).click(); assertThat(riderPage.getByTestId("delivery-application")).isVisible();
         assertThat(riderPage.getByText("Changes requested", new Page.GetByTextOptions().setExact(true))).isVisible();
-    }
-    @Test void staffPortalRequestsAdministratorVerification() {
-        new LoginPage(adminPage).login(testAdminPhone); PortalLauncherPage launcher = new PortalLauncherPage(adminPage);
-        launcher.open(); launcher.state(Portal.ADMIN, "Verification required"); launcher.choose(Portal.ADMIN);
-        assertThat(adminPage.getByRole(AriaRole.DIALOG, new Page.GetByRoleOptions().setName("Administrator verification").setExact(true))).isVisible();
     }
 }

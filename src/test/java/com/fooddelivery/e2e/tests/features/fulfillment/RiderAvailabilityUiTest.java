@@ -17,6 +17,7 @@ import java.util.regex.Pattern;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @Tag("ui-only")
+@Tag("feature-rider-delivery")
 public class RiderAvailabilityUiTest extends TestBase {
 
     @Test
@@ -31,8 +32,8 @@ public class RiderAvailabilityUiTest extends TestBase {
 
         assertThat(duty.isOnline() || duty.isOffline())
                 .as("Fresh login exposes one explicit duty state").isTrue();
-        assertThat(riderPage.getByText("Today’s Earnings",
-                new Page.GetByTextOptions().setExact(true)).isVisible()).isTrue();
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(
+                riderPage.getByText(Pattern.compile("^(Today’s earnings|Paid today)$"))).isVisible();
 
         boolean initiallyOnline = duty.isOnline();
         // Online setup is idempotent; do not cycle a rider already on duty.

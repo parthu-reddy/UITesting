@@ -38,9 +38,13 @@ public class DeliveryDashboardPage {
 
     // ── Tab navigation ───────────────────────────────────────────────────
 
-    public void openActiveTab() {
-        page.locator("button:has-text('Active'), [role='tab']:has-text('Active')").first().click();
-        page.waitForTimeout(300);
+    /** Leaves Settings: the rider header toggles "Profile settings" / "Back to jobs" (RiderHeader); there is no Active tab. */
+    public void backToJobs() {
+        page.getByRole(com.microsoft.playwright.options.AriaRole.BUTTON,
+                new Page.GetByRoleOptions().setName("Back to jobs").setExact(true)).click();
+        com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat(page.getByRole(
+                com.microsoft.playwright.options.AriaRole.BUTTON,
+                new Page.GetByRoleOptions().setName("Profile settings").setExact(true))).isVisible();
     }
 
     public void openHistoryTab() {
@@ -54,10 +58,6 @@ public class DeliveryDashboardPage {
         page.waitForTimeout(300);
     }
 
-    public void openEarningsTab() {
-        page.locator("button:has-text('Earnings'), [role='tab']:has-text('Earnings')").first().click();
-        page.waitForTimeout(300);
-    }
 
     public void openWalletTab() {
         page.locator("button:has-text('Wallet'), [role='tab']:has-text('Wallet')").first().click();

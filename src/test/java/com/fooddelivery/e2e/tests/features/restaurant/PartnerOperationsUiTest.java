@@ -16,14 +16,4 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Tag("ui-only")
 public class PartnerOperationsUiTest extends TestBase {
 
-    @Test
-    @DisplayName("EARNINGS-01: Rider views wallet and earnings")
-    void verifyRiderEarnings() {
-        riderPage.navigate(TestConfig.APP_URL);
-        new LoginPage(riderPage).login(testRiderPhone).openPortal(Portal.DELIVERY);
-        
-        Locator earnings = riderPage.locator("text=Today’s Earnings").first();
-        earnings.waitFor(new Locator.WaitForOptions().setTimeout(15000));
-        assertThat(earnings.isVisible()).isTrue();
-    }
 }

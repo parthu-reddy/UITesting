@@ -1,0 +1,112 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ---------------------< com.fooddelivery:e2e-tests >---------------------
+[INFO] Building e2e-tests 1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.4.0:resources (default-resources) @ e2e-tests ---
+[INFO] skip non existing resourceDirectory /Users/parthureddy/Documents/Food Delivery.nosync/UITesting/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ e2e-tests ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- resources:3.4.0:testResources (default-testResources) @ e2e-tests ---
+[INFO] Copying 3 resources from src/test/resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ e2e-tests ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO] 
+[INFO] --- surefire:3.5.2:test (default-test) @ e2e-tests ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.fooddelivery.e2e.tests.flows.HappyDeliveryFlowTest
+[E2E STARTUP] Creating Playwright driver
+[E2E STARTUP] Launching Chromium (headless=false)
+[E2E STARTUP] Chromium ready
+═══ STEP 1: Logging in all actors ═══
+Customer=8000000001 Restaurant=9000000001 Rider=7000000001
+[OTP SWIPE] AT_RESTAURANT submission returned HTTP 200 for order f3b3d38b-6e4f-4ff7-a26f-1264e775c267
+[SWIPE] Slide to confirm pickup confirmed on attempt 1
+[OTP SWIPE] OUT_FOR_DELIVERY submission returned HTTP 200 for order f3b3d38b-6e4f-4ff7-a26f-1264e775c267
+[RIDER] Leaving visible active delivery or dispatch unchanged
+[E2E TEARDOWN] customer signed out [everyday=200]
+[E2E TEARDOWN] restaurant signed out [everyday=200]
+[E2E TEARDOWN] rider signed out [everyday=200]
+[ERROR] Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 93.80 s <<< FAILURE! -- in com.fooddelivery.e2e.tests.flows.HappyDeliveryFlowTest
+[ERROR] com.fooddelivery.e2e.tests.flows.HappyDeliveryFlowTest.completeOrderLifecycle -- Time elapsed: 91.92 s <<< ERROR!
+com.microsoft.playwright.TimeoutError: 
+Error {
+  message='Timeout 30000ms exceeded.
+  name='TimeoutError
+  stack='TimeoutError: Timeout 30000ms exceeded.
+    at _ProgressController.run (/private/var/folders/0h/ntc9lth93bq3sgfrgr9f9ylm0000gn/T/playwright-java-7509837401395927197/package/lib/coreBundle.js:12360:32)
+    at DispatcherConnection.dispatch (/private/var/folders/0h/ntc9lth93bq3sgfrgr9f9ylm0000gn/T/playwright-java-7509837401395927197/package/lib/coreBundle.js:19135:44)
+}
+Call log:
+-   - waiting for getByRole(AriaRole.REGION, new Page.GetByRoleOptions().setName("Live order tracking").setExact(true)).getByRole(AriaRole.IMG, new Locator.GetByRoleOptions().setName("Courier location").setExact(true)) to be visible
+
+	at com.microsoft.playwright.impl.WaitableResult.get(WaitableResult.java:52)
+	at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:147)
+	at com.microsoft.playwright.impl.Connection.sendMessage(Connection.java:136)
+	at com.microsoft.playwright.impl.ChannelOwner.sendMessage(ChannelOwner.java:133)
+	at com.microsoft.playwright.impl.FrameImpl.waitForSelectorImpl(FrameImpl.java:998)
+	at com.microsoft.playwright.impl.LocatorImpl.waitFor(LocatorImpl.java:672)
+	at com.fooddelivery.e2e.util.LiveCustomerMap.assertMovement(LiveCustomerMap.java:35)
+	at com.fooddelivery.e2e.tests.flows.HappyDeliveryFlowTest.resumeAssignedOrder(HappyDeliveryFlowTest.java:333)
+	at com.fooddelivery.e2e.tests.flows.HappyDeliveryFlowTest.completeOrderLifecycle(HappyDeliveryFlowTest.java:515)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+Caused by: com.microsoft.playwright.TimeoutError: Error {
+  message='Timeout 30000ms exceeded.
+  name='TimeoutError
+  stack='TimeoutError: Timeout 30000ms exceeded.
+    at _ProgressController.run (/private/var/folders/0h/ntc9lth93bq3sgfrgr9f9ylm0000gn/T/playwright-java-7509837401395927197/package/lib/coreBundle.js:12360:32)
+    at DispatcherConnection.dispatch (/private/var/folders/0h/ntc9lth93bq3sgfrgr9f9ylm0000gn/T/playwright-java-7509837401395927197/package/lib/coreBundle.js:19135:44)
+}
+Call log:
+-   - waiting for getByRole(AriaRole.REGION, new Page.GetByRoleOptions().setName("Live order tracking").setExact(true)).getByRole(AriaRole.IMG, new Locator.GetByRoleOptions().setName("Courier location").setExact(true)) to be visible
+
+	at com.microsoft.playwright.impl.Connection.dispatch(Connection.java:274)
+	at com.microsoft.playwright.impl.Connection.processOneMessage(Connection.java:230)
+	at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:145)
+	... 10 more
+
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Errors: 
+[ERROR]   HappyDeliveryFlowTest.completeOrderLifecycle:515->resumeAssignedOrder:333 » Timeout Error {
+  message='Timeout 30000ms exceeded.
+  name='TimeoutError
+  stack='TimeoutError: Timeout 30000ms exceeded.
+    at _ProgressController.run (/private/var/folders/0h/ntc9lth93bq3sgfrgr9f9ylm0000gn/T/playwright-java-7509837401395927197/package/lib/coreBundle.js:12360:32)
+    at DispatcherConnection.dispatch (/private/var/folders/0h/ntc9lth93bq3sgfrgr9f9ylm0000gn/T/playwright-java-7509837401395927197/package/lib/coreBundle.js:19135:44)
+}
+Call log:
+-   - waiting for getByRole(AriaRole.REGION, new Page.GetByRoleOptions().setName("Live order tracking").setExact(true)).getByRole(AriaRole.IMG, new Locator.GetByRoleOptions().setName("Courier location").setExact(true)) to be visible
+
+[INFO] 
+[ERROR] Tests run: 1, Failures: 0, Errors: 1, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  01:34 min
+[INFO] Finished at: 2026-10-07T17:11:24+05:30
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.5.2:test (default-test) on project e2e-tests: 
+[ERROR] 
+[ERROR] See /Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

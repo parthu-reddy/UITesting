@@ -7,7 +7,9 @@ import com.microsoft.playwright.options.AriaRole;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
-@Tag("business-platform") @Tag("bp-o4") @Tag("ui-only")
+@Tag("ui-only")
+@Tag("feature-admin-ops")
+@Tag("feature-auth")
 public class AdminStepUpTest extends TestBase {
     @Test void administratorVerifiesSeparatelyAndKeepsEverydayAccess() {
         new LoginPage(adminPage).login(testAdminPhone).openPortal(Portal.CUSTOMER);

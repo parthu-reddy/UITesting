@@ -15,7 +15,8 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /** Visible discovery proof for seeded pending and rejected restaurant applications. */
-@Tag("business-platform") @Tag("bp-o3")
+@Tag("feature-catalog")
+@Tag("feature-partner-onboarding")
 public class UnapprovedOutletHiddenTest extends PartnerApplicationsUiTestBase {
     @Test
     void pendingAndRejectedOutletsAreNotDiscoverableThroughTheCustomerUI() {

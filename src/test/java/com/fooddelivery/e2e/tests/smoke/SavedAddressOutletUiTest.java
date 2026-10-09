@@ -28,7 +28,8 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
 import static org.assertj.core.api.Assertions.assertThat;
 
 /** Saved-address/outlet selection, cart confirmations and quote binding; no order submission. */
-@Tag("catalog-ui")
+@Tag("feature-addresses")
+@Tag("feature-catalog")
 public class SavedAddressOutletUiTest extends TestBase {
 
 
@@ -88,8 +89,7 @@ public class SavedAddressOutletUiTest extends TestBase {
     @Test
     void visibleBrand1OutletDistancesAreNumeric() {
         selectInitialHome();
-        customerPage.getByRole(AriaRole.BUTTON,
-                new Page.GetByRoleOptions().setName(Pattern.compile("Brand 1\\b"))).first().click();
+        new com.fooddelivery.e2e.pages.customer.NearbyOutletPage(customerPage).openBrandCard("Brand 1");
         customerPage.getByRole(AriaRole.BUTTON,
                 new Page.GetByRoleOptions().setName("Change outlet")).click();
 
@@ -240,6 +240,7 @@ public class SavedAddressOutletUiTest extends TestBase {
                 new Page.GetByRoleOptions().setName(name).setExact(true))).isVisible();
     }
 
+    @Tag("feature-cart-checkout")
     @ParameterizedTest
     @ValueSource(strings = {"cancel", "confirm"})
     void outletSwitchWithCartRequiresDecisionAndPreservesOtherCart(String decision) {
@@ -283,6 +284,7 @@ public class SavedAddressOutletUiTest extends TestBase {
         }
     }
 
+    @Tag("feature-cart-checkout")
     @Test
     void selectingSameOutletKeepsCartWithoutConfirmation() {
         SeededRiderDuty.ensureOnline(riderPage, testRiderPhone);
@@ -339,6 +341,7 @@ public class SavedAddressOutletUiTest extends TestBase {
         return (Map<?,?>) customerPage.evaluate("text => JSON.parse(text)", text);
     }
 
+    @Tag("feature-cart-checkout")
     @Test
     void changingSavedAddressConfirmsCartClearAndQuotesNewAddress() {
         try (SeededRiderDuty duty = SeededRiderDuty.ensureOnline(riderPage, testRiderPhone)) {

@@ -32,8 +32,9 @@ import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertTha
  * order chat, and so this support path, only for two hours after that (isOrderChatOffered). No
  * order is created. Methods run in order: each needs the one before.
  */
-@Tag("flow") @Tag("support-refund")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@Tag("feature-money-ledger")
+@Tag("feature-refunds-support")
 public class SupportRefundResolutionFlowTest extends TestBase {
     private static final String ORDER = System.getProperty("support.order.id", "").trim();
     private static final BigDecimal AWARD = new BigDecimal("12.00");
@@ -130,7 +131,8 @@ public class SupportRefundResolutionFlowTest extends TestBase {
 
         Locator reply = steps.requestItemQuote(ORDER, "E2E second request for the same item");
         assertThat(reply).hasAttribute("data-message-type", "REFUND_ERROR");
-        assertThat(reply).containsText("ITEM_ALREADY_REFUNDED");
+        // The server's refusal (ITEM_ALREADY_REFUNDED) reaches the customer as a sentence (ChatRefundProcessorService.CUSTOMER_TEXT).
+        assertThat(reply).containsText("These items have already been refunded.");
 
         Map<?, ?> body = (Map<?, ?>) RefundRecoveryChecks.read(adminPage, "/api/v1/internal/admin/refunds?status=OPEN&size=50").get("body");
         org.assertj.core.api.Assertions.assertThat(((List<?>) body.get("content")).stream().map(t -> (Map<?, ?>) t)

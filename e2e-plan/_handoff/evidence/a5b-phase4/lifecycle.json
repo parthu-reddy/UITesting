@@ -1,0 +1,40 @@
+{
+  "recordedAt": "2026-10-07T17:14+05:30",
+  "test": "HappyDeliveryFlowTest#completeOrderLifecycle [A5b phase4]",
+  "ownedOrderId": "f3b3d38b-6e4f-4ff7-a26f-1264e775c267",
+  "outlet": "Brand 1 Outlet 5",
+  "orderState": "DELIVERED",
+  "deployed": {
+    "customer-service": "ea07602",
+    "delivery-service": "48077cc",
+    "food-delivery-app-ui": "7e7ebce",
+    "check": "served image == pin == repo HEAD, drift 0, all healthy (a5b-deploy/release-state.json)"
+  },
+  "invocations": [
+    {
+      "n": 1,
+      "result": "ERROR at ASSIGNED evidence write",
+      "cause": "harness: page.evaluate cannot take a Java long; tracker WAS live (assertion passed before the write). Fixed: Gson",
+      "log": "a5b-deploy/lifecycle-invocation1.log"
+    },
+    {
+      "n": 2,
+      "result": "ERROR in LiveCustomerMap",
+      "cause": "my -Dresume.verify.customer.map=true forced the SSE map check; quick tunnel buffers SSE (0 bytes on 3x 200 streams). ASSIGNED live recorded before it",
+      "log": "a5b-deploy/lifecycle-invocation2.log"
+    },
+    {
+      "n": 3,
+      "result": "PASS 1/1 (101 s), resumed same order, no duplicate",
+      "log": "a5b-deploy/lifecycle-invocation3.log",
+      "logSha256": "d2eee57d58d9dfe8da6e0e0d776ec8157389857a4e6e300e15056038f79d36c9"
+    }
+  ],
+  "observations": "live-eta.json: ASSIGNED live +1307 s; OUT_FOR_DELIVERY live +1027 s; AT_DOOR live +0 s 40 s after the rider's GPS moved",
+  "validator": {
+    "phase1": "10/10",
+    "phase2": "17/17",
+    "phase3": "8/8",
+    "phase4": "4/4 (negative control 3/4)"
+  }
+}

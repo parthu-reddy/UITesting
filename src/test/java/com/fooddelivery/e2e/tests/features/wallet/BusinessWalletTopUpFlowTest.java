@@ -26,7 +26,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  *
  * <p>The ₹10.13 top-up is declined by the Dev payment mock on purpose (MockTopupDeclineSeam, never in prod).
  */
-@Tag("business-platform") @Tag("bp-w2")
+@Tag("feature-wallet")
 public class BusinessWalletTopUpFlowTest extends TestBase {
 
     private static final String DECLINED_BY_DEV_SEAM = "10.13";

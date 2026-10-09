@@ -14,6 +14,8 @@ import os
 from pathlib import Path
 import secrets
 import subprocess
+
+import live_run_lock
 from urllib.parse import urlparse
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -97,11 +99,12 @@ def main() -> int:
         command.extend(f"-Dbp.o3.phone.{key}={phone}" for key, phone in phones.items())
         command.append("test")
         print("Running browser-only O3 gate; retained local allocation: " + str(manifest), flush=True)
-        result = subprocess.run(
-            command,
-            cwd=ROOT,
-            env={**os.environ, "PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD": "1"},
-        )
+        with live_run_lock.held(ROOT):
+            result = subprocess.run(
+                command,
+                cwd=ROOT,
+                env={**os.environ, "PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD": "1"},
+            )
         report["exitCode"] = result.returncode
         manifest.write_text(json.dumps(report, indent=2) + "\n")
         print("All O3 applicant data is retained; no cleanup performed", flush=True)

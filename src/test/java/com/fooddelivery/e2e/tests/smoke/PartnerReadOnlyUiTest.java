@@ -8,11 +8,11 @@ import org.junit.jupiter.api.*;
 import java.util.regex.Pattern;
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
-@Tag("partner-ui")
 public class PartnerReadOnlyUiTest extends TestBase {
     private void login(Page page, Portal role, String phone) {
         page.navigate(TestConfig.APP_URL); new LoginPage(page).login(phone).openPortal(role);
     }
+    @Tag("feature-rider-delivery")
     @Test void riderHistoryDateCanBeCleared() {
         login(riderPage,Portal.DELIVERY,testRiderPhone);
         riderPage.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName(Pattern.compile("Trips Completed"))).click();
@@ -22,6 +22,7 @@ public class PartnerReadOnlyUiTest extends TestBase {
         riderPage.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("Clear").setExact(true)).click();
         assertThat(date).hasValue("");
     }
+    @Tag("feature-rider-delivery")
     @Test void riderHistoryShowsEmptyStateForOldDate() {
         login(riderPage,Portal.DELIVERY,testRiderPhone);
         riderPage.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName(Pattern.compile("Trips Completed"))).click();
@@ -33,6 +34,8 @@ public class PartnerReadOnlyUiTest extends TestBase {
                 new Page.GetByTextOptions().setExact(true))).isVisible();
     }
     // Reuse the canonical lifecycle's retained order; this class creates no second financial flow.
+    @Tag("feature-money-ledger")
+    @Tag("feature-rider-delivery")
     @Test void riderCompletedTripShowsRestaurantPayoutAndDate() throws java.io.IOException {
         String orderId = System.getProperty("partner.completed.order.id", "").trim();
         org.assertj.core.api.Assertions.assertThat(orderId).as("Owned delivered order is required").matches("[a-f0-9-]{36}");
@@ -58,6 +61,8 @@ public class PartnerReadOnlyUiTest extends TestBase {
         org.assertj.core.api.Assertions.assertThat(details.nth(2).innerText().trim())
                 .as("completed trip date").isNotEmpty();
     }
+    @Tag("feature-money-ledger")
+    @Tag("feature-rider-delivery")
     @Test void riderTodayEarningsIsNonNegativeCurrency() {
         login(riderPage,Portal.DELIVERY,testRiderPhone);
         Locator earnings = riderPage.getByText(Pattern.compile("^(Today’s earnings|Paid today)$"))
@@ -66,6 +71,7 @@ public class PartnerReadOnlyUiTest extends TestBase {
         String amount = earnings.innerText().trim().substring(1).replace(",", "");
         org.assertj.core.api.Assertions.assertThat(Double.parseDouble(amount)).isGreaterThanOrEqualTo(0);
     }
+    @Tag("feature-settings-profile")
     @Test void riderSettingsCanCloseWithoutChanges() {
         login(riderPage,Portal.DELIVERY,testRiderPhone);
         riderPage.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("Profile settings").setExact(true)).click();
@@ -73,6 +79,7 @@ public class PartnerReadOnlyUiTest extends TestBase {
         riderPage.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("Close settings").setExact(true)).click();
         assertThat(riderPage.getByText(Pattern.compile("^(Today’s earnings|Paid today)$"))).isVisible();
     }
+    @Tag("feature-money-ledger")
     @Test void restaurantEarningsPanel() {
         login(restaurantPage,Portal.RESTAURANT,testRestaurantPhone);
         restaurantPage.getByText("Earnings",new Page.GetByTextOptions().setExact(true)).first().click();
@@ -80,6 +87,7 @@ public class PartnerReadOnlyUiTest extends TestBase {
         assertThat(restaurantPage.getByText("Pending Balance",new Page.GetByTextOptions().setExact(true))).isVisible();
         assertThat(restaurantPage.getByText("Clawbacks",new Page.GetByTextOptions().setExact(true))).isVisible();
     }
+    @Tag("feature-settings-profile")
     @Test void restaurantProfileCanCloseWithoutChanges() {
         login(restaurantPage,Portal.RESTAURANT,testRestaurantPhone);
         restaurantPage.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("Profile settings").setExact(true)).click();
@@ -88,6 +96,7 @@ public class PartnerReadOnlyUiTest extends TestBase {
         assertThat(restaurantPage.getByRole(AriaRole.TAB,new Page.GetByRoleOptions().setName("Menu").setExact(true))).isVisible();
     }
 
+    @Tag("feature-catalog")
     @Test void restaurantStockControlsRenderWithoutToggling() {
         login(restaurantPage,Portal.RESTAURANT,testRestaurantPhone);
         restaurantPage.getByRole(AriaRole.TAB,new Page.GetByRoleOptions().setName("Menu").setExact(true)).click();
@@ -95,6 +104,8 @@ public class PartnerReadOnlyUiTest extends TestBase {
         assertThat(restaurantPage.getByRole(AriaRole.SWITCH).first()).isVisible();
         assertThat(restaurantPage.getByRole(AriaRole.SWITCH).first()).hasAttribute("aria-checked",Pattern.compile("true|false"));
     }
+    @Tag("feature-partner-onboarding")
+    @Tag("feature-wallet")
     @Test void riderVerificationAndWalletSectionsRender() {
         login(riderPage,Portal.DELIVERY,testRiderPhone);
         riderPage.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("Profile settings").setExact(true)).click();
@@ -115,6 +126,7 @@ public class PartnerReadOnlyUiTest extends TestBase {
         org.assertj.core.api.Assertions.assertThat(Double.parseDouble(amount)).isGreaterThanOrEqualTo(0);
         assertThat(riderPage.getByRole(AriaRole.BUTTON,new Page.GetByRoleOptions().setName("Sign Out").setExact(true))).isVisible();
     }
+    @Tag("feature-settings-profile")
     @Test void riderProfileValuesArePopulatedWithoutEditing() {
         login(riderPage,Portal.DELIVERY,testRiderPhone);
         riderPage.getByRole(AriaRole.BUTTON,

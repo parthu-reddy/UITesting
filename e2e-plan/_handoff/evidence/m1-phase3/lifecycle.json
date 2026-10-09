@@ -1,0 +1,33 @@
+{
+  "recordedAt": "2026-10-07T16:00+05:30",
+  "test": "HappyDeliveryFlowTest#completeOrderLifecycle [M1 phase3]",
+  "tests": 1,
+  "passed": 1,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "elapsedSeconds": 268.2,
+  "ownedOrderId": "570bbdcb-b895-4890-a3f9-f7e732b7bc7c",
+  "orderState": "DELIVERED",
+  "deployed": {
+    "customer-service": "0fe11f0",
+    "delivery-service": "911d678",
+    "maps-integration": "28afef7",
+    "food-delivery-app-ui": "58542df",
+    "commonLibraryPublish": "6dfdd0b 09:54:49-09:56:53Z; consumer images rebuilt 09:57-09:59Z; deployed 10:02-10:04Z"
+  },
+  "routes": "customer 160s/789m; rider 1129s/4577m and 164s/789m; all 200, integer, no travelSeconds (typed RouteDto)",
+  "alsoVerified": [
+    "RIDER-EARN-03 with whole-paise comparison",
+    "trip details net payout == row",
+    "money: CARD/SUCCESS 43.02, rider 21.16, restaurant 6.54, 18 lines balance 92.72, 0 refunds",
+    "customer receipt"
+  ],
+  "validator": {
+    "phase1": "3/3",
+    "phase2": "9/9 (re-run on committed code after owner's test-less rebuild removed surefire XML)",
+    "phase3": "6/6"
+  },
+  "rawLog": "/private/tmp/food-m1-phase3-lifecycle1.log",
+  "rawLogSha256": "a2d7f03d80f50d9bea886152f51208dfbbb96951e0e7536f857e44a601adcbb6"
+}

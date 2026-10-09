@@ -28,7 +28,7 @@ public final class AdminSupportChatPage {
     }
 
     public void selectTicketForOrder(String orderId) {
-        Locator ticket = page.locator("button:has-text('Order #" + shortOrderId(orderId) + "')").first();
+        Locator ticket = page.locator("button:has-text('Order #" + shortOrderId(orderId) + "')");
         ticket.waitFor(visible());
         ticket.click();
     }

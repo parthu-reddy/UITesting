@@ -1,0 +1,25 @@
+{
+  "actors": {
+    "customer": "8000000001",
+    "restaurant": "9000000001",
+    "rider": "7000000001"
+  },
+  "deployedUi": "cfb83e2",
+  "recordedAt": "2026-10-07T13:55+05:30",
+  "test": "HappyDeliveryFlowTest#completeOrderLifecycle [post-deploy active visual]",
+  "invocation": 2,
+  "tests": 1,
+  "passed": 0,
+  "failures": 1,
+  "errors": 0,
+  "skipped": 0,
+  "elapsedSeconds": 269.5,
+  "newOrderCreated": true,
+  "ownedOrderId": "d3e0ebed-082b-4ccc-8d1b-eb4c73df282f",
+  "outlet": "Brand 1 Outlet 5",
+  "manifest": "../fixtures/127-visual-owned-d3e0ebed-082b-4ccc-8d1b-eb4c73df282f.json",
+  "failure": "RiderVisualAudit courier pin missing at out-for-delivery capture after rider reload",
+  "missingPinDiagnostics": "visible, focused, permission granted; restaurant lookup 200 at 1.5s; getCurrentPosition timeout code 3 after 15003ms; markers after probe = 2 (customer + restaurant, i.e. the deployed GPS-independent pins work)",
+  "rawLog": "/private/tmp/food-pending-item3-postdeploy-lifecycle2.log",
+  "rawLogSha256": "c03fad22403ec0677a36c999f7e0f445a1442137b1d8a89ad77cde52244b3f7b"
+}

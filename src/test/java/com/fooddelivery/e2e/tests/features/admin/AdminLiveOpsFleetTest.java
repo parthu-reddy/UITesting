@@ -16,8 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Tests for Admin Fleet Map, LiveOps pagination/refunds, and Operations DLQ tabs.
  * Covers: FLEET-01..06, LIVEOPS-01..09, OPS-TAB-01..07
  */
-@Tag("admin")
-@Tag("admin-liveops")
+@Tag("feature-admin-ops")
 public class AdminLiveOpsFleetTest extends TestBase {
 
     private AdminPortalPage portal;
@@ -204,6 +203,7 @@ public class AdminLiveOpsFleetTest extends TestBase {
         assertThat(ops.isOperationsVisible()).isTrue();
     }
 
+    @Tag("feature-money-ledger")
     @Test
     @DisplayName("OPS-TAB-02: Open rejections tab")
     void openRejectionsTab() {
@@ -213,6 +213,7 @@ public class AdminLiveOpsFleetTest extends TestBase {
         assertOperationsTab("Ledger Rejections", "Rejected Ledger Movements", "No unresolved rejections.");
     }
 
+    @Tag("feature-money-ledger")
     @Test
     @DisplayName("OPS-TAB-03: Open reconciliation tab")
     void openReconciliationTab() {
@@ -222,6 +223,7 @@ public class AdminLiveOpsFleetTest extends TestBase {
         assertOperationsTab("Reconciliation Runs", "Recent Reconciliation Runs", "No runs found.");
     }
 
+    @Tag("feature-money-ledger")
     @Test
     @DisplayName("OPS-TAB-05: Open payment DLQ tab")
     void openPaymentDlqTab() {
@@ -231,6 +233,7 @@ public class AdminLiveOpsFleetTest extends TestBase {
         assertOperationsTab("Payment DLQ", "Failed Payment Webhooks", "No failed webhooks found.");
     }
 
+    @Tag("feature-money-ledger")
     @Test
     @DisplayName("OPS-TAB-06: Open wallet DLQ tab")
     void openWalletDlqTab() {

@@ -29,9 +29,8 @@ import static org.assertj.core.api.Assertions.assertThat;
  * therefore exercises the production bundle and its confirmation state without reading or
  * changing a real refund ticket.</p>
  */
-@Tag("admin")
-@Tag("admin-support-refund")
 @Tag("browser-routed")
+@Tag("feature-refunds-support")
 public class AdminRefundPolicyRoutedUiTest extends TestBase {
 
     private static final String REFUND_API_PATH = "/api/v1/internal/admin/refunds";

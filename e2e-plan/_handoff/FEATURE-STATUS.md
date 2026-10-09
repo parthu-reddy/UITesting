@@ -1,5 +1,63 @@
 # Feature audit status
 
+## 2026-10-07T17:14+05:30 — Item5 A5b DONE: live arrival estimate verified on Dev
+
+Deployed customer ea07602, delivery 48077cc, UI 7e7ebce (served == pin == HEAD, healthy). Order
+f3b3d38b (Brand 1 Outlet 5) DELIVERED; the tracker showed "Live" at ASSIGNED (+1307 s), after pickup
+(+1027 s) and +0 s 40 s after the rider's GPS reached the door. Invocations 1–2 errored on harness
+issues (Java long through page.evaluate; my forced SSE map check, parked on the tunnel); 3 passed
+1/1 by resuming the same order. Validator 10/10, 17/17, 8/8, 4/4.
+[Evidence](evidence/a5b-phase4/lifecycle.json). **Next: item6** (backlog reconcile + final handoff).
+
+## 2026-10-07T16:38+05:30 — Item5 A5b: phases 1–3 done locally; owner deploy pending
+
+Live arrival estimate from the assigned rider's position. Plan and evidence:
+[A5b_LiveRiderEta](../../../RandomDocuments/PendingWork_2026-10-07/A5b_LiveRiderEta/README.md).
+- Delivery: the snapshot Lua now runs in a test (luaj); `/sync` stamps receipt time; `/batch` relays
+  only the rider's assigned order (any rider could draw on any customer's map). Module 237 green.
+- Customer: `LiveDeliveryEtaService` on `/active`, `/{id}`, `/batch`; `estimatedArrivalSource`
+  ROUTE|LIVE + `estimatedArrivalTimeExpiresAt`. Maps route is fetched off-thread, ≤1 per order per 30 s.
+  Module 529 green; spec +2 fields.
+- UI: "Live" chip until expiry; 10 s polls while a rider is assigned. Vitest 1070, gates green.
+- Validators 10/10, 17/17, 8/8; break-tests 9/9, 9/9, 3/3 RED-then-GREEN.
+- E2E: `HappyDeliveryFlowTest` checks live at ASSIGNED and OUT_FOR_DELIVERY, then ≤2 min at the door.
+  It compiles and passes the locator audit; it has not run.
+**Waiting on the owner:** deploy delivery, customer, then UI
+([A5b DEPLOY](../../../RandomDocuments/PendingWork_2026-10-07/A5b_LiveRiderEta/DEPLOY.md)). No wipe.
+Then one fresh lifecycle, and `validate_a5b.py --phase 4`.
+
+## 2026-10-07T16:00+05:30 — Item4 M1 DONE; first fully green lifecycle after all item3/M1 fixes
+
+Deployed: customer 0fe11f0, delivery 911d678, maps 28afef7, UI 58542df, after the CommonLibrary
+6dfdd0b publish; the tags equal the pins. `HappyDeliveryFlowTest` passes 1/1 on order 570bbdcb in
+268s. Route responses carry integer totals through the typed RouteDto (rider 1129 s/4577 m). The
+earnings increase, trip-details payout, 18 balanced ledger lines and the receipt all pass.
+Validator: phase1 3/3, phase2 9/9, phase3 6/6.
+**Next: item5 A5b.** Note for A5b: a missing total arrives as null, but the TS type omits null.
+[M1](../../../RandomDocuments/PendingWork_2026-10-07/M1_NumericRoute/README.md).
+
+## 2026-10-07T14:45+05:30 — checkpoint128: ITEM3 CLOSED; banner fix verified live
+
+UI 8c5b15e is served. A read-only on-duty probe saw only "Connecting to dispatch…" on three reloads,
+never "Connection lost", and the rider was restored to Offline. All item3 dispositions are recorded.
+**Next: item4 M1, then item5 A5b** (still paused; a fresh session is suggested). Owned fixtures
+d3e0ebed and f01c1e92 are DELIVERED. [Checkpoint128](checkpoints/128-item3-closed.md).
+
+## 2026-10-07T14:15+05:30 — checkpoint127: checkpoint-125 fixes verified live; banner fix pending deploy
+
+UI cfb83e2 is served, and the Dev data was wiped by a fresh install (old fixtures are gone). After
+deployment, the resumes of d3e0ebed and f01c1e92 pass 1/1 each. The retained money check on f01c1e92
+passes 1/1: 18 lines balance ₹92.72 and the rider net is ₹21.16. All four checkpoint-125 fixes are
+verified live.
+
+The intermittent missing courier pin was proven to be Playwright's ageing static GPS fix, not a
+product defect, and the harness now refreshes it.
+
+New, local only: the dispatch banner said "Connection lost" on every page load before the first
+connection. It now says "Connecting to dispatch…", proven red first; UI 179/1,065 green.
+**Waiting on the owner: a FoodDeliveryAppUI deploy (5 files). Pull Deployment first.**
+[Checkpoint127](checkpoints/127-postdeploy-active-rider-verified.md).
+
 ## 2026-10-07T12:40+05:30 — checkpoint125
 
 Cross-role lifecycle: owned ce254f3a delivered through the retained resume (1/1), and its retained

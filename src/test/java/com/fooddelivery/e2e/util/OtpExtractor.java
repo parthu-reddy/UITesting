@@ -23,7 +23,7 @@ public final class OtpExtractor {
      * @return the OTP string
      */
     public static String getCustomerDeliveryOtp(Page page) {
-        // Tracker is already open from StateSetupHelper, do not reload as it drops the React state
+        // The caller has the tracker open; do not reload, as that drops the React state
         Locator otpValue = page.locator("[data-testid='delivery-code']").first();
         otpValue.waitFor(new Locator.WaitForOptions()
                 .setState(WaitForSelectorState.VISIBLE)

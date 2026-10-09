@@ -1,5 +1,264 @@
 # Current checkpoint
 
+## 2026-10-08T22:15+05:30 — every changed test PASS_CURRENT; Dev has no active order
+
+- History-paging set (9 methods) PASS after one more race fix: SupportRefundSteps waits for the chat history before
+  counting quote replies (guard P4.3). OrderCancellation 45.9 s, RestaurantReject 73.4 s (were 207.7 / 139.2 s).
+- 09553039 and 3066d465 ended CANCELLED_BY_PLATFORM (no rider), not the 60-min sweep I predicted.
+- Fixtures used: support 6cababdc, retry + chat 6265ca4b (Brand 2), reviews 4ea76408, settings dialog f3b3d38b.
+
+## 2026-10-08T21:55+05:30 — approve-delay PASS; two ACCEPTED orders await the 60-min sweep
+
+- DelayApprovalFlowTest#customerApprovesRestaurantDelay PASS 43.4 s (3066d465) after a fix: it now waits for the
+  /delay-approval response and checks server state (restaurant card ACCEPTED|PREPARING within 30 s; customer reload).
+- Run 1's 09553039 and run 2's 3066d465 stay ACCEPTED until RestaurantTimeoutSweeper (~22:51/22:53). Rider OFFLINE.
+  Details: FastE2E_2026-10-08/Phase3_MeasureOnDev/mistakes_and_improvements.md.
+
+## 2026-10-08T21:30+05:30 — checkpoint139: owner-gated list PASS; Dev has no active order
+
+- tipped 21.3 s, closed-chat 10.6 s, delay-reject 32.2 s (first pass), overlapping 155.9 s; canaries ×4 green.
+- Fixes: placeOrder id from the POST response; 7 history lookups page; rejectDelay waits for the delay prompt;
+  OrderChatChecks per customer; one more `slow` tag. Static race guards: `validate_fast_e2e.py --phase 4`.
+- [Checkpoint139](checkpoints/139-owner-gated-list-under-fast-defaults.md). Local, uncommitted.
+
+## 2026-10-08T18:35+05:30 — checkpoint138: fast defaults; OTP expiry unit-tested; nothing running
+
+- Default: slow.mo 0, headless, no video (were 400 ms, headed, video, in every batch). `--debug` restores them.
+  Read-only test on Dev: 7.7 s → 3.1 s. `resendRejectsThePreviousCode` 4/4 live with the new defaults.
+- `expiredOtpIsRejectedWithoutCreatingASession` and the `slow-auth` tag are deleted; AuthServiceTest covers the lifetime and refusal.
+- [Checkpoint138](checkpoints/138-fast-defaults.md). Local, uncommitted (UITesting, IdentityService test only).
+
+## 2026-10-08T18:05+05:30 — checkpoint137: feature tags + change-based selection; nothing running
+
+- Every E2E test carries `feature-<name>` tags (19 features). `feature-tags/features.json` maps all 1977 in-scope source
+  files. `run_e2e_batch.py --changed` / `--features` runs only the touched features' tests. Gates: feature tags 6/6,
+  break tests 17/17, runner 19/19, p02 6/6, Phase 4 10/10, Phase 6, locator audit, fixture and redaction guards green.
+- [Checkpoint137](checkpoints/137-feature-tags.md). Local, uncommitted. No Dev run in this phase.
+
+## 2026-10-08T18:00+05:30 — checkpoint136: owner items done under "no sweep, no slow"; feature tags next
+
+- Owner: no full sweep (no backend change); run only tests added/changed, never `slow`. Then: feature tags (Phase7).
+- Done: 15:39 order = fac23c59 auto-cancelled; D1 holds OPEN ticket b8389997 (report only); RetainedOrderState 1/1
+  (history paging); suspension 1/1; ws-token leak path deleted + guard; postData null = authFetch's request.clone()
+  (probe test, no writes); inventory scanner DisplayName fix. Not run by rule: tipped placement, closed-window chat,
+  delay-reject, overlapping orders, F13 rider availability/REST-01. [Checkpoint136](checkpoints/136-owner-items-no-sweep.md).
+- Local, uncommitted (UITesting): CustomerOrderHistoryPage, RetainedOrderStateUiTest, CustomerHomePage,
+  CustomerDashboardPage, TestBase, RequestBodyVisibilityTest, _handoff/tools/check_log_redaction.py; P02 build_inventory.py.
+
+## 2026-10-08T17:45+05:30 — Phase 6: duplicates removed; slow/auto-cancel tags
+
+- Removed (strict subsets, read side by side): SettingsTest (class), LoginValidationTest#resendOtp,
+  PortalLauncherUiTest#staffPortalRequestsAdministratorVerification, CustomerOrderPlacementTest#customerPlacesOrderSuccessfully
+  (−1 live order per run; CHECKOUT-11-13 id kept), PartnerOperationsUiTest#verifyRiderEarnings (+ OwnedRefundVisual earlier).
+- Tags: `slow` ×10 (median ≥ 60 s), `auto-cancel` ×4 (RestaurantTimeoutSweeper 10/60 min). Runner `--exclude-tags`.
+- Inventory scanner fix: annotation strings with ; { } hid tags (17 sites). Gates: phase6 5/5, p02 6/6, phase4 10/10, runner 15/15.
+- Plan + verdicts: RandomDocuments/PendingWork_2026-10-07/P02_E2EInventory/Phase6_SlowTagsAndDuplicates/plan.md.
+
+## 2026-10-08T17:00+05:30 — checkpoint135: all approved batches executed; no run, no locks
+
+See checkpoint135 for results, order ids and the five Dev changes beyond BATCHES.md. Gates green on a quiet tree.
+
+## 2026-10-08T16:10+05:30 — parallel lanes RUNNING (A = C4 on …0001 + admin 1000000001; B = C1/C2 copy + admin 1000000002)
+
+- **C1 DONE 6/6** (3 registrations + 3 session cases; lane B copy, manifests in scratch laneB/UITesting/target/registration).
+- **C2 8/10 + retry running**: o3 restaurant/brand-search/delivery/admin, o45 delivery/restaurant/membership pass;
+  o45-revocation failed once on `net::ERR_NETWORK_IO_SUSPENDED` during admin login (left 1 extra: fresh 9999 owner +
+  organisation + SUBMITTED, unapproved restaurant application). Retrying revocation, then suspension.
+- **C4 so far:** D1 `8a7114cb-2f9b-47b7-b40f-f5b71e9d5968` delivered; steps 2-6 on D1: CustomerSettings review 1/1,
+  OrderReviews 1 + 3 designed skips (O4-INT-002), RiderReviewHistory 1/1, ChatHistoryPaging 1/1; 3 reviews + 2 chat sessions.
+  **Unrecorded order (deviation):** overlappingOrdersRemainIndependent placed 1 order at outlet 36342aa6 then crashed on
+  `postData()==null` (LiveOrderFixture:71) before recording it; expected to auto-cancel after 10 min (not verified).
+  **D1 likely holds 1 OPEN refund ticket** (first SupportRefund run failed after submitting it; 403 on admin reads).
+  D2 `8fa0ef02-9f00-481e-8889-ee55f1607afe`, D3 `49387edd-6436-48be-87cd-1512f3ac3fb1` delivered (fresh lifecycles).
+  SupportRefund 3/3 on D2, AdminRefundRetry 1/1 on D3. Running: cancel/reject/placement → OTP → delay.
+- **Harness fixes (live tree, uncommitted):** RefundRecoveryChecks uses sessionStorage `admin_auth_token` for
+  /internal/admin/ (UI tokenStore.ts:40) — proven live 4/4; LiveOrderFixture records the order before any other check and
+  asserts paymentMethod from the response (postData null cause NOT established); runner uses_admin widened (red→green);
+  MenuCart stock predicate (PUT …/stock), RiderOnboardingFull fieldset, history-tab assertion on data-state (rows are nested,
+  old selector matched nothing; SettingsTest's check was vacuous), lane 2's 8 fixture diffs (guard PASS 80/DRIFT 0; FAIL before).
+- **Overlap reduction (owner, 15:58):** OwnedRefundVisualUiTest DELETED; its only unique checks (customer "Refund Request
+  Submitted"/"Under review…") moved into SupportRefundSteps.submitItemTicket (all 4 refund flows now assert them; passed live).
+  Removed from triage.py, batches.py, seed_request.py; Phase 4 gate 10/10. overlappingOrders rerun deferred; 80 admin
+  re-checks skipped (deploy-scoped).
+- validate_p02 showed 3/6 while lane A was writing evidence (P1.2/P1.6 race) — rerun on a quiet tree before trusting it.
+
+## 2026-10-08T14:15+05:30 — checkpoint134: nothing running; sweep partial; C1-C4 approved, not started
+
+- No live run, no locks (RUN-IN-PROGRESS removed after the orphan test finished). UI 77f29d7 deployed (cutoff 00:46:06Z).
+- Inventory PASS_CURRENT 187 / PASS_OLDER 97 / LAST_FAILED 25 / NEVER_RUN 28; validate_p02 6/6.
+- Local, uncommitted: lane 3 diffs, classify_impact FixtureShell fix, triage reason text, TestBase write log, runner pacing.
+- Dev changed: one menu item out of stock (MenuCartUiTest, retained by design). See checkpoint134.
+
+## 2026-10-08T13:15+05:30 — lane 3 applied; A/B/F + C0 sweep RUNNING (started 13:11, ETA ~16:15 IST)
+
+- Owner confirmed in lane 1 (12:33): apply lane 3's 7 diffs, C1-C4 approved, start now (DECISIONS.md top entry).
+- Applied `Phase4_OwnerApprovedRuns/tools/apply_lane3_diffs.py --rebuild`: 9 tracked, clean files deleted (restorable
+  from git HEAD), PickupDeliveryOtpTest 7 orders → 1, partner tests sign out, fresh-person runners take the run lock.
+- **Finding during rebuild:** triage refused AdminDispatchSafety + AdminSupportTicketResolution (write signals, no
+  verdict). Cause: `classify_impact.py` matched only the inline catch-all route; checkpoint131 moved 4 classes to
+  `FixtureShell::isFixturedApi`. Classifier now recognises it → ALL_API 4. Triage C 26/40, A 53/232, F 4/4 (as lane 3
+  predicted); Phase 4 gate 10/10 (88 methods); validate_p02 6/6; `mvn clean test-compile` rc 0.
+- **TestBase now logs every API write** as `[E2E WRITE] <method> <status> dev|fixture <url>` (fixture = no server
+  address). Lines containing "otp" are dropped by the runner's redaction. The dev/fixture marker is NOT yet proven;
+  ChatWindowRoutedUiTest runs first in the sweep to check it.
+- Sweep: 60 classes / 278 methods, `evidence/sweep-77f29d7`, selection `evidence/sweep-77f29d7-selection.txt`. Then C1→C4.
+- **Dev state changed by the sweep (13:42 IST):** MenuCartUiTest#outOfStockItemsCannotBeAdded set menu item
+  `60c6e41e-f617-584e-9329-ccfa0747b537` at outlet `36342aa6-05fe-5cb3-a755-21b207c601bd` OUT OF STOCK
+  (`PUT …/menu-items/{id}/stock` 200, `[E2E WRITE]` log). By design it is retained (no restore); later runs take the
+  read-only branch. The test then errored: it waits for `POST /menu-overrides/`, which the UI no longer sends → stale,
+  fix after the sweep. Triage verdict B for MenuCartUiTest misses this write → correct it. C4/reorder may meet this item.
+- Expected sweep non-passes (fixture-gated, not regressions): ApprovedRestaurantBrandSearch + ChatSupportWindowClosed
+  (impact F, my selection error), history pagination + cancelled-history (need C4 orders),
+  CustomerSettingsUiTest#deliveredOrderReviewRequiresAtLeastOneRating (needs an owned delivered order id).
+- `POST /api/v1/orders/quote` writes `order_quotes` rows (CustomerOrderService → orderQuoteRepository.save); transient,
+  `ExpiredQuoteSweeper` deletes expired ones. Allowed in the write watch.
+
+## 2026-10-08T06:30+05:30 — checkpoint133: UI 77f29d7 live; chat isolation 4/4; pacing persists
+
+- **Deployed:** UI `77f29d7` (DEPLOY_LOG 00:46:06Z == pin == HEAD == VM, healthy). Deploy lock removed. Cutoff 00:46:06Z.
+- **Live:** AdminSupportChatIsolationRoutedUiTest 4/4 + canaries 4/4 (evidence/chat-77f29d7). The UI chat fix is done.
+- **Local, not deployed:** runner pacing history (`_handoff/ADMIN-STEP-UPS.json`), test isolation; 13/13 guard tests.
+- Inventory: PASS_CURRENT 8 / PASS_OLDER 282 / LAST_FAILED 32 / NEVER_RUN 31. Fixtures on Dev unchanged; nothing created.
+- Parallel lanes: [PARALLEL-SPLIT.md](PARALLEL-SPLIT.md). [Checkpoint133](checkpoints/133-ui-77f29d7-chat-green-and-persistent-pacing.md).
+
+## 2026-10-08T06:12+05:30 — owner deploy in progress (UI); E2E paused
+
+- Owner: "UI is building and deploying" (expected: the useChatSession double-POST fix). `_handoff/DEPLOY-IN-PROGRESS`
+  created 06:12; `run_e2e_batch.py` refuses while it exists. No E2E until the owner says "deployed".
+- Runner guard tests were 3 fail / 4 error while the real lock existed: they read the real lock path, so every
+  `main()` test hit the refusal. Fixed in `tools/test_run_e2e_batch.py` (tests use a temp lock path). Now 10/10;
+  breaking the runner's lock check turns `test_deploy_lock_refuses` red (restored byte-identical).
+- Work split into 3 lanes for parallel sessions: [PARALLEL-SPLIT.md](PARALLEL-SPLIT.md). Only lane 1 (this session) touches Dev.
+- Everything else is as checkpoint132 below.
+
+## 2026-10-08T06:20+05:30 — checkpoint132: UI 530daa4 live; support-chat solved; one UI fix awaits deploy
+
+- **Deployed:** UI `530daa4` (DEPLOY_LOG 2026-10-07T23:50:20Z == Dev pin == `main` HEAD == VM container, healthy).
+  Backend unchanged since checkpoint131 (customer-service 4cf2d7c at 13:36:25Z is the last backend deploy).
+- **Working tree, NOT deployed:** `FoodDeliveryAppUI/src/features/communication/models/useChatSession.ts` (+ its
+  test): the chat-session effect keyed on a fresh `getUserProfile()` object, so every chat open POSTed
+  `/api/v1/chat/sessions` twice. Gates: lint 0, typecheck 0, vitest 180 files / 1078 tests.
+- **Test-side (UITesting, uncommitted):** AdminSupportChatIsolationRoutedUiTest, AdminSupportTicketResolutionRoutedUiTest,
+  ChatWindowRoutedUiTest, pages/admin/AdminSupportChatPage (details in checkpoint132).
+- **Live on 530daa4:** 3 deployed fixes 3/3; support-ticket resolution 3/3; support-chat isolation 3/4
+  (CHAT-01 waits for the UI deploy). Inventory rebuilt at the 530daa4 cutoff: PASS_CURRENT 12 / PASS_OLDER 277
+  (`validate_p02.py --phase 1` 6/6; P1.5 made cutoff-independent and break-tested).
+- **Fixtures on Dev:** unchanged; retained delivered orders d3e0ebed, f01c1e92, 046fa470, 570bbdcb, f3b3d38b.
+  No order, ticket, refund or wallet row was created this session (all runs were routed fixtures or read-only).
+- [Checkpoint132](checkpoints/132-ui-530daa4-live-and-support-chat-faults.md).
+
+## 2026-10-07T18:45+05:30 — checkpoint130: F13 DONE, locator audit PASS (FAIL 0)
+
+Deployed versions unchanged (UI 7e7ebce = pin = HEAD). Locator audit was 74 FAIL/28 files; now 0.
+Test-code changes in 10 files (uncommitted, listed in checkpoint130); audit tool + exceptions changed
+in RandomDocuments. 11/11 rewritten executions live-green, read-only. Retained fixtures untouched:
+d3e0ebed, f01c1e92, 046fa470, 570bbdcb, f3b3d38b. [Checkpoint130](checkpoints/130-f13-locator-audit-green.md).
+
+## 2026-10-07T17:14+05:30 — Item5 A5b DONE: live arrival estimate verified on Dev
+
+Deployed customer ea07602, delivery 48077cc, UI 7e7ebce (served == pin == HEAD, healthy). Order
+f3b3d38b (Brand 1 Outlet 5) DELIVERED; the tracker showed "Live" at ASSIGNED (+1307 s), after pickup
+(+1027 s) and +0 s 40 s after the rider's GPS reached the door. Invocations 1–2 errored on harness
+issues (Java long through page.evaluate; my forced SSE map check, parked on the tunnel); 3 passed
+1/1 by resuming the same order. Validator 10/10, 17/17, 8/8, 4/4.
+[Evidence](evidence/a5b-phase4/lifecycle.json). **Next: item6** (backlog reconcile + final handoff).
+
+## 2026-10-07T16:38+05:30 — Item5 A5b: phases 1–3 done locally; owner deploy pending
+
+Live arrival estimate from the assigned rider's position. Plan and evidence:
+[A5b_LiveRiderEta](../../../RandomDocuments/PendingWork_2026-10-07/A5b_LiveRiderEta/README.md).
+- Delivery: the snapshot Lua now runs in a test (luaj); `/sync` stamps receipt time; `/batch` relays
+  only the rider's assigned order (any rider could draw on any customer's map). Module 237 green.
+- Customer: `LiveDeliveryEtaService` on `/active`, `/{id}`, `/batch`; `estimatedArrivalSource`
+  ROUTE|LIVE + `estimatedArrivalTimeExpiresAt`. Maps route is fetched off-thread, ≤1 per order per 30 s.
+  Module 529 green; spec +2 fields.
+- UI: "Live" chip until expiry; 10 s polls while a rider is assigned. Vitest 1070, gates green.
+- Validators 10/10, 17/17, 8/8; break-tests 9/9, 9/9, 3/3 RED-then-GREEN.
+- E2E: `HappyDeliveryFlowTest` checks live at ASSIGNED and OUT_FOR_DELIVERY, then ≤2 min at the door.
+  It compiles and passes the locator audit; it has not run.
+**Waiting on the owner:** deploy delivery, customer, then UI
+([A5b DEPLOY](../../../RandomDocuments/PendingWork_2026-10-07/A5b_LiveRiderEta/DEPLOY.md)). No wipe.
+Then one fresh lifecycle, and `validate_a5b.py --phase 4`.
+
+## 2026-10-07T16:00+05:30 — Item4 M1 DONE; first fully green lifecycle after all item3/M1 fixes
+
+Deployed: customer 0fe11f0, delivery 911d678, maps 28afef7, UI 58542df, after the CommonLibrary
+6dfdd0b publish; the tags equal the pins. `HappyDeliveryFlowTest` passes 1/1 on order 570bbdcb in
+268s. Route responses carry integer totals through the typed RouteDto (rider 1129 s/4577 m). The
+earnings increase, trip-details payout, 18 balanced ledger lines and the receipt all pass.
+Validator: phase1 3/3, phase2 9/9, phase3 6/6.
+**Next: item5 A5b.** Note for A5b: a missing total arrives as null, but the TS type omits null.
+[M1](../../../RandomDocuments/PendingWork_2026-10-07/M1_NumericRoute/README.md).
+
+## 2026-10-07T15:40+05:30 — Item4 M1: phases 1–2 done locally; owner deploy pending
+
+The M1 plan lives in [M1_NumericRoute](../../../RandomDocuments/PendingWork_2026-10-07/M1_NumericRoute/README.md).
+
+Phase1 observed through the real UI on order 046fa470 (delivered): the deployed route responses
+carry integer totals (rider 939 s/4577 m), so the extraction is correct. That lifecycle errored
+afterwards on a harness double-sum bug (₹63.48 vs 63.480000000000004), now fixed with whole paise.
+
+Phase2, validator 9/9:
+- the pre-M1 `travelSeconds()` stopgap is deleted;
+- the delivery route is a typed RouteDto;
+- MapsIntegration has extraction tests and a producer contract;
+- the specs and UI types are regenerated;
+- all touched builds are green.
+
+**Waiting on the owner:** push CommonLibrary first and wait for its publish, then the rest, then
+deploy ([M1 DEPLOY](../../../RandomDocuments/PendingWork_2026-10-07/M1_NumericRoute/DEPLOY.md)).
+Phase3 is one lifecycle after that.
+
+## 2026-10-07T14:45+05:30 — checkpoint128: ITEM3 CLOSED; banner fix verified live
+
+UI 8c5b15e is served. A read-only on-duty probe saw only "Connecting to dispatch…" on three reloads,
+never "Connection lost", and the rider was restored to Offline. All item3 dispositions are recorded.
+**Next: item4 M1, then item5 A5b** (still paused; a fresh session is suggested). Owned fixtures
+d3e0ebed and f01c1e92 are DELIVERED. [Checkpoint128](checkpoints/128-item3-closed.md).
+
+## 2026-10-07T14:15+05:30 — checkpoint127: checkpoint-125 fixes verified live; banner fix pending deploy
+
+UI cfb83e2 is served, and the Dev data was wiped by a fresh install (old fixtures are gone). After
+deployment, the resumes of d3e0ebed and f01c1e92 pass 1/1 each. The retained money check on f01c1e92
+passes 1/1: 18 lines balance ₹92.72 and the rider net is ₹21.16. All four checkpoint-125 fixes are
+verified live.
+
+The intermittent missing courier pin was proven to be Playwright's ageing static GPS fix, not a
+product defect, and the harness now refreshes it.
+
+New, local only: the dispatch banner said "Connection lost" on every page load before the first
+connection. It now says "Connecting to dispatch…", proven red first; UI 179/1,065 green.
+**Waiting on the owner: a FoodDeliveryAppUI deploy (5 files). Pull Deployment first.**
+[Checkpoint127](checkpoints/127-postdeploy-active-rider-verified.md).
+
+## 2026-10-07T13:50+05:30 — Redeploy confirmed served; Dev data wiped by fresh install
+
+The owner redeployed at 08:04Z with the correct pins (UI cfb83e2 plus customer, delivery and maps).
+The served `DeliveryDashboard-DzSDaAKB.js` contains all four new strings and none of the old fee
+text. The served map chunk places known pins before the geolocation call.
+
+The owner also did a **fresh installation that wiped all old data**. Fixtures 6fbe0289, ce254f3a and
+ticket 47ffbccd are gone and are marked `wipedAt`. The retained read-only check on ce254f3a therefore
+failed: History returned 200 with empty content. This is not a product defect. Their earlier
+results remain dated history.
+
+The trip-details "Your net payout" assertion is now a shared helper, run by the main lifecycle as
+well. One fresh `HappyDeliveryFlowTest` lifecycle with the visual audit is running against the new
+build. Evidence goes to `evidence/127-postdeploy-active-visual`, and any created identity must be
+retained. [Evidence](evidence/127-postdeploy-served-and-wipe.json).
+
+## 2026-10-07T13:30+05:30 — UI deploy did NOT take: stale Deployment pins
+
+The owner reported "Everything is deployed". UI commit cfb83e2 contains exactly the 11
+checkpoint125 files, and CI 37588967285 succeeded. However, the live site still serves 6eb4ef6:
+`DeliveryDashboard-CubehF8y.js`, with 0 new strings and the old "credit"/"Total Earnings" text.
+
+DEPLOY_LOG shows the 07:51:09Z deploy used food-delivery-app-ui **6eb4ef6**. That deploy ran from
+a Deployment checkout 4 commits behind origin/main. customer-service, delivery-service and
+maps-integration went out at their previous tags too. The fix is `git pull` in Deployment, then
+redeploy. No E2E was run against the stale build. [Evidence](evidence/126-deploy-stale-pins.json).
+The checkpoint125 next gates are unchanged.
+
 ## 2026-10-07T12:40+05:30 — checkpoint125: ce254f3a delivered + verified; 3 rider defects fixed locally, UI deploy pending
 
 **Correction:** the earlier "invocation 3 running" entries were stale. Invocation 3 failed before

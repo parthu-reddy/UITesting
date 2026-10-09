@@ -14,5 +14,6 @@
   "dataPolicy": "retain",
   "cleanupPerformed": false,
   "originalWriter": "evidence/123-owned-refund-invocation1-error-after-rejection.json",
-  "verifiedResume": "evidence/123-owned-refund-invocation2-readonly-green.json"
+  "verifiedResume": "evidence/123-owned-refund-invocation2-readonly-green.json",
+  "wipedAt": "2026-10-07 (owner fresh installation; no longer exists on Dev)"
 }

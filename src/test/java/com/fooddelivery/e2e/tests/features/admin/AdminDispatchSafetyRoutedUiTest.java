@@ -34,9 +34,9 @@ import static org.assertj.core.api.Assertions.assertThat;
  * stale-result and audited-workflow handoff checks deterministic without touching a real order,
  * rider, or refund ticket.</p>
  */
-@Tag("admin")
-@Tag("admin-dispatch")
 @Tag("browser-routed")
+@Tag("feature-admin-ops")
+@Tag("feature-rider-delivery")
 public class AdminDispatchSafetyRoutedUiTest extends TestBase {
 
     private static final String ORDER_A_ID = "a1000000-0000-4000-8000-000000000001";
@@ -364,14 +364,14 @@ public class AdminDispatchSafetyRoutedUiTest extends TestBase {
     private void registerFixtureRoutes(DispatchFixture fixture) {
         // Login precedes this registration. Authentication remains a real deployment check;
         // only the reads that drive this dispatch test become browser-local fixtures.
-        adminPage.route(url -> url.contains("/api/v1/"), fixture::handle);
+        adminPage.route(com.fooddelivery.e2e.util.FixtureShell::isFixturedApi, fixture::handle);
     }
 
     private void registerFixtureRoutes(ManualInterventionFixture fixture) {
         // This route is installed after a real administrator login. The action buttons are
         // exercised against disposable browser responses, so cancelling a confirmation cannot
         // alter a shared Dev order or initiate a refund.
-        adminPage.route(url -> url.contains("/api/v1/"), fixture::handle);
+        adminPage.route(com.fooddelivery.e2e.util.FixtureShell::isFixturedApi, fixture::handle);
     }
 
     private void waitFor(java.util.function.BooleanSupplier condition, String expectation) {
@@ -459,7 +459,7 @@ public class AdminDispatchSafetyRoutedUiTest extends TestBase {
             // installed so an incidental poll cannot escape to the deployment.
             if ("GET".equals(method) && INTERVENTION_QUEUE_PATH.equals(requestPath)) {
                 interventionCountReads.incrementAndGet();
-                fulfillJson(route, "[]");
+                fulfillJson(route, emptyManualInterventionQueueResponse());
                 return;
             }
 

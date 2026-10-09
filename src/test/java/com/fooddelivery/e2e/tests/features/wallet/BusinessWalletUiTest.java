@@ -28,7 +28,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * ₹100.00 with the top-up as the newest statement line. A disposable MANAGER, invited and accepted through
  * the hub, sees the balance and no Add money button. Fixtures are retained; nothing is cleaned up.
  */
-@Tag("business-platform") @Tag("bp-w3")
+@Tag("feature-wallet")
 public class BusinessWalletUiTest extends TestBase {
 
     @Test void businessWalletPage() throws Exception {

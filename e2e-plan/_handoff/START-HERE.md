@@ -1,5 +1,180 @@
 # Resume the Food Delivery E2E audit
 
+## 2026-10-08T21:30+05:30 — checkpoint139: owner-gated list done; nothing running
+
+All four owner-gated tests pass under the fast defaults, after five harness fixes, each guarded or explained in
+[Checkpoint139](checkpoints/139-owner-gated-list-under-fast-defaults.md). No order is active on Dev. Next: NEXT-STEPS top entry.
+
+## 2026-10-08T18:35+05:30 — checkpoint138: runs are fast by default; `--debug` to watch
+
+TestConfig no longer adds a 400 ms delay per action, a visible browser or video. The runner's `--debug` restores them.
+The 305 s OTP-expiry E2E is replaced by IdentityService unit tests. [Checkpoint138](checkpoints/138-fast-defaults.md).
+Next: NEXT-STEPS top entry.
+
+## 2026-10-08T18:05+05:30 — checkpoint137: tests are tagged by feature; run only what a change touches
+
+`run_e2e_batch.py --changed` (or `--features a,b`) selects tests by `feature-*` tags through
+`feature-tags/features.json`. See AGENTS.md "Running tests against Dev". [Checkpoint137](checkpoints/137-feature-tags.md).
+Next: NEXT-STEPS top entry.
+
+## 2026-10-08T18:00+05:30 — checkpoint136: owner items done; feature tags next
+
+Full sweep dropped by the owner (no backend change); only tests added/changed run, never slow. All checkpoint-135
+items closed or owner-gated; postData null root cause found; ws-token print path removed with a guard.
+[Checkpoint136](checkpoints/136-owner-items-no-sweep.md). Next: NEXT-STEPS top entry.
+
+## 2026-10-08T17:00+05:30 — checkpoint135: C1–C4 executed on two lanes; nothing running
+
+C1 6/6, C2 9/10, C3 9/9, C4 done except delay-reject and 2 placement checks; 25/25 fixed-test reruns. Inventory
+PASS_CURRENT 229 (from 8). Five Dev changes beyond the plan are listed for the owner.
+[Checkpoint135](checkpoints/135-parallel-lanes-c1-c4-done.md). Next: NEXT-STEPS top entry.
+
+## 2026-10-08T14:15+05:30 — checkpoint134: lane 3 applied; sweep stopped early; nothing running
+
+Owner had 25 min left, so the sweep stopped at 38/60 + the chat-touching remainder (3/3). 202 pass; every non-pass is
+diagnosed (fixture-gated, stale test, or runner gap), none a product regression. C1-C4 approved but NOT started.
+[Checkpoint134](checkpoints/134-lane3-applied-sweep-partial.md). Next: NEXT-STEPS top entry.
+
+## 2026-10-08T06:30+05:30 — checkpoint133: UI 77f29d7 live; support-chat 4/4; runner pacing persists
+
+The useChatSession double-POST fix is deployed and support-chat isolation passes 4/4 live. Runner admin pacing now
+survives across invocations. Work is split into 3 lanes ([PARALLEL-SPLIT.md](PARALLEL-SPLIT.md)); only lane 1 touches Dev.
+[Checkpoint133](checkpoints/133-ui-77f29d7-chat-green-and-persistent-pacing.md). Next: NEXT-STEPS top entry.
+
+## 2026-10-08T06:05+05:30 — checkpoint132: UI 530daa4 live-green; support-chat faults fixed
+
+UI 530daa4 verified (log == pin == HEAD == VM) and its 3 fixes pass live. Support-chat ×4 had four stacked
+faults: fixture `entityId` drift, a dead `routeWebSocket` stub (registered after page load), a short-id ticket
+collision, and a real UI defect (every chat open POSTed the session twice; fixed locally, **needs UI deploy**).
+[Checkpoint132](checkpoints/132-ui-530daa4-live-and-support-chat-faults.md). Next steps: NEXT-STEPS.md top entry.
+
+## 2026-10-08T00:15+05:30 — checkpoint131: P0-2 measured inventory, safe live runs, 3 UI defects
+
+Run E2E batches only via `tools/run_e2e_batch.py` (AGENTS.md). 210+ methods passed live on the current release; three
+UI defects fixed locally and awaiting a UI deploy; ~25 stale tests rewritten. [Checkpoint131](checkpoints/131-p02-inventory-and-live-runs.md).
+
+## 2026-10-07T18:45+05:30 — checkpoint130: F13 DONE, the locator audit is green
+
+`e2e_locator_audit.py --ui-ref HEAD` is **PASS, FAIL 0** (was 74 in 28 files). Most rows were audit
+blind spots, not broken tests: 58 rules-fixable, 6 written exceptions, 10 really stale. Rewritten:
+sign-in role tabs → phone login (ISOLATION-05, RESP-01/03/04, ACCESS-07/10, RECOVERY-01/16, SettingsTest
+logout, StateSetupHelper), rider earnings label, dead onboarding fallback, RestaurantUiTest 11–13 (no-brand
+11 moved to PortalLauncherUiTest). 11/11 rewritten executions passed live; RiderAvailabilityUiTest NOT run
+(it cycles rider duty). No orders, no fixtures touched. [Checkpoint130](checkpoints/130-f13-locator-audit-green.md).
+
+## 2026-10-07T17:40+05:30 — checkpoint129: ITEM6 DONE, the pending-work list is complete
+
+All 22 Dev services run their pinned image (= `main` HEAD). Gates are green except the E2E locator
+audit: **74 FAILs in 28 files**, now backlog F13 and the recommended next item. Retained fixtures
+d3e0ebed, f01c1e92, 046fa470, 570bbdcb and f3b3d38b are DELIVERED and are the only orders on Dev.
+The resume command is in the item6 README; the WORKSPACE-AND-COMMANDS commands name wiped orders.
+[Checkpoint129](checkpoints/129-item6-final-handoff.md).
+
+## 2026-10-07T17:14+05:30 — Item5 A5b DONE: live arrival estimate verified on Dev
+
+Deployed customer ea07602, delivery 48077cc, UI 7e7ebce (served == pin == HEAD, healthy). Order
+f3b3d38b (Brand 1 Outlet 5) DELIVERED; the tracker showed "Live" at ASSIGNED (+1307 s), after pickup
+(+1027 s) and +0 s 40 s after the rider's GPS reached the door. Invocations 1–2 errored on harness
+issues (Java long through page.evaluate; my forced SSE map check, parked on the tunnel); 3 passed
+1/1 by resuming the same order. Validator 10/10, 17/17, 8/8, 4/4.
+[Evidence](evidence/a5b-phase4/lifecycle.json). **Next: item6** (backlog reconcile + final handoff).
+
+## 2026-10-07T16:38+05:30 — Item5 A5b: phases 1–3 done locally; owner deploy pending
+
+Live arrival estimate from the assigned rider's position. Plan and evidence:
+[A5b_LiveRiderEta](../../../RandomDocuments/PendingWork_2026-10-07/A5b_LiveRiderEta/README.md).
+- Delivery: the snapshot Lua now runs in a test (luaj); `/sync` stamps receipt time; `/batch` relays
+  only the rider's assigned order (any rider could draw on any customer's map). Module 237 green.
+- Customer: `LiveDeliveryEtaService` on `/active`, `/{id}`, `/batch`; `estimatedArrivalSource`
+  ROUTE|LIVE + `estimatedArrivalTimeExpiresAt`. Maps route is fetched off-thread, ≤1 per order per 30 s.
+  Module 529 green; spec +2 fields.
+- UI: "Live" chip until expiry; 10 s polls while a rider is assigned. Vitest 1070, gates green.
+- Validators 10/10, 17/17, 8/8; break-tests 9/9, 9/9, 3/3 RED-then-GREEN.
+- E2E: `HappyDeliveryFlowTest` checks live at ASSIGNED and OUT_FOR_DELIVERY, then ≤2 min at the door.
+  It compiles and passes the locator audit; it has not run.
+**Waiting on the owner:** deploy delivery, customer, then UI
+([A5b DEPLOY](../../../RandomDocuments/PendingWork_2026-10-07/A5b_LiveRiderEta/DEPLOY.md)). No wipe.
+Then one fresh lifecycle, and `validate_a5b.py --phase 4`.
+
+## 2026-10-07T16:00+05:30 — Item4 M1 DONE; first fully green lifecycle after all item3/M1 fixes
+
+Deployed: customer 0fe11f0, delivery 911d678, maps 28afef7, UI 58542df, after the CommonLibrary
+6dfdd0b publish; the tags equal the pins. `HappyDeliveryFlowTest` passes 1/1 on order 570bbdcb in
+268s. Route responses carry integer totals through the typed RouteDto (rider 1129 s/4577 m). The
+earnings increase, trip-details payout, 18 balanced ledger lines and the receipt all pass.
+Validator: phase1 3/3, phase2 9/9, phase3 6/6.
+**Next: item5 A5b.** Note for A5b: a missing total arrives as null, but the TS type omits null.
+[M1](../../../RandomDocuments/PendingWork_2026-10-07/M1_NumericRoute/README.md).
+
+## 2026-10-07T15:40+05:30 — Item4 M1: phases 1–2 done locally; owner deploy pending
+
+The M1 plan lives in [M1_NumericRoute](../../../RandomDocuments/PendingWork_2026-10-07/M1_NumericRoute/README.md).
+
+Phase1 observed through the real UI on order 046fa470 (delivered): the deployed route responses
+carry integer totals (rider 939 s/4577 m), so the extraction is correct. That lifecycle errored
+afterwards on a harness double-sum bug (₹63.48 vs 63.480000000000004), now fixed with whole paise.
+
+Phase2, validator 9/9:
+- the pre-M1 `travelSeconds()` stopgap is deleted;
+- the delivery route is a typed RouteDto;
+- MapsIntegration has extraction tests and a producer contract;
+- the specs and UI types are regenerated;
+- all touched builds are green.
+
+**Waiting on the owner:** push CommonLibrary first and wait for its publish, then the rest, then
+deploy ([M1 DEPLOY](../../../RandomDocuments/PendingWork_2026-10-07/M1_NumericRoute/DEPLOY.md)).
+Phase3 is one lifecycle after that.
+
+## 2026-10-07T14:45+05:30 — checkpoint128: ITEM3 CLOSED; banner fix verified live
+
+UI 8c5b15e is served. A read-only on-duty probe saw only "Connecting to dispatch…" on three reloads,
+never "Connection lost", and the rider was restored to Offline. All item3 dispositions are recorded.
+**Next: item4 M1, then item5 A5b** (still paused; a fresh session is suggested). Owned fixtures
+d3e0ebed and f01c1e92 are DELIVERED. [Checkpoint128](checkpoints/128-item3-closed.md).
+
+## 2026-10-07T14:15+05:30 — checkpoint127: checkpoint-125 fixes verified live; banner fix pending deploy
+
+UI cfb83e2 is served, and the Dev data was wiped by a fresh install (old fixtures are gone). After
+deployment, the resumes of d3e0ebed and f01c1e92 pass 1/1 each. The retained money check on f01c1e92
+passes 1/1: 18 lines balance ₹92.72 and the rider net is ₹21.16. All four checkpoint-125 fixes are
+verified live.
+
+The intermittent missing courier pin was proven to be Playwright's ageing static GPS fix, not a
+product defect, and the harness now refreshes it.
+
+New, local only: the dispatch banner said "Connection lost" on every page load before the first
+connection. It now says "Connecting to dispatch…", proven red first; UI 179/1,065 green.
+**Waiting on the owner: a FoodDeliveryAppUI deploy (5 files). Pull Deployment first.**
+[Checkpoint127](checkpoints/127-postdeploy-active-rider-verified.md).
+
+## 2026-10-07T13:50+05:30 — Redeploy confirmed served; Dev data wiped by fresh install
+
+The owner redeployed at 08:04Z with the correct pins (UI cfb83e2 plus customer, delivery and maps).
+The served `DeliveryDashboard-DzSDaAKB.js` contains all four new strings and none of the old fee
+text. The served map chunk places known pins before the geolocation call.
+
+The owner also did a **fresh installation that wiped all old data**. Fixtures 6fbe0289, ce254f3a and
+ticket 47ffbccd are gone and are marked `wipedAt`. The retained read-only check on ce254f3a therefore
+failed: History returned 200 with empty content. This is not a product defect. Their earlier
+results remain dated history.
+
+The trip-details "Your net payout" assertion is now a shared helper, run by the main lifecycle as
+well. One fresh `HappyDeliveryFlowTest` lifecycle with the visual audit is running against the new
+build. Evidence goes to `evidence/127-postdeploy-active-visual`, and any created identity must be
+retained. [Evidence](evidence/127-postdeploy-served-and-wipe.json).
+
+## 2026-10-07T13:30+05:30 — UI deploy did NOT take: stale Deployment pins
+
+The owner reported "Everything is deployed". UI commit cfb83e2 contains exactly the 11
+checkpoint125 files, and CI 37588967285 succeeded. However, the live site still serves 6eb4ef6:
+`DeliveryDashboard-CubehF8y.js`, with 0 new strings and the old "credit"/"Total Earnings" text.
+
+DEPLOY_LOG shows the 07:51:09Z deploy used food-delivery-app-ui **6eb4ef6**. That deploy ran from
+a Deployment checkout 4 commits behind origin/main. customer-service, delivery-service and
+maps-integration went out at their previous tags too. The fix is `git pull` in Deployment, then
+redeploy. No E2E was run against the stale build. [Evidence](evidence/126-deploy-stale-pins.json).
+The checkpoint125 next gates are unchanged.
+
 ## 2026-10-07T12:40+05:30 — checkpoint125: ce254f3a delivered + verified; 3 rider defects fixed locally, UI deploy pending
 
 **Correction:** the earlier "invocation 3 running" entries were stale. Invocation 3 failed before
