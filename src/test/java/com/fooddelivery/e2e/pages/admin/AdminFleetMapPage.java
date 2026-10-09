@@ -22,10 +22,15 @@ public class AdminFleetMapPage {
         return legend().isVisible();
     }
 
+    /** The legend, then the rider layer: a rider pin or the explicit no-location note (the legend renders first). */
     public void waitForFleetMap() {
         legend().waitFor(new com.microsoft.playwright.Locator.WaitForOptions()
                 .setState(com.microsoft.playwright.options.WaitForSelectorState.VISIBLE)
                 .setTimeout(15000));
+        riderMarkers().or(page.getByTestId("fleet-riders-empty")).first()
+                .waitFor(new com.microsoft.playwright.Locator.WaitForOptions()
+                        .setState(com.microsoft.playwright.options.WaitForSelectorState.VISIBLE)
+                        .setTimeout(15000));
     }
 
     private com.microsoft.playwright.Locator legend() {

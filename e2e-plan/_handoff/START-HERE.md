@@ -1,5 +1,10 @@
 # Resume the Food Delivery E2E audit
 
+## 2026-10-09T17:35+05:30 — checkpoint140: admin sign-in once per class LIVE-GREEN; admins 003/004 await owner reseed
+
+identity 436fef2 + UI f27091a live; 27 admin methods in ~2 min, one step-up per class. Owner: commit Deployment, then
+`run_remote_dummy_data.sh --scenarios-only`. [Checkpoint140](checkpoints/140-admin-class-session-live.md). Next: NEXT-STEPS top entry.
+
 ## 2026-10-08T21:30+05:30 — checkpoint139: owner-gated list done; nothing running
 
 All four owner-gated tests pass under the fast defaults, after five harness fixes, each guarded or explained in

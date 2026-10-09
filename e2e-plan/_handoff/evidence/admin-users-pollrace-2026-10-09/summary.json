@@ -1,0 +1,85 @@
+{
+ "stopped": false,
+ "results": [
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminUserOpsTest",
+   "name": "adminUserManagement",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminUserOpsTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminSupportUserReviewTest",
+   "name": "searchAndOpenSeededUser",
+   "outcome": "error",
+   "signature": "AdminSupportUserReviewTest.java:446 Timeout 60000ms exceeded",
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminSupportUserReviewTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminSupportUserReviewTest",
+   "name": "filterByRole",
+   "outcome": "error",
+   "signature": "AdminSupportUserReviewTest.java:446 Timeout 60000ms exceeded",
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminSupportUserReviewTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminSupportUserReviewTest",
+   "name": "userPagination",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminSupportUserReviewTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminSupportUserReviewTest",
+   "name": "statusControlIsStateAwareAndSuspensionConfirmationCanBeCanceled",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminSupportUserReviewTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminSupportUserReviewTest",
+   "name": "roleChangeConfirmationCanBeCanceled",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminSupportUserReviewTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminUserCatalogModerationRoutedUiTest",
+   "name": "userSelectionIsolationAndCanceledRoleStatusChangesAreWriteFree",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminUserCatalogModerationRoutedUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminUserCatalogModerationRoutedUiTest",
+   "name": "confirmedRoleRemovalAndStatusUpdateUseOnlyFixtureWrites",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminUserCatalogModerationRoutedUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminUserCatalogModerationRoutedUiTest",
+   "name": "confirmedRoleGrantAndActivationUseOnlyFixtureWrites",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminUserCatalogModerationRoutedUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminUserCatalogModerationRoutedUiTest",
+   "name": "failedRoleRemovalAndStatusUpdateLeaveTheUserUnchanged",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminUserCatalogModerationRoutedUiTest.xml"
+  }
+ ]
+}

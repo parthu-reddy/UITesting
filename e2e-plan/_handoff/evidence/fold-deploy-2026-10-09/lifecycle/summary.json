@@ -1,0 +1,13 @@
+{
+ "stopped": false,
+ "results": [
+  {
+   "cls": "com.fooddelivery.e2e.tests.flows.HappyDeliveryFlowTest",
+   "name": "completeOrderLifecycle",
+   "outcome": "failure",
+   "signature": "HappyDeliveryFlowTest.java:705 Locator expected to have attribute 'data-status'",
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.flows.HappyDeliveryFlowTest.xml"
+  }
+ ]
+}

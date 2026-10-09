@@ -1,0 +1,45 @@
+[E2E STARTUP] Creating Playwright driver
+[E2E STARTUP] Launching Chromium (headless=true)
+[E2E STARTUP] Chromium ready
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/admin-session
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] admin signed out [admin=200, everyday=200]
+[ERROR] Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 70.86 s <<< FAILURE! -- in com.fooddelivery.e2e.tests.features.admin.AdminSupportUserReviewTest
+[ERROR] com.fooddelivery.e2e.tests.features.admin.AdminSupportUserReviewTest.filterByRole -- Time elapsed: 68.48 s <<< ERROR!
+com.microsoft.playwright.TimeoutError: Timeout 60000ms exceeded
+	at com.microsoft.playwright.impl.WaitableTimeout.get(WaitableTimeout.java:41)
+	at com.microsoft.playwright.impl.WaitableRace.get(WaitableRace.java:46)
+	at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:147)
+	at com.microsoft.playwright.impl.FrameImpl.waitForLoadStateImpl(FrameImpl.java:848)
+	at com.microsoft.playwright.impl.FrameImpl.waitForLoadStateImpl(FrameImpl.java:833)
+	at com.microsoft.playwright.impl.PageImpl.lambda$waitForLoadState$14(PageImpl.java:1477)
+	at com.microsoft.playwright.impl.WaitForEventLogger.get(WaitForEventLogger.java:50)
+	at com.microsoft.playwright.impl.ChannelOwner.withWaitLogging(ChannelOwner.java:84)
+	at com.microsoft.playwright.impl.PageImpl.lambda$waitForLoadState$15(PageImpl.java:1476)
+	at com.microsoft.playwright.impl.ChannelOwner.lambda$withTitle$0(ChannelOwner.java:90)
+	at com.microsoft.playwright.impl.ChannelOwner.withTitle(ChannelOwner.java:98)
+	at com.microsoft.playwright.impl.ChannelOwner.withTitle(ChannelOwner.java:89)
+	at com.microsoft.playwright.impl.PageImpl.waitForLoadState(PageImpl.java:1475)
+	at com.microsoft.playwright.Page.waitForLoadState(Page.java:8208)
+	at com.fooddelivery.e2e.tests.features.admin.AdminSupportUserReviewTest.openUsersAndWaitForInitialList(AdminSupportUserReviewTest.java:446)
+	at com.fooddelivery.e2e.tests.features.admin.AdminSupportUserReviewTest.filterByRole(AdminSupportUserReviewTest.java:129)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+
+[ERROR] Errors: 
+[ERROR]   AdminSupportUserReviewTest.filterByRole:129->openUsersAndWaitForInitialList:446 » Timeout Timeout 60000ms exceeded
+[ERROR] Tests run: 1, Failures: 0, Errors: 1, Skipped: 0
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.5.2:test (default-test) on project e2e-tests: 
+[ERROR] 
+[ERROR] See /Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

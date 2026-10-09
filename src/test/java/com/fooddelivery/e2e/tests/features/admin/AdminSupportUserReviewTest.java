@@ -4,8 +4,8 @@ import com.fooddelivery.e2e.base.TestBase;
 import com.fooddelivery.e2e.pages.admin.*;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Response;
+import com.fooddelivery.e2e.util.UiSettle;
 import com.microsoft.playwright.options.AriaRole;
-import com.microsoft.playwright.options.LoadState;
 import org.junit.jupiter.api.*;
 
 import java.util.List;
@@ -64,7 +64,7 @@ public class AdminSupportUserReviewTest extends TestBase {
                                 && "GET".equals(r.request().method()),
                 support::nextPage);
         assertThat(next.status()).isEqualTo(200);
-        adminPage.waitForLoadState(LoadState.NETWORKIDLE);
+        UiSettle.after(adminPage, next);
         assertThat(support.getPageInfo()).startsWith("Page 2 of ");
 
         Response previous = adminPage.waitForResponse(r ->
@@ -74,7 +74,7 @@ public class AdminSupportUserReviewTest extends TestBase {
                                 && "GET".equals(r.request().method()),
                 support::prevPage);
         assertThat(previous.status()).isEqualTo(200);
-        adminPage.waitForLoadState(LoadState.NETWORKIDLE);
+        UiSettle.after(adminPage, previous);
         assertThat(support.getPageInfo()).startsWith("Page 1 of ");
     }
 
@@ -133,7 +133,7 @@ public class AdminSupportUserReviewTest extends TestBase {
                                 && "GET".equals(r.request().method()),
                 () -> users.filterByRole("CUSTOMER"));
         assertThat(response.status()).isEqualTo(200);
-        adminPage.waitForLoadState(LoadState.NETWORKIDLE);
+        UiSettle.after(adminPage, response);
 
         if (users.getUserCount() == 0) {
             assertThat(users.isNoUsersStateVisible()).isTrue();
@@ -164,7 +164,7 @@ public class AdminSupportUserReviewTest extends TestBase {
                                 && "GET".equals(r.request().method()),
                 users::nextPage);
         assertThat(next.status()).isEqualTo(200);
-        adminPage.waitForLoadState(LoadState.NETWORKIDLE);
+        UiSettle.after(adminPage, next);
         assertThat(users.getPageInfo()).startsWith("Page 2 of ");
 
         Response previous = adminPage.waitForResponse(r ->
@@ -173,7 +173,7 @@ public class AdminSupportUserReviewTest extends TestBase {
                                 && "GET".equals(r.request().method()),
                 users::prevPage);
         assertThat(previous.status()).isEqualTo(200);
-        adminPage.waitForLoadState(LoadState.NETWORKIDLE);
+        UiSettle.after(adminPage, previous);
         assertThat(users.getPageInfo()).startsWith("Page 1 of ");
     }
 
@@ -313,7 +313,7 @@ public class AdminSupportUserReviewTest extends TestBase {
                                 && "GET".equals(r.request().method()),
                 () -> reviews.searchByEntity("RESTAURANT", UNKNOWN_UUID));
         assertThat(response.status()).isEqualTo(200);
-        adminPage.waitForLoadState(LoadState.NETWORKIDLE);
+        UiSettle.after(adminPage, response);
         assertThat(reviews.isEmptyState()).isTrue();
         assertThat(reviews.getReviewCount()).isZero();
     }
@@ -330,7 +330,7 @@ public class AdminSupportUserReviewTest extends TestBase {
                                 && "GET".equals(r.request().method()),
                 () -> reviews.searchByUser(customerId));
         assertThat(response.status()).isEqualTo(200);
-        adminPage.waitForLoadState(LoadState.NETWORKIDLE);
+        UiSettle.after(adminPage, response);
 
         int count = reviews.getReviewCount();
         if (count == 0) {
@@ -422,7 +422,7 @@ public class AdminSupportUserReviewTest extends TestBase {
                                 && r.url().contains("status=OPEN")
                                 && "GET".equals(r.request().method()),
                 portal::openSupportTab);
-        adminPage.waitForLoadState(LoadState.NETWORKIDLE);
+        UiSettle.after(adminPage, response);
         return response;
     }
 
@@ -432,7 +432,7 @@ public class AdminSupportUserReviewTest extends TestBase {
                                 && r.url().contains("status=OPEN")
                                 && "GET".equals(r.request().method()),
                 portal::openRefundsTab);
-        adminPage.waitForLoadState(LoadState.NETWORKIDLE);
+        UiSettle.after(adminPage, response);
         return response;
     }
 
@@ -443,7 +443,7 @@ public class AdminSupportUserReviewTest extends TestBase {
                                 && "GET".equals(r.request().method()),
                 portal::openUsersTab);
         assertThat(response.status()).isEqualTo(200);
-        adminPage.waitForLoadState(LoadState.NETWORKIDLE);
+        UiSettle.after(adminPage, response);
         return new AdminUserManagementPage(adminPage);
     }
 
@@ -453,7 +453,7 @@ public class AdminSupportUserReviewTest extends TestBase {
                                 && r.url().contains("phone=" + testCustomerPhone)
                                 && "GET".equals(r.request().method()),
                 () -> users.searchUser(testCustomerPhone));
-        adminPage.waitForLoadState(LoadState.NETWORKIDLE);
+        UiSettle.after(adminPage, response);
         return response;
     }
 
@@ -475,7 +475,7 @@ public class AdminSupportUserReviewTest extends TestBase {
                                 && r.url().contains("/active")
                                 && "GET".equals(r.request().method()),
                 () -> users.selectUser(0));
-        adminPage.waitForLoadState(LoadState.NETWORKIDLE);
+        UiSettle.after(adminPage, response);
         return response;
     }
 
@@ -484,7 +484,7 @@ public class AdminSupportUserReviewTest extends TestBase {
                         r.url().contains("/api/v1/categories")
                                 && "GET".equals(r.request().method()),
                 portal::openCategoriesTab);
-        adminPage.waitForLoadState(LoadState.NETWORKIDLE);
+        UiSettle.after(adminPage, response);
         return response;
     }
 

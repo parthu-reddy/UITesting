@@ -1,0 +1,61 @@
+{
+ "stopped": false,
+ "results": [
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminLedgerAdvancedTest",
+   "name": "ledgerViewVisible",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminLedgerAdvancedTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminLedgerAdvancedTest",
+   "name": "ledgerRowsHaveCompleteFinancialValues",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminLedgerAdvancedTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.flows.OrderReviewsFlowTest",
+   "name": "participantsReviewEachOther",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.flows.OrderReviewsFlowTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.flows.OrderReviewsFlowTest",
+   "name": "remainingDriverReviewRefreshesTheCachedAggregate",
+   "outcome": "skipped",
+   "signature": "O4-INT-002: direct aggregate requests require a visible UI replacement",
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.flows.OrderReviewsFlowTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.flows.OrderReviewsFlowTest",
+   "name": "submittedDishReviewRemainsReadOnly",
+   "outcome": "skipped",
+   "signature": "O4-INT-002: historical direct eligibility fixture; primary journey proves rendered read-only state",
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.flows.OrderReviewsFlowTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.flows.OrderReviewsFlowTest",
+   "name": "remainingDishReviewRefreshesTheCachedAggregate",
+   "outcome": "skipped",
+   "signature": "O4-INT-002: direct aggregate requests require a visible UI replacement",
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.flows.OrderReviewsFlowTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminLedgerAdvancedTest",
+   "name": "pendingPayoutsHavePositiveBalances",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminLedgerAdvancedTest.xml"
+  }
+ ]
+}

@@ -42,6 +42,8 @@ public abstract class TestBase {
     protected String testRestaurantPhone;
     protected String testRiderPhone;
     protected String testAdminPhone;
+    /** The admin page holds this class's shared session: signing it out per method would end it for the rest. */
+    private boolean adminUsesClassSession;
 
     @BeforeAll
     public static void setUpClass() {
@@ -63,7 +65,8 @@ public abstract class TestBase {
     }
 
     @AfterAll
-    public static void tearDownClass() {
+    public static void tearDownClass(org.junit.jupiter.api.TestInfo info) {
+        com.fooddelivery.e2e.util.ClassAdminSession.signOut(info.getTestClass().orElse(null), browser);
         if (browser != null) browser.close();
         if (playwright != null) playwright.close();
     }
@@ -74,6 +77,7 @@ public abstract class TestBase {
         testRestaurantPhone = TestConfig.restaurantPhone();
         testRiderPhone = TestConfig.riderPhone();
         testAdminPhone = TestConfig.adminPhone();
+        adminUsesClassSession = false;
 
         customerContext = createContext("customer");
         restaurantContext = createContext("restaurant");
@@ -94,7 +98,7 @@ public abstract class TestBase {
             signOutQuietly("customer", customerPage);
             signOutQuietly("restaurant", restaurantPage);
             signOutQuietly("rider", riderPage);
-            signOutQuietly("admin", adminPage);
+            if (!adminUsesClassSession) signOutQuietly("admin", adminPage);
             closeQuietly(customerContext);
             closeQuietly(restaurantContext);
             closeQuietly(riderContext);
@@ -117,11 +121,30 @@ public abstract class TestBase {
         return browser.newContext(options);
     }
 
-    /** Authenticate through the ordinary UI and separate administrator verification every time. */
+    /**
+     * Signs the admin in through the ordinary UI and administrator verification once per test class; later methods
+     * reuse that session in their own fresh context (util/ClassAdminSession). A reused session that no longer opens
+     * the portal is dropped and replaced by a real sign-in.
+     */
     protected final void loginAsAdmin() {
+        Class<?> testClass = getClass();
+        if (com.fooddelivery.e2e.util.ClassAdminSession.has(testClass)) {
+            com.fooddelivery.e2e.util.ClassAdminSession.inject(testClass, adminContext);
+            adminPage.navigate(TestConfig.APP_URL.replaceAll("/$", "") + Portal.ADMIN.path);
+            try {
+                new AdminPortalPage(adminPage).waitForPortal();
+                adminUsesClassSession = true;
+                return;
+            } catch (RuntimeException | AssertionError e) {
+                System.out.println("[E2E SETUP] class admin session did not open the portal; signing in again");
+                com.fooddelivery.e2e.util.ClassAdminSession.forget(testClass);
+            }
+        }
         new LoginPage(adminPage).login(testAdminPhone, TestConfig.ADMIN_PROFILE_NAME, TestConfig.ADMIN_PROFILE_EMAIL)
                 .openPortal(Portal.ADMIN);
         new AdminPortalPage(adminPage).waitForPortal();
+        com.fooddelivery.e2e.util.ClassAdminSession.capture(testClass, adminContext, adminPage);
+        adminUsesClassSession = true;
     }
 
     private Page createPage(BrowserContext context) {

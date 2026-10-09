@@ -9,7 +9,9 @@ Guarantees:
      failure stops the batch before the real work starts.
   3. Runs one class per Maven invocation and prints progress + ETA after each.
   4. Paces admin step-up: Identity allows 5 verifies / 5 min and 10 code sends / 10 min per admin
-     phone (IdentityService AuthService.sendOtp/verifyOtp). Admin classes run one METHOD at a time,
+     phone (IdentityService AuthService.sendOtp/verifyOtp), so step-ups rotate over the four seeded admin phones.
+     A class that signs in only through TestBase.loginAsAdmin() shares one admin session (util/ClassAdminSession)
+     and runs as ONE unit costing one step-up; any other admin class runs one METHOD at a time,
      and the runner waits until the rolling windows allow another step-up. A method that still hits
      ADMIN_STEP_UP_RATE_LIMITED is retried once after a full window. The step-up history persists in
      `_handoff/ADMIN-STEP-UPS.json`, so a new invocation inherits the budget the last one spent.
@@ -65,8 +67,12 @@ def take_run_lock():
     import atexit
     atexit.register(lambda: os.path.exists(RUN_LOCK) and open(RUN_LOCK).read().startswith(f"{os.getpid()} ")
                     and os.remove(RUN_LOCK))
-PHONES = ["-Dcustomer.phone=8000000001", "-Drestaurant.phone=9000000001",
-          "-Drider.phone=7000000001", "-Dadmin.phone=1000000001"]
+PHONES = ["-Dcustomer.phone=8000000001", "-Drestaurant.phone=9000000001", "-Drider.phone=7000000001"]
+# Admin phones that exist on Dev (identity_db, read-only check). Identity's step-up limits are per phone, so each
+# one is a separate budget. Only list a phone once Dev has it: signing in with an unknown phone creates a plain user
+# (AuthService.createSession), which the seed's admin collision guard then refuses. The seed provisions 1000000001-004
+# (generate_scenario_data.py); 003 and 004 are added here after the owner's identity deploy + scenario reseed.
+ADMIN_PHONES = ["1000000001", "1000000002"]
 # Never run: parked rate limits, SSE over the tunnel and latency measurements (tags, not names).
 ALWAYS_EXCLUDED = ["auth-rate-limit", "parked", "measurement"]
 # COMMON[0] is rewritten by --exclude-tags.
@@ -83,28 +89,31 @@ CANARIES = {
 # because a test can step up more than once (P0-2 run 2 hit 429 twice at exactly 5 / 5 min).
 ADMIN_WINDOWS = [(300, 4), (600, 8)]
 RATE_LIMITED = "ADMIN_STEP_UP_RATE_LIMITED"
-stepups: list[float] = []
+stepups: dict[str, list[float]] = {p: [] for p in ADMIN_PHONES}
 # Identity's windows outlive one invocation, so the step-up history must too: back-to-back batches each
 # started with an empty budget and hit ADMIN_STEP_UP_RATE_LIMITED (checkpoint132). Epoch seconds only.
 STEPUP_HISTORY = os.path.join(HANDOFF, "ADMIN-STEP-UPS.json")
 
 
 def load_stepups(now):
-    """Merge earlier invocations' step-ups that still fall inside the longest window."""
+    """Merge earlier invocations' step-ups (per admin phone) that still fall inside the longest window."""
     if not os.path.exists(STEPUP_HISTORY):
         return
     try:
         saved = json.load(open(STEPUP_HISTORY))
+        if not isinstance(saved, dict) or not all(isinstance(v, list) for v in saved.values()):
+            raise ValueError("expected {admin phone: [epoch seconds]}")
     except ValueError as e:
         sys.exit(f"REFUSED: {STEPUP_HISTORY} is unreadable ({e}); without it the admin budget is unknown. "
                  "Delete it only if no admin step-up happened in the last 10 minutes.")
     horizon = max(w for w, _n in ADMIN_WINDOWS)
-    # Called once per process, before any step-up; a list, not a set: equal timestamps are separate step-ups.
-    stepups[:] = sorted(stepups + [t for t in saved if now - t < horizon])
+    # Called once per process, before any step-up; lists, not sets: equal timestamps are separate step-ups.
+    for phone in ADMIN_PHONES:
+        stepups[phone] = sorted(stepups[phone] + [t for t in saved.get(phone, []) if now - t < horizon])
 
 
-def record_stepup(dry):
-    stepups.append(clock(dry))
+def record_stepup(dry, phone):
+    stepups[phone].append(clock(dry))
     if not dry:
         tmp = STEPUP_HISTORY + ".tmp"
         with open(tmp, "w") as fh:
@@ -128,14 +137,22 @@ def test_methods(src):
                       r"(?:\([^)]*\))?[\s\S]*?\bvoid\s+(\w+)\s*\(", src)
 
 
+# Admin sign-ins that do not go through TestBase.loginAsAdmin(): each one is its own step-up. testAdminPhone /
+# Account.ADMIN / ADMIN_PROFILE_NAME are parameterized sign-ins (SessionUiTest hit 429 unpaced, checkpoint134).
+OWN_ADMIN_SIGN_IN = r"Portal\.ADMIN|stepUpAdmin|testAdminPhone|Account\.ADMIN|ADMIN_PROFILE_NAME"
+
+
 def uses_admin(src):
-    # testAdminPhone / Account.ADMIN / ADMIN_PROFILE_NAME: parameterized admin sign-ins (SessionUiTest hit 429
-    # unpaced, checkpoint134). Over-matching only adds pacing; under-matching costs a rate-limited failure.
-    return bool(re.search(r"Portal\.ADMIN|stepUpAdmin|loginAsAdmin|adminPage\.navigate|testAdminPhone"
-                          r"|Account\.ADMIN|ADMIN_PROFILE_NAME", src))
+    # Over-matching only adds pacing; under-matching costs a rate-limited failure.
+    return bool(re.search(OWN_ADMIN_SIGN_IN + r"|loginAsAdmin|adminPage\.navigate", src))
 
 
-SIM = {"now": None}  # dry-run clock: simulated waits advance it, so the printed duration is real
+def shares_class_admin_session(src):
+    """Signs in only through loginAsAdmin(): one step-up for the whole class (util/ClassAdminSession)."""
+    return "loginAsAdmin" in src and not re.search(OWN_ADMIN_SIGN_IN, src)
+
+
+SIM = {"now": None, "waited": 0.0}  # dry-run clock: simulated waits advance it, so the printed duration is real
 EST_ADMIN_TEST_S = 40  # observed: an admin test is ~30-60 s on the Dev tunnel
 
 
@@ -143,30 +160,46 @@ def clock(dry):
     return SIM["now"] if dry else time.time()
 
 
-def admin_wait(dry):
-    """Seconds until another admin step-up fits every rolling window (0 = now)."""
+def phone_wait(dry, phone):
+    """Seconds until another step-up on this admin phone fits every rolling window (0 = now)."""
     if dry and SIM["now"] is None:
         SIM["now"] = time.time()
     now = clock(dry)
     waits = [0.0]
     for window, limit in ADMIN_WINDOWS:
-        recent = sorted(t for t in stepups if now - t < window)
+        recent = sorted(t for t in stepups[phone] if now - t < window)
         if len(recent) >= limit:
             waits.append(recent[len(recent) - limit] + window - now + 2)
     return max(waits)
 
 
-def wait_for_admin_budget(dry):
-    """Block until another admin step-up fits every rolling window, then record it."""
-    while (pause := admin_wait(dry)) > 0:
-        log(f"admin step-up budget used ({len(stepups)} so far): waiting {pause:.0f}s")
+def pick_phone(dry):
+    """The admin phone that can step up soonest (the first one on a tie), and its wait."""
+    return min(((phone_wait(dry, p), p) for p in ADMIN_PHONES), key=lambda wp: wp[0])[::-1]
+
+
+def admin_wait(dry):
+    """Seconds until any admin phone can step up (0 = now)."""
+    return pick_phone(dry)[1]
+
+
+def wait_for_admin_budget(dry, est_s=None):
+    """Block until some admin phone fits every rolling window, record the step-up on it and return the phone."""
+    while True:
+        phone, pause = pick_phone(dry)
+        if pause <= 0:
+            break
+        used = sum(len(v) for v in stepups.values())
+        log(f"admin step-up budget used on all {len(ADMIN_PHONES)} admin phones ({used} so far): waiting {pause:.0f}s")
         if dry:
             SIM["now"] += pause
+            SIM["waited"] += pause
         else:
             time.sleep(pause)
-    record_stepup(dry)
+    record_stepup(dry, phone)
     if dry:
-        SIM["now"] += EST_ADMIN_TEST_S
+        SIM["now"] += EST_ADMIN_TEST_S if est_s is None else est_s
+    return phone
 
 
 EXTRA: list[str] = []  # -Dkey=value fixture properties from --prop
@@ -177,13 +210,13 @@ LOGS = {"dir": None, "n": 0}
 SECRET = re.compile(r"otp|token=|Bearer |password", re.I)
 
 
-def run(selector, dry):
+def run(selector, dry, admin_phone=ADMIN_PHONES[0]):
     """One Maven invocation; returns (exit, list of testcase dicts from the reports it wrote)."""
     if dry:
-        log(f"would run -Dtest={selector}")
+        log(f"would run -Dtest={selector} as admin {admin_phone}")
         return 0, []
     shutil.rmtree(REPORTS, ignore_errors=True)
-    cmd = ["mvn", "-q", f"-Dtest={selector}", *PHONES, *COMMON, *EXTRA, *DEBUG, "test"]
+    cmd = ["mvn", "-q", f"-Dtest={selector}", *PHONES, f"-Dadmin.phone={admin_phone}", *COMMON, *EXTRA, *DEBUG, "test"]
     env = {**os.environ, "PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD": "1"}
     proc = subprocess.run(cmd, cwd=UITESTING, env=env, capture_output=True, text=True)
     if LOGS["dir"]:
@@ -274,11 +307,13 @@ def main():
         if unknown:
             sys.exit(f"{c}: no test methods {sorted(unknown)}")
         admin = uses_admin(src)
-        # Admin classes always run method by method (paced); a method subset runs as one invocation.
-        plan.append((c, admin, methods if (admin or only) else None))
-    admin_methods = sum(len(m) for _c, adm, m in plan if adm)
-    log(f"{len(plan)} classes, {admin_methods} admin methods paced at "
-        + ", ".join(f"{n} per {w // 60} min" for w, n in ADMIN_WINDOWS))
+        shared = admin and shares_class_admin_session(src)
+        # Shared-session admin classes are one unit (one step-up); other admin classes run method by method
+        # (each its own step-up); a method subset of a non-admin class runs as one invocation.
+        plan.append((c, admin, shared, methods if (admin or only) else None))
+    stepups_planned = sum(1 if shared else len(m) for _c, adm, shared, m in plan if adm)
+    log(f"{len(plan)} classes, {stepups_planned} admin step-ups paced at "
+        + ", ".join(f"{n} per {w // 60} min" for w, n in ADMIN_WINDOWS) + f" on each of {len(ADMIN_PHONES)} admin phones")
     if not a.dry_run:
         rc = subprocess.run(["mvn", "-q", "test-compile"], cwd=UITESTING, capture_output=True, text=True,
                             env={**os.environ, "PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD": "1"})
@@ -287,39 +322,42 @@ def main():
     results, signatures, started, done = [], collections.defaultdict(set), time.time(), 0
     if not a.skip_canary:
         for role, sel in CANARIES.items():
-            if role == "admin":
-                wait_for_admin_budget(a.dry_run)
-            _rc, cases = run(sel, a.dry_run)
+            phone = wait_for_admin_budget(a.dry_run) if role == "admin" else ADMIN_PHONES[0]
+            _rc, cases = run(sel, a.dry_run, phone)
             if not a.dry_run:
                 keep(cases, a.evidence)
                 bad = [c for c in cases if c["outcome"] != "pass"]
                 if not cases or bad:
                     sys.exit(f"STOPPED at {role} canary {sel}: {[(c['name'], c['signature']) for c in bad] or 'no report'}")
                 log(f"canary {role} ok")
-    # Work units: admin classes per METHOD (each is one step-up), others per class. While the admin
-    # budget is used up, the next non-admin unit runs instead of the runner sleeping.
+    # Work units: shared-session admin classes whole (one step-up), other admin classes per METHOD (each is one
+    # step-up), others per class. While every admin phone's budget is used up, the next non-admin unit runs
+    # instead of the runner sleeping.
     admin_q, other_q, remaining = collections.deque(), collections.deque(), collections.Counter()
-    for c, admin, methods in plan:
-        units = [f"{c}#{m}" for m in methods] if admin else ([f"{c}#{'+'.join(methods)}"] if methods else [c])
-        (admin_q if admin else other_q).extend((c, u) for u in units)
+    for c, admin, shared, methods in plan:
+        if admin and not shared:
+            units = [(f"{c}#{m}", 1) for m in methods]
+        else:
+            units = [(f"{c}#{'+'.join(methods)}" if methods else c, len(methods) if methods else 1)]
+        (admin_q if admin else other_q).extend((c, u, n) for u, n in units)
         remaining[c] += len(units)
     by_class = collections.defaultdict(list)
     while admin_q or other_q:
         if admin_q and (admin_wait(a.dry_run) == 0 or not other_q):
-            c, sel = admin_q.popleft()
-            wait_for_admin_budget(a.dry_run)
-            _rc, got = run(sel, a.dry_run)
+            c, sel, n = admin_q.popleft()
+            phone = wait_for_admin_budget(a.dry_run, EST_ADMIN_TEST_S * n)
+            _rc, got = run(sel, a.dry_run, phone)
             if any(x["rate_limited"] for x in got):
                 # The refused attempt still cost Identity a send; keep the history (clearing it let
                 # the retry run into the 10-minute send window) and let the windows decide the wait.
-                log(f"{sel}: admin step-up still rate-limited; one retry once the windows allow it")
-                record_stepup(a.dry_run)
+                log(f"{sel}: admin step-up still rate-limited on {phone}; one retry once the windows allow it")
+                record_stepup(a.dry_run, phone)
                 if not a.dry_run:
                     time.sleep(ADMIN_WINDOWS[0][0] + 5)
-                wait_for_admin_budget(a.dry_run)
-                _rc, got = run(sel, a.dry_run)
+                phone = wait_for_admin_budget(a.dry_run, EST_ADMIN_TEST_S * n)
+                _rc, got = run(sel, a.dry_run, phone)
         else:
-            c, sel = other_q.popleft()
+            c, sel, _n = other_q.popleft()
             _rc, got = run(sel, a.dry_run)
         if not a.dry_run:
             keep(got, a.evidence)
@@ -342,7 +380,8 @@ def main():
             sys.exit(f"STOPPED (fail-fast): the same failure in {len(where)} classes {where}:\n  {sig}\n"
                      "Diagnose it before running anything else.")
     if a.dry_run and SIM["now"]:
-        log(f"dry run: admin pacing alone spans ~{(SIM['now'] - started) / 60:.0f} min (non-admin classes add their own time)")
+        log(f"dry run: ~{SIM['waited'] / 60:.0f} min waiting for admin step-up budget; admin units span "
+            f"~{(SIM['now'] - started) / 60:.0f} min with ~{EST_ADMIN_TEST_S} s per admin method (non-admin classes add their own time)")
     json.dump(dict(stopped=False, results=results), open(os.path.join(a.evidence, "summary.json"), "w"), indent=1)
     log(f"done: {dict(collections.Counter(x['outcome'] for x in results))}")
 

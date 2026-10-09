@@ -4,8 +4,8 @@ import com.fooddelivery.e2e.base.TestBase;
 import com.fooddelivery.e2e.pages.admin.*;
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Response;
+import com.fooddelivery.e2e.util.UiSettle;
 import com.microsoft.playwright.options.AriaRole;
-import com.microsoft.playwright.options.LoadState;
 import org.junit.jupiter.api.*;
 
 import java.util.List;
@@ -34,7 +34,7 @@ public class AdminLiveOpsFleetTest extends TestBase {
                                 && "GET".equals(r.request().method()),
                 portal::openLiveOpsTab);
         assertThat(response.status()).isEqualTo(200);
-        adminPage.waitForLoadState(LoadState.NETWORKIDLE);
+        UiSettle.after(adminPage, response);
         AdminLiveOpsPage liveOps = new AdminLiveOpsPage(adminPage);
         assertThat(liveOps.isLiveOpsVisible()).isTrue();
         liveOps.waitForOrdersLoaded();
@@ -48,7 +48,7 @@ public class AdminLiveOpsFleetTest extends TestBase {
                                 && "GET".equals(r.request().method()),
                 portal::openFleetTab);
         assertThat(response.status()).isEqualTo(200);
-        adminPage.waitForLoadState(LoadState.NETWORKIDLE);
+        UiSettle.after(adminPage, response);
         AdminFleetMapPage fleet = new AdminFleetMapPage(adminPage);
         fleet.waitForFleetMap();
         return fleet;
@@ -92,7 +92,7 @@ public class AdminLiveOpsFleetTest extends TestBase {
                                 && "GET".equals(r.request().method()),
                 fleet::refreshMap);
         assertThat(response.status()).isEqualTo(200);
-        adminPage.waitForLoadState(LoadState.NETWORKIDLE);
+        UiSettle.after(adminPage, response);
         assertThat(fleet.isFleetMapVisible()).isTrue();
     }
 
@@ -156,7 +156,7 @@ public class AdminLiveOpsFleetTest extends TestBase {
                                 && "GET".equals(r.request().method()),
                 liveOps::refresh);
         assertThat(response.status()).isEqualTo(200);
-        adminPage.waitForLoadState(LoadState.NETWORKIDLE);
+        UiSettle.after(adminPage, response);
         assertThat(liveOps.isLiveOpsVisible()).isTrue();
         liveOps.waitForOrdersLoaded();
     }

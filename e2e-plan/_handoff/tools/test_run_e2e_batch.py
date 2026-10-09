@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Proves run_e2e_batch.py's guards fire: deploy lock, canary stop, fail-fast on a repeated
 signature, and admin pacing. Live runs are faked; nothing touches Dev.   python3 test_run_e2e_batch.py"""
+import collections
 import json
 import os
 import sys
@@ -18,11 +19,20 @@ rb.take_run_lock = lambda: None  # main() tests must never write the real handof
 rb.LOCK = os.path.join(tempfile.mkdtemp(), "DEPLOY-IN-PROGRESS")
 
 
+def reset_stepups():
+    rb.stepups.clear()
+    rb.stepups.update({p: [] for p in rb.ADMIN_PHONES})
+
+
+def total_stepups():
+    return sum(len(v) for v in rb.stepups.values())
+
+
 class Fresh(unittest.TestCase):
     """Each test gets its own step-up history file; none may read or write the real one."""
     def setUp(self):
         rb.STEPUP_HISTORY = os.path.join(tempfile.mkdtemp(), "ADMIN-STEP-UPS.json")
-        rb.stepups.clear()
+        reset_stepups()
 
 
 def case(cls, outcome="pass", sig=None, limited=False):
@@ -54,7 +64,7 @@ class Guards(Fresh):
     def test_canary_failure_stops_before_work(self):
         calls = []
 
-        def fake(sel, dry):
+        def fake(sel, dry, *_):
             calls.append(sel)
             return 0, [case("c", "failure", "LoginPage.java:71 Timeout")] if "PageReload" in sel else [case("c")]
         with mock.patch.object(rb, "run", side_effect=fake):
@@ -66,7 +76,7 @@ class Guards(Fresh):
     def test_repeated_signature_stops_at_second_class(self):
         calls = []
 
-        def fake(sel, dry):
+        def fake(sel, dry, *_):
             calls.append(sel)
             return 0, [case(sel, "failure", "SavedDeliveryAddressPage.java:15 Locator expected to be visible")]
         with mock.patch.object(rb, "run", side_effect=fake):
@@ -77,18 +87,20 @@ class Guards(Fresh):
 
     def test_distinct_failures_do_not_stop(self):
         sigs = iter(["A.java:1 x", "B.java:2 y", "C.java:3 z"])
-        with mock.patch.object(rb, "run", side_effect=lambda sel, dry: (0, [case(sel, "failure", next(sigs))])):
+        with mock.patch.object(rb, "run", side_effect=lambda sel, dry, *_: (0, [case(sel, "failure", next(sigs))])):
             self.main("--skip-canary", "--classes", "RestaurantUiTest,ProfileSettingsTest,CheckoutUiTest")
 
-    def test_admin_pacing_waits_after_four(self):
+    def test_admin_pacing_spreads_over_phones_then_waits(self):
         sleeps = []
-        rb.time.sleep.side_effect = lambda s: sleeps.append(s)
-        for _ in range(4):
-            rb.wait_for_admin_budget(False)
-        self.assertEqual(sleeps, [])
-        rb.time.sleep.side_effect = lambda s: (sleeps.append(s), rb.stepups.clear())
+
+        def must_not_wait(s):  # the clock is frozen here, so a wait would spin forever: fail instead
+            raise AssertionError(f"waited {s:.0f}s before every admin phone had used its budget")
+        rb.time.sleep.side_effect = must_not_wait
+        used = [rb.wait_for_admin_budget(False) for _ in range(4 * len(rb.ADMIN_PHONES))]
+        self.assertEqual(sorted(collections.Counter(used).values()), [4] * len(rb.ADMIN_PHONES), used)
+        rb.time.sleep.side_effect = lambda s: (sleeps.append(s), reset_stepups())
         rb.wait_for_admin_budget(False)
-        self.assertTrue(sleeps and sleeps[0] >= 300, f"5th step-up inside 5 min must wait a window, waited {sleeps}")
+        self.assertTrue(sleeps and sleeps[0] >= 300, f"a 5th step-up on every phone inside 5 min must wait, waited {sleeps}")
 
 
 class RunLock(Fresh):
@@ -106,18 +118,19 @@ class RunLock(Fresh):
 
 class Interleave(Fresh):
     def test_non_admin_runs_while_admin_budget_is_spent(self):
-        rb.stepups.clear()
+        reset_stepups()
         order = []
         clock = {"t": 1_000_000.0}
         with mock.patch.object(rb, "keep"), mock.patch.object(rb, "time") as t, \
                 mock.patch.object(rb.subprocess, "run", return_value=mock.Mock(returncode=0, stdout="", stderr="")), \
-                mock.patch.object(rb, "run", side_effect=lambda sel, dry: (order.append(sel), (0, [case(sel)]))[1]), \
+                mock.patch.object(rb, "run", side_effect=lambda sel, dry, *_: (order.append(sel), (0, [case(sel)]))[1]), \
                 mock.patch.object(sys, "argv", ["x", "--evidence", tempfile.mkdtemp(), "--skip-canary",
                                                 "--classes", "AdminUiTest,ProfileSettingsTest"]):
             t.time.side_effect = lambda: clock["t"]
             t.sleep.side_effect = lambda s: clock.__setitem__("t", clock["t"] + s)
             t.strftime.return_value = "00:00:00"
-            rb.stepups[:] = [clock["t"] - 10] * 4  # four step-ups in the last minute: budget spent
+            for p in rb.ADMIN_PHONES:  # four step-ups per phone in the last minute: every budget spent
+                rb.stepups[p] = [clock["t"] - 10] * 4
             rb.main()
         self.assertTrue(order[0].startswith("ProfileSettingsTest"), f"non-admin work must fill the admin wait: {order}")
         self.assertTrue(any(o.startswith("AdminUiTest#") for o in order[1:]), order)
@@ -125,11 +138,11 @@ class Interleave(Fresh):
 
 class RetryKeepsHistory(Fresh):
     def test_rate_limited_retry_counts_the_refused_attempt_and_keeps_history(self):
-        rb.stepups.clear()
+        reset_stepups()
         clock = {"t": 2_000_000.0}
         calls = []
 
-        def fake(sel, dry):
+        def fake(sel, dry, *_):
             calls.append(sel)
             return 0, [case(sel, "failure", "LoginPage.java:89 ADMIN", limited=len(calls) == 1)]
         with mock.patch.object(rb, "keep"), mock.patch.object(rb, "time") as t, mock.patch.object(rb, "run", side_effect=fake), \
@@ -141,7 +154,7 @@ class RetryKeepsHistory(Fresh):
             t.strftime.return_value = "00:00:00"
             rb.main()
         self.assertEqual(len(calls), 2, "one retry")
-        self.assertEqual(len(rb.stepups), 3, "first attempt + refused send + retry are all remembered")
+        self.assertEqual(total_stepups(), 3, "first attempt + refused send + retry are all remembered")
 
 
 class Selection(Fresh):
@@ -151,7 +164,7 @@ class Selection(Fresh):
 
     def test_method_subset_and_props(self):
         seen = []
-        with mock.patch.object(rb, "run", side_effect=lambda sel, dry: (seen.append((sel, list(rb.EXTRA))), (0, [case(sel)]))[1]), \
+        with mock.patch.object(rb, "run", side_effect=lambda sel, dry, *_: (seen.append((sel, list(rb.EXTRA))), (0, [case(sel)]))[1]), \
                 mock.patch.object(rb, "keep"), \
                 mock.patch.object(rb.subprocess, "run", return_value=mock.Mock(returncode=0, stdout="", stderr="")), \
                 mock.patch.object(sys, "argv", ["x", "--evidence", self.ev, "--skip-canary", "--prop", "a.b=c",
@@ -211,7 +224,7 @@ class FeatureSelection(Fresh):
 
     def planned(self, *args):
         seen = []
-        with mock.patch.object(rb, "run", side_effect=lambda sel, dry: (seen.append(sel), (0, []))[1]), \
+        with mock.patch.object(rb, "run", side_effect=lambda sel, dry, *_: (seen.append(sel), (0, []))[1]), \
                 mock.patch.object(sys, "argv", ["x", "--evidence", tempfile.mkdtemp(), "--dry-run", "--skip-canary", *args]):
             rb.main()
         return seen
@@ -253,10 +266,10 @@ class AdminDetection(unittest.TestCase):
 class HistoryAcrossInvocations(Fresh):
     def invoke(self, clock, order, *classes):
         """One runner invocation in a fresh process: the in-memory history starts empty."""
-        rb.stepups.clear()
+        reset_stepups()
         with mock.patch.object(rb, "keep"), mock.patch.object(rb, "time") as t, \
                 mock.patch.object(rb.subprocess, "run", return_value=mock.Mock(returncode=0, stdout="", stderr="")), \
-                mock.patch.object(rb, "run", side_effect=lambda sel, dry: (order.append((sel, clock["t"])), (0, [case(sel)]))[1]), \
+                mock.patch.object(rb, "run", side_effect=lambda sel, dry, *_: (order.append((sel, clock["t"])), (0, [case(sel)]))[1]), \
                 mock.patch.object(sys, "argv", ["x", "--evidence", tempfile.mkdtemp(), "--skip-canary",
                                                 "--classes", ",".join(classes)]):
             t.time.side_effect = lambda: clock["t"]
@@ -267,26 +280,87 @@ class HistoryAcrossInvocations(Fresh):
     def test_second_invocation_inherits_the_spent_budget(self):
         clock, order = {"t": 3_000_000.0}, []
         first = rb.test_methods(rb.class_source("AdminUiTest"))[0]
-        self.invoke(clock, order, *[f"AdminUiTest#{first}"] * 4)  # four admin step-ups: budget spent
-        self.assertEqual(len(json.load(open(rb.STEPUP_HISTORY))), 4, "each step-up is written as it happens")
+        spend = 4 * len(rb.ADMIN_PHONES)
+        self.invoke(clock, order, *[f"AdminUiTest#{first}"] * spend)  # four step-ups per phone: every budget spent
+        saved = json.load(open(rb.STEPUP_HISTORY))
+        self.assertEqual(sum(len(v) for v in saved.values()), spend, "each step-up is written as it happens")
         started = clock["t"]
         self.invoke(clock, order, f"AdminUiTest#{first}")
         self.assertGreaterEqual(order[-1][1] - started, 240,
-                                "the 5th step-up inside 5 minutes must wait, even in a new invocation")
+                                "a 5th step-up per phone inside 5 minutes must wait, even in a new invocation")
 
     def test_expired_entries_are_dropped_and_dry_run_never_writes(self):
-        json.dump([1_000.0, 2_999_990.0], open(rb.STEPUP_HISTORY, "w"))
+        first, second = rb.ADMIN_PHONES[:2]
+        saved = {first: [1_000.0, 2_999_990.0], second: [2_999_995.0]}
+        json.dump(saved, open(rb.STEPUP_HISTORY, "w"))
         rb.load_stepups(3_000_000.0)
-        self.assertEqual(rb.stepups, [2_999_990.0], "entries older than the longest window are forgotten")
+        self.assertEqual(rb.stepups[first], [2_999_990.0], "entries older than the longest window are forgotten")
+        self.assertEqual(rb.stepups[second], [2_999_995.0], "each phone keeps its own history")
         rb.SIM["now"] = 3_000_000.0
-        rb.record_stepup(True)
-        self.assertEqual(json.load(open(rb.STEPUP_HISTORY)), [1_000.0, 2_999_990.0], "a dry run must not spend budget")
+        rb.record_stepup(True, second)
+        self.assertEqual(json.load(open(rb.STEPUP_HISTORY)), saved, "a dry run must not spend budget")
+
+    def test_flat_list_history_refuses(self):
+        json.dump([2_999_990.0], open(rb.STEPUP_HISTORY, "w"))
+        with self.assertRaises(SystemExit) as e:
+            rb.load_stepups(3_000_000.0)
+        self.assertIn("REFUSED", str(e.exception))
 
     def test_unreadable_history_refuses(self):
         open(rb.STEPUP_HISTORY, "w").write("{half")
         with self.assertRaises(SystemExit) as e:
             rb.load_stepups(3_000_000.0)
         self.assertIn("REFUSED", str(e.exception))
+
+
+
+class ClassSessionUnits(Fresh):
+    """A class signing in only via loginAsAdmin() shares one admin session: one unit, one step-up (2026-10-09)."""
+
+    def units(self, *classes):
+        seen = []
+        with mock.patch.object(rb, "keep"), mock.patch.object(rb, "time") as t, \
+                mock.patch.object(rb.subprocess, "run", return_value=mock.Mock(returncode=0, stdout="", stderr="")), \
+                mock.patch.object(rb, "run", side_effect=lambda sel, dry, phone=rb.ADMIN_PHONES[0]: (seen.append((sel, phone)), (0, [case(sel)]))[1]), \
+                mock.patch.object(sys, "argv", ["x", "--evidence", tempfile.mkdtemp(), "--skip-canary", "--classes", ",".join(classes)]):
+            clock = {"t": 4_000_000.0}  # sleeping advances the clock, so a wrong plan waits instead of hanging
+            t.time.side_effect = lambda: clock["t"]
+            t.sleep.side_effect = lambda s: clock.__setitem__("t", clock["t"] + s)
+            t.strftime.return_value = "00:00:00"
+            rb.main()
+        return seen
+
+    def test_shared_session_class_is_one_unit_and_one_stepup(self):
+        src = rb.class_source("AdminSupportUserReviewTest")
+        self.assertTrue(rb.shares_class_admin_session(src))
+        seen = self.units("AdminSupportUserReviewTest")
+        self.assertEqual([s for s, _p in seen], ["AdminSupportUserReviewTest#" + "+".join(rb.test_methods(src))], seen)
+        self.assertEqual(total_stepups(), 1)
+        self.assertIn(seen[0][1], rb.ADMIN_PHONES)
+
+    def test_own_admin_sign_in_stays_per_method(self):
+        src = rb.class_source("SessionUiTest")
+        self.assertFalse(rb.shares_class_admin_session(src), "testAdminPhone sign-ins are separate step-ups")
+        self.assertTrue(rb.uses_admin(src))
+
+    def test_consecutive_units_rotate_phones_when_one_is_spent(self):
+        rb.stepups[rb.ADMIN_PHONES[0]] = [4_000_000.0 - 10] * 4  # the first phone is spent
+        seen = self.units("AdminSupportUserReviewTest", "AdminLiveOpsFleetTest")
+        self.assertNotIn(rb.ADMIN_PHONES[0], [p for _s, p in seen], seen)
+
+    def test_every_runner_admin_phone_is_a_seeded_admin(self):
+        seed = os.path.join(rb.UITESTING, "..", "Deployment", "OracleDeployment", "DummyData", "scenario_accounts.json")
+        admins = {a["phone"] for a in json.load(open(seed)) if a["role"] == "ADMIN"}
+        self.assertTrue(set(rb.ADMIN_PHONES) <= admins, f"runner phones {rb.ADMIN_PHONES} must be seeded admins {sorted(admins)}")
+        self.assertGreaterEqual(len(rb.ADMIN_PHONES), 2)
+
+    def test_maven_command_carries_exactly_the_chosen_admin_phone(self):
+        cmds = []
+        with mock.patch.object(rb.shutil, "rmtree"), \
+                mock.patch.object(rb.subprocess, "run", side_effect=lambda cmd, **k: (cmds.append(cmd), mock.Mock(returncode=0, stdout="", stderr=""))[1]):
+            rb.run("AdminUiTest", False, "1000000003")
+        phones = [a for a in cmds[0] if a.startswith("-Dadmin.phone=")]
+        self.assertEqual(phones, ["-Dadmin.phone=1000000003"], cmds[0])
 
 
 if __name__ == "__main__":

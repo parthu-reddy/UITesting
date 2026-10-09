@@ -1,0 +1,221 @@
+{
+ "stopped": false,
+ "results": [
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminLiveOpsFleetTest",
+   "name": "liveOpsTabVisible",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminLiveOpsFleetTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminLiveOpsFleetTest",
+   "name": "openPaymentDlqTab",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminLiveOpsFleetTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminLiveOpsFleetTest",
+   "name": "refreshLiveOps",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminLiveOpsFleetTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminLiveOpsFleetTest",
+   "name": "liveOpsPagination",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminLiveOpsFleetTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminLiveOpsFleetTest",
+   "name": "refreshFleetMap",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminLiveOpsFleetTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminLiveOpsFleetTest",
+   "name": "openWalletDlqTab",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminLiveOpsFleetTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminLiveOpsFleetTest",
+   "name": "nearbyDriverTelemetryAndManualInterventionHandoff",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminLiveOpsFleetTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminLiveOpsFleetTest",
+   "name": "operationsPanelVisible",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminLiveOpsFleetTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminLiveOpsFleetTest",
+   "name": "deployedDriverMarkersUseKnownRiderTones",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminLiveOpsFleetTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminLiveOpsFleetTest",
+   "name": "fleetMapVisible",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminLiveOpsFleetTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminLiveOpsFleetTest",
+   "name": "activeOrderCount",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminLiveOpsFleetTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminLiveOpsFleetTest",
+   "name": "openReconciliationTab",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminLiveOpsFleetTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminLiveOpsFleetTest",
+   "name": "openRejectionsTab",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminLiveOpsFleetTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminSupportUserReviewTest",
+   "name": "supportPagination",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminSupportUserReviewTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminSupportUserReviewTest",
+   "name": "searchSeededAuthorAndInspectReviews",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminSupportUserReviewTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminSupportUserReviewTest",
+   "name": "supportTicketsVisibleAndCounted",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminSupportUserReviewTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminSupportUserReviewTest",
+   "name": "searchReviewsByUnknownEntity",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminSupportUserReviewTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminSupportUserReviewTest",
+   "name": "invalidCategoryNameDoesNotCreateCategory",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminSupportUserReviewTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminSupportUserReviewTest",
+   "name": "statusControlIsStateAwareAndSuspensionConfirmationCanBeCanceled",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminSupportUserReviewTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminSupportUserReviewTest",
+   "name": "categoriesEditorAndCount",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminSupportUserReviewTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminSupportUserReviewTest",
+   "name": "categoryListEmptyStateOrEditFormIsReadOnly",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminSupportUserReviewTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminSupportUserReviewTest",
+   "name": "searchAndOpenSeededUser",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminSupportUserReviewTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminSupportUserReviewTest",
+   "name": "roleChangeConfirmationCanBeCanceled",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminSupportUserReviewTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminSupportUserReviewTest",
+   "name": "refundQueueVisibleAndCounted",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminSupportUserReviewTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminSupportUserReviewTest",
+   "name": "filterByRole",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminSupportUserReviewTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminSupportUserReviewTest",
+   "name": "reviewLookupModes",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminSupportUserReviewTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminSupportUserReviewTest",
+   "name": "userPagination",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminSupportUserReviewTest.xml"
+  }
+ ]
+}

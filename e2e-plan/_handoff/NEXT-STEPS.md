@@ -1,5 +1,12 @@
 # Ordered continuation
 
+## 2026-10-09T17:35+05:30 — checkpoint140: remaining, in order
+
+1. OWNER: commit Deployment seed changes; run `bash Deployment/OracleDeployment/DummyData/run_remote_dummy_data.sh --scenarios-only`.
+2. Agent, after the owner says it ran: read-only identity_db check for ADMIN 1000000003/004; add both to `ADMIN_PHONES`
+   in `tools/run_e2e_batch.py`; `python3 RandomDocuments/AdminRunSpeed_2026-10-09/tools/validate_admin_speed.py --phase 3`.
+3. Owner: commit UITesting (class admin session, runner, fleet test) and CodingPracticesAcrossAllServices (practices sync).
+
 ## 2026-10-09 (overnight) — backend conformance phases 1–7 done locally; read OWNER-MORNING first
 
 `RandomDocuments/BackendConformance_2026-10-08/OWNER-MORNING.md`: 6 backend bugs fixed (F1, F2, F4–F7), missing tests

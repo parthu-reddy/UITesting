@@ -4,7 +4,7 @@ import com.fooddelivery.e2e.base.TestBase;
 import com.fooddelivery.e2e.pages.admin.AdminPortalPage;
 import com.fooddelivery.e2e.pages.admin.AdminSupportTicketsPage;
 import com.microsoft.playwright.Response;
-import com.microsoft.playwright.options.LoadState;
+import com.fooddelivery.e2e.util.UiSettle;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -33,7 +33,7 @@ public class AdminSupportRefundQueueTest extends TestBase {
                                 && "GET".equals(r.request().method()),
                 portal::openSupportTab);
         assertThat(initial.status()).isEqualTo(200);
-        adminPage.waitForLoadState(LoadState.NETWORKIDLE);
+        UiSettle.after(adminPage, initial);
 
         AdminSupportTicketsPage support = new AdminSupportTicketsPage(adminPage);
         assertThat(support.isSupportVisible()).isTrue();
@@ -53,7 +53,7 @@ public class AdminSupportRefundQueueTest extends TestBase {
                                 && "GET".equals(r.request().method()),
                 openTab);
         assertThat(response.status()).isEqualTo(200);
-        adminPage.waitForLoadState(LoadState.NETWORKIDLE);
+        UiSettle.after(adminPage, response);
         assertSupportState(support, status);
     }
 

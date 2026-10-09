@@ -1,0 +1,88 @@
+[E2E STARTUP] Creating Playwright driver
+[E2E STARTUP] Launching Chromium (headless=true)
+[E2E STARTUP] Chromium ready
+═══ STEP 1: Logging in all actors ═══
+Customer=8000000001 Restaurant=9000000001 Rider=7000000001
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[RIDER] Server DUTY_STATUS ONLINE and live UI location frames verified
+═══ STEP 2: Rider going online ═══
+═══ STEP 3: Customer selecting address and restaurant ═══
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders/quote
+Selected Brand 1 Outlet 5 at 1.4 km
+═══ STEP 4: Customer adding item and placing order ═══
+[CUSTOMER] Found item with prep time: 14 min
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders/quote
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders
+Tracking Order ID: 3da79bfd-adf6-4cef-b568-3c8e420d9600
+Short Order ID: 3da79bfd
+═══ STEP 5: Restaurant accepting order ═══
+[BROWSER WARNING] [.WebGL-0x1340043d800]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[BROWSER WARNING] [.WebGL-0x1340043d800]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders/quote
+[BROWSER WARNING] [.WebGL-0x1340043d800]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[BROWSER WARNING] [.WebGL-0x1340043d800]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+[KITCHEN] UI active-order response status=200 outlet=36342aa6-05fe-5cb3-a755-21b207c601bd
+[KITCHEN] rows=1 ownedRows=1 ownedStatus=CREATED
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/restaurants/36342aa6-05fe-5cb3-a755-21b207c601bd/fulfillment/orders/3da79bfd-adf6-4cef-b568-3c8e420d9600/accept
+═══ STEP 8: Rider accepting dispatch ═══
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/chat/sessions
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/chat/sessions
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/chat/sessions
+═══ STEP 6: Restaurant starting cook ═══
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/restaurants/36342aa6-05fe-5cb3-a755-21b207c601bd/fulfillment/orders/3da79bfd-adf6-4cef-b568-3c8e420d9600/prepare
+═══ STEP 7: Restaurant marking prepared ═══
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/restaurants/36342aa6-05fe-5cb3-a755-21b207c601bd/fulfillment/orders/3da79bfd-adf6-4cef-b568-3c8e420d9600/ready
+[RIDER] Leaving visible active delivery or dispatch unchanged
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] customer signed out [everyday=200]
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] restaurant signed out [everyday=200]
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] rider signed out [everyday=200]
+[ERROR] Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 79.51 s <<< FAILURE! -- in com.fooddelivery.e2e.tests.flows.HappyDeliveryFlowTest
+[ERROR] com.fooddelivery.e2e.tests.flows.HappyDeliveryFlowTest.completeOrderLifecycle -- Time elapsed: 78.22 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+Locator expected to have attribute 'data-status'
+Expected: READY_FOR_PICKUP
+Received: PREPARING
+
+Call log:
+  - Assert "hasAttribute" locator("[data-testid='restaurant-order-card'][data-order-id='3da79bfd-adf6-4cef-b568-3c8e420d9600']") with timeout 5000ms
+  - waiting for locator("[data-testid='restaurant-order-card'][data-order-id='3da79bfd-adf6-4cef-b568-3c8e420d9600']")
+    14 × locator resolved to <div data-status="PREPARING" data-testid="restaurant-order-card" data-order-id="3da79bfd-adf6-4cef-b568-3c8e420d9600" class="p-4 space-y-3.5 relative overflow-hidden dark">…</div>
+       - unexpected value "PREPARING"
+	at com.microsoft.playwright.impl.AssertionsBase.expectImpl(AssertionsBase.java:81)
+	at com.microsoft.playwright.impl.AssertionsBase.expectImpl(AssertionsBase.java:47)
+	at com.microsoft.playwright.impl.AssertionsBase.expectImpl(AssertionsBase.java:39)
+	at com.microsoft.playwright.impl.LocatorAssertionsImpl.hasAttribute(LocatorAssertionsImpl.java:190)
+	at com.microsoft.playwright.impl.LocatorAssertionsImpl.hasAttribute(LocatorAssertionsImpl.java:170)
+	at com.microsoft.playwright.assertions.LocatorAssertions.hasAttribute(LocatorAssertions.java:1526)
+	at com.fooddelivery.e2e.tests.flows.HappyDeliveryFlowTest.completeOrderLifecycle(HappyDeliveryFlowTest.java:705)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+
+[ERROR] Failures: 
+[ERROR]   HappyDeliveryFlowTest.completeOrderLifecycle:705 Locator expected to have attribute 'data-status'
+Expected: READY_FOR_PICKUP
+Received: PREPARING
+
+Call log:
+  - Assert "hasAttribute" locator("[data-testid='restaurant-order-card'][data-order-id='3da79bfd-adf6-4cef-b568-3c8e420d9600']") with timeout 5000ms
+  - waiting for locator("[data-testid='restaurant-order-card'][data-order-id='3da79bfd-adf6-4cef-b568-3c8e420d9600']")
+    14 × locator resolved to <div data-status="PREPARING" data-testid="restaurant-order-card" data-order-id="3da79bfd-adf6-4cef-b568-3c8e420d9600" class="p-4 space-y-3.5 relative overflow-hidden dark">…</div>
+       - unexpected value "PREPARING"
+[ERROR] Tests run: 1, Failures: 1, Errors: 0, Skipped: 0
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.5.2:test (default-test) on project e2e-tests: There are test failures.
+[ERROR] 
+[ERROR] See /Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

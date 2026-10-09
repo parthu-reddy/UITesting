@@ -1,0 +1,11 @@
+[E2E STARTUP] Creating Playwright driver
+[E2E STARTUP] Launching Chromium (headless=true)
+[E2E STARTUP] Chromium ready
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/admin-session
+[BROWSER WARNING] [.WebGL-0x13c0043fc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[E2E WRITE] DELETE 200 fixture https://gulf-strike-dark-extras.trycloudflare.com/api/v1/internal/admin/users/a1000000-0000-4000-8000-000000000001/roles/ADMIN
+[E2E WRITE] PUT 200 fixture https://gulf-strike-dark-extras.trycloudflare.com/api/v1/internal/admin/users/a1000000-0000-4000-8000-000000000001/status
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] admin signed out [admin=200, everyday=200]

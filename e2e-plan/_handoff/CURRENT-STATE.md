@@ -1,5 +1,155 @@
 # Current checkpoint
 
+## 2026-10-09T15:41+05:30 — identity 436fef2 + UI f27091a live; class admin session + fleet fix LIVE-GREEN 27/27
+
+- Deploy verified: DEPLOY_LOG 10:05/10:06Z == pins == HEADs (clean) == running images.
+- Run 15:38–15:40 (evidence/admin-class-session-2026-10-09): canaries ×4; AdminLiveOpsFleetTest 13/13 (incl.
+  deployedDriverMarkersUseKnownRiderTones, the 13:4x failure) in ~44 s; AdminSupportUserReviewTest 14/14 in ~60 s.
+  Logs: exactly ONE `/api/v1/auth/admin-session` POST per class; each class's session signed out once at the end
+  [admin=200, everyday=200]. 27 admin methods in ~2 min (the same kind of run took ~40 min at 13:19).
+- **Reseed NOT run yet:** Dev identity_db has admins 001, 002 only; no user with 003/004 (no collision). Seed changes in
+  Deployment are uncommitted. Owner: commit Deployment, then `bash Deployment/OracleDeployment/DummyData/
+  run_remote_dummy_data.sh --scenarios-only` (pipes the local SQL; additive). Then I verify and add 003/004 to the
+  runner's ADMIN_PHONES. Until then the runner uses 001/002 (safe).
+
+## 2026-10-09T15:40+05:30 — admin run speed built locally (RandomDocuments/AdminRunSpeed_2026-10-09); nothing running
+
+- Owner: one admin sign-in per class + more admins. Gate `validate_admin_speed.py --phase all` 13/13, `--prove` 5/5.
+- Phase 1: seed admins 1000000001–004 (generator, SQL, accounts JSON, seed validator 556 identities / 4 admins);
+  IdentityService SeededOtpAccountPolicy ADMIN_LAST …004 (tests red first; suite 166/0).
+- Phase 2: TestBase.loginAsAdmin signs in once per class and injects that session into later methods' own fresh
+  contexts (util/ClassAdminSession); per-method teardown skips admin sign-out for it; @AfterAll signs it out once.
+- Phase 3: runner — shared-session admin classes are ONE unit (1 step-up); per-phone budgets/history
+  ({phone: [...]}, old flat file replaced after checking it was 92 min old); `-Dadmin.phone` per unit. 27 runner tests.
+  Dry run of the 28-method set: 3 step-ups, ~0 min waiting (was ~36 min).
+- **SAFETY: runner ADMIN_PHONES = 001, 002 only** until Dev has 003/004 (sign-in with an unknown phone creates a plain
+  user → the reseed's admin collision guard would refuse). After owner deploy + `run_remote_dummy_data.sh
+  --scenarios-only`: verify read-only (identity_db admins), then add 003/004 to ADMIN_PHONES.
+- Then live: AdminLiveOpsFleetTest + AdminSupportUserReviewTest (fleet fix + per-class session; expect one
+  /auth/admin-session POST per class in logs).
+- Fold gate 10/10 after the owner-approved deletion of root `fix_migrations2.sh`.
+
+## 2026-10-09T15:20+05:30 — fleet-map failure root-caused + fixed locally (needs UI deploy); nothing running
+
+- AdminLiveOpsFleetTest#deployedDriverMarkersUseKnownRiderTones (13:4x FAIL) = real UI defect: useFleetMarkers placed pins
+  only after the map's `load` (Ola style + tiles). Legend "Riders (N)" renders from data at once, so while tiles were slow
+  the admin saw a rider count, no pins, and no note. And no map screen handled a map that never loads (no `error` handler
+  anywhere in maps-tracking): blank panel, no message.
+- Fix (FoodDeliveryAppUI, local): useFleetMarkers renders pins immediately (MapLibre markers need no style); MapPanel
+  shows role=alert "The map could not load. Try again in a moment." on an error before the first `load`, cleared by
+  `load`; later single-tile errors stay silent. All map screens share MapPanel. placeOrderMap's isStyleLoaded gate is
+  legitimate (addSource/addLayer need the style) and stays.
+- Red first: useFleetMarkers.test.ts (pin placed while map not loaded) and MapPanel.test.tsx (alert on early error) failed
+  on the old code, green after. UI lint 0, typecheck 0, vitest 184 files / 1086 tests.
+- E2E side: AdminFleetMapPage.waitForFleetMap now also waits for the rider layer (a pin or fleet-riders-empty).
+  UITesting test-compile 0; FastE2E phase 4 4/4.
+- feature map: AdminFleetMap/AdminAssignmentMap/useFleetMarkers were order-tracking only → + admin-ops; MapPanel/maplibre
+  (6 screens) → + admin-ops, addresses, catalog. Feature tags 6/6, its tests OK.
+- After the UI deploy: AdminLiveOpsFleetTest (13 methods, ~15 min, read-only) proves both the fix and the remaining
+  methods. `--changed` would now select 130 methods / 31 classes (MapPanel is shared): owner's call, not run by default.
+
+## 2026-10-09T13:50+05:30 — NETWORKIDLE replaced by UiSettle; run STOPPED by owner (going out) at 20/28 PASS
+
+- All 19 `waitForLoadState(NETWORKIDLE)` (AdminSupportUserReview 13, AdminLiveOpsFleet 4, AdminSupportRefundQueue 2)
+  → `util/UiSettle.after(page, response)`: response body finished, then DOM quiet 300 ms (cap 15 s, then fail loudly).
+  Guard FastE2E validate_fast_e2e.py P4.4 (phase 4 now 4/4), seen red on both mutations. UITesting test-compile rc 0.
+- Live (evidence/uisettle-2026-10-09): canaries ×4; AdminSupportUserReviewTest 14/14 (incl. this morning's 2 timeouts),
+  AdminSupportRefundQueueTest 1/1, AdminLiveOpsFleetTest 6 PASS + **1 FAIL** before the owner stopped the run (13:50).
+  FAIL (real, not the interrupted method): deployedDriverMarkersUseKnownRiderTones, AdminLiveOpsFleetTest.java:78
+  "a fleet with no usable rider coordinates must explain why no rider pins render" → false. NOT investigated yet; first
+  step: read AdminFleetMap empty-fleet message vs the test's locator, and Dev rider locations (rider offline since 07:41Z).
+  Not reached: the rest of AdminLiveOpsFleetTest (refreshLiveOps was cut mid-run). Stopped processes verified gone.
+- Gates 13:20: conformance p8 6/6, lifecycle 68/68, money readiness 61+1 skip, money audit 0/23 (clean), timezone 26/26,
+  rider duty 14/14 static, reviews 83/83, ad platform 40 (+4 DB skipped), DLT OK.
+- Fold gate F3 was STALE after the owner committed the fold (HEAD-vs-tree found 0 deleted files). Repaired to read git
+  history: now checks 30 deleted migrations; ONE real hit: workspace-root `fix_migrations2.sh` (dead Sep-5 one-off
+  renaming V2 files that no longer exist). Root is unversioned → deletion is permanent: owner decides. Fold gate 9/10 until then.
+- Dev: no active order (845e15f1 CANCELLED_BY_PLATFORM 07:41Z as expected).
+- Owner decided (14:00): admin E2E signs in once per CLASS, more admin accounts only if needed. PARKED: discuss with
+  the owner before implementing (memory admin-signin-per-class-todo). Nothing changed for it yet.
+
+## 2026-10-09T13:00+05:30 — restaurant 4bee9ee + delivery bbefe1e deployed; F8/F9 now live; 3/3 PASS
+
+- DEPLOY_LOG 07:23:31Z == pins == repo HEADs (clean) == running images. All 22 services: running image == pin.
+- Precheck: no active order. DelayApprovalFlowTest 2/2 (approve 845e15f1, reject 1ec8ba68 CANCELLED_BY_RESTAURANT,
+  delay_decision DECLINED), PickupDeliveryOtpTest 1/1 (eabdd048 DELIVERED). Canaries ×4. Evidence:
+  evidence/restaurant-delivery-deploy-2026-10-09 (12:54–12:58).
+- **Active:** 845e15f1 ACCEPTED (approve test leaves it; rider offline → expect CANCELLED_BY_PLATFORM at dispatch). Check
+  before the next order run.
+- Still unit-proven only, not exercised live: 409 on a second delay answer, 429 after 5 wrong OTPs, F9 refusal.
+
+## 2026-10-09T12:35+05:30 — UI e98fd57 deployed (admin Users poll-race fix); restaurant + delivery still old
+
+- DEPLOY_LOG 06:43:04Z == dev pin == UI HEAD == running image e98fd57 (docker compose ps, up 20 min). e98fd57 = the
+  2 files of the 10:40 fix exactly.
+- Still NOT redeployed: restaurant-service f7a59ab-dirty (pin 4bee9ee, F9) and delivery-service 48077cc (pin bbefe1e, F8).
+- E2E (narrow, owner did not choose; user-management only, no real-user writes: reads, cancelled confirmations, routed
+  fixture writes): AdminUserOpsTest#adminUserManagement, AdminSupportUserReviewTest ×5, AdminUserCatalogModerationRoutedUiTest ×4.
+  Evidence: evidence/admin-users-pollrace-2026-10-09. Result 12:34–12:45: canaries ×4 ok; 8 pass, 2 error.
+  PASS: AdminUserOpsTest 1/1; AdminSupportUserReview userPagination, statusControl…, roleChange…; routed 4/4 (the
+  confirmed role grant/removal + suspend/activate paths, i.e. the changed code).
+  ERROR: AdminSupportUserReview searchAndOpenSeededUser + filterByRole, both TimeoutError 60 s in
+  openUsersAndWaitForInitialList:446 `waitForLoadState(NETWORKIDLE)` AFTER the users/all response returned 200. The other 3
+  methods pass the same helper. Not the fix: refreshListAfterWrite runs only after a confirmed write; these timed out
+  before any click. Same NETWORKIDLE 60 s timeouts across this class in E2EFullSuite_2026-09-27 (pre-existing). Cause of
+  the never-idle network NOT found (no WebGL/map correlation). NETWORKIDLE: 19 calls in 3 files (AdminSupportUserReview,
+  AdminSupportRefundQueue, AdminLiveOpsFleet). Not changed yet: offered to owner.
+
+## 2026-10-09T10:40+05:30 — admin Users list poll race fixed locally (needs UI deploy)
+
+- Same race as the restaurant card: AdminUserManagement's 30 s list poll, read before a confirmed suspend/activate or
+  role grant/removal, answered after it and put the old user back in the list (badge/role vanish; re-selecting the row
+  offered "Suspend" on a suspended user). Fix: refetch after each of the 3 confirmed writes (supersedes the in-flight
+  read via usePolling's fetchId), the convention every other polled admin screen already follows.
+- Whole set: 15 usePolling consumers enumerated; restaurant + rider have their own guards, the rest render poll data
+  and refetch after writes. AdminUserManagement was the only unguarded one.
+- Red first: AdminUserManagement.pollRace.test.tsx (real usePolling) failed at both "older poll" assertions on today's
+  code, green after. UI lint 0, typecheck 0, vitest 182 files / 1083 tests.
+- Also: feature-tags F1 was red on unmapped DelayDecision.java (from F3); mapped with DelayApproval → 6/6.
+- After the UI deploy: `run_e2e_batch.py --changed` selects 38 admin methods in 11 classes (admin step-up paced).
+
+## 2026-10-09T10:10+05:30 — CORRECTION: Phase 8 restaurant + delivery fixes are NOT running on Dev
+
+- The 08:15 entry's "owner deployed restaurant 4bee9ee / delivery bbefe1e" was wrong. It checked pin == HEAD, not the
+  running container. `docker inspect` on the VM: restaurant-service runs f7a59ab-dirty-137d097 (created 00:38Z);
+  delivery-service runs 48077cc (created 2026-10-07 11:24Z). Every other service's running image == its pin.
+- Missing on Dev: F8 (delivery OTP attempt cap: AbstractDeliveryOrderState + 2 strategies) and, very likely, F9
+  (restaurant PendingDelayState second delay request; f7a59ab..4bee9ee is exactly that diff; not confirmed by opening the image).
+  The 08:15 3/3 PASS did not exercise F8/F9, so it neither proves nor contradicts this.
+- Needed: `Deployment/deploy.sh restaurant-service delivery-service` (no wipe; no schema change in those diffs), then
+  verify by `docker compose ps` image == pin, not pin == HEAD.
+- D1 ticket b8389997 (OPEN, ₹14.26 on order 8a7114cb) no longer exists: customer_db support_tickets = 0 rows and order 8a7114cb is gone after the 2026-10-09 wipes (read-only query 10:15). Nothing to report any more.
+- The VM's own Deployment checkout is at 2d12b72 (2026-09-26) with old pins; it is not what drives the running images.
+
+## 2026-10-09T09:58+05:30 — UI poll-race fix deployed and live-green: lifecycle PASS uninterrupted
+
+- Owner deployed food-delivery-app-ui b3ac504 (DEPLOY_LOG 04:11:26Z == dev pin == UI HEAD; container image b3ac504,
+  verified by docker compose ps). b3ac504 carries useRestaurantOrders.ts + useRestaurantOrders.pollRace.test.ts.
+- Pre-run read-only check: only order 3da79bfd, HANDED_OVER/DELIVERED, assignment RELEASED (completed deliveries keep
+  HANDED_OVER; delivery_status holds DELIVERED — IOrderRepository:87, HandedOverState).
+- HappyDeliveryFlowTest#completeOrderLifecycle PASS 175.1 s on 7094dbde, no resume needed; passed the "Mark ready"
+  step that stopped 3da79bfd. Canaries x4 ok. Evidence: evidence/ui-pollrace-deploy-2026-10-09.
+- Dev after: 7094dbde HANDED_OVER/DELIVERED, assignment RELEASED. No active order.
+- One clean pass is consistent with the fix but does not prove the race is gone (it was intermittent); the unit test is the guard.
+
+## 2026-10-09T09:23+05:30 — migration fold live: lifecycle (resumed) + reviews + ledger PASS
+
+- customer/ledger/reviews redeployed on folded V1s (MigrationFold_2026-10-09). 3da79bfd: first run stopped at
+  HappyDeliveryFlowTest:705 (card PREPARING while server READY; UI poll race, fixed locally in useRestaurantOrders,
+  **needs UI deploy**); resumed with -Dresume.order.id/-Dresume.outlet → PASS, DELIVERED. OrderReviewsFlowTest 1 pass +
+  3 designed skips on 3da79bfd; AdminLedgerAdvancedTest 3/3. Dev: no active order (3da79bfd delivered).
+- After the UI deploy: rerun HappyDeliveryFlowTest#completeOrderLifecycle (fresh order; check no active order first).
+
+## 2026-10-09T08:15+05:30 — Phase 8 deploy verified live: 3/3 PASS
+
+- Owner deployed customer 4155903 / restaurant 4bee9ee / delivery bbefe1e / chat 02e0f2f (pins == HEAD) after wiping
+  customer_db + chat_db. Fixes: F3 delay decision recorded once, F8 OTP attempt cap, F9 second delay request refused,
+  chat composite index (RandomDocuments/BackendConformance_2026-10-08/Phase8_OwnerDecisions).
+- Canaries ×4 ok; DelayApprovalFlowTest 2/2 (approve f83cedbd, reject 67976967); PickupDeliveryOtpTest 1/1.
+  Evidence: evidence/phase8-deploy-2026-10-09 (2 min 56 s total).
+- Not exercised live (unit-proven only): the 409 on a second delay answer, the 429 after 5 wrong OTPs.
+- **Possibly active:** approve order f83cedbd ends ACCEPTED; not checked (SSH denied). Check before the next order run.
+
 ## 2026-10-08T22:15+05:30 — every changed test PASS_CURRENT; Dev has no active order
 
 - History-paging set (9 methods) PASS after one more race fix: SupportRefundSteps waits for the chat history before

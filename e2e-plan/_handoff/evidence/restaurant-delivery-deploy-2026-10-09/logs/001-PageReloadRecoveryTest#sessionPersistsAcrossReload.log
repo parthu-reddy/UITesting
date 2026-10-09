@@ -1,0 +1,10 @@
+[E2E STARTUP] Creating Playwright driver
+[E2E STARTUP] Launching Chromium (headless=true)
+[E2E STARTUP] Chromium ready
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[BROWSER NETWORK ERROR] 401 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/chat/webrtc/ice-servers
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 401 ()
+[BROWSER NETWORK ERROR] 401 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/users/profile
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 401 ()
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] customer signed out [everyday=200]
