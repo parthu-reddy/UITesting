@@ -1,5 +1,15 @@
 # Ordered continuation
 
+## 2026-10-09T22:45+05:30 — checkpoint141: remaining, in order
+
+1. OWNER: follow the deploy order in `RandomDocuments/TimeIndependentOrdering_2026-10-09/README.md` (CommonLibrary
+   publish → restaurant-service → customer-service → food-delivery-app-ui; commit Deployment, run
+   `run_remote_dummy_data.sh` all mode; commit UITesting). No wipe.
+2. Agent, after "deployed": verify DEPLOY_LOG == pin == HEAD == running image; `validate_time_independence.py --phase 4 --live`.
+3. Agent, owner-approved (orders): `run_e2e_batch.py --features` for the order/catalog features touched; check no
+   active order on Dev first.
+4. P0-2 leftovers: RiderAvailabilityUiTest (owner decision: cycles rider duty), SSEReconnectTest (parked).
+
 ## 2026-10-09 — AdminRunSpeed complete; remaining
 
 1. Owner: commit Deployment (seed), UITesting (class admin session, runner with 4 admin phones, fleet test, handoff)

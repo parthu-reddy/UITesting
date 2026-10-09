@@ -1,5 +1,11 @@
 # Resume the Food Delivery E2E audit
 
+## 2026-10-09T22:45+05:30 — checkpoint141: P0-2 approved batch 6/6; time-independent ordering built, deploy pending
+
+Owner-approved C batch green (3 classes, 6 methods). Time-of-day test failures fixed at the root (backend rule, caches,
+UI editors, seed, test helper) in RandomDocuments/TimeIndependentOrdering_2026-10-09; nothing deployed yet.
+[Checkpoint141](checkpoints/141-p02-batch-and-time-independent-ordering.md). Next: NEXT-STEPS top entry.
+
 ## 2026-10-09 — checkpoint140 update: AdminRunSpeed COMPLETE; four admin phones live
 
 Reseed done; admins 003/004 verified on Dev and added to the runner; each signed in live. Only owner commits remain.

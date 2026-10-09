@@ -1,5 +1,12 @@
 # Current checkpoint
 
+## 2026-10-09T22:45+05:30 — checkpoint141
+
+- P0-2 owner-approved batch: AdminPartnerApprovalsUiTest#reviewQueuesNavigation 1/1, OneLoginEntitlementsTest 4/4,
+  EntitlementRevocationTest#accepted… 1/1 (evidence/p02-close-2026-10-09). Inventory: PASS_CURRENT 37.
+- TimeIndependentOrdering_2026-10-09 Phases 1–5 built locally, gate green, all `--prove` red; deploy pending (no wipe).
+- Nothing running; no order active from this session.
+
 ## 2026-10-09T15:41+05:30 — identity 436fef2 + UI f27091a live; class admin session + fleet fix LIVE-GREEN 27/27
 
 - Deploy verified: DEPLOY_LOG 10:05/10:06Z == pins == HEADs (clean) == running images.

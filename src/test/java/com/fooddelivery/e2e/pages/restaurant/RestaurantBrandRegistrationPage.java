@@ -103,9 +103,12 @@ public class RestaurantBrandRegistrationPage {
         field("Latitude").fill("12.9808");
         field("Longitude").fill("77.6467");
         assertThat(page.getByTestId("fleet-city")).isVisible();
-        // These fresh O3 fixtures need an explicit opening window for discovery at test time.
-        field("Opens").fill("00:00");
-        field("Closes").fill("23:59");
+        // Fresh applicants are open all day, so discovery and ordering checks never depend on the time a test
+        // runs (TimeIndependentOrdering_2026-10-09). The switch writes 00:00-00:00, the one form of "all day".
+        Locator allDay = page.getByRole(AriaRole.SWITCH,
+                new Page.GetByRoleOptions().setName("Shift 1: open 24 hours").setExact(true));
+        if (!"true".equals(allDay.getAttribute("aria-checked"))) allDay.click();
+        assertThat(allDay).hasAttribute("aria-checked", "true");
         page.getByRole(AriaRole.BUTTON,
                 new Page.GetByRoleOptions().setName("Save outlet and continue").setExact(true)).click();
         assertThat(page.getByRole(AriaRole.BUTTON,

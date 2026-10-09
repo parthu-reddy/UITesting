@@ -6,8 +6,6 @@ import com.microsoft.playwright.options.WaitForSelectorState;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Page Object for the Customer Menu View (inside a restaurant).
@@ -108,94 +106,41 @@ public class CustomerMenuViewPage {
     // ── Adding items to cart ─────────────────────────────────────────────
 
     /**
-     * Adds the first item with preparation time less than 15 minutes to the cart.
-     * This ensures the rider gets assigned immediately during E2E tests.
+     * Adds the first orderable dish whose card shows a prep time under 15 minutes, at the outlet already
+     * selected, so the rider sees the trip as soon as the restaurant accepts.
+     *
+     * <p>No other outlet is tried and no slower dish is taken instead. This used to wander through up to five
+     * outlets and then fall back to any dish, so the same test ordered from different outlets at different
+     * hours, often away from the waiting rider, and failed much later with an unrelated timeout. Every caller
+     * orders from Brand 1 or Brand 2, which the Dev seed makes orderable at every minute at every outlet
+     * (RandomDocuments/TimeIndependentOrdering_2026-10-09, Phase 4). A missing dish is therefore a fixture
+     * defect, reported here with the outlet and the instant.
      */
     public void addQuickPrepItemToCart() {
-        Set<String> triedOutlets = new HashSet<>();
-        // Try up to 5 times (checking different outlets if needed)
-        for (int attempt = 0; attempt < 5; attempt++) {
-            String currentOutlet = page.locator("#outlet-select").first().innerText().trim().split("\\R")[0];
-            triedOutlets.add(currentOutlet);
-            Locator dishControls = page.locator("[data-menu-item]");
-            try {
-                dishControls.first().waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE).setTimeout(3000));
-            } catch (Exception e) {
-                System.out.println("[CUSTOMER] No menu items visible on attempt " + attempt);
-            }
-
-            boolean foundAnyOrderable = false;
-            for (int i = 0; i < dishControls.count(); i++) {
-                Locator control = dishControls.nth(i);
-                
-                // Skip items that are not orderable (no ADD button)
-                if (control.locator("[data-testid='add-to-cart-button']").count() == 0) {
-                    continue;
-                }
-                
-                foundAnyOrderable = true;
-                String text = control.textContent();
-                if (text != null && text.contains("min")) {
-                    Matcher m = Pattern.compile("(\\d+)\\s*min").matcher(text);
-                    if (m.find()) {
-                        int mins = Integer.parseInt(m.group(1));
-                        if (mins < 15) {
-                            System.out.println("[CUSTOMER] Found item with prep time: " + mins + " min");
-                            control.locator("[data-testid='add-to-cart-button']").first().click();
-                            page.waitForTimeout(500);
-                            return;
-                        }
-                    }
-                }
-            }
-
-            if (foundAnyOrderable) {
-                // We found orderable items, but none with < 15 min. Just add the first available.
-                System.out.println("[CUSTOMER] No item with <15 min prep time found, but items are available. Adding first available.");
-                page.locator("[data-testid='add-to-cart-button']").first().click();
-                page.waitForTimeout(500);
+        String outlet = page.locator("#outlet-select").count() > 0
+                ? page.locator("#outlet-select").first().innerText().trim().split("\\R")[0] : "the selected outlet";
+        Locator orderable = page.locator("[data-menu-item]:has([data-testid='add-to-cart-button'])");
+        try {
+            orderable.first().waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE).setTimeout(10000));
+        } catch (com.microsoft.playwright.TimeoutError e) {
+            throw new AssertionError(noDish(outlet, "no orderable dish"), e);
+        }
+        Pattern prep = Pattern.compile("(\\d+)\\s*min");
+        for (int i = 0; i < orderable.count(); i++) {
+            Matcher m = prep.matcher(String.valueOf(orderable.nth(i).textContent()));
+            if (m.find() && Integer.parseInt(m.group(1)) < 15) {
+                System.out.println("[CUSTOMER] Adding a " + m.group(1) + "-min dish at " + outlet);
+                orderable.nth(i).locator("[data-testid='add-to-cart-button']").first().click();
                 return;
             }
-
-            System.out.println("[CUSTOMER] No orderable items at this outlet. Trying another outlet...");
-            try {
-                page.locator("#outlet-select").first().click();
-                page.locator("role=dialog").first().waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE).setTimeout(3000));
-                Locator options = page.locator("role=dialog").first().locator("button:has(p)");
-                options.first().waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE).setTimeout(3000));
-                
-                boolean selectedNew = false;
-                for (int i = 0; i < options.count(); i++) {
-                    String text = options.nth(i).innerText();
-                    if (text != null) {
-                        Matcher m = Pattern.compile("([0-9.]+)\\s*(km|kms)").matcher(text.toLowerCase());
-                        if (m.find()) {
-                            double distance = Double.parseDouble(m.group(1));
-                            String outletName = options.nth(i).locator("p").first().innerText().trim();
-                            if (distance < 5.0 && !triedOutlets.contains(outletName)) {
-                                System.out.println("[CUSTOMER] Selecting alternative outlet: "
-                                        + outletName + " at " + distance + " km");
-                                triedOutlets.add(outletName);
-                                options.nth(i).click();
-                                selectedNew = true;
-                                break;
-                            }
-                        }
-                    }
-                }
-                
-                if (!selectedNew) {
-                    System.out.println("[CUSTOMER] No more untried alternative outlets < 5km found.");
-                    break; // stop trying
-                }
-                page.waitForTimeout(2000); // wait for new menu to load
-            } catch (Exception e) {
-                System.out.println("[CUSTOMER] Failed to switch outlet during retry: " + e.getMessage());
-                break;
-            }
         }
+        throw new AssertionError(noDish(outlet, "no orderable dish under 15 min"));
+    }
 
-        throw new RuntimeException("Could not find any orderable items across available outlets.");
+    private static String noDish(String outlet, String what) {
+        return what + " at " + outlet + " at " + java.time.Instant.now() + ". Brand 1 and Brand 2 must be orderable at"
+                + " every minute: run RandomDocuments/TimeIndependentOrdering_2026-10-09/tools/validate_time_independence.py"
+                + " --phase 4 --live";
     }
 
     /**
