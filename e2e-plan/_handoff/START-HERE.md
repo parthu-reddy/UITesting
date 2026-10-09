@@ -1,5 +1,10 @@
 # Resume the Food Delivery E2E audit
 
+## 2026-10-09 — checkpoint140 update: AdminRunSpeed COMPLETE; four admin phones live
+
+Reseed done; admins 003/004 verified on Dev and added to the runner; each signed in live. Only owner commits remain.
+[Checkpoint140](checkpoints/140-admin-class-session-live.md). Next: NEXT-STEPS top entry.
+
 ## 2026-10-09T17:35+05:30 — checkpoint140: admin sign-in once per class LIVE-GREEN; admins 003/004 await owner reseed
 
 identity 436fef2 + UI f27091a live; 27 admin methods in ~2 min, one step-up per class. Owner: commit Deployment, then

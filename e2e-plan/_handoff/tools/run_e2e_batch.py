@@ -71,8 +71,8 @@ PHONES = ["-Dcustomer.phone=8000000001", "-Drestaurant.phone=9000000001", "-Drid
 # Admin phones that exist on Dev (identity_db, read-only check). Identity's step-up limits are per phone, so each
 # one is a separate budget. Only list a phone once Dev has it: signing in with an unknown phone creates a plain user
 # (AuthService.createSession), which the seed's admin collision guard then refuses. The seed provisions 1000000001-004
-# (generate_scenario_data.py); 003 and 004 are added here after the owner's identity deploy + scenario reseed.
-ADMIN_PHONES = ["1000000001", "1000000002"]
+# (generate_scenario_data.py); 003 and 004 were confirmed ADMIN on Dev after the 2026-10-09 scenario reseed.
+ADMIN_PHONES = ["1000000001", "1000000002", "1000000003", "1000000004"]
 # Never run: parked rate limits, SSE over the tunnel and latency measurements (tags, not names).
 ALWAYS_EXCLUDED = ["auth-rate-limit", "parked", "measurement"]
 # COMMON[0] is rewritten by --exclude-tags.

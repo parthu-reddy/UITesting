@@ -36,3 +36,10 @@ Read-only check at 17:3x: Dev identity_db has ADMIN 1000000001, 1000000002 only;
 Read-only check that 003/004 exist with ADMIN; add both to `ADMIN_PHONES` in `tools/run_e2e_batch.py`; rerun
 `validate_admin_speed.py --phase 3`. **Never list a phone before Dev has it**: signing in with an unknown phone creates a
 plain user, and the reseed's admin collision guard then refuses.
+
+## Update 2026-10-09 — reseed done, four admin phones live
+
+Owner ran the scenario reseed. Read-only: 1000000001-004 active with ADMIN. `ADMIN_PHONES` now lists all four;
+runner tests 27/27, `validate_admin_speed.py --phase 3` 3/3, `--prove` 5/5. Live: AdminUserOpsTest 1/1 as 003 and
+1/1 as 004, run directly with `-Dadmin.phone` (the runner always prefers the first free phone, so it would not have
+used them); both step-ups appended to ADMIN-STEP-UPS.json. AdminRunSpeed is complete. Remaining: owner commits.
