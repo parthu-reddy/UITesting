@@ -1,0 +1,56 @@
+Running browser-only O3 gate; retained local allocation: /Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/business-platform/o3/allocation-6351f9280e01eacd.json
+[E2E STARTUP] Creating Playwright driver
+[E2E STARTUP] Launching Chromium (headless=true)
+[E2E STARTUP] Chromium ready
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/otp
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[E2E WRITE] PUT 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/users/profile
+[E2E WRITE] POST 201 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/organisations
+[BROWSER NETWORK ERROR] 401 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/organisations?[redacted]
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 401 ()
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session/refresh
+[E2E WRITE] PUT 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/restaurant-onboarding/organisations/019ea89d-70a1-40a1-b96a-942221c45d40/application
+[BROWSER NETWORK ERROR] 400 POST https://gulf-strike-dark-extras.trycloudflare.com/api/v1/restaurant-onboarding/organisations/019ea89d-70a1-40a1-b96a-942221c45d40/application/outlets
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 400 ()
+[E2E WRITE] POST 400 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/restaurant-onboarding/organisations/019ea89d-70a1-40a1-b96a-942221c45d40/application/outlets
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] signed out [everyday=200]
+[ERROR] Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 15.57 s <<< FAILURE! -- in com.fooddelivery.e2e.tests.features.organisations.RestaurantApplicationApiTest
+[ERROR] com.fooddelivery.e2e.tests.features.organisations.RestaurantApplicationApiTest.restaurantApplicationLifecycle -- Time elapsed: 12.44 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+Locator expected to be visible
+Error: element(s) not found
+Call log:
+  - Assert "isVisible" getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Upload GST registration").setExact(true)) with timeout 5000ms
+  - waiting for getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Upload GST registration").setExact(true))
+	at com.microsoft.playwright.impl.AssertionsBase.expectImpl(AssertionsBase.java:76)
+	at com.microsoft.playwright.impl.AssertionsBase.expectImpl(AssertionsBase.java:47)
+	at com.microsoft.playwright.impl.LocatorAssertionsImpl.expectTrue(LocatorAssertionsImpl.java:471)
+	at com.microsoft.playwright.impl.LocatorAssertionsImpl.isVisible(LocatorAssertionsImpl.java:466)
+	at com.microsoft.playwright.assertions.LocatorAssertions.isVisible(LocatorAssertions.java:861)
+	at com.fooddelivery.e2e.pages.restaurant.RestaurantBrandRegistrationPage.fillOutletDetails(RestaurantBrandRegistrationPage.java:115)
+	at com.fooddelivery.e2e.pages.restaurant.RestaurantBrandRegistrationPage.submitNewApplication(RestaurantBrandRegistrationPage.java:39)
+	at com.fooddelivery.e2e.tests.features.organisations.RestaurantApplicationApiTest.restaurantApplicationLifecycle(RestaurantApplicationApiTest.java:37)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+
+[ERROR] Failures: 
+[ERROR]   RestaurantApplicationApiTest.restaurantApplicationLifecycle:37 Locator expected to be visible
+Error: element(s) not found
+Call log:
+  - Assert "isVisible" getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Upload GST registration").setExact(true)) with timeout 5000ms
+  - waiting for getByRole(AriaRole.BUTTON, new Page.GetByRoleOptions().setName("Upload GST registration").setExact(true))
+[ERROR] Tests run: 1, Failures: 1, Errors: 0, Skipped: 0
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.5.2:test (default-test) on project e2e-tests: There are test failures.
+[ERROR] 
+[ERROR] See /Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+All O3 applicant data is retained; no cleanup performed

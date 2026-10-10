@@ -1,0 +1,42 @@
+Running browser-only O3 gate; retained local allocation: /Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/business-platform/o3/allocation-a9e0693f8b80a0ff.json
+[E2E STARTUP] Creating Playwright driver
+[E2E STARTUP] Launching Chromium (headless=true)
+[E2E STARTUP] Chromium ready
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/otp
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[E2E WRITE] PUT 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/users/profile
+[E2E WRITE] PUT 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/delivery-onboarding/application
+[BROWSER NETWORK ERROR] 401 POST https://gulf-strike-dark-extras.trycloudflare.com/api/v1/verification/documents/5cec07df-d38e-41c0-a76a-e68af995c333/complete
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 401 ()
+[E2E WRITE] POST 401 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/verification/documents/5cec07df-d38e-41c0-a76a-e68af995c333/complete
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session/refresh
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/verification/documents/5cec07df-d38e-41c0-a76a-e68af995c333/complete
+[UPLOAD] Driving licence confirmed 200 and Uploaded; 1 observed entitlement challenges
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/verification/driving-license
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/verification/documents/93bde0e0-e377-47c9-9806-b9ac7d711eea/complete
+[UPLOAD] Vehicle registration confirmed 200 and Uploaded; 0 observed entitlement challenges
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/verification/vehicle-rc
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/verification/bank-account
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/verification/documents/90c383a4-165f-4722-bbdf-bc2734f277ed/complete
+[UPLOAD] Selfie confirmed 200 and Uploaded; 0 observed entitlement challenges
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/verification/biometric
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/delivery-onboarding/application/submit
+[BROWSER NETWORK ERROR] 401 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/delivery-onboarding/application
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 401 ()
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session/refresh
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/otp
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/admin-session/otp
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/admin-session
+[BROWSER WARNING] [.WebGL-0x12c0043fc00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/internal/admin/delivery-applications/d1d3d815-f336-4199-8a9b-db6982e3b209/approve
+[BROWSER NETWORK ERROR] 401 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/users/me/portals
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 401 ()
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session/refresh
+[PORTALS] DELIVERY Available confirmed by automatic revalidation in 10376 ms
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] signed out [everyday=200]
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] signed out [admin=200, everyday=200]
+All O3 applicant data is retained; no cleanup performed

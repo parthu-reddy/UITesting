@@ -1,0 +1,53 @@
+[E2E STARTUP] Creating Playwright driver
+[E2E STARTUP] Launching Chromium (headless=true)
+[E2E STARTUP] Chromium ready
+═══ STEP 1: Logging in all actors ═══
+Customer=8000000001 Restaurant=9000000001 Rider=7000000001
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[RIDER] Server DUTY_STATUS ONLINE and live UI location frames verified
+═══ STEP 2: Rider going online ═══
+═══ STEP 3: Customer selecting address and restaurant ═══
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders/quote
+Selected Brand 1 Outlet 5 at 1.4 km
+═══ STEP 4: Customer adding item and placing order ═══
+[CUSTOMER] Adding a 14-min dish at Change outlet
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders/quote
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders
+Tracking Order ID: 5dc4e098-7e0c-4bd8-a93c-aea98df625c4
+Short Order ID: 5dc4e098
+═══ STEP 5: Restaurant accepting order ═══
+[BROWSER WARNING] [.WebGL-0x1340045a000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders/quote
+[BROWSER WARNING] [.WebGL-0x1340045a000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[BROWSER WARNING] [.WebGL-0x1340045a000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[BROWSER WARNING] [.WebGL-0x1340045a000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/restaurants/36342aa6-05fe-5cb3-a755-21b207c601bd/fulfillment/orders/5dc4e098-7e0c-4bd8-a93c-aea98df625c4/accept
+═══ STEP 8: Rider accepting dispatch ═══
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/chat/sessions
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/chat/sessions
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/chat/sessions
+═══ STEP 6: Restaurant starting cook ═══
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/restaurants/36342aa6-05fe-5cb3-a755-21b207c601bd/fulfillment/orders/5dc4e098-7e0c-4bd8-a93c-aea98df625c4/prepare
+═══ STEP 7: Restaurant marking prepared ═══
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/restaurants/36342aa6-05fe-5cb3-a755-21b207c601bd/fulfillment/orders/5dc4e098-7e0c-4bd8-a93c-aea98df625c4/ready
+═══ STEP 10: Rider marking arrived ═══
+═══ STEP 11: Rider picking up order ═══
+[SWIPE] Slide to confirm pickup confirmed on attempt 1
+═══ STEP 13: Rider delivering order ═══
+[SWIPE] Slide to deliver confirmed on attempt 1
+═══ STEP 14: Verifying delivery complete ═══
+═══ STEP 15: Verifying exact customer and restaurant history ═══
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/admin-session
+════════════════════════════════════════
+  ✅ HAPPY PATH E2E TEST PASSED
+════════════════════════════════════════
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] customer signed out [everyday=200]
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] restaurant signed out [everyday=200]
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] rider signed out [everyday=200]
+[E2E TEARDOWN] class admin session signed out [admin=200, everyday=200]

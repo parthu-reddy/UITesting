@@ -1,0 +1,69 @@
+[E2E STARTUP] Creating Playwright driver
+[E2E STARTUP] Launching Chromium (headless=true)
+[E2E STARTUP] Chromium ready
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] customer signed out [everyday=200]
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] customer signed out [everyday=200]
+[ERROR] Tests run: 2, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 20.50 s <<< FAILURE! -- in com.fooddelivery.e2e.tests.features.customer.CustomerOrderHistoryUiTest
+[ERROR] com.fooddelivery.e2e.tests.features.customer.CustomerOrderHistoryUiTest.missingReorderItemsShowWarningWithoutPartialCart -- Time elapsed: 8.948 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+Locator expected to be visible
+Error: element(s) not found
+Call log:
+  - Assert "isVisible" getByTestId("reorder-order").first() with timeout 5000ms
+  - waiting for getByTestId("reorder-order").first()
+	at com.microsoft.playwright.impl.AssertionsBase.expectImpl(AssertionsBase.java:76)
+	at com.microsoft.playwright.impl.AssertionsBase.expectImpl(AssertionsBase.java:47)
+	at com.microsoft.playwright.impl.LocatorAssertionsImpl.expectTrue(LocatorAssertionsImpl.java:471)
+	at com.microsoft.playwright.impl.LocatorAssertionsImpl.isVisible(LocatorAssertionsImpl.java:466)
+	at com.microsoft.playwright.assertions.LocatorAssertions.isVisible(LocatorAssertions.java:861)
+	at com.fooddelivery.e2e.tests.features.customer.CustomerOrderHistoryUiTest.firstReorder(CustomerOrderHistoryUiTest.java:205)
+	at com.fooddelivery.e2e.tests.features.customer.CustomerOrderHistoryUiTest.missingReorderItemsShowWarningWithoutPartialCart(CustomerOrderHistoryUiTest.java:295)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+
+[ERROR] com.fooddelivery.e2e.tests.features.customer.CustomerOrderHistoryUiTest.closedReorderOutletShowsWarningWithoutCart -- Time elapsed: 8.874 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+Locator expected to be visible
+Error: element(s) not found
+Call log:
+  - Assert "isVisible" getByTestId("reorder-order").first() with timeout 5000ms
+  - waiting for getByTestId("reorder-order").first()
+	at com.microsoft.playwright.impl.AssertionsBase.expectImpl(AssertionsBase.java:76)
+	at com.microsoft.playwright.impl.AssertionsBase.expectImpl(AssertionsBase.java:47)
+	at com.microsoft.playwright.impl.LocatorAssertionsImpl.expectTrue(LocatorAssertionsImpl.java:471)
+	at com.microsoft.playwright.impl.LocatorAssertionsImpl.isVisible(LocatorAssertionsImpl.java:466)
+	at com.microsoft.playwright.assertions.LocatorAssertions.isVisible(LocatorAssertions.java:861)
+	at com.fooddelivery.e2e.tests.features.customer.CustomerOrderHistoryUiTest.firstReorder(CustomerOrderHistoryUiTest.java:205)
+	at com.fooddelivery.e2e.tests.features.customer.CustomerOrderHistoryUiTest.closedReorderOutletShowsWarningWithoutCart(CustomerOrderHistoryUiTest.java:271)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+
+[ERROR] Failures: 
+[ERROR]   CustomerOrderHistoryUiTest.closedReorderOutletShowsWarningWithoutCart:271->firstReorder:205 Locator expected to be visible
+Error: element(s) not found
+Call log:
+  - Assert "isVisible" getByTestId("reorder-order").first() with timeout 5000ms
+  - waiting for getByTestId("reorder-order").first()
+[ERROR]   CustomerOrderHistoryUiTest.missingReorderItemsShowWarningWithoutPartialCart:295->firstReorder:205 Locator expected to be visible
+Error: element(s) not found
+Call log:
+  - Assert "isVisible" getByTestId("reorder-order").first() with timeout 5000ms
+  - waiting for getByTestId("reorder-order").first()
+[ERROR] Tests run: 2, Failures: 2, Errors: 0, Skipped: 0
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.5.2:test (default-test) on project e2e-tests: There are test failures.
+[ERROR] 
+[ERROR] See /Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

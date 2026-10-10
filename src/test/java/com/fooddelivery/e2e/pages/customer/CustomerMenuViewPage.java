@@ -117,8 +117,10 @@ public class CustomerMenuViewPage {
      * defect, reported here with the outlet and the instant.
      */
     public void addQuickPrepItemToCart() {
-        String outlet = page.locator("#outlet-select").count() > 0
-                ? page.locator("#outlet-select").first().innerText().trim().split("\\R")[0] : "the selected outlet";
+        // The menu's heading names the outlet; #outlet-select is the "Change outlet" button, not a name.
+        Locator heading = page.getByRole(com.microsoft.playwright.options.AriaRole.HEADING,
+                new Page.GetByRoleOptions().setName(Pattern.compile("^Brand \\d+ Outlet \\d+$"))).first();
+        String outlet = heading.count() > 0 ? heading.innerText().trim() : "the selected outlet";
         Locator orderable = page.locator("[data-menu-item]:has([data-testid='add-to-cart-button'])");
         try {
             orderable.first().waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE).setTimeout(10000));

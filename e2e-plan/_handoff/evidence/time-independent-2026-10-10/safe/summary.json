@@ -1,0 +1,749 @@
+{
+ "stopped": false,
+ "results": [
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.organisations.AdminPartnerApprovalsUiTest",
+   "name": "reviewQueuesNavigation",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.organisations.AdminPartnerApprovalsUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.smoke.AdminReadOnlyUiTest",
+   "name": "categoriesEditorOpensWithoutChangingData",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.smoke.AdminReadOnlyUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminSupportUserReviewTest",
+   "name": "invalidCategoryNameDoesNotCreateCategory",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminSupportUserReviewTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminSupportUserReviewTest",
+   "name": "categoriesEditorAndCount",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminSupportUserReviewTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminSupportUserReviewTest",
+   "name": "categoryListEmptyStateOrEditFormIsReadOnly",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminSupportUserReviewTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminUserCatalogModerationRoutedUiTest",
+   "name": "categoryCreateErrorKeepsThePendingCategoryCorrectableWithoutFalseSuccess",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminUserCatalogModerationRoutedUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminUserCatalogModerationRoutedUiTest",
+   "name": "categoryValidationEditCancellationAndFixtureCreateAreDeterministic",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminUserCatalogModerationRoutedUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminUserCatalogModerationRoutedUiTest",
+   "name": "categoryUpdateErrorKeepsThePendingEditCorrectableWithoutFalseSuccess",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminUserCatalogModerationRoutedUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminUserCatalogModerationRoutedUiTest",
+   "name": "categoryUpdateSuccessUsesOnlyTheBrowserFixture",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminUserCatalogModerationRoutedUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.resilience.RoleVisualAuditUiTest",
+   "name": "riderMobileDashboardAndVerificationRead",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.resilience.RoleVisualAuditUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.customer.CheckoutRoutedUiTest",
+   "name": "tipChangesChargeWalletEligibilityAndExactSubmissionPayload",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.customer.CheckoutRoutedUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.customer.CheckoutRoutedUiTest",
+   "name": "orderErrorPreservesCartAndExplicitRetryUsesChosenMethod(int, String)[1]",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.customer.CheckoutRoutedUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.customer.CheckoutRoutedUiTest",
+   "name": "orderErrorPreservesCartAndExplicitRetryUsesChosenMethod(int, String)[2]",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.customer.CheckoutRoutedUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.customer.CheckoutRoutedUiTest",
+   "name": "abandoningCheckoutPreservesCartAndSubmitsNoOrder(String)[1]",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.customer.CheckoutRoutedUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.customer.CheckoutRoutedUiTest",
+   "name": "abandoningCheckoutPreservesCartAndSubmitsNoOrder(String)[2]",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.customer.CheckoutRoutedUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.customer.CheckoutRoutedUiTest",
+   "name": "abandoningCheckoutPreservesCartAndSubmitsNoOrder(String)[3]",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.customer.CheckoutRoutedUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.customer.CheckoutRoutedUiTest",
+   "name": "reopeningCheckoutWaitsForCurrentWalletBalance",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.customer.CheckoutRoutedUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.customer.CheckoutRoutedUiTest",
+   "name": "walletCannotBeSelectedBeforeItsBalanceArrives",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.customer.CheckoutRoutedUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.customer.CheckoutRoutedUiTest",
+   "name": "unavailableItemResponseRemovesOnlyTheRejectedItem",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.customer.CheckoutRoutedUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.customer.CheckoutUiTest",
+   "name": "paymentChoicesAndCheckoutReentry",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.customer.CheckoutUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.customer.CheckoutUiTest",
+   "name": "verifyCheckoutAndPaymentOptions",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.customer.CheckoutUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.customer.CheckoutUiTest",
+   "name": "reloadDuringCheckoutPreservesCart",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.customer.CheckoutUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.customer.CheckoutUiTest",
+   "name": "enterKeyActivatesCheckout",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.customer.CheckoutUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.customer.CustomerHomeAddressTest",
+   "name": "freeDeliveryTrackerVisible",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.customer.CustomerHomeAddressTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.customer.CustomerHomeAddressTest",
+   "name": "openRestaurantFromHome",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.customer.CustomerHomeAddressTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.customer.CustomerHomeAddressTest",
+   "name": "addressModalOpens",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.customer.CustomerHomeAddressTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.customer.CustomerHomeAddressTest",
+   "name": "selectExistingHomeAddress",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.customer.CustomerHomeAddressTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.customer.CustomerHomeAddressTest",
+   "name": "addressCountAccurate",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.customer.CustomerHomeAddressTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.customer.CustomerHomeAddressTest",
+   "name": "searchRestaurantFromHome",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.customer.CustomerHomeAddressTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.customer.CustomerHomeAddressTest",
+   "name": "restaurantCountOnHome",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.customer.CustomerHomeAddressTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.customer.CustomerOrderHistoryUiTest",
+   "name": "missingReorderItemsShowWarningWithoutPartialCart",
+   "outcome": "failure",
+   "signature": "CustomerOrderHistoryUiTest.java:205 Locator expected to be visible",
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.customer.CustomerOrderHistoryUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.customer.CustomerOrderHistoryUiTest",
+   "name": "closedReorderOutletShowsWarningWithoutCart",
+   "outcome": "failure",
+   "signature": "CustomerOrderHistoryUiTest.java:205 Locator expected to be visible",
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.customer.CustomerOrderHistoryUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.customer.MenuCartFeatureTest",
+   "name": "addIncrementDecrementAndEmptyCart",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.customer.MenuCartFeatureTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.customer.MenuCartFeatureTest",
+   "name": "menuDisplaysItemsWithoutRestaurantEditingControls",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.customer.MenuCartFeatureTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.smoke.MenuCartUiTest",
+   "name": "everyMenuItemHasLoadedImageOrFallback",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.smoke.MenuCartUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.smoke.MenuCartUiTest",
+   "name": "customerOutletSelectorExposesNoManagementActions",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.smoke.MenuCartUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.smoke.MenuCartUiTest",
+   "name": "menuDescriptionsUseSecondaryTextStyling",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.smoke.MenuCartUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.smoke.MenuCartUiTest",
+   "name": "catalogFailureOffersRetryAndRecoversTheSelectedOutlet",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.smoke.MenuCartUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.smoke.MenuCartUiTest",
+   "name": "successfulEmptyCatalogShowsAnExplicitEmptyState",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.smoke.MenuCartUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.smoke.MenuCartUiTest",
+   "name": "menuDisplaysItemsWithoutRestaurantEditingControls",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.smoke.MenuCartUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.smoke.MenuCartUiTest",
+   "name": "outOfStockItemsCannotBeAdded",
+   "outcome": "failure",
+   "signature": "NearbyOutletPage.java:37 Locator expected to have count",
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.smoke.MenuCartUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.smoke.MenuCartUiTest",
+   "name": "allMenuItemsHaveNamesPositivePricesAndCategories",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.smoke.MenuCartUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.smoke.MenuCartUiTest",
+   "name": "dietaryMarkersAndPrepTimesNeverInventValues",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.smoke.MenuCartUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.resilience.NetworkRecoveryUiTest",
+   "name": "cartAndPageRecoverAfterOfflinePeriod",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.resilience.NetworkRecoveryUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.customer.OutletSelectionTest",
+   "name": "selectNearbyOutletLoadsItsMenu",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.customer.OutletSelectionTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.customer.OutletSelectionTest",
+   "name": "everyOutletShowsDistance",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.customer.OutletSelectionTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.customer.OutletSelectionTest",
+   "name": "homeAddressPersistsAfterReload",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.customer.OutletSelectionTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.customer.OutletSelectionTest",
+   "name": "outletSelectorListsSelectableOutlets",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.customer.OutletSelectionTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.customer.OutletSelectionTest",
+   "name": "outletPersistsDuringCartNavigation",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.customer.OutletSelectionTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.customer.OutletSelectionTest",
+   "name": "farOutletsCannotBeSelected",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.customer.OutletSelectionTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.resilience.PageReloadRecoveryTest",
+   "name": "sessionPersistsAcrossReload",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.resilience.PageReloadRecoveryTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.resilience.PageReloadRecoveryTest",
+   "name": "selectedAddressPersistsAcrossReload",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.resilience.PageReloadRecoveryTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.resilience.PageReloadRecoveryTest",
+   "name": "secondTabSharesCustomerSession",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.resilience.PageReloadRecoveryTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.resilience.PageReloadRecoveryTest",
+   "name": "browserBackFromPaymentPreservesCart",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.resilience.PageReloadRecoveryTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.resilience.PageReloadRecoveryTest",
+   "name": "cartSynchronizesAcrossCustomerTabs",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.resilience.PageReloadRecoveryTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.resilience.PageReloadRecoveryTest",
+   "name": "browserBackFromRestaurantMenuRestoresHome",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.resilience.PageReloadRecoveryTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.resilience.PageReloadRecoveryTest",
+   "name": "settingsRoutePersistsAcrossReload",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.resilience.PageReloadRecoveryTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.resilience.PageReloadRecoveryTest",
+   "name": "cartPersistsAcrossReload",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.resilience.PageReloadRecoveryTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.smoke.PartnerReadOnlyUiTest",
+   "name": "riderVerificationAndWalletSectionsRender",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.smoke.PartnerReadOnlyUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.smoke.PartnerReadOnlyUiTest",
+   "name": "restaurantStockControlsRenderWithoutToggling",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.smoke.PartnerReadOnlyUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.organisations.PortalLauncherUiTest",
+   "name": "restaurantWithoutBrandIsInvitedToStart",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.organisations.PortalLauncherUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.organisations.PortalLauncherUiTest",
+   "name": "rejectedRiderSeesActionAndReason",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.organisations.PortalLauncherUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.organisations.PortalLauncherUiTest",
+   "name": "pendingRestaurantOpensItsApplicationStatus",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.organisations.PortalLauncherUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.organisations.PortalLauncherUiTest",
+   "name": "ownerSwitchesApprovedPortalsAndSeesDeliveryStart",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.organisations.PortalLauncherUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.resilience.ResponsiveAccessibilityTest",
+   "name": "tabletCustomerDashboardFitsViewport",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.resilience.ResponsiveAccessibilityTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.resilience.ResponsiveAccessibilityTest",
+   "name": "tabKeyAdvancesThroughCustomerDashboardControls",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.resilience.ResponsiveAccessibilityTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.resilience.ResponsiveAccessibilityTest",
+   "name": "mobileCustomerDashboardFitsViewport",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.resilience.ResponsiveAccessibilityTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.resilience.ResponsiveAccessibilityTest",
+   "name": "customerRestaurantImagesHaveAltAttributes",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.resilience.ResponsiveAccessibilityTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.smoke.RestaurantDiscoveryUiTest",
+   "name": "searchNoResultsAndClearRestoreRestaurantCards",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.smoke.RestaurantDiscoveryUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.smoke.RestaurantDiscoveryUiTest",
+   "name": "failedCoverImagesRenderNamedFallbacks",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.smoke.RestaurantDiscoveryUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.smoke.RestaurantDiscoveryUiTest",
+   "name": "emptyNearbyAreaOffersAnAddressChange",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.smoke.RestaurantDiscoveryUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.smoke.RestaurantDiscoveryUiTest",
+   "name": "multipleRestaurantBrandsAndDisplayedDistancesAreValid",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.smoke.RestaurantDiscoveryUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.smoke.RestaurantDiscoveryUiTest",
+   "name": "cuisineSearchMatchesTheRenderedCuisine",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.smoke.RestaurantDiscoveryUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.smoke.RestaurantDiscoveryUiTest",
+   "name": "everyRestaurantCardHasALoadedNamedCoverImage",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.smoke.RestaurantDiscoveryUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.smoke.RestaurantDiscoveryUiTest",
+   "name": "nearbyFailureShowsRetryAndRecoversWithoutClaimingOutOfRange",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.smoke.RestaurantDiscoveryUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.smoke.RestaurantDiscoveryUiTest",
+   "name": "categoryFilterCanBeSelectedAndCleared",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.smoke.RestaurantDiscoveryUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.restaurant.RestaurantMenuManagementTest",
+   "name": "toggleMenuItemAvailability",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.restaurant.RestaurantMenuManagementTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.rider.RiderOnboardingFullTest",
+   "name": "approvedRiderHasOperationalDashboardAndFrozenDetails",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.rider.RiderOnboardingFullTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.rider.RiderOnboardingTest",
+   "name": "checkOnboardingWizard",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.rider.RiderOnboardingTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.smoke.SavedAddressOutletUiTest",
+   "name": "existingHomeAndNearbyBrand1Outlet",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.smoke.SavedAddressOutletUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.smoke.SavedAddressOutletUiTest",
+   "name": "keyboardWrapHomeEndSkipDisabledOutlets",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.smoke.SavedAddressOutletUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.smoke.SavedAddressOutletUiTest",
+   "name": "homeAddressModalCanBeReopenedAndDismissedTwice",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.smoke.SavedAddressOutletUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.smoke.SavedAddressOutletUiTest",
+   "name": "outletSwitchWithCartRequiresDecisionAndPreservesOtherCart(String)[1]",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.smoke.SavedAddressOutletUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.smoke.SavedAddressOutletUiTest",
+   "name": "outletSwitchWithCartRequiresDecisionAndPreservesOtherCart(String)[2]",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.smoke.SavedAddressOutletUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.smoke.SavedAddressOutletUiTest",
+   "name": "reloadKeepsAddressIdentityAndCoordinatesConsistent(String)[1]",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.smoke.SavedAddressOutletUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.smoke.SavedAddressOutletUiTest",
+   "name": "reloadKeepsAddressIdentityAndCoordinatesConsistent(String)[2]",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.smoke.SavedAddressOutletUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.smoke.SavedAddressOutletUiTest",
+   "name": "homeAddressPersistsAcrossReload",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.smoke.SavedAddressOutletUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.smoke.SavedAddressOutletUiTest",
+   "name": "changingSavedAddressConfirmsCartClearAndQuotesNewAddress",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.smoke.SavedAddressOutletUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.smoke.SavedAddressOutletUiTest",
+   "name": "outletSelectorArrowDownMovesFocus",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.smoke.SavedAddressOutletUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.smoke.SavedAddressOutletUiTest",
+   "name": "visibleBrand1OutletDistancesAreNumeric",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.smoke.SavedAddressOutletUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.smoke.SavedAddressOutletUiTest",
+   "name": "switchBetweenTwoNearbyBrand1Outlets",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.smoke.SavedAddressOutletUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.smoke.SavedAddressOutletUiTest",
+   "name": "selectingSameOutletKeepsCartWithoutConfirmation",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.smoke.SavedAddressOutletUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.organisations.UnapprovedOutletHiddenTest",
+   "name": "pendingAndRejectedOutletsAreNotDiscoverableThroughTheCustomerUI",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.organisations.UnapprovedOutletHiddenTest.xml"
+  }
+ ]
+}

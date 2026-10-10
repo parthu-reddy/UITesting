@@ -95,15 +95,22 @@ public abstract class TestBase {
         try {
             com.fooddelivery.e2e.util.SeededRiderDuty.finishOfflineIfIdle(riderPage);
         } finally {
-            signOutQuietly("customer", customerPage);
-            signOutQuietly("restaurant", restaurantPage);
-            signOutQuietly("rider", riderPage);
+            signOutAndClose("customer", customerPage, customerContext);
+            signOutAndClose("restaurant", restaurantPage, restaurantContext);
+            signOutAndClose("rider", riderPage, riderContext);
             if (!adminUsesClassSession) signOutQuietly("admin", adminPage);
-            closeQuietly(customerContext);
-            closeQuietly(restaurantContext);
-            closeQuietly(riderContext);
             closeQuietly(adminContext);
         }
+    }
+
+    /**
+     * Signs one page out and closes its context at once. Signing every page out before closing any left the other
+     * pages running on revoked sessions, so their background calls (e.g. the storefront's debounced quote) drew
+     * 401s from the gateway that read like product failures (checkpoint144).
+     */
+    private void signOutAndClose(String label, Page page, BrowserContext context) {
+        signOutQuietly(label, page);
+        closeQuietly(context);
     }
 
     // ── Helpers ──────────────────────────────────────────────────────────
@@ -179,7 +186,7 @@ public abstract class TestBase {
     }
 
     /** Teardown must still close every context when a sign-out fails; the statuses are printed, never asserted. */
-    private void signOutQuietly(String label, Page page) {
+    protected final void signOutQuietly(String label, Page page) {
         try {
             var statuses = com.fooddelivery.e2e.util.SessionSignOut.signOut(page);
             if (!statuses.isEmpty()) System.out.println("[E2E TEARDOWN] " + label + " signed out " + statuses);

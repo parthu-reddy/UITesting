@@ -1,0 +1,123 @@
+[E2E STARTUP] Creating Playwright driver
+[E2E STARTUP] Launching Chromium (headless=true)
+[E2E STARTUP] Chromium ready
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[BROWSER NETWORK ERROR] 409 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/restaurants/36342aa6-05fe-5cb3-a755-21b207c601bd/delivery-availability
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 409 ()
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders/quote
+Selected Brand 1 Outlet 5 at 1.4 km
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] customer signed out [everyday=200]
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[BROWSER NETWORK ERROR] 409 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/restaurants/36342aa6-05fe-5cb3-a755-21b207c601bd/delivery-availability
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 409 ()
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders/quote
+Selected Brand 1 Outlet 5 at 1.4 km
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] customer signed out [everyday=200]
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[BROWSER NETWORK ERROR] 409 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/restaurants/36342aa6-05fe-5cb3-a755-21b207c601bd/delivery-availability
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 409 ()
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders/quote
+Selected Brand 1 Outlet 5 at 1.4 km
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] customer signed out [everyday=200]
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[BROWSER NETWORK ERROR] 409 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/restaurants/36342aa6-05fe-5cb3-a755-21b207c601bd/delivery-availability
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 409 ()
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders/quote
+Selected Brand 1 Outlet 5 at 1.4 km
+[BROWSER NETWORK ERROR] 502 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/restaurants/36342aa6-05fe-5cb3-a755-21b207c601bd/catalog/items
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 502 (Bad Gateway)
+[BROWSER NETWORK ERROR] 409 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/restaurants/36342aa6-05fe-5cb3-a755-21b207c601bd/delivery-availability
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 409 ()
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] customer signed out [everyday=200]
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[BROWSER NETWORK ERROR] 409 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/restaurants/36342aa6-05fe-5cb3-a755-21b207c601bd/delivery-availability
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 409 ()
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders/quote
+Selected Brand 1 Outlet 5 at 1.4 km
+[BROWSER NETWORK ERROR] 409 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/restaurants/36342aa6-05fe-5cb3-a755-21b207c601bd/delivery-availability
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 409 ()
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] customer signed out [everyday=200]
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[BROWSER NETWORK ERROR] 409 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/restaurants/36342aa6-05fe-5cb3-a755-21b207c601bd/delivery-availability
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 409 ()
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders/quote
+Selected Brand 1 Outlet 5 at 1.4 km
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] customer signed out [everyday=200]
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[BROWSER NETWORK ERROR] 409 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/restaurants/36342aa6-05fe-5cb3-a755-21b207c601bd/delivery-availability
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 409 ()
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders/quote
+Selected Brand 1 Outlet 5 at 1.4 km
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[E2E WRITE] PUT 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/outlets/36342aa6-05fe-5cb3-a755-21b207c601bd/menu-items/60c6e41e-f617-584e-9329-ccfa0747b537/stock
+[BROWSER NETWORK ERROR] 409 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/restaurants/36342aa6-05fe-5cb3-a755-21b207c601bd/delivery-availability
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 409 ()
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders/quote
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] customer signed out [everyday=200]
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] restaurant signed out [everyday=200]
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[BROWSER NETWORK ERROR] 409 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/restaurants/36342aa6-05fe-5cb3-a755-21b207c601bd/delivery-availability
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 409 ()
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders/quote
+Selected Brand 1 Outlet 5 at 1.4 km
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] customer signed out [everyday=200]
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[BROWSER NETWORK ERROR] 409 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/restaurants/36342aa6-05fe-5cb3-a755-21b207c601bd/delivery-availability
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 409 ()
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders/quote
+Selected Brand 1 Outlet 5 at 1.4 km
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] customer signed out [everyday=200]
+[ERROR] Tests run: 9, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 101.8 s <<< FAILURE! -- in com.fooddelivery.e2e.tests.smoke.MenuCartUiTest
+[ERROR] com.fooddelivery.e2e.tests.smoke.MenuCartUiTest.outOfStockItemsCannotBeAdded -- Time elapsed: 41.54 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+Locator expected to have count
+Expected: 1
+Received: 0
+
+Call log:
+  - Assert "hasCount" getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHas(getByText("Brand 1", new Page.GetByTextOptions().setExact(true)))) with timeout 30000ms
+  - waiting for getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHas(getByText("Brand 1", new Page.GetByTextOptions().setExact(true))))
+    63 × locator resolved to 0 elements
+       - unexpected value "0"
+	at com.microsoft.playwright.impl.AssertionsBase.expectImpl(AssertionsBase.java:81)
+	at com.microsoft.playwright.impl.AssertionsBase.expectImpl(AssertionsBase.java:47)
+	at com.microsoft.playwright.impl.LocatorAssertionsImpl.hasCount(LocatorAssertionsImpl.java:235)
+	at com.fooddelivery.e2e.pages.customer.NearbyOutletPage.openBrandCard(NearbyOutletPage.java:37)
+	at com.fooddelivery.e2e.pages.customer.NearbyOutletPage.openBrandCardAndSelectNearby(NearbyOutletPage.java:21)
+	at com.fooddelivery.e2e.tests.smoke.MenuCartUiTest.outOfStockItemsCannotBeAdded(MenuCartUiTest.java:182)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+
+[ERROR] Failures: 
+[ERROR]   MenuCartUiTest.outOfStockItemsCannotBeAdded:182 Locator expected to have count
+Expected: 1
+Received: 0
+
+Call log:
+  - Assert "hasCount" getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHas(getByText("Brand 1", new Page.GetByTextOptions().setExact(true)))) with timeout 30000ms
+  - waiting for getByRole(AriaRole.BUTTON).filter(new Locator.FilterOptions().setHas(getByText("Brand 1", new Page.GetByTextOptions().setExact(true))))
+    63 × locator resolved to 0 elements
+       - unexpected value "0"
+[ERROR] Tests run: 9, Failures: 1, Errors: 0, Skipped: 0
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.5.2:test (default-test) on project e2e-tests: There are test failures.
+[ERROR] 
+[ERROR] See /Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

@@ -1,0 +1,45 @@
+Running combined UI gate; retained candidates: /Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/business-platform/o45/allocation-4cbcad635b96b0a9.json
+[E2E STARTUP] Creating Playwright driver
+[E2E STARTUP] Launching Chromium (headless=true)
+[E2E STARTUP] Chromium ready
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/otp
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[E2E WRITE] PUT 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/users/profile
+[E2E WRITE] PUT 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/delivery-onboarding/application
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/verification/documents/fdae3334-81bf-4ce2-b874-c3a8488c95f6/complete
+[UPLOAD] Driving licence confirmed 200 and Uploaded; 0 observed entitlement challenges
+[BROWSER NETWORK ERROR] 401 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/delivery-onboarding/application
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 401 ()
+[BROWSER NETWORK ERROR] 401 POST https://gulf-strike-dark-extras.trycloudflare.com/api/v1/verification/driving-license
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 401 ()
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session/refresh
+[E2E WRITE] POST 401 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/verification/driving-license
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/verification/driving-license
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/verification/documents/eb9179d0-bdd9-473d-86f0-b7ae0ffbb263/complete
+[UPLOAD] Vehicle registration confirmed 200 and Uploaded; 0 observed entitlement challenges
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/verification/vehicle-rc
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/verification/bank-account
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/verification/documents/d4570c65-510b-474f-b9f8-0c1dcaeb96de/complete
+[UPLOAD] Selfie confirmed 200 and Uploaded; 0 observed entitlement challenges
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/verification/biometric
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/delivery-onboarding/application/submit
+[BROWSER NETWORK ERROR] 401 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/delivery-onboarding/application
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 401 ()
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session/refresh
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/otp
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/admin-session/otp
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/admin-session
+[BROWSER WARNING] [.WebGL-0x13c00436600]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[BROWSER WARNING] [.WebGL-0x13c00436600]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/internal/admin/delivery-applications/7ea4dab0-f039-4bf7-b816-3bd4550ffdc1/approve
+[BROWSER NETWORK ERROR] 401 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/users/me/portals
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 401 ()
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session/refresh
+[PORTALS] DELIVERY Available confirmed by automatic revalidation in 10389 ms
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] rider signed out [everyday=200]
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] admin signed out [admin=200, everyday=200]
+All owned business fixtures retained; no server cleanup performed

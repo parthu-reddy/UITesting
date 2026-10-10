@@ -178,9 +178,12 @@ public class MenuCartUiTest extends TestBase {
         assertThat(stockSwitch).isVisible();
         assertThat(stockSwitch).hasAttribute("aria-checked", "true");
         setStockAvailability(stockSwitch, false);
+        // The open outlet lives in the URL (/customer/restaurant/:id, useCustomerRoute), so a reload reopens the
+        // same menu rather than the feed; this branch ran only on a freshly reset Dev (2026-10-10) and still
+        // expected the feed.
         customerPage.reload();
-        String reopenedOutlet = new NearbyOutletPage(customerPage).openBrandCardAndSelectNearby("Brand 1");
-        org.assertj.core.api.Assertions.assertThat(reopenedOutlet).isEqualTo(selectedOutlet);
+        org.assertj.core.api.Assertions.assertThat(new CustomerMenuViewPage(customerPage).getSelectedOutletName())
+                .isEqualTo(selectedOutlet);
         assertUnavailable(customerPage.locator("[data-menu-item=\"" + itemId + "\"]"));
     }
 

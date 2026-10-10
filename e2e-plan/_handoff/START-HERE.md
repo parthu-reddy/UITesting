@@ -1,5 +1,13 @@
 # Resume the Food Delivery E2E audit
 
+## 2026-10-10T06:30+05:30 — checkpoint143: lifecycle + applicants green; restaurant application fix needs redeploy
+
+[Checkpoint143](checkpoints/143-order-run-and-applicants.md). Next: NEXT-STEPS top entry.
+
+## 2026-10-10T03:00+05:30 — checkpoint142: time-independent ordering live; safe batch 90/93 (3 data/stale, fixed or explained)
+
+[Checkpoint142](checkpoints/142-time-independent-live.md). Next: NEXT-STEPS top entry.
+
 ## 2026-10-09T22:45+05:30 — checkpoint141: P0-2 approved batch 6/6; time-independent ordering built, deploy pending
 
 Owner-approved C batch green (3 classes, 6 methods). Time-of-day test failures fixed at the root (backend rule, caches,

@@ -69,23 +69,19 @@ public abstract class PartnerApplicationsUiTestBase extends TestBase {
         }
     }
 
+    /** Like TestBase, each page is signed out and closed at once, but a context that fails to close fails the test. */
     @Override
     @AfterEach
     public void tearDownContexts() {
-        for (Page page : Arrays.asList(customerPage, restaurantPage, riderPage, adminPage)) {
-            try {
-                var statuses = com.fooddelivery.e2e.util.SessionSignOut.signOut(page);
-                if (!statuses.isEmpty()) System.out.println("[E2E TEARDOWN] signed out " + statuses);
-            } catch (RuntimeException failure) {
-                System.out.println("[E2E TEARDOWN] sign-out failed: " + failure.getMessage());
-            }
-        }
         RuntimeException closeFailure = null;
-        for (BrowserContext context : Arrays.asList(
-                customerContext, restaurantContext, riderContext, adminContext)) {
-            if (context == null) continue;
+        String[] labels = {"customer", "restaurant", "rider", "admin"};
+        List<Page> pages = Arrays.asList(customerPage, restaurantPage, riderPage, adminPage);
+        List<BrowserContext> contexts = Arrays.asList(customerContext, restaurantContext, riderContext, adminContext);
+        for (int i = 0; i < labels.length; i++) {
+            signOutQuietly(labels[i], pages.get(i));
+            if (contexts.get(i) == null) continue;
             try {
-                context.close();
+                contexts.get(i).close();
             } catch (RuntimeException failure) {
                 if (closeFailure == null) closeFailure = failure;
                 else closeFailure.addSuppressed(failure);

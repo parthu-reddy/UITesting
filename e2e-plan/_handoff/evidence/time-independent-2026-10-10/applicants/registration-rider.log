@@ -1,0 +1,28 @@
+Running UI-only registration; retained candidates: /Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/registration/b9f24fd7d74c9688.json
+[E2E STARTUP] Creating Playwright driver
+[E2E STARTUP] Launching Chromium (headless=true)
+[E2E STARTUP] Chromium ready
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/otp
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[E2E WRITE] PUT 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/users/profile
+[E2E WRITE] PUT 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/delivery-onboarding/application
+[BROWSER NETWORK ERROR] 401 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/verification/upload-url?[redacted]
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 401 ()
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session/refresh
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/verification/documents/10b520dd-34f5-45e5-9885-618fa222155c/complete
+[UPLOAD] Driving licence confirmed 200 and Uploaded; 0 observed entitlement challenges
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/verification/driving-license
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/verification/documents/02256e8c-5336-4975-9063-c2de6a0ec011/complete
+[UPLOAD] Vehicle registration confirmed 200 and Uploaded; 0 observed entitlement challenges
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/verification/vehicle-rc
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/verification/bank-account
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/verification/documents/959298a5-b048-403f-b5e2-542725b786de/complete
+[UPLOAD] Selfie confirmed 200 and Uploaded; 0 observed entitlement challenges
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/verification/biometric
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/delivery-onboarding/application/submit
+[BROWSER NETWORK ERROR] 401 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/delivery-onboarding/application
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 401 ()
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session/refresh
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] rider signed out [everyday=200]
+Accounts, sessions and candidate manifest retained; no cleanup performed

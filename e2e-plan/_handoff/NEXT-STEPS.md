@@ -1,5 +1,42 @@
 # Ordered continuation
 
+## 2026-10-10T11:58+05:30 — checkpoint145: remaining, in order
+
+1. OWNER: commit + redeploy (no wipe) customer-service, delivery-service, identity-service, ledger-service,
+   payment-gateway, wallet-service, communication-integration; commit UITesting. What each carries: RandomDocuments/OwnerAway_2026-10-10/README.md.
+2. Agent, after "deployed": image == pin == HEAD for all seven; `docker compose logs --since 10m customer-service | grep -c "applying in
+   memory"` == 0 across a sweeper cycle (the 400 for size > 100 is covered by PageBoundsTest).
+3. E2E for the changed features (owner OK first: 255 methods / 62 classes, some place orders; canary per role, check
+   no active order): `python3 e2e-plan/feature-tags/select_tests.py --git --out /tmp/sel.txt` then
+   `python3 e2e-plan/_handoff/tools/run_e2e_batch.py --selection /tmp/sel.txt --evidence <dir>`.
+4. Then checkpoint144's list (data-only history gaps, RiderAvailabilityUiTest decision, SSE parked).
+
+## 2026-10-10T07:00+05:30 — checkpoint144: remaining, in order
+
+0. OWNER: commit ApiGateway (rejection logging) + redeploy api-gateway; commit UITesting (teardown). After
+   "deployed": verify image == pin == HEAD, then a gateway log grep for `REJECTED` during any run.
+1. Data-only gaps on the reset Dev (need an order cancelled by the restaurant / >1 history page):
+   CustomerOrderHistoryUiTest cancelledHistoryRow…, historyPagination….
+2. P0-2 leftovers: RiderAvailabilityUiTest (owner decision), SSEReconnectTest (parked).
+(checkpoint143 steps 1–2 DONE.)
+
+## 2026-10-10T06:30+05:30 — checkpoint143: remaining, in order
+
+1. OWNER: commit RestaurantApplication (ApplicationOutletFactory + test) and UITesting; redeploy restaurant-service.
+2. Agent, after "deployed": verify image == pin == HEAD; run `scripts/run_partner_applications_o3_e2e.py --only restaurant`
+   and `scripts/run_registration_e2e.py --only restaurant` (both create an applicant).
+3. Data-only gaps on the reset Dev (need an order cancelled by the restaurant / >1 history page):
+   CustomerOrderHistoryUiTest cancelledHistoryRow…, historyPagination….
+4. P0-2 leftovers: RiderAvailabilityUiTest (owner decision), SSEReconnectTest (parked).
+
+## 2026-10-10T03:00+05:30 — checkpoint142: remaining, in order
+
+1. Owner: commit UITesting (MenuCartUiTest stale-reload fix).
+2. Owner approval, then run: CustomerOrderPlacementTest#tippedOrderMatchesMockPaidTotal (1 order; rider online near
+   the outlet; check no active order first), then CustomerOrderHistoryUiTest (reorder needs that delivered order).
+3. Owner approval: RegistrationUiTest, RestaurantApplicationApiTest, DeliveryApplicationApiTest, DeliveryOnboardingUiTest.
+4. P0-2 leftovers: RiderAvailabilityUiTest (owner decision), SSEReconnectTest (parked).
+
 ## 2026-10-09T22:45+05:30 — checkpoint141: remaining, in order
 
 1. OWNER: follow the deploy order in `RandomDocuments/TimeIndependentOrdering_2026-10-09/README.md` (CommonLibrary

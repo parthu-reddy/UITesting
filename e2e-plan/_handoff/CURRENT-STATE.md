@@ -1,5 +1,25 @@
 # Current checkpoint
 
+## 2026-10-10T11:58+05:30 — checkpoint145
+
+- api-gateway 6a0ec23 live-verified. CustomerApplication: 3 backend fixes built (567/0), deploy pending. Nothing running.
+
+## 2026-10-10T07:00+05:30 — checkpoint144
+
+- restaurant-service 168853c verified (DEPLOY_LOG == pin == HEAD == running image). Restaurant applicants: O3 1/1,
+  registration 1/1 — "Open 24 hours" outlet now accepted. Nothing running.
+
+## 2026-10-10T06:30+05:30 — checkpoint143
+
+- Lifecycle 1/1 (order 5dc4e098 delivered); reorder tests now pass; delivery applicants 2/2; registration customer+rider 2/2.
+- RestaurantApplicationApiTest found ApplicationOutletFactory refusing all-day hours (400): fixed locally, needs deploy.
+
+## 2026-10-10T03:00+05:30 — checkpoint142
+
+- Deploy verified (restaurant 09f905f, customer 30bfb63, UI 986e01c; image == pin == HEAD). Dev was reset: 0 orders.
+- Live: Brand 1/2 orderable every minute (P4.5); safe batch 90 pass / 3 fail (2 need a delivered order, 1 stale test
+  fixed, rerun 1/1). Nothing running.
+
 ## 2026-10-09T22:45+05:30 — checkpoint141
 
 - P0-2 owner-approved batch: AdminPartnerApprovalsUiTest#reviewQueuesNavigation 1/1, OneLoginEntitlementsTest 4/4,
