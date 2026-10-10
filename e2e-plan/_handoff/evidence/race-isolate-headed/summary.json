@@ -1,0 +1,69 @@
+{
+ "stopped": false,
+ "results": [
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminFleetSafetyRoutedUiTest",
+   "name": "fleetLayersRefreshSafelyAndRecoverFromOneUnavailableRead",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminFleetSafetyRoutedUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminFleetSafetyRoutedUiTest",
+   "name": "fleetCitySelectionScopesEveryLayerRequest",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminFleetSafetyRoutedUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminSupportChatIsolationRoutedUiTest",
+   "name": "switchingSupportTicketsUsesSeparateReadOnlyChatSessions",
+   "outcome": "error",
+   "signature": "AdminSupportChatPage.java:53 Error {",
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminSupportChatIsolationRoutedUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminSupportChatIsolationRoutedUiTest",
+   "name": "imageUploadWithoutUsableUrlShowsAnErrorWithoutForgingAnAttachment",
+   "outcome": "error",
+   "signature": "AdminSupportChatPage.java:53 Error {",
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminSupportChatIsolationRoutedUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminSupportChatIsolationRoutedUiTest",
+   "name": "moderatorImageUploadUsesTheSelectedSessionAndAuthoritativeBroadcast",
+   "outcome": "error",
+   "signature": "AdminSupportChatPage.java:53 Error {",
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminSupportChatIsolationRoutedUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminSupportChatIsolationRoutedUiTest",
+   "name": "supportModeratorCanSendAndReceiveWithinTheSelectedTicketSession",
+   "outcome": "error",
+   "signature": "AdminSupportChatPage.java:53 Error {",
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminSupportChatIsolationRoutedUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.smoke.LoginThemeUiTest",
+   "name": "themeSwitchAndOtpNavigation(int)[1]",
+   "outcome": "failure",
+   "signature": "LoginThemeUiTest.java:46 [dark-mode phone input text contrast] ",
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.smoke.LoginThemeUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.smoke.LoginThemeUiTest",
+   "name": "themeSwitchAndOtpNavigation(int)[2]",
+   "outcome": "failure",
+   "signature": "LoginThemeUiTest.java:46 [dark-mode phone input text contrast] ",
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.smoke.LoginThemeUiTest.xml"
+  }
+ ]
+}

@@ -1,0 +1,50 @@
+[E2E STARTUP] Creating Playwright driver
+[E2E STARTUP] Launching Chromium (headless=true)
+[E2E STARTUP] Chromium ready
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/admin-session
+[BROWSER WARNING] [.WebGL-0x11400446e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[BROWSER WARNING] [.WebGL-0x11400446e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[BROWSER WARNING] [.WebGL-0x11400446e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[BROWSER WARNING] [.WebGL-0x11400446e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+[E2E TEARDOWN] class admin session signed out [admin=200, everyday=200]
+[ERROR] Tests run: 2, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 32.07 s <<< FAILURE! -- in com.fooddelivery.e2e.tests.features.admin.AdminFleetSafetyRoutedUiTest
+[ERROR] com.fooddelivery.e2e.tests.features.admin.AdminFleetSafetyRoutedUiTest.fleetLayersRefreshSafelyAndRecoverFromOneUnavailableRead -- Time elapsed: 15.14 s <<< ERROR!
+com.microsoft.playwright.TimeoutError: Timeout 10000ms exceeded
+	at com.microsoft.playwright.impl.WaitableTimeout.get(WaitableTimeout.java:41)
+	at com.microsoft.playwright.impl.WaitableRace.get(WaitableRace.java:46)
+	at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:147)
+	at com.microsoft.playwright.impl.PageImpl.waitForCondition(PageImpl.java:1635)
+	at com.fooddelivery.e2e.tests.features.admin.AdminFleetSafetyRoutedUiTest.waitForReadCount(AdminFleetSafetyRoutedUiTest.java:144)
+	at com.fooddelivery.e2e.tests.features.admin.AdminFleetSafetyRoutedUiTest.fleetLayersRefreshSafelyAndRecoverFromOneUnavailableRead(AdminFleetSafetyRoutedUiTest.java:72)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+
+[ERROR] com.fooddelivery.e2e.tests.features.admin.AdminFleetSafetyRoutedUiTest.fleetCitySelectionScopesEveryLayerRequest -- Time elapsed: 12.90 s <<< ERROR!
+com.microsoft.playwright.TimeoutError: Timeout 10000ms exceeded
+	at com.microsoft.playwright.impl.WaitableTimeout.get(WaitableTimeout.java:41)
+	at com.microsoft.playwright.impl.WaitableRace.get(WaitableRace.java:46)
+	at com.microsoft.playwright.impl.ChannelOwner.runUntil(ChannelOwner.java:147)
+	at com.microsoft.playwright.impl.PageImpl.waitForCondition(PageImpl.java:1635)
+	at com.fooddelivery.e2e.tests.features.admin.AdminFleetSafetyRoutedUiTest.waitForScopedReadCount(AdminFleetSafetyRoutedUiTest.java:155)
+	at com.fooddelivery.e2e.tests.features.admin.AdminFleetSafetyRoutedUiTest.fleetCitySelectionScopesEveryLayerRequest(AdminFleetSafetyRoutedUiTest.java:121)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+
+[ERROR] Errors: 
+[ERROR]   AdminFleetSafetyRoutedUiTest.fleetCitySelectionScopesEveryLayerRequest:121->waitForScopedReadCount:155 » Timeout Timeout 10000ms exceeded
+[ERROR]   AdminFleetSafetyRoutedUiTest.fleetLayersRefreshSafelyAndRecoverFromOneUnavailableRead:72->waitForReadCount:144 » Timeout Timeout 10000ms exceeded
+[ERROR] Tests run: 2, Failures: 0, Errors: 2, Skipped: 0
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.5.2:test (default-test) on project e2e-tests: 
+[ERROR] 
+[ERROR] See /Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

@@ -1,0 +1,61 @@
+{
+ "stopped": false,
+ "results": [
+  {
+   "cls": "com.fooddelivery.e2e.tests.flows.CampaignModerationActivationFlowTest",
+   "name": "campaignGoesLiveAndBills",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.flows.CampaignModerationActivationFlowTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.flows.AdsManagerPortalUiTest",
+   "name": "ownerRunsACampaignInAdsManager",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.flows.AdsManagerPortalUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.wallet.BusinessWalletAccessApiTest",
+   "name": "businessWalletAccess",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.wallet.BusinessWalletAccessApiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.wallet.BusinessWalletTopUpFlowTest",
+   "name": "businessWalletTopUpFlow",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.wallet.BusinessWalletTopUpFlowTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.wallet.BusinessWalletUiTest",
+   "name": "businessWalletPage",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.wallet.BusinessWalletUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.ads.AdAccountPerOrganisationApiTest",
+   "name": "adAccountPerOrganisation",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.ads.AdAccountPerOrganisationApiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.ads.PromotedOutletApiTest",
+   "name": "campaignPromotesOneOfItsOwnOutlets",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.ads.PromotedOutletApiTest.xml"
+  }
+ ]
+}

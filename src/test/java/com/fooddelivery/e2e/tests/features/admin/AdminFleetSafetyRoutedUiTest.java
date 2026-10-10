@@ -58,6 +58,14 @@ public class AdminFleetSafetyRoutedUiTest extends TestBase {
         loginAsAdmin();
         portal = new AdminPortalPage(adminPage);
         portal.waitForPortal();
+        // /admin redirects to /admin/map, so the Fleet Map mounts and reads the deployment during sign-in,
+        // before any fixture route exists; openFleetTab() would then click the already-open tab and nothing
+        // re-reads under the fixture for 30 s. Park on Categories first (its mount read completes here, before
+        // the routes; it next polls in 30 s) so openFleetTab() mounts the map fresh.
+        adminPage.waitForResponse(
+                response -> "GET".equals(response.request().method())
+                        && "/api/v1/categories".equals(pathOf(response.url())),
+                portal::openCategoriesTab);
     }
 
     @Test

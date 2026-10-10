@@ -1,0 +1,131 @@
+[E2E STARTUP] Creating Playwright driver
+[E2E STARTUP] Launching Chromium (headless=true)
+[E2E STARTUP] Chromium ready
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[RIDER] Server DUTY_STATUS ONLINE and live UI location frames verified
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders/quote
+Selected Brand 1 Outlet 5 at 1.4 km
+[CUSTOMER] Adding a 14-min dish at Brand 1 Outlet 5
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders/quote
+[BROWSER NETWORK ERROR] 503 POST https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 503 (Service Unavailable)
+[E2E WRITE] POST 503 fixture https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders
+[RIDER] Restored seeded rider to Offline through the delivery portal
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] customer signed out [everyday=200]
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] rider signed out [everyday=200]
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[RIDER] Server DUTY_STATUS ONLINE and live UI location frames verified
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders/quote
+Selected Brand 1 Outlet 5 at 1.4 km
+[CUSTOMER] Adding a 14-min dish at Brand 1 Outlet 5
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders/quote
+[BROWSER NETWORK ERROR] 503 POST https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 503 (Service Unavailable)
+[E2E WRITE] POST 503 fixture https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders
+[BROWSER NETWORK ERROR] 503 POST https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 503 (Service Unavailable)
+[E2E WRITE] POST 503 fixture https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders
+[RIDER] Restored seeded rider to Offline through the delivery portal
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] customer signed out [everyday=200]
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] rider signed out [everyday=200]
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[RIDER] Server DUTY_STATUS ONLINE and live UI location frames verified
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders/quote
+Selected Brand 1 Outlet 5 at 1.4 km
+[CUSTOMER] Adding a 14-min dish at Brand 1 Outlet 5
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders/quote
+[BROWSER NETWORK ERROR] 402 POST https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 402 (Payment Required)
+[E2E WRITE] POST 402 fixture https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders
+[BROWSER NETWORK ERROR] 402 POST https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 402 (Payment Required)
+[E2E WRITE] POST 402 fixture https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders
+[RIDER] Restored seeded rider to Offline through the delivery portal
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] customer signed out [everyday=200]
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] rider signed out [everyday=200]
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[RIDER] Server DUTY_STATUS ONLINE and live UI location frames verified
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders/quote
+Selected Brand 1 Outlet 5 at 1.4 km
+[CUSTOMER] Adding a 14-min dish at Brand 1 Outlet 5
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders/quote
+[RIDER] Restored seeded rider to Offline through the delivery portal
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] customer signed out [everyday=200]
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] rider signed out [everyday=200]
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[RIDER] Server DUTY_STATUS ONLINE and live UI location frames verified
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders/quote
+Selected Brand 1 Outlet 5 at 1.4 km
+[CUSTOMER] Adding a 14-min dish at Brand 1 Outlet 5
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders/quote
+[RIDER] Restored seeded rider to Offline through the delivery portal
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] customer signed out [everyday=200]
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] rider signed out [everyday=200]
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[RIDER] Server DUTY_STATUS ONLINE and live UI location frames verified
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders/quote
+Selected Brand 1 Outlet 5 at 1.4 km
+[CUSTOMER] Adding a 14-min dish at Brand 1 Outlet 5
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders/quote
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders/quote
+[RIDER] Restored seeded rider to Offline through the delivery portal
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] customer signed out [everyday=200]
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] rider signed out [everyday=200]
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[RIDER] Server DUTY_STATUS ONLINE and live UI location frames verified
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders/quote
+Selected Brand 1 Outlet 5 at 1.4 km
+[CUSTOMER] Adding a 14-min dish at Brand 1 Outlet 5
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders/quote
+[RIDER] Restored seeded rider to Offline through the delivery portal
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] customer signed out [everyday=200]
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] rider signed out [everyday=200]
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[RIDER] Server DUTY_STATUS ONLINE and live UI location frames verified
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders/quote
+Selected Brand 1 Outlet 5 at 1.4 km
+[CUSTOMER] Adding a 14-min dish at Brand 1 Outlet 5
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders/quote
+[RIDER] Restored seeded rider to Offline through the delivery portal
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] customer signed out [everyday=200]
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] rider signed out [everyday=200]
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[RIDER] Server DUTY_STATUS ONLINE and live UI location frames verified
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders/quote
+Selected Brand 1 Outlet 5 at 1.4 km
+[CUSTOMER] Adding a 14-min dish at Brand 1 Outlet 5
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders/quote
+[BROWSER NETWORK ERROR] 400 POST https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 400 (Bad Request)
+[E2E WRITE] POST 400 fixture https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders/quote
+[RIDER] Restored seeded rider to Offline through the delivery portal
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] customer signed out [everyday=200]
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] rider signed out [everyday=200]

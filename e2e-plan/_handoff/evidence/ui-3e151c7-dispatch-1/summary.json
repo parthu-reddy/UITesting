@@ -1,0 +1,53 @@
+{
+ "stopped": false,
+ "results": [
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminDispatchSafetyRoutedUiTest",
+   "name": "manualAssignmentFailureBecomesVisibleAndReenablesTheNextAttempt",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminDispatchSafetyRoutedUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminDispatchSafetyRoutedUiTest",
+   "name": "staleCandidatesAreDiscardedAndLiveOpsCannotDirectlyAssign",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminDispatchSafetyRoutedUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminDispatchSafetyRoutedUiTest",
+   "name": "rejectedCancellationKeepsTheInterventionCorrectableWithoutFalseSuccess",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminDispatchSafetyRoutedUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminDispatchSafetyRoutedUiTest",
+   "name": "acceptedManualAssignmentRemovesTheResolvedIntervention",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminDispatchSafetyRoutedUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminDispatchSafetyRoutedUiTest",
+   "name": "manualInterventionGuardsAreDeterministicAndDoNotWrite",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminDispatchSafetyRoutedUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminDispatchSafetyRoutedUiTest",
+   "name": "acceptedCancellationRemovesTheResolvedIntervention",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminDispatchSafetyRoutedUiTest.xml"
+  }
+ ]
+}

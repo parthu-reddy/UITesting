@@ -1,0 +1,13 @@
+{
+ "stopped": false,
+ "results": [
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.fulfillment.RiderAvailabilityUiTest",
+   "name": "riderDutyAndDashboardState",
+   "outcome": "failure",
+   "signature": "RiderAvailabilityUiTest.java:58 Expecting value to be true but was false",
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.fulfillment.RiderAvailabilityUiTest.xml"
+  }
+ ]
+}

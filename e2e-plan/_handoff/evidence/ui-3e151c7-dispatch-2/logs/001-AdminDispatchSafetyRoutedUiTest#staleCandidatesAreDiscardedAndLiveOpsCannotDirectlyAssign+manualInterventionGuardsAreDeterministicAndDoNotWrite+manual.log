@@ -1,0 +1,16 @@
+[E2E STARTUP] Creating Playwright driver
+[E2E STARTUP] Launching Chromium (headless=true)
+[E2E STARTUP] Chromium ready
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/admin-session
+[BROWSER WARNING] [.WebGL-0x11c00454000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[BROWSER WARNING] [.WebGL-0x11c00454000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[BROWSER WARNING] [.WebGL-0x11c00454000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[BROWSER WARNING] [.WebGL-0x11c00454000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+[E2E WRITE] POST 200 fixture https://gulf-strike-dark-extras.trycloudflare.com/api/v1/internal/admin/orders/intervention/b1000000-0000-4000-8000-000000000001/assign-driver
+[BROWSER NETWORK ERROR] 409 POST https://gulf-strike-dark-extras.trycloudflare.com/api/v1/internal/admin/orders/intervention/b1000000-0000-4000-8000-000000000001/cancel
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 409 (Conflict)
+[E2E WRITE] POST 409 fixture https://gulf-strike-dark-extras.trycloudflare.com/api/v1/internal/admin/orders/intervention/b1000000-0000-4000-8000-000000000001/cancel
+[E2E WRITE] POST 200 fixture https://gulf-strike-dark-extras.trycloudflare.com/api/v1/internal/admin/orders/intervention/b1000000-0000-4000-8000-000000000001/assign-driver
+[E2E WRITE] POST 200 fixture https://gulf-strike-dark-extras.trycloudflare.com/api/v1/internal/admin/orders/intervention/b1000000-0000-4000-8000-000000000001/cancel
+[E2E TEARDOWN] class admin session signed out [admin=200, everyday=200]

@@ -1,0 +1,34 @@
+[E2E STARTUP] Creating Playwright driver
+[E2E STARTUP] Launching Chromium (headless=true)
+[E2E STARTUP] Chromium ready
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[BROWSER WARNING] [.WebGL-0x12c06264e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[BROWSER NETWORK ERROR] 404 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/restaurants/c1000000-0000-4000-8000-000000000003
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 404 ()
+[BROWSER WARNING] [.WebGL-0x12c06264e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[BROWSER NETWORK ERROR] 403 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders/c1000000-0000-4000-8000-000000000001/live-tracking
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 403 ()
+[BROWSER WARNING] [.WebGL-0x12c06264e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[BROWSER WARNING] [.WebGL-0x12c06264e00]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+[E2E WRITE] POST 201 fixture https://gulf-strike-dark-extras.trycloudflare.com/api/v1/chat/sessions
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] customer signed out [everyday=200]
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[BROWSER NETWORK ERROR] 403 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders/c1000000-0000-4000-8000-000000000001/live-tracking
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 403 ()
+[BROWSER NETWORK ERROR] 404 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/restaurants/c1000000-0000-4000-8000-000000000003
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 404 ()
+[BROWSER NETWORK ERROR] 503 POST https://gulf-strike-dark-extras.trycloudflare.com/api/v1/chat/sessions
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 503 (Service Unavailable)
+[E2E WRITE] POST 503 fixture https://gulf-strike-dark-extras.trycloudflare.com/api/v1/chat/sessions
+[E2E WRITE] POST 201 fixture https://gulf-strike-dark-extras.trycloudflare.com/api/v1/chat/sessions
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] customer signed out [everyday=200]
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[BROWSER NETWORK ERROR] 404 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/restaurants/c1000000-0000-4000-8000-000000000003
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 404 ()
+[BROWSER NETWORK ERROR] 403 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders/c1000000-0000-4000-8000-000000000001/live-tracking
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 403 ()
+[E2E WRITE] POST 201 fixture https://gulf-strike-dark-extras.trycloudflare.com/api/v1/chat/sessions
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] customer signed out [everyday=200]

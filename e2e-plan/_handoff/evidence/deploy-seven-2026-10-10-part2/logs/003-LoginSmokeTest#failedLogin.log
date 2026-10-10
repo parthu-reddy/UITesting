@@ -1,0 +1,15 @@
+[E2E STARTUP] Creating Playwright driver
+[E2E STARTUP] Launching Chromium (headless=true)
+[E2E STARTUP] Chromium ready
+[BROWSER NETWORK ERROR] 401 POST https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 401 ()
+[E2E WRITE] POST 401 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[BROWSER NETWORK ERROR] 401 POST https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 401 ()
+[E2E WRITE] POST 401 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[BROWSER NETWORK ERROR] 401 POST https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 401 ()
+[E2E WRITE] POST 401 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[BROWSER NETWORK ERROR] 401 POST https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 401 ()
+[E2E WRITE] POST 401 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session

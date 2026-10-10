@@ -1,0 +1,21 @@
+{
+ "stopped": false,
+ "results": [
+  {
+   "cls": "com.fooddelivery.e2e.tests.flows.DelayApprovalFlowTest",
+   "name": "customerApprovesRestaurantDelay",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.flows.DelayApprovalFlowTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.flows.DelayApprovalFlowTest",
+   "name": "customerRejectsRestaurantDelay",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.flows.DelayApprovalFlowTest.xml"
+  }
+ ]
+}

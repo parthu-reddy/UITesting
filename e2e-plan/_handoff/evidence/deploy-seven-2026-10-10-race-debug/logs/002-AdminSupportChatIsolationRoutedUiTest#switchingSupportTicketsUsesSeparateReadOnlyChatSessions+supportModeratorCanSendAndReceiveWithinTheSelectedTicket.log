@@ -1,0 +1,15 @@
+[E2E STARTUP] Creating Playwright driver
+[E2E STARTUP] Launching Chromium (headless=false)
+[E2E STARTUP] Chromium ready
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/admin-session
+[E2E WRITE] POST 201 fixture https://gulf-strike-dark-extras.trycloudflare.com/api/v1/chat/sessions
+[E2E WRITE] POST 201 fixture https://gulf-strike-dark-extras.trycloudflare.com/api/v1/chat/sessions
+[E2E WRITE] POST 201 fixture https://gulf-strike-dark-extras.trycloudflare.com/api/v1/chat/sessions
+[E2E WRITE] POST 200 fixture https://gulf-strike-dark-extras.trycloudflare.com/api/v1/chat/sessions/f1000000-0000-4000-8000-000000000301/upload-image
+[E2E WRITE] POST 201 fixture https://gulf-strike-dark-extras.trycloudflare.com/api/v1/chat/sessions
+[E2E WRITE] POST 200 fixture https://gulf-strike-dark-extras.trycloudflare.com/api/v1/chat/sessions/f1000000-0000-4000-8000-000000000301/upload-image
+[BROWSER ERROR] Loading the image 'https://fixture-images.invalid/support-ticket-evidence.png' violates the following Content Security Policy directive: "img-src 'self' data: blob: https://images.unsplash.com https://pub-331840c6b8de469a8750b945b9159673.r2.dev https://80708a753745ca23eabc20b4b3dee5fa.r2.cloudflarestorage.com https://labouffe-documents-dev.80708a753745ca23eabc20b4b3dee5fa.r2.cloudflarestorage.com". The action has been blocked.
+[BROWSER ERROR] Loading the image 'https://fixture-images.invalid/support-ticket-evidence.png' violates the following Content Security Policy directive: "img-src 'self' data: blob: https://images.unsplash.com https://pub-331840c6b8de469a8750b945b9159673.r2.dev https://80708a753745ca23eabc20b4b3dee5fa.r2.cloudflarestorage.com https://labouffe-documents-dev.80708a753745ca23eabc20b4b3dee5fa.r2.cloudflarestorage.com". The action has been blocked.
+[E2E WRITE] POST 201 fixture https://gulf-strike-dark-extras.trycloudflare.com/api/v1/chat/sessions
+[E2E TEARDOWN] class admin session signed out [admin=200, everyday=200]

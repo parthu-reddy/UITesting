@@ -1,5 +1,30 @@
 # Ordered continuation
 
+## 2026-10-10T20:45+05:30 — checkpoint147 (cont.): remaining, in order
+
+1. Races fixed (5 UITesting files, local) + UI false-empty-state fix in FoodDeliveryAppUI AdminManualInterventions (local).
+   OWNER: commit UITesting + FoodDeliveryAppUI; redeploy food-delivery-app-ui (no wipe). After "deployed": rerun
+   AdminDispatchSafetyRoutedUiTest fast 3× (the candidates wait is the guard).
+2. C4 lifecycle DONE, all PASS (history pagination PASS 20:46 once the 11th row existed).
+3. ChatSupportWindowClosedTest: `-Dsupport.closed.order.ids=299c2b52-a2a3-4db3-8b1e-bb615b580e03` after 22:15 IST
+   (D1 delivered 14:45Z + 2 h).
+
+## 2026-10-10T17:40+05:30 — checkpoint147: remaining, in order
+
+1. Changed-features E2E: 290 pass / 337 results; no failure traced to the seven deploys (checkpoint147 table).
+2. DONE 17:54: C2 + C3 gated runs all PASS (checkpoint147).
+3. Fix the three slow-mo-hidden races (AdminFleetSafety, AdminSupportChatIsolation, LoginTheme) + the instant-isVisible
+   pattern (openWalletDlqTab, RiderAvailability line 58, dispatch candidates wait). Fix the wait, never restore slow-mo.
+4. Owner OK needed: C4 order lifecycle (slow) to feed the 12 data-dependent methods.
+
+## 2026-10-10T16:28+05:30 — checkpoint146: remaining, in order
+
+1. (checkpoint145 steps 1–2 DONE: all seven deployed; image == pin == HEAD; 0 `applying in memory`, 0 ERROR.)
+2. E2E for the changed features (owner OK first: 255 methods / 62 classes, some place orders; canary per role, check
+   no active order): `python3 e2e-plan/feature-tags/select_tests.py --git --out /tmp/sel.txt` then
+   `python3 e2e-plan/_handoff/tools/run_e2e_batch.py --selection /tmp/sel.txt --evidence <dir>`.
+3. Then checkpoint144's list (data-only history gaps, RiderAvailabilityUiTest decision, SSE parked).
+
 ## 2026-10-10T11:58+05:30 — checkpoint145: remaining, in order
 
 1. OWNER: commit + redeploy (no wipe) customer-service, delivery-service, identity-service, ledger-service,

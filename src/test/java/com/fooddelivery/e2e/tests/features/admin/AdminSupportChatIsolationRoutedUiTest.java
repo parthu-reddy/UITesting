@@ -239,12 +239,14 @@ public class AdminSupportChatIsolationRoutedUiTest extends TestBase {
     }
 
     private void openTicketChat(AdminSupportChatPage support, SupportChatFixture fixture, TicketFixture ticket) {
-        // The admin wrapper normally opens the widget through its ref. If a remount leaves the
-        // new ticket at the launcher, open that launcher directly; both paths remain in-browser.
-        adminPage.waitForCondition(
-                () -> fixture.hasSessionFor(ticket) || support.chatLauncher(ticket.orderId()).isVisible(),
-                new Page.WaitForConditionOptions().setTimeout(5_000));
-        if (!fixture.hasSessionFor(ticket)) {
+        // The admin wrapper opens the widget itself (OpenChatHelper calls openChatOnly through the ref
+        // right after mount), so the launcher is on screen for a frame or two. Clicking it then races
+        // that open: the launcher detaches mid-click and the click waits 60 s for it to come back.
+        // Give the wrapper's open its chance first; use the launcher only if the widget stayed closed.
+        try {
+            adminPage.waitForCondition(() -> fixture.hasSessionFor(ticket),
+                    new Page.WaitForConditionOptions().setTimeout(5_000));
+        } catch (com.microsoft.playwright.TimeoutError widgetStayedClosed) {
             support.openChatIfLauncherVisible(ticket.orderId());
         }
         adminPage.waitForCondition(() -> fixture.hasSessionFor(ticket),

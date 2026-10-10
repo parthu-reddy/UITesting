@@ -1,0 +1,31 @@
+[E2E STARTUP] Creating Playwright driver
+[E2E STARTUP] Launching Chromium (headless=true)
+[E2E STARTUP] Chromium ready
+[ERROR] Tests run: 1, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 2.735 s <<< FAILURE! -- in com.fooddelivery.e2e.tests.features.organisations.DeliveryOnboardingUiTest
+[ERROR] com.fooddelivery.e2e.tests.features.organisations.DeliveryOnboardingUiTest.approvedRiderEntersDeliveryOfflineWithoutAnotherPersonLogin -- Time elapsed: 0.347 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: 
+[Use the retained O4/O5 UI runner] 
+expected: "true"
+ but was: null
+	at com.fooddelivery.e2e.util.BusinessPlatformFixture.phone(BusinessPlatformFixture.java:15)
+	at com.fooddelivery.e2e.tests.features.organisations.DeliveryOnboardingUiTest.approvedRiderEntersDeliveryOfflineWithoutAnotherPersonLogin(DeliveryOnboardingUiTest.java:16)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1612)
+
+[ERROR] Failures: 
+[ERROR]   DeliveryOnboardingUiTest.approvedRiderEntersDeliveryOfflineWithoutAnotherPersonLogin:16 [Use the retained O4/O5 UI runner] 
+expected: "true"
+ but was: null
+[ERROR] Tests run: 1, Failures: 1, Errors: 0, Skipped: 0
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.5.2:test (default-test) on project e2e-tests: There are test failures.
+[ERROR] 
+[ERROR] See /Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

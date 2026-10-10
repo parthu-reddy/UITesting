@@ -1,0 +1,32 @@
+[E2E STARTUP] Creating Playwright driver
+[E2E STARTUP] Launching Chromium (headless=true)
+[E2E STARTUP] Chromium ready
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[BROWSER NETWORK ERROR] 404 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/advertisers/98cb32af-f48e-573a-b9b5-d554e1d9506f
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 404 ()
+[E2E WRITE] PUT 201 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/advertisers/98cb32af-f48e-573a-b9b5-d554e1d9506f
+[E2E WRITE] POST 201 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/advertisers/98cb32af-f48e-573a-b9b5-d554e1d9506f/campaigns
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/advertisers/98cb32af-f48e-573a-b9b5-d554e1d9506f/campaigns/d7d780ab-fe82-48f2-8dc2-a1172f76407f/creatives/upload-url
+[E2E WRITE] POST 201 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/advertisers/98cb32af-f48e-573a-b9b5-d554e1d9506f/campaigns/d7d780ab-fe82-48f2-8dc2-a1172f76407f/creatives
+[BROWSER NETWORK ERROR] 400 POST https://gulf-strike-dark-extras.trycloudflare.com/api/v1/advertisers/98cb32af-f48e-573a-b9b5-d554e1d9506f/campaigns/d7d780ab-fe82-48f2-8dc2-a1172f76407f/activate
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 400 ()
+[E2E WRITE] POST 400 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/advertisers/98cb32af-f48e-573a-b9b5-d554e1d9506f/campaigns/d7d780ab-fe82-48f2-8dc2-a1172f76407f/activate
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/admin-session
+[BROWSER WARNING] [.WebGL-0x11400442000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[BROWSER WARNING] [.WebGL-0x11400442000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[BROWSER WARNING] [.WebGL-0x11400442000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[BROWSER WARNING] [.WebGL-0x11400442000]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/internal/admin/ad-creatives/7751bf8a-2127-451d-891e-aebd1e502828/approve
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/money/business/98cb32af-f48e-573a-b9b5-d554e1d9506f/topups
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/advertisers/98cb32af-f48e-573a-b9b5-d554e1d9506f/campaigns/d7d780ab-fe82-48f2-8dc2-a1172f76407f/activate
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/advertisers/98cb32af-f48e-573a-b9b5-d554e1d9506f/campaigns/d7d780ab-fe82-48f2-8dc2-a1172f76407f/pause
+A4 campaign created in Ads Manager, uploaded creative published on approval, served, paused; retained target/business-platform/a4/campaign-1791634915699.json
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] customer signed out [everyday=200]
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] restaurant signed out [everyday=200]
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] admin signed out [admin=200, everyday=200]

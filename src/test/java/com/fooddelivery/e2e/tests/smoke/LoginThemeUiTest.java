@@ -22,6 +22,10 @@ public class LoginThemeUiTest extends TestBase {
         var phone = customerPage.getByPlaceholder("9876543210");
         assertThat(phone).isVisible();
         phone.fill("8000000001");
+        // .app-background fades its colour over --duration-slow (380 ms); measuring before that ends
+        // reads a half-dark background. Wait for the CSS transitions (not infinite animations) to finish.
+        customerPage.evaluate("() => Promise.all(document.getAnimations()"
+                + ".filter(a => a instanceof CSSTransition).map(a => a.finished.catch(() => null)))");
         double contrast = ((Number) phone.evaluate("""
                 input => {
                   const rgb = value => (value.match(/[0-9.]+/g) || []).slice(0, 3).map(Number);

@@ -1,0 +1,54 @@
+[E2E STARTUP] Creating Playwright driver
+[E2E STARTUP] Launching Chromium (headless=true)
+[E2E STARTUP] Chromium ready
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[E2E WRITE] PUT 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/advertisers/1dfc716b-4db7-5395-82dd-fded7dff73fc
+[E2E WRITE] PUT 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/advertisers/1dfc716b-4db7-5395-82dd-fded7dff73fc
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[E2E WRITE] PUT 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/users/profile
+[E2E WRITE] POST 201 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/organisations/1dfc716b-4db7-5395-82dd-fded7dff73fc/invitations
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/organisation-invitations/e23cd470-dadf-45a9-a8f9-b6b5430bafc8/accept
+[BROWSER NETWORK ERROR] 401 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders/history?[redacted]
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 401 ()
+[BROWSER NETWORK ERROR] 401 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/chat/webrtc/ice-servers
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 401 ()
+[BROWSER NETWORK ERROR] 401 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/customers/f1f15d6d-cb83-438b-92aa-d133933abda1/addresses
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 401 ()
+[BROWSER NETWORK ERROR] 401 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/users/profile
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 401 ()
+[BROWSER NETWORK ERROR] 401 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders/active?[redacted]
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 401 ()
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session/refresh
+[BROWSER NETWORK ERROR] 401 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/users/profile
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 401 ()
+[BROWSER NETWORK ERROR] 403 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/advertisers/1dfc716b-4db7-5395-82dd-fded7dff73fc
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 403 ()
+[E2E WRITE] PATCH 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/organisations/1dfc716b-4db7-5395-82dd-fded7dff73fc/members/f1f15d6d-cb83-438b-92aa-d133933abda1
+[BROWSER NETWORK ERROR] 401 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/users/profile
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 401 ()
+[BROWSER NETWORK ERROR] 401 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/chat/webrtc/ice-servers
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 401 ()
+[BROWSER NETWORK ERROR] 401 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders/history?[redacted]
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 401 ()
+[BROWSER NETWORK ERROR] 401 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/customers/f1f15d6d-cb83-438b-92aa-d133933abda1/addresses
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 401 ()
+[BROWSER NETWORK ERROR] 401 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders/active?[redacted]
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 401 ()
+[BROWSER NETWORK ERROR] 401 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/users/profile
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 401 ()
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session/refresh
+[E2E WRITE] POST 201 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/advertisers/1dfc716b-4db7-5395-82dd-fded7dff73fc/campaigns
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[BROWSER NETWORK ERROR] 404 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/advertisers/1dfc716b-4db7-5395-82dd-fded7dff73fc
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 404 ()
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[BROWSER NETWORK ERROR] 403 PUT https://gulf-strike-dark-extras.trycloudflare.com/api/v1/advertisers/f913d760-fa53-5426-bd79-d287a0917f16
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 403 ()
+[E2E WRITE] PUT 403 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/advertisers/f913d760-fa53-5426-bd79-d287a0917f16
+A1 ad account per organisation verified; retained fixture target/business-platform/a1/member-9999713856.json
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] customer signed out [everyday=200]
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] restaurant signed out [everyday=200]
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] admin signed out [everyday=200]

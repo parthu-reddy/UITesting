@@ -252,12 +252,12 @@ public class AdminLiveOpsFleetTest extends TestBase {
         heading.waitFor(new Locator.WaitForOptions().setTimeout(30000));
         assertThat(heading.isVisible()).isTrue();
         // A fetch failure currently leaves the panel body blank. Require its explicit empty state
-        // or at least one rendered entry so a heading alone cannot pass as a healthy queue.
+        // or at least one rendered entry so a heading alone cannot pass as a healthy queue. The
+        // heading also renders for a frame after a tab switch, before the tab's fetch starts, so
+        // wait for either one instead of reading the panel once.
         Locator empty = adminPage.getByText(emptyState,
                 new com.microsoft.playwright.Page.GetByTextOptions().setExact(true));
-        if (!empty.isVisible()) {
-            Locator panel = heading.locator("xpath=..");
-            assertThat(panel.locator(":scope > div").count()).isPositive();
-        }
+        Locator firstEntry = heading.locator("xpath=..").locator(":scope > div").first();
+        empty.or(firstEntry).first().waitFor(new Locator.WaitForOptions().setTimeout(15000));
     }
 }

@@ -1,0 +1,19 @@
+[E2E STARTUP] Creating Playwright driver
+[E2E STARTUP] Launching Chromium (headless=true)
+[E2E STARTUP] Chromium ready
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[BROWSER NETWORK ERROR] 409 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/restaurants/36342aa6-05fe-5cb3-a755-21b207c601bd/delivery-availability
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 409 ()
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders/quote
+Selected Brand 1 Outlet 5 at 1.4 km
+[CUSTOMER] Adding a 14-min dish at Brand 1 Outlet 5
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders/quote
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] customer signed out [everyday=200]
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[BROWSER NETWORK ERROR] 409 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/restaurants/36342aa6-05fe-5cb3-a755-21b207c601bd/delivery-availability
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 409 ()
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders/quote
+Selected Brand 1 Outlet 5 at 1.4 km
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] customer signed out [everyday=200]

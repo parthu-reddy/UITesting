@@ -1,0 +1,21 @@
+{
+ "stopped": false,
+ "results": [
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminFleetSafetyRoutedUiTest",
+   "name": "fleetLayersRefreshSafelyAndRecoverFromOneUnavailableRead",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminFleetSafetyRoutedUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminFleetSafetyRoutedUiTest",
+   "name": "fleetCitySelectionScopesEveryLayerRequest",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminFleetSafetyRoutedUiTest.xml"
+  }
+ ]
+}

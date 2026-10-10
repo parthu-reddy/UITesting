@@ -1,0 +1,21 @@
+{
+ "stopped": false,
+ "results": [
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminOrderMoneyOutcomesTest",
+   "name": "panelShowsTheOutcome(String, String)[1]",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminOrderMoneyOutcomesTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.admin.AdminOrderMoneyOutcomesTest",
+   "name": "panelShowsTheOutcome(String, String)",
+   "outcome": "error",
+   "signature": "AdminOrderMoneyOutcomesTest.java:38 Index 1 out of bounds for length 1",
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.admin.AdminOrderMoneyOutcomesTest.xml"
+  }
+ ]
+}

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="com.fooddelivery.e2e.tests.features.admin.AdminFleetSafetyRoutedUiTest" time="24.893" tests="2" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="26"/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.class.path" value="/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/test-classes:/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/classes:/Users/parthureddy/.m2/repository/com/microsoft/playwright/playwright/1.63.0/playwright-1.63.0.jar:/Users/parthureddy/.m2/repository/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar:/Users/parthureddy/.m2/repository/com/google/errorprone/error_prone_annotations/2.48.0/error_prone_annotations-2.48.0.jar:/Users/parthureddy/.m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/Users/parthureddy/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/parthureddy/.m2/repository/com/microsoft/playwright/driver/1.63.0/driver-1.63.0.jar:/Users/parthureddy/.m2/repository/com/microsoft/playwright/driver-bundle/1.63.0/driver-bundle-1.63.0.jar:/Users/parthureddy/.m2/repository/org/junit/jupiter/junit-jupiter/5.11.4/junit-jupiter-5.11.4.jar:/Users/parthureddy/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.11.4/junit-jupiter-api-5.11.4.jar:/Users/parthureddy/.m2/repository/org/junit/platform/junit-platform-commons/1.11.4/junit-platform-commons-1.11.4.jar:/Users/parthureddy/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/parthureddy/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.11.4/junit-jupiter-params-5.11.4.jar:/Users/parthureddy/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.11.4/junit-jupiter-engine-5.11.4.jar:/Users/parthureddy/.m2/repository/org/junit/platform/junit-platform-engine/1.11.4/junit-platform-engine-1.11.4.jar:/Users/parthureddy/.m2/repository/org/assertj/assertj-core/3.26.3/assertj-core-3.26.3.jar:/Users/parthureddy/.m2/repository/net/bytebuddy/byte-buddy/1.14.18/byte-buddy-1.14.18.jar:"/>
+    <property name="java.vm.vendor" value="Homebrew"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="restaurant.phone" value="9000000001"/>
+    <property name="admin.phone" value="1000000001"/>
+    <property name="rider.phone" value="7000000001"/>
+    <property name="java.vendor.url" value="https://github.com/Homebrew/homebrew-core/issues"/>
+    <property name="user.timezone" value="Asia/Kolkata"/>
+    <property name="customer.phone" value="8000000001"/>
+    <property name="os.name" value="Mac OS X"/>
+    <property name="java.vm.specification.version" value="26"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="IN"/>
+    <property name="sun.boot.library.path" value="/opt/homebrew/Cellar/openjdk/26.0.1/libexec/openjdk.jdk/Contents/Home/lib"/>
+    <property name="sun.java.command" value="/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire/surefirebooter-20261010173849145_3.jar /Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire 2026-10-10T17-38-49_088-jvmRun1 surefire-20261010173849145_1tmp surefire_0-20261010173849145_2tmp"/>
+    <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="slow.mo" value="400"/>
+    <property name="test" value="AdminFleetSafetyRoutedUiTest#fleetLayersRefreshSafelyAndRecoverFromOneUnavailableRead+fleetCitySelectionScopesEveryLayerRequest"/>
+    <property name="surefire.test.class.path" value="/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/test-classes:/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/classes:/Users/parthureddy/.m2/repository/com/microsoft/playwright/playwright/1.63.0/playwright-1.63.0.jar:/Users/parthureddy/.m2/repository/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar:/Users/parthureddy/.m2/repository/com/google/errorprone/error_prone_annotations/2.48.0/error_prone_annotations-2.48.0.jar:/Users/parthureddy/.m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar:/Users/parthureddy/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/parthureddy/.m2/repository/com/microsoft/playwright/driver/1.63.0/driver-1.63.0.jar:/Users/parthureddy/.m2/repository/com/microsoft/playwright/driver-bundle/1.63.0/driver-bundle-1.63.0.jar:/Users/parthureddy/.m2/repository/org/junit/jupiter/junit-jupiter/5.11.4/junit-jupiter-5.11.4.jar:/Users/parthureddy/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.11.4/junit-jupiter-api-5.11.4.jar:/Users/parthureddy/.m2/repository/org/junit/platform/junit-platform-commons/1.11.4/junit-platform-commons-1.11.4.jar:/Users/parthureddy/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/parthureddy/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.11.4/junit-jupiter-params-5.11.4.jar:/Users/parthureddy/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.11.4/junit-jupiter-engine-5.11.4.jar:/Users/parthureddy/.m2/repository/org/junit/platform/junit-platform-engine/1.11.4/junit-platform-engine-1.11.4.jar:/Users/parthureddy/.m2/repository/org/assertj/assertj-core/3.26.3/assertj-core-3.26.3.jar:/Users/parthureddy/.m2/repository/net/bytebuddy/byte-buddy/1.14.18/byte-buddy-1.14.18.jar:"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="/Users/parthureddy"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2026-04-21"/>
+    <property name="java.home" value="/opt/homebrew/Cellar/openjdk/26.0.1/libexec/openjdk.jdk/Contents/Home"/>
+    <property name="file.separator" value="/"/>
+    <property name="basedir" value="/Users/parthureddy/Documents/Food Delivery.nosync/UITesting"/>
+    <property name="java.vm.compressedOopsMode" value="Non-zero disjoint base"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="apple.awt.application.name" value="ForkedBooter"/>
+    <property name="surefire.real.class.path" value="/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire/surefirebooter-20261010173849145_3.jar"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="java.runtime.version" value="26.0.1"/>
+    <property name="user.name" value="parthureddy"/>
+    <property name="stdout.encoding" value="UTF-8"/>
+    <property name="path.separator" value=":"/>
+    <property name="os.version" value="27.0.1"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="record.video" value="true"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="surefire.failIfNoSpecifiedTests" value="false"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="java.vendor.version" value="Homebrew"/>
+    <property name="localRepository" value="/Users/parthureddy/.m2/repository"/>
+    <property name="java.vendor.url.bug" value="https://github.com/Homebrew/homebrew-core/issues"/>
+    <property name="java.io.tmpdir" value="/var/folders/0h/ntc9lth93bq3sgfrgr9f9ylm0000gn/T/"/>
+    <property name="java.version" value="26.0.1"/>
+    <property name="surefire.rerunFailingTestsCount" value="0"/>
+    <property name="user.dir" value="/Users/parthureddy/Documents/Food Delivery.nosync/UITesting"/>
+    <property name="os.arch" value="aarch64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="excludedGroups" value="auth-rate-limit,parked,measurement"/>
+    <property name="headless" value="false"/>
+    <property name="native.encoding" value="UTF-8"/>
+    <property name="java.library.path" value="/Users/parthureddy/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="stderr.encoding" value="UTF-8"/>
+    <property name="java.vendor" value="Homebrew"/>
+    <property name="java.vm.version" value="26.0.1"/>
+    <property name="stdin.encoding" value="UTF-8"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
+    <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="java.class.version" value="70.0"/>
+  </properties>
+  <testcase name="fleetLayersRefreshSafelyAndRecoverFromOneUnavailableRead" classname="com.fooddelivery.e2e.tests.features.admin.AdminFleetSafetyRoutedUiTest" time="13.111">
+    <system-out><![CDATA[[E2E STARTUP] Creating Playwright driver
+[E2E STARTUP] Launching Chromium (headless=false)
+[E2E STARTUP] Chromium ready
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/otp
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/admin-session/otp
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/admin-session
+[BROWSER NETWORK ERROR] 503 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/internal/admin/customers/addresses?[redacted]
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 503 (Service Unavailable)
+]]></system-out>
+  </testcase>
+  <testcase name="fleetCitySelectionScopesEveryLayerRequest" classname="com.fooddelivery.e2e.tests.features.admin.AdminFleetSafetyRoutedUiTest" time="4.476"/>
+</testsuite>

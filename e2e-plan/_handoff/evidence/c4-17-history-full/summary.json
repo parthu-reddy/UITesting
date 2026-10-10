@@ -1,0 +1,109 @@
+{
+ "stopped": false,
+ "results": [
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.customer.CustomerOrderHistoryUiTest",
+   "name": "completedOrderReordersIntoTheCartWithoutSubmitting",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.customer.CustomerOrderHistoryUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.customer.CustomerOrderHistoryUiTest",
+   "name": "decliningReorderReplacementPreservesEditedCart",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.customer.CustomerOrderHistoryUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.customer.CustomerOrderHistoryUiTest",
+   "name": "historyRendersDefinedState",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.customer.CustomerOrderHistoryUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.customer.CustomerOrderHistoryUiTest",
+   "name": "historyPaginationPreservesRowsWithoutDuplicates",
+   "outcome": "error",
+   "signature": "CustomerOrderHistoryUiTest.java:145 Error {",
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.customer.CustomerOrderHistoryUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.customer.CustomerOrderHistoryUiTest",
+   "name": "failedHistoryRetriesWithoutFalseEmptyState",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.customer.CustomerOrderHistoryUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.customer.CustomerOrderHistoryUiTest",
+   "name": "historyRowOpensExactOrderTrackerWhenHistoryExists",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.customer.CustomerOrderHistoryUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.customer.CustomerOrderHistoryUiTest",
+   "name": "missingReorderItemsShowWarningWithoutPartialCart",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.customer.CustomerOrderHistoryUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.customer.CustomerOrderHistoryUiTest",
+   "name": "cancelledHistoryRowOpensExactTerminalTracker",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.customer.CustomerOrderHistoryUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.customer.CustomerOrderHistoryUiTest",
+   "name": "unavailableReorderQuoteShowsWarningWithoutCart",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.customer.CustomerOrderHistoryUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.customer.CustomerOrderHistoryUiTest",
+   "name": "closedReorderOutletShowsWarningWithoutCart",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.customer.CustomerOrderHistoryUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.customer.CustomerOrderHistoryUiTest",
+   "name": "populatedRowsHaveRequiredSummaryFields",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.customer.CustomerOrderHistoryUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.customer.CustomerOrderHistoryUiTest",
+   "name": "pendingHistoryShowsLoadingUntilTheResponseCompletes",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.customer.CustomerOrderHistoryUiTest.xml"
+  },
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.customer.CustomerOrderHistoryUiTest",
+   "name": "successfulEmptyHistoryHasExplicitState",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.customer.CustomerOrderHistoryUiTest.xml"
+  }
+ ]
+}

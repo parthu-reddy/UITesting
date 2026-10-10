@@ -1,0 +1,22 @@
+[E2E STARTUP] Creating Playwright driver
+[E2E STARTUP] Launching Chromium (headless=true)
+[E2E STARTUP] Chromium ready
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[E2E WRITE] PUT 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/advertisers/1dfc716b-4db7-5395-82dd-fded7dff73fc
+[E2E WRITE] POST 201 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/advertisers/1dfc716b-4db7-5395-82dd-fded7dff73fc/campaigns
+[BROWSER NETWORK ERROR] 400 PUT https://gulf-strike-dark-extras.trycloudflare.com/api/v1/advertisers/1dfc716b-4db7-5395-82dd-fded7dff73fc/campaigns/1adafcaf-e26f-4b30-a85d-c2afded341ee/ad-groups/79c005d6-ee04-4f33-88d9-fc89f4cb4304
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 400 ()
+[E2E WRITE] PUT 400 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/advertisers/1dfc716b-4db7-5395-82dd-fded7dff73fc/campaigns/1adafcaf-e26f-4b30-a85d-c2afded341ee/ad-groups/79c005d6-ee04-4f33-88d9-fc89f4cb4304
+[BROWSER NETWORK ERROR] 403 POST https://gulf-strike-dark-extras.trycloudflare.com/api/v1/advertisers/1dfc716b-4db7-5395-82dd-fded7dff73fc/campaigns
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 403 ()
+[E2E WRITE] POST 403 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/advertisers/1dfc716b-4db7-5395-82dd-fded7dff73fc/campaigns
+[BROWSER NETWORK ERROR] 403 POST https://gulf-strike-dark-extras.trycloudflare.com/api/v1/advertisers/1dfc716b-4db7-5395-82dd-fded7dff73fc/campaigns
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 403 ()
+[E2E WRITE] POST 403 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/advertisers/1dfc716b-4db7-5395-82dd-fded7dff73fc/campaigns
+A2 promoted outlet verified; retained fixture target/business-platform/a2/promoted-outlet-1791635029821.json
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] restaurant signed out [everyday=200]
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] admin signed out [everyday=200]

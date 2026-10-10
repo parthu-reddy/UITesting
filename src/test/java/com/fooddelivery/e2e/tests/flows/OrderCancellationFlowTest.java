@@ -41,7 +41,10 @@ public class OrderCancellationFlowTest extends TestBase {
             assertThat(tracker.tracker()).hasAttribute("data-status","CANCELLED");
             assertThat(tracker.tracker().getByTestId("terminal-headline")).hasText("This order was cancelled.");
             assertThat(tracker.tracker().getByRole(AriaRole.BUTTON,new Locator.GetByRoleOptions().setName("Cancel order").setExact(true))).isHidden();
-            restaurantPage.reload();dashboard.waitForDashboard();dashboard.selectOutlet(created.outlet());assertThat(card).isHidden();
+            // The dashboard reads restaurant-service's event-fed copy (CANCELLED landed 1.7 s after the cancel on Dev,
+            // 2026-10-10) and polls it every 5 s, so allow propagation plus a full poll, not the 5 s default.
+            restaurantPage.reload();dashboard.waitForDashboard();dashboard.selectOutlet(created.outlet());
+            assertThat(card).isHidden(new com.microsoft.playwright.assertions.LocatorAssertions.IsHiddenOptions().setTimeout(15000));
             loginAsAdmin();RefundRecoveryChecks.verify(customerPage,adminPage,id,originalPaid);
         }
     }

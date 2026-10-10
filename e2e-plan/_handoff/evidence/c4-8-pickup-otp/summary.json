@@ -1,0 +1,13 @@
+{
+ "stopped": false,
+ "results": [
+  {
+   "cls": "com.fooddelivery.e2e.tests.features.fulfillment.PickupDeliveryOtpTest",
+   "name": "everyHandoverCheckOnOneOrder",
+   "outcome": "pass",
+   "signature": null,
+   "rate_limited": false,
+   "report": "/Users/parthureddy/Documents/Food Delivery.nosync/UITesting/target/surefire-reports/TEST-com.fooddelivery.e2e.tests.features.fulfillment.PickupDeliveryOtpTest.xml"
+  }
+ ]
+}

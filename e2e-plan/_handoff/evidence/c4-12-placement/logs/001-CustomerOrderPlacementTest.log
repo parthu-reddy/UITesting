@@ -1,0 +1,45 @@
+[E2E STARTUP] Creating Playwright driver
+[E2E STARTUP] Launching Chromium (headless=true)
+[E2E STARTUP] Chromium ready
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[RIDER] Server DUTY_STATUS ONLINE and live UI location frames verified
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders/quote
+Selected Brand 1 Outlet 5 at 1.4 km
+[CUSTOMER] Adding a 14-min dish at Brand 1 Outlet 5
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders/quote
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders
+[BROWSER NETWORK ERROR] 503 GET https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders/62e5e531-5ac6-4086-8306-a5b5354cbb9a
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 503 (Service Unavailable)
+[BROWSER WARNING] [.WebGL-0x13c00456400]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[BROWSER WARNING] [.WebGL-0x13c00456400]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders/quote
+[BROWSER WARNING] [.WebGL-0x13c00456400]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels
+[BROWSER WARNING] [.WebGL-0x13c00456400]GL Driver Message (OpenGL, Performance, GL_CLOSE_PATH_NV, High): GPU stall due to ReadPixels (this message will no longer repeat)
+[BROWSER NETWORK ERROR] 409 POST https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 409 ()
+[E2E WRITE] POST 409 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders
+[CHECKOUT] Retained Dev order 62e5e531-5ac6-4086-8306-a5b5354cbb9a; consumed quote replay rejected; no cleanup
+[RIDER] Restored seeded rider to Offline through the delivery portal
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] customer signed out [everyday=200]
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] rider signed out [everyday=200]
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[RIDER] Server DUTY_STATUS ONLINE and live UI location frames verified
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/session
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders/quote
+Selected Brand 1 Outlet 5 at 1.4 km
+[CUSTOMER] Adding a 14-min dish at Brand 1 Outlet 5
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders/quote
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders
+[BROWSER NETWORK ERROR] 409 POST https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders
+[BROWSER ERROR] Failed to load resource: the server responded with a status of 409 ()
+[E2E WRITE] POST 409 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/orders/quote
+[CHECKOUT] Retained Dev order 311d4309-c6b4-493d-beff-cfd07e210013; consumed quote replay rejected; no cleanup
+[RIDER] Restored seeded rider to Offline through the delivery portal
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] customer signed out [everyday=200]
+[E2E WRITE] POST 200 dev https://gulf-strike-dark-extras.trycloudflare.com/api/v1/auth/logout
+[E2E TEARDOWN] rider signed out [everyday=200]

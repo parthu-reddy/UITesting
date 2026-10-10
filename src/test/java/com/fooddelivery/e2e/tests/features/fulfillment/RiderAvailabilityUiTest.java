@@ -54,11 +54,13 @@ public class RiderAvailabilityUiTest extends TestBase {
 
         riderPage.getByRole(AriaRole.BUTTON,
                 new Page.GetByRoleOptions().setName(Pattern.compile("Trips Completed"))).click();
-        assertThat(riderPage.getByRole(AriaRole.HEADING,
-                new Page.GetByRoleOptions().setName("Completed Deliveries")).isVisible()).isTrue();
-        assertThat(riderPage.getByText("Delivered", new Page.GetByTextOptions().setExact(true)).first().isVisible()
-                || riderPage.getByText("No completed deliveries found.",
-                new Page.GetByTextOptions().setExact(true)).isVisible()).isTrue();
+        // The history panel opens after the click and loads its trips; wait for it rather than reading once.
+        riderPage.getByRole(AriaRole.HEADING, new Page.GetByRoleOptions().setName("Completed Deliveries"))
+                .waitFor(new com.microsoft.playwright.Locator.WaitForOptions().setTimeout(15000));
+        riderPage.getByText("Delivered", new Page.GetByTextOptions().setExact(true)).first()
+                .or(riderPage.getByText("No completed deliveries found.", new Page.GetByTextOptions().setExact(true)))
+                .first()
+                .waitFor(new com.microsoft.playwright.Locator.WaitForOptions().setTimeout(15000));
         if (!initiallyOnline) duty.goOffline();
     }
 }
